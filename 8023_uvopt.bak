@@ -141,7 +141,7 @@
         <aSer4>0</aSer4>
         <StkLoc>0</StkLoc>
         <TrcWin>0</TrcWin>
-        <newCpu>0</newCpu>
+        <newCpu>1</newCpu>
         <uProt>0</uProt>
       </DebugFlag>
       <LintExecutable></LintExecutable>
@@ -155,8 +155,8 @@
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>1</FileNumber>
+      <GroupNumber>0</GroupNumber>
+      <FileNumber>0</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -169,10 +169,10 @@
       <FilenameWithoutPath>STARTUP.A51</FilenameWithoutPath>
     </File>
     <File>
-      <GroupNumber>1</GroupNumber>
-      <FileNumber>2</FileNumber>
+      <GroupNumber>0</GroupNumber>
+      <FileNumber>0</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
+      <tvExp>1</tvExp>
       <Focus>0</Focus>
       <ColumnNumber>9</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -185,9 +185,9 @@
   </Group>
 
   <AlienFiles>
-    <PathWithFilename>D:\ANGELPROGRAM\KEIL4\C51\INC\INTRINS.H</PathWithFilename>
-    <TopLine>1</TopLine>
-    <CurrentLine>1</CurrentLine>
+    <PathWithFilename>D:\ANGELPROGRAM\KEIL4\C51\INC\STC\STC12C5A60S2.H</PathWithFilename>
+    <TopLine>324</TopLine>
+    <CurrentLine>324</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -211,9 +211,9 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>D:\ANGELPROGRAM\KEIL4\C51\INC\MATH.H</PathWithFilename>
+    <PathWithFilename>D:\AngelUsers\Desktop\test\output\8023.h</PathWithFilename>
     <TopLine>1</TopLine>
-    <CurrentLine>1</CurrentLine>
+    <CurrentLine>5</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -263,9 +263,9 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>D:\AngelUsers\Desktop\robot\OUTPUT\8023.H</PathWithFilename>
+    <PathWithFilename>D:\ANGELPROGRAM\KEIL4\C51\INC\MATH.H</PathWithFilename>
     <TopLine>1</TopLine>
-    <CurrentLine>5</CurrentLine>
+    <CurrentLine>1</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -289,9 +289,9 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>D:\ANGELPROGRAM\KEIL4\C51\INC\STC\STC12C5A60S2.H</PathWithFilename>
-    <TopLine>324</TopLine>
-    <CurrentLine>324</CurrentLine>
+    <PathWithFilename>D:\ANGELPROGRAM\KEIL4\C51\INC\INTRINS.H</PathWithFilename>
+    <TopLine>1</TopLine>
+    <CurrentLine>1</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
