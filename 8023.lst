@@ -1,0 +1,25 @@
+C51 COMPILER V9.01   8023                                                                  02/21/2015 21:17:23 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE 8023
+OBJECT MODULE PLACED IN .\output\8023.obj
+COMPILER INVOKED BY: D:\AngelProgram\keil4\C51\BIN\C51.EXE program\8023.c DEBUG OBJECTEXTEND PRINT(.\8023.lst) OBJECT(.\
+                    -output\8023.obj)
+
+line level    source
+
+   1          #include "./output/8023.h"
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
