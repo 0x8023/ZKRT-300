@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   1          TH1=0xB1;
   53   1          TF1=0;
   54   1      }//20毫秒定时器1初始化
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 2   
 
   55          void fun_timer0(){
   56   1          TL0=0xB0;
@@ -126,7 +126,7 @@ line level    source
  114   1          CCAPM0=0X42;//8位PWM输出，无中断
  115   1          PCA_PWM0=0x00;
  116   1      }//右路PWM输出
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 3   
 
  117          void fun_pwml(ui par_value){
  118   1          CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
@@ -190,7 +190,7 @@ line level    source
  176   2                  out_motorselect=0;
  177   2                  if(par_speed>0)
  178   2                      out_dir1=0;
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 4   
 
  179   2                  else if(par_speed<0)
  180   2                      out_dir1=1;

@@ -10,19 +10,6 @@ Project File Date:  02/25/2015
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(67): warning C259: 'parameter 2': different enumeration types
-PROGRAM\8023.C(69): warning C259: 'parameter 2': different enumeration types
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",

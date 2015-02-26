@@ -36,11 +36,11 @@
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
-//    typedef unsigned int* pui;     //unsigned int --> pui
- //   typedef unsigned char* puc;   //unsigned char --> puc
-//    typedef int* pi;                       //int* --> pi
- //   typedef char* pc;                     //char* --> pc
-//    typedef unsigned long ul;     //unsigned long --> ul
+    typedef unsigned int* pui;     //unsigned int --> pui
+    typedef unsigned char* puc;   //unsigned char --> puc
+    typedef int* pi;                       //int* --> pi
+    typedef char* pc;                     //char* --> pc
+    typedef unsigned long ul;     //unsigned long --> ul
 /*-----------------------------------------------------------------In Put-----*/
     sbit in_start=P3^2;//启动按键(start_)
     sbit in_ls1=P0^0;//1号传感器(靠近？侧)
