@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  02/26/2015 09:53:56 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -9,7 +9,7 @@ COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE program\8023.c DEBUG OBJECT
 line level    source
 
    1          #include "./output/8023.h"
-   2          void fun_delay(enum varENU_delaymodel par_model,ui par_value){
+   2          void fun_delay(ui par_value,enum varENU_delaymodel par_model){
    3   1          ui loc_con=par_value;
    4   1          switch(par_model){
    5   2              case us:
@@ -62,7 +62,7 @@ line level    source
   52   1          TH1=0xB1;
   53   1          TF1=0;
   54   1      }//20毫秒定时器1初始化
-C51 COMPILER V9.01   8023                                                                  02/26/2015 09:53:56 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 2   
 
   55          void fun_timer0(){
   56   1          TL0=0xB0;
@@ -76,9 +76,9 @@ line level    source
   64   1      }//20毫秒定时器1处理函数
   65          void fun_wait(){
   66   1          while(in_start==1);
-  67   1          fun_delay(ms,20);
+  67   1          fun_delay(20,ms);
   68   1          while(in_start==0);
-  69   1          fun_delay(ms,256);
+  69   1          fun_delay(256,ms);
   70   1      }//等待按键
   71          void fun_select(enum varENU_selectsensor par_model){
   72   1          if(par_model==ps58)
@@ -126,7 +126,7 @@ line level    source
  114   1          CCAPM0=0X42;//8位PWM输出，无中断
  115   1          PCA_PWM0=0x00;
  116   1      }//右路PWM输出
-C51 COMPILER V9.01   8023                                                                  02/26/2015 09:53:56 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 3   
 
  117          void fun_pwml(ui par_value){
  118   1          CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
@@ -190,7 +190,7 @@ line level    source
  176   2                  out_motorselect=0;
  177   2                  if(par_speed>0)
  178   2                      out_dir1=0;
-C51 COMPILER V9.01   8023                                                                  02/26/2015 09:53:56 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  02/26/2015 14:07:08 PAGE 4   
 
  179   2                  else if(par_speed<0)
  180   2                      out_dir1=1;
@@ -208,7 +208,7 @@ line level    source
  192   2                  break;
  193   2          }
  194   1      }//启动电机
- 195          void stop(enum varENU_motor par_model){
+ 195          void fun_stop(enum varENU_motor par_model){
  196   1          switch(par_model){
  197   2              case l:
  198   2                  fun_pwml(0);out_pwml=0;break;

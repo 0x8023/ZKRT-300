@@ -1,5 +1,5 @@
 #include "./output/8023.h"
-void fun_delay(enum varENU_delaymodel par_model,ui par_value){
+void fun_delay(ui par_value,enum varENU_delaymodel par_model){
     ui loc_con=par_value;
     switch(par_model){
         case us:
@@ -64,9 +64,9 @@ void fun_timer1(){
 }//20毫秒定时器1处理函数
 void fun_wait(){
     while(in_start==1);
-    fun_delay(ms,20);
+    fun_delay(20,ms);
     while(in_start==0);
-    fun_delay(ms,256);
+    fun_delay(256,ms);
 }//等待按键
 void fun_select(enum varENU_selectsensor par_model){
     if(par_model==ps58)
@@ -192,7 +192,7 @@ void fun_startdj(enum varENU_motor par_model,char par_speed){
             break;
     }
 }//启动电机
-void stop(enum varENU_motor par_model){
+void fun_stop(enum varENU_motor par_model){
     switch(par_model){
         case l:
             fun_pwml(0);out_pwml=0;break;

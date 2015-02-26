@@ -108,15 +108,15 @@
     xdata enum varENU_sjplace{wz1,wz12,wz2,wz23,wz3,wz34,wz4,wz45,wz5};//升降位置
 
     xdata struct str_state{
-        char str_x;//X坐标
-        char str_y;//Y坐标
-        enum varENU_direction str_ctfx;//车头方向
-        enum varENU_sjplace str_sjwz;//升降位置
-        enum varENU_translationplace str_pywz;//平移位置
+        char x;//X坐标
+        char y;//Y坐标
+        enum varENU_direction ctfx;//车头方向
+        enum varENU_sjplace sjwz;//升降位置
+        enum varENU_translationplace pywz;//平移位置
 
-    }begin,now,next;
+    }str_begin,str_now,str_next;
 /*---------------------------------------------------------------函数声明-----*/
-    void fun_delay(enum varENU_delaymodel par_model,ui par_value);//延时
+    void fun_delay(ui par_value,enum varENU_delaymodel par_model);//延时
     void fun_timer0init();//50毫秒定时器0初始化
     void fun_timer1init();//20毫秒定时器1初始化
     void fun_timer0();//50毫秒定时器0处理函数
@@ -128,5 +128,5 @@
     void fun_pwmr(ui par_value);//右路PWM输出
     void fun_pwml(ui par_value);//左路PWM输出
     void fun_startdj(enum varENU_motor par_model,char par_speed);//启动电机
-    void stop(enum varENU_motor par_model);//停止电机
+    void fun_stop(enum varENU_motor par_model);//停止电机
 /*---------------------------------------------------------------更新日志-----*/
