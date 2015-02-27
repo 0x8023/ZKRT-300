@@ -1,5 +1,5 @@
 #include "./output/8023.h"
-xdata struct str_state str_begin,str_now,str_next;//·Ö±ğÎª:ÆğÊ¼×´Ì¬/µ±Ç°×´Ì¬/Ä¿±ê×´Ì¬
+xdata struct str_state str_begin,str_now,str_next;//åˆ†åˆ«ä¸º:èµ·å§‹çŠ¶æ€/å½“å‰çŠ¶æ€/ç›®æ ‡çŠ¶æ€
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
@@ -36,7 +36,7 @@ void fun_delay(ui par_value,enum varENU_del par_model){
             return;
         default:return;
     }
-}//ÑÓÊ±
+}//å»¶æ—¶
 void fun_timer0init(){
     AUXR&=0x7F;
     TMOD&=0xF0;
@@ -44,7 +44,7 @@ void fun_timer0init(){
     TL0=0xB0;
     TH0=0x3C;
     TF0=0;
-}//50ºÁÃë¶¨Ê±Æ÷0³õÊ¼»¯
+}//50æ¯«ç§’å®šæ—¶å™¨0åˆå§‹åŒ–
 void fun_timer1init(){
     AUXR&=0xBF;
     TMOD&=0x0F;
@@ -52,74 +52,74 @@ void fun_timer1init(){
     TL1=0xE0;
     TH1=0xB1;
     TF1=0;
-}//20ºÁÃë¶¨Ê±Æ÷1³õÊ¼»¯
+}//20æ¯«ç§’å®šæ—¶å™¨1åˆå§‹åŒ–
 void fun_timer0(){
     TL0=0xB0;
     TH0=0x3C;
     _nop_();
-}//50ºÁÃë¶¨Ê±Æ÷0´¦Àíº¯Êı
+}//50æ¯«ç§’å®šæ—¶å™¨0å¤„ç†å‡½æ•°
 void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
-}//20ºÁÃë¶¨Ê±Æ÷1´¦Àíº¯Êı
+}//20æ¯«ç§’å®šæ—¶å™¨1å¤„ç†å‡½æ•°
 void fun_wait(){
     while(in_start==1);
     fun_delay(20,del_ms);
     while(in_start==0);
     fun_delay(256,del_ms);
-}//µÈ´ı°´¼ü
+}//ç­‰å¾…æŒ‰é”®
 void fun_select(enum varENU_sel par_model){
     if(par_model==sel_58)
         out_switchselect=0;
     else if(par_model==sel_912)
         out_switchselect=1;
-}//´«¸ĞÆ÷Æ¬Ñ¡
+}//ä¼ æ„Ÿå™¨ç‰‡é€‰
 void fun_initialization(){
-    CLK_DIV=0x00;//²»·ÖÆµ
+    CLK_DIV=0x00;//ä¸åˆ†é¢‘
 
-    P0M1=0xff;//P0ÓÃÓÚÊäÈë
-    P0M0=0x00;//P0²»ÄÜÊä³ö
+    P0M1=0xff;//P0ç”¨äºè¾“å…¥
+    P0M0=0x00;//P0ä¸èƒ½è¾“å‡º
     
-    P1M1=0x00;//P1¿Ú0-1Ë«Ïò£¬2ÖĞ¶ÏÊäÈë£¬3-6ÊäÈë£¬7Êä³ö
-    P1M0=0xfc;//P1¿Ú2-7Êä³ö
+    P1M1=0x00;//P1å£0-1åŒå‘ï¼Œ2ä¸­æ–­è¾“å…¥ï¼Œ3-6è¾“å…¥ï¼Œ7è¾“å‡º
+    P1M0=0xfc;//P1å£2-7è¾“å‡º
 
-    P2M1=0xf0;//P2¿Ú4-7ÊäÈë
-    P2M0=0x0f;//P2¿Ú0-3Êä³ö
+    P2M1=0xf0;//P2å£4-7è¾“å…¥
+    P2M0=0x0f;//P2å£0-3è¾“å‡º
 
-    //PS_2=1;//ÊÖ×¥ËÉ´«¸ĞÆ÷ÖÃ1 $?$
-    //PS_11=1;//Éı½µÎ»ÖÃ3´«¸ĞÆ÷ÖÃ1 $?$
+    //PS_2=1;//æ‰‹æŠ“æ¾ä¼ æ„Ÿå™¨ç½®1 $?$
+    //PS_11=1;//å‡é™ä½ç½®3ä¼ æ„Ÿå™¨ç½®1 $?$
 
-    out_en1=1;//µç»ú1/3Ê¹ÄÜ $?$
-    out_en2=1;//µç»ú2/4Ê¹ÄÜ $?$
-    out_motorselect=1;//µç»úÆ¬Ñ¡Îª1 $?$
-    fun_delay(del_ms,1);//ÑÓÊ±1ºÁÃë $?$
-    out_motorselect=0;//µç»úÆ¬Ñ¡Îª0 $?$
+    out_en1=1;//ç”µæœº1/3ä½¿èƒ½ $?$
+    out_en2=1;//ç”µæœº2/4ä½¿èƒ½ $?$
+    out_motorselect=1;//ç”µæœºç‰‡é€‰ä¸º1 $?$
+    fun_delay(del_ms,1);//å»¶æ—¶1æ¯«ç§’ $?$
+    out_motorselect=0;//ç”µæœºç‰‡é€‰ä¸º0 $?$
     //PS_5=PS_1;// $?$
 
-    fun_pwminit();//PWMµÄ³õÊ¼»¯ÉèÖÃ
-    fun_timer0init();//³õÊ¼»¯¶¨Ê±Æ÷0
-    fun_timer1init();//³õÊ¼»¯¶¨Ê±Æ÷1
-    in_start=1;//°´¼üÖÃ1
+    fun_pwminit();//PWMçš„åˆå§‹åŒ–è®¾ç½®
+    fun_timer0init();//åˆå§‹åŒ–å®šæ—¶å™¨0
+    fun_timer1init();//åˆå§‹åŒ–å®šæ—¶å™¨1
+    in_start=1;//æŒ‰é”®ç½®1
 
     fun_wait();
-}//³õÊ¼»¯
+}//åˆå§‹åŒ–
 void fun_pwminit(){
     CCON=0x00;
     CH=0;
     CL=0;
     CMOD=0x00;
-}//PWM³õÊ¼»¯
+}//PWMåˆå§‹åŒ–
 void fun_pwmr(uc par_value){
-    CCAP0H=CCAP0L=par_value*2.5;//¿ØÖÆÊä³öµÄÕ¼¿Õ±È
-    CCAPM0=0X42;//8Î»PWMÊä³ö£¬ÎŞÖĞ¶Ï
+    CCAP0H=CCAP0L=par_value*2.5;//æ§åˆ¶è¾“å‡ºçš„å ç©ºæ¯”
+    CCAPM0=0X42;//8ä½PWMè¾“å‡ºï¼Œæ— ä¸­æ–­
     PCA_PWM0=0x00;
-}//ÓÒÂ·PWMÊä³ö
+}//å³è·¯PWMè¾“å‡º
 void fun_pwml(uc par_value){
-    CCAP1H=CCAP1L=par_value*2.5;//¿ØÖÆÊä³öµÄÕ¼¿Õ±È
-    CCAPM1=0X42;//8Î»PWMÊä³ö£¬ÎŞÖĞ¶Ï
+    CCAP1H=CCAP1L=par_value*2.5;//æ§åˆ¶è¾“å‡ºçš„å ç©ºæ¯”
+    CCAPM1=0X42;//8ä½PWMè¾“å‡ºï¼Œæ— ä¸­æ–­
     PCA_PWM1=0x00;
-}//×óÂ·PWMÊä³ö
+}//å·¦è·¯PWMè¾“å‡º
 void fun_startdj(enum varENU_mot par_model,char par_speed){
     if(par_speed==0)
         return;
@@ -157,7 +157,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 fun_pwmr(cabs(par_speed));out_pwmr=1;
             }
             break;
-        case mot_dj1://Õı×ªÎª×¥½ô£¬·´×ªÎªËÉ¿ª
+        case mot_dj1://æ­£è½¬ä¸ºæŠ“ç´§ï¼Œåè½¬ä¸ºæ¾å¼€
             out_motorselect=1;
             if(par_speed>0)
                 out_dir1=1;
@@ -165,7 +165,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 out_dir1=0;
             out_en1=0;
             break;
-        case mot_dj2://Õı×ªÊÇÏòÎŞµç»úÒ»·½×ª,·´×ªÎªÏòÓĞµç»úÒ»·½×ª
+        case mot_dj2://æ­£è½¬æ˜¯å‘æ— ç”µæœºä¸€æ–¹è½¬,åè½¬ä¸ºå‘æœ‰ç”µæœºä¸€æ–¹è½¬
             out_motorselect=1;
             if(par_speed>0)
                 out_dir2=1;
@@ -173,7 +173,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 out_dir2=0;
             out_en2=0;
             break;
-        case mot_dj3://ÏòÉÏÎªÕı×ª,ÏòÏÂÎª·´×ª
+        case mot_dj3://å‘ä¸Šä¸ºæ­£è½¬,å‘ä¸‹ä¸ºåè½¬
             out_motorselect=0;
             if(par_speed>0)
                 out_dir1=0;
@@ -181,7 +181,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 out_dir1=1;
             out_en1=0;
             break;
-        case mot_dj4://Ë³Ê±ÕëÎªÕı×ª,ÄæÊ±ÕëÎª·´×ª
+        case mot_dj4://é¡ºæ—¶é’ˆä¸ºæ­£è½¬,é€†æ—¶é’ˆä¸ºåè½¬
             out_motorselect=0;
             if(par_speed>0)
                 out_dir2=0;
@@ -192,7 +192,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
         default:
             break;
     }
-}//Æô¶¯µç»ú
+}//å¯åŠ¨ç”µæœº
 void fun_stop(enum varENU_mot par_model){
     switch(par_model){
         case mot_l:
@@ -212,7 +212,7 @@ void fun_stop(enum varENU_mot par_model){
         default:
             break;
     }
-}//Í£Ö¹µç»ú
+}//åœæ­¢ç”µæœº
 void fun_sz1(enum varENU_han par_model){
     if(par_model==han_s){
         while(1){
@@ -237,7 +237,7 @@ void fun_sz1(enum varENU_han par_model){
         }
     }
     str_begin.szzt=par_model;
-}//ÊÖ×¥µ¥²½ÔË¶¯
+}//æ‰‹æŠ“å•æ­¥è¿åŠ¨
 void fun_sj1(enum varENU_sjp par_model){
     switch(par_model){
         case sjp_wz1:
@@ -354,7 +354,7 @@ void fun_sj1(enum varENU_sjp par_model){
             break;
     }
     str_begin.sjwz=par_model;
-}//Éı½µµ¥²½ÔË¶¯
+}//å‡é™å•æ­¥è¿åŠ¨
 void fun_py1(enum varENU_tra par_model){
     switch(par_model){
         case tra_q:
@@ -383,9 +383,71 @@ void fun_py1(enum varENU_tra par_model){
             break;
     }
     str_begin.pywz=par_model;
-}//Æ½ÒÆµ¥²½ÔË¶¯
-// void fun_hz1(enum varENU_dir par_model){
-//     switch(par_model){
-//         ;
-//     }
-// }
+}//å¹³ç§»å•æ­¥è¿åŠ¨
+void fun_hz1(enum varENU_dir par_model){
+    switch(par_model){
+        case dir_up:
+            switch(begin.hzfx){
+                case dir_down:
+                
+                    break;
+                case dir_left:
+                
+                    break;
+                case dir_right:
+                
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case dir_down:
+            switch(begin.hzfx){
+                case dir_up:
+
+                    break;
+                case dir_left:
+                
+                    break;
+                case dir_right:
+                
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case dir_left:
+            switch(begin.hzfx){
+                case dir_up:
+
+                    break;
+                case dir_down:
+                
+                    break;
+                case dir_right:
+                
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case dir_right:
+            switch(begin.hzfx){
+                case dir_up:
+
+                    break;
+                case dir_down:
+                
+                    break;
+                case dir_left:
+                
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+    str_begin.hzfx=par_model;
+}
