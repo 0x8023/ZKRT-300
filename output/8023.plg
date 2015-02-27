@@ -18,3 +18,36 @@ TO ".\output\8023.LIB"
 LIB51 LIBRARY MANAGER V4.24
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
 ".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+program\8023.c(1): warning C318: can't open file '/output/8023.h'
+PROGRAM\8023.C(2): error C141: syntax error near 'par_value', expected ')'
+PROGRAM\8023.C(3): error C141: syntax error near 'loc_con'
+PROGRAM\8023.C(3): error C202: 'loc_con': undefined identifier
+PROGRAM\8023.C(4): error C202: 'par_model': undefined identifier
+PROGRAM\8023.C(5): error C202: 'us': undefined identifier
+PROGRAM\8023.C(6): error C202: 'loc_con': undefined identifier
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).

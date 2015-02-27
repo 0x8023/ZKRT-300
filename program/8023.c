@@ -1,5 +1,5 @@
 #include "./output/8023.h"
-void fun_delay(ui par_value,enum varENU_delaymodel par_model){
+extern void fun_delay(ui par_value,enum varENU_delaymodel par_model){
     ui loc_con=par_value;
     switch(par_model){
         case us:
@@ -36,7 +36,7 @@ void fun_delay(ui par_value,enum varENU_delaymodel par_model){
         default:return;
     }
 }//延时
-void fun_timer0init(){
+extern void fun_timer0init(){
     AUXR&=0x7F;
     TMOD&=0xF0;
     TMOD|=0x01;
@@ -44,7 +44,7 @@ void fun_timer0init(){
     TH0=0x3C;
     TF0=0;
 }//50毫秒定时器0初始化
-void fun_timer1init(){
+extern void fun_timer1init(){
     AUXR&=0xBF;
     TMOD&=0x0F;
     TMOD|=0x10;
@@ -52,29 +52,29 @@ void fun_timer1init(){
     TH1=0xB1;
     TF1=0;
 }//20毫秒定时器1初始化
-void fun_timer0(){
+extern void fun_timer0(){
     TL0=0xB0;
     TH0=0x3C;
     _nop_();
 }//50毫秒定时器0处理函数
-void fun_timer1(){
+extern void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
 }//20毫秒定时器1处理函数
-void fun_wait(){
+extern void fun_wait(){
     while(in_start==1);
     fun_delay(20,ms);
     while(in_start==0);
     fun_delay(256,ms);
 }//等待按键
-void fun_select(enum varENU_selectsensor par_model){
+extern void fun_select(enum varENU_selectsensor par_model){
     if(par_model==ps58)
         out_switchselect=0;
     else if(par_model==ps912)
         out_switchselect=1;
 }//传感器片选
-void fun_initialization(){
+extern void fun_initialization(){
     CLK_DIV=0x00;//不分频
 
     P0M1=0xff;//P0用于输入
@@ -103,23 +103,23 @@ void fun_initialization(){
 
     fun_wait();
 }//初始化
-void fun_pwminit(){
+extern void fun_pwminit(){
     CCON=0x00;
     CH=0;
     CL=0;
     CMOD=0x00;
 }//PWM初始化
-void fun_pwmr(ui par_value){
+extern void fun_pwmr(ui par_value){
     CCAP0H=CCAP0L=par_value*2.5;//控制输出的占空比
     CCAPM0=0X42;//8位PWM输出，无中断
     PCA_PWM0=0x00;
 }//右路PWM输出
-void fun_pwml(ui par_value){
+extern void fun_pwml(ui par_value){
     CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
     CCAPM1=0X42;//8位PWM输出，无中断
     PCA_PWM1=0x00;
 }//左路PWM输出
-void fun_startdj(enum varENU_motor par_model,char par_speed){
+extern void fun_startdj(enum varENU_motor par_model,char par_speed){
     if(par_speed==0)
         return;
     else if(par_speed>100)
@@ -192,7 +192,7 @@ void fun_startdj(enum varENU_motor par_model,char par_speed){
             break;
     }
 }//启动电机
-void fun_stop(enum varENU_motor par_model){
+extern void fun_stop(enum varENU_motor par_model){
     switch(par_model){
         case l:
             fun_pwml(0);out_pwml=0;break;

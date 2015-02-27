@@ -172,100 +172,22 @@
       <GroupNumber>1</GroupNumber>
       <FileNumber>2</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>33</ColumnNumber>
+      <ColumnNumber>20</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>1</TopLine>
-      <CurrentLine>20</CurrentLine>
+      <CurrentLine>4</CurrentLine>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\program\8023.c</PathWithFileName>
-      <FilenameWithoutPath>8023.c</FilenameWithoutPath>
+      <PathWithFileName>.\perfect.c</PathWithFileName>
+      <FilenameWithoutPath>perfect.c</FilenameWithoutPath>
     </File>
   </Group>
 
   <AlienFiles>
-    <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\MATH.H</PathWithFilename>
-    <TopLine>11</TopLine>
-    <CurrentLine>14</CurrentLine>
-    <Constant>0</Constant>
-    <WindowPosition>
-      <length>0</length>
-      <flags>0</flags>
-      <showCmd>0</showCmd>
-      <MinPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MinPosition>
-      <MaxPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MaxPosition>
-      <NormalPosition>
-        <Top>0</Top>
-        <Left>0</Left>
-        <Right>0</Right>
-        <Bottom>0</Bottom>
-      </NormalPosition>
-    </WindowPosition>
-  </AlienFiles>
-
-  <AlienFiles>
-    <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</PathWithFilename>
-    <TopLine>231</TopLine>
-    <CurrentLine>250</CurrentLine>
-    <Constant>0</Constant>
-    <WindowPosition>
-      <length>0</length>
-      <flags>0</flags>
-      <showCmd>0</showCmd>
-      <MinPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MinPosition>
-      <MaxPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MaxPosition>
-      <NormalPosition>
-        <Top>0</Top>
-        <Left>0</Left>
-        <Right>0</Right>
-        <Bottom>0</Bottom>
-      </NormalPosition>
-    </WindowPosition>
-  </AlienFiles>
-
-  <AlienFiles>
-    <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\STDIO.H</PathWithFilename>
-    <TopLine>13</TopLine>
-    <CurrentLine>31</CurrentLine>
-    <Constant>0</Constant>
-    <WindowPosition>
-      <length>0</length>
-      <flags>0</flags>
-      <showCmd>0</showCmd>
-      <MinPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MinPosition>
-      <MaxPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MaxPosition>
-      <NormalPosition>
-        <Top>0</Top>
-        <Left>0</Left>
-        <Right>0</Right>
-        <Bottom>0</Bottom>
-      </NormalPosition>
-    </WindowPosition>
-  </AlienFiles>
-
-  <AlienFiles>
-    <PathWithFilename>D:\Desktop\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
+    <PathWithFilename>D:\Desktop\ZKRT-300\output\8023.H</PathWithFilename>
     <TopLine>1</TopLine>
-    <CurrentLine>11</CurrentLine>
+    <CurrentLine>1</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1632,34 +1554,16 @@
       <ActiveTab>0</ActiveTab>
       <Documents>
         <Doc>
-          <Name>.\program\8023.c</Name>
-          <ColumnNumber>33</ColumnNumber>
+          <Name>.\perfect.c</Name>
+          <ColumnNumber>20</ColumnNumber>
           <TopLine>1</TopLine>
-          <CurrentLine>20</CurrentLine>
+          <CurrentLine>4</CurrentLine>
         </Doc>
         <Doc>
-          <Name>./OUTPUT/8023.H</Name>
+          <Name>../8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
           <TopLine>1</TopLine>
-          <CurrentLine>11</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>H:\PROGRAM\KEIL\C51\INC\STDIO.H</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>13</TopLine>
-          <CurrentLine>31</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
-          <ColumnNumber>65</ColumnNumber>
-          <TopLine>231</TopLine>
-          <CurrentLine>250</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>H:\PROGRAM\KEIL\C51\INC\MATH.H</Name>
-          <ColumnNumber>38</ColumnNumber>
-          <TopLine>11</TopLine>
-          <CurrentLine>14</CurrentLine>
+          <CurrentLine>1</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

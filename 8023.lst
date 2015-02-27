@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -9,7 +9,7 @@ COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE program\8023.c DEBUG OBJECT
 line level    source
 
    1          #include "./output/8023.h"
-   2          void fun_delay(ui par_value,enum varENU_delaymodel par_model){
+   2          extern void fun_delay(ui par_value,enum varENU_delaymodel par_model){
    3   1          ui loc_con=par_value;
    4   1          switch(par_model){
    5   2              case us:
@@ -46,7 +46,7 @@ line level    source
   36   2              default:return;
   37   2          }
   38   1      }//延时
-  39          void fun_timer0init(){
+  39          extern void fun_timer0init(){
   40   1          AUXR&=0x7F;
   41   1          TMOD&=0xF0;
   42   1          TMOD|=0x01;
@@ -54,7 +54,7 @@ line level    source
   44   1          TH0=0x3C;
   45   1          TF0=0;
   46   1      }//50毫秒定时器0初始化
-  47          void fun_timer1init(){
+  47          extern void fun_timer1init(){
   48   1          AUXR&=0xBF;
   49   1          TMOD&=0x0F;
   50   1          TMOD|=0x10;
@@ -62,31 +62,31 @@ line level    source
   52   1          TH1=0xB1;
   53   1          TF1=0;
   54   1      }//20毫秒定时器1初始化
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 2   
 
-  55          void fun_timer0(){
+  55          extern void fun_timer0(){
   56   1          TL0=0xB0;
   57   1          TH0=0x3C;
   58   1          _nop_();
   59   1      }//50毫秒定时器0处理函数
-  60          void fun_timer1(){
+  60          extern void fun_timer1(){
   61   1          TL1=0xE0;
   62   1          TH1=0xB1;
   63   1          _nop_();
   64   1      }//20毫秒定时器1处理函数
-  65          void fun_wait(){
+  65          extern void fun_wait(){
   66   1          while(in_start==1);
   67   1          fun_delay(20,ms);
   68   1          while(in_start==0);
   69   1          fun_delay(256,ms);
   70   1      }//等待按键
-  71          void fun_select(enum varENU_selectsensor par_model){
+  71          extern void fun_select(enum varENU_selectsensor par_model){
   72   1          if(par_model==ps58)
   73   1              out_switchselect=0;
   74   1          else if(par_model==ps912)
   75   1              out_switchselect=1;
   76   1      }//传感器片选
-  77          void fun_initialization(){
+  77          extern void fun_initialization(){
   78   1          CLK_DIV=0x00;//不分频
   79   1      
   80   1          P0M1=0xff;//P0用于输入
@@ -115,25 +115,25 @@ line level    source
  103   1      
  104   1          fun_wait();
  105   1      }//初始化
- 106          void fun_pwminit(){
+ 106          extern void fun_pwminit(){
  107   1          CCON=0x00;
  108   1          CH=0;
  109   1          CL=0;
  110   1          CMOD=0x00;
  111   1      }//PWM初始化
- 112          void fun_pwmr(ui par_value){
+ 112          extern void fun_pwmr(ui par_value){
  113   1          CCAP0H=CCAP0L=par_value*2.5;//控制输出的占空比
  114   1          CCAPM0=0X42;//8位PWM输出，无中断
  115   1          PCA_PWM0=0x00;
  116   1      }//右路PWM输出
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 3   
 
- 117          void fun_pwml(ui par_value){
+ 117          extern void fun_pwml(ui par_value){
  118   1          CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
  119   1          CCAPM1=0X42;//8位PWM输出，无中断
  120   1          PCA_PWM1=0x00;
  121   1      }//左路PWM输出
- 122          void fun_startdj(enum varENU_motor par_model,char par_speed){
+ 122          extern void fun_startdj(enum varENU_motor par_model,char par_speed){
  123   1          if(par_speed==0)
  124   1              return;
  125   1          else if(par_speed>100)
@@ -190,7 +190,7 @@ line level    source
  176   2                  out_motorselect=0;
  177   2                  if(par_speed>0)
  178   2                      out_dir1=0;
-C51 COMPILER V9.01   8023                                                                  02/26/2015 14:53:33 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 4   
 
  179   2                  else if(par_speed<0)
  180   2                      out_dir1=1;
@@ -208,7 +208,7 @@ line level    source
  192   2                  break;
  193   2          }
  194   1      }//启动电机
- 195          void fun_stop(enum varENU_motor par_model){
+ 195          extern void fun_stop(enum varENU_motor par_model){
  196   1          switch(par_model){
  197   2              case l:
  198   2                  fun_pwml(0);out_pwml=0;break;

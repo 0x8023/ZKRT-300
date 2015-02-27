@@ -1,0 +1,16 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Desktop\ZKRT-300\output\project\perfect.uvproj
+Project File Date:  02/27/2015
+
+<h2>Output:</h2>
+Build target 'Ä¿±ê 1'
+assembling STARTUP.A51...
+compiling perfect.c...
+linking...
+Program Size: data=9.0 xdata=15 code=16
+creating hex file from "perfect"...
+"perfect" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"perfect.obj" 
+TO "perfect" 
+RAMSIZE(256) 

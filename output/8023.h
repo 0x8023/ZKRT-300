@@ -116,17 +116,17 @@
 
     }str_begin,str_now,str_next;
 /*---------------------------------------------------------------函数声明-----*/
-    void fun_delay(ui par_value,enum varENU_delaymodel par_model);//延时
-    void fun_timer0init();//50毫秒定时器0初始化
-    void fun_timer1init();//20毫秒定时器1初始化
-    void fun_timer0();//50毫秒定时器0处理函数
-    void fun_timer1();//20毫秒定时器1处理函数
-    void fun_wait();//等待按键
-    void fun_select(enum varENU_selectsensor par_model);//传感器片选
-    void fun_initialization();//初始化函数
-    void fun_pwminit();//PWM初始化
-    void fun_pwmr(ui par_value);//右路PWM输出
-    void fun_pwml(ui par_value);//左路PWM输出
-    void fun_startdj(enum varENU_motor par_model,char par_speed);//启动电机
-    void fun_stop(enum varENU_motor par_model);//停止电机
+    extern void fun_delay(ui par_value,enum varENU_delaymodel par_model);//延时
+    extern void fun_timer0init();//50毫秒定时器0初始化
+    extern void fun_timer1init();//20毫秒定时器1初始化
+    extern void fun_timer0();//50毫秒定时器0处理函数
+    extern void fun_timer1();//20毫秒定时器1处理函数
+    extern void fun_wait();//等待按键
+    extern void fun_select(enum varENU_selectsensor par_model);//传感器片选
+    extern void fun_initialization();//初始化函数
+    extern void fun_pwminit();//PWM初始化
+    extern void fun_pwmr(ui par_value);//右路PWM输出
+    extern void fun_pwml(ui par_value);//左路PWM输出
+    extern void fun_startdj(enum varENU_motor par_model,char par_speed);//启动电机
+    extern void fun_stop(enum varENU_motor par_model);//停止电机
 /*---------------------------------------------------------------更新日志-----*/
