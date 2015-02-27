@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   PERFECT                                                               02/27/2015 09:10:21 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               02/27/2015 18:03:20 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
@@ -9,14 +9,21 @@ line level    source
 
    1          #include "../8023.h"
    2          void main(){
-   3   1              ;
-   4   1      }
+   3   1          fun_initialization();
+   4   1          while(1){
+   5   2              fun_py1(tra_q);
+   6   2              fun_delay(1,del_s);
+   7   2              fun_py1(tra_h);
+   8   2              fun_delay(1,del_s);
+   9   2          }
+  10   1          def_stop
+  11   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =      1    ----
+   CODE SIZE        =     33    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     15    ----
+   XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

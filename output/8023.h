@@ -1,3 +1,5 @@
+#ifndef __8023_H__
+#define __8023_H__
 /*-------------------------------------------------------------头文件引入-----*/
     #include "STC12c5a60s2.h"//单片机头文件
     #include "intrins.h"//_nop_与循环位移
@@ -11,6 +13,13 @@
     #define def_timer1start TR1=1;//定时器1开启
     #define def_timer1stop TR1=0;//定时器1关闭
     #define def_start fun_initialization();//初始化
+    #define def_stop fun_stop(mot_dj1);\
+                     fun_stop(mot_dj2);\
+                     fun_stop(mot_dj3);\
+                     fun_stop(mot_dj4);\
+                     fun_stop(mot_rl);\
+                     EA=0;\
+                     while(1);
     // #define j 0//手爪夹紧
     // #define s 1//手爪松开   
 
@@ -99,34 +108,83 @@
     sbit out_switchselect=P1^6;//接近开关片选(SER_BS)
     sbit out_motorselect=P1^7;//电机输出片选(MOT_BS)
     sbit out_lamp=P3^7;//警灯输出(LAMP)
-/*---------------------------------------------------------------变量定义-----*/
-    xdata enum varENU_delaymodel{us,ms,s};//延时模式选择
-    xdata enum varENU_selectsensor{ps58,ps912};//传感器片选
-    xdata enum varENU_motor{l,r,rl,dj1,dj2,dj3,dj4};//电机选择
-    xdata enum varENU_direction{up,down,left,right};//车头方向
-    xdata enum varENU_translationplace{q,kq,zj,kh,h};//平移位置
-    xdata enum varENU_sjplace{wz1,wz12,wz2,wz23,wz3,wz34,wz4,wz45,wz5};//升降位置
-
-    xdata struct str_state{
+/*---------------------------------------------------------------变量声明-----*/
+    enum varENU_del{
+        del_us,
+        del_ms,
+        del_s
+    };//延时模式选择
+    enum varENU_sel{
+        sel_58,
+        sel_912
+    };//传感器片选
+    enum varENU_mot{
+        mot_l,
+        mot_r,
+        mot_rl,
+        mot_dj1,
+        mot_dj2,
+        mot_dj3,
+        mot_dj4
+    };//电机选择
+    enum varENU_dir{
+        dir_up,
+        dir_down,
+        dir_left,
+        dir_right
+    };//车头方向
+    enum varENU_tra{
+        tra_q,
+        tra_kq,
+        tra_z,
+        tra_kh,
+        tra_h
+    };//平移位置
+    enum varENU_sjp{
+        sjp_wz1,
+        sjp_wz12,
+        sjp_wz2,
+        sjp_wz23,
+        sjp_wz3,
+        sjp_wz34,
+        sjp_wz4,
+        sjp_wz45,
+        sjp_wz5
+    };//升降位置
+    enum varENU_han{
+        han_j,
+        han_s
+    };//手抓状态
+    enum varENU_cir{
+        cir_s,
+        cir_n
+    };//回转状态
+    struct str_state{
         char x;//X坐标
         char y;//Y坐标
-        enum varENU_direction ctfx;//车头方向
-        enum varENU_sjplace sjwz;//升降位置
-        enum varENU_translationplace pywz;//平移位置
-
-    }str_begin,str_now,str_next;
+        enum varENU_dir ctfx;//车头方向
+        enum varENU_han szzt;//手抓状态
+        enum varENU_sjp sjwz;//升降位置
+        enum varENU_tra pywz;//平移位置
+        enum varENU_dir hzfx;//回转方向
+    };
 /*---------------------------------------------------------------函数声明-----*/
-    extern void fun_delay(ui par_value,enum varENU_delaymodel par_model);//延时
+    extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//50毫秒定时器0初始化
     extern void fun_timer1init();//20毫秒定时器1初始化
     extern void fun_timer0();//50毫秒定时器0处理函数
     extern void fun_timer1();//20毫秒定时器1处理函数
     extern void fun_wait();//等待按键
-    extern void fun_select(enum varENU_selectsensor par_model);//传感器片选
+    extern void fun_select(enum varENU_sel par_model);//传感器片选
     extern void fun_initialization();//初始化函数
     extern void fun_pwminit();//PWM初始化
-    extern void fun_pwmr(ui par_value);//右路PWM输出
-    extern void fun_pwml(ui par_value);//左路PWM输出
-    extern void fun_startdj(enum varENU_motor par_model,char par_speed);//启动电机
-    extern void fun_stop(enum varENU_motor par_model);//停止电机
+    extern void fun_pwmr(uc par_value);//右路PWM输出
+    extern void fun_pwml(uc par_value);//左路PWM输出
+    extern void fun_startdj(enum varENU_mot par_model,char par_speed);//启动电机
+    extern void fun_stop(enum varENU_mot par_model);//停止电机
+    extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
+    extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
+    extern void fun_py1(enum varENU_tra par_model);//平移单步运动
+    extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
 /*---------------------------------------------------------------更新日志-----*/
+#endif

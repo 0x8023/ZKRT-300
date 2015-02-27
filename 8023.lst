@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -9,234 +9,416 @@ COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE program\8023.c DEBUG OBJECT
 line level    source
 
    1          #include "./output/8023.h"
-   2          extern void fun_delay(ui par_value,enum varENU_delaymodel par_model){
-   3   1          ui loc_con=par_value;
-   4   1          switch(par_model){
-   5   2              case us:
-   6   2                  while(loc_con-->0){
-   7   3                      _nop_();
+   2          xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+   3          void fun_delay(ui par_value,enum varENU_del par_model){
+   4   1          ui loc_con=par_value;
+   5   1          switch(par_model){
+   6   2              case del_us:
+   7   2                  while(loc_con-->0){
    8   3                      _nop_();
-   9   3                  }
-  10   2                  return;
-  11   2              case ms:
-  12   2                  while(loc_con-->0){
-  13   3                      uc loc_i, loc_j;
-  14   3                      _nop_();
+   9   3                      _nop_();
+  10   3                  }
+  11   2                  return;
+  12   2              case del_ms:
+  13   2                  while(loc_con-->0){
+  14   3                      uc loc_i, loc_j;
   15   3                      _nop_();
-  16   3                      loc_i=12;
-  17   3                      loc_j=168;
-  18   3                      do{
-  19   4                          while(--loc_j);
-  20   4                      }while(--loc_i);
-  21   3                  }
-  22   2                  return;
-  23   2              case s:
-  24   2                  while(loc_con-->0){
-  25   3                      uc loc_i, loc_j, loc_k;
-  26   3                      loc_i=46;
-  27   3                      loc_j=153;
-  28   3                      loc_k=245;
-  29   3                      do{
-  30   4                          do{
-  31   5                              while(--loc_k);
-  32   5                          }while(--loc_j);
-  33   4                      }while(--loc_i);
-  34   3                  }
-  35   2                  return;
-  36   2              default:return;
-  37   2          }
-  38   1      }//延时
-  39          extern void fun_timer0init(){
-  40   1          AUXR&=0x7F;
-  41   1          TMOD&=0xF0;
-  42   1          TMOD|=0x01;
-  43   1          TL0=0xB0;
-  44   1          TH0=0x3C;
-  45   1          TF0=0;
-  46   1      }//50毫秒定时器0初始化
-  47          extern void fun_timer1init(){
-  48   1          AUXR&=0xBF;
-  49   1          TMOD&=0x0F;
-  50   1          TMOD|=0x10;
-  51   1          TL1=0xE0;
-  52   1          TH1=0xB1;
-  53   1          TF1=0;
-  54   1      }//20毫秒定时器1初始化
-C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 2   
+  16   3                      _nop_();
+  17   3                      loc_i=12;
+  18   3                      loc_j=168;
+  19   3                      do{
+  20   4                          while(--loc_j);
+  21   4                      }while(--loc_i);
+  22   3                  }
+  23   2                  return;
+  24   2              case del_s:
+  25   2                  while(loc_con-->0){
+  26   3                      uc loc_i, loc_j, loc_k;
+  27   3                      loc_i=46;
+  28   3                      loc_j=153;
+  29   3                      loc_k=245;
+  30   3                      do{
+  31   4                          do{
+  32   5                              while(--loc_k);
+  33   5                          }while(--loc_j);
+  34   4                      }while(--loc_i);
+  35   3                  }
+  36   2                  return;
+  37   2              default:return;
+  38   2          }
+  39   1      }//延时
+  40          void fun_timer0init(){
+  41   1          AUXR&=0x7F;
+  42   1          TMOD&=0xF0;
+  43   1          TMOD|=0x01;
+  44   1          TL0=0xB0;
+  45   1          TH0=0x3C;
+  46   1          TF0=0;
+  47   1      }//50毫秒定时器0初始化
+  48          void fun_timer1init(){
+  49   1          AUXR&=0xBF;
+  50   1          TMOD&=0x0F;
+  51   1          TMOD|=0x10;
+  52   1          TL1=0xE0;
+  53   1          TH1=0xB1;
+  54   1          TF1=0;
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 2   
 
-  55          extern void fun_timer0(){
-  56   1          TL0=0xB0;
-  57   1          TH0=0x3C;
-  58   1          _nop_();
-  59   1      }//50毫秒定时器0处理函数
-  60          extern void fun_timer1(){
-  61   1          TL1=0xE0;
-  62   1          TH1=0xB1;
-  63   1          _nop_();
-  64   1      }//20毫秒定时器1处理函数
-  65          extern void fun_wait(){
-  66   1          while(in_start==1);
-  67   1          fun_delay(20,ms);
-  68   1          while(in_start==0);
-  69   1          fun_delay(256,ms);
-  70   1      }//等待按键
-  71          extern void fun_select(enum varENU_selectsensor par_model){
-  72   1          if(par_model==ps58)
-  73   1              out_switchselect=0;
-  74   1          else if(par_model==ps912)
-  75   1              out_switchselect=1;
-  76   1      }//传感器片选
-  77          extern void fun_initialization(){
-  78   1          CLK_DIV=0x00;//不分频
-  79   1      
-  80   1          P0M1=0xff;//P0用于输入
-  81   1          P0M0=0x00;//P0不能输出
-  82   1          
-  83   1          P1M1=0x00;//P1口0-1双向，2中断输入，3-6输入，7输出
-  84   1          P1M0=0xfc;//P1口2-7输出
-  85   1      
-  86   1          P2M1=0xf0;//P2口4-7输入
-  87   1          P2M0=0x0f;//P2口0-3输出
-  88   1      
-  89   1          //PS_2=1;//手抓松传感器置1 $?$
-  90   1          //PS_11=1;//升降位置3传感器置1 $?$
-  91   1      
-  92   1          out_en1=1;//电机1/3使能 $?$
-  93   1          out_en2=1;//电机2/4使能 $?$
-  94   1          out_motorselect=1;//电机片选为1 $?$
-  95   1          fun_delay(ms,1);//延时1毫秒 $?$
-  96   1          out_motorselect=0;//电机片选为0 $?$
-  97   1          //PS_5=PS_1;// $?$
-  98   1      
-  99   1          fun_pwminit();//PWM的初始化设置
- 100   1          fun_timer0init();//初始化定时器0
- 101   1          fun_timer1init();//初始化定时器1
- 102   1          in_start=1;//按键置1
- 103   1      
- 104   1          fun_wait();
- 105   1      }//初始化
- 106          extern void fun_pwminit(){
- 107   1          CCON=0x00;
- 108   1          CH=0;
- 109   1          CL=0;
- 110   1          CMOD=0x00;
- 111   1      }//PWM初始化
- 112          extern void fun_pwmr(ui par_value){
- 113   1          CCAP0H=CCAP0L=par_value*2.5;//控制输出的占空比
- 114   1          CCAPM0=0X42;//8位PWM输出，无中断
- 115   1          PCA_PWM0=0x00;
- 116   1      }//右路PWM输出
-C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 3   
+  55   1      }//20毫秒定时器1初始化
+  56          void fun_timer0(){
+  57   1          TL0=0xB0;
+  58   1          TH0=0x3C;
+  59   1          _nop_();
+  60   1      }//50毫秒定时器0处理函数
+  61          void fun_timer1(){
+  62   1          TL1=0xE0;
+  63   1          TH1=0xB1;
+  64   1          _nop_();
+  65   1      }//20毫秒定时器1处理函数
+  66          void fun_wait(){
+  67   1          while(in_start==1);
+  68   1          fun_delay(20,del_ms);
+  69   1          while(in_start==0);
+  70   1          fun_delay(256,del_ms);
+  71   1      }//等待按键
+  72          void fun_select(enum varENU_sel par_model){
+  73   1          if(par_model==sel_58)
+  74   1              out_switchselect=0;
+  75   1          else if(par_model==sel_912)
+  76   1              out_switchselect=1;
+  77   1      }//传感器片选
+  78          void fun_initialization(){
+  79   1          CLK_DIV=0x00;//不分频
+  80   1      
+  81   1          P0M1=0xff;//P0用于输入
+  82   1          P0M0=0x00;//P0不能输出
+  83   1          
+  84   1          P1M1=0x00;//P1口0-1双向，2中断输入，3-6输入，7输出
+  85   1          P1M0=0xfc;//P1口2-7输出
+  86   1      
+  87   1          P2M1=0xf0;//P2口4-7输入
+  88   1          P2M0=0x0f;//P2口0-3输出
+  89   1      
+  90   1          //PS_2=1;//手抓松传感器置1 $?$
+  91   1          //PS_11=1;//升降位置3传感器置1 $?$
+  92   1      
+  93   1          out_en1=1;//电机1/3使能 $?$
+  94   1          out_en2=1;//电机2/4使能 $?$
+  95   1          out_motorselect=1;//电机片选为1 $?$
+  96   1          fun_delay(del_ms,1);//延时1毫秒 $?$
+  97   1          out_motorselect=0;//电机片选为0 $?$
+  98   1          //PS_5=PS_1;// $?$
+  99   1      
+ 100   1          fun_pwminit();//PWM的初始化设置
+ 101   1          fun_timer0init();//初始化定时器0
+ 102   1          fun_timer1init();//初始化定时器1
+ 103   1          in_start=1;//按键置1
+ 104   1      
+ 105   1          fun_wait();
+ 106   1      }//初始化
+ 107          void fun_pwminit(){
+ 108   1          CCON=0x00;
+ 109   1          CH=0;
+ 110   1          CL=0;
+ 111   1          CMOD=0x00;
+ 112   1      }//PWM初始化
+ 113          void fun_pwmr(uc par_value){
+ 114   1          CCAP0H=CCAP0L=par_value*2.5;//控制输出的占空比
+ 115   1          CCAPM0=0X42;//8位PWM输出，无中断
+ 116   1          PCA_PWM0=0x00;
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 3   
 
- 117          extern void fun_pwml(ui par_value){
- 118   1          CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
- 119   1          CCAPM1=0X42;//8位PWM输出，无中断
- 120   1          PCA_PWM1=0x00;
- 121   1      }//左路PWM输出
- 122          extern void fun_startdj(enum varENU_motor par_model,char par_speed){
- 123   1          if(par_speed==0)
- 124   1              return;
- 125   1          else if(par_speed>100)
- 126   1              par_speed=100;
- 127   1          else if(par_speed<-100)
- 128   1              par_speed=-100;
- 129   1          switch(par_model){
- 130   2              case l:
- 131   2                  CR=1;
- 132   2                  if(par_speed>0){
- 133   3                      fun_pwml(par_speed);out_pwml=0;
- 134   3                  }
- 135   2                  else if(par_speed<0){
- 136   3                      fun_pwml(cabs(par_speed));out_pwml=1;
- 137   3                  }
- 138   2                  break;
- 139   2              case r:
- 140   2                  CR=1;
- 141   2                  if(par_speed>0){
- 142   3                      fun_pwmr(par_speed);out_pwmr=0;
- 143   3                  }
- 144   2                  else if(par_speed<0){
- 145   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
- 146   3                  }
- 147   2                  break;
- 148   2              case rl:
- 149   2                  CR=1;
- 150   2                  if(par_speed>0){
- 151   3                      fun_pwml(par_speed);out_pwml=0;
- 152   3                      fun_pwmr(par_speed);out_pwmr=0;
- 153   3                  }
- 154   2                  else if(par_speed<0){
- 155   3                      fun_pwml(cabs(par_speed));out_pwml=1;
- 156   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
- 157   3                  }
- 158   2                  break;
- 159   2              case dj1:
- 160   2                  out_motorselect=1;
- 161   2                  if(par_speed>0)
- 162   2                      out_dir1=1;
- 163   2                  else if(par_speed<0)
- 164   2                      out_dir1=0;
- 165   2                  out_en1=0;
- 166   2                  break;
- 167   2              case dj2:
- 168   2                  out_motorselect=1;
- 169   2                  if(par_speed>0)
- 170   2                      out_dir2=1;
- 171   2                  else if(par_speed<0)
- 172   2                      out_dir2=0;
- 173   2                  out_en2=0;
- 174   2                  break;
- 175   2              case dj3:
- 176   2                  out_motorselect=0;
- 177   2                  if(par_speed>0)
- 178   2                      out_dir1=0;
-C51 COMPILER V9.01   8023                                                                  02/27/2015 09:09:49 PAGE 4   
+ 117   1      }//右路PWM输出
+ 118          void fun_pwml(uc par_value){
+ 119   1          CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
+ 120   1          CCAPM1=0X42;//8位PWM输出，无中断
+ 121   1          PCA_PWM1=0x00;
+ 122   1      }//左路PWM输出
+ 123          void fun_startdj(enum varENU_mot par_model,char par_speed){
+ 124   1          if(par_speed==0)
+ 125   1              return;
+ 126   1          else if(par_speed>100)
+ 127   1              par_speed=100;
+ 128   1          else if(par_speed<-100)
+ 129   1              par_speed=-100;
+ 130   1          switch(par_model){
+ 131   2              case mot_l:
+ 132   2                  CR=1;
+ 133   2                  if(par_speed>0){
+ 134   3                      fun_pwml(par_speed);out_pwml=0;
+ 135   3                  }
+ 136   2                  else if(par_speed<0){
+ 137   3                      fun_pwml(cabs(par_speed));out_pwml=1;
+ 138   3                  }
+ 139   2                  break;
+ 140   2              case mot_r:
+ 141   2                  CR=1;
+ 142   2                  if(par_speed>0){
+ 143   3                      fun_pwmr(par_speed);out_pwmr=0;
+ 144   3                  }
+ 145   2                  else if(par_speed<0){
+ 146   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 147   3                  }
+ 148   2                  break;
+ 149   2              case mot_rl:
+ 150   2                  CR=1;
+ 151   2                  if(par_speed>0){
+ 152   3                      fun_pwml(par_speed);out_pwml=0;
+ 153   3                      fun_pwmr(par_speed);out_pwmr=0;
+ 154   3                  }
+ 155   2                  else if(par_speed<0){
+ 156   3                      fun_pwml(cabs(par_speed));out_pwml=1;
+ 157   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 158   3                  }
+ 159   2                  break;
+ 160   2              case mot_dj1://正转为抓紧，反转为松开
+ 161   2                  out_motorselect=1;
+ 162   2                  if(par_speed>0)
+ 163   2                      out_dir1=1;
+ 164   2                  else if(par_speed<0)
+ 165   2                      out_dir1=0;
+ 166   2                  out_en1=0;
+ 167   2                  break;
+ 168   2              case mot_dj2://正转是向无电机一方转,反转为向有电机一方转
+ 169   2                  out_motorselect=1;
+ 170   2                  if(par_speed>0)
+ 171   2                      out_dir2=1;
+ 172   2                  else if(par_speed<0)
+ 173   2                      out_dir2=0;
+ 174   2                  out_en2=0;
+ 175   2                  break;
+ 176   2              case mot_dj3://向上为正转,向下为反转
+ 177   2                  out_motorselect=0;
+ 178   2                  if(par_speed>0)
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 4   
 
- 179   2                  else if(par_speed<0)
- 180   2                      out_dir1=1;
- 181   2                  out_en1=0;
- 182   2                  break;
- 183   2              case dj4:
- 184   2                  out_motorselect=0;
- 185   2                  if(par_speed>0)
- 186   2                      out_dir2=1;
- 187   2                  else if(par_speed<0)
- 188   2                      out_dir2=0;
- 189   2                  out_en2=0;
- 190   2                  break;
- 191   2              default:
- 192   2                  break;
- 193   2          }
- 194   1      }//启动电机
- 195          extern void fun_stop(enum varENU_motor par_model){
- 196   1          switch(par_model){
- 197   2              case l:
- 198   2                  fun_pwml(0);out_pwml=0;break;
- 199   2              case r:
- 200   2                  fun_pwmr(0);out_pwmr=0;break;
- 201   2              case rl:
- 202   2                  CR=0;fun_pwmr(0);out_pwmr=0;fun_pwml(0);out_pwml=0;break;
- 203   2              case dj1:
- 204   2                  out_motorselect=1;out_dir1=0;out_en1=1;break;
- 205   2              case dj2:
- 206   2                  out_motorselect=1;out_dir2=0;out_en2=1;break;
- 207   2              case dj3:
- 208   2                  out_motorselect=0;out_dir1=0;out_en1=1;break;
- 209   2              case dj4:
- 210   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
- 211   2              default:
- 212   2                  break;
- 213   2          }
- 214   1      }//停止电机
- 215          
+ 179   2                      out_dir1=0;
+ 180   2                  else if(par_speed<0)
+ 181   2                      out_dir1=1;
+ 182   2                  out_en1=0;
+ 183   2                  break;
+ 184   2              case mot_dj4://顺时针为正转,逆时针为反转
+ 185   2                  out_motorselect=0;
+ 186   2                  if(par_speed>0)
+ 187   2                      out_dir2=0;
+ 188   2                  else if(par_speed<0)
+ 189   2                      out_dir2=1;
+ 190   2                  out_en2=0;
+ 191   2                  break;
+ 192   2              default:
+ 193   2                  break;
+ 194   2          }
+ 195   1      }//启动电机
+ 196          void fun_stop(enum varENU_mot par_model){
+ 197   1          switch(par_model){
+ 198   2              case mot_l:
+ 199   2                  fun_pwml(0);out_pwml=0;break;
+ 200   2              case mot_r:
+ 201   2                  fun_pwmr(0);out_pwmr=0;break;
+ 202   2              case mot_rl:
+ 203   2                  CR=0;fun_pwmr(0);out_pwmr=0;fun_pwml(0);out_pwml=0;break;
+ 204   2              case mot_dj1:
+ 205   2                  out_motorselect=1;out_dir1=0;out_en1=1;break;
+ 206   2              case mot_dj2:
+ 207   2                  out_motorselect=1;out_dir2=0;out_en2=1;break;
+ 208   2              case mot_dj3:
+ 209   2                  out_motorselect=0;out_dir1=0;out_en1=1;break;
+ 210   2              case mot_dj4:
+ 211   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
+ 212   2              default:
+ 213   2                  break;
+ 214   2          }
+ 215   1      }//停止电机
+ 216          void fun_sz1(enum varENU_han par_model){
+ 217   1          if(par_model==han_s){
+ 218   2              while(1){
+ 219   3                  fun_startdj(mot_dj1,-100);
+ 220   3                  while(in_s==1);
+ 221   3                  fun_delay(20,del_ms);
+ 222   3                  if(in_s==0){
+ 223   4                      fun_stop(mot_dj1);
+ 224   4                      break;
+ 225   4                  }
+ 226   3              }
+ 227   2          }
+ 228   1          else{
+ 229   2              while(1){
+ 230   3                  fun_startdj(mot_dj1,100);
+ 231   3                  while(in_j==1);
+ 232   3                  fun_delay(20,del_ms);
+ 233   3                  if(in_j==0){
+ 234   4                      fun_stop(mot_dj1);
+ 235   4                      break;
+ 236   4                  }
+ 237   3              }
+ 238   2          }
+ 239   1          str_begin.szzt=par_model;
+ 240   1      }//手抓单步运动
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 5   
+
+ 241          void fun_sj1(enum varENU_sjp par_model){
+ 242   1          switch(par_model){
+ 243   2              case sjp_wz1:
+ 244   2                  while(1){
+ 245   3                      fun_startdj(mot_dj3,100);
+ 246   3                      fun_select(sel_58);
+ 247   3                      fun_delay(50,del_ms);
+ 248   3                      while(in_wz1==1);
+ 249   3                      fun_delay(50,del_ms);
+ 250   3                      if(in_wz1==0){
+ 251   4                          fun_stop(mot_dj3);
+ 252   4                          break;
+ 253   4                      }
+ 254   3                  }
+ 255   2                  break;
+ 256   2              case sjp_wz2:
+ 257   2                  if(par_model>str_begin.sjwz){
+ 258   3                      while(1){
+ 259   4                          fun_startdj(mot_dj3,-100);
+ 260   4                          fun_select(sel_58);
+ 261   4                          fun_delay(50,del_ms);
+ 262   4                          while(in_wz2==1);
+ 263   4                          fun_delay(50,del_ms);
+ 264   4                          if(in_wz2==0){
+ 265   5                              fun_stop(mot_dj3);
+ 266   5                              break;
+ 267   5                          }
+ 268   4                      }
+ 269   3                  }
+ 270   2                  else{
+ 271   3                      while(1){
+ 272   4                          fun_startdj(mot_dj3,100);
+ 273   4                          fun_select(sel_58);
+ 274   4                          fun_delay(50,del_ms);
+ 275   4                          while(in_wz2==1);
+ 276   4                          fun_delay(50,del_ms);
+ 277   4                          if(in_wz2==0){
+ 278   5                              fun_stop(mot_dj3);
+ 279   5                              break;
+ 280   5                          }
+ 281   4                      }
+ 282   3                  }
+ 283   2                  break;
+ 284   2              case sjp_wz3:
+ 285   2                  if(par_model>str_begin.sjwz){
+ 286   3                      while(1){
+ 287   4                          fun_startdj(mot_dj3,-100);
+ 288   4                          fun_select(sel_58);
+ 289   4                          fun_delay(50,del_ms);
+ 290   4                          while(in_wz3==1);
+ 291   4                          fun_delay(50,del_ms);
+ 292   4                          if(in_wz3==0){
+ 293   5                              fun_stop(mot_dj3);
+ 294   5                              break;
+ 295   5                          }
+ 296   4                      }
+ 297   3                  }
+ 298   2                  else{
+ 299   3                      while(1){
+ 300   4                          fun_startdj(mot_dj3,100);
+ 301   4                          fun_select(sel_58);
+ 302   4                          fun_delay(50,del_ms);
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 6   
+
+ 303   4                          while(in_wz3==1);
+ 304   4                          fun_delay(50,del_ms);
+ 305   4                          if(in_wz3==0){
+ 306   5                              fun_stop(mot_dj3);
+ 307   5                              break;
+ 308   5                          }
+ 309   4                      }
+ 310   3                  }
+ 311   2                  break;
+ 312   2              case sjp_wz4:
+ 313   2                  if(par_model>str_begin.sjwz){
+ 314   3                      while(1){
+ 315   4                          fun_startdj(mot_dj3,-100);
+ 316   4                          fun_select(sel_58);
+ 317   4                          fun_delay(50,del_ms);
+ 318   4                          while(in_wz4==1);
+ 319   4                          fun_delay(50,del_ms);
+ 320   4                          if(in_wz4==0){
+ 321   5                              fun_stop(mot_dj3);
+ 322   5                              break;
+ 323   5                          }
+ 324   4                      }
+ 325   3                  }
+ 326   2                  else{
+ 327   3                      while(1){
+ 328   4                          fun_startdj(mot_dj3,100);
+ 329   4                          fun_select(sel_58);
+ 330   4                          fun_delay(50,del_ms);
+ 331   4                          while(in_wz4==1);
+ 332   4                          fun_delay(50,del_ms);
+ 333   4                          if(in_wz4==0){
+ 334   5                              fun_stop(mot_dj3);
+ 335   5                              break;
+ 336   5                          }
+ 337   4                      }
+ 338   3                  }
+ 339   2                  break;
+ 340   2              case sjp_wz5:
+ 341   2                  while(1){
+ 342   3                      fun_startdj(mot_dj3,-100);
+ 343   3                      fun_select(sel_912);
+ 344   3                      fun_delay(50,del_ms);
+ 345   3                      while(in_wz5==1);
+ 346   3                      fun_delay(50,del_ms);
+ 347   3                      if(in_wz5==0){
+ 348   4                          fun_stop(mot_dj3);
+ 349   4                          return;
+ 350   4                      }
+ 351   3                  }
+ 352   2                  break;
+ 353   2              default:
+ 354   2                  break;
+ 355   2          }
+ 356   1          str_begin.sjwz=par_model;
+ 357   1      }//升降单步运动
+ 358          void fun_py1(enum varENU_tra par_model){
+ 359   1          switch(par_model){
+ 360   2              case tra_q:
+ 361   2                  while(1){
+ 362   3                      fun_startdj(mot_dj2,100);
+ 363   3                      while(in_qpy==1);
+ 364   3                      fun_delay(20,del_ms);
+C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 7   
+
+ 365   3                      if(in_qpy==0){
+ 366   4                          fun_stop(mot_dj2);
+ 367   4                          break;
+ 368   4                      }
+ 369   3                  }
+ 370   2                  break;
+ 371   2              case tra_h:
+ 372   2                  while(1){
+ 373   3                      fun_startdj(mot_dj2,-100);
+ 374   3                      while(in_hpy==1);
+ 375   3                      fun_delay(20,del_ms);
+ 376   3                      if(in_hpy==0){
+ 377   4                          fun_stop(mot_dj2);
+ 378   4                          break;
+ 379   4                      }
+ 380   3                  }
+ 381   2                  break;
+ 382   2              default:
+ 383   2                  break;
+ 384   2          }
+ 385   1          str_begin.pywz=par_model;
+ 386   1      }//平移单步运动
+ 387          // void fun_hz1(enum varENU_dir par_model){
+ 388          //     switch(par_model){
+ 389          //         ;
+ 390          //     }
+ 391          // }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    721    ----
+   CODE SIZE        =   1086    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     15    ----
+   XDATA SIZE       =     21    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----       4
+   DATA SIZE        =   ----       7
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

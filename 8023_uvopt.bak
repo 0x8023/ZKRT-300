@@ -174,10 +174,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>9</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>1</CurrentLine>
+      <TopLine>242</TopLine>
+      <CurrentLine>242</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -187,7 +187,7 @@
   <AlienFiles>
     <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\MATH.H</PathWithFilename>
     <TopLine>11</TopLine>
-    <CurrentLine>14</CurrentLine>
+    <CurrentLine>11</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -213,7 +213,7 @@
   <AlienFiles>
     <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</PathWithFilename>
     <TopLine>231</TopLine>
-    <CurrentLine>250</CurrentLine>
+    <CurrentLine>231</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -239,7 +239,7 @@
   <AlienFiles>
     <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\STDIO.H</PathWithFilename>
     <TopLine>13</TopLine>
-    <CurrentLine>31</CurrentLine>
+    <CurrentLine>13</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -264,8 +264,8 @@
 
   <AlienFiles>
     <PathWithFilename>D:\Desktop\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
-    <TopLine>1</TopLine>
-    <CurrentLine>11</CurrentLine>
+    <TopLine>133</TopLine>
+    <CurrentLine>133</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1633,33 +1633,33 @@
       <Documents>
         <Doc>
           <Name>.\program\8023.c</Name>
-          <ColumnNumber>9</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>1</CurrentLine>
+          <ColumnNumber>0</ColumnNumber>
+          <TopLine>242</TopLine>
+          <CurrentLine>242</CurrentLine>
         </Doc>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>1</TopLine>
-          <CurrentLine>11</CurrentLine>
+          <TopLine>133</TopLine>
+          <CurrentLine>133</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STDIO.H</Name>
           <ColumnNumber>0</ColumnNumber>
           <TopLine>13</TopLine>
-          <CurrentLine>31</CurrentLine>
+          <CurrentLine>13</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
           <ColumnNumber>65</ColumnNumber>
           <TopLine>231</TopLine>
-          <CurrentLine>250</CurrentLine>
+          <CurrentLine>231</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\MATH.H</Name>
           <ColumnNumber>38</ColumnNumber>
           <TopLine>11</TopLine>
-          <CurrentLine>14</CurrentLine>
+          <CurrentLine>11</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>
