@@ -1,11 +1,12 @@
 #include "../8023.h"
 void main(){
-    fun_initialization();
-    while(1){
-        fun_py1(tra_q);
-        fun_delay(1,del_s);
-        fun_py1(tra_h);
-        fun_delay(1,del_s);
-    }
+    def_start(0,0,dir_up,han_j,sjp_wz1,tra_q,dir_down)
+
+    fun_mline(5,50);
     def_stop
+    while(1);
+    
+    fun_hz1(dir_up);
+    
+    
 }

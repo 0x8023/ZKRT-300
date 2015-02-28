@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -13,13 +13,13 @@ line level    source
    3          void fun_delay(ui par_value,enum varENU_del par_model){
    4   1          ui loc_con=par_value;
    5   1          switch(par_model){
-   6   2              case del_us:
+   6   2              case del_us://微秒级延时
    7   2                  while(loc_con-->0){
    8   3                      _nop_();
    9   3                      _nop_();
   10   3                  }
   11   2                  return;
-  12   2              case del_ms:
+  12   2              case del_ms://毫秒级延时
   13   2                  while(loc_con-->0){
   14   3                      uc loc_i, loc_j;
   15   3                      _nop_();
@@ -31,7 +31,7 @@ line level    source
   21   4                      }while(--loc_i);
   22   3                  }
   23   2                  return;
-  24   2              case del_s:
+  24   2              case del_s://秒级延时
   25   2                  while(loc_con-->0){
   26   3                      uc loc_i, loc_j, loc_k;
   27   3                      loc_i=46;
@@ -62,7 +62,7 @@ line level    source
   52   1          TL1=0xE0;
   53   1          TH1=0xB1;
   54   1          TF1=0;
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 2   
 
   55   1      }//20毫秒定时器1初始化
   56          void fun_timer0(){
@@ -126,7 +126,7 @@ line level    source
  114   1          CCAP0H=CCAP0L=par_value*2.5;//控制输出的占空比
  115   1          CCAPM0=0X42;//8位PWM输出，无中断
  116   1          PCA_PWM0=0x00;
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 3   
 
  117   1      }//右路PWM输出
  118          void fun_pwml(uc par_value){
@@ -142,7 +142,7 @@ line level    source
  128   1          else if(par_speed<-100)
  129   1              par_speed=-100;
  130   1          switch(par_model){
- 131   2              case mot_l:
+ 131   2              case mot_l://左轮电机
  132   2                  CR=1;
  133   2                  if(par_speed>0){
  134   3                      fun_pwml(par_speed);out_pwml=0;
@@ -151,7 +151,7 @@ line level    source
  137   3                      fun_pwml(cabs(par_speed));out_pwml=1;
  138   3                  }
  139   2                  break;
- 140   2              case mot_r:
+ 140   2              case mot_r://右轮电机
  141   2                  CR=1;
  142   2                  if(par_speed>0){
  143   3                      fun_pwmr(par_speed);out_pwmr=0;
@@ -160,7 +160,7 @@ line level    source
  146   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
  147   3                  }
  148   2                  break;
- 149   2              case mot_rl:
+ 149   2              case mot_rl://左右轮同步
  150   2                  CR=1;
  151   2                  if(par_speed>0){
  152   3                      fun_pwml(par_speed);out_pwml=0;
@@ -190,7 +190,7 @@ line level    source
  176   2              case mot_dj3://向上为正转,向下为反转
  177   2                  out_motorselect=0;
  178   2                  if(par_speed>0)
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 4   
 
  179   2                      out_dir1=0;
  180   2                  else if(par_speed<0)
@@ -216,209 +216,457 @@ line level    source
  200   2              case mot_r:
  201   2                  fun_pwmr(0);out_pwmr=0;break;
  202   2              case mot_rl:
- 203   2                  CR=0;fun_pwmr(0);out_pwmr=0;fun_pwml(0);out_pwml=0;break;
- 204   2              case mot_dj1:
- 205   2                  out_motorselect=1;out_dir1=0;out_en1=1;break;
- 206   2              case mot_dj2:
- 207   2                  out_motorselect=1;out_dir2=0;out_en2=1;break;
- 208   2              case mot_dj3:
- 209   2                  out_motorselect=0;out_dir1=0;out_en1=1;break;
- 210   2              case mot_dj4:
- 211   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
- 212   2              default:
- 213   2                  break;
- 214   2          }
- 215   1      }//停止电机
- 216          void fun_sz1(enum varENU_han par_model){
- 217   1          if(par_model==han_s){
- 218   2              while(1){
- 219   3                  fun_startdj(mot_dj1,-100);
- 220   3                  while(in_s==1);
- 221   3                  fun_delay(20,del_ms);
- 222   3                  if(in_s==0){
- 223   4                      fun_stop(mot_dj1);
- 224   4                      break;
- 225   4                  }
- 226   3              }
- 227   2          }
- 228   1          else{
- 229   2              while(1){
- 230   3                  fun_startdj(mot_dj1,100);
- 231   3                  while(in_j==1);
- 232   3                  fun_delay(20,del_ms);
- 233   3                  if(in_j==0){
- 234   4                      fun_stop(mot_dj1);
- 235   4                      break;
- 236   4                  }
- 237   3              }
- 238   2          }
- 239   1          str_begin.szzt=par_model;
+ 203   2                  CR=0;
+ 204   2                  fun_pwmr(0);out_pwmr=0;
+ 205   2                  fun_pwml(0);out_pwml=0;
+ 206   2                  break;
+ 207   2              case mot_dj1:
+ 208   2                  out_motorselect=1;out_dir1=0;out_en1=1;break;
+ 209   2              case mot_dj2:
+ 210   2                  out_motorselect=1;out_dir2=0;out_en2=1;break;
+ 211   2              case mot_dj3:
+ 212   2                  out_motorselect=0;out_dir1=0;out_en1=1;break;
+ 213   2              case mot_dj4:
+ 214   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
+ 215   2              default:
+ 216   2                  break;
+ 217   2          }
+ 218   1      }//停止电机
+ 219          void fun_sz1(enum varENU_han par_model){
+ 220   1          if(par_model==han_s){//手抓松
+ 221   2              while(1){
+ 222   3                  fun_startdj(mot_dj1,-100);
+ 223   3                  while(in_s==1);
+ 224   3                  fun_delay(20,del_ms);
+ 225   3                  if(in_s==0)
+ 226   3                      break;
+ 227   3              }
+ 228   2          }
+ 229   1          else{//手抓紧
+ 230   2              while(1){
+ 231   3                  fun_startdj(mot_dj1,100);
+ 232   3                  while(in_j==1);
+ 233   3                  fun_delay(20,del_ms);
+ 234   3                  if(in_j==0)
+ 235   3                      break;
+ 236   3              }
+ 237   2          }
+ 238   1          fun_stop(mot_dj1);
+ 239   1          str_begin.szzt=par_model;//存储运行结果
  240   1      }//手抓单步运动
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 5   
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 5   
 
  241          void fun_sj1(enum varENU_sjp par_model){
  242   1          switch(par_model){
- 243   2              case sjp_wz1:
- 244   2                  while(1){
+ 243   2              case sjp_wz1://升降位置1(最上位)
+ 244   2                  while(1){//只有向上
  245   3                      fun_startdj(mot_dj3,100);
  246   3                      fun_select(sel_58);
  247   3                      fun_delay(50,del_ms);
  248   3                      while(in_wz1==1);
  249   3                      fun_delay(50,del_ms);
- 250   3                      if(in_wz1==0){
- 251   4                          fun_stop(mot_dj3);
- 252   4                          break;
- 253   4                      }
- 254   3                  }
- 255   2                  break;
- 256   2              case sjp_wz2:
- 257   2                  if(par_model>str_begin.sjwz){
- 258   3                      while(1){
- 259   4                          fun_startdj(mot_dj3,-100);
- 260   4                          fun_select(sel_58);
+ 250   3                      if(in_wz1==0)
+ 251   3                          break;
+ 252   3                  }
+ 253   2                  break;
+ 254   2              case sjp_wz2://升降位置2
+ 255   2                  if(par_model>str_begin.sjwz){
+ 256   3                      while(1){//要去的地方比较靠下,向下走
+ 257   4                          fun_startdj(mot_dj3,-100);
+ 258   4                          fun_select(sel_58);
+ 259   4                          fun_delay(50,del_ms);
+ 260   4                          while(in_wz2==1);
  261   4                          fun_delay(50,del_ms);
- 262   4                          while(in_wz2==1);
- 263   4                          fun_delay(50,del_ms);
- 264   4                          if(in_wz2==0){
- 265   5                              fun_stop(mot_dj3);
- 266   5                              break;
- 267   5                          }
- 268   4                      }
- 269   3                  }
- 270   2                  else{
- 271   3                      while(1){
- 272   4                          fun_startdj(mot_dj3,100);
- 273   4                          fun_select(sel_58);
- 274   4                          fun_delay(50,del_ms);
- 275   4                          while(in_wz2==1);
- 276   4                          fun_delay(50,del_ms);
- 277   4                          if(in_wz2==0){
- 278   5                              fun_stop(mot_dj3);
- 279   5                              break;
- 280   5                          }
- 281   4                      }
- 282   3                  }
- 283   2                  break;
- 284   2              case sjp_wz3:
- 285   2                  if(par_model>str_begin.sjwz){
- 286   3                      while(1){
- 287   4                          fun_startdj(mot_dj3,-100);
- 288   4                          fun_select(sel_58);
- 289   4                          fun_delay(50,del_ms);
- 290   4                          while(in_wz3==1);
- 291   4                          fun_delay(50,del_ms);
- 292   4                          if(in_wz3==0){
- 293   5                              fun_stop(mot_dj3);
- 294   5                              break;
- 295   5                          }
- 296   4                      }
- 297   3                  }
- 298   2                  else{
- 299   3                      while(1){
- 300   4                          fun_startdj(mot_dj3,100);
- 301   4                          fun_select(sel_58);
- 302   4                          fun_delay(50,del_ms);
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 6   
+ 262   4                          if(in_wz2==0)
+ 263   4                              break;
+ 264   4                      }
+ 265   3                  }
+ 266   2                  else{//要去的地方在上面，向上走
+ 267   3                      while(1){
+ 268   4                          fun_startdj(mot_dj3,100);
+ 269   4                          fun_select(sel_58);
+ 270   4                          fun_delay(50,del_ms);
+ 271   4                          while(in_wz2==1);
+ 272   4                          fun_delay(50,del_ms);
+ 273   4                          if(in_wz2==0)
+ 274   4                              break;
+ 275   4                      }
+ 276   3                  }
+ 277   2                  break;
+ 278   2              case sjp_wz3://升降位置3
+ 279   2                  if(par_model>str_begin.sjwz){
+ 280   3                      while(1){//要去的地方比较靠下,向下走
+ 281   4                          fun_startdj(mot_dj3,-100);
+ 282   4                          fun_select(sel_58);
+ 283   4                          fun_delay(50,del_ms);
+ 284   4                          while(in_wz3==1);
+ 285   4                          fun_delay(50,del_ms);
+ 286   4                          if(in_wz3==0)
+ 287   4                              break;
+ 288   4                      }
+ 289   3                  }
+ 290   2                  else{//要去的地方在上面，向上走
+ 291   3                      while(1){
+ 292   4                          fun_startdj(mot_dj3,100);
+ 293   4                          fun_select(sel_58);
+ 294   4                          fun_delay(50,del_ms);
+ 295   4                          while(in_wz3==1);
+ 296   4                          fun_delay(50,del_ms);
+ 297   4                          if(in_wz3==0)
+ 298   4                              break;
+ 299   4                      }
+ 300   3                  }
+ 301   2                  break;
+ 302   2              case sjp_wz4://升降位置4
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 6   
 
- 303   4                          while(in_wz3==1);
- 304   4                          fun_delay(50,del_ms);
- 305   4                          if(in_wz3==0){
- 306   5                              fun_stop(mot_dj3);
- 307   5                              break;
- 308   5                          }
- 309   4                      }
- 310   3                  }
- 311   2                  break;
- 312   2              case sjp_wz4:
- 313   2                  if(par_model>str_begin.sjwz){
- 314   3                      while(1){
- 315   4                          fun_startdj(mot_dj3,-100);
- 316   4                          fun_select(sel_58);
- 317   4                          fun_delay(50,del_ms);
- 318   4                          while(in_wz4==1);
- 319   4                          fun_delay(50,del_ms);
- 320   4                          if(in_wz4==0){
- 321   5                              fun_stop(mot_dj3);
- 322   5                              break;
- 323   5                          }
- 324   4                      }
- 325   3                  }
- 326   2                  else{
- 327   3                      while(1){
- 328   4                          fun_startdj(mot_dj3,100);
- 329   4                          fun_select(sel_58);
- 330   4                          fun_delay(50,del_ms);
- 331   4                          while(in_wz4==1);
- 332   4                          fun_delay(50,del_ms);
- 333   4                          if(in_wz4==0){
- 334   5                              fun_stop(mot_dj3);
- 335   5                              break;
- 336   5                          }
- 337   4                      }
- 338   3                  }
+ 303   2                  if(par_model>str_begin.sjwz){
+ 304   3                      while(1){//要去的地方比较靠下,向下走
+ 305   4                          fun_startdj(mot_dj3,-100);
+ 306   4                          fun_select(sel_58);
+ 307   4                          fun_delay(50,del_ms);
+ 308   4                          while(in_wz4==1);
+ 309   4                          fun_delay(50,del_ms);
+ 310   4                          if(in_wz4==0)
+ 311   4                              break;
+ 312   4                      }
+ 313   3                  }
+ 314   2                  else{//要去的地方在上面，向上走
+ 315   3                      while(1){
+ 316   4                          fun_startdj(mot_dj3,100);
+ 317   4                          fun_select(sel_58);
+ 318   4                          fun_delay(50,del_ms);
+ 319   4                          while(in_wz4==1);
+ 320   4                          fun_delay(50,del_ms);
+ 321   4                          if(in_wz4==0)
+ 322   4                              break;
+ 323   4                      }
+ 324   3                  }
+ 325   2                  break;
+ 326   2              case sjp_wz5://升降位置5
+ 327   2                  while(1){//要去的地方比较靠下,向下走
+ 328   3                      fun_startdj(mot_dj3,-100);
+ 329   3                      fun_select(sel_912);
+ 330   3                      fun_delay(50,del_ms);
+ 331   3                      while(in_wz5==1);
+ 332   3                      fun_delay(50,del_ms);
+ 333   3                      if(in_wz5==0){
+ 334   4                          break;
+ 335   4                      }
+ 336   3                  }
+ 337   2                  break;
+ 338   2              default:
  339   2                  break;
- 340   2              case sjp_wz5:
- 341   2                  while(1){
- 342   3                      fun_startdj(mot_dj3,-100);
- 343   3                      fun_select(sel_912);
- 344   3                      fun_delay(50,del_ms);
- 345   3                      while(in_wz5==1);
- 346   3                      fun_delay(50,del_ms);
- 347   3                      if(in_wz5==0){
- 348   4                          fun_stop(mot_dj3);
- 349   4                          return;
- 350   4                      }
- 351   3                  }
- 352   2                  break;
- 353   2              default:
+ 340   2          }
+ 341   1          fun_stop(mot_dj3);
+ 342   1          str_begin.sjwz=par_model;//存储运行结果
+ 343   1      }//升降单步运动
+ 344          void fun_py1(enum varENU_tra par_model){
+ 345   1          switch(par_model){
+ 346   2              case tra_q://前平移(没有电机的呢个方向)
+ 347   2                  while(1){
+ 348   3                      fun_startdj(mot_dj2,100);
+ 349   3                      while(in_qpy==1);
+ 350   3                      fun_delay(20,del_ms);
+ 351   3                      if(in_qpy==0)
+ 352   3                          break;
+ 353   3                  }
  354   2                  break;
- 355   2          }
- 356   1          str_begin.sjwz=par_model;
- 357   1      }//升降单步运动
- 358          void fun_py1(enum varENU_tra par_model){
- 359   1          switch(par_model){
- 360   2              case tra_q:
- 361   2                  while(1){
- 362   3                      fun_startdj(mot_dj2,100);
- 363   3                      while(in_qpy==1);
- 364   3                      fun_delay(20,del_ms);
-C51 COMPILER V9.01   8023                                                                  02/27/2015 18:03:16 PAGE 7   
+ 355   2              case tra_h://后平移(有电机的呢个方向)
+ 356   2                  while(1){
+ 357   3                      fun_startdj(mot_dj2,-100);
+ 358   3                      while(in_hpy==1);
+ 359   3                      fun_delay(20,del_ms);
+ 360   3                      if(in_hpy==0)
+ 361   3                          break;
+ 362   3                  }
+ 363   2                  break;
+ 364   2              default:
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 7   
 
- 365   3                      if(in_qpy==0){
- 366   4                          fun_stop(mot_dj2);
- 367   4                          break;
- 368   4                      }
- 369   3                  }
- 370   2                  break;
- 371   2              case tra_h:
- 372   2                  while(1){
- 373   3                      fun_startdj(mot_dj2,-100);
- 374   3                      while(in_hpy==1);
- 375   3                      fun_delay(20,del_ms);
- 376   3                      if(in_hpy==0){
- 377   4                          fun_stop(mot_dj2);
- 378   4                          break;
- 379   4                      }
- 380   3                  }
- 381   2                  break;
- 382   2              default:
- 383   2                  break;
- 384   2          }
- 385   1          str_begin.pywz=par_model;
- 386   1      }//平移单步运动
- 387          // void fun_hz1(enum varENU_dir par_model){
- 388          //     switch(par_model){
- 389          //         ;
- 390          //     }
- 391          // }
+ 365   2                  break;
+ 366   2          }
+ 367   1          fun_stop(mot_dj2);
+ 368   1          str_begin.pywz=par_model;//存储运行结果
+ 369   1      }//平移单步运动
+ 370          void fun_hz1(enum varENU_dir par_model){
+ 371   1          switch(par_model){
+ 372   2              case dir_up://回转至前方
+ 373   2                  switch(str_begin.hzfx){
+ 374   3                      case dir_down://现在在下方
+ 375   3                          fun_startdj(mot_dj4,-100);
+ 376   3                          fun_select(sel_912);
+ 377   3                          fun_delay(1,del_s);
+ 378   3                          while(1){
+ 379   4                              while(in_hz==1);
+ 380   4                              fun_delay(25,del_ms);
+ 381   4                              if(in_hz==0)
+ 382   4                                  break;
+ 383   4                          }
+ 384   3                          while(1){
+ 385   4                              while(in_hz==0);
+ 386   4                              fun_delay(25,del_ms);
+ 387   4                              if(in_hz==1)
+ 388   4                                  break;
+ 389   4                          }
+ 390   3                          while(1){
+ 391   4                              while(in_hz==1);
+ 392   4                              fun_delay(25,del_ms);
+ 393   4                              if(in_hz==0)
+ 394   4                                  break;
+ 395   4                          }
+ 396   3                          break;
+ 397   3                      case dir_left://现在在左边
+ 398   3                          fun_startdj(mot_dj4,100);
+ 399   3                          fun_select(sel_912);
+ 400   3                          fun_delay(1,del_s);
+ 401   3                          while(1){
+ 402   4                              while(in_hz==1);
+ 403   4                              fun_delay(25,del_ms);
+ 404   4                              if(in_hz==0)
+ 405   4                                  break;
+ 406   4                          }
+ 407   3                          break;
+ 408   3                      case dir_right://现在在右边
+ 409   3                          fun_startdj(mot_dj4,-100);
+ 410   3                          fun_select(sel_912);
+ 411   3                          fun_delay(1,del_s);
+ 412   3                          while(1){
+ 413   4                              while(in_hz==1);
+ 414   4                              fun_delay(25,del_ms);
+ 415   4                              if(in_hz==0)
+ 416   4                                  break;
+ 417   4                          }
+ 418   3                          break;
+ 419   3                      default:
+ 420   3                          break;
+ 421   3                  }
+ 422   2                  break;
+ 423   2              case dir_down://要去下面
+ 424   2                  switch(str_begin.hzfx){
+ 425   3                      case dir_up://现在在上面
+ 426   3                          fun_startdj(mot_dj4,100);
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 8   
+
+ 427   3                          fun_select(sel_912);
+ 428   3                          fun_delay(1,del_s);
+ 429   3                          while(1){
+ 430   4                              while(in_hz==1);
+ 431   4                              fun_delay(25,del_ms);
+ 432   4                              if(in_hz==0)
+ 433   4                                  break;
+ 434   4                          }
+ 435   3                          while(1){
+ 436   4                              while(in_hz==0);
+ 437   4                              fun_delay(25,del_ms);
+ 438   4                              if(in_hz==1)
+ 439   4                                  break;
+ 440   4                          }
+ 441   3                          while(1){
+ 442   4                              while(in_hz==1);
+ 443   4                              fun_delay(25,del_ms);
+ 444   4                              if(in_hz==0)
+ 445   4                                  break;
+ 446   4                          }
+ 447   3                          break;
+ 448   3                      case dir_left://现在在左面
+ 449   3                          fun_startdj(mot_dj4,-100);
+ 450   3                          fun_select(sel_912);
+ 451   3                          fun_delay(1,del_s);
+ 452   3                          while(1){
+ 453   4                              while(in_hz==1);
+ 454   4                              fun_delay(25,del_ms);
+ 455   4                              if(in_hz==0)
+ 456   4                                  break;
+ 457   4                          }
+ 458   3                          break;
+ 459   3                      case dir_right://现在在右面
+ 460   3                          fun_startdj(mot_dj4,100);
+ 461   3                          fun_select(sel_912);
+ 462   3                          fun_delay(1,del_s);
+ 463   3                          while(1){
+ 464   4                              while(in_hz==1);
+ 465   4                              fun_delay(25,del_ms);
+ 466   4                              if(in_hz==0)
+ 467   4                                  break;
+ 468   4                          }
+ 469   3                          break;
+ 470   3                      default:
+ 471   3                          break;
+ 472   3                  }
+ 473   2                  break;
+ 474   2              case dir_left://要去左边
+ 475   2                  switch(str_begin.hzfx){
+ 476   3                      case dir_up://现在在上面
+ 477   3                          fun_startdj(mot_dj4,-100);
+ 478   3                          fun_select(sel_912);
+ 479   3                          fun_delay(1,del_s);
+ 480   3                          while(1){
+ 481   4                              while(in_hz==1);
+ 482   4                              fun_delay(25,del_ms);
+ 483   4                              if(in_hz==0)
+ 484   4                                  break;
+ 485   4                          }
+ 486   3                          break;
+ 487   3                      case dir_down://现在在下面
+ 488   3                          fun_startdj(mot_dj4,100);
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 9   
+
+ 489   3                          fun_select(sel_912);
+ 490   3                          fun_delay(1,del_s);
+ 491   3                          while(1){
+ 492   4                              while(in_hz==1);
+ 493   4                              fun_delay(25,del_ms);
+ 494   4                              if(in_hz==0)
+ 495   4                                  break;
+ 496   4                          }
+ 497   3                          break;
+ 498   3                      case dir_right://现在在右面
+ 499   3                          fun_startdj(mot_dj4,-100);
+ 500   3                          fun_select(sel_912);
+ 501   3                          fun_delay(1,del_s);
+ 502   3                          while(1){
+ 503   4                              while(in_hz==1);
+ 504   4                              fun_delay(25,del_ms);
+ 505   4                              if(in_hz==0)
+ 506   4                                  break;
+ 507   4                          }
+ 508   3                          while(1){
+ 509   4                              while(in_hz==0);
+ 510   4                              fun_delay(25,del_ms);
+ 511   4                              if(in_hz==1)
+ 512   4                                  break;
+ 513   4                          }
+ 514   3                          while(1){
+ 515   4                              while(in_hz==1);
+ 516   4                              fun_delay(25,del_ms);
+ 517   4                              if(in_hz==0){
+ 518   5                                  break;
+ 519   5                              }
+ 520   4                          }
+ 521   3                          break;
+ 522   3                      default:
+ 523   3                          break;
+ 524   3                  }
+ 525   2                  break;
+ 526   2              case dir_right://要去右面
+ 527   2                  switch(str_begin.hzfx){
+ 528   3                      case dir_up://现在在前面
+ 529   3                          fun_startdj(mot_dj4,100);
+ 530   3                          fun_select(sel_912);
+ 531   3                          fun_delay(1,del_s);
+ 532   3                          while(1){
+ 533   4                              while(in_hz==1);
+ 534   4                              fun_delay(25,del_ms);
+ 535   4                              if(in_hz==0)
+ 536   4                                  break;
+ 537   4                          }
+ 538   3                          break;
+ 539   3                      case dir_down://现在在下面
+ 540   3                          fun_startdj(mot_dj4,-100);
+ 541   3                          fun_select(sel_912);
+ 542   3                          fun_delay(1,del_s);
+ 543   3                          while(1){
+ 544   4                              while(in_hz==1);
+ 545   4                              fun_delay(25,del_ms);
+ 546   4                              if(in_hz==0)
+ 547   4                                  break;
+ 548   4                          }
+ 549   3                          break;
+ 550   3                      case dir_left://现在在左面
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 10  
+
+ 551   3                          fun_startdj(mot_dj4,100);
+ 552   3                          fun_select(sel_912);
+ 553   3                          fun_delay(1,del_s);
+ 554   3                          while(1){
+ 555   4                              while(in_hz==1);
+ 556   4                              fun_delay(25,del_ms);
+ 557   4                              if(in_hz==0)
+ 558   4                                  break;
+ 559   4                          }
+ 560   3                          while(1){
+ 561   4                              while(in_hz==0);
+ 562   4                              fun_delay(25,del_ms);
+ 563   4                              if(in_hz==1)
+ 564   4                                  break;
+ 565   4                          }
+ 566   3                          while(1){
+ 567   4                              while(in_hz==1);
+ 568   4                              fun_delay(25,del_ms);
+ 569   4                              if(in_hz==0){
+ 570   5                                  break;
+ 571   5                              }
+ 572   4                          }
+ 573   3                          break;
+ 574   3                      default:
+ 575   3                          break;
+ 576   3                  }
+ 577   2                  break;
+ 578   2              default:
+ 579   2                  break;
+ 580   2          }
+ 581   1          fun_stop(mot_dj4);
+ 582   1          str_begin.hzfx=par_model;//存储运行结果
+ 583   1      }//回转单步运动
+ 584          void fun_mline(uc par_num,uc par_sd){
+ 585   1          uc loc_i,loc_con=0;
+ 586   1          uc loc_l=par_sd,loc_r=par_sd;
+ 587   1          for(loc_i=0;loc_i<par_sd;loc_i++){//软起动
+ 588   2              fun_delay(8,del_ms);
+ 589   2              fun_startdj(mot_rl,loc_i);
+ 590   2          }
+ 591   1          while(1){
+ 592   2              if(in_ls3){//纠偏
+ 593   3                  loc_l*=0.9;
+ 594   3                  loc_r*=1.1;
+ 595   3              }
+ 596   2              if(in_ls6){
+ 597   3                  loc_l*=1.1;
+ 598   3                  loc_r*=0.9;
+ 599   3              }  
+ 600   2              if(in_ls2){
+ 601   3                  loc_l*=0.8;
+ 602   3                  loc_r*=1.2;
+ 603   3              }
+ 604   2              if(in_ls7){
+ 605   3                  loc_l*=1.2;
+ 606   3                  loc_r*=0.8;
+ 607   3              }        
+ 608   2              if(in_ls1){
+ 609   3                  loc_l*=0.7;
+ 610   3                  loc_r*=1.3;
+ 611   3              }
+ 612   2              if(in_ls8){
+C51 COMPILER V9.01   8023                                                                  02/28/2015 13:07:32 PAGE 11  
+
+ 613   3                  loc_l*=1.3;
+ 614   3                  loc_r*=0.7;
+ 615   3              }
+ 616   2              fun_startdj(mot_l,loc_l);//更新电机参数
+ 617   2              fun_startdj(mot_r,loc_r);
+ 618   2              if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//巡线计数
+ 619   3                  while((in_ls1&&in_ls7)||(in_ls2&&in_ls8));
+ 620   3                  fun_delay(10,del_ms);
+ 621   3                  if((!in_ls1&&!in_ls7)||(!in_ls2&&!in_ls8)){
+ 622   4                      if(++loc_con>=par_num){
+ 623   5                          fun_stop(mot_rl);
+ 624   5                          return;
+ 625   5                      }                
+ 626   4                  }
+ 627   3              }
+ 628   2              loc_l=par_sd;//恢复默认参数
+ 629   2              loc_r=par_sd;
+ 630   2          }
+ 631   1      }//主函数巡线
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1086    ----
+   CODE SIZE        =   2146    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     21    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----       7
+   DATA SIZE        =   ----      14
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

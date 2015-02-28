@@ -12,7 +12,15 @@
     #define def_timer0stop TR0=0;//定时器0关闭
     #define def_timer1start TR1=1;//定时器1开启
     #define def_timer1stop TR1=0;//定时器1关闭
-    #define def_start fun_initialization();//初始化
+    #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
+                      fun_initialization();\
+                      str_begin.x=par_x;\
+                      str_begin.y=par_y;\
+                      str_begin.ctfx=par_ctfx;\
+                      str_begin.szzt=par_szzt;\
+                      str_begin.sjwz=par_sjwz;\
+                      str_begin.pywz=par_pywz;\
+                      str_begin.hzfx=par_hzfx;//初始化
     #define def_stop fun_stop(mot_dj1);\
                      fun_stop(mot_dj2);\
                      fun_stop(mot_dj3);\
@@ -52,14 +60,14 @@
     typedef unsigned long ul;     //unsigned long --> ul
 /*-----------------------------------------------------------------In Put-----*/
     sbit in_start=P3^2;//启动按键(start_)
-    sbit in_ls1=P0^0;//1号传感器(靠近？侧)
-    sbit in_ls2=P0^1;//2号传感器
-    sbit in_ls3=P0^2;//3号传感器
-    sbit in_ls4=P0^3;//4号传感器
-    sbit in_ls5=P0^4;//5号传感器
-    sbit in_ls6=P0^5;//6号传感器
-    sbit in_ls7=P0^6;//7号传感器
-    sbit in_ls8=P0^7;//8号传感器(靠近？侧)
+    sbit in_ls1=P0^7;//1号传感器(靠近左侧,下侧传感器灯,无信号低电平)
+    sbit in_ls2=P0^6;//2号传感器
+    sbit in_ls3=P0^5;//3号传感器
+    sbit in_ls4=P0^4;//4号传感器
+    sbit in_ls5=P0^3;//5号传感器
+    sbit in_ls6=P0^2;//6号传感器
+    sbit in_ls7=P0^1;//7号传感器
+    sbit in_ls8=P0^0;//8号传感器(靠近右侧,上侧传感器灯)
 
     sbit in_j=P3^4;//手抓紧传感器
     sbit in_s=P3^3;//手抓松传感器
@@ -168,6 +176,8 @@
         enum varENU_tra pywz;//平移位置
         enum varENU_dir hzfx;//回转方向
     };
+
+    extern xdata struct str_state str_begin,str_now,str_next;
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//50毫秒定时器0初始化
@@ -186,5 +196,6 @@
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
+    extern void fun_mline(uc par_num,uc par_sd);//主函数巡线
 /*---------------------------------------------------------------更新日志-----*/
 #endif

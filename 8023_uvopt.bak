@@ -176,8 +176,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>242</TopLine>
-      <CurrentLine>242</CurrentLine>
+      <TopLine>240</TopLine>
+      <CurrentLine>240</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -264,8 +264,8 @@
 
   <AlienFiles>
     <PathWithFilename>D:\Desktop\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
-    <TopLine>133</TopLine>
-    <CurrentLine>133</CurrentLine>
+    <TopLine>135</TopLine>
+    <CurrentLine>135</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1634,14 +1634,14 @@
         <Doc>
           <Name>.\program\8023.c</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>242</TopLine>
-          <CurrentLine>242</CurrentLine>
+          <TopLine>240</TopLine>
+          <CurrentLine>240</CurrentLine>
         </Doc>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>133</TopLine>
-          <CurrentLine>133</CurrentLine>
+          <TopLine>135</TopLine>
+          <CurrentLine>135</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STDIO.H</Name>
