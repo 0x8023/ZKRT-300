@@ -13,14 +13,14 @@
     #define def_timer1start TR1=1;//定时器1开启
     #define def_timer1stop TR1=0;//定时器1关闭
     #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
-                      fun_initialization();\
-                      str_begin.x=par_x;\
-                      str_begin.y=par_y;\
-                      str_begin.ctfx=par_ctfx;\
-                      str_begin.szzt=par_szzt;\
-                      str_begin.sjwz=par_sjwz;\
-                      str_begin.pywz=par_pywz;\
-                      str_begin.hzfx=par_hzfx;//初始化
+    /*初始化*/        fun_initialization();\
+    /*X坐标*/         str_begin.x=par_x;\
+    /*Y坐标*/         str_begin.y=par_y;\
+    /*车头方向*/      str_begin.ctfx=par_ctfx;\
+    /*手抓状态*/      str_begin.szzt=par_szzt;\
+    /*升降位置*/      str_begin.sjwz=par_sjwz;\
+    /*平移位置*/      str_begin.pywz=par_pywz;\
+    /*回转方向*/      str_begin.hzfx=par_hzfx; 
     #define def_stop fun_stop(mot_dj1);\
                      fun_stop(mot_dj2);\
                      fun_stop(mot_dj3);\
@@ -163,9 +163,9 @@
         han_j,
         han_s
     };//手抓状态
-    enum varENU_cir{
-        cir_s,
-        cir_n
+    enum varENU_tur{
+        tur_l,
+        tur_r
     };//回转状态
     struct str_state{
         char x;//X坐标
@@ -177,7 +177,9 @@
         enum varENU_dir hzfx;//回转方向
     };
 
-    extern xdata struct str_state str_begin,str_now,str_next;
+    extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+    extern xdata ui cod_mlinerqd,//主函数软起动时间(毫秒)
+                    cod_mlineqc;//组函数前冲时间(毫秒)
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//50毫秒定时器0初始化
@@ -196,6 +198,6 @@
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
-    extern void fun_mline(uc par_num,uc par_sd);//主函数巡线
+    extern void fun_mptline(uc par_num,uc par_sd,enum varENU_dir);//主函数普通巡线
 /*---------------------------------------------------------------更新日志-----*/
 #endif

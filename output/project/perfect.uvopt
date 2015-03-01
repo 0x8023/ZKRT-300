@@ -176,8 +176,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>6</TopLine>
-      <CurrentLine>6</CurrentLine>
+      <TopLine>13</TopLine>
+      <CurrentLine>13</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\perfect.c</PathWithFileName>
       <FilenameWithoutPath>perfect.c</FilenameWithoutPath>
@@ -1596,8 +1596,8 @@
         <Doc>
           <Name>.\perfect.c</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>6</TopLine>
-          <CurrentLine>6</CurrentLine>
+          <TopLine>13</TopLine>
+          <CurrentLine>13</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\INTRINS.H</Name>

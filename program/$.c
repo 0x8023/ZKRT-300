@@ -25,3 +25,6 @@ int fun_max(char par_num,...){
     va_end(loc_args);
     return loc_max;
 }
+
+
+Angel Beats!

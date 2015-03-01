@@ -1,5 +1,7 @@
 #include "./output/8023.h"
 xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+xdata ui cod_mlinerqd=500,//默认主函数巡线软起动时间为500毫秒
+         cod_mlineqc=300;//默认主函数巡线前冲时间为500毫秒
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
@@ -92,8 +94,8 @@ void fun_initialization(){
 
     out_en1=1;//电机1/3使能 $?$
     out_en2=1;//电机2/4使能 $?$
-    out_motorselect=1;//电机片选为1 $?$
-    fun_delay(del_ms,1);//延时1毫秒 $?$
+    //out_motorselect=1;//电机片选为1 $?$
+    //fun_delay(del_ms,1);//延时1毫秒 $?$
     out_motorselect=0;//电机片选为0 $?$
     //PS_5=PS_1;// $?$
 
@@ -581,14 +583,85 @@ void fun_hz1(enum varENU_dir par_model){
     fun_stop(mot_dj4);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
-void fun_mline(uc par_num,uc par_sd){
-    uc loc_i,loc_con=0;
+void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
+    bit loc_flag=0;
+    ui loc_i;
+    uc loc_con=0;
     uc loc_l=par_sd,loc_r=par_sd;
-    for(loc_i=0;loc_i<par_sd;loc_i++){//软起动
-        fun_delay(8,del_ms);
-        fun_startdj(mot_rl,loc_i);
-    }
+    for(loc_i=2;loc_i<par_sd;fun_startdj(mot_rl,loc_i++))//软起动
+        fun_delay(cod_mlinerqd/par_sd,del_ms);
     while(1){
+        loc_l=par_sd;//恢复默认参数
+        loc_r=par_sd;
+        if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//巡线计数
+            loc_flag=1;
+            if(loc_con>=par_num){
+                if(par_model==dir_left){//左转
+                    fun_startdj(mot_l,-20);
+                    fun_delay(500,del_ms);
+                    while(1){
+                        while(!in_ls4||!in_ls5);
+                        fun_delay(100,del_us);
+                        if(in_ls4&&in_ls5){
+                            fun_stop(mot_rl);
+                            return;
+                        }
+                    }
+                }
+                else if(par_model==dir_right){
+                    fun_startdj(mot_r,-20);
+                    fun_delay(500,del_ms);
+                    while(1){
+                        while(!in_ls4||!in_ls5);
+                        fun_delay(100,del_us);
+                        if(in_ls4&&in_ls5){
+                            fun_stop(mot_rl);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        else if(loc_flag==1){
+            if(++loc_con>=par_num){
+                if(par_model==dir_up){
+                    for(loc_i=0;loc_i<cod_mlineqc;loc_i++){
+                        loc_l=par_sd*0.7;//恢复默认参数
+                        loc_r=par_sd*0.7;
+                        if(in_ls3){//纠偏
+                            loc_l*=0.9;
+                            loc_r*=1.1;
+                        }
+                        if(in_ls6){
+                            loc_l*=1.1;
+                            loc_r*=0.9;
+                        }
+                        if(in_ls2){
+                            loc_l*=0.8;
+                            loc_r*=1.2;
+                        }
+                        if(in_ls7){
+                            loc_l*=1.2;
+                            loc_r*=0.8;
+                        }
+                        if(in_ls1){
+                            loc_l*=0.7;
+                            loc_r*=1.3;
+                        }
+                        if(in_ls8){
+                            loc_l*=1.3;
+                            loc_r*=0.7;
+                        }
+                        fun_startdj(mot_l,loc_l);//更新电机参数
+                        fun_startdj(mot_r,loc_r);
+                        fun_delay(1,del_ms);
+                    }
+                    fun_stop(mot_rl);
+                    return;
+                }
+            }
+            loc_flag=0;
+        }
         if(in_ls3){//纠偏
             loc_l*=0.9;
             loc_r*=1.1;
@@ -604,7 +677,7 @@ void fun_mline(uc par_num,uc par_sd){
         if(in_ls7){
             loc_l*=1.2;
             loc_r*=0.8;
-        }        
+        }
         if(in_ls1){
             loc_l*=0.7;
             loc_r*=1.3;
@@ -615,17 +688,5 @@ void fun_mline(uc par_num,uc par_sd){
         }
         fun_startdj(mot_l,loc_l);//更新电机参数
         fun_startdj(mot_r,loc_r);
-        if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//巡线计数
-            while((in_ls1&&in_ls7)||(in_ls2&&in_ls8));
-            fun_delay(10,del_ms);
-            if((!in_ls1&&!in_ls7)||(!in_ls2&&!in_ls8)){
-                if(++loc_con>=par_num){
-                    fun_stop(mot_rl);
-                    return;
-                }                
-            }
-        }
-        loc_l=par_sd;//恢复默认参数
-        loc_r=par_sd;
     }
-}//主函数巡线
+}//主函数普通巡线

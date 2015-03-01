@@ -10,173 +10,185 @@ Project File Date:  02/25/2015
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(584): warning C206: 'fun_stratdj': missing function-prototype
-PROGRAM\8023.C(584): error C267: 'fun_stratdj': requires ANSI-style prototype
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(586): error C236: '_fun_mptline': different length of parameter lists
 目标未创建
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(584): warning C206: 'fun_stratdj': missing function-prototype
-PROGRAM\8023.C(584): error C267: 'fun_stratdj': requires ANSI-style prototype
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(640): warning C206: 'stop': missing function-prototype
+PROGRAM\8023.C(640): error C267: 'stop': requires ANSI-style prototype
 目标未创建
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(584): warning C206: 'fun_stratdj': missing function-prototype
-PROGRAM\8023.C(584): error C267: 'fun_stratdj': requires ANSI-style prototype
+PROGRAM\8023.C(640): warning C206: 'stop': missing function-prototype
+PROGRAM\8023.C(640): error C267: 'stop': requires ANSI-style prototype
 目标未创建
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(581): warning C280: 'par_num': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 1 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(581): warning C280: 'par_num': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 1 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(581): warning C280: 'par_num': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 1 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(581): warning C280: 'par_num': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 1 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(581): warning C280: 'par_num': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 1 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(581): error C236: '_fun_mline': different length of parameter lists
-PROGRAM\8023.C(591): error C202: 'loc_com': undefined identifier
+PROGRAM\8023.C(640): warning C206: 'stop': missing function-prototype
+PROGRAM\8023.C(640): error C267: 'stop': requires ANSI-style prototype
 目标未创建
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(581): error C236: '_fun_mline': different length of parameter lists
+PROGRAM\8023.C(640): warning C206: 'stop': missing function-prototype
+PROGRAM\8023.C(640): error C267: 'stop': requires ANSI-style prototype
 目标未创建
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(592): warning C209: '_fun_startdj': too few actual parameters
+PROGRAM\8023.C(640): warning C206: 'fun_stopdj': missing function-prototype
+PROGRAM\8023.C(640): error C267: 'fun_stopdj': requires ANSI-style prototype
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(645): warning C206: 'fun_stopdj': missing function-prototype
+PROGRAM\8023.C(645): error C267: 'fun_stopdj': requires ANSI-style prototype
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(648): warning C206: 'stop': missing function-prototype
+PROGRAM\8023.C(648): error C267: 'stop': requires ANSI-style prototype
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
@@ -184,7 +196,155 @@ TRANSFER
 TO ".\output\8023.LIB"
 LIB51 LIBRARY MANAGER V4.24
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 1 Warning(s).
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(601): error C202: 'del_ns': undefined identifier
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...

@@ -176,8 +176,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>594</TopLine>
-      <CurrentLine>594</CurrentLine>
+      <TopLine>648</TopLine>
+      <CurrentLine>648</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -1634,8 +1634,8 @@
         <Doc>
           <Name>.\program\8023.c</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>594</TopLine>
-          <CurrentLine>594</CurrentLine>
+          <TopLine>648</TopLine>
+          <CurrentLine>648</CurrentLine>
         </Doc>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
