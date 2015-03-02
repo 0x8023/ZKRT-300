@@ -25,7 +25,7 @@
     <ToolsetNumber>0x0</ToolsetNumber>
     <ToolsetName>MCS-51</ToolsetName>
     <TargetOption>
-      <CLK51>45000000</CLK51>
+      <CLK51>12000000</CLK51>
       <OPTTT>
         <gFlags>1</gFlags>
         <BeepAtEnd>1</BeepAtEnd>
@@ -176,8 +176,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>648</TopLine>
-      <CurrentLine>648</CurrentLine>
+      <TopLine>10</TopLine>
+      <CurrentLine>10</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -212,8 +212,8 @@
 
   <AlienFiles>
     <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</PathWithFilename>
-    <TopLine>231</TopLine>
-    <CurrentLine>231</CurrentLine>
+    <TopLine>71</TopLine>
+    <CurrentLine>71</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -264,8 +264,8 @@
 
   <AlienFiles>
     <PathWithFilename>D:\Desktop\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
-    <TopLine>137</TopLine>
-    <CurrentLine>137</CurrentLine>
+    <TopLine>139</TopLine>
+    <CurrentLine>139</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1629,31 +1629,31 @@
     <ActiveMDIGroup>0</ActiveMDIGroup>
     <MDIGroup>
       <Size>100</Size>
-      <ActiveTab>0</ActiveTab>
+      <ActiveTab>1</ActiveTab>
       <Documents>
+        <Doc>
+          <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
+          <ColumnNumber>43</ColumnNumber>
+          <TopLine>71</TopLine>
+          <CurrentLine>71</CurrentLine>
+        </Doc>
         <Doc>
           <Name>.\program\8023.c</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>648</TopLine>
-          <CurrentLine>648</CurrentLine>
+          <TopLine>10</TopLine>
+          <CurrentLine>10</CurrentLine>
         </Doc>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>137</TopLine>
-          <CurrentLine>137</CurrentLine>
+          <TopLine>139</TopLine>
+          <CurrentLine>139</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STDIO.H</Name>
           <ColumnNumber>0</ColumnNumber>
           <TopLine>13</TopLine>
           <CurrentLine>13</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
-          <ColumnNumber>65</ColumnNumber>
-          <TopLine>231</TopLine>
-          <CurrentLine>231</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\MATH.H</Name>

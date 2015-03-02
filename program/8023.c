@@ -1,17 +1,32 @@
 #include "./output/8023.h"
-xdata struct str_state str_begin,str_now,str_next;//·Ö±ğÎª:ÆğÊ¼×´Ì¬/µ±Ç°×´Ì¬/Ä¿±ê×´Ì¬
-xdata ui cod_mlinerqd=500,//Ä¬ÈÏÖ÷º¯ÊıÑ²ÏßÈíÆğ¶¯Ê±¼äÎª500ºÁÃë
-         cod_mlineqc=300;//Ä¬ÈÏÖ÷º¯ÊıÑ²ÏßÇ°³åÊ±¼äÎª500ºÁÃë
+struct str_state str_begin,str_now,str_next;//åˆ†åˆ«ä¸º:èµ·å§‹çŠ¶æ€/å½“å‰çŠ¶æ€/ç›®æ ‡çŠ¶æ€
+struct str_parameter str_cod={
+    /*ui str_cod.mlinerqd*/500,//é»˜è®¤ä¸»å‡½æ•°å·¡çº¿è½¯èµ·åŠ¨æ—¶é—´ä¸º500æ¯«ç§’
+    /*ui str_cod.mlineqc*/300,//é»˜è®¤ä¸»å‡½æ•°å·¡çº¿å‰å†²æ—¶é—´ä¸º500æ¯«ç§’
+
+    /*ui str_cod.sj1xx*/600,
+    /*ui str_cod.sj1xs*/1000,
+
+    /*ui str_cod.py1qkq*/666,
+    /*ui str_cod.py1kqz*/684,
+    /*ui str_cod.py1zkh*/684,
+    /*ui str_cod.py1khh*/666,
+    /*ui str_cod.py1qz*/1310,
+    /*ui str_cod.py1zh*/1310,
+    /*ui str_cod.py1kqkh*/1480,
+    /*ui str_cod.py1qkh*/2122,
+    /*ui str_cod.py1kqh*/2122,
+};
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
-        case del_us://Î¢Ãë¼¶ÑÓÊ±
+        case del_us://å¾®ç§’çº§å»¶æ—¶
             while(loc_con-->0){
                 _nop_();
                 _nop_();
             }
             return;
-        case del_ms://ºÁÃë¼¶ÑÓÊ±
+        case del_ms://æ¯«ç§’çº§å»¶æ—¶
             while(loc_con-->0){
                 uc loc_i, loc_j;
                 _nop_();
@@ -23,7 +38,7 @@ void fun_delay(ui par_value,enum varENU_del par_model){
                 }while(--loc_i);
             }
             return;
-        case del_s://Ãë¼¶ÑÓÊ±
+        case del_s://ç§’çº§å»¶æ—¶
             while(loc_con-->0){
                 uc loc_i, loc_j, loc_k;
                 loc_i=46;
@@ -38,7 +53,7 @@ void fun_delay(ui par_value,enum varENU_del par_model){
             return;
         default:return;
     }
-}//ÑÓÊ±
+}//å»¶æ—¶
 void fun_timer0init(){
     AUXR&=0x7F;
     TMOD&=0xF0;
@@ -46,7 +61,7 @@ void fun_timer0init(){
     TL0=0xB0;
     TH0=0x3C;
     TF0=0;
-}//50ºÁÃë¶¨Ê±Æ÷0³õÊ¼»¯
+}//50æ¯«ç§’å®šæ—¶å™¨0åˆå§‹åŒ–
 void fun_timer1init(){
     AUXR&=0xBF;
     TMOD&=0x0F;
@@ -54,74 +69,74 @@ void fun_timer1init(){
     TL1=0xE0;
     TH1=0xB1;
     TF1=0;
-}//20ºÁÃë¶¨Ê±Æ÷1³õÊ¼»¯
+}//20æ¯«ç§’å®šæ—¶å™¨1åˆå§‹åŒ–
 void fun_timer0(){
     TL0=0xB0;
     TH0=0x3C;
     _nop_();
-}//50ºÁÃë¶¨Ê±Æ÷0´¦Àíº¯Êı
+}//50æ¯«ç§’å®šæ—¶å™¨0å¤„ç†å‡½æ•°
 void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
-}//20ºÁÃë¶¨Ê±Æ÷1´¦Àíº¯Êı
+}//20æ¯«ç§’å®šæ—¶å™¨1å¤„ç†å‡½æ•°
 void fun_wait(){
     while(in_start==1);
     fun_delay(20,del_ms);
     while(in_start==0);
     fun_delay(256,del_ms);
-}//µÈ´ı°´¼ü
+}//ç­‰å¾…æŒ‰é”®
 void fun_select(enum varENU_sel par_model){
     if(par_model==sel_58)
         out_switchselect=0;
     else if(par_model==sel_912)
         out_switchselect=1;
-}//´«¸ĞÆ÷Æ¬Ñ¡
+}//ä¼ æ„Ÿå™¨ç‰‡é€‰
 void fun_initialization(){
-    CLK_DIV=0x00;//²»·ÖÆµ
+    CLK_DIV=0x00;//ä¸åˆ†é¢‘
 
-    P0M1=0xff;//P0ÓÃÓÚÊäÈë
-    P0M0=0x00;//P0²»ÄÜÊä³ö
+    P0M1=0xff;//P0ç”¨äºè¾“å…¥
+    P0M0=0x00;//P0ä¸èƒ½è¾“å‡º
     
-    P1M1=0x00;//P1¿Ú0-1Ë«Ïò£¬2ÖĞ¶ÏÊäÈë£¬3-6ÊäÈë£¬7Êä³ö
-    P1M0=0xfc;//P1¿Ú2-7Êä³ö
+    P1M1=0x00;//P1å£0-1åŒå‘ï¼Œ2ä¸­æ–­è¾“å…¥ï¼Œ3-6è¾“å…¥ï¼Œ7è¾“å‡º
+    P1M0=0xfc;//P1å£2-7è¾“å‡º
 
-    P2M1=0xf0;//P2¿Ú4-7ÊäÈë
-    P2M0=0x0f;//P2¿Ú0-3Êä³ö
+    P2M1=0xf0;//P2å£4-7è¾“å…¥
+    P2M0=0x0f;//P2å£0-3è¾“å‡º
 
-    //PS_2=1;//ÊÖ×¥ËÉ´«¸ĞÆ÷ÖÃ1 $?$
-    //PS_11=1;//Éı½µÎ»ÖÃ3´«¸ĞÆ÷ÖÃ1 $?$
+    //PS_2=1;//æ‰‹æŠ“æ¾ä¼ æ„Ÿå™¨ç½®1 $?$
+    //PS_11=1;//å‡é™ä½ç½®3ä¼ æ„Ÿå™¨ç½®1 $?$
 
-    out_en1=1;//µç»ú1/3Ê¹ÄÜ $?$
-    out_en2=1;//µç»ú2/4Ê¹ÄÜ $?$
-    //out_motorselect=1;//µç»úÆ¬Ñ¡Îª1 $?$
-    //fun_delay(del_ms,1);//ÑÓÊ±1ºÁÃë $?$
-    out_motorselect=0;//µç»úÆ¬Ñ¡Îª0 $?$
+    out_en1=1;//ç”µæœº1/3ä½¿èƒ½ $?$
+    out_en2=1;//ç”µæœº2/4ä½¿èƒ½ $?$
+    //out_motorselect=1;//ç”µæœºç‰‡é€‰ä¸º1 $?$
+    //fun_delay(del_ms,1);//å»¶æ—¶1æ¯«ç§’ $?$
+    out_motorselect=0;//ç”µæœºç‰‡é€‰ä¸º0 $?$
     //PS_5=PS_1;// $?$
 
-    fun_pwminit();//PWMµÄ³õÊ¼»¯ÉèÖÃ
-    fun_timer0init();//³õÊ¼»¯¶¨Ê±Æ÷0
-    fun_timer1init();//³õÊ¼»¯¶¨Ê±Æ÷1
-    in_start=1;//°´¼üÖÃ1
+    fun_pwminit();//PWMçš„åˆå§‹åŒ–è®¾ç½®
+    fun_timer0init();//åˆå§‹åŒ–å®šæ—¶å™¨0
+    fun_timer1init();//åˆå§‹åŒ–å®šæ—¶å™¨1
+    in_start=1;//æŒ‰é”®ç½®1
 
     fun_wait();
-}//³õÊ¼»¯
+}//åˆå§‹åŒ–
 void fun_pwminit(){
     CCON=0x00;
     CH=0;
     CL=0;
     CMOD=0x00;
-}//PWM³õÊ¼»¯
+}//PWMåˆå§‹åŒ–
 void fun_pwmr(uc par_value){
-    CCAP0H=CCAP0L=par_value*2.5;//¿ØÖÆÊä³öµÄÕ¼¿Õ±È
-    CCAPM0=0X42;//8Î»PWMÊä³ö£¬ÎŞÖĞ¶Ï
+    CCAP0H=CCAP0L=par_value*2.5;//æ§åˆ¶è¾“å‡ºçš„å ç©ºæ¯”
+    CCAPM0=0X42;//8ä½PWMè¾“å‡ºï¼Œæ— ä¸­æ–­
     PCA_PWM0=0x00;
-}//ÓÒÂ·PWMÊä³ö
+}//å³è·¯PWMè¾“å‡º
 void fun_pwml(uc par_value){
-    CCAP1H=CCAP1L=par_value*2.5;//¿ØÖÆÊä³öµÄÕ¼¿Õ±È
-    CCAPM1=0X42;//8Î»PWMÊä³ö£¬ÎŞÖĞ¶Ï
+    CCAP1H=CCAP1L=par_value*2.5;//æ§åˆ¶è¾“å‡ºçš„å ç©ºæ¯”
+    CCAPM1=0X42;//8ä½PWMè¾“å‡ºï¼Œæ— ä¸­æ–­
     PCA_PWM1=0x00;
-}//×óÂ·PWMÊä³ö
+}//å·¦è·¯PWMè¾“å‡º
 void fun_startdj(enum varENU_mot par_model,char par_speed){
     if(par_speed==0)
         return;
@@ -130,7 +145,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
     else if(par_speed<-100)
         par_speed=-100;
     switch(par_model){
-        case mot_l://×óÂÖµç»ú
+        case mot_l://å·¦è½®ç”µæœº
             CR=1;
             if(par_speed>0){
                 fun_pwml(par_speed);out_pwml=0;
@@ -139,7 +154,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 fun_pwml(cabs(par_speed));out_pwml=1;
             }
             break;
-        case mot_r://ÓÒÂÖµç»ú
+        case mot_r://å³è½®ç”µæœº
             CR=1;
             if(par_speed>0){
                 fun_pwmr(par_speed);out_pwmr=0;
@@ -148,7 +163,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 fun_pwmr(cabs(par_speed));out_pwmr=1;
             }
             break;
-        case mot_rl://×óÓÒÂÖÍ¬²½
+        case mot_rl://å·¦å³è½®åŒæ­¥
             CR=1;
             if(par_speed>0){
                 fun_pwml(par_speed);out_pwml=0;
@@ -159,7 +174,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 fun_pwmr(cabs(par_speed));out_pwmr=1;
             }
             break;
-        case mot_dj1://Õı×ªÎª×¥½ô£¬·´×ªÎªËÉ¿ª
+        case mot_dj1://æ­£è½¬ä¸ºæŠ“ç´§ï¼Œåè½¬ä¸ºæ¾å¼€
             out_motorselect=1;
             if(par_speed>0)
                 out_dir1=1;
@@ -167,7 +182,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 out_dir1=0;
             out_en1=0;
             break;
-        case mot_dj2://Õı×ªÊÇÏòÎŞµç»úÒ»·½×ª,·´×ªÎªÏòÓĞµç»úÒ»·½×ª
+        case mot_dj2://æ­£è½¬æ˜¯å‘æ— ç”µæœºä¸€æ–¹è½¬,åè½¬ä¸ºå‘æœ‰ç”µæœºä¸€æ–¹è½¬
             out_motorselect=1;
             if(par_speed>0)
                 out_dir2=1;
@@ -175,7 +190,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 out_dir2=0;
             out_en2=0;
             break;
-        case mot_dj3://ÏòÉÏÎªÕı×ª,ÏòÏÂÎª·´×ª
+        case mot_dj3://å‘ä¸Šä¸ºæ­£è½¬,å‘ä¸‹ä¸ºåè½¬
             out_motorselect=0;
             if(par_speed>0)
                 out_dir1=0;
@@ -183,7 +198,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
                 out_dir1=1;
             out_en1=0;
             break;
-        case mot_dj4://Ë³Ê±ÕëÎªÕı×ª,ÄæÊ±ÕëÎª·´×ª
+        case mot_dj4://é¡ºæ—¶é’ˆä¸ºæ­£è½¬,é€†æ—¶é’ˆä¸ºåè½¬
             out_motorselect=0;
             if(par_speed>0)
                 out_dir2=0;
@@ -194,7 +209,7 @@ void fun_startdj(enum varENU_mot par_model,char par_speed){
         default:
             break;
     }
-}//Æô¶¯µç»ú
+}//å¯åŠ¨ç”µæœº
 void fun_stop(enum varENU_mot par_model){
     switch(par_model){
         case mot_l:
@@ -217,9 +232,9 @@ void fun_stop(enum varENU_mot par_model){
         default:
             break;
     }
-}//Í£Ö¹µç»ú
+}//åœæ­¢ç”µæœº
 void fun_sz1(enum varENU_han par_model){
-    if(par_model==han_s){//ÊÖ×¥ËÉ
+    if(par_model==han_s){//æ‰‹æŠ“æ¾
         while(1){
             fun_startdj(mot_dj1,-100);
             while(in_s==1);
@@ -228,7 +243,7 @@ void fun_sz1(enum varENU_han par_model){
                 break;
         }
     }
-    else{//ÊÖ×¥½ô
+    else{//æ‰‹æŠ“ç´§
         while(1){
             fun_startdj(mot_dj1,100);
             while(in_j==1);
@@ -238,114 +253,131 @@ void fun_sz1(enum varENU_han par_model){
         }
     }
     fun_stop(mot_dj1);
-    str_begin.szzt=par_model;//´æ´¢ÔËĞĞ½á¹û
-}//ÊÖ×¥µ¥²½ÔË¶¯
+    str_begin.szzt=par_model;//å­˜å‚¨è¿è¡Œç»“æœ
+}//æ‰‹æŠ“å•æ­¥è¿åŠ¨
 void fun_sj1(enum varENU_sjp par_model){
+    if(par_model==str_begin.sjwz)
+       return;
     switch(par_model){
-        case sjp_wz1://Éı½µÎ»ÖÃ1(×îÉÏÎ»)
-            while(1){//Ö»ÓĞÏòÉÏ
-                fun_startdj(mot_dj3,100);
-                fun_select(sel_58);
-                fun_delay(50,del_ms);
+        case sjp_wz1://å‡é™ä½ç½®1(æœ€ä¸Šä½)
+            fun_startdj(mot_dj3,100);
+            fun_select(sel_58);
+            fun_delay(50,del_ms);
+            while(1){//åªæœ‰å‘ä¸Š
                 while(in_wz1==1);
-                fun_delay(50,del_ms);
+                fun_delay(20,del_ms);
                 if(in_wz1==0)
                     break;
             }
             break;
-        case sjp_wz2://Éı½µÎ»ÖÃ2
+        case sjp_wz12:
             if(par_model>str_begin.sjwz){
-                while(1){//ÒªÈ¥µÄµØ·½±È½Ï¿¿ÏÂ,ÏòÏÂ×ß
-                    fun_startdj(mot_dj3,-100);
-                    fun_select(sel_58);
-                    fun_delay(50,del_ms);
-                    while(in_wz2==1);
-                    fun_delay(50,del_ms);
-                    if(in_wz2==0)
-                        break;
-                }
-            }
-            else{//ÒªÈ¥µÄµØ·½ÔÚÉÏÃæ£¬ÏòÉÏ×ß
-                while(1){
-                    fun_startdj(mot_dj3,100);
-                    fun_select(sel_58);
-                    fun_delay(50,del_ms);
-                    while(in_wz2==1);
-                    fun_delay(50,del_ms);
-                    if(in_wz2==0)
-                        break;
-                }
-            }
-            break;
-        case sjp_wz3://Éı½µÎ»ÖÃ3
-            if(par_model>str_begin.sjwz){
-                while(1){//ÒªÈ¥µÄµØ·½±È½Ï¿¿ÏÂ,ÏòÏÂ×ß
-                    fun_startdj(mot_dj3,-100);
-                    fun_select(sel_58);
-                    fun_delay(50,del_ms);
-                    while(in_wz3==1);
-                    fun_delay(50,del_ms);
-                    if(in_wz3==0)
-                        break;
-                }
-            }
-            else{//ÒªÈ¥µÄµØ·½ÔÚÉÏÃæ£¬ÏòÉÏ×ß
-                while(1){
-                    fun_startdj(mot_dj3,100);
-                    fun_select(sel_58);
-                    fun_delay(50,del_ms);
-                    while(in_wz3==1);
-                    fun_delay(50,del_ms);
-                    if(in_wz3==0)
-                        break;
-                }
-            }
-            break;
-        case sjp_wz4://Éı½µÎ»ÖÃ4
-            if(par_model>str_begin.sjwz){
-                while(1){//ÒªÈ¥µÄµØ·½±È½Ï¿¿ÏÂ,ÏòÏÂ×ß
-                    fun_startdj(mot_dj3,-100);
-                    fun_select(sel_58);
-                    fun_delay(50,del_ms);
-                    while(in_wz4==1);
-                    fun_delay(50,del_ms);
-                    if(in_wz4==0)
-                        break;
-                }
-            }
-            else{//ÒªÈ¥µÄµØ·½ÔÚÉÏÃæ£¬ÏòÉÏ×ß
-                while(1){
-                    fun_startdj(mot_dj3,100);
-                    fun_select(sel_58);
-                    fun_delay(50,del_ms);
-                    while(in_wz4==1);
-                    fun_delay(50,del_ms);
-                    if(in_wz4==0)
-                        break;
-                }
-            }
-            break;
-        case sjp_wz5://Éı½µÎ»ÖÃ5
-            while(1){//ÒªÈ¥µÄµØ·½±È½Ï¿¿ÏÂ,ÏòÏÂ×ß
                 fun_startdj(mot_dj3,-100);
-                fun_select(sel_912);
-                fun_delay(50,del_ms);
-                while(in_wz5==1);
-                fun_delay(50,del_ms);
-                if(in_wz5==0){
+                fun_delay(str_cod.sj1xx,del_ms);
+            }
+            else{//è¦å»çš„åœ°æ–¹åœ¨ä¸Šé¢ï¼Œå‘ä¸Šèµ°
+                fun_sj1(sjp_wz2);
+                fun_startdj(mot_dj3,100);
+                fun_delay(str_cod.sj1xs,del_ms);
+            }
+            break;
+        case sjp_wz2://å‡é™ä½ç½®2
+            if(par_model>str_begin.sjwz)
+                fun_startdj(mot_dj3,-100);
+            else
+                fun_startdj(mot_dj3,100);
+            fun_select(sel_58);
+            fun_delay(50,del_ms);
+            while(1){//è¦å»çš„åœ°æ–¹æ¯”è¾ƒé ä¸‹,å‘ä¸‹èµ°                    
+                while(in_wz2==1);
+                fun_delay(20,del_ms);
+                if(in_wz2==0)
                     break;
-                }
+            }
+            break;
+        case sjp_wz23:
+            if(par_model>str_begin.sjwz){
+                fun_sj1(sjp_wz2);
+                fun_startdj(mot_dj3,-100);
+                fun_delay(str_cod.sj1xx,del_ms);
+            }
+            else{//è¦å»çš„åœ°æ–¹åœ¨ä¸Šé¢ï¼Œå‘ä¸Šèµ°
+                fun_sj1(sjp_wz3);
+                fun_startdj(mot_dj3,100);
+                fun_delay(str_cod.sj1xs,del_ms);
+            }
+            break;
+        case sjp_wz3://å‡é™ä½ç½®3
+            if(par_model>str_begin.sjwz)
+                fun_startdj(mot_dj3,-100);
+            else
+                fun_startdj(mot_dj3,100);
+            fun_select(sel_58);
+            fun_delay(50,del_ms);
+            while(1){
+                while(in_wz3==1);
+                fun_delay(20,del_ms);
+                if(in_wz3==0)
+                    break;
+            }
+            break;
+        case sjp_wz34:
+            if(par_model>str_begin.sjwz){
+                fun_sj1(sjp_wz3);
+                fun_startdj(mot_dj3,-100);
+                fun_delay(str_cod.sj1xx,del_ms);
+            }
+            else{//è¦å»çš„åœ°æ–¹åœ¨ä¸Šé¢ï¼Œå‘ä¸Šèµ°
+                fun_sj1(sjp_wz4);
+                fun_startdj(mot_dj3,100);
+                fun_delay(str_cod.sj1xs,del_ms);
+            }
+            break;
+        case sjp_wz4://å‡é™ä½ç½®4
+            if(par_model>str_begin.sjwz)
+                fun_startdj(mot_dj3,-100);
+            else
+                fun_startdj(mot_dj3,100);
+            fun_select(sel_58);
+            fun_delay(50,del_ms);
+            while(1){
+                while(in_wz4==1);
+                fun_delay(20,del_ms);
+                if(in_wz4==0)
+                    break;
+            }
+            break;
+        case sjp_wz45:
+            if(par_model>str_begin.sjwz){
+                fun_sj1(sjp_wz4);
+                fun_startdj(mot_dj3,-100);
+                fun_delay(str_cod.sj1xx,del_ms);
+            }
+            else{//è¦å»çš„åœ°æ–¹åœ¨ä¸Šé¢ï¼Œå‘ä¸Šèµ°
+                fun_startdj(mot_dj3,100);
+                //fun_delay(str_cod.sj1xs,del_ms);
+            }
+            break;
+        case sjp_wz5://å‡é™ä½ç½®5
+            fun_startdj(mot_dj3,-100);
+            fun_select(sel_912);
+            fun_delay(50,del_ms);
+            while(1){//è¦å»çš„åœ°æ–¹æ¯”è¾ƒé ä¸‹,å‘ä¸‹èµ°                
+                while(in_wz5==1);
+                fun_delay(20,del_ms);
+                if(in_wz5==0)
+                    break;
             }
             break;
         default:
             break;
     }
     fun_stop(mot_dj3);
-    str_begin.sjwz=par_model;//´æ´¢ÔËĞĞ½á¹û
-}//Éı½µµ¥²½ÔË¶¯
+    str_begin.sjwz=par_model;//å­˜å‚¨è¿è¡Œç»“æœ
+}//å‡é™å•æ­¥è¿åŠ¨
 void fun_py1(enum varENU_tra par_model){
     switch(par_model){
-        case tra_q://Ç°Æ½ÒÆ(Ã»ÓĞµç»úµÄÄØ¸ö·½Ïò)
+        case tra_q://å‰å¹³ç§»(æ²¡æœ‰ç”µæœºçš„å‘¢ä¸ªæ–¹å‘)
             while(1){
                 fun_startdj(mot_dj2,100);
                 while(in_qpy==1);
@@ -354,7 +386,46 @@ void fun_py1(enum varENU_tra par_model){
                     break;
             }
             break;
-        case tra_h://ºóÆ½ÒÆ(ÓĞµç»úµÄÄØ¸ö·½Ïò)
+        // case tra_kq:
+        //     switch(str_begin.pywz){
+        //         case tra_q:
+        //             //fun_startdj(mot_dj2,-100);
+        //             //D(666)
+
+        //             break;
+        //         case tra_z:
+        //             break;
+        //         case tra_kh:
+        //             break;
+        //         case tra_h:
+        //             break;
+        //     }
+        //     break;
+        // case tra_z:
+        //     switch(str_begin.pywz){
+        //         case tra_q:
+        //             break;
+        //         case tra_kq:
+        //             break;
+        //         case tra_kh:
+        //             break;
+        //         case tra_h:
+        //             break;
+        //     }
+        //     break;
+        // case tra_kh:
+        //     switch(str_begin.pywz){
+        //         case tra_q:
+        //             break;
+        //         case tra_kq:
+        //             break;
+        //         case tra_z:
+        //             break;
+        //         case tra_h:
+        //             break;
+        //     }
+        //     break;
+        case tra_h://åå¹³ç§»(æœ‰ç”µæœºçš„å‘¢ä¸ªæ–¹å‘)
             while(1){
                 fun_startdj(mot_dj2,-100);
                 while(in_hpy==1);
@@ -367,13 +438,13 @@ void fun_py1(enum varENU_tra par_model){
             break;
     }
     fun_stop(mot_dj2);
-    str_begin.pywz=par_model;//´æ´¢ÔËĞĞ½á¹û
-}//Æ½ÒÆµ¥²½ÔË¶¯
+    str_begin.pywz=par_model;//å­˜å‚¨è¿è¡Œç»“æœ
+}//å¹³ç§»å•æ­¥è¿åŠ¨
 void fun_hz1(enum varENU_dir par_model){
     switch(par_model){
-        case dir_up://»Ø×ªÖÁÇ°·½
+        case dir_up://å›è½¬è‡³å‰æ–¹
             switch(str_begin.hzfx){
-                case dir_down://ÏÖÔÚÔÚÏÂ·½
+                case dir_down://ç°åœ¨åœ¨ä¸‹æ–¹
                     fun_startdj(mot_dj4,-100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -396,7 +467,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_left://ÏÖÔÚÔÚ×ó±ß
+                case dir_left://ç°åœ¨åœ¨å·¦è¾¹
                     fun_startdj(mot_dj4,100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -407,7 +478,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_right://ÏÖÔÚÔÚÓÒ±ß
+                case dir_right://ç°åœ¨åœ¨å³è¾¹
                     fun_startdj(mot_dj4,-100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -422,9 +493,9 @@ void fun_hz1(enum varENU_dir par_model){
                     break;
             }
             break;
-        case dir_down://ÒªÈ¥ÏÂÃæ
+        case dir_down://è¦å»ä¸‹é¢
             switch(str_begin.hzfx){
-                case dir_up://ÏÖÔÚÔÚÉÏÃæ
+                case dir_up://ç°åœ¨åœ¨ä¸Šé¢
                     fun_startdj(mot_dj4,100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -447,7 +518,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_left://ÏÖÔÚÔÚ×óÃæ
+                case dir_left://ç°åœ¨åœ¨å·¦é¢
                     fun_startdj(mot_dj4,-100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -458,7 +529,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_right://ÏÖÔÚÔÚÓÒÃæ
+                case dir_right://ç°åœ¨åœ¨å³é¢
                     fun_startdj(mot_dj4,100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -473,9 +544,9 @@ void fun_hz1(enum varENU_dir par_model){
                     break;
             }
             break;
-        case dir_left://ÒªÈ¥×ó±ß
+        case dir_left://è¦å»å·¦è¾¹
             switch(str_begin.hzfx){
-                case dir_up://ÏÖÔÚÔÚÉÏÃæ
+                case dir_up://ç°åœ¨åœ¨ä¸Šé¢
                     fun_startdj(mot_dj4,-100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -486,7 +557,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_down://ÏÖÔÚÔÚÏÂÃæ
+                case dir_down://ç°åœ¨åœ¨ä¸‹é¢
                     fun_startdj(mot_dj4,100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -497,7 +568,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_right://ÏÖÔÚÔÚÓÒÃæ
+                case dir_right://ç°åœ¨åœ¨å³é¢
                     fun_startdj(mot_dj4,-100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -525,9 +596,9 @@ void fun_hz1(enum varENU_dir par_model){
                     break;
             }
             break;
-        case dir_right://ÒªÈ¥ÓÒÃæ
+        case dir_right://è¦å»å³é¢
             switch(str_begin.hzfx){
-                case dir_up://ÏÖÔÚÔÚÇ°Ãæ
+                case dir_up://ç°åœ¨åœ¨å‰é¢
                     fun_startdj(mot_dj4,100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -538,7 +609,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_down://ÏÖÔÚÔÚÏÂÃæ
+                case dir_down://ç°åœ¨åœ¨ä¸‹é¢
                     fun_startdj(mot_dj4,-100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -549,7 +620,7 @@ void fun_hz1(enum varENU_dir par_model){
                             break;
                     }
                     break;
-                case dir_left://ÏÖÔÚÔÚ×óÃæ
+                case dir_left://ç°åœ¨åœ¨å·¦é¢
                     fun_startdj(mot_dj4,100);
                     fun_select(sel_912);
                     fun_delay(1,del_s);
@@ -581,22 +652,22 @@ void fun_hz1(enum varENU_dir par_model){
             break;
     }
     fun_stop(mot_dj4);
-    str_begin.hzfx=par_model;//´æ´¢ÔËĞĞ½á¹û
-}//»Ø×ªµ¥²½ÔË¶¯
+    str_begin.hzfx=par_model;//å­˜å‚¨è¿è¡Œç»“æœ
+}//å›è½¬å•æ­¥è¿åŠ¨
 void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
     bit loc_flag=0;
     ui loc_i;
     uc loc_con=0;
     uc loc_l=par_sd,loc_r=par_sd;
-    for(loc_i=2;loc_i<par_sd;fun_startdj(mot_rl,loc_i++))//ÈíÆğ¶¯
-        fun_delay(cod_mlinerqd/par_sd,del_ms);
+    for(loc_i=2;loc_i<par_sd;fun_startdj(mot_rl,loc_i++))//è½¯èµ·åŠ¨
+        fun_delay(str_cod.mlinerqd/par_sd,del_ms);
     while(1){
-        loc_l=par_sd;//»Ö¸´Ä¬ÈÏ²ÎÊı
+        loc_l=par_sd;//æ¢å¤é»˜è®¤å‚æ•°
         loc_r=par_sd;
-        if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//Ñ²Ïß¼ÆÊı
+        if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//å·¡çº¿è®¡æ•°
             loc_flag=1;
             if(loc_con>=par_num){
-                if(par_model==dir_left){//×ó×ª
+                if(par_model==dir_left){//å·¦è½¬
                     fun_startdj(mot_l,-20);
                     fun_delay(500,del_ms);
                     while(1){
@@ -625,10 +696,10 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
         else if(loc_flag==1){
             if(++loc_con>=par_num){
                 if(par_model==dir_up){
-                    for(loc_i=0;loc_i<cod_mlineqc;loc_i++){
-                        loc_l=par_sd*0.7;//»Ö¸´Ä¬ÈÏ²ÎÊı
+                    for(loc_i=0;loc_i<str_cod.mlineqc;loc_i++){
+                        loc_l=par_sd*0.7;//æ¢å¤é»˜è®¤å‚æ•°
                         loc_r=par_sd*0.7;
-                        if(in_ls3){//¾ÀÆ«
+                        if(in_ls3){//çº å
                             loc_l*=0.9;
                             loc_r*=1.1;
                         }
@@ -652,7 +723,7 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
                             loc_l*=1.3;
                             loc_r*=0.7;
                         }
-                        fun_startdj(mot_l,loc_l);//¸üĞÂµç»ú²ÎÊı
+                        fun_startdj(mot_l,loc_l);//æ›´æ–°ç”µæœºå‚æ•°
                         fun_startdj(mot_r,loc_r);
                         fun_delay(1,del_ms);
                     }
@@ -662,7 +733,7 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
             }
             loc_flag=0;
         }
-        if(in_ls3){//¾ÀÆ«
+        if(in_ls3){//çº å
             loc_l*=0.9;
             loc_r*=1.1;
         }
@@ -686,7 +757,49 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
             loc_l*=1.3;
             loc_r*=0.7;
         }
-        fun_startdj(mot_l,loc_l);//¸üĞÂµç»ú²ÎÊı
+        fun_startdj(mot_l,loc_l);//æ›´æ–°ç”µæœºå‚æ•°
         fun_startdj(mot_r,loc_r);
     }
-}//Ö÷º¯ÊıÆÕÍ¨Ñ²Ïß
+}//ä¸»å‡½æ•°æ™®é€šå·¡çº¿
+void fun_stope2prom(){
+    IAP_CONTR = 0;                  //å…³é—­IAPåŠŸèƒ½
+    IAP_CMD = 0;                    //æ¸…é™¤å‘½ä»¤
+    IAP_TRIG = 0;                   //æ¸…é™¤è§¦å‘å¯„å­˜å™¨
+    IAP_ADDRH = 0x80;               //æ•°æ®æŒ‡é’ˆæŒ‡å‘éEEPROMåŒº
+    IAP_ADDRL = 0;                  //æ¸…é™¤IAPåœ°å€
+}//å…³é—­EEPROMåŠŸèƒ½(IapIdle)
+uc fun_reade2prom(ui par_add){
+    uc loc_dat;                     //æ•°æ®ç¼“å†²åŒº
+    IAP_CONTR = 0x83;               //æ‰“å¼€EEPROMåŠŸèƒ½,è®¾ç½®ç­‰å¾…æ—¶é—´
+    IAP_CMD = 1;                    //è®¾ç½®EEPROMè¯»å‘½ä»¤
+    IAP_ADDRL = par_add;            //è®¾ç½®EEPROMåœ°å€ä½å…«ä½
+    IAP_ADDRH = par_add >> 8;       //è®¾ç½®EEPROMåœ°å€é«˜å…«ä½
+    IAP_TRIG = 0x5a;                //è§¦å‘
+    IAP_TRIG = 0xa5;                //å†æ¬¡è§¦å‘
+    fun_delay(10,del_us);           //ç¨ç­‰ä¸€ä¼šå„¿
+    loc_dat = IAP_DATA;             //è¯»å‡ºEEPROMä¸­çš„æ•°æ®
+    fun_stope2prom();               //å…³é—­EEPROMåŠŸèƒ½
+    return loc_dat;                 //è¿”å›è¯»å–ç»“æœ
+}//è¯»å–EEPROMæ•°æ®
+void fun_writee2prom(ui par_add,uc par_dat){
+    IAP_CONTR = 0x83;               //æ‰“å¼€EEPROMåŠŸèƒ½,è®¾ç½®ç­‰å¾…æ—¶é—´
+    IAP_CMD = 2;                    //è®¾ç½®EEPROMå†™å…¥å‘½ä»¤
+    IAP_ADDRL = par_add;            //è®¾ç½®EEPROMåœ°å€ä½å…«ä½
+    IAP_ADDRH = par_add >> 8;       //è®¾ç½®EEPROMåœ°å€é«˜å…«ä½
+    IAP_DATA = par_dat;             //å†™å…¥æ•°æ®
+    IAP_TRIG = 0x5a;                //è§¦å‘
+    IAP_TRIG = 0xa5;                //å†æ¬¡è§¦å‘
+    fun_delay(10,del_us);           //ç¨ç­‰ä¸€ä¼šå„¿
+    fun_stope2prom();               //å…³é—­EEPROMåŠŸèƒ½
+}//å†™EEPROMæ•°æ®
+void fun_cleane2prom(ui par_add){
+    IAP_CONTR = 0x83;               //æ‰“å¼€EEPROMåŠŸèƒ½,è®¾ç½®ç­‰å¾…æ—¶é—´
+    IAP_CMD = 3;                    //è®¾ç½®EEPROMæ“¦é™¤å‘½ä»¤
+    IAP_ADDRL = par_add;            //è®¾ç½®EEPROMåœ°å€ä½å…«ä½
+    IAP_ADDRH = par_add >> 8;       //è®¾ç½®EEPROMåœ°å€é«˜å…«ä½
+    IAP_TRIG = 0x5a;                //è§¦å‘
+    IAP_TRIG = 0xa5;                //å†æ¬¡è§¦å‘
+    fun_delay(10,del_us);           //ç¨ç­‰ä¸€ä¼šå„¿
+    fun_stope2prom();               //å…³é—­EEPROMåŠŸèƒ½
+}//æ¸…é™¤EEPROMæ•°æ®
+

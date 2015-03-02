@@ -1,735 +1,852 @@
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
 OBJECT MODULE PLACED IN .\output\8023.obj
-COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE program\8023.c DEBUG OBJECTEXTEND PRINT(.\8023.lst) OBJECT(.\output
-                    -\8023.obj)
+COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE program\8023.c LARGE DEBUG OBJECTEXTEND PRINT(.\8023.lst) OBJECT(.\
+                    -output\8023.obj)
 
 line level    source
 
    1          #include "./output/8023.h"
-   2          xdata struct str_state str_begin,str_now,str_next;//∑÷±Œ™:∆ º◊¥Ã¨/µ±«∞◊¥Ã¨/ƒø±Í◊¥Ã¨
-   3          xdata ui cod_mlinerqd=500,//ƒ¨»œ÷˜∫Ø ˝—≤œﬂ»Ì∆∂Ø ±º‰Œ™500∫¡√Î
-   4                   cod_mlineqc=300;//ƒ¨»œ÷˜∫Ø ˝—≤œﬂ«∞≥Â ±º‰Œ™500∫¡√Î
-   5          void fun_delay(ui par_value,enum varENU_del par_model){
-   6   1          ui loc_con=par_value;
-   7   1          switch(par_model){
-   8   2              case del_us://Œ¢√Îº∂—” ±
-   9   2                  while(loc_con-->0){
-  10   3                      _nop_();
-  11   3                      _nop_();
-  12   3                  }
-  13   2                  return;
-  14   2              case del_ms://∫¡√Îº∂—” ±
-  15   2                  while(loc_con-->0){
-  16   3                      uc loc_i, loc_j;
-  17   3                      _nop_();
-  18   3                      _nop_();
-  19   3                      loc_i=12;
-  20   3                      loc_j=168;
-  21   3                      do{
-  22   4                          while(--loc_j);
-  23   4                      }while(--loc_i);
-  24   3                  }
-  25   2                  return;
-  26   2              case del_s://√Îº∂—” ±
-  27   2                  while(loc_con-->0){
-  28   3                      uc loc_i, loc_j, loc_k;
-  29   3                      loc_i=46;
-  30   3                      loc_j=153;
-  31   3                      loc_k=245;
-  32   3                      do{
-  33   4                          do{
-  34   5                              while(--loc_k);
-  35   5                          }while(--loc_j);
-  36   4                      }while(--loc_i);
-  37   3                  }
-  38   2                  return;
-  39   2              default:return;
-  40   2          }
-  41   1      }//—” ±
-  42          void fun_timer0init(){
-  43   1          AUXR&=0x7F;
-  44   1          TMOD&=0xF0;
-  45   1          TMOD|=0x01;
-  46   1          TL0=0xB0;
-  47   1          TH0=0x3C;
-  48   1          TF0=0;
-  49   1      }//50∫¡√Î∂® ±∆˜0≥ı ºªØ
-  50          void fun_timer1init(){
-  51   1          AUXR&=0xBF;
-  52   1          TMOD&=0x0F;
-  53   1          TMOD|=0x10;
-  54   1          TL1=0xE0;
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 2   
+   2          struct str_state str_begin,str_now,str_next;//ÂàÜÂà´‰∏∫:Ëµ∑ÂßãÁä∂ÊÄÅ/ÂΩìÂâçÁä∂ÊÄÅ/ÁõÆÊ†áÁä∂ÊÄÅ
+   3          struct str_parameter str_cod={
+   4              /*ui str_cod.mlinerqd*/500,//ÈªòËÆ§‰∏ªÂáΩÊï∞Â∑°Á∫øËΩØËµ∑Âä®Êó∂Èó¥‰∏∫500ÊØ´Áßí
+   5              /*ui str_cod.mlineqc*/300,//ÈªòËÆ§‰∏ªÂáΩÊï∞Â∑°Á∫øÂâçÂÜ≤Êó∂Èó¥‰∏∫500ÊØ´Áßí
+   6          
+   7              /*ui str_cod.sj1xx*/600,
+   8              /*ui str_cod.sj1xs*/1000,
+   9          
+  10              /*ui str_cod.py1qkq*/666,
+  11              /*ui str_cod.py1kqz*/684,
+  12              /*ui str_cod.py1zkh*/684,
+  13              /*ui str_cod.py1khh*/666,
+  14              /*ui str_cod.py1qz*/1310,
+  15              /*ui str_cod.py1zh*/1310,
+  16              /*ui str_cod.py1kqkh*/1480,
+  17              /*ui str_cod.py1qkh*/2122,
+  18              /*ui str_cod.py1kqh*/2122,
+  19          };
+  20          void fun_delay(ui par_value,enum varENU_del par_model){
+  21   1          ui loc_con=par_value;
+  22   1          switch(par_model){
+  23   2              case del_us://ÂæÆÁßíÁ∫ßÂª∂Êó∂
+  24   2                  while(loc_con-->0){
+  25   3                      _nop_();
+  26   3                      _nop_();
+  27   3                  }
+  28   2                  return;
+  29   2              case del_ms://ÊØ´ÁßíÁ∫ßÂª∂Êó∂
+  30   2                  while(loc_con-->0){
+  31   3                      uc loc_i, loc_j;
+  32   3                      _nop_();
+  33   3                      _nop_();
+  34   3                      loc_i=12;
+  35   3                      loc_j=168;
+  36   3                      do{
+  37   4                          while(--loc_j);
+  38   4                      }while(--loc_i);
+  39   3                  }
+  40   2                  return;
+  41   2              case del_s://ÁßíÁ∫ßÂª∂Êó∂
+  42   2                  while(loc_con-->0){
+  43   3                      uc loc_i, loc_j, loc_k;
+  44   3                      loc_i=46;
+  45   3                      loc_j=153;
+  46   3                      loc_k=245;
+  47   3                      do{
+  48   4                          do{
+  49   5                              while(--loc_k);
+  50   5                          }while(--loc_j);
+  51   4                      }while(--loc_i);
+  52   3                  }
+  53   2                  return;
+  54   2              default:return;
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 2   
 
-  55   1          TH1=0xB1;
-  56   1          TF1=0;
-  57   1      }//20∫¡√Î∂® ±∆˜1≥ı ºªØ
-  58          void fun_timer0(){
-  59   1          TL0=0xB0;
-  60   1          TH0=0x3C;
-  61   1          _nop_();
-  62   1      }//50∫¡√Î∂® ±∆˜0¥¶¿Ì∫Ø ˝
-  63          void fun_timer1(){
-  64   1          TL1=0xE0;
-  65   1          TH1=0xB1;
-  66   1          _nop_();
-  67   1      }//20∫¡√Î∂® ±∆˜1¥¶¿Ì∫Ø ˝
-  68          void fun_wait(){
-  69   1          while(in_start==1);
-  70   1          fun_delay(20,del_ms);
-  71   1          while(in_start==0);
-  72   1          fun_delay(256,del_ms);
-  73   1      }//µ»¥˝∞¥º¸
-  74          void fun_select(enum varENU_sel par_model){
-  75   1          if(par_model==sel_58)
-  76   1              out_switchselect=0;
-  77   1          else if(par_model==sel_912)
-  78   1              out_switchselect=1;
-  79   1      }//¥´∏–∆˜∆¨—°
-  80          void fun_initialization(){
-  81   1          CLK_DIV=0x00;//≤ª∑÷∆µ
-  82   1      
-  83   1          P0M1=0xff;//P0”√”⁄ ‰»Î
-  84   1          P0M0=0x00;//P0≤ªƒ‹ ‰≥ˆ
-  85   1          
-  86   1          P1M1=0x00;//P1ø⁄0-1À´œÚ£¨2÷–∂œ ‰»Î£¨3-6 ‰»Î£¨7 ‰≥ˆ
-  87   1          P1M0=0xfc;//P1ø⁄2-7 ‰≥ˆ
-  88   1      
-  89   1          P2M1=0xf0;//P2ø⁄4-7 ‰»Î
-  90   1          P2M0=0x0f;//P2ø⁄0-3 ‰≥ˆ
-  91   1      
-  92   1          //PS_2=1;// ÷◊•À…¥´∏–∆˜÷√1 $?$
-  93   1          //PS_11=1;//…˝ΩµŒª÷√3¥´∏–∆˜÷√1 $?$
-  94   1      
-  95   1          out_en1=1;//µÁª˙1/3 πƒ‹ $?$
-  96   1          out_en2=1;//µÁª˙2/4 πƒ‹ $?$
-  97   1          //out_motorselect=1;//µÁª˙∆¨—°Œ™1 $?$
-  98   1          //fun_delay(del_ms,1);//—” ±1∫¡√Î $?$
-  99   1          out_motorselect=0;//µÁª˙∆¨—°Œ™0 $?$
- 100   1          //PS_5=PS_1;// $?$
- 101   1      
- 102   1          fun_pwminit();//PWMµƒ≥ı ºªØ…Ë÷√
- 103   1          fun_timer0init();//≥ı ºªØ∂® ±∆˜0
- 104   1          fun_timer1init();//≥ı ºªØ∂® ±∆˜1
- 105   1          in_start=1;//∞¥º¸÷√1
+  55   2          }
+  56   1      }//Âª∂Êó∂
+  57          void fun_timer0init(){
+  58   1          AUXR&=0x7F;
+  59   1          TMOD&=0xF0;
+  60   1          TMOD|=0x01;
+  61   1          TL0=0xB0;
+  62   1          TH0=0x3C;
+  63   1          TF0=0;
+  64   1      }//50ÊØ´ÁßíÂÆöÊó∂Âô®0ÂàùÂßãÂåñ
+  65          void fun_timer1init(){
+  66   1          AUXR&=0xBF;
+  67   1          TMOD&=0x0F;
+  68   1          TMOD|=0x10;
+  69   1          TL1=0xE0;
+  70   1          TH1=0xB1;
+  71   1          TF1=0;
+  72   1      }//20ÊØ´ÁßíÂÆöÊó∂Âô®1ÂàùÂßãÂåñ
+  73          void fun_timer0(){
+  74   1          TL0=0xB0;
+  75   1          TH0=0x3C;
+  76   1          _nop_();
+  77   1      }//50ÊØ´ÁßíÂÆöÊó∂Âô®0Â§ÑÁêÜÂáΩÊï∞
+  78          void fun_timer1(){
+  79   1          TL1=0xE0;
+  80   1          TH1=0xB1;
+  81   1          _nop_();
+  82   1      }//20ÊØ´ÁßíÂÆöÊó∂Âô®1Â§ÑÁêÜÂáΩÊï∞
+  83          void fun_wait(){
+  84   1          while(in_start==1);
+  85   1          fun_delay(20,del_ms);
+  86   1          while(in_start==0);
+  87   1          fun_delay(256,del_ms);
+  88   1      }//Á≠âÂæÖÊåâÈîÆ
+  89          void fun_select(enum varENU_sel par_model){
+  90   1          if(par_model==sel_58)
+  91   1              out_switchselect=0;
+  92   1          else if(par_model==sel_912)
+  93   1              out_switchselect=1;
+  94   1      }//‰º†ÊÑüÂô®ÁâáÈÄâ
+  95          void fun_initialization(){
+  96   1          CLK_DIV=0x00;//‰∏çÂàÜÈ¢ë
+  97   1      
+  98   1          P0M1=0xff;//P0Áî®‰∫éËæìÂÖ•
+  99   1          P0M0=0x00;//P0‰∏çËÉΩËæìÂá∫
+ 100   1          
+ 101   1          P1M1=0x00;//P1Âè£0-1ÂèåÂêëÔºå2‰∏≠Êñ≠ËæìÂÖ•Ôºå3-6ËæìÂÖ•Ôºå7ËæìÂá∫
+ 102   1          P1M0=0xfc;//P1Âè£2-7ËæìÂá∫
+ 103   1      
+ 104   1          P2M1=0xf0;//P2Âè£4-7ËæìÂÖ•
+ 105   1          P2M0=0x0f;//P2Âè£0-3ËæìÂá∫
  106   1      
- 107   1          fun_wait();
- 108   1      }//≥ı ºªØ
- 109          void fun_pwminit(){
- 110   1          CCON=0x00;
- 111   1          CH=0;
- 112   1          CL=0;
- 113   1          CMOD=0x00;
- 114   1      }//PWM≥ı ºªØ
- 115          void fun_pwmr(uc par_value){
- 116   1          CCAP0H=CCAP0L=par_value*2.5;//øÿ÷∆ ‰≥ˆµƒ’ºø’±»
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 3   
+ 107   1          //PS_2=1;//ÊâãÊäìÊùæ‰º†ÊÑüÂô®ÁΩÆ1 $?$
+ 108   1          //PS_11=1;//ÂçáÈôç‰ΩçÁΩÆ3‰º†ÊÑüÂô®ÁΩÆ1 $?$
+ 109   1      
+ 110   1          out_en1=1;//ÁîµÊú∫1/3‰ΩøËÉΩ $?$
+ 111   1          out_en2=1;//ÁîµÊú∫2/4‰ΩøËÉΩ $?$
+ 112   1          //out_motorselect=1;//ÁîµÊú∫ÁâáÈÄâ‰∏∫1 $?$
+ 113   1          //fun_delay(del_ms,1);//Âª∂Êó∂1ÊØ´Áßí $?$
+ 114   1          out_motorselect=0;//ÁîµÊú∫ÁâáÈÄâ‰∏∫0 $?$
+ 115   1          //PS_5=PS_1;// $?$
+ 116   1      
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 3   
 
- 117   1          CCAPM0=0X42;//8ŒªPWM ‰≥ˆ£¨Œﬁ÷–∂œ
- 118   1          PCA_PWM0=0x00;
- 119   1      }//”“¬∑PWM ‰≥ˆ
- 120          void fun_pwml(uc par_value){
- 121   1          CCAP1H=CCAP1L=par_value*2.5;//øÿ÷∆ ‰≥ˆµƒ’ºø’±»
- 122   1          CCAPM1=0X42;//8ŒªPWM ‰≥ˆ£¨Œﬁ÷–∂œ
- 123   1          PCA_PWM1=0x00;
- 124   1      }//◊Û¬∑PWM ‰≥ˆ
- 125          void fun_startdj(enum varENU_mot par_model,char par_speed){
- 126   1          if(par_speed==0)
- 127   1              return;
- 128   1          else if(par_speed>100)
- 129   1              par_speed=100;
- 130   1          else if(par_speed<-100)
- 131   1              par_speed=-100;
- 132   1          switch(par_model){
- 133   2              case mot_l://◊Û¬÷µÁª˙
- 134   2                  CR=1;
- 135   2                  if(par_speed>0){
- 136   3                      fun_pwml(par_speed);out_pwml=0;
- 137   3                  }
- 138   2                  else if(par_speed<0){
- 139   3                      fun_pwml(cabs(par_speed));out_pwml=1;
- 140   3                  }
- 141   2                  break;
- 142   2              case mot_r://”“¬÷µÁª˙
- 143   2                  CR=1;
- 144   2                  if(par_speed>0){
- 145   3                      fun_pwmr(par_speed);out_pwmr=0;
- 146   3                  }
- 147   2                  else if(par_speed<0){
- 148   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
- 149   3                  }
- 150   2                  break;
- 151   2              case mot_rl://◊Û”“¬÷Õ¨≤Ω
- 152   2                  CR=1;
- 153   2                  if(par_speed>0){
- 154   3                      fun_pwml(par_speed);out_pwml=0;
- 155   3                      fun_pwmr(par_speed);out_pwmr=0;
- 156   3                  }
- 157   2                  else if(par_speed<0){
- 158   3                      fun_pwml(cabs(par_speed));out_pwml=1;
- 159   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
- 160   3                  }
- 161   2                  break;
- 162   2              case mot_dj1://’˝◊™Œ™◊•ΩÙ£¨∑¥◊™Œ™À…ø™
- 163   2                  out_motorselect=1;
- 164   2                  if(par_speed>0)
- 165   2                      out_dir1=1;
- 166   2                  else if(par_speed<0)
- 167   2                      out_dir1=0;
- 168   2                  out_en1=0;
- 169   2                  break;
- 170   2              case mot_dj2://’˝◊™ «œÚŒﬁµÁª˙“ª∑Ω◊™,∑¥◊™Œ™œÚ”–µÁª˙“ª∑Ω◊™
- 171   2                  out_motorselect=1;
- 172   2                  if(par_speed>0)
- 173   2                      out_dir2=1;
- 174   2                  else if(par_speed<0)
- 175   2                      out_dir2=0;
- 176   2                  out_en2=0;
- 177   2                  break;
- 178   2              case mot_dj3://œÚ…œŒ™’˝◊™,œÚœ¬Œ™∑¥◊™
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 4   
+ 117   1          fun_pwminit();//PWMÁöÑÂàùÂßãÂåñËÆæÁΩÆ
+ 118   1          fun_timer0init();//ÂàùÂßãÂåñÂÆöÊó∂Âô®0
+ 119   1          fun_timer1init();//ÂàùÂßãÂåñÂÆöÊó∂Âô®1
+ 120   1          in_start=1;//ÊåâÈîÆÁΩÆ1
+ 121   1      
+ 122   1          fun_wait();
+ 123   1      }//ÂàùÂßãÂåñ
+ 124          void fun_pwminit(){
+ 125   1          CCON=0x00;
+ 126   1          CH=0;
+ 127   1          CL=0;
+ 128   1          CMOD=0x00;
+ 129   1      }//PWMÂàùÂßãÂåñ
+ 130          void fun_pwmr(uc par_value){
+ 131   1          CCAP0H=CCAP0L=par_value*2.5;//ÊéßÂà∂ËæìÂá∫ÁöÑÂç†Á©∫ÊØî
+ 132   1          CCAPM0=0X42;//8‰ΩçPWMËæìÂá∫ÔºåÊó†‰∏≠Êñ≠
+ 133   1          PCA_PWM0=0x00;
+ 134   1      }//Âè≥Ë∑ØPWMËæìÂá∫
+ 135          void fun_pwml(uc par_value){
+ 136   1          CCAP1H=CCAP1L=par_value*2.5;//ÊéßÂà∂ËæìÂá∫ÁöÑÂç†Á©∫ÊØî
+ 137   1          CCAPM1=0X42;//8‰ΩçPWMËæìÂá∫ÔºåÊó†‰∏≠Êñ≠
+ 138   1          PCA_PWM1=0x00;
+ 139   1      }//Â∑¶Ë∑ØPWMËæìÂá∫
+ 140          void fun_startdj(enum varENU_mot par_model,char par_speed){
+ 141   1          if(par_speed==0)
+ 142   1              return;
+ 143   1          else if(par_speed>100)
+ 144   1              par_speed=100;
+ 145   1          else if(par_speed<-100)
+ 146   1              par_speed=-100;
+ 147   1          switch(par_model){
+ 148   2              case mot_l://Â∑¶ËΩÆÁîµÊú∫
+ 149   2                  CR=1;
+ 150   2                  if(par_speed>0){
+ 151   3                      fun_pwml(par_speed);out_pwml=0;
+ 152   3                  }
+ 153   2                  else if(par_speed<0){
+ 154   3                      fun_pwml(cabs(par_speed));out_pwml=1;
+ 155   3                  }
+ 156   2                  break;
+ 157   2              case mot_r://Âè≥ËΩÆÁîµÊú∫
+ 158   2                  CR=1;
+ 159   2                  if(par_speed>0){
+ 160   3                      fun_pwmr(par_speed);out_pwmr=0;
+ 161   3                  }
+ 162   2                  else if(par_speed<0){
+ 163   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 164   3                  }
+ 165   2                  break;
+ 166   2              case mot_rl://Â∑¶Âè≥ËΩÆÂêåÊ≠•
+ 167   2                  CR=1;
+ 168   2                  if(par_speed>0){
+ 169   3                      fun_pwml(par_speed);out_pwml=0;
+ 170   3                      fun_pwmr(par_speed);out_pwmr=0;
+ 171   3                  }
+ 172   2                  else if(par_speed<0){
+ 173   3                      fun_pwml(cabs(par_speed));out_pwml=1;
+ 174   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 175   3                  }
+ 176   2                  break;
+ 177   2              case mot_dj1://Ê≠£ËΩ¨‰∏∫ÊäìÁ¥ßÔºåÂèçËΩ¨‰∏∫ÊùæÂºÄ
+ 178   2                  out_motorselect=1;
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 4   
 
- 179   2                  out_motorselect=0;
- 180   2                  if(par_speed>0)
- 181   2                      out_dir1=0;
- 182   2                  else if(par_speed<0)
- 183   2                      out_dir1=1;
- 184   2                  out_en1=0;
- 185   2                  break;
- 186   2              case mot_dj4://À≥ ±’ÎŒ™’˝◊™,ƒÊ ±’ÎŒ™∑¥◊™
- 187   2                  out_motorselect=0;
- 188   2                  if(par_speed>0)
- 189   2                      out_dir2=0;
- 190   2                  else if(par_speed<0)
- 191   2                      out_dir2=1;
- 192   2                  out_en2=0;
- 193   2                  break;
- 194   2              default:
- 195   2                  break;
- 196   2          }
- 197   1      }//∆Ù∂ØµÁª˙
- 198          void fun_stop(enum varENU_mot par_model){
- 199   1          switch(par_model){
- 200   2              case mot_l:
- 201   2                  fun_pwml(0);out_pwml=0;break;
- 202   2              case mot_r:
- 203   2                  fun_pwmr(0);out_pwmr=0;break;
- 204   2              case mot_rl:
- 205   2                  CR=0;
- 206   2                  fun_pwmr(0);out_pwmr=0;
- 207   2                  fun_pwml(0);out_pwml=0;
+ 179   2                  if(par_speed>0)
+ 180   2                      out_dir1=1;
+ 181   2                  else if(par_speed<0)
+ 182   2                      out_dir1=0;
+ 183   2                  out_en1=0;
+ 184   2                  break;
+ 185   2              case mot_dj2://Ê≠£ËΩ¨ÊòØÂêëÊó†ÁîµÊú∫‰∏ÄÊñπËΩ¨,ÂèçËΩ¨‰∏∫ÂêëÊúâÁîµÊú∫‰∏ÄÊñπËΩ¨
+ 186   2                  out_motorselect=1;
+ 187   2                  if(par_speed>0)
+ 188   2                      out_dir2=1;
+ 189   2                  else if(par_speed<0)
+ 190   2                      out_dir2=0;
+ 191   2                  out_en2=0;
+ 192   2                  break;
+ 193   2              case mot_dj3://Âêë‰∏ä‰∏∫Ê≠£ËΩ¨,Âêë‰∏ã‰∏∫ÂèçËΩ¨
+ 194   2                  out_motorselect=0;
+ 195   2                  if(par_speed>0)
+ 196   2                      out_dir1=0;
+ 197   2                  else if(par_speed<0)
+ 198   2                      out_dir1=1;
+ 199   2                  out_en1=0;
+ 200   2                  break;
+ 201   2              case mot_dj4://È°∫Êó∂Èíà‰∏∫Ê≠£ËΩ¨,ÈÄÜÊó∂Èíà‰∏∫ÂèçËΩ¨
+ 202   2                  out_motorselect=0;
+ 203   2                  if(par_speed>0)
+ 204   2                      out_dir2=0;
+ 205   2                  else if(par_speed<0)
+ 206   2                      out_dir2=1;
+ 207   2                  out_en2=0;
  208   2                  break;
- 209   2              case mot_dj1:
- 210   2                  out_motorselect=1;out_dir1=0;out_en1=1;break;
- 211   2              case mot_dj2:
- 212   2                  out_motorselect=1;out_dir2=0;out_en2=1;break;
- 213   2              case mot_dj3:
- 214   2                  out_motorselect=0;out_dir1=0;out_en1=1;break;
- 215   2              case mot_dj4:
- 216   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
- 217   2              default:
- 218   2                  break;
- 219   2          }
- 220   1      }//Õ£÷πµÁª˙
- 221          void fun_sz1(enum varENU_han par_model){
- 222   1          if(par_model==han_s){// ÷◊•À…
- 223   2              while(1){
- 224   3                  fun_startdj(mot_dj1,-100);
- 225   3                  while(in_s==1);
- 226   3                  fun_delay(20,del_ms);
- 227   3                  if(in_s==0)
- 228   3                      break;
- 229   3              }
- 230   2          }
- 231   1          else{// ÷◊•ΩÙ
- 232   2              while(1){
- 233   3                  fun_startdj(mot_dj1,100);
- 234   3                  while(in_j==1);
- 235   3                  fun_delay(20,del_ms);
- 236   3                  if(in_j==0)
- 237   3                      break;
- 238   3              }
- 239   2          }
- 240   1          fun_stop(mot_dj1);
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 5   
+ 209   2              default:
+ 210   2                  break;
+ 211   2          }
+ 212   1      }//ÂêØÂä®ÁîµÊú∫
+ 213          void fun_stop(enum varENU_mot par_model){
+ 214   1          switch(par_model){
+ 215   2              case mot_l:
+ 216   2                  fun_pwml(0);out_pwml=0;break;
+ 217   2              case mot_r:
+ 218   2                  fun_pwmr(0);out_pwmr=0;break;
+ 219   2              case mot_rl:
+ 220   2                  CR=0;
+ 221   2                  fun_pwmr(0);out_pwmr=0;
+ 222   2                  fun_pwml(0);out_pwml=0;
+ 223   2                  break;
+ 224   2              case mot_dj1:
+ 225   2                  out_motorselect=1;out_dir1=0;out_en1=1;break;
+ 226   2              case mot_dj2:
+ 227   2                  out_motorselect=1;out_dir2=0;out_en2=1;break;
+ 228   2              case mot_dj3:
+ 229   2                  out_motorselect=0;out_dir1=0;out_en1=1;break;
+ 230   2              case mot_dj4:
+ 231   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
+ 232   2              default:
+ 233   2                  break;
+ 234   2          }
+ 235   1      }//ÂÅúÊ≠¢ÁîµÊú∫
+ 236          void fun_sz1(enum varENU_han par_model){
+ 237   1          if(par_model==han_s){//ÊâãÊäìÊùæ
+ 238   2              while(1){
+ 239   3                  fun_startdj(mot_dj1,-100);
+ 240   3                  while(in_s==1);
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 5   
 
- 241   1          str_begin.szzt=par_model;//¥Ê¥¢‘À––Ω·π˚
- 242   1      }// ÷◊•µ•≤Ω‘À∂Ø
- 243          void fun_sj1(enum varENU_sjp par_model){
- 244   1          switch(par_model){
- 245   2              case sjp_wz1://…˝ΩµŒª÷√1(◊Ó…œŒª)
- 246   2                  while(1){//÷ª”–œÚ…œ
- 247   3                      fun_startdj(mot_dj3,100);
- 248   3                      fun_select(sel_58);
- 249   3                      fun_delay(50,del_ms);
- 250   3                      while(in_wz1==1);
- 251   3                      fun_delay(50,del_ms);
- 252   3                      if(in_wz1==0)
- 253   3                          break;
- 254   3                  }
- 255   2                  break;
- 256   2              case sjp_wz2://…˝ΩµŒª÷√2
- 257   2                  if(par_model>str_begin.sjwz){
- 258   3                      while(1){//“™»•µƒµÿ∑Ω±»Ωœøøœ¬,œÚœ¬◊ﬂ
- 259   4                          fun_startdj(mot_dj3,-100);
- 260   4                          fun_select(sel_58);
- 261   4                          fun_delay(50,del_ms);
- 262   4                          while(in_wz2==1);
- 263   4                          fun_delay(50,del_ms);
- 264   4                          if(in_wz2==0)
- 265   4                              break;
- 266   4                      }
- 267   3                  }
- 268   2                  else{//“™»•µƒµÿ∑Ω‘⁄…œ√Ê£¨œÚ…œ◊ﬂ
- 269   3                      while(1){
- 270   4                          fun_startdj(mot_dj3,100);
- 271   4                          fun_select(sel_58);
- 272   4                          fun_delay(50,del_ms);
- 273   4                          while(in_wz2==1);
- 274   4                          fun_delay(50,del_ms);
- 275   4                          if(in_wz2==0)
- 276   4                              break;
- 277   4                      }
- 278   3                  }
- 279   2                  break;
- 280   2              case sjp_wz3://…˝ΩµŒª÷√3
- 281   2                  if(par_model>str_begin.sjwz){
- 282   3                      while(1){//“™»•µƒµÿ∑Ω±»Ωœøøœ¬,œÚœ¬◊ﬂ
- 283   4                          fun_startdj(mot_dj3,-100);
- 284   4                          fun_select(sel_58);
- 285   4                          fun_delay(50,del_ms);
- 286   4                          while(in_wz3==1);
- 287   4                          fun_delay(50,del_ms);
- 288   4                          if(in_wz3==0)
- 289   4                              break;
- 290   4                      }
- 291   3                  }
- 292   2                  else{//“™»•µƒµÿ∑Ω‘⁄…œ√Ê£¨œÚ…œ◊ﬂ
- 293   3                      while(1){
- 294   4                          fun_startdj(mot_dj3,100);
- 295   4                          fun_select(sel_58);
- 296   4                          fun_delay(50,del_ms);
- 297   4                          while(in_wz3==1);
- 298   4                          fun_delay(50,del_ms);
- 299   4                          if(in_wz3==0)
- 300   4                              break;
- 301   4                      }
- 302   3                  }
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 6   
+ 241   3                  fun_delay(20,del_ms);
+ 242   3                  if(in_s==0)
+ 243   3                      break;
+ 244   3              }
+ 245   2          }
+ 246   1          else{//ÊâãÊäìÁ¥ß
+ 247   2              while(1){
+ 248   3                  fun_startdj(mot_dj1,100);
+ 249   3                  while(in_j==1);
+ 250   3                  fun_delay(20,del_ms);
+ 251   3                  if(in_j==0)
+ 252   3                      break;
+ 253   3              }
+ 254   2          }
+ 255   1          fun_stop(mot_dj1);
+ 256   1          str_begin.szzt=par_model;//Â≠òÂÇ®ËøêË°åÁªìÊûú
+ 257   1      }//ÊâãÊäìÂçïÊ≠•ËøêÂä®
+ 258          void fun_sj1(enum varENU_sjp par_model){
+ 259   1          if(par_model==str_begin.sjwz)
+ 260   1             return;
+ 261   1          switch(par_model){
+ 262   2              case sjp_wz1://ÂçáÈôç‰ΩçÁΩÆ1(ÊúÄ‰∏ä‰Ωç)
+ 263   2                  fun_startdj(mot_dj3,100);
+ 264   2                  fun_select(sel_58);
+ 265   2                  fun_delay(50,del_ms);
+ 266   2                  while(1){//Âè™ÊúâÂêë‰∏ä
+ 267   3                      while(in_wz1==1);
+ 268   3                      fun_delay(20,del_ms);
+ 269   3                      if(in_wz1==0)
+ 270   3                          break;
+ 271   3                  }
+ 272   2                  break;
+ 273   2              case sjp_wz12:
+ 274   2                  if(par_model>str_begin.sjwz){
+ 275   3                      fun_startdj(mot_dj3,-100);
+ 276   3                      fun_delay(str_cod.sj1xx,del_ms);
+ 277   3                  }
+ 278   2                  else{//Ë¶ÅÂéªÁöÑÂú∞ÊñπÂú®‰∏äÈù¢ÔºåÂêë‰∏äËµ∞
+ 279   3                      fun_sj1(sjp_wz2);
+ 280   3                      fun_startdj(mot_dj3,100);
+ 281   3                      fun_delay(str_cod.sj1xs,del_ms);
+ 282   3                  }
+ 283   2                  break;
+ 284   2              case sjp_wz2://ÂçáÈôç‰ΩçÁΩÆ2
+ 285   2                  if(par_model>str_begin.sjwz)
+ 286   2                      fun_startdj(mot_dj3,-100);
+ 287   2                  else
+ 288   2                      fun_startdj(mot_dj3,100);
+ 289   2                  fun_select(sel_58);
+ 290   2                  fun_delay(50,del_ms);
+ 291   2                  while(1){//Ë¶ÅÂéªÁöÑÂú∞ÊñπÊØîËæÉÈù†‰∏ã,Âêë‰∏ãËµ∞                    
+ 292   3                      while(in_wz2==1);
+ 293   3                      fun_delay(20,del_ms);
+ 294   3                      if(in_wz2==0)
+ 295   3                          break;
+ 296   3                  }
+ 297   2                  break;
+ 298   2              case sjp_wz23:
+ 299   2                  if(par_model>str_begin.sjwz){
+ 300   3                      fun_sj1(sjp_wz2);
+ 301   3                      fun_startdj(mot_dj3,-100);
+ 302   3                      fun_delay(str_cod.sj1xx,del_ms);
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 6   
 
- 303   2                  break;
- 304   2              case sjp_wz4://…˝ΩµŒª÷√4
- 305   2                  if(par_model>str_begin.sjwz){
- 306   3                      while(1){//“™»•µƒµÿ∑Ω±»Ωœøøœ¬,œÚœ¬◊ﬂ
- 307   4                          fun_startdj(mot_dj3,-100);
- 308   4                          fun_select(sel_58);
- 309   4                          fun_delay(50,del_ms);
- 310   4                          while(in_wz4==1);
- 311   4                          fun_delay(50,del_ms);
- 312   4                          if(in_wz4==0)
- 313   4                              break;
- 314   4                      }
- 315   3                  }
- 316   2                  else{//“™»•µƒµÿ∑Ω‘⁄…œ√Ê£¨œÚ…œ◊ﬂ
- 317   3                      while(1){
- 318   4                          fun_startdj(mot_dj3,100);
- 319   4                          fun_select(sel_58);
- 320   4                          fun_delay(50,del_ms);
- 321   4                          while(in_wz4==1);
- 322   4                          fun_delay(50,del_ms);
- 323   4                          if(in_wz4==0)
- 324   4                              break;
- 325   4                      }
- 326   3                  }
- 327   2                  break;
- 328   2              case sjp_wz5://…˝ΩµŒª÷√5
- 329   2                  while(1){//“™»•µƒµÿ∑Ω±»Ωœøøœ¬,œÚœ¬◊ﬂ
- 330   3                      fun_startdj(mot_dj3,-100);
- 331   3                      fun_select(sel_912);
- 332   3                      fun_delay(50,del_ms);
- 333   3                      while(in_wz5==1);
- 334   3                      fun_delay(50,del_ms);
- 335   3                      if(in_wz5==0){
- 336   4                          break;
- 337   4                      }
- 338   3                  }
- 339   2                  break;
- 340   2              default:
- 341   2                  break;
- 342   2          }
- 343   1          fun_stop(mot_dj3);
- 344   1          str_begin.sjwz=par_model;//¥Ê¥¢‘À––Ω·π˚
- 345   1      }//…˝Ωµµ•≤Ω‘À∂Ø
- 346          void fun_py1(enum varENU_tra par_model){
- 347   1          switch(par_model){
- 348   2              case tra_q://«∞∆Ω“∆(√ª”–µÁª˙µƒƒÿ∏ˆ∑ΩœÚ)
- 349   2                  while(1){
- 350   3                      fun_startdj(mot_dj2,100);
- 351   3                      while(in_qpy==1);
- 352   3                      fun_delay(20,del_ms);
- 353   3                      if(in_qpy==0)
- 354   3                          break;
+ 303   3                  }
+ 304   2                  else{//Ë¶ÅÂéªÁöÑÂú∞ÊñπÂú®‰∏äÈù¢ÔºåÂêë‰∏äËµ∞
+ 305   3                      fun_sj1(sjp_wz3);
+ 306   3                      fun_startdj(mot_dj3,100);
+ 307   3                      fun_delay(str_cod.sj1xs,del_ms);
+ 308   3                  }
+ 309   2                  break;
+ 310   2              case sjp_wz3://ÂçáÈôç‰ΩçÁΩÆ3
+ 311   2                  if(par_model>str_begin.sjwz)
+ 312   2                      fun_startdj(mot_dj3,-100);
+ 313   2                  else
+ 314   2                      fun_startdj(mot_dj3,100);
+ 315   2                  fun_select(sel_58);
+ 316   2                  fun_delay(50,del_ms);
+ 317   2                  while(1){
+ 318   3                      while(in_wz3==1);
+ 319   3                      fun_delay(20,del_ms);
+ 320   3                      if(in_wz3==0)
+ 321   3                          break;
+ 322   3                  }
+ 323   2                  break;
+ 324   2              case sjp_wz34:
+ 325   2                  if(par_model>str_begin.sjwz){
+ 326   3                      fun_sj1(sjp_wz3);
+ 327   3                      fun_startdj(mot_dj3,-100);
+ 328   3                      fun_delay(str_cod.sj1xx,del_ms);
+ 329   3                  }
+ 330   2                  else{//Ë¶ÅÂéªÁöÑÂú∞ÊñπÂú®‰∏äÈù¢ÔºåÂêë‰∏äËµ∞
+ 331   3                      fun_sj1(sjp_wz4);
+ 332   3                      fun_startdj(mot_dj3,100);
+ 333   3                      fun_delay(str_cod.sj1xs,del_ms);
+ 334   3                  }
+ 335   2                  break;
+ 336   2              case sjp_wz4://ÂçáÈôç‰ΩçÁΩÆ4
+ 337   2                  if(par_model>str_begin.sjwz)
+ 338   2                      fun_startdj(mot_dj3,-100);
+ 339   2                  else
+ 340   2                      fun_startdj(mot_dj3,100);
+ 341   2                  fun_select(sel_58);
+ 342   2                  fun_delay(50,del_ms);
+ 343   2                  while(1){
+ 344   3                      while(in_wz4==1);
+ 345   3                      fun_delay(20,del_ms);
+ 346   3                      if(in_wz4==0)
+ 347   3                          break;
+ 348   3                  }
+ 349   2                  break;
+ 350   2              case sjp_wz45:
+ 351   2                  if(par_model>str_begin.sjwz){
+ 352   3                      fun_sj1(sjp_wz4);
+ 353   3                      fun_startdj(mot_dj3,-100);
+ 354   3                      fun_delay(str_cod.sj1xx,del_ms);
  355   3                  }
- 356   2                  break;
- 357   2              case tra_h://∫Û∆Ω“∆(”–µÁª˙µƒƒÿ∏ˆ∑ΩœÚ)
- 358   2                  while(1){
- 359   3                      fun_startdj(mot_dj2,-100);
- 360   3                      while(in_hpy==1);
- 361   3                      fun_delay(20,del_ms);
- 362   3                      if(in_hpy==0)
- 363   3                          break;
- 364   3                  }
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 7   
+ 356   2                  else{//Ë¶ÅÂéªÁöÑÂú∞ÊñπÂú®‰∏äÈù¢ÔºåÂêë‰∏äËµ∞
+ 357   3                      fun_startdj(mot_dj3,100);
+ 358   3                      //fun_delay(str_cod.sj1xs,del_ms);
+ 359   3                  }
+ 360   2                  break;
+ 361   2              case sjp_wz5://ÂçáÈôç‰ΩçÁΩÆ5
+ 362   2                  fun_startdj(mot_dj3,-100);
+ 363   2                  fun_select(sel_912);
+ 364   2                  fun_delay(50,del_ms);
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 7   
 
- 365   2                  break;
- 366   2              default:
- 367   2                  break;
- 368   2          }
- 369   1          fun_stop(mot_dj2);
- 370   1          str_begin.pywz=par_model;//¥Ê¥¢‘À––Ω·π˚
- 371   1      }//∆Ω“∆µ•≤Ω‘À∂Ø
- 372          void fun_hz1(enum varENU_dir par_model){
- 373   1          switch(par_model){
- 374   2              case dir_up://ªÿ◊™÷¡«∞∑Ω
- 375   2                  switch(str_begin.hzfx){
- 376   3                      case dir_down://œ÷‘⁄‘⁄œ¬∑Ω
- 377   3                          fun_startdj(mot_dj4,-100);
- 378   3                          fun_select(sel_912);
- 379   3                          fun_delay(1,del_s);
- 380   3                          while(1){
- 381   4                              while(in_hz==1);
- 382   4                              fun_delay(25,del_ms);
- 383   4                              if(in_hz==0)
- 384   4                                  break;
- 385   4                          }
- 386   3                          while(1){
- 387   4                              while(in_hz==0);
- 388   4                              fun_delay(25,del_ms);
- 389   4                              if(in_hz==1)
- 390   4                                  break;
- 391   4                          }
- 392   3                          while(1){
- 393   4                              while(in_hz==1);
- 394   4                              fun_delay(25,del_ms);
- 395   4                              if(in_hz==0)
- 396   4                                  break;
- 397   4                          }
- 398   3                          break;
- 399   3                      case dir_left://œ÷‘⁄‘⁄◊Û±ﬂ
- 400   3                          fun_startdj(mot_dj4,100);
- 401   3                          fun_select(sel_912);
- 402   3                          fun_delay(1,del_s);
- 403   3                          while(1){
- 404   4                              while(in_hz==1);
- 405   4                              fun_delay(25,del_ms);
- 406   4                              if(in_hz==0)
- 407   4                                  break;
- 408   4                          }
- 409   3                          break;
- 410   3                      case dir_right://œ÷‘⁄‘⁄”“±ﬂ
- 411   3                          fun_startdj(mot_dj4,-100);
- 412   3                          fun_select(sel_912);
- 413   3                          fun_delay(1,del_s);
- 414   3                          while(1){
- 415   4                              while(in_hz==1);
- 416   4                              fun_delay(25,del_ms);
- 417   4                              if(in_hz==0)
- 418   4                                  break;
- 419   4                          }
- 420   3                          break;
- 421   3                      default:
- 422   3                          break;
- 423   3                  }
- 424   2                  break;
- 425   2              case dir_down://“™»•œ¬√Ê
- 426   2                  switch(str_begin.hzfx){
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 8   
+ 365   2                  while(1){//Ë¶ÅÂéªÁöÑÂú∞ÊñπÊØîËæÉÈù†‰∏ã,Âêë‰∏ãËµ∞                
+ 366   3                      while(in_wz5==1);
+ 367   3                      fun_delay(20,del_ms);
+ 368   3                      if(in_wz5==0)
+ 369   3                          break;
+ 370   3                  }
+ 371   2                  break;
+ 372   2              default:
+ 373   2                  break;
+ 374   2          }
+ 375   1          fun_stop(mot_dj3);
+ 376   1          str_begin.sjwz=par_model;//Â≠òÂÇ®ËøêË°åÁªìÊûú
+ 377   1      }//ÂçáÈôçÂçïÊ≠•ËøêÂä®
+ 378          void fun_py1(enum varENU_tra par_model){
+ 379   1          switch(par_model){
+ 380   2              case tra_q://ÂâçÂπ≥Áßª(Ê≤°ÊúâÁîµÊú∫ÁöÑÂë¢‰∏™ÊñπÂêë)
+ 381   2                  while(1){
+ 382   3                      fun_startdj(mot_dj2,100);
+ 383   3                      while(in_qpy==1);
+ 384   3                      fun_delay(20,del_ms);
+ 385   3                      if(in_qpy==0)
+ 386   3                          break;
+ 387   3                  }
+ 388   2                  break;
+ 389   2              // case tra_kq:
+ 390   2              //     switch(str_begin.pywz){
+ 391   2              //         case tra_q:
+ 392   2              //             //fun_startdj(mot_dj2,-100);
+ 393   2              //             //D(666)
+ 394   2      
+ 395   2              //             break;
+ 396   2              //         case tra_z:
+ 397   2              //             break;
+ 398   2              //         case tra_kh:
+ 399   2              //             break;
+ 400   2              //         case tra_h:
+ 401   2              //             break;
+ 402   2              //     }
+ 403   2              //     break;
+ 404   2              // case tra_z:
+ 405   2              //     switch(str_begin.pywz){
+ 406   2              //         case tra_q:
+ 407   2              //             break;
+ 408   2              //         case tra_kq:
+ 409   2              //             break;
+ 410   2              //         case tra_kh:
+ 411   2              //             break;
+ 412   2              //         case tra_h:
+ 413   2              //             break;
+ 414   2              //     }
+ 415   2              //     break;
+ 416   2              // case tra_kh:
+ 417   2              //     switch(str_begin.pywz){
+ 418   2              //         case tra_q:
+ 419   2              //             break;
+ 420   2              //         case tra_kq:
+ 421   2              //             break;
+ 422   2              //         case tra_z:
+ 423   2              //             break;
+ 424   2              //         case tra_h:
+ 425   2              //             break;
+ 426   2              //     }
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 8   
 
- 427   3                      case dir_up://œ÷‘⁄‘⁄…œ√Ê
- 428   3                          fun_startdj(mot_dj4,100);
- 429   3                          fun_select(sel_912);
- 430   3                          fun_delay(1,del_s);
- 431   3                          while(1){
- 432   4                              while(in_hz==1);
- 433   4                              fun_delay(25,del_ms);
- 434   4                              if(in_hz==0)
- 435   4                                  break;
- 436   4                          }
- 437   3                          while(1){
- 438   4                              while(in_hz==0);
- 439   4                              fun_delay(25,del_ms);
- 440   4                              if(in_hz==1)
- 441   4                                  break;
- 442   4                          }
- 443   3                          while(1){
- 444   4                              while(in_hz==1);
- 445   4                              fun_delay(25,del_ms);
- 446   4                              if(in_hz==0)
- 447   4                                  break;
- 448   4                          }
- 449   3                          break;
- 450   3                      case dir_left://œ÷‘⁄‘⁄◊Û√Ê
- 451   3                          fun_startdj(mot_dj4,-100);
- 452   3                          fun_select(sel_912);
- 453   3                          fun_delay(1,del_s);
- 454   3                          while(1){
- 455   4                              while(in_hz==1);
- 456   4                              fun_delay(25,del_ms);
- 457   4                              if(in_hz==0)
- 458   4                                  break;
- 459   4                          }
- 460   3                          break;
- 461   3                      case dir_right://œ÷‘⁄‘⁄”“√Ê
- 462   3                          fun_startdj(mot_dj4,100);
- 463   3                          fun_select(sel_912);
- 464   3                          fun_delay(1,del_s);
- 465   3                          while(1){
- 466   4                              while(in_hz==1);
- 467   4                              fun_delay(25,del_ms);
- 468   4                              if(in_hz==0)
- 469   4                                  break;
- 470   4                          }
- 471   3                          break;
- 472   3                      default:
- 473   3                          break;
- 474   3                  }
- 475   2                  break;
- 476   2              case dir_left://“™»•◊Û±ﬂ
- 477   2                  switch(str_begin.hzfx){
- 478   3                      case dir_up://œ÷‘⁄‘⁄…œ√Ê
- 479   3                          fun_startdj(mot_dj4,-100);
- 480   3                          fun_select(sel_912);
- 481   3                          fun_delay(1,del_s);
- 482   3                          while(1){
- 483   4                              while(in_hz==1);
- 484   4                              fun_delay(25,del_ms);
- 485   4                              if(in_hz==0)
- 486   4                                  break;
- 487   4                          }
- 488   3                          break;
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 9   
+ 427   2              //     break;
+ 428   2              case tra_h://ÂêéÂπ≥Áßª(ÊúâÁîµÊú∫ÁöÑÂë¢‰∏™ÊñπÂêë)
+ 429   2                  while(1){
+ 430   3                      fun_startdj(mot_dj2,-100);
+ 431   3                      while(in_hpy==1);
+ 432   3                      fun_delay(20,del_ms);
+ 433   3                      if(in_hpy==0)
+ 434   3                          break;
+ 435   3                  }
+ 436   2                  break;
+ 437   2              default:
+ 438   2                  break;
+ 439   2          }
+ 440   1          fun_stop(mot_dj2);
+ 441   1          str_begin.pywz=par_model;//Â≠òÂÇ®ËøêË°åÁªìÊûú
+ 442   1      }//Âπ≥ÁßªÂçïÊ≠•ËøêÂä®
+ 443          void fun_hz1(enum varENU_dir par_model){
+ 444   1          switch(par_model){
+ 445   2              case dir_up://ÂõûËΩ¨Ëá≥ÂâçÊñπ
+ 446   2                  switch(str_begin.hzfx){
+ 447   3                      case dir_down://Áé∞Âú®Âú®‰∏ãÊñπ
+ 448   3                          fun_startdj(mot_dj4,-100);
+ 449   3                          fun_select(sel_912);
+ 450   3                          fun_delay(1,del_s);
+ 451   3                          while(1){
+ 452   4                              while(in_hz==1);
+ 453   4                              fun_delay(25,del_ms);
+ 454   4                              if(in_hz==0)
+ 455   4                                  break;
+ 456   4                          }
+ 457   3                          while(1){
+ 458   4                              while(in_hz==0);
+ 459   4                              fun_delay(25,del_ms);
+ 460   4                              if(in_hz==1)
+ 461   4                                  break;
+ 462   4                          }
+ 463   3                          while(1){
+ 464   4                              while(in_hz==1);
+ 465   4                              fun_delay(25,del_ms);
+ 466   4                              if(in_hz==0)
+ 467   4                                  break;
+ 468   4                          }
+ 469   3                          break;
+ 470   3                      case dir_left://Áé∞Âú®Âú®Â∑¶Ëæπ
+ 471   3                          fun_startdj(mot_dj4,100);
+ 472   3                          fun_select(sel_912);
+ 473   3                          fun_delay(1,del_s);
+ 474   3                          while(1){
+ 475   4                              while(in_hz==1);
+ 476   4                              fun_delay(25,del_ms);
+ 477   4                              if(in_hz==0)
+ 478   4                                  break;
+ 479   4                          }
+ 480   3                          break;
+ 481   3                      case dir_right://Áé∞Âú®Âú®Âè≥Ëæπ
+ 482   3                          fun_startdj(mot_dj4,-100);
+ 483   3                          fun_select(sel_912);
+ 484   3                          fun_delay(1,del_s);
+ 485   3                          while(1){
+ 486   4                              while(in_hz==1);
+ 487   4                              fun_delay(25,del_ms);
+ 488   4                              if(in_hz==0)
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 9   
 
- 489   3                      case dir_down://œ÷‘⁄‘⁄œ¬√Ê
- 490   3                          fun_startdj(mot_dj4,100);
- 491   3                          fun_select(sel_912);
- 492   3                          fun_delay(1,del_s);
- 493   3                          while(1){
- 494   4                              while(in_hz==1);
- 495   4                              fun_delay(25,del_ms);
- 496   4                              if(in_hz==0)
- 497   4                                  break;
- 498   4                          }
- 499   3                          break;
- 500   3                      case dir_right://œ÷‘⁄‘⁄”“√Ê
- 501   3                          fun_startdj(mot_dj4,-100);
- 502   3                          fun_select(sel_912);
- 503   3                          fun_delay(1,del_s);
- 504   3                          while(1){
- 505   4                              while(in_hz==1);
- 506   4                              fun_delay(25,del_ms);
- 507   4                              if(in_hz==0)
- 508   4                                  break;
- 509   4                          }
- 510   3                          while(1){
- 511   4                              while(in_hz==0);
- 512   4                              fun_delay(25,del_ms);
- 513   4                              if(in_hz==1)
- 514   4                                  break;
- 515   4                          }
- 516   3                          while(1){
- 517   4                              while(in_hz==1);
- 518   4                              fun_delay(25,del_ms);
- 519   4                              if(in_hz==0){
- 520   5                                  break;
- 521   5                              }
- 522   4                          }
- 523   3                          break;
- 524   3                      default:
- 525   3                          break;
- 526   3                  }
- 527   2                  break;
- 528   2              case dir_right://“™»•”“√Ê
- 529   2                  switch(str_begin.hzfx){
- 530   3                      case dir_up://œ÷‘⁄‘⁄«∞√Ê
- 531   3                          fun_startdj(mot_dj4,100);
- 532   3                          fun_select(sel_912);
- 533   3                          fun_delay(1,del_s);
- 534   3                          while(1){
- 535   4                              while(in_hz==1);
- 536   4                              fun_delay(25,del_ms);
- 537   4                              if(in_hz==0)
- 538   4                                  break;
- 539   4                          }
- 540   3                          break;
- 541   3                      case dir_down://œ÷‘⁄‘⁄œ¬√Ê
- 542   3                          fun_startdj(mot_dj4,-100);
- 543   3                          fun_select(sel_912);
- 544   3                          fun_delay(1,del_s);
- 545   3                          while(1){
- 546   4                              while(in_hz==1);
- 547   4                              fun_delay(25,del_ms);
- 548   4                              if(in_hz==0)
- 549   4                                  break;
- 550   4                          }
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 10  
+ 489   4                                  break;
+ 490   4                          }
+ 491   3                          break;
+ 492   3                      default:
+ 493   3                          break;
+ 494   3                  }
+ 495   2                  break;
+ 496   2              case dir_down://Ë¶ÅÂéª‰∏ãÈù¢
+ 497   2                  switch(str_begin.hzfx){
+ 498   3                      case dir_up://Áé∞Âú®Âú®‰∏äÈù¢
+ 499   3                          fun_startdj(mot_dj4,100);
+ 500   3                          fun_select(sel_912);
+ 501   3                          fun_delay(1,del_s);
+ 502   3                          while(1){
+ 503   4                              while(in_hz==1);
+ 504   4                              fun_delay(25,del_ms);
+ 505   4                              if(in_hz==0)
+ 506   4                                  break;
+ 507   4                          }
+ 508   3                          while(1){
+ 509   4                              while(in_hz==0);
+ 510   4                              fun_delay(25,del_ms);
+ 511   4                              if(in_hz==1)
+ 512   4                                  break;
+ 513   4                          }
+ 514   3                          while(1){
+ 515   4                              while(in_hz==1);
+ 516   4                              fun_delay(25,del_ms);
+ 517   4                              if(in_hz==0)
+ 518   4                                  break;
+ 519   4                          }
+ 520   3                          break;
+ 521   3                      case dir_left://Áé∞Âú®Âú®Â∑¶Èù¢
+ 522   3                          fun_startdj(mot_dj4,-100);
+ 523   3                          fun_select(sel_912);
+ 524   3                          fun_delay(1,del_s);
+ 525   3                          while(1){
+ 526   4                              while(in_hz==1);
+ 527   4                              fun_delay(25,del_ms);
+ 528   4                              if(in_hz==0)
+ 529   4                                  break;
+ 530   4                          }
+ 531   3                          break;
+ 532   3                      case dir_right://Áé∞Âú®Âú®Âè≥Èù¢
+ 533   3                          fun_startdj(mot_dj4,100);
+ 534   3                          fun_select(sel_912);
+ 535   3                          fun_delay(1,del_s);
+ 536   3                          while(1){
+ 537   4                              while(in_hz==1);
+ 538   4                              fun_delay(25,del_ms);
+ 539   4                              if(in_hz==0)
+ 540   4                                  break;
+ 541   4                          }
+ 542   3                          break;
+ 543   3                      default:
+ 544   3                          break;
+ 545   3                  }
+ 546   2                  break;
+ 547   2              case dir_left://Ë¶ÅÂéªÂ∑¶Ëæπ
+ 548   2                  switch(str_begin.hzfx){
+ 549   3                      case dir_up://Áé∞Âú®Âú®‰∏äÈù¢
+ 550   3                          fun_startdj(mot_dj4,-100);
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 10  
 
- 551   3                          break;
- 552   3                      case dir_left://œ÷‘⁄‘⁄◊Û√Ê
- 553   3                          fun_startdj(mot_dj4,100);
- 554   3                          fun_select(sel_912);
- 555   3                          fun_delay(1,del_s);
- 556   3                          while(1){
- 557   4                              while(in_hz==1);
- 558   4                              fun_delay(25,del_ms);
- 559   4                              if(in_hz==0)
- 560   4                                  break;
- 561   4                          }
- 562   3                          while(1){
- 563   4                              while(in_hz==0);
- 564   4                              fun_delay(25,del_ms);
- 565   4                              if(in_hz==1)
- 566   4                                  break;
- 567   4                          }
- 568   3                          while(1){
- 569   4                              while(in_hz==1);
- 570   4                              fun_delay(25,del_ms);
- 571   4                              if(in_hz==0){
- 572   5                                  break;
- 573   5                              }
- 574   4                          }
- 575   3                          break;
- 576   3                      default:
- 577   3                          break;
- 578   3                  }
- 579   2                  break;
- 580   2              default:
- 581   2                  break;
- 582   2          }
- 583   1          fun_stop(mot_dj4);
- 584   1          str_begin.hzfx=par_model;//¥Ê¥¢‘À––Ω·π˚
- 585   1      }//ªÿ◊™µ•≤Ω‘À∂Ø
- 586          void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
- 587   1          bit loc_flag=0;
- 588   1          ui loc_i;
- 589   1          uc loc_con=0;
- 590   1          uc loc_l=par_sd,loc_r=par_sd;
- 591   1          for(loc_i=2;loc_i<par_sd;fun_startdj(mot_rl,loc_i++))//»Ì∆∂Ø
- 592   1              fun_delay(cod_mlinerqd/par_sd,del_ms);
- 593   1          while(1){
- 594   2              loc_l=par_sd;//ª÷∏¥ƒ¨»œ≤Œ ˝
- 595   2              loc_r=par_sd;
- 596   2              if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//—≤œﬂº∆ ˝
- 597   3                  loc_flag=1;
- 598   3                  if(loc_con>=par_num){
- 599   4                      if(par_model==dir_left){//◊Û◊™
- 600   5                          fun_startdj(mot_l,-20);
- 601   5                          fun_delay(500,del_ms);
- 602   5                          while(1){
- 603   6                              while(!in_ls4||!in_ls5);
- 604   6                              fun_delay(100,del_us);
- 605   6                              if(in_ls4&&in_ls5){
- 606   7                                  fun_stop(mot_rl);
- 607   7                                  return;
- 608   7                              }
- 609   6                          }
- 610   5                      }
- 611   4                      else if(par_model==dir_right){
- 612   5                          fun_startdj(mot_r,-20);
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 11  
+ 551   3                          fun_select(sel_912);
+ 552   3                          fun_delay(1,del_s);
+ 553   3                          while(1){
+ 554   4                              while(in_hz==1);
+ 555   4                              fun_delay(25,del_ms);
+ 556   4                              if(in_hz==0)
+ 557   4                                  break;
+ 558   4                          }
+ 559   3                          break;
+ 560   3                      case dir_down://Áé∞Âú®Âú®‰∏ãÈù¢
+ 561   3                          fun_startdj(mot_dj4,100);
+ 562   3                          fun_select(sel_912);
+ 563   3                          fun_delay(1,del_s);
+ 564   3                          while(1){
+ 565   4                              while(in_hz==1);
+ 566   4                              fun_delay(25,del_ms);
+ 567   4                              if(in_hz==0)
+ 568   4                                  break;
+ 569   4                          }
+ 570   3                          break;
+ 571   3                      case dir_right://Áé∞Âú®Âú®Âè≥Èù¢
+ 572   3                          fun_startdj(mot_dj4,-100);
+ 573   3                          fun_select(sel_912);
+ 574   3                          fun_delay(1,del_s);
+ 575   3                          while(1){
+ 576   4                              while(in_hz==1);
+ 577   4                              fun_delay(25,del_ms);
+ 578   4                              if(in_hz==0)
+ 579   4                                  break;
+ 580   4                          }
+ 581   3                          while(1){
+ 582   4                              while(in_hz==0);
+ 583   4                              fun_delay(25,del_ms);
+ 584   4                              if(in_hz==1)
+ 585   4                                  break;
+ 586   4                          }
+ 587   3                          while(1){
+ 588   4                              while(in_hz==1);
+ 589   4                              fun_delay(25,del_ms);
+ 590   4                              if(in_hz==0){
+ 591   5                                  break;
+ 592   5                              }
+ 593   4                          }
+ 594   3                          break;
+ 595   3                      default:
+ 596   3                          break;
+ 597   3                  }
+ 598   2                  break;
+ 599   2              case dir_right://Ë¶ÅÂéªÂè≥Èù¢
+ 600   2                  switch(str_begin.hzfx){
+ 601   3                      case dir_up://Áé∞Âú®Âú®ÂâçÈù¢
+ 602   3                          fun_startdj(mot_dj4,100);
+ 603   3                          fun_select(sel_912);
+ 604   3                          fun_delay(1,del_s);
+ 605   3                          while(1){
+ 606   4                              while(in_hz==1);
+ 607   4                              fun_delay(25,del_ms);
+ 608   4                              if(in_hz==0)
+ 609   4                                  break;
+ 610   4                          }
+ 611   3                          break;
+ 612   3                      case dir_down://Áé∞Âú®Âú®‰∏ãÈù¢
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 11  
 
- 613   5                          fun_delay(500,del_ms);
- 614   5                          while(1){
- 615   6                              while(!in_ls4||!in_ls5);
- 616   6                              fun_delay(100,del_us);
- 617   6                              if(in_ls4&&in_ls5){
- 618   7                                  fun_stop(mot_rl);
- 619   7                                  return;
- 620   7                              }
- 621   6                          }
- 622   5                      }
- 623   4                  }
- 624   3              }
- 625   2              else if(loc_flag==1){
- 626   3                  if(++loc_con>=par_num){
- 627   4                      if(par_model==dir_up){
- 628   5                          for(loc_i=0;loc_i<cod_mlineqc;loc_i++){
- 629   6                              loc_l=par_sd*0.7;//ª÷∏¥ƒ¨»œ≤Œ ˝
- 630   6                              loc_r=par_sd*0.7;
- 631   6                              if(in_ls3){//æ¿∆´
- 632   7                                  loc_l*=0.9;
- 633   7                                  loc_r*=1.1;
- 634   7                              }
- 635   6                              if(in_ls6){
- 636   7                                  loc_l*=1.1;
- 637   7                                  loc_r*=0.9;
- 638   7                              }
- 639   6                              if(in_ls2){
- 640   7                                  loc_l*=0.8;
- 641   7                                  loc_r*=1.2;
- 642   7                              }
- 643   6                              if(in_ls7){
- 644   7                                  loc_l*=1.2;
- 645   7                                  loc_r*=0.8;
- 646   7                              }
- 647   6                              if(in_ls1){
- 648   7                                  loc_l*=0.7;
- 649   7                                  loc_r*=1.3;
- 650   7                              }
- 651   6                              if(in_ls8){
- 652   7                                  loc_l*=1.3;
- 653   7                                  loc_r*=0.7;
- 654   7                              }
- 655   6                              fun_startdj(mot_l,loc_l);//∏¸–¬µÁª˙≤Œ ˝
- 656   6                              fun_startdj(mot_r,loc_r);
- 657   6                              fun_delay(1,del_ms);
- 658   6                          }
- 659   5                          fun_stop(mot_rl);
- 660   5                          return;
- 661   5                      }
- 662   4                  }
- 663   3                  loc_flag=0;
- 664   3              }
- 665   2              if(in_ls3){//æ¿∆´
- 666   3                  loc_l*=0.9;
- 667   3                  loc_r*=1.1;
- 668   3              }
- 669   2              if(in_ls6){
- 670   3                  loc_l*=1.1;
- 671   3                  loc_r*=0.9;
- 672   3              }  
- 673   2              if(in_ls2){
- 674   3                  loc_l*=0.8;
-C51 COMPILER V9.01   8023                                                                  03/01/2015 23:51:06 PAGE 12  
+ 613   3                          fun_startdj(mot_dj4,-100);
+ 614   3                          fun_select(sel_912);
+ 615   3                          fun_delay(1,del_s);
+ 616   3                          while(1){
+ 617   4                              while(in_hz==1);
+ 618   4                              fun_delay(25,del_ms);
+ 619   4                              if(in_hz==0)
+ 620   4                                  break;
+ 621   4                          }
+ 622   3                          break;
+ 623   3                      case dir_left://Áé∞Âú®Âú®Â∑¶Èù¢
+ 624   3                          fun_startdj(mot_dj4,100);
+ 625   3                          fun_select(sel_912);
+ 626   3                          fun_delay(1,del_s);
+ 627   3                          while(1){
+ 628   4                              while(in_hz==1);
+ 629   4                              fun_delay(25,del_ms);
+ 630   4                              if(in_hz==0)
+ 631   4                                  break;
+ 632   4                          }
+ 633   3                          while(1){
+ 634   4                              while(in_hz==0);
+ 635   4                              fun_delay(25,del_ms);
+ 636   4                              if(in_hz==1)
+ 637   4                                  break;
+ 638   4                          }
+ 639   3                          while(1){
+ 640   4                              while(in_hz==1);
+ 641   4                              fun_delay(25,del_ms);
+ 642   4                              if(in_hz==0){
+ 643   5                                  break;
+ 644   5                              }
+ 645   4                          }
+ 646   3                          break;
+ 647   3                      default:
+ 648   3                          break;
+ 649   3                  }
+ 650   2                  break;
+ 651   2              default:
+ 652   2                  break;
+ 653   2          }
+ 654   1          fun_stop(mot_dj4);
+ 655   1          str_begin.hzfx=par_model;//Â≠òÂÇ®ËøêË°åÁªìÊûú
+ 656   1      }//ÂõûËΩ¨ÂçïÊ≠•ËøêÂä®
+ 657          void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
+ 658   1          bit loc_flag=0;
+ 659   1          ui loc_i;
+ 660   1          uc loc_con=0;
+ 661   1          uc loc_l=par_sd,loc_r=par_sd;
+ 662   1          for(loc_i=2;loc_i<par_sd;fun_startdj(mot_rl,loc_i++))//ËΩØËµ∑Âä®
+ 663   1              fun_delay(str_cod.mlinerqd/par_sd,del_ms);
+ 664   1          while(1){
+ 665   2              loc_l=par_sd;//ÊÅ¢Â§çÈªòËÆ§ÂèÇÊï∞
+ 666   2              loc_r=par_sd;
+ 667   2              if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//Â∑°Á∫øËÆ°Êï∞
+ 668   3                  loc_flag=1;
+ 669   3                  if(loc_con>=par_num){
+ 670   4                      if(par_model==dir_left){//Â∑¶ËΩ¨
+ 671   5                          fun_startdj(mot_l,-20);
+ 672   5                          fun_delay(500,del_ms);
+ 673   5                          while(1){
+ 674   6                              while(!in_ls4||!in_ls5);
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 12  
 
- 675   3                  loc_r*=1.2;
- 676   3              }
- 677   2              if(in_ls7){
- 678   3                  loc_l*=1.2;
- 679   3                  loc_r*=0.8;
- 680   3              }
- 681   2              if(in_ls1){
- 682   3                  loc_l*=0.7;
- 683   3                  loc_r*=1.3;
- 684   3              }
- 685   2              if(in_ls8){
- 686   3                  loc_l*=1.3;
- 687   3                  loc_r*=0.7;
- 688   3              }
- 689   2              fun_startdj(mot_l,loc_l);//∏¸–¬µÁª˙≤Œ ˝
- 690   2              fun_startdj(mot_r,loc_r);
- 691   2          }
- 692   1      }//÷˜∫Ø ˝∆’Õ®—≤œﬂ
+ 675   6                              fun_delay(100,del_us);
+ 676   6                              if(in_ls4&&in_ls5){
+ 677   7                                  fun_stop(mot_rl);
+ 678   7                                  return;
+ 679   7                              }
+ 680   6                          }
+ 681   5                      }
+ 682   4                      else if(par_model==dir_right){
+ 683   5                          fun_startdj(mot_r,-20);
+ 684   5                          fun_delay(500,del_ms);
+ 685   5                          while(1){
+ 686   6                              while(!in_ls4||!in_ls5);
+ 687   6                              fun_delay(100,del_us);
+ 688   6                              if(in_ls4&&in_ls5){
+ 689   7                                  fun_stop(mot_rl);
+ 690   7                                  return;
+ 691   7                              }
+ 692   6                          }
+ 693   5                      }
+ 694   4                  }
+ 695   3              }
+ 696   2              else if(loc_flag==1){
+ 697   3                  if(++loc_con>=par_num){
+ 698   4                      if(par_model==dir_up){
+ 699   5                          for(loc_i=0;loc_i<str_cod.mlineqc;loc_i++){
+ 700   6                              loc_l=par_sd*0.7;//ÊÅ¢Â§çÈªòËÆ§ÂèÇÊï∞
+ 701   6                              loc_r=par_sd*0.7;
+ 702   6                              if(in_ls3){//Á∫†ÂÅè
+ 703   7                                  loc_l*=0.9;
+ 704   7                                  loc_r*=1.1;
+ 705   7                              }
+ 706   6                              if(in_ls6){
+ 707   7                                  loc_l*=1.1;
+ 708   7                                  loc_r*=0.9;
+ 709   7                              }
+ 710   6                              if(in_ls2){
+ 711   7                                  loc_l*=0.8;
+ 712   7                                  loc_r*=1.2;
+ 713   7                              }
+ 714   6                              if(in_ls7){
+ 715   7                                  loc_l*=1.2;
+ 716   7                                  loc_r*=0.8;
+ 717   7                              }
+ 718   6                              if(in_ls1){
+ 719   7                                  loc_l*=0.7;
+ 720   7                                  loc_r*=1.3;
+ 721   7                              }
+ 722   6                              if(in_ls8){
+ 723   7                                  loc_l*=1.3;
+ 724   7                                  loc_r*=0.7;
+ 725   7                              }
+ 726   6                              fun_startdj(mot_l,loc_l);//Êõ¥Êñ∞ÁîµÊú∫ÂèÇÊï∞
+ 727   6                              fun_startdj(mot_r,loc_r);
+ 728   6                              fun_delay(1,del_ms);
+ 729   6                          }
+ 730   5                          fun_stop(mot_rl);
+ 731   5                          return;
+ 732   5                      }
+ 733   4                  }
+ 734   3                  loc_flag=0;
+ 735   3              }
+ 736   2              if(in_ls3){//Á∫†ÂÅè
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 13  
+
+ 737   3                  loc_l*=0.9;
+ 738   3                  loc_r*=1.1;
+ 739   3              }
+ 740   2              if(in_ls6){
+ 741   3                  loc_l*=1.1;
+ 742   3                  loc_r*=0.9;
+ 743   3              }  
+ 744   2              if(in_ls2){
+ 745   3                  loc_l*=0.8;
+ 746   3                  loc_r*=1.2;
+ 747   3              }
+ 748   2              if(in_ls7){
+ 749   3                  loc_l*=1.2;
+ 750   3                  loc_r*=0.8;
+ 751   3              }
+ 752   2              if(in_ls1){
+ 753   3                  loc_l*=0.7;
+ 754   3                  loc_r*=1.3;
+ 755   3              }
+ 756   2              if(in_ls8){
+ 757   3                  loc_l*=1.3;
+ 758   3                  loc_r*=0.7;
+ 759   3              }
+ 760   2              fun_startdj(mot_l,loc_l);//Êõ¥Êñ∞ÁîµÊú∫ÂèÇÊï∞
+ 761   2              fun_startdj(mot_r,loc_r);
+ 762   2          }
+ 763   1      }//‰∏ªÂáΩÊï∞ÊôÆÈÄöÂ∑°Á∫ø
+ 764          void fun_stope2prom(){
+ 765   1          IAP_CONTR = 0;                  //ÂÖ≥Èó≠IAPÂäüËÉΩ
+ 766   1          IAP_CMD = 0;                    //Ê∏ÖÈô§ÂëΩ‰ª§
+ 767   1          IAP_TRIG = 0;                   //Ê∏ÖÈô§Ëß¶ÂèëÂØÑÂ≠òÂô®
+ 768   1          IAP_ADDRH = 0x80;               //Êï∞ÊçÆÊåáÈíàÊåáÂêëÈùûEEPROMÂå∫
+ 769   1          IAP_ADDRL = 0;                  //Ê∏ÖÈô§IAPÂú∞ÂùÄ
+ 770   1      }//ÂÖ≥Èó≠EEPROMÂäüËÉΩ(IapIdle)
+ 771          uc fun_reade2prom(ui par_add){
+ 772   1          uc loc_dat;                     //Êï∞ÊçÆÁºìÂÜ≤Âå∫
+ 773   1          IAP_CONTR = 0x83;               //ÊâìÂºÄEEPROMÂäüËÉΩ,ËÆæÁΩÆÁ≠âÂæÖÊó∂Èó¥
+ 774   1          IAP_CMD = 1;                    //ËÆæÁΩÆEEPROMËØªÂëΩ‰ª§
+ 775   1          IAP_ADDRL = par_add;            //ËÆæÁΩÆEEPROMÂú∞ÂùÄ‰ΩéÂÖ´‰Ωç
+ 776   1          IAP_ADDRH = par_add >> 8;       //ËÆæÁΩÆEEPROMÂú∞ÂùÄÈ´òÂÖ´‰Ωç
+ 777   1          IAP_TRIG = 0x5a;                //Ëß¶Âèë
+ 778   1          IAP_TRIG = 0xa5;                //ÂÜçÊ¨°Ëß¶Âèë
+ 779   1          fun_delay(10,del_us);           //Á®çÁ≠â‰∏Ä‰ºöÂÑø
+ 780   1          loc_dat = IAP_DATA;             //ËØªÂá∫EEPROM‰∏≠ÁöÑÊï∞ÊçÆ
+ 781   1          fun_stope2prom();               //ÂÖ≥Èó≠EEPROMÂäüËÉΩ
+ 782   1          return loc_dat;                 //ËøîÂõûËØªÂèñÁªìÊûú
+ 783   1      }//ËØªÂèñEEPROMÊï∞ÊçÆ
+ 784          void fun_writee2prom(ui par_add,uc par_dat){
+ 785   1          IAP_CONTR = 0x83;               //ÊâìÂºÄEEPROMÂäüËÉΩ,ËÆæÁΩÆÁ≠âÂæÖÊó∂Èó¥
+ 786   1          IAP_CMD = 2;                    //ËÆæÁΩÆEEPROMÂÜôÂÖ•ÂëΩ‰ª§
+ 787   1          IAP_ADDRL = par_add;            //ËÆæÁΩÆEEPROMÂú∞ÂùÄ‰ΩéÂÖ´‰Ωç
+ 788   1          IAP_ADDRH = par_add >> 8;       //ËÆæÁΩÆEEPROMÂú∞ÂùÄÈ´òÂÖ´‰Ωç
+ 789   1          IAP_DATA = par_dat;             //ÂÜôÂÖ•Êï∞ÊçÆ
+ 790   1          IAP_TRIG = 0x5a;                //Ëß¶Âèë
+ 791   1          IAP_TRIG = 0xa5;                //ÂÜçÊ¨°Ëß¶Âèë
+ 792   1          fun_delay(10,del_us);           //Á®çÁ≠â‰∏Ä‰ºöÂÑø
+ 793   1          fun_stope2prom();               //ÂÖ≥Èó≠EEPROMÂäüËÉΩ
+ 794   1      }//ÂÜôEEPROMÊï∞ÊçÆ
+ 795          void fun_cleane2prom(ui par_add){
+ 796   1          IAP_CONTR = 0x83;               //ÊâìÂºÄEEPROMÂäüËÉΩ,ËÆæÁΩÆÁ≠âÂæÖÊó∂Èó¥
+ 797   1          IAP_CMD = 3;                    //ËÆæÁΩÆEEPROMÊì¶Èô§ÂëΩ‰ª§
+ 798   1          IAP_ADDRL = par_add;            //ËÆæÁΩÆEEPROMÂú∞ÂùÄ‰ΩéÂÖ´‰Ωç
+C51 COMPILER V9.01   8023                                                                  03/02/2015 22:46:19 PAGE 14  
+
+ 799   1          IAP_ADDRH = par_add >> 8;       //ËÆæÁΩÆEEPROMÂú∞ÂùÄÈ´òÂÖ´‰Ωç
+ 800   1          IAP_TRIG = 0x5a;                //Ëß¶Âèë
+ 801   1          IAP_TRIG = 0xa5;                //ÂÜçÊ¨°Ëß¶Âèë
+ 802   1          fun_delay(10,del_us);           //Á®çÁ≠â‰∏Ä‰ºöÂÑø
+ 803   1          fun_stope2prom();               //ÂÖ≥Èó≠EEPROMÂäüËÉΩ
+ 804   1      }//Ê∏ÖÈô§EEPROMÊï∞ÊçÆ
+ 805          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2609    ----
+   CODE SIZE        =   3106    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     25    ----
+   XDATA SIZE       =     47      16
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----      16
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----       1
 END OF MODULE INFORMATION.

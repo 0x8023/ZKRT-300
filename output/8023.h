@@ -50,6 +50,8 @@
     // #define home 29//回家
     // #define start 30//起始区
     // #define tz 31//抓取工位的台子
+/*-------------------------------------------------------------简化宏定义-----*/
+    //#define D(par_ms) fun_delay(par_ms,del_ms);
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
@@ -176,10 +178,25 @@
         enum varENU_tra pywz;//平移位置
         enum varENU_dir hzfx;//回转方向
     };
+    struct str_parameter{
+        ui mlinerqd;//默认主函数巡线软起动时间为500毫秒
+        ui mlineqc;//默认主函数巡线前冲时间为500毫秒
 
-    extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
-    extern xdata ui cod_mlinerqd,//主函数软起动时间(毫秒)
-                    cod_mlineqc;//组函数前冲时间(毫秒)
+        ui sj1xx;
+        ui sj1xs;
+
+        ui py1qkq;
+        ui py1kqz;
+        ui py1zkh;
+        ui py1khh;
+        ui py1qz;
+        ui py1zh;
+        ui py1kqkh;
+        ui py1qkh;
+        ui py1kqh;
+    };//参数
+
+    extern struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//50毫秒定时器0初始化
@@ -199,5 +216,9 @@
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
     extern void fun_mptline(uc par_num,uc par_sd,enum varENU_dir);//主函数普通巡线
+    extern void fun_stope2prom();//停止EEPROM服务
+    extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
+    extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
+    extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
 /*---------------------------------------------------------------更新日志-----*/
 #endif

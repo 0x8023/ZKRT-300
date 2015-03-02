@@ -1,30 +1,56 @@
-C51 COMPILER V9.01   PERFECT                                                               03/01/2015 23:51:12 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               03/02/2015 22:46:22 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
 OBJECT MODULE PLACED IN perfect.OBJ
-COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE perfect.c BROWSE DEBUG OBJECTEXTEND
+COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE perfect.c LARGE BROWSE DEBUG OBJECTEXTEND
 
 line level    source
 
    1          #include "../8023.h"
-   2          void main(){
-   3   1          def_start(
-  10   1              0,//X坐标
-  10   1              0,//Y坐标
-  10   1              dir_up,//车头方向
-  10   1              han_j,//手抓状态
-  10   1              sjp_wz1,//升降位置
-  10   1              tra_q,//平移位置
-  10   1              dir_down)//回转方向
-  11   1          fun_mptline(3,70,dir_left);
-  12   1          fun_mptline(1,70,dir_up);
-  13   1          def_stop
-  14   1      }
+   2          
+   3          void main(){
+   4   1          def_start(
+  11   1              0,//X坐标
+  11   1              0,//Y坐标
+  11   1              dir_up,//车头方向
+  11   1              han_j,//手抓状态
+  11   1              sjp_wz1,//升降位置
+  11   1              tra_q,//平移位置
+  11   1              dir_down)//回转方向
+  12   1      //    fun_sj1(sjp_wz1);
+  13   1      //    fun_delay(1,del_s);
+  14   1      
+  15   1      
+  16   1          def_stop
+  17   1      
+  18   1      
+  19   1      /*
+  20   1          fun_sj1(sjp_wz1);
+  21   1          fun_delay(1,del_s);
+  22   1          fun_sj1(sjp_wz12);
+  23   1          fun_delay(1,del_s);
+  24   1          fun_sj1(sjp_wz2);
+  25   1          fun_delay(1,del_s);
+  26   1          fun_sj1(sjp_wz23);
+  27   1          fun_delay(1,del_s);
+  28   1          fun_sj1(sjp_wz3);
+  29   1          fun_delay(1,del_s);
+  30   1          fun_sj1(sjp_wz34);
+  31   1          fun_delay(1,del_s);
+  32   1          fun_sj1(sjp_wz4);
+  33   1          fun_delay(1,del_s);
+  34   1          fun_sj1(sjp_wz45);
+  35   1          fun_delay(1,del_s);
+  36   1          fun_sj1(sjp_wz5);
+  37   1          fun_delay(1,del_s);
+  38   1      */
+  39   1          
+  40   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     68    ----
+   CODE SIZE        =     50    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
