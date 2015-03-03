@@ -1,22 +1,23 @@
 #include "./output/8023.h"
-struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
-struct str_parameter str_cod={
+xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+xdata struct str_parameter str_cod={
     /*ui str_cod.mlinerqd*/500,//默认主函数巡线软起动时间为500毫秒
-    /*ui str_cod.mlineqc*/300,//默认主函数巡线前冲时间为500毫秒
+    /*ui str_cod.mlineqc*/200,//默认主函数巡线前冲时间为500毫秒
 
-    /*ui str_cod.sj1xx*/600,
-    /*ui str_cod.sj1xs*/1000,
+    /*ui str_cod.sj1bzw*/58,
+    /*ui str_cod.sj1zjw*/800,
 
     /*ui str_cod.py1qkq*/666,
     /*ui str_cod.py1kqz*/684,
     /*ui str_cod.py1zkh*/684,
     /*ui str_cod.py1khh*/666,
-    /*ui str_cod.py1qz*/1310,
-    /*ui str_cod.py1zh*/1310,
+    /*ui str_cod.py1qz*/500,
+    /*ui str_cod.py1zh*/500,
     /*ui str_cod.py1kqkh*/1480,
     /*ui str_cod.py1qkh*/2122,
     /*ui str_cod.py1kqh*/2122,
 };
+ui var_timer0=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
@@ -55,13 +56,15 @@ void fun_delay(ui par_value,enum varENU_del par_model){
     }
 }//延时
 void fun_timer0init(){
-    AUXR&=0x7F;
-    TMOD&=0xF0;
-    TMOD|=0x01;
-    TL0=0xB0;
-    TH0=0x3C;
-    TF0=0;
-}//50毫秒定时器0初始化
+    AUXR|=0x80;       //定时器时钟1T模式
+    TMOD&=0xF0;       //设置定时器模式
+    TMOD|=0x01;       //设置定时器模式
+    TL0=0x20;     //设置定时初值
+    TH0=0xD1;     //设置定时初值
+    TF0=0;        //清除TF0标志
+    ET0=1;
+    EA=1;
+}//1毫秒定时器0初始化
 void fun_timer1init(){
     AUXR&=0xBF;
     TMOD&=0x0F;
@@ -69,12 +72,15 @@ void fun_timer1init(){
     TL1=0xE0;
     TH1=0xB1;
     TF1=0;
+    ET1=1;
+    EA=1;
 }//20毫秒定时器1初始化
 void fun_timer0(){
-    TL0=0xB0;
-    TH0=0x3C;
+    TL0=0x20;
+    TH0=0xD1;
     _nop_();
-}//50毫秒定时器0处理函数
+    var_timer0++;
+}//1毫秒定时器0处理函数
 void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
@@ -117,6 +123,7 @@ void fun_initialization(){
     fun_pwminit();//PWM的初始化设置
     fun_timer0init();//初始化定时器0
     fun_timer1init();//初始化定时器1
+    fun_port();//初始化串口
     in_start=1;//按键置1
 
     fun_wait();
@@ -266,19 +273,21 @@ void fun_sj1(enum varENU_sjp par_model){
             while(1){//只有向上
                 while(in_wz1==1);
                 fun_delay(20,del_ms);
-                if(in_wz1==0)
-                    break;
+                if(in_wz1==0){
+                    fun_delay(20,del_ms);
+                    break;                    
+                }
             }
             break;
         case sjp_wz12:
             if(par_model>str_begin.sjwz){
                 fun_startdj(mot_dj3,-100);
-                fun_delay(str_cod.sj1xx,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_sj1(sjp_wz2);
                 fun_startdj(mot_dj3,100);
-                fun_delay(str_cod.sj1xs,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz2://升降位置2
@@ -291,20 +300,22 @@ void fun_sj1(enum varENU_sjp par_model){
             while(1){//要去的地方比较靠下,向下走                    
                 while(in_wz2==1);
                 fun_delay(20,del_ms);
-                if(in_wz2==0)
+                if(in_wz2==0){
+                    fun_delay(str_cod.sj1bzw,del_ms);
                     break;
+                }
             }
             break;
         case sjp_wz23:
             if(par_model>str_begin.sjwz){
                 fun_sj1(sjp_wz2);
                 fun_startdj(mot_dj3,-100);
-                fun_delay(str_cod.sj1xx,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_sj1(sjp_wz3);
                 fun_startdj(mot_dj3,100);
-                fun_delay(str_cod.sj1xs,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz3://升降位置3
@@ -316,7 +327,7 @@ void fun_sj1(enum varENU_sjp par_model){
             fun_delay(50,del_ms);
             while(1){
                 while(in_wz3==1);
-                fun_delay(20,del_ms);
+                fun_delay(str_cod.sj1bzw,del_ms);
                 if(in_wz3==0)
                     break;
             }
@@ -325,12 +336,12 @@ void fun_sj1(enum varENU_sjp par_model){
             if(par_model>str_begin.sjwz){
                 fun_sj1(sjp_wz3);
                 fun_startdj(mot_dj3,-100);
-                fun_delay(str_cod.sj1xx,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_sj1(sjp_wz4);
                 fun_startdj(mot_dj3,100);
-                fun_delay(str_cod.sj1xs,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz4://升降位置4
@@ -342,7 +353,7 @@ void fun_sj1(enum varENU_sjp par_model){
             fun_delay(50,del_ms);
             while(1){
                 while(in_wz4==1);
-                fun_delay(20,del_ms);
+                fun_delay(str_cod.sj1bzw,del_ms);
                 if(in_wz4==0)
                     break;
             }
@@ -351,11 +362,11 @@ void fun_sj1(enum varENU_sjp par_model){
             if(par_model>str_begin.sjwz){
                 fun_sj1(sjp_wz4);
                 fun_startdj(mot_dj3,-100);
-                fun_delay(str_cod.sj1xx,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_startdj(mot_dj3,100);
-                //fun_delay(str_cod.sj1xs,del_ms);
+                fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz5://升降位置5
@@ -365,8 +376,10 @@ void fun_sj1(enum varENU_sjp par_model){
             while(1){//要去的地方比较靠下,向下走                
                 while(in_wz5==1);
                 fun_delay(20,del_ms);
-                if(in_wz5==0)
+                if(in_wz5==0){
+                    fun_delay(str_cod.sj1bzw,del_ms);
                     break;
+                }
             }
             break;
         default:
@@ -382,56 +395,81 @@ void fun_py1(enum varENU_tra par_model){
                 fun_startdj(mot_dj2,100);
                 while(in_qpy==1);
                 fun_delay(20,del_ms);
-                if(in_qpy==0)
+                if(in_qpy==0){
+                    fun_delay(20,del_ms);
+                    break;
+                }
+            }
+            break;
+        case tra_kq:
+            switch(str_begin.pywz){
+                case tra_q:
+                    fun_startdj(mot_dj2,-100);
+                    fun_delay(str_cod.py1qkq,del_ms);
+                    break;
+                case tra_z:
+                    fun_startdj(mot_dj2,100);
+                    fun_delay(str_cod.py1kqz,del_ms);
+                    break;
+                case tra_kh:
+                    fun_startdj(mot_dj2,100);
+                    fun_delay(str_cod.py1kqkh,del_ms);
+                    break;
+                case tra_h:
+                    fun_startdj(mot_dj2,100);
+                    fun_delay(str_cod.py1kqh,del_ms);
                     break;
             }
             break;
-        // case tra_kq:
-        //     switch(str_begin.pywz){
-        //         case tra_q:
-        //             //fun_startdj(mot_dj2,-100);
-        //             //D(666)
-
-        //             break;
-        //         case tra_z:
-        //             break;
-        //         case tra_kh:
-        //             break;
-        //         case tra_h:
-        //             break;
-        //     }
-        //     break;
-        // case tra_z:
-        //     switch(str_begin.pywz){
-        //         case tra_q:
-        //             break;
-        //         case tra_kq:
-        //             break;
-        //         case tra_kh:
-        //             break;
-        //         case tra_h:
-        //             break;
-        //     }
-        //     break;
-        // case tra_kh:
-        //     switch(str_begin.pywz){
-        //         case tra_q:
-        //             break;
-        //         case tra_kq:
-        //             break;
-        //         case tra_z:
-        //             break;
-        //         case tra_h:
-        //             break;
-        //     }
-        //     break;
+        case tra_z:
+            switch(str_begin.pywz){
+                case tra_q:
+                    fun_startdj(mot_dj2,-100);
+                    fun_delay(str_cod.py1qz,del_ms);
+                    break;
+                case tra_kq:
+                    fun_startdj(mot_dj2,-100);
+                    fun_delay(str_cod.py1kqz,del_ms);
+                    break;
+                case tra_kh:
+                    fun_startdj(mot_dj2,100);
+                    fun_delay(str_cod.py1zkh,del_ms);
+                    break;
+                case tra_h:
+                    fun_startdj(mot_dj2,100);
+                    fun_delay(str_cod.py1zh,del_ms);
+                    break;
+            }
+            break;
+        case tra_kh:
+            switch(str_begin.pywz){
+                case tra_q:
+                    fun_startdj(mot_dj2,-100);
+                    fun_delay(str_cod.py1qkh,del_ms);
+                    break;
+                case tra_kq:
+                    fun_startdj(mot_dj2,-100);
+                    fun_delay(str_cod.py1kqkh,del_ms);
+                    break;
+                case tra_z:
+                    fun_startdj(mot_dj2,-100);
+                    fun_delay(str_cod.py1zkh,del_ms);
+                    break;
+                case tra_h:
+                    fun_startdj(mot_dj2,100);
+                    fun_delay(str_cod.py1khh,del_ms);
+                    break;
+            }
+            break;
         case tra_h://后平移(有电机的呢个方向)
             while(1){
                 fun_startdj(mot_dj2,-100);
                 while(in_hpy==1);
                 fun_delay(20,del_ms);
-                if(in_hpy==0)
+                if(in_hpy==0){
+                    fun_delay(20,del_ms);
                     break;
+                }
             }
             break;
         default:
@@ -802,4 +840,26 @@ void fun_cleane2prom(ui par_add){
     fun_delay(10,del_us);           //稍等一会儿
     fun_stope2prom();               //关闭EEPROM功能
 }//清除EEPROM数据
+void fun_calibration(){
+    // fun_sj1(sjp_wz1);//升到最上位
+    fun_py1(tra_q);//移动到最前端
+    fun_py1(tra_h);//移动到最后端
+    def_timer0start//开始定时器
+    fun_py1(tra_q);//移动到前端并计时
+    fun_py1(tra_h);//移动到后端
+    def_timer0stop//停止定时器
+    var_timer0*=0.39;
 
+    str_cod.py1zh=str_cod.py1qz=var_timer0*0.5;
+    str_cod.py1qkh=str_cod.py1kqh=var_timer0*0.75;
+    OUT(var_timer0)
+}//自动校准参数
+void fun_port(){
+    PCON|=0x80;       //使能波特率倍速位SMOD
+    SCON=0x50;        //8位数据,可变波特率
+    AUXR|=0x04;       //独立波特率发生器时钟为Fosc,即1T
+    BRT=0xD9;     //设定独立波特率发生器重装值
+    AUXR|=0x01;       //串口1选择独立波特率发生器为波特率发生器
+    AUXR|=0x10;       //启动独立波特率发生器
+    TI=1;//打开串口传输功能
+}//串口初始化

@@ -1,9 +1,9 @@
-C51 COMPILER V9.01   PERFECT                                                               03/02/2015 22:46:22 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               03/04/2015 00:52:49 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
 OBJECT MODULE PLACED IN perfect.OBJ
-COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE perfect.c LARGE BROWSE DEBUG OBJECTEXTEND
+COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE perfect.c BROWSE DEBUG OBJECTEXTEND
 
 line level    source
 
@@ -15,43 +15,80 @@ line level    source
   11   1              0,//Y坐标
   11   1              dir_up,//车头方向
   11   1              han_j,//手抓状态
-  11   1              sjp_wz1,//升降位置
+  11   1              sjp_wz5,//升降位置
   11   1              tra_q,//平移位置
   11   1              dir_down)//回转方向
   12   1      //    fun_sj1(sjp_wz1);
   13   1      //    fun_delay(1,del_s);
-  14   1      
-  15   1      
-  16   1          def_stop
-  17   1      
-  18   1      
-  19   1      /*
-  20   1          fun_sj1(sjp_wz1);
-  21   1          fun_delay(1,del_s);
-  22   1          fun_sj1(sjp_wz12);
-  23   1          fun_delay(1,del_s);
-  24   1          fun_sj1(sjp_wz2);
-  25   1          fun_delay(1,del_s);
-  26   1          fun_sj1(sjp_wz23);
-  27   1          fun_delay(1,del_s);
-  28   1          fun_sj1(sjp_wz3);
-  29   1          fun_delay(1,del_s);
-  30   1          fun_sj1(sjp_wz34);
+  14   1      //    WZ5
+  15   1      //    D(2000)
+  16   1      //    WZ2
+  17   1      //    def_stop
+  18   1          WZ4
+  19   1          def_stop
+  20   1          fun_calibration();
+  21   1          //fun_py1(tra_q);
+  22   1          fun_py1(tra_kq);
+  23   1          MSG("stop")
+  24   1      
+  25   1          
+  26   1      
+  27   1      
+  28   1      
+  29   1      
+  30   1          fun_sj1(sjp_wz1);
   31   1          fun_delay(1,del_s);
-  32   1          fun_sj1(sjp_wz4);
+  32   1          fun_sj1(sjp_wz12);
   33   1          fun_delay(1,del_s);
-  34   1          fun_sj1(sjp_wz45);
+  34   1          fun_sj1(sjp_wz2);
   35   1          fun_delay(1,del_s);
-  36   1          fun_sj1(sjp_wz5);
+  36   1          fun_sj1(sjp_wz23);
   37   1          fun_delay(1,del_s);
-  38   1      */
-  39   1          
-  40   1      }
+  38   1          fun_sj1(sjp_wz3);
+  39   1          fun_delay(1,del_s);
+  40   1          fun_sj1(sjp_wz34);
+  41   1          fun_delay(1,del_s);
+  42   1          fun_sj1(sjp_wz4);
+  43   1          fun_delay(1,del_s);
+  44   1          fun_sj1(sjp_wz45);
+  45   1          fun_delay(1,del_s);
+  46   1          fun_sj1(sjp_wz5);
+  47   1          fun_delay(1,del_s);
+  48   1      
+  49   1          fun_sj1(sjp_wz45);
+  50   1          fun_delay(1,del_s);
+  51   1          fun_sj1(sjp_wz4);
+  52   1          fun_delay(1,del_s);
+  53   1          fun_sj1(sjp_wz34);
+  54   1          fun_delay(1,del_s);
+  55   1          fun_sj1(sjp_wz3);
+C51 COMPILER V9.01   PERFECT                                                               03/04/2015 00:52:49 PAGE 2   
+
+  56   1          fun_delay(1,del_s);
+  57   1          fun_sj1(sjp_wz23);
+  58   1          fun_delay(1,del_s);
+  59   1          fun_sj1(sjp_wz2);
+  60   1          fun_delay(1,del_s);
+  61   1          fun_sj1(sjp_wz12);
+  62   1          fun_delay(1,del_s);
+  63   1          fun_sj1(sjp_wz1);
+  64   1      
+  65   1          def_stop
+  66   1      }
+  67          void Int0Interrupt() interrupt 0{
+  68   1          ;
+  69   1      }
+  70          void Timer0Interrupt() interrupt 1 using 1{
+  71   1          fun_timer0();
+  72   1      }
+  73          void Timer1Interrupt() interrupt 3 using 1{
+  74   1          ;
+  75   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     50    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =     87    ----
+   CONSTANT SIZE    =     10    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----

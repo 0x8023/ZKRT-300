@@ -20,7 +20,7 @@
     /*手抓状态*/      str_begin.szzt=par_szzt;\
     /*升降位置*/      str_begin.sjwz=par_sjwz;\
     /*平移位置*/      str_begin.pywz=par_pywz;\
-    /*回转方向*/      str_begin.hzfx=par_hzfx; 
+    /*回转方向*/      str_begin.hzfx=par_hzfx;
     #define def_stop fun_stop(mot_dj1);\
                      fun_stop(mot_dj2);\
                      fun_stop(mot_dj3);\
@@ -51,7 +51,16 @@
     // #define start 30//起始区
     // #define tz 31//抓取工位的台子
 /*-------------------------------------------------------------简化宏定义-----*/
-    //#define D(par_ms) fun_delay(par_ms,del_ms);
+    #define D(par_ms) fun_delay(par_ms,del_ms);
+    #define J fun_sz1(han_j);
+    #define S fun_sz1(han_s);
+    #define WZ1 fun_sj1(sjp_wz1);
+    #define WZ2 fun_sj1(sjp_wz2);
+    #define WZ3 fun_sj1(sjp_wz3);
+    #define WZ4 fun_sj1(sjp_wz4);
+    #define WZ5 fun_sj1(sjp_wz5);
+    #define MSG(par_value) printf("%s \n",par_value);
+    #define OUT(par_value) printf("%d \n",par_value);
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
@@ -117,7 +126,7 @@
     sbit out_en2=P2^3;//电机2/4使能(MOT_EN2)
     sbit out_switchselect=P1^6;//接近开关片选(SER_BS)
     sbit out_motorselect=P1^7;//电机输出片选(MOT_BS)
-    sbit out_lamp=P3^7;//警灯输出(LAMP)
+    sbit out_lamp=P3^7;//红外输出(LAMP)(低电平打开)
 /*---------------------------------------------------------------变量声明-----*/
     enum varENU_del{
         del_us,
@@ -182,8 +191,8 @@
         ui mlinerqd;//默认主函数巡线软起动时间为500毫秒
         ui mlineqc;//默认主函数巡线前冲时间为500毫秒
 
-        ui sj1xx;
-        ui sj1xs;
+        ui sj1bzw;
+        ui sj1zjw;
 
         ui py1qkq;
         ui py1kqz;
@@ -196,12 +205,14 @@
         ui py1kqh;
     };//参数
 
-    extern struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+    extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+    extern xdata struct str_parameter str_cod;
+    extern ui var_timer0;
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
-    extern void fun_timer0init();//50毫秒定时器0初始化
+    extern void fun_timer0init();//1毫秒定时器0初始化
     extern void fun_timer1init();//20毫秒定时器1初始化
-    extern void fun_timer0();//50毫秒定时器0处理函数
+    extern void fun_timer0();//1毫秒定时器0处理函数
     extern void fun_timer1();//20毫秒定时器1处理函数
     extern void fun_wait();//等待按键
     extern void fun_select(enum varENU_sel par_model);//传感器片选
@@ -220,5 +231,7 @@
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
     extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
+    extern void fun_calibration();//自动校准参数
+    extern void fun_port();//串口初始化
 /*---------------------------------------------------------------更新日志-----*/
 #endif
