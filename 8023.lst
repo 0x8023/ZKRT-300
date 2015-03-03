@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   4                      }while(--loc_i);
   53   3                  }
   54   2                  return;
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 2   
 
   55   2              default:return;
   56   2          }
@@ -126,7 +126,7 @@ line level    source
  114   1          //PS_11=1;//升降位置3传感器置1 $?$
  115   1      
  116   1          out_en1=1;//电机1/3使能 $?$
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 3   
 
  117   1          out_en2=1;//电机2/4使能 $?$
  118   1          //out_motorselect=1;//电机片选为1 $?$
@@ -190,7 +190,7 @@ line level    source
  176   3                      fun_pwml(par_speed);out_pwml=0;
  177   3                      fun_pwmr(par_speed);out_pwmr=0;
  178   3                  }
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 4   
 
  179   2                  else if(par_speed<0){
  180   3                      fun_pwml(cabs(par_speed));out_pwml=1;
@@ -254,7 +254,7 @@ line level    source
  238   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
  239   2              default:
  240   2                  break;
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 5   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 5   
 
  241   2          }
  242   1      }//停止电机
@@ -318,7 +318,7 @@ line level    source
  300   2                  while(1){//要去的地方比较靠下,向下走                    
  301   3                      while(in_wz2==1);
  302   3                      fun_delay(20,del_ms);
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 6   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 6   
 
  303   3                      if(in_wz2==0){
  304   4                          fun_delay(str_cod.sj1bzw,del_ms);
@@ -382,7 +382,7 @@ line level    source
  362   2                  if(par_model>str_begin.sjwz){
  363   3                      fun_sj1(sjp_wz4);
  364   3                      fun_startdj(mot_dj3,-100);
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 7   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 7   
 
  365   3                      fun_delay(str_cod.sj1zjw,del_ms);
  366   3                  }
@@ -446,7 +446,7 @@ line level    source
  424   2              case tra_z:
  425   2                  switch(str_begin.pywz){
  426   3                      case tra_q:
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 8   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 8   
 
  427   3                          fun_startdj(mot_dj2,-100);
  428   3                          fun_delay(str_cod.py1qz,del_ms);
@@ -510,7 +510,7 @@ line level    source
  486   3                          fun_startdj(mot_dj4,-100);
  487   3                          fun_select(sel_912);
  488   3                          fun_delay(1,del_s);
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 9   
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 9   
 
  489   3                          while(1){
  490   4                              while(in_hz==1);
@@ -574,7 +574,7 @@ line level    source
  548   4                              fun_delay(25,del_ms);
  549   4                              if(in_hz==1)
  550   4                                  break;
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 10  
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 10  
 
  551   4                          }
  552   3                          while(1){
@@ -638,7 +638,7 @@ line level    source
  610   3                          fun_startdj(mot_dj4,-100);
  611   3                          fun_select(sel_912);
  612   3                          fun_delay(1,del_s);
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 11  
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 11  
 
  613   3                          while(1){
  614   4                              while(in_hz==1);
@@ -702,7 +702,7 @@ line level    source
  672   4                              while(in_hz==0);
  673   4                              fun_delay(25,del_ms);
  674   4                              if(in_hz==1)
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 12  
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 12  
 
  675   4                                  break;
  676   4                          }
@@ -766,7 +766,7 @@ line level    source
  734   2              else if(loc_flag==1){
  735   3                  if(++loc_con>=par_num){
  736   4                      if(par_model==dir_up){
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 13  
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 13  
 
  737   5                          for(loc_i=0;loc_i<str_cod.mlineqc;loc_i++){
  738   6                              loc_l=par_sd*0.7;//恢复默认参数
@@ -830,7 +830,7 @@ line level    source
  796   3                  loc_r*=0.7;
  797   3              }
  798   2              fun_startdj(mot_l,loc_l);//更新电机参数
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 14  
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 14  
 
  799   2              fun_startdj(mot_r,loc_r);
  800   2          }
@@ -894,7 +894,7 @@ line level    source
  858   1          PCON|=0x80;       //使能波特率倍速位SMOD
  859   1          SCON=0x50;        //8位数据,可变波特率
  860   1          AUXR|=0x04;       //独立波特率发生器时钟为Fosc,即1T
-C51 COMPILER V9.01   8023                                                                  03/04/2015 00:52:46 PAGE 15  
+C51 COMPILER V9.01   8023                                                                  03/04/2015 01:03:44 PAGE 15  
 
  861   1          BRT=0xD9;     //设定独立波特率发生器重装值
  862   1          AUXR|=0x01;       //串口1选择独立波特率发生器为波特率发生器

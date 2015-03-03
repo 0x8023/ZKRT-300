@@ -237,7 +237,7 @@
   </AlienFiles>
 
   <AlienFiles>
-    <PathWithFilename>D:\Desktop\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
+    <PathWithFilename>D:\Robot\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
     <TopLine>141</TopLine>
     <CurrentLine>141</CurrentLine>
     <Constant>0</Constant>
@@ -1629,19 +1629,19 @@
     <ActiveMDIGroup>0</ActiveMDIGroup>
     <MDIGroup>
       <Size>100</Size>
-      <ActiveTab>1</ActiveTab>
+      <ActiveTab>0</ActiveTab>
       <Documents>
-        <Doc>
-          <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>208</TopLine>
-          <CurrentLine>208</CurrentLine>
-        </Doc>
         <Doc>
           <Name>.\program\8023.c</Name>
           <ColumnNumber>0</ColumnNumber>
           <TopLine>20</TopLine>
           <CurrentLine>20</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
+          <ColumnNumber>0</ColumnNumber>
+          <TopLine>208</TopLine>
+          <CurrentLine>208</CurrentLine>
         </Doc>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
