@@ -10,6 +10,17 @@ Project File Date:  03/04/2015
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
@@ -17,10 +28,21 @@ TRANSFER
 TO ".\output\8023.LIB"
 LIB51 LIBRARY MANAGER V4.24
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
@@ -28,4 +50,546 @@ TRANSFER
 TO ".\output\8023.LIB"
 LIB51 LIBRARY MANAGER V4.24
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1194): error C141: syntax error near 'int'
+PROGRAM\8023.C(1194): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1194): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1194): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1194): error C141: syntax error near ')'
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1194): error C141: syntax error near 'int'
+PROGRAM\8023.C(1194): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1194): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1194): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1194): error C141: syntax error near ')'
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(2): warning C258: 'str_begin': mspace on parameter ignored
+PROGRAM\8023.C(2): error C132: 'str_begin': not in formal parameter list
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(2): warning C258: 'str_begin': mspace on parameter ignored
+PROGRAM\8023.C(2): error C132: 'str_begin': not in formal parameter list
+目标未创建
+Build target '目标 1'
+compiling 8023.c...
+PROGRAM\8023.C(2): warning C258: 'str_begin': mspace on parameter ignored
+PROGRAM\8023.C(2): error C132: 'str_begin': not in formal parameter list
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(2): warning C258: 'str_begin': mspace on parameter ignored
+PROGRAM\8023.C(2): error C132: 'str_begin': not in formal parameter list
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1202): error C141: syntax error near 'int'
+PROGRAM\8023.C(1202): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1202): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1202): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1202): error C141: syntax error near ')'
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+PROGRAM\8023.C(1180): warning C275: expression with possibly no effect
+PROGRAM\8023.C(1181): warning C290: missing return value
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 13 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1140): warning C280: 'par_31': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_32': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_33': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_34': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_71': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_72': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_73': unreferenced local variable
+PROGRAM\8023.C(1140): warning C280: 'par_74': unreferenced local variable
+PROGRAM\8023.C(1151): warning C280: 'loc_high03': unreferenced local variable
+PROGRAM\8023.C(1152): warning C280: 'loc_high47': unreferenced local variable
+PROGRAM\8023.C(1153): warning C280: 'loc_high07': unreferenced local variable
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 11 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1168): error C141: syntax error near 'uc'
+PROGRAM\8023.C(1168): error C202: 'loc_xh': undefined identifier
+PROGRAM\8023.C(1168): error C202: 'loc_xh': undefined identifier
+PROGRAM\8023.C(1168): error C202: 'loc_xh': undefined identifier
+PROGRAM\8023.C(1168): error C141: syntax error near ')'
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1180): error C202: 'i': undefined identifier
+PROGRAM\8023.C(1181): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1181): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1182): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1182): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1183): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1183): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1184): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1184): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1185): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1185): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1186): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1186): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1187): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1187): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1188): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1188): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1190): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1190): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1191): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1191): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1192): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1192): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1193): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1193): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1194): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1194): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1195): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1195): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1196): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1196): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1197): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1197): error C202: 'shuzu': undefined identifier
+PROGRAM\8023.C(1221): error C141: syntax error near ')'
+PROGRAM\8023.C(1222): error C141: syntax error near '}'
+目标未创建

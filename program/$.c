@@ -12,19 +12,16 @@ int sum(int num,...)
     return sum;
 }
 //求最大值
-int fun_max(char par_num,...){
+int fun_max(uc par_num,...){
     uc loc_max=0;//最大值
-    char loc_xh=0;//循环次数
+    uc loc_xh=0;//循环次数
     va_list loc_args;
     va_start(loc_args,par_num);
     while(loc_xh++<par_num){
-        if(va_arg(loc_args,uc)>loc_max){
+        if(va_arg(loc_args,uc)<loc_max){
             loc_max=va_arg(loc_args,uc);
         }
     }
     va_end(loc_args);
     return loc_max;
 }
-
-
-Angel Beats!

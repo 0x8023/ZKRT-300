@@ -28,28 +28,6 @@
                      fun_stop(mot_rl);\
                      EA=0;\
                      while(1);
-    // #define j 0//手爪夹紧
-    // #define s 1//手爪松开   
-
-    // #define qpy 0//手爪前平移 
-    // #define hpy 1//手爪后平移
-    
-    // #define xs 0//向上升
-    // #define xx 1//向下降
-
-    // #define qhz 0//前回转 
-    // #define hhz 1//后回转
-
-    // #define f 0//代表电机正转
-    // #define b 1//代表电机反转
-
-    // #define up 25
-    // #define down 26
-    // #define left 27
-    // #define right 28
-    // #define home 29//回家
-    // #define start 30//起始区
-    // #define tz 31//抓取工位的台子
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
     #define J fun_sz1(han_j);
@@ -153,11 +131,11 @@
         dir_right
     };//车头方向
     enum varENU_tra{
-        tra_q,
+        tra_q,//没有电机的一方
         tra_kq,
         tra_z,
         tra_kh,
-        tra_h
+        tra_h//有电机的一方
     };//平移位置
     enum varENU_sjp{
         sjp_wz1,
@@ -226,6 +204,7 @@
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
+    extern void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz);//平移回转同步运动
     extern void fun_mptline(uc par_num,uc par_sd,enum varENU_dir);//主函数普通巡线
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
@@ -233,5 +212,8 @@
     extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
     extern void fun_calibration();//自动校准参数
     extern void fun_port();//串口初始化
+    extern void fun_zhuajian();//自动抓件
+    extern uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4);//求4个数的最小值
+    extern uc fun_min2(uc par_num1,uc par_num2);//求2个数的最小值
 /*---------------------------------------------------------------更新日志-----*/
 #endif
