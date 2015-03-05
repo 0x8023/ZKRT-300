@@ -1144,11 +1144,10 @@ void fun_zhuajian(
     xdata uc loc_high03;
     xdata uc loc_high47;
     xdata uc loc_high07;
-
     xdata uc loc_xh1,loc_xh2;
 
-    memset(loc_data,0,sizeof(loc_data));
-
+    memset(loc_data,0,sizeof(loc_data));//清空数组
+    //起始区件号
     loc_data[0][1][0]=par_01;//传入形参:区0的第1号件件号(最高位)
     loc_data[0][2][0]=par_02;//传入形参:区0的第2号件件号
     loc_data[0][3][0]=par_03;//传入形参:区0的第3号件件号
@@ -1157,71 +1156,150 @@ void fun_zhuajian(
     loc_data[4][2][0]=par_42;//传入形参:区4的第2号件件号
     loc_data[4][3][0]=par_43;//传入形参:区4的第3号件件号
     loc_data[4][4][0]=par_44;//传入形参:区4的第4号件件号(最低位)
+    //目的区件号
+    loc_data[3][1][0]=par_31;//传入形参:区0的第1号件件号(最高位)
+    loc_data[3][2][0]=par_32;//传入形参:区0的第2号件件号
+    loc_data[3][3][0]=par_33;//传入形参:区0的第3号件件号
+    loc_data[3][4][0]=par_34;//传入形参:区0的第4号件件号(最低位)
+    loc_data[7][1][0]=par_71;//传入形参:区4的第1号件件号(最高位)
+    loc_data[7][2][0]=par_72;//传入形参:区4的第2号件件号
+    loc_data[7][3][0]=par_73;//传入形参:区4的第3号件件号
+    loc_data[7][4][0]=par_74;//传入形参:区4的第4号件件号(最低位)
+    //目的次序
+    loc_data[3][1][1]=1;//标准次序:区3的第1号目的次序号(最高位)
+    loc_data[3][2][1]=2;//标准次序:区3的第2号目的次序号
+    loc_data[3][3][1]=3;//标准次序:区3的第3号目的次序号
+    loc_data[3][4][1]=4;//标准次序:区3的第4号目的次序号(最低位)
+    loc_data[7][1][1]=5;//标准次序:区7的第1号目的次序号(最高位)
+    loc_data[7][2][1]=6;//标准次序:区7的第2号目的次序号
+    loc_data[7][3][1]=7;//标准次序:区7的第3号目的次序号
+    loc_data[7][4][1]=8;//标准次序:区7的第4号目的次序号(最低位)
+    //根据形参统一次序
+    for(loc_xh1=4;loc_xh1>0;loc_xh1--){
+             if((loc_data[0][i][0]==loc_data[3][1][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[3][1][1];
+        else if((loc_data[0][i][0]==loc_data[3][2][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[3][2][1];
+        else if((loc_data[0][i][0]==loc_data[3][3][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[3][3][1];
+        else if((loc_data[0][i][0]==loc_data[3][4][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[3][4][1];
+        else if((loc_data[0][i][0]==loc_data[7][1][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[7][1][1];
+        else if((loc_data[0][i][0]==loc_data[7][2][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[7][2][1];
+        else if((loc_data[0][i][0]==loc_data[7][3][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[7][3][1];
+        else if((loc_data[0][i][0]==loc_data[7][4][0])&&(loc_data[0][i][0]!=0))    loc_data[0][i][1]=loc_data[7][4][1];
 
-    loc_data[3][1][1]=par_31;//传入形参:区3的第1号目的件件号(最高位)
-    loc_data[3][2][1]=par_32;//传入形参:区3的第2号目的件件号
-    loc_data[3][3][1]=par_33;//传入形参:区3的第3号目的件件号
-    loc_data[3][4][1]=par_34;//传入形参:区3的第4号目的件件号(最低位)
-    loc_data[7][1][1]=par_71;//传入形参:区7的第1号目的件件号(最高位)
-    loc_data[7][2][1]=par_72;//传入形参:区7的第2号目的件件号
-    loc_data[7][3][1]=par_73;//传入形参:区7的第3号目的件件号
-    loc_data[7][4][1]=par_74;//传入形参:区7的第4号目的件件号(最低位)
-
-    for(loc_xh1=0;loc_xh1<=7;loc_xh1++){//8个区的循环
+             if((loc_data[4][i][0]==loc_data[3][1][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[3][1][1];
+        else if((loc_data[4][i][0]==loc_data[3][2][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[3][2][1];
+        else if((loc_data[4][i][0]==loc_data[3][3][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[3][3][1];
+        else if((loc_data[4][i][0]==loc_data[3][4][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[3][4][1];
+        else if((loc_data[4][i][0]==loc_data[7][1][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[7][1][1];
+        else if((loc_data[4][i][0]==loc_data[7][2][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[7][2][1];
+        else if((loc_data[4][i][0]==loc_data[7][3][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[7][3][1];
+        else if((loc_data[4][i][0]==loc_data[7][4][0])&&(loc_data[4][i][0]!=0))    loc_data[4][i][1]=loc_data[7][4][1];
+    }
+    //清空形参表(实际件序)
+    for(loc_xh1=0;loc_xh1<=7;loc_xh++)
+        for(loc_xh2=0;loc_xh2<=4;loc_xh2++)
+            loc_data[loc_xh1][loc_xh2][0]=0;
+    //转移04的序号
+    for(loc_xh1=0;loc_xh<=4;loc_xh++){
+        loc_data[0][loc_xh1][0]=loc_data[0][loc_xh1][1];
+        loc_data[4][loc_xh1][0]=loc_data[4][loc_xh1][1];
+    }
+    //目的区除了3.7区全部清零
+    for(loc_xh1=0;loc_xh<=4;loc_xh++){
+        loc_data[0][loc_xh1][1]=0;
+        loc_data[1][loc_xh1][1]=0;
+        loc_data[2][loc_xh1][1]=0;
+        loc_data[4][loc_xh1][1]=0;
+        loc_data[5][loc_xh1][1]=0;
+        loc_data[6][loc_xh1][1]=0;
+    }
+    //8个区的循环
+    for(loc_xh1=0;loc_xh1<=7;loc_xh1++){
         loc_high[loc_xh1]=4;//默认为没有件
-        for(loc_xh2=0;loc_xh2>=4;loc_xh2++){//5个高度的循环
+        for(loc_xh2=0;loc_xh2<=4;loc_xh2++){//5个高度的循环
             if(loc_data[loc_xh1][loc_xh2][0]!=0){//如果放了件了
                 loc_high[loc_xh1]=loc_xh2-1;//记录这个区最高空闲位置
                 break;//继续区的循环
             }
         }
-    }    
-
-    for(i=4;i>0;i--){            //来4个循环,将两摞件的次序统一(据说没有问题)
-        if((shuzu[0][i][0]==shuzu[3][1][0])&&(shuzu[0][i][2]==1))   shuzu[0][i][1]=shuzu[3][1][1];
-        else if((shuzu[0][i][0]==shuzu[3][2][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[3][2][1];
-        else if((shuzu[0][i][0]==shuzu[3][3][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[3][3][1];
-        else if((shuzu[0][i][0]==shuzu[3][4][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[3][4][1];
-        else if((shuzu[0][i][0]==shuzu[7][1][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][1][1];
-        else if((shuzu[0][i][0]==shuzu[7][2][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][2][1];
-        else if((shuzu[0][i][0]==shuzu[7][3][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][3][1];
-        else if((shuzu[0][i][0]==shuzu[7][4][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][4][1];
-
-        if((shuzu[4][i][0]==shuzu[3][1][0])&&(shuzu[4][i][2]==1))   shuzu[4][i][1]=shuzu[3][1][1];
-        else if((shuzu[4][i][0]==shuzu[3][2][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[3][2][1];
-        else if((shuzu[4][i][0]==shuzu[3][3][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[3][3][1];
-        else if((shuzu[4][i][0]==shuzu[3][4][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[3][4][1];
-        else if((shuzu[4][i][0]==shuzu[7][1][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][1][1];
-        else if((shuzu[4][i][0]==shuzu[7][2][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][2][1];
-        else if((shuzu[4][i][0]==shuzu[7][3][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][3][1];
-        else if((shuzu[4][i][0]==shuzu[7][4][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][4][1];
     }
-
-
 
     while(1){
         loc_high03=fun_min4(loc_high[0],loc_high[1],loc_high[2],loc_high[3]);
         loc_high47=fun_min4(loc_high[4],loc_high[5],loc_high[6],loc_high[7]);
         loc_high07=fun_min2(loc_high03,loc_high47);
         if(str_begin.hzfx==dir_left){
-            if(loc_data[0][loc_high[0]][0]==loc_data[3][loc_high[3]][1]){//如果区0最高位等于区3最高位件
-                ;
-            }
-            else if(loc_data[0][loc_high[0]][0]==loc_data[7][loc_high[7]][1]){//如果区0最高位等于区7最高位件
-                ;
-            }
-            else{
-                if(loc_high[1]>=3){//如果区1能放得下,放在区1
+            if(loc_high[0]<4){//如果区0有件
+                if(loc_data[0][loc_high[0]+1][0]==loc_data[3][loc_high[3]][1]){//如果区0最高位等于区3最高位件
                     ;
                 }
-                else{//否则放在区2
+                else if(loc_data[0][loc_high[0]+1][0]==loc_data[7][loc_high[7]][1]){//如果区0最高位等于区7最高位件
+                    ;
+                }
+                else{
+                    if((loc_high[1]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[1][loc_high[1]][0])){//如果区1能放得下,放在区1
+                        ;
+                    }
+                    else{//否则放在区2
+                        ;
+                    }
+                }
+            }
+            else if(loc_high[1]<4){//如果区1有件
+                if(loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1]){//如果区1最高位等于区3最高位件
+                    ;
+                }
+                else if(loc_data[1][loc_high[1]+1][0]==loc_data[7][loc_high[7]][1]){//如果区1最高位等于区7最高位件
+                    ;
+                }
+                else if(loc_data[1][loc_high[1]+1][0]>loc_data[2][loc_high[2]][0]){//如果区2能放得下,放在区2
                     ;
                 }
             }
-            if()
+            else if(loc_high[2]<4){//如果区2有件
+                if(loc_data[2][loc_high[2]+1][0]==loc_data[3][loc_high[3]][1]){//如果区2最高位等于区3最高位件
+                    ;
+                }
+                else if(loc_data[2][loc_high[2]+1][0]==loc_data[7][loc_high[7]][1]){//如果区2最高位等于区7最高位件
+                    ;
+                }
+            }
         }
         else if(str_begin.hzfx==dir_right){
-            ;
+            if(loc_high[4]<4){//如果区4有件
+                if(loc_data[4][loc_high[4]+1][0]==loc_data[7][loc_high[7]][1]){//如果区4最高位等于区7最高位件
+                    ;
+                }
+                else if(loc_data[4][loc_high[4]+1][0]==loc_data[3][loc_high[3]][1]){//如果区4最高位等于区3最高位件
+                    ;
+                }
+                else{
+                    if((loc_high[6]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[6][loc_high[6]][0])){//如果区6能放得下,放在区6
+                        ;
+                    }
+                    else{//否则放在区5
+                        ;
+                    }
+                }
+            }
+            else if(loc_high[5]<4){//如果区5有件
+                if(loc_data[5][loc_high[5]+1][0]==loc_data[7][loc_high[7]][1]){//如果区5最高位等于区7最高位件
+                    ;
+                }
+                else if(loc_data[5][loc_high[5]+1][0]==loc_data[3][loc_high[3]][1]){//如果区5最高位等于区3最高位件
+                    ;
+                }
+                else if(loc_data[5][loc_high[5]+1][0]>loc_data[6][loc_high[6]][0]){//如果区6能放得下,放在区6
+                    ;
+                }
+            }
+            else if(loc_high[6]<4){//如果区6有件
+                if(loc_data[6][loc_high[6]+1][0]==loc_data[7][loc_high[7]][1]){//如果区6最高位等于区7最高位件
+                    ;
+                }
+                else if(loc_data[6][loc_high[6]+1][0]==loc_data[3][loc_high[3]][1]){//如果区6最高位等于区3最高位件
+                    ;
+                }
+            }
         }
     }
 }
@@ -1241,7 +1319,7 @@ uc fun_min2(uc par_num1,uc par_num2){
 
 // void superzhuajian(uc LA1,uc LA2,uc LA3,uc LA4,uc RA1,uc RA2,uc RA3,uc RA4)
 // {
-//     uc xdata shuzu[8][5][3];
+//     uc xdata loc_data[8][5][3];
 //     uc xdata data0high=1;
 //     uc xdata data1high=4;
 //     uc xdata data2high=4;
@@ -1259,51 +1337,51 @@ uc fun_min2(uc par_num1,uc par_num2){
 //     uc xdata hzwz_1=0;
 //     uc xdata hzwz_3=0;
 
-//     memset(shuzu,0,sizeof(shuzu));
+//     memset(loc_data,0,sizeof(loc_data));
 
-//     shuzu[3][4][1]=1;shuzu[3][3][1]=2;shuzu[3][2][1]=3;shuzu[3][1][1]=4;//区3的次序从上到下依次为4.3.2.1(不变)
-//     shuzu[7][4][1]=5;shuzu[7][3][1]=6;shuzu[7][2][1]=7;shuzu[7][1][1]=8;//区7的次序从上到下依次为5.6.7.8(不变)
-//     shuzu[0][1][2]=1;shuzu[0][2][2]=1;shuzu[0][3][2]=1;shuzu[0][4][2]=1;//区0已经摞满件
-//     shuzu[4][1][2]=1;shuzu[4][2][2]=1;shuzu[4][3][2]=1;shuzu[4][4][2]=1;//区4已经摞满件
+//     loc_data[3][4][1]=1;loc_data[3][3][1]=2;loc_data[3][2][1]=3;loc_data[3][1][1]=4;//区3的次序从上到下依次为4.3.2.1(不变)
+//     loc_data[7][4][1]=5;loc_data[7][3][1]=6;loc_data[7][2][1]=7;loc_data[7][1][1]=8;//区7的次序从上到下依次为5.6.7.8(不变)
+//     loc_data[0][1][2]=1;loc_data[0][2][2]=1;loc_data[0][3][2]=1;loc_data[0][4][2]=1;//区0已经摞满件
+//     loc_data[4][1][2]=1;loc_data[4][2][2]=1;loc_data[4][3][2]=1;loc_data[4][4][2]=1;//区4已经摞满件
 //     //区0的件序从上到下依次为以下值(改这里改这里~~)
-//     shuzu[0][1][0]=LA1;
-//     shuzu[0][2][0]=LA2;
-//     shuzu[0][3][0]=LA3;
-//     shuzu[0][4][0]=LA4;
+//     loc_data[0][1][0]=LA1;
+//     loc_data[0][2][0]=LA2;
+//     loc_data[0][3][0]=LA3;
+//     loc_data[0][4][0]=LA4;
 //     //区3的件序从上到下依次为以下值(改这里改这里~~)
-//     shuzu[3][1][0]=jianxu[0];
-//     shuzu[3][2][0]=jianxu[1];
-//     shuzu[3][3][0]=jianxu[2];
-//     shuzu[3][4][0]=jianxu[3];
+//     loc_data[3][1][0]=jianxu[0];
+//     loc_data[3][2][0]=jianxu[1];
+//     loc_data[3][3][0]=jianxu[2];
+//     loc_data[3][4][0]=jianxu[3];
 //     //区4的件序从上到下依次为以下值(改这里改这里~~)
-//     shuzu[4][1][0]=RA1;
-//     shuzu[4][2][0]=RA2;
-//     shuzu[4][3][0]=RA3;
-//     shuzu[4][4][0]=RA4;
+//     loc_data[4][1][0]=RA1;
+//     loc_data[4][2][0]=RA2;
+//     loc_data[4][3][0]=RA3;
+//     loc_data[4][4][0]=RA4;
 //     //区7的件序从上到下依次为以下值(改这里改这里~~)
-//     shuzu[7][1][0]=jianxu[4];
-//     shuzu[7][2][0]=jianxu[5];
-//     shuzu[7][3][0]=jianxu[6];
-//     shuzu[7][4][0]=jianxu[7];
+//     loc_data[7][1][0]=jianxu[4];
+//     loc_data[7][2][0]=jianxu[5];
+//     loc_data[7][3][0]=jianxu[6];
+//     loc_data[7][4][0]=jianxu[7];
 //     for(i=4;i>0;i--)            //来4个循环,将两摞件的次序统一(据说没有问题)
 //     {
-//         if((shuzu[0][i][0]==shuzu[3][1][0])&&(shuzu[0][i][2]==1))   shuzu[0][i][1]=shuzu[3][1][1];
-//         else if((shuzu[0][i][0]==shuzu[3][2][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[3][2][1];
-//         else if((shuzu[0][i][0]==shuzu[3][3][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[3][3][1];
-//         else if((shuzu[0][i][0]==shuzu[3][4][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[3][4][1];
-//         else if((shuzu[0][i][0]==shuzu[7][1][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][1][1];
-//         else if((shuzu[0][i][0]==shuzu[7][2][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][2][1];
-//         else if((shuzu[0][i][0]==shuzu[7][3][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][3][1];
-//         else if((shuzu[0][i][0]==shuzu[7][4][0])&&(shuzu[0][i][2]==1))  shuzu[0][i][1]=shuzu[7][4][1];
+//         if((loc_data[0][i][0]==loc_data[3][1][0])&&(loc_data[0][i][2]==1))   loc_data[0][i][1]=loc_data[3][1][1];
+//         else if((loc_data[0][i][0]==loc_data[3][2][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[3][2][1];
+//         else if((loc_data[0][i][0]==loc_data[3][3][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[3][3][1];
+//         else if((loc_data[0][i][0]==loc_data[3][4][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[3][4][1];
+//         else if((loc_data[0][i][0]==loc_data[7][1][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[7][1][1];
+//         else if((loc_data[0][i][0]==loc_data[7][2][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[7][2][1];
+//         else if((loc_data[0][i][0]==loc_data[7][3][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[7][3][1];
+//         else if((loc_data[0][i][0]==loc_data[7][4][0])&&(loc_data[0][i][2]==1))  loc_data[0][i][1]=loc_data[7][4][1];
 
-//         if((shuzu[4][i][0]==shuzu[3][1][0])&&(shuzu[4][i][2]==1))   shuzu[4][i][1]=shuzu[3][1][1];
-//         else if((shuzu[4][i][0]==shuzu[3][2][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[3][2][1];
-//         else if((shuzu[4][i][0]==shuzu[3][3][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[3][3][1];
-//         else if((shuzu[4][i][0]==shuzu[3][4][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[3][4][1];
-//         else if((shuzu[4][i][0]==shuzu[7][1][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][1][1];
-//         else if((shuzu[4][i][0]==shuzu[7][2][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][2][1];
-//         else if((shuzu[4][i][0]==shuzu[7][3][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][3][1];
-//         else if((shuzu[4][i][0]==shuzu[7][4][0])&&(shuzu[4][i][2]==1))  shuzu[4][i][1]=shuzu[7][4][1];
+//         if((loc_data[4][i][0]==loc_data[3][1][0])&&(loc_data[4][i][2]==1))   loc_data[4][i][1]=loc_data[3][1][1];
+//         else if((loc_data[4][i][0]==loc_data[3][2][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[3][2][1];
+//         else if((loc_data[4][i][0]==loc_data[3][3][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[3][3][1];
+//         else if((loc_data[4][i][0]==loc_data[3][4][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[3][4][1];
+//         else if((loc_data[4][i][0]==loc_data[7][1][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[7][1][1];
+//         else if((loc_data[4][i][0]==loc_data[7][2][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[7][2][1];
+//         else if((loc_data[4][i][0]==loc_data[7][3][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[7][3][1];
+//         else if((loc_data[4][i][0]==loc_data[7][4][0])&&(loc_data[4][i][2]==1))  loc_data[4][i][1]=loc_data[7][4][1];
 //     }
 //     XSWZ1 S
 
@@ -1314,9 +1392,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //             highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //             highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //             highmax=min2(highmax03,highmax47);//求全局最高位
-//             if((shuzu[0][1][2]==1)||(shuzu[0][2][2]==1)||(shuzu[0][3][2]==1)||(shuzu[0][4][2]==1))//如果区0有件
+//             if((loc_data[0][1][2]==1)||(loc_data[0][2][2]==1)||(loc_data[0][3][2]==1)||(loc_data[0][4][2]==1))//如果区0有件
 //             {
-//                 if(shuzu[0][data0high][1]==shuzu[3][data3high][1])//如果和区3的件次序相同，则移到区3
+//                 if(loc_data[0][data0high][1]==loc_data[3][data3high][1])//如果和区3的件次序相同，则移到区3
 //                 {
 //                     sjdj(highmax03-1);//上升到03方最高位
 //                     zhuajianweizhi(0);//抓件位置0
@@ -1326,12 +1404,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(3);//抓件位置3
 //                     sjdj(data3high);//下降到区3最高位
 //                     S//松件
-//                     shuzu[0][data0high][2]=0;//区0最高位件已被拿走
-//                     shuzu[3][data3high][2]=1;//区3最高位已经放上件
+//                     loc_data[0][data0high][2]=0;//区0最高位件已被拿走
+//                     loc_data[3][data3high][2]=1;//区3最高位已经放上件
 //                     data0high=data0high+1;//更新区0最高位
 //                     data3high=data3high-1;//更新区3最高位
 //                 }
-//                 else if(shuzu[0][data0high][1]==shuzu[7][data7high][1])//如果和区7的件次序相同，则移到区7
+//                 else if(loc_data[0][data0high][1]==loc_data[7][data7high][1])//如果和区7的件次序相同，则移到区7
 //                 {
 //                     sjdj(highmax-1);//上升到全局最高位
 //                     zhuajianweizhi(0);//抓件位置0
@@ -1341,16 +1419,16 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(7);//抓件位置7
 //                     sjdj(data7high);//向下到区7最高位
 //                     S//松件
-//                     shuzu[0][data0high][2]=0;//区0最高位件已被拿走
-//                     shuzu[7][data7high][2]=1;//区7最高位已经放上件
+//                     loc_data[0][data0high][2]=0;//区0最高位件已被拿走
+//                     loc_data[7][data7high][2]=1;//区7最高位已经放上件
 //                     data0high=data0high+1;//更新区0最高位
 //                     data7high=data7high-1;//更新区7最高位
 //                 }
-//                 else if((shuzu[0][data0high][1]!=shuzu[3][data3high][1])&&(shuzu[0][data0high][1]!=shuzu[7][data7high][1]))//如果区0最高位件的件序与区3和区7最高位件都不一样
+//                 else if((loc_data[0][data0high][1]!=loc_data[3][data3high][1])&&(loc_data[0][data0high][1]!=loc_data[7][data7high][1]))//如果区0最高位件的件序与区3和区7最高位件都不一样
 //                 {
-//                     if((shuzu[0][data0high][1]==shuzu[3][4][1])||(shuzu[0][data0high][1]==shuzu[3][3][1])||(shuzu[0][data0high][1]==shuzu[3][2][1])||(shuzu[0][data0high][1]==shuzu[3][1][1]))
+//                     if((loc_data[0][data0high][1]==loc_data[3][4][1])||(loc_data[0][data0high][1]==loc_data[3][3][1])||(loc_data[0][data0high][1]==loc_data[3][2][1])||(loc_data[0][data0high][1]==loc_data[3][1][1]))
 //                     {
-//                         if((shuzu[1][4][2]==0||shuzu[0][data0high][1]<shuzu[1][data1high+1][1])&&(data1high>2))//如果区1没放件或者区0最高位件次序小于区1最高位次序而且区1放了不超过3个件
+//                         if((loc_data[1][4][2]==0||loc_data[0][data0high][1]<loc_data[1][data1high+1][1])&&(data1high>2))//如果区1没放件或者区0最高位件次序小于区1最高位次序而且区1放了不超过3个件
 //                         {
 //                             sjdj(highmax03-1);//上升到03方最高位
 //                             zhuajianweizhi(0);//抓件位置0
@@ -1360,13 +1438,13 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(1);//抓件位置1
 //                             sjdj(data1high);//向下到区1最高位
 //                             S//松件
-//                             shuzu[0][data0high][2]=0;//区0的件已经被拿走
-//                             shuzu[1][data1high][2]=1;//区1最高位已经放上件
-//                             shuzu[1][data1high][1]=shuzu[0][data0high][1];//区1放上的件就是区0拿过来的件
+//                             loc_data[0][data0high][2]=0;//区0的件已经被拿走
+//                             loc_data[1][data1high][2]=1;//区1最高位已经放上件
+//                             loc_data[1][data1high][1]=loc_data[0][data0high][1];//区1放上的件就是区0拿过来的件
 //                             data0high=data0high+1;//更新区0最高位
 //                             data1high=data1high-1;//更新区1最高位
 //                         }
-//                         else if((shuzu[2][4][2]==0||shuzu[0][data0high][1]<shuzu[2][data2high+1][1])&&(data2high>2))//如果区2没放件或者区0最高位件次序小于区2最高位次序而且区2放了不超过3个件
+//                         else if((loc_data[2][4][2]==0||loc_data[0][data0high][1]<loc_data[2][data2high+1][1])&&(data2high>2))//如果区2没放件或者区0最高位件次序小于区2最高位次序而且区2放了不超过3个件
 //                         {
 //                             sjdj(highmax03-1);//上升到03方最高位
 //                             zhuajianweizhi(0);//抓件位置0
@@ -1376,16 +1454,16 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(2);//抓件位置1
 //                             sjdj(data2high);//向下到区1最高位
 //                             S//松件
-//                             shuzu[0][data0high][2]=0;//区0的件已经被拿走
-//                             shuzu[2][data2high][2]=1;//区2最高位已经放上件
-//                             shuzu[2][data2high][1]=shuzu[0][data0high][1];//区2放上的件就是区0拿过来的件
+//                             loc_data[0][data0high][2]=0;//区0的件已经被拿走
+//                             loc_data[2][data2high][2]=1;//区2最高位已经放上件
+//                             loc_data[2][data2high][1]=loc_data[0][data0high][1];//区2放上的件就是区0拿过来的件
 //                             data0high=data0high+1;//更新区0最高位
 //                             data2high=data2high-1;//更新区2最高位
 //                         }
 //                     }
-//                     else if((shuzu[0][data0high][1]==shuzu[7][4][1])||(shuzu[0][data0high][1]==shuzu[7][3][1])||(shuzu[0][data0high][1]==shuzu[7][2][1])||(shuzu[0][data0high][1]==shuzu[7][1][1]))
+//                     else if((loc_data[0][data0high][1]==loc_data[7][4][1])||(loc_data[0][data0high][1]==loc_data[7][3][1])||(loc_data[0][data0high][1]==loc_data[7][2][1])||(loc_data[0][data0high][1]==loc_data[7][1][1]))
 //                     {
-//                         if(((shuzu[5][4][2]==0)||(shuzu[0][data0high][1]<shuzu[5][data5high+1][1]))&&(data5high>2))//如果区5没放件或者区0最高位件次序小于区5最高位次序而且区5放了不超过3个件
+//                         if(((loc_data[5][4][2]==0)||(loc_data[0][data0high][1]<loc_data[5][data5high+1][1]))&&(data5high>2))//如果区5没放件或者区0最高位件次序小于区5最高位次序而且区5放了不超过3个件
 //                         {
 //                             sjdj(highmax-1);//上升到全局最高位
 //                             zhuajianweizhi(0);//抓件位置0
@@ -1395,13 +1473,13 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(5);//抓件位置5
 //                             sjdj(data5high);//向下到区5最高位
 //                             S//松件
-//                             shuzu[0][data0high][2]=0;//区0的件已经被拿走
-//                             shuzu[5][data5high][2]=1;//区5最高位已经放上件
-//                             shuzu[5][data5high][1]=shuzu[0][data0high][1];//区5放上的件就是区0拿过来的件
+//                             loc_data[0][data0high][2]=0;//区0的件已经被拿走
+//                             loc_data[5][data5high][2]=1;//区5最高位已经放上件
+//                             loc_data[5][data5high][1]=loc_data[0][data0high][1];//区5放上的件就是区0拿过来的件
 //                             data0high=data0high+1;//更新区0最高位
 //                             data5high=data5high-1;//更新区5最高位
 //                         }
-//                         else if(((shuzu[6][4][2]==0)||(shuzu[0][data0high][1]<shuzu[6][data6high+1][1]))&&(data6high>2))//如果区6没放件或者区0最高位件次序小于区6最高位次序而且区6放了不超过3个件
+//                         else if(((loc_data[6][4][2]==0)||(loc_data[0][data0high][1]<loc_data[6][data6high+1][1]))&&(data6high>2))//如果区6没放件或者区0最高位件次序小于区6最高位次序而且区6放了不超过3个件
 //                         {
 //                             sjdj(highmax-1);//上升到全局最高位
 //                             zhuajianweizhi(0);//抓件位置0
@@ -1411,9 +1489,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(6);//抓件位置6
 //                             sjdj(data6high);//向下到区6最高位
 //                             S//松件
-//                             shuzu[0][data0high][2]=0;//区0的件已经被拿走
-//                             shuzu[6][data6high][2]=1;//区6最高位已经放上件
-//                             shuzu[6][data6high][1]=shuzu[0][data0high][1];//区6放上的件就是区0拿过来的件
+//                             loc_data[0][data0high][2]=0;//区0的件已经被拿走
+//                             loc_data[6][data6high][2]=1;//区6最高位已经放上件
+//                             loc_data[6][data6high][1]=loc_data[0][data0high][1];//区6放上的件就是区0拿过来的件
 //                             data0high=data0high+1;//更新区0最高位
 //                             data6high=data6high-1;//更新区6最高位
 //                         }
@@ -1423,9 +1501,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //             highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //             highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //             highmax=min2(highmax03,highmax47);//求全局最高位
-//             if((shuzu[1][1][2]==1)||(shuzu[1][2][2]==1)||(shuzu[1][3][2]==1)||(shuzu[1][4][2]==1))//如果区1有件
+//             if((loc_data[1][1][2]==1)||(loc_data[1][2][2]==1)||(loc_data[1][3][2]==1)||(loc_data[1][4][2]==1))//如果区1有件
 //             {
-//                 if(shuzu[1][data1high+1][1]==shuzu[3][data3high][1])//区1最高位件次序等于区3最高位件的次序
+//                 if(loc_data[1][data1high+1][1]==loc_data[3][data3high][1])//区1最高位件次序等于区3最高位件的次序
 //                 {
 //                     sjdj(highmax03-1);//上升到03方最高位
 //                     zhuajianweizhi(1);//抓件位置1
@@ -1435,12 +1513,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(3);//抓件位置3
 //                     sjdj(data3high);//向下到区3最高位
 //                     S//松件
-//                     shuzu[1][data1high+1][2]=0;//区1最高位件已被拿走
-//                     shuzu[3][data3high][2]=1;//区3最高位已经放上件
+//                     loc_data[1][data1high+1][2]=0;//区1最高位件已被拿走
+//                     loc_data[3][data3high][2]=1;//区3最高位已经放上件
 //                     data1high=data1high+1;//更新区1最高位
 //                     data3high=data3high-1;//更新区3最高位
 //                 }
-//                 else if(shuzu[1][data1high+1][1]==shuzu[7][data7high][1])//区1最高位件次序等于区7最高位件的次序
+//                 else if(loc_data[1][data1high+1][1]==loc_data[7][data7high][1])//区1最高位件次序等于区7最高位件的次序
 //                 {
 //                     sjdj(highmax-1);//上升到全局最高位
 //                     zhuajianweizhi(1);//抓件位置1
@@ -1450,8 +1528,8 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(7);//抓件位置7
 //                     sjdj(data7high);//向下到区7最高位
 //                     S//松件
-//                     shuzu[1][data1high+1][2]=0;//区1最高位件已被拿走
-//                     shuzu[7][data7high][2]=1;//区7最高位已经放上件
+//                     loc_data[1][data1high+1][2]=0;//区1最高位件已被拿走
+//                     loc_data[7][data7high][2]=1;//区7最高位已经放上件
 //                     data1high=data1high+1;//更新区1最高位
 //                     data7high=data7high-1;//更新区7最高位
 //                 }
@@ -1459,9 +1537,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //             highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //             highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //             highmax=min2(highmax03,highmax47);//求全局最高位
-//             if((shuzu[2][1][2]==1)||(shuzu[2][2][2]==1)||(shuzu[2][3][2]==1)||(shuzu[2][4][2]==1))//如果区2有件
+//             if((loc_data[2][1][2]==1)||(loc_data[2][2][2]==1)||(loc_data[2][3][2]==1)||(loc_data[2][4][2]==1))//如果区2有件
 //             {
-//                 if(shuzu[2][data2high+1][1]==shuzu[3][data3high][1])//区2最高位件次序等于区3最高位件的次序
+//                 if(loc_data[2][data2high+1][1]==loc_data[3][data3high][1])//区2最高位件次序等于区3最高位件的次序
 //                 {
 //                     sjdj(highmax03-1);//上升到03方最高位
 //                     zhuajianweizhi(2);//抓件位置2
@@ -1471,12 +1549,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(3);//抓件位置3
 //                     sjdj(data3high);//下降到区3最高位
 //                     S//手抓松
-//                     shuzu[2][data2high+1][2]=0;//区2最高位件已经被拿走
-//                     shuzu[3][data3high][2]=1;//区3最高位已经放上件
+//                     loc_data[2][data2high+1][2]=0;//区2最高位件已经被拿走
+//                     loc_data[3][data3high][2]=1;//区3最高位已经放上件
 //                     data2high=data2high+1;//更新区2最高位
 //                     data3high=data3high-1;//更新区3最高位
 //                 }
-//                 else if(shuzu[2][data2high+1][1]==shuzu[7][data7high][1])//区2最高位件次序等于区7最高位件的次序
+//                 else if(loc_data[2][data2high+1][1]==loc_data[7][data7high][1])//区2最高位件次序等于区7最高位件的次序
 //                 {
 //                     sjdj(highmax-1);//上升到全局最高位
 //                     zhuajianweizhi(2);//抓件位置2
@@ -1486,17 +1564,17 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(7);//抓件位置7
 //                     sjdj(data7high);//向下到区7最高位
 //                     S//松件
-//                     shuzu[2][data2high+1][2]=0;//区2最高位件已被拿走
-//                     shuzu[7][data7high][2]=1;//区7最高位已经放上件
+//                     loc_data[2][data2high+1][2]=0;//区2最高位件已被拿走
+//                     loc_data[7][data7high][2]=1;//区7最高位已经放上件
 //                     data2high=data2high+1;//更新区2最高位
 //                     data7high=data7high-1;//更新区7最高位
 //                 }
 //             }
-//             else if(((shuzu[2][1][2]==1)||(shuzu[2][2][2]==1)||(shuzu[2][3][2]==1)||(shuzu[2][4][2]==1))&&((shuzu[1][1][2]==1)||(shuzu[1][2][2]==1)||(shuzu[1][3][2]==1)||(shuzu[1][4][2]==1)))///如果区1区2都有件
+//             else if(((loc_data[2][1][2]==1)||(loc_data[2][2][2]==1)||(loc_data[2][3][2]==1)||(loc_data[2][4][2]==1))&&((loc_data[1][1][2]==1)||(loc_data[1][2][2]==1)||(loc_data[1][3][2]==1)||(loc_data[1][4][2]==1)))///如果区1区2都有件
 //             {
-//                 if((shuzu[0][data0high][1]>shuzu[2][data2high+1][1])&&(shuzu[0][data0high][1]>shuzu[1][data1high+1][1]))//如果区0的件比区1和区2的都大
+//                 if((loc_data[0][data0high][1]>loc_data[2][data2high+1][1])&&(loc_data[0][data0high][1]>loc_data[1][data1high+1][1]))//如果区0的件比区1和区2的都大
 //                 {
-//                     if(shuzu[1][data1high+1][1]<shuzu[2][data2high+1][1])//如果区1最高位的件小于区2最高位的件
+//                     if(loc_data[1][data1high+1][1]<loc_data[2][data2high+1][1])//如果区1最高位的件小于区2最高位的件
 //                     {
 //                         sjdj(highmax03-1);//上升到03最高位
 //                         zhuajianweizhi(1);//抓件位置1
@@ -1506,13 +1584,13 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                         zhuajianweizhi(2);//抓件位置2
 //                         sjdj(data2high);//向下到抓件位置2的最高位
 //                         S//松开手抓
-//                         shuzu[1][data1high+1][2]=0;//区1最高位件已被拿走
-//                         shuzu[2][data2high][2]=1;//区2最高位已经放上件
-//                         shuzu[2][data2high][1]=shuzu[1][data1high+1][1];//区2放上的件就是区1拿来的件
+//                         loc_data[1][data1high+1][2]=0;//区1最高位件已被拿走
+//                         loc_data[2][data2high][2]=1;//区2最高位已经放上件
+//                         loc_data[2][data2high][1]=loc_data[1][data1high+1][1];//区2放上的件就是区1拿来的件
 //                         data1high=data1high+1;//更新区1最高位
 //                         data2high=data2high-1;//更新区2最高位
 //                     }
-//                     else if(shuzu[2][data2high+1][1]<shuzu[1][data1high+1][1])//如果区2最高位的件小于区1最高位的件
+//                     else if(loc_data[2][data2high+1][1]<loc_data[1][data1high+1][1])//如果区2最高位的件小于区1最高位的件
 //                     {
 //                         sjdj(highmax03-1);//上升到03最高位
 //                         zhuajianweizhi(2);//抓件位置2
@@ -1522,9 +1600,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                         zhuajianweizhi(1);//抓件位置1
 //                         sjdj(data1high);//向下到抓件位置1的最高位
 //                         S//松开手抓
-//                         shuzu[2][data2high+1][2]=0;//区2最高位件已被拿走
-//                         shuzu[1][data1high][2]=1;//区1最高位已经放上件
-//                         shuzu[1][data1high][1]=shuzu[2][data2high+1][1];//区1最高位放上的件就是区2拿来的件
+//                         loc_data[2][data2high+1][2]=0;//区2最高位件已被拿走
+//                         loc_data[1][data1high][2]=1;//区1最高位已经放上件
+//                         loc_data[1][data1high][1]=loc_data[2][data2high+1][1];//区1最高位放上的件就是区2拿来的件
 //                         data2high=data2high+1;//更新区2最高位
 //                         data1high=data1high-1;//更新区1最高位
 //                     }
@@ -1543,9 +1621,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //             highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //             highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //             highmax=min2(highmax03,highmax47);//求全局最高位
-//             if((shuzu[4][1][2]==1)||(shuzu[4][2][2]==1)||(shuzu[4][3][2]==1)||(shuzu[4][4][2]==1))//如果区4有件
+//             if((loc_data[4][1][2]==1)||(loc_data[4][2][2]==1)||(loc_data[4][3][2]==1)||(loc_data[4][4][2]==1))//如果区4有件
 //             {
-//                 if(shuzu[4][data4high][1]==shuzu[7][data7high][1])//如果和区7的件次序相同，则移到区7
+//                 if(loc_data[4][data4high][1]==loc_data[7][data7high][1])//如果和区7的件次序相同，则移到区7
 //                 {
 //                     sjdj(highmax47-1);//上升到47方最高位
 //                     zhuajianweizhi(4);//抓件位置4
@@ -1555,12 +1633,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(7);//抓件位置7
 //                     sjdj(data7high);//下降到区7最高位
 //                     S//松件
-//                     shuzu[4][data4high][2]=0;//区4最高位件已被拿走
-//                     shuzu[7][data7high][2]=1;//区7最高位已经放上件
+//                     loc_data[4][data4high][2]=0;//区4最高位件已被拿走
+//                     loc_data[7][data7high][2]=1;//区7最高位已经放上件
 //                     data4high=data4high+1;//更新区4最高位
 //                     data7high=data7high-1;//更新区7最高位
 //                 }
-//                 else if(shuzu[4][data4high][1]==shuzu[3][data3high][1])//如果和区3的件次序相同，则移到区3
+//                 else if(loc_data[4][data4high][1]==loc_data[3][data3high][1])//如果和区3的件次序相同，则移到区3
 //                 {
 //                     sjdj(highmax-1);//上升到全局最高位
 //                     zhuajianweizhi(4);//抓件位置4
@@ -1570,16 +1648,16 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(3);//抓件位置3
 //                     sjdj(data3high);//向下到区3最高位
 //                     S//松件
-//                     shuzu[4][data4high][2]=0;//区4最高位件已被拿走
-//                     shuzu[3][data3high][2]=1;//区3最高位已经放上件
+//                     loc_data[4][data4high][2]=0;//区4最高位件已被拿走
+//                     loc_data[3][data3high][2]=1;//区3最高位已经放上件
 //                     data4high=data4high+1;//更新区4最高位
 //                     data3high=data3high-1;//更新区3最高位
 //                 }
-//                 else if((shuzu[4][data4high][1]!=shuzu[7][data7high][1])&&(shuzu[4][data4high][1]!=shuzu[7][data7high][1]))//如果区4最高位件的件序与区7和区3最高位件都不一样
+//                 else if((loc_data[4][data4high][1]!=loc_data[7][data7high][1])&&(loc_data[4][data4high][1]!=loc_data[7][data7high][1]))//如果区4最高位件的件序与区7和区3最高位件都不一样
 //                 {
-//                     if((shuzu[4][data4high][1]==shuzu[7][4][1])||(shuzu[4][data4high][1]==shuzu[7][3][1])||(shuzu[4][data4high][1]==shuzu[7][2][1])||(shuzu[4][data4high][1]==shuzu[7][1][1]))
+//                     if((loc_data[4][data4high][1]==loc_data[7][4][1])||(loc_data[4][data4high][1]==loc_data[7][3][1])||(loc_data[4][data4high][1]==loc_data[7][2][1])||(loc_data[4][data4high][1]==loc_data[7][1][1]))
 //                     {
-//                         if((shuzu[5][4][2]==0||shuzu[4][data4high][1]<shuzu[5][data5high+1][1])&&(data5high>2))//如果区5没放件或者区4最高位件次序小于区5最高位次序而且区5放了不超过3个件
+//                         if((loc_data[5][4][2]==0||loc_data[4][data4high][1]<loc_data[5][data5high+1][1])&&(data5high>2))//如果区5没放件或者区4最高位件次序小于区5最高位次序而且区5放了不超过3个件
 //                         {
 //                             sjdj(highmax47-1);//上升到47方最高位
 //                             zhuajianweizhi(4);//抓件位置4
@@ -1589,13 +1667,13 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(5);//抓件位置5
 //                             sjdj(data5high);//向下到区5最高位
 //                             S//松件
-//                             shuzu[4][data4high][2]=0;//区4的件已经被拿走
-//                             shuzu[5][data5high][2]=1;//区5最高位已经放上件
-//                             shuzu[5][data5high][1]=shuzu[4][data4high][1];//区5放上的件就是区4拿过来的件
+//                             loc_data[4][data4high][2]=0;//区4的件已经被拿走
+//                             loc_data[5][data5high][2]=1;//区5最高位已经放上件
+//                             loc_data[5][data5high][1]=loc_data[4][data4high][1];//区5放上的件就是区4拿过来的件
 //                             data4high=data4high+1;//更新区4最高位
 //                             data5high=data5high-1;//更新区5最高位
 //                         }
-//                         else if((shuzu[6][4][2]==0||shuzu[4][data4high][1]<shuzu[6][data6high+1][1])&&(data6high>2))//如果区6没放件或者区4最高位件次序小于区6最高位次序而且区6放了不超过3个件
+//                         else if((loc_data[6][4][2]==0||loc_data[4][data4high][1]<loc_data[6][data6high+1][1])&&(data6high>2))//如果区6没放件或者区4最高位件次序小于区6最高位次序而且区6放了不超过3个件
 //                         {
 //                             sjdj(highmax47-1);//上升到47方最高位
 //                             zhuajianweizhi(4);//抓件位置4
@@ -1605,16 +1683,16 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(6);//抓件位置6
 //                             sjdj(data6high);//向下到区6最高位
 //                             S//松件
-//                             shuzu[4][data4high][2]=0;//区4的件已经被拿走
-//                             shuzu[6][data6high][2]=1;//区6最高位已经放上件
-//                             shuzu[6][data6high][1]=shuzu[4][data4high][1];//区6放上的件就是区4拿过来的件
+//                             loc_data[4][data4high][2]=0;//区4的件已经被拿走
+//                             loc_data[6][data6high][2]=1;//区6最高位已经放上件
+//                             loc_data[6][data6high][1]=loc_data[4][data4high][1];//区6放上的件就是区4拿过来的件
 //                             data4high=data4high+1;//更新区4最高位
 //                             data6high=data6high-1;//更新区6最高位
 //                         }
 //                     }
-//                     else if((shuzu[4][data4high][1]==shuzu[3][4][1])||(shuzu[4][data4high][1]==shuzu[3][3][1])||(shuzu[4][data4high][1]==shuzu[3][2][1])||(shuzu[4][data4high][1]==shuzu[3][1][1]))
+//                     else if((loc_data[4][data4high][1]==loc_data[3][4][1])||(loc_data[4][data4high][1]==loc_data[3][3][1])||(loc_data[4][data4high][1]==loc_data[3][2][1])||(loc_data[4][data4high][1]==loc_data[3][1][1]))
 //                     {
-//                         if((shuzu[1][4][2]==0||shuzu[4][data4high][1]<shuzu[1][data1high+1][1])&&(data1high>2))//如果区1没放件或者区4最高位件次序小于区1最高位次序而且区1放了不超过3个件
+//                         if((loc_data[1][4][2]==0||loc_data[4][data4high][1]<loc_data[1][data1high+1][1])&&(data1high>2))//如果区1没放件或者区4最高位件次序小于区1最高位次序而且区1放了不超过3个件
 //                         {
 //                             sjdj(highmax-1);//上升到全局最高位
 //                             zhuajianweizhi(4);//抓件位置4
@@ -1624,13 +1702,13 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(1);//抓件位置1
 //                             sjdj(data1high);//向下到区1最高位
 //                             S//松件
-//                             shuzu[4][data4high][2]=0;//区4的件已经被拿走
-//                             shuzu[1][data1high][2]=1;//区1最高位已经放上件
-//                             shuzu[1][data1high][1]=shuzu[4][data4high][1];//区1放上的件就是区4拿过来的件
+//                             loc_data[4][data4high][2]=0;//区4的件已经被拿走
+//                             loc_data[1][data1high][2]=1;//区1最高位已经放上件
+//                             loc_data[1][data1high][1]=loc_data[4][data4high][1];//区1放上的件就是区4拿过来的件
 //                             data4high=data4high+1;//更新区4最高位
 //                             data1high=data1high-1;//更新区1最高位
 //                         }
-//                         else if((shuzu[2][4][2]==0||shuzu[4][data4high][1]<shuzu[2][data2high+1][1])&&(data2high>2))//如果区2没放件或者区4最高位件次序小于区2最高位次序而且区2放了不超过3个件
+//                         else if((loc_data[2][4][2]==0||loc_data[4][data4high][1]<loc_data[2][data2high+1][1])&&(data2high>2))//如果区2没放件或者区4最高位件次序小于区2最高位次序而且区2放了不超过3个件
 //                         {
 //                             sjdj(highmax-1);//上升到全局最高位
 //                             zhuajianweizhi(4);//抓件位置4
@@ -1640,9 +1718,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                             zhuajianweizhi(2);//抓件位置2
 //                             sjdj(data2high);//向下到区2最高位
 //                             S//松件
-//                             shuzu[4][data4high][2]=0;//区4的件已经被拿走
-//                             shuzu[2][data2high][2]=1;//区2最高位已经放上件
-//                             shuzu[2][data2high][1]=shuzu[4][data4high][1];//区2放上的件就是区4拿过来的件
+//                             loc_data[4][data4high][2]=0;//区4的件已经被拿走
+//                             loc_data[2][data2high][2]=1;//区2最高位已经放上件
+//                             loc_data[2][data2high][1]=loc_data[4][data4high][1];//区2放上的件就是区4拿过来的件
 //                             data4high=data4high+1;//更新区4最高位
 //                             data2high=data2high-1;//更新区2最高位
 //                         }
@@ -1652,9 +1730,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //             highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //             highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //             highmax=min2(highmax03,highmax47);//求全局最高位
-//             if((shuzu[5][1][2]==1)||(shuzu[5][2][2]==1)||(shuzu[5][3][2]==1)||(shuzu[5][4][2]==1))//如果区5有件
+//             if((loc_data[5][1][2]==1)||(loc_data[5][2][2]==1)||(loc_data[5][3][2]==1)||(loc_data[5][4][2]==1))//如果区5有件
 //             {
-//                 if(shuzu[5][data5high+1][1]==shuzu[7][data7high][1])//区5最高位件次序等于区7最高位件的次序
+//                 if(loc_data[5][data5high+1][1]==loc_data[7][data7high][1])//区5最高位件次序等于区7最高位件的次序
 //                 {
 //                     sjdj(highmax47-1);//上升到47方最高位
 //                     zhuajianweizhi(5);//抓件位置5
@@ -1664,12 +1742,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(7);//抓件位置7
 //                     sjdj(data7high);//向下到区7最高位
 //                     S//松件
-//                     shuzu[5][data5high+1][2]=0;//区5最高位件已被拿走
-//                     shuzu[7][data7high][2]=1;//区7最高位已经放上件
+//                     loc_data[5][data5high+1][2]=0;//区5最高位件已被拿走
+//                     loc_data[7][data7high][2]=1;//区7最高位已经放上件
 //                     data5high=data5high+1;//更新区5最高位
 //                     data7high=data7high-1;//更新区7最高位
 //                 }
-//                 else if(shuzu[5][data5high+1][1]==shuzu[3][data3high][1])//区5最高位件次序等于区3最高位件的次序
+//                 else if(loc_data[5][data5high+1][1]==loc_data[3][data3high][1])//区5最高位件次序等于区3最高位件的次序
 //                 {
 //                     sjdj(highmax-1);//上升到全局最高位
 //                     zhuajianweizhi(5);//抓件位置5
@@ -1679,8 +1757,8 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(3);//抓件位置3
 //                     sjdj(data3high);//向下到区3最高位
 //                     S//松件
-//                     shuzu[5][data5high+1][2]=0;//区5最高位件已被拿走
-//                     shuzu[3][data3high][2]=1;//区3最高位已经放上件
+//                     loc_data[5][data5high+1][2]=0;//区5最高位件已被拿走
+//                     loc_data[3][data3high][2]=1;//区3最高位已经放上件
 //                     data5high=data5high+1;//更新区5最高位
 //                     data3high=data3high-1;//更新区3最高位
 //                 }
@@ -1688,9 +1766,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //             highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //             highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //             highmax=min2(highmax03,highmax47);//求全局最高位
-//             if((shuzu[6][1][2]==1)||(shuzu[6][2][2]==1)||(shuzu[6][3][2]==1)||(shuzu[6][4][2]==1))//如果区6有件
+//             if((loc_data[6][1][2]==1)||(loc_data[6][2][2]==1)||(loc_data[6][3][2]==1)||(loc_data[6][4][2]==1))//如果区6有件
 //             {
-//                 if(shuzu[6][data6high+1][1]==shuzu[7][data7high][1])//区6最高位件次序等于区7最高位件的次序
+//                 if(loc_data[6][data6high+1][1]==loc_data[7][data7high][1])//区6最高位件次序等于区7最高位件的次序
 //                 {
 //                     sjdj(highmax47-1);//上升到47方最高位
 //                     zhuajianweizhi(6);//抓件位置6
@@ -1700,12 +1778,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(7);//抓件位置7
 //                     sjdj(data7high);//下降到区7最高位
 //                     S//手抓松
-//                     shuzu[6][data6high+1][2]=0;//区6最高位件已经被拿走
-//                     shuzu[7][data7high][2]=1;//区7最高位已经放上件
+//                     loc_data[6][data6high+1][2]=0;//区6最高位件已经被拿走
+//                     loc_data[7][data7high][2]=1;//区7最高位已经放上件
 //                     data6high=data6high+1;//更新区6最高位
 //                     data7high=data7high-1;//更新区7最高位
 //                 }
-//                 else if(shuzu[6][data6high+1][1]==shuzu[3][data3high][1])//区6最高位件次序等于区3最高位件的次序
+//                 else if(loc_data[6][data6high+1][1]==loc_data[3][data3high][1])//区6最高位件次序等于区3最高位件的次序
 //                 {
 //                     sjdj(highmax-1);//上升到全局最高位
 //                     zhuajianweizhi(6);//抓件位置6
@@ -1715,17 +1793,17 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                     zhuajianweizhi(3);//抓件位置3
 //                     sjdj(data3high);//向下到区3最高位
 //                     S//松件
-//                     shuzu[6][data6high+1][2]=0;//区6最高位件已被拿走
-//                     shuzu[3][data3high][2]=1;//区3最高位已经放上件
+//                     loc_data[6][data6high+1][2]=0;//区6最高位件已被拿走
+//                     loc_data[3][data3high][2]=1;//区3最高位已经放上件
 //                     data6high=data6high+1;//更新区6最高位
 //                     data3high=data3high-1;//更新区3最高位
 //                 }
 //             }
-//             else if(((shuzu[5][1][2]==1)||(shuzu[5][2][2]==1)||(shuzu[5][3][2]==1)||(shuzu[5][4][2]==1))&&((shuzu[6][1][2]==1)||(shuzu[6][2][2]==1)||(shuzu[6][3][2]==1)||(shuzu[6][4][2]==1)))///如果区5区6都有件
+//             else if(((loc_data[5][1][2]==1)||(loc_data[5][2][2]==1)||(loc_data[5][3][2]==1)||(loc_data[5][4][2]==1))&&((loc_data[6][1][2]==1)||(loc_data[6][2][2]==1)||(loc_data[6][3][2]==1)||(loc_data[6][4][2]==1)))///如果区5区6都有件
 //             {
-//                 if((shuzu[4][data4high][1]>shuzu[6][data6high+1][1])&&(shuzu[4][data4high][1]>shuzu[5][data5high+1][1]))//如果区4的件比区5和区6的都大
+//                 if((loc_data[4][data4high][1]>loc_data[6][data6high+1][1])&&(loc_data[4][data4high][1]>loc_data[5][data5high+1][1]))//如果区4的件比区5和区6的都大
 //                 {
-//                     if(shuzu[5][data5high+1][1]<shuzu[6][data6high+1][1])//如果区5最高位的件小于区6最高位的件
+//                     if(loc_data[5][data5high+1][1]<loc_data[6][data6high+1][1])//如果区5最高位的件小于区6最高位的件
 //                     {
 //                         sjdj(highmax47-1);//上升到47最高位
 //                         zhuajianweizhi(5);//抓件位置5
@@ -1735,13 +1813,13 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                         zhuajianweizhi(6);//抓件位置6
 //                         sjdj(data6high);//向下到抓件位置6的最高位
 //                         S//松开手抓
-//                         shuzu[5][data5high+1][2]=0;//区5最高位件已被拿走
-//                         shuzu[6][data6high][2]=1;//区6最高位已经放上件
-//                         shuzu[6][data6high][1]=shuzu[5][data5high+1][1];//区6放上的件就是区5拿来的件
+//                         loc_data[5][data5high+1][2]=0;//区5最高位件已被拿走
+//                         loc_data[6][data6high][2]=1;//区6最高位已经放上件
+//                         loc_data[6][data6high][1]=loc_data[5][data5high+1][1];//区6放上的件就是区5拿来的件
 //                         data5high=data5high+1;//更新区5最高位
 //                         data6high=data6high-1;//更新区6最高位
 //                     }
-//                     else if(shuzu[6][data6high+1][1]<shuzu[5][data5high+1][1])//如果区6最高位的件小于区5最高位的件
+//                     else if(loc_data[6][data6high+1][1]<loc_data[5][data5high+1][1])//如果区6最高位的件小于区5最高位的件
 //                     {
 //                         sjdj(highmax47-1);//上升到47最高位
 //                         zhuajianweizhi(6);//抓件位置6
@@ -1751,9 +1829,9 @@ uc fun_min2(uc par_num1,uc par_num2){
 //                         zhuajianweizhi(5);//抓件位置5
 //                         sjdj(data5high);//向下到抓件位置5的最高位
 //                         S//松开手抓
-//                         shuzu[6][data6high+1][2]=0;//区6最高位件已被拿走
-//                         shuzu[5][data5high][2]=1;//区5最高位已经放上件
-//                         shuzu[5][data5high][1]=shuzu[6][data6high+1][1];//区5最高位放上的件就是区6拿来的件
+//                         loc_data[6][data6high+1][2]=0;//区6最高位件已被拿走
+//                         loc_data[5][data5high][2]=1;//区5最高位已经放上件
+//                         loc_data[5][data5high][1]=loc_data[6][data6high+1][1];//区5最高位放上的件就是区6拿来的件
 //                         data6high=data6high+1;//更新区6最高位
 //                         data5high=data5high-1;//更新区5最高位
 //                     }
@@ -1771,12 +1849,12 @@ uc fun_min2(uc par_num1,uc par_num2){
 //         highmax03=min4(data0high,data1high,data2high,data3high);//求左侧的最高位
 //         highmax47=min4(data4high,data5high,data6high,data7high);//求右侧的最高位
 //         highmax=min2(highmax03,highmax47);//求全局最高位
-//         if((shuzu[3][1][2]==1)&&(shuzu[7][1][2]==1))
+//         if((loc_data[3][1][2]==1)&&(loc_data[7][1][2]==1))
 //         {
 //             NOP(3);
-//             if((shuzu[3][1][2]==1)&&(shuzu[7][1][2]==1))
+//             if((loc_data[3][1][2]==1)&&(loc_data[7][1][2]==1))
 //             {
-//                 memset(shuzu,0,sizeof(shuzu));
+//                 memset(loc_data,0,sizeof(loc_data));
 //                 i=4;
 //                 data4high=1;
 //                 data5high=4;
