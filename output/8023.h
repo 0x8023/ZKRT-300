@@ -215,5 +215,6 @@
     extern void fun_zhuajian();//自动抓件
     extern uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4);//求4个数的最小值
     extern uc fun_min2(uc par_num1,uc par_num2);//求2个数的最小值
+    extern void fun_sj1zt(uc par_value);
 /*---------------------------------------------------------------更新日志-----*/
 #endif
