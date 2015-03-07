@@ -212,7 +212,7 @@
     extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
     extern void fun_calibration();//自动校准参数
     extern void fun_port();//串口初始化
-    extern void fun_zhuajian();//自动抓件
+    extern void fun_zhuajian(uc par_01,uc par_02,uc par_03,uc par_04,uc par_41,uc par_42,uc par_43,uc par_44,uc par_31,uc par_32,uc par_33,uc par_34,uc par_71,uc par_72,uc par_73,uc par_74);//自动抓件
     extern uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4);//求4个数的最小值
     extern uc fun_min2(uc par_num1,uc par_num2);//求2个数的最小值
     extern void fun_sj1zt(uc par_value);

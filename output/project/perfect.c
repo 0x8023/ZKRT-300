@@ -5,28 +5,29 @@ void main(){
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
-        han_j,//手抓状态
-        sjp_wz5,//升降位置
-        tra_kq,//平移位置
-        dir_right)//回转方向
+        han_s,//手抓状态
+        sjp_wz1,//升降位置
+        tra_q,//平移位置
+        dir_left)//回转方向
 //    fun_sj1(sjp_wz1);
 //    fun_delay(1,del_s);
 //    WZ5
 //    D(2000)
 //    WZ2
 //    def_stop
-    WZ1
-    fun_pyhz2(tra_h,dir_left);
-    
+    //fun_zhuajian(1,2,3,4,5,6,7,8,4,3,2,1,8,7,6,5);
 
-	   
+
+    fun_mptline(2,60,dir_up);
+
+	MSG("stop")  
 	def_stop
     WZ4
     
     fun_calibration();
     //fun_py1(tra_q);
     fun_py1(tra_kq);
-    MSG("stop")
+    
 
     
 

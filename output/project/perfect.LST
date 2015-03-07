@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   PERFECT                                                               03/06/2015 18:13:49 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               03/07/2015 11:08:14 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
@@ -14,86 +14,87 @@ line level    source
   11   1              0,//X坐标
   11   1              0,//Y坐标
   11   1              dir_up,//车头方向
-  11   1              han_j,//手抓状态
-  11   1              sjp_wz5,//升降位置
-  11   1              tra_kq,//平移位置
-  11   1              dir_right)//回转方向
+  11   1              han_s,//手抓状态
+  11   1              sjp_wz1,//升降位置
+  11   1              tra_q,//平移位置
+  11   1              dir_left)//回转方向
   12   1      //    fun_sj1(sjp_wz1);
   13   1      //    fun_delay(1,del_s);
   14   1      //    WZ5
   15   1      //    D(2000)
   16   1      //    WZ2
   17   1      //    def_stop
-  18   1          WZ1
-  19   1          fun_pyhz2(tra_h,dir_left);
-  20   1          
-  21   1      
-  22   1                 
-  23   1              def_stop
-  24   1          WZ4
-  25   1          
-  26   1          fun_calibration();
-  27   1          //fun_py1(tra_q);
-  28   1          fun_py1(tra_kq);
-  29   1          MSG("stop")
-  30   1      
-  31   1          
-  32   1      
+  18   1          //fun_zhuajian(1,2,3,4,5,6,7,8,4,3,2,1,8,7,6,5);
+  19   1      
+  20   1      
+  21   1          fun_mptline(2,60,dir_up);
+  22   1      
+  23   1              MSG("stop")  
+  24   1              def_stop
+  25   1          WZ4
+  26   1          
+  27   1          fun_calibration();
+  28   1          //fun_py1(tra_q);
+  29   1          fun_py1(tra_kq);
+  30   1          
+  31   1      
+  32   1          
   33   1      
   34   1      
   35   1      
-  36   1          fun_sj1(sjp_wz1);
-  37   1          fun_delay(1,del_s);
-  38   1          fun_sj1(sjp_wz12);
-  39   1          fun_delay(1,del_s);
-  40   1          fun_sj1(sjp_wz2);
-  41   1          fun_delay(1,del_s);
-  42   1          fun_sj1(sjp_wz23);
-  43   1          fun_delay(1,del_s);
-  44   1          fun_sj1(sjp_wz3);
-  45   1          fun_delay(1,del_s);
-  46   1          fun_sj1(sjp_wz34);
-  47   1          fun_delay(1,del_s);
-  48   1          fun_sj1(sjp_wz4);
-  49   1          fun_delay(1,del_s);
-  50   1          fun_sj1(sjp_wz45);
-  51   1          fun_delay(1,del_s);
-  52   1          fun_sj1(sjp_wz5);
-  53   1          fun_delay(1,del_s);
-  54   1      
-  55   1          fun_sj1(sjp_wz45);
-C51 COMPILER V9.01   PERFECT                                                               03/06/2015 18:13:49 PAGE 2   
+  36   1      
+  37   1          fun_sj1(sjp_wz1);
+  38   1          fun_delay(1,del_s);
+  39   1          fun_sj1(sjp_wz12);
+  40   1          fun_delay(1,del_s);
+  41   1          fun_sj1(sjp_wz2);
+  42   1          fun_delay(1,del_s);
+  43   1          fun_sj1(sjp_wz23);
+  44   1          fun_delay(1,del_s);
+  45   1          fun_sj1(sjp_wz3);
+  46   1          fun_delay(1,del_s);
+  47   1          fun_sj1(sjp_wz34);
+  48   1          fun_delay(1,del_s);
+  49   1          fun_sj1(sjp_wz4);
+  50   1          fun_delay(1,del_s);
+  51   1          fun_sj1(sjp_wz45);
+  52   1          fun_delay(1,del_s);
+  53   1          fun_sj1(sjp_wz5);
+  54   1          fun_delay(1,del_s);
+  55   1      
+C51 COMPILER V9.01   PERFECT                                                               03/07/2015 11:08:14 PAGE 2   
 
-  56   1          fun_delay(1,del_s);
-  57   1          fun_sj1(sjp_wz4);
-  58   1          fun_delay(1,del_s);
-  59   1          fun_sj1(sjp_wz34);
-  60   1          fun_delay(1,del_s);
-  61   1          fun_sj1(sjp_wz3);
-  62   1          fun_delay(1,del_s);
-  63   1          fun_sj1(sjp_wz23);
-  64   1          fun_delay(1,del_s);
-  65   1          fun_sj1(sjp_wz2);
-  66   1          fun_delay(1,del_s);
-  67   1          fun_sj1(sjp_wz12);
-  68   1          fun_delay(1,del_s);
-  69   1          fun_sj1(sjp_wz1);
-  70   1      
-  71   1          def_stop
-  72   1      }
-  73          void Int0Interrupt() interrupt 0{
-  74   1          ;
-  75   1      }
-  76          void Timer0Interrupt() interrupt 1 using 1{
-  77   1          fun_timer0();
-  78   1      }
-  79          void Timer1Interrupt() interrupt 3 using 1{
-  80   1          fun_timer1();
-  81   1      }
+  56   1          fun_sj1(sjp_wz45);
+  57   1          fun_delay(1,del_s);
+  58   1          fun_sj1(sjp_wz4);
+  59   1          fun_delay(1,del_s);
+  60   1          fun_sj1(sjp_wz34);
+  61   1          fun_delay(1,del_s);
+  62   1          fun_sj1(sjp_wz3);
+  63   1          fun_delay(1,del_s);
+  64   1          fun_sj1(sjp_wz23);
+  65   1          fun_delay(1,del_s);
+  66   1          fun_sj1(sjp_wz2);
+  67   1          fun_delay(1,del_s);
+  68   1          fun_sj1(sjp_wz12);
+  69   1          fun_delay(1,del_s);
+  70   1          fun_sj1(sjp_wz1);
+  71   1      
+  72   1          def_stop
+  73   1      }
+  74          void Int0Interrupt() interrupt 0{
+  75   1          ;
+  76   1      }
+  77          void Timer0Interrupt() interrupt 1 using 1{
+  78   1          fun_timer0();
+  79   1      }
+  80          void Timer1Interrupt() interrupt 3 using 1{
+  81   1          fun_timer1();
+  82   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    122    ----
+   CODE SIZE        =    135    ----
    CONSTANT SIZE    =     10    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

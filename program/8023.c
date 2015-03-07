@@ -1,7 +1,7 @@
 #include "./output/8023.h"
 xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
 xdata struct str_parameter str_cod={
-    /*ui str_cod.mlinerqd*/500,//默认主函数巡线软起动时间为500毫秒
+    /*ui str_cod.mlinerqd*/25000,//默认主函数巡线软起动路程为25000
     /*ui str_cod.mlineqc*/200,//默认主函数巡线前冲时间为500毫秒
 
     /*ui str_cod.sj1bzw*/58,
@@ -967,11 +967,57 @@ void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz){
 }//回转单步运动
 void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
     bit loc_flag=0;
-    ui loc_i;
-    uc loc_con=0;
-    uc loc_l=par_sd,loc_r=par_sd;
-    for(loc_i=2;loc_i<par_sd;fun_startdj(mot_rl,loc_i++))//软起动
-        fun_delay(str_cod.mlinerqd/par_sd,del_ms);
+    xdata ui loc_xh=str_cod.mlinerqd/(0.5*(par_sd*par_sd+par_sd));
+    xdata uc loc_con;
+    xdata uc loc_l=par_sd,loc_r=par_sd;
+    for(loc_con=1;loc_con<par_sd;fun_startdj(mot_rl,loc_con++))//确定路程的软启动程序
+        fun_delay(loc_xh,del_ms);
+    loc_con=0;
+    while(1){
+        if(((in_ls1)&&(in_ls7))||((in_ls2)&&(in_ls8)))
+            loc_flag=1;
+        else if(loc_flag==1){
+            loc_con++;
+            if(loc_con>=par_num){
+                for(loc_con=1;loc_con<par_sd;fun_startdj(mot_rl,loc_con++))//确定路程的软启动程序
+                    fun_delay(loc_xh,del_ms);
+            }
+
+        }
+
+
+
+        if(in_ls3){//纠偏
+            loc_l*=0.9;
+            loc_r*=1.1;
+        }
+        if(in_ls6){
+            loc_l*=1.1;
+            loc_r*=0.9;
+        }  
+        if(in_ls2){
+            loc_l*=0.8;
+            loc_r*=1.2;
+        }
+        if(in_ls7){
+            loc_l*=1.2;
+            loc_r*=0.8;
+        }
+        if(in_ls1){
+            loc_l*=0.7;
+            loc_r*=1.3;
+        }
+        if(in_ls8){
+            loc_l*=1.3;
+            loc_r*=0.7;
+        }
+        fun_startdj(mot_l,loc_l);//更新电机参数
+        fun_startdj(mot_r,loc_r);
+    }
+
+
+
+
     while(1){
         loc_l=par_sd;//恢复默认参数
         loc_r=par_sd;
@@ -1007,7 +1053,7 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
         else if(loc_flag==1){
             if(++loc_con>=par_num){
                 if(par_model==dir_up){
-                    for(loc_i=0;loc_i<str_cod.mlineqc;loc_i++){
+                    for(loc_xh=0;loc_xh<str_cod.mlineqc;loc_xh++){
                         loc_l=par_sd*0.7;//恢复默认参数
                         loc_r=par_sd*0.7;
                         if(in_ls3){//纠偏
