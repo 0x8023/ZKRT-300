@@ -21,63 +21,6 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(972): error C231: 'loc_xh': redefinition
-PROGRAM\8023.C(977): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1012): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1015): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1019): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1023): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1027): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1031): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1035): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1038): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1049): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1053): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1057): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1061): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1065): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1069): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1072): error C202: 'loc_l': undefined identifier
-PROGRAM\8023.C(1268): error C187: not an lvalue
-PROGRAM\8023.C(1269): error C187: not an lvalue
-PROGRAM\8023.C(1283): error C187: not an lvalue
-PROGRAM\8023.C(1284): error C187: not an lvalue
-PROGRAM\8023.C(1299): error C187: not an lvalue
-PROGRAM\8023.C(1300): error C187: not an lvalue
-PROGRAM\8023.C(1314): error C187: not an lvalue
-PROGRAM\8023.C(1315): error C187: not an lvalue
-PROGRAM\8023.C(1332): error C187: not an lvalue
-PROGRAM\8023.C(1333): error C187: not an lvalue
-PROGRAM\8023.C(1347): error C187: not an lvalue
-PROGRAM\8023.C(1348): error C187: not an lvalue
-PROGRAM\8023.C(1362): error C187: not an lvalue
-PROGRAM\8023.C(1363): error C187: not an lvalue
-PROGRAM\8023.C(1379): error C187: not an lvalue
-PROGRAM\8023.C(1380): error C187: not an lvalue
-PROGRAM\8023.C(1394): error C187: not an lvalue
-PROGRAM\8023.C(1395): error C187: not an lvalue
-PROGRAM\8023.C(1426): error C187: not an lvalue
-PROGRAM\8023.C(1427): error C187: not an lvalue
-PROGRAM\8023.C(1441): error C187: not an lvalue
-PROGRAM\8023.C(1442): error C187: not an lvalue
-PROGRAM\8023.C(1457): error C187: not an lvalue
-PROGRAM\8023.C(1458): error C187: not an lvalue
-PROGRAM\8023.C(1472): error C187: not an lvalue
-PROGRAM\8023.C(1473): error C187: not an lvalue
-PROGRAM\8023.C(1490): error C187: not an lvalue
-PROGRAM\8023.C(1491): error C187: not an lvalue
-PROGRAM\8023.C(1505): error C187: not an lvalue
-PROGRAM\8023.C(1506): error C187: not an lvalue
-PROGRAM\8023.C(1520): error C187: not an lvalue
-PROGRAM\8023.C(1521): error C187: not an lvalue
-PROGRAM\8023.C(1537): error C187: not an lvalue
-PROGRAM\8023.C(1538): error C187: not an lvalue
-PROGRAM\8023.C(1552): error C187: not an lvalue
-PROGRAM\8023.C(1553): error C187: not an lvalue
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
@@ -132,27 +75,6 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
 ".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
 Build target '目标 1'
 assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
 compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER

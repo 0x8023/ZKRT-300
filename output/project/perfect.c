@@ -18,10 +18,10 @@ void main(){
     //fun_zhuajian(1,2,3,4,5,6,7,8,4,3,2,1,8,7,6,5);
 
 
-    fun_mptline(2,60,dir_up);
+    fun_mptline(5,60,dir_left);
 
-	MSG("stop")  
-	def_stop
+    MSG("停止电机")
+    def_stop
     WZ4
     
     fun_calibration();

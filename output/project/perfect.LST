@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   PERFECT                                                               03/07/2015 11:08:14 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               03/07/2015 15:53:46 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
@@ -27,10 +27,10 @@ line level    source
   18   1          //fun_zhuajian(1,2,3,4,5,6,7,8,4,3,2,1,8,7,6,5);
   19   1      
   20   1      
-  21   1          fun_mptline(2,60,dir_up);
+  21   1          fun_mptline(5,60,dir_left);
   22   1      
-  23   1              MSG("stop")  
-  24   1              def_stop
+  23   1          MSG("停止电机")
+  24   1          def_stop
   25   1          WZ4
   26   1          
   27   1          fun_calibration();
@@ -62,7 +62,7 @@ line level    source
   53   1          fun_sj1(sjp_wz5);
   54   1          fun_delay(1,del_s);
   55   1      
-C51 COMPILER V9.01   PERFECT                                                               03/07/2015 11:08:14 PAGE 2   
+C51 COMPILER V9.01   PERFECT                                                               03/07/2015 15:53:46 PAGE 2   
 
   56   1          fun_sj1(sjp_wz45);
   57   1          fun_delay(1,del_s);
@@ -94,8 +94,8 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    135    ----
-   CONSTANT SIZE    =     10    ----
+   CODE SIZE        =    134    ----
+   CONSTANT SIZE    =     18    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      2    ----

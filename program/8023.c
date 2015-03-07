@@ -967,26 +967,11 @@ void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz){
 }//回转单步运动
 void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
     bit loc_flag=0;
-    xdata ui loc_xh=str_cod.mlinerqd/(0.5*(par_sd*par_sd+par_sd));
-    xdata uc loc_con;
-    xdata uc loc_l=par_sd,loc_r=par_sd;
-    for(loc_con=1;loc_con<par_sd;fun_startdj(mot_rl,loc_con++))//确定路程的软启动程序
-        fun_delay(loc_xh,del_ms);
-    loc_con=0;
-    while(1){
-        if(((in_ls1)&&(in_ls7))||((in_ls2)&&(in_ls8)))
-            loc_flag=1;
-        else if(loc_flag==1){
-            loc_con++;
-            if(loc_con>=par_num){
-                for(loc_con=1;loc_con<par_sd;fun_startdj(mot_rl,loc_con++))//确定路程的软启动程序
-                    fun_delay(loc_xh,del_ms);
-            }
-
-        }
-
-
-
+    ui loc_xh=str_cod.mlinerqd/(0.5*(par_sd*par_sd+par_sd));
+    uc loc_con;
+    uc loc_l=par_sd,loc_r=par_sd;
+    for(loc_con=1;loc_con<par_sd;fun_delay(loc_xh,del_ms)){//确定路程的软启动程序
+        loc_r=loc_l=loc_con++;//恢复默认参数
         if(in_ls3){//纠偏
             loc_l*=0.9;
             loc_r*=1.1;
@@ -1011,51 +996,48 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
             loc_l*=1.3;
             loc_r*=0.7;
         }
-        fun_startdj(mot_l,loc_l);//更新电机参数
         fun_startdj(mot_r,loc_r);
+        fun_startdj(mot_l,loc_l);
     }
-
-
-
-
+    loc_con=0;
     while(1){
-        loc_l=par_sd;//恢复默认参数
-        loc_r=par_sd;
-        if((in_ls1&&in_ls7)||(in_ls2&&in_ls8)){//巡线计数
+        if(((in_ls1)&&(in_ls7))||((in_ls2)&&(in_ls8)))
             loc_flag=1;
-            if(loc_con>=par_num){
-                if(par_model==dir_left){//左转
-                    fun_startdj(mot_l,-20);
-                    fun_delay(500,del_ms);
-                    while(1){
-                        while(!in_ls4||!in_ls5);
-                        fun_delay(100,del_us);
-                        if(in_ls4&&in_ls5){
-                            fun_stop(mot_rl);
-                            return;
-                        }
-                    }
-                }
-                else if(par_model==dir_right){
-                    fun_startdj(mot_r,-20);
-                    fun_delay(500,del_ms);
-                    while(1){
-                        while(!in_ls4||!in_ls5);
-                        fun_delay(100,del_us);
-                        if(in_ls4&&in_ls5){
-                            fun_stop(mot_rl);
-                            return;
-                        }
-                    }
-                }
-            }
-        }
         else if(loc_flag==1){
-            if(++loc_con>=par_num){
-                if(par_model==dir_up){
-                    for(loc_xh=0;loc_xh<str_cod.mlineqc;loc_xh++){
-                        loc_l=par_sd*0.7;//恢复默认参数
-                        loc_r=par_sd*0.7;
+            loc_con++;
+            loc_flag=0;
+            if(loc_con>=par_num){
+                if(par_model!=dir_up){
+                    if(par_model==dir_left){//左转
+                        fun_startdj(mot_r,par_sd);
+                        fun_startdj(mot_l,-10);
+                        fun_delay(500,del_ms);
+                        while(1){
+                            while(!in_ls4||!in_ls5);
+                            fun_delay(100,del_us);
+                            if(in_ls4&&in_ls5){
+                                fun_stop(mot_rl);
+                                return;
+                            }
+                        }
+                    }
+                    else if(par_model==dir_right){
+                        fun_startdj(mot_l,par_sd);
+                        fun_startdj(mot_r,-10);
+                        fun_delay(500,del_ms);
+                        while(1){
+                            while(!in_ls4||!in_ls5);
+                            fun_delay(100,del_us);
+                            if(in_ls4&&in_ls5){
+                                fun_stop(mot_rl);
+                                return;
+                            }
+                        }
+                    }
+                }
+                else{
+                    for(loc_con=par_sd;loc_con>0;fun_delay(loc_xh,del_ms)){//确定路程的软启动程序
+                        loc_r=loc_l=loc_con--;//恢复默认参数
                         if(in_ls3){//纠偏
                             loc_l*=0.9;
                             loc_r*=1.1;
@@ -1063,7 +1045,7 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
                         if(in_ls6){
                             loc_l*=1.1;
                             loc_r*=0.9;
-                        }
+                        }  
                         if(in_ls2){
                             loc_l*=0.8;
                             loc_r*=1.2;
@@ -1080,16 +1062,15 @@ void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
                             loc_l*=1.3;
                             loc_r*=0.7;
                         }
-                        fun_startdj(mot_l,loc_l);//更新电机参数
                         fun_startdj(mot_r,loc_r);
-                        fun_delay(1,del_ms);
+                        fun_startdj(mot_l,loc_l);
                     }
                     fun_stop(mot_rl);
                     return;
                 }
             }
-            loc_flag=0;
         }
+        loc_r=loc_l=par_sd;
         if(in_ls3){//纠偏
             loc_l*=0.9;
             loc_r*=1.1;

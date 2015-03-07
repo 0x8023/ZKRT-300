@@ -174,10 +174,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>25</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1588</TopLine>
-      <CurrentLine>1588</CurrentLine>
+      <TopLine>1590</TopLine>
+      <CurrentLine>1590</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -188,32 +188,6 @@
     <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\STRING.H</PathWithFilename>
     <TopLine>1</TopLine>
     <CurrentLine>1</CurrentLine>
-    <Constant>0</Constant>
-    <WindowPosition>
-      <length>0</length>
-      <flags>0</flags>
-      <showCmd>0</showCmd>
-      <MinPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MinPosition>
-      <MaxPosition>
-        <xPos>0</xPos>
-        <yPos>0</yPos>
-      </MaxPosition>
-      <NormalPosition>
-        <Top>0</Top>
-        <Left>0</Left>
-        <Right>0</Right>
-        <Bottom>0</Bottom>
-      </NormalPosition>
-    </WindowPosition>
-  </AlienFiles>
-
-  <AlienFiles>
-    <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\MATH.H</PathWithFilename>
-    <TopLine>11</TopLine>
-    <CurrentLine>11</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -290,8 +264,34 @@
 
   <AlienFiles>
     <PathWithFilename>D:\Robot\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
-    <TopLine>145</TopLine>
-    <CurrentLine>145</CurrentLine>
+    <TopLine>149</TopLine>
+    <CurrentLine>149</CurrentLine>
+    <Constant>0</Constant>
+    <WindowPosition>
+      <length>0</length>
+      <flags>0</flags>
+      <showCmd>0</showCmd>
+      <MinPosition>
+        <xPos>0</xPos>
+        <yPos>0</yPos>
+      </MinPosition>
+      <MaxPosition>
+        <xPos>0</xPos>
+        <yPos>0</yPos>
+      </MaxPosition>
+      <NormalPosition>
+        <Top>0</Top>
+        <Left>0</Left>
+        <Right>0</Right>
+        <Bottom>0</Bottom>
+      </NormalPosition>
+    </WindowPosition>
+  </AlienFiles>
+
+  <AlienFiles>
+    <PathWithFilename>H:\PROGRAM\KEIL\C51\INC\MATH.H</PathWithFilename>
+    <TopLine>11</TopLine>
+    <CurrentLine>11</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1658,16 +1658,22 @@
       <ActiveTab>0</ActiveTab>
       <Documents>
         <Doc>
+          <Name>H:\PROGRAM\KEIL\C51\INC\MATH.H</Name>
+          <ColumnNumber>16</ColumnNumber>
+          <TopLine>11</TopLine>
+          <CurrentLine>11</CurrentLine>
+        </Doc>
+        <Doc>
           <Name>.\program\8023.c</Name>
-          <ColumnNumber>25</ColumnNumber>
-          <TopLine>1588</TopLine>
-          <CurrentLine>1588</CurrentLine>
+          <ColumnNumber>0</ColumnNumber>
+          <TopLine>1592</TopLine>
+          <CurrentLine>1592</CurrentLine>
         </Doc>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>145</TopLine>
-          <CurrentLine>145</CurrentLine>
+          <TopLine>149</TopLine>
+          <CurrentLine>149</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
@@ -1680,12 +1686,6 @@
           <ColumnNumber>0</ColumnNumber>
           <TopLine>13</TopLine>
           <CurrentLine>13</CurrentLine>
-        </Doc>
-        <Doc>
-          <Name>H:\PROGRAM\KEIL\C51\INC\MATH.H</Name>
-          <ColumnNumber>38</ColumnNumber>
-          <TopLine>11</TopLine>
-          <CurrentLine>11</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STRING.H</Name>
