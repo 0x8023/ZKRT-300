@@ -39,6 +39,7 @@
     #define WZ5 fun_sj1(sjp_wz5);
     #define MSG(par_value) printf("%s \n",par_value);
     #define OUT(par_value) printf("%d \n",par_value);
+    #define MSGOUT(par_value,par_num) printf("%s:%d\n",par_value,par_num);
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
@@ -216,5 +217,6 @@
     extern uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4);//求4个数的最小值
     extern uc fun_min2(uc par_num1,uc par_num2);//求2个数的最小值
     extern void fun_sj1zt(uc par_value);
+    extern uc fun_min(uc par_num,...);
 /*---------------------------------------------------------------更新日志-----*/
 #endif

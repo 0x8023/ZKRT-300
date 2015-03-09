@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   4                      }while(--loc_i);
   53   3                  }
   54   2                  return;
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 2   
 
   55   2              default:return;
   56   2          }
@@ -126,7 +126,7 @@ line level    source
  114   1          //PS_11=1;//升降位置3传感器置1 $?$
  115   1      
  116   1          out_en1=1;//电机1/3使能 $?$
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 3   
 
  117   1          out_en2=1;//电机2/4使能 $?$
  118   1          //out_motorselect=1;//电机片选为1 $?$
@@ -190,7 +190,7 @@ line level    source
  176   3                      fun_pwml(par_speed);out_pwml=0;
  177   3                      fun_pwmr(par_speed);out_pwmr=0;
  178   3                  }
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 4   
 
  179   2                  else if(par_speed<0){
  180   3                      fun_pwml(cabs(par_speed));out_pwml=1;
@@ -254,7 +254,7 @@ line level    source
  238   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
  239   2              default:
  240   2                  break;
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 5   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 5   
 
  241   2          }
  242   1      }//停止电机
@@ -318,7 +318,7 @@ line level    source
  300   2                  while(1){//要去的地方比较靠下,向下走                    
  301   3                      while(in_wz2==1);
  302   3                      fun_delay(20,del_ms);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 6   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 6   
 
  303   3                      if(in_wz2==0){
  304   4                          fun_delay(str_cod.sj1bzw,del_ms);
@@ -382,7 +382,7 @@ line level    source
  362   2                  if(par_model>str_begin.sjwz){
  363   3                      fun_sj1(sjp_wz4);
  364   3                      fun_startdj(mot_dj3,-100);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 7   
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 7   
 
  365   3                      fun_delay(str_cod.sj1zjw,del_ms);
  366   3                  }
@@ -411,1334 +411,1407 @@ line level    source
  389   1          str_begin.sjwz=par_model;//存储运行结果
  390   1      }//升降单步运动
  391          void fun_py1(enum varENU_tra par_model){
- 392   1          switch(par_model){
- 393   2              case tra_q://前平移(没有电机的呢个方向)
- 394   2                  while(1){
- 395   3                      fun_startdj(mot_dj2,100);
- 396   3                      while(in_qpy==1);
- 397   3                      fun_delay(20,del_ms);
- 398   3                      if(in_qpy==0){
- 399   4                          fun_delay(20,del_ms);
- 400   4                          break;
- 401   4                      }
- 402   3                  }
- 403   2                  break;
- 404   2              case tra_kq:
- 405   2                  switch(str_begin.pywz){
- 406   3                      case tra_q:
- 407   3                          fun_startdj(mot_dj2,-100);
- 408   3                          fun_delay(str_cod.py1qkq,del_ms);
- 409   3                          break;
- 410   3                      case tra_z:
- 411   3                          fun_startdj(mot_dj2,100);
- 412   3                          fun_delay(str_cod.py1kqz,del_ms);
- 413   3                          break;
- 414   3                      case tra_kh:
- 415   3                          fun_startdj(mot_dj2,100);
- 416   3                          fun_delay(str_cod.py1kqkh,del_ms);
- 417   3                          break;
- 418   3                      case tra_h:
- 419   3                          fun_startdj(mot_dj2,100);
- 420   3                          fun_delay(str_cod.py1kqh,del_ms);
- 421   3                          break;
- 422   3                  }
- 423   2                  break;
- 424   2              case tra_z:
- 425   2                  switch(str_begin.pywz){
- 426   3                      case tra_q:
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 8   
+ 392   1          if(str_begin.pywz==par_model)
+ 393   1              return;
+ 394   1          switch(par_model){
+ 395   2              case tra_q://前平移(没有电机的呢个方向)
+ 396   2                  while(1){
+ 397   3                      fun_startdj(mot_dj2,100);
+ 398   3                      while(in_qpy==1);
+ 399   3                      fun_delay(20,del_ms);
+ 400   3                      if(in_qpy==0){
+ 401   4                          fun_delay(20,del_ms);
+ 402   4                          break;
+ 403   4                      }
+ 404   3                  }
+ 405   2                  break;
+ 406   2              case tra_kq:
+ 407   2                  switch(str_begin.pywz){
+ 408   3                      case tra_q:
+ 409   3                          fun_startdj(mot_dj2,-100);
+ 410   3                          fun_delay(str_cod.py1qkq,del_ms);
+ 411   3                          break;
+ 412   3                      case tra_z:
+ 413   3                          fun_startdj(mot_dj2,100);
+ 414   3                          fun_delay(str_cod.py1kqz,del_ms);
+ 415   3                          break;
+ 416   3                      case tra_kh:
+ 417   3                          fun_startdj(mot_dj2,100);
+ 418   3                          fun_delay(str_cod.py1kqkh,del_ms);
+ 419   3                          break;
+ 420   3                      case tra_h:
+ 421   3                          fun_startdj(mot_dj2,100);
+ 422   3                          fun_delay(str_cod.py1kqh,del_ms);
+ 423   3                          break;
+ 424   3                  }
+ 425   2                  break;
+ 426   2              case tra_z:
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 8   
 
- 427   3                          fun_startdj(mot_dj2,-100);
- 428   3                          fun_delay(str_cod.py1qz,del_ms);
- 429   3                          break;
- 430   3                      case tra_kq:
- 431   3                          fun_startdj(mot_dj2,-100);
- 432   3                          fun_delay(str_cod.py1kqz,del_ms);
- 433   3                          break;
- 434   3                      case tra_kh:
- 435   3                          fun_startdj(mot_dj2,100);
- 436   3                          fun_delay(str_cod.py1zkh,del_ms);
- 437   3                          break;
- 438   3                      case tra_h:
- 439   3                          fun_startdj(mot_dj2,100);
- 440   3                          fun_delay(str_cod.py1zh,del_ms);
- 441   3                          break;
- 442   3                  }
- 443   2                  break;
- 444   2              case tra_kh:
- 445   2                  switch(str_begin.pywz){
- 446   3                      case tra_q:
- 447   3                          fun_startdj(mot_dj2,-100);
- 448   3                          fun_delay(str_cod.py1qkh,del_ms);
- 449   3                          break;
- 450   3                      case tra_kq:
- 451   3                          fun_startdj(mot_dj2,-100);
- 452   3                          fun_delay(str_cod.py1kqkh,del_ms);
- 453   3                          break;
- 454   3                      case tra_z:
- 455   3                          fun_startdj(mot_dj2,-100);
- 456   3                          fun_delay(str_cod.py1zkh,del_ms);
- 457   3                          break;
- 458   3                      case tra_h:
- 459   3                          fun_startdj(mot_dj2,100);
- 460   3                          fun_delay(str_cod.py1khh,del_ms);
- 461   3                          break;
- 462   3                  }
- 463   2                  break;
- 464   2              case tra_h://后平移(有电机的呢个方向)
- 465   2                  while(1){
- 466   3                      fun_startdj(mot_dj2,-100);
- 467   3                      while(in_hpy==1);
- 468   3                      fun_delay(20,del_ms);
- 469   3                      if(in_hpy==0){
- 470   4                          fun_delay(20,del_ms);
- 471   4                          break;
- 472   4                      }
- 473   3                  }
- 474   2                  break;
- 475   2              default:
+ 427   2                  switch(str_begin.pywz){
+ 428   3                      case tra_q:
+ 429   3                          fun_startdj(mot_dj2,-100);
+ 430   3                          fun_delay(str_cod.py1qz,del_ms);
+ 431   3                          break;
+ 432   3                      case tra_kq:
+ 433   3                          fun_startdj(mot_dj2,-100);
+ 434   3                          fun_delay(str_cod.py1kqz,del_ms);
+ 435   3                          break;
+ 436   3                      case tra_kh:
+ 437   3                          fun_startdj(mot_dj2,100);
+ 438   3                          fun_delay(str_cod.py1zkh,del_ms);
+ 439   3                          break;
+ 440   3                      case tra_h:
+ 441   3                          fun_startdj(mot_dj2,100);
+ 442   3                          fun_delay(str_cod.py1zh,del_ms);
+ 443   3                          break;
+ 444   3                  }
+ 445   2                  break;
+ 446   2              case tra_kh:
+ 447   2                  switch(str_begin.pywz){
+ 448   3                      case tra_q:
+ 449   3                          fun_startdj(mot_dj2,-100);
+ 450   3                          fun_delay(str_cod.py1qkh,del_ms);
+ 451   3                          break;
+ 452   3                      case tra_kq:
+ 453   3                          fun_startdj(mot_dj2,-100);
+ 454   3                          fun_delay(str_cod.py1kqkh,del_ms);
+ 455   3                          break;
+ 456   3                      case tra_z:
+ 457   3                          fun_startdj(mot_dj2,-100);
+ 458   3                          fun_delay(str_cod.py1zkh,del_ms);
+ 459   3                          break;
+ 460   3                      case tra_h:
+ 461   3                          fun_startdj(mot_dj2,100);
+ 462   3                          fun_delay(str_cod.py1khh,del_ms);
+ 463   3                          break;
+ 464   3                  }
+ 465   2                  break;
+ 466   2              case tra_h://后平移(有电机的呢个方向)
+ 467   2                  while(1){
+ 468   3                      fun_startdj(mot_dj2,-100);
+ 469   3                      while(in_hpy==1);
+ 470   3                      fun_delay(20,del_ms);
+ 471   3                      if(in_hpy==0){
+ 472   4                          fun_delay(20,del_ms);
+ 473   4                          break;
+ 474   4                      }
+ 475   3                  }
  476   2                  break;
- 477   2          }
- 478   1          fun_stop(mot_dj2);
- 479   1          str_begin.pywz=par_model;//存储运行结果
- 480   1      }//平移单步运动
- 481          void fun_hz1(enum varENU_dir par_model){
- 482   1          fun_select(sel_912);
- 483   1          switch(par_model){
- 484   2              case dir_up://回转至前方
- 485   2                  switch(str_begin.hzfx){
- 486   3                      case dir_down://现在在下方
- 487   3                          fun_startdj(mot_dj4,-100);
- 488   3                          fun_delay(1,del_s);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 9   
+ 477   2              default:
+ 478   2                  break;
+ 479   2          }
+ 480   1          fun_stop(mot_dj2);
+ 481   1          str_begin.pywz=par_model;//存储运行结果
+ 482   1      }//平移单步运动
+ 483          void fun_hz1(enum varENU_dir par_model){
+ 484   1          fun_select(sel_912);
+ 485   1          switch(par_model){
+ 486   2              case dir_up://回转至前方
+ 487   2                  switch(str_begin.hzfx){
+ 488   3                      case dir_down://现在在下方
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 9   
 
- 489   3                          while(1){
- 490   4                              while(in_hz==1);
- 491   4                              fun_delay(25,del_ms);
- 492   4                              if(in_hz==0)
- 493   4                                  break;
- 494   4                          }
- 495   3                          while(1){
- 496   4                              while(in_hz==0);
- 497   4                              fun_delay(25,del_ms);
- 498   4                              if(in_hz==1)
- 499   4                                  break;
- 500   4                          }
- 501   3                          while(1){
- 502   4                              while(in_hz==1);
- 503   4                              fun_delay(25,del_ms);
- 504   4                              if(in_hz==0)
- 505   4                                  break;
- 506   4                          }
- 507   3                          break;
- 508   3                      case dir_left://现在在左边
- 509   3                          fun_startdj(mot_dj4,100);
- 510   3                          fun_delay(1,del_s);
- 511   3                          while(1){
- 512   4                              while(in_hz==1);
- 513   4                              fun_delay(25,del_ms);
- 514   4                              if(in_hz==0)
- 515   4                                  break;
- 516   4                          }
- 517   3                          break;
- 518   3                      case dir_right://现在在右边
- 519   3                          fun_startdj(mot_dj4,-100);
- 520   3                          fun_delay(1,del_s);
- 521   3                          while(1){
- 522   4                              while(in_hz==1);
- 523   4                              fun_delay(25,del_ms);
- 524   4                              if(in_hz==0)
- 525   4                                  break;
- 526   4                          }
- 527   3                          break;
- 528   3                      default:
+ 489   3                          fun_startdj(mot_dj4,-100);
+ 490   3                          fun_delay(1,del_s);
+ 491   3                          while(1){
+ 492   4                              while(in_hz==1);
+ 493   4                              fun_delay(25,del_ms);
+ 494   4                              if(in_hz==0)
+ 495   4                                  break;
+ 496   4                          }
+ 497   3                          while(1){
+ 498   4                              while(in_hz==0);
+ 499   4                              fun_delay(25,del_ms);
+ 500   4                              if(in_hz==1)
+ 501   4                                  break;
+ 502   4                          }
+ 503   3                          while(1){
+ 504   4                              while(in_hz==1);
+ 505   4                              fun_delay(25,del_ms);
+ 506   4                              if(in_hz==0)
+ 507   4                                  break;
+ 508   4                          }
+ 509   3                          break;
+ 510   3                      case dir_left://现在在左边
+ 511   3                          fun_startdj(mot_dj4,100);
+ 512   3                          fun_delay(1,del_s);
+ 513   3                          while(1){
+ 514   4                              while(in_hz==1);
+ 515   4                              fun_delay(25,del_ms);
+ 516   4                              if(in_hz==0)
+ 517   4                                  break;
+ 518   4                          }
+ 519   3                          break;
+ 520   3                      case dir_right://现在在右边
+ 521   3                          fun_startdj(mot_dj4,-100);
+ 522   3                          fun_delay(1,del_s);
+ 523   3                          while(1){
+ 524   4                              while(in_hz==1);
+ 525   4                              fun_delay(25,del_ms);
+ 526   4                              if(in_hz==0)
+ 527   4                                  break;
+ 528   4                          }
  529   3                          break;
- 530   3                  }
- 531   2                  break;
- 532   2              case dir_down://要去下面
- 533   2                  switch(str_begin.hzfx){
- 534   3                      case dir_up://现在在上面
- 535   3                          fun_startdj(mot_dj4,100);
- 536   3                          fun_delay(1,del_s);
- 537   3                          while(1){
- 538   4                              while(in_hz==1);
- 539   4                              fun_delay(25,del_ms);
- 540   4                              if(in_hz==0)
- 541   4                                  break;
- 542   4                          }
- 543   3                          while(1){
- 544   4                              while(in_hz==0);
- 545   4                              fun_delay(25,del_ms);
- 546   4                              if(in_hz==1)
- 547   4                                  break;
- 548   4                          }
- 549   3                          while(1){
- 550   4                              while(in_hz==1);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 10  
+ 530   3                      default:
+ 531   3                          break;
+ 532   3                  }
+ 533   2                  break;
+ 534   2              case dir_down://要去下面
+ 535   2                  switch(str_begin.hzfx){
+ 536   3                      case dir_up://现在在上面
+ 537   3                          fun_startdj(mot_dj4,100);
+ 538   3                          fun_delay(1,del_s);
+ 539   3                          while(1){
+ 540   4                              while(in_hz==1);
+ 541   4                              fun_delay(25,del_ms);
+ 542   4                              if(in_hz==0)
+ 543   4                                  break;
+ 544   4                          }
+ 545   3                          while(1){
+ 546   4                              while(in_hz==0);
+ 547   4                              fun_delay(25,del_ms);
+ 548   4                              if(in_hz==1)
+ 549   4                                  break;
+ 550   4                          }
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 10  
 
- 551   4                              fun_delay(25,del_ms);
- 552   4                              if(in_hz==0)
- 553   4                                  break;
- 554   4                          }
- 555   3                          break;
- 556   3                      case dir_left://现在在左面
- 557   3                          fun_startdj(mot_dj4,-100);
- 558   3                          fun_delay(1,del_s);
- 559   3                          while(1){
- 560   4                              while(in_hz==1);
- 561   4                              fun_delay(25,del_ms);
- 562   4                              if(in_hz==0)
- 563   4                                  break;
- 564   4                          }
- 565   3                          break;
- 566   3                      case dir_right://现在在右面
- 567   3                          fun_startdj(mot_dj4,100);
- 568   3                          fun_delay(1,del_s);
- 569   3                          while(1){
- 570   4                              while(in_hz==1);
- 571   4                              fun_delay(25,del_ms);
- 572   4                              if(in_hz==0)
- 573   4                                  break;
- 574   4                          }
- 575   3                          break;
- 576   3                      default:
+ 551   3                          while(1){
+ 552   4                              while(in_hz==1);
+ 553   4                              fun_delay(25,del_ms);
+ 554   4                              if(in_hz==0)
+ 555   4                                  break;
+ 556   4                          }
+ 557   3                          break;
+ 558   3                      case dir_left://现在在左面
+ 559   3                          fun_startdj(mot_dj4,-100);
+ 560   3                          fun_delay(1,del_s);
+ 561   3                          while(1){
+ 562   4                              while(in_hz==1);
+ 563   4                              fun_delay(25,del_ms);
+ 564   4                              if(in_hz==0)
+ 565   4                                  break;
+ 566   4                          }
+ 567   3                          break;
+ 568   3                      case dir_right://现在在右面
+ 569   3                          fun_startdj(mot_dj4,100);
+ 570   3                          fun_delay(1,del_s);
+ 571   3                          while(1){
+ 572   4                              while(in_hz==1);
+ 573   4                              fun_delay(25,del_ms);
+ 574   4                              if(in_hz==0)
+ 575   4                                  break;
+ 576   4                          }
  577   3                          break;
- 578   3                  }
- 579   2                  break;
- 580   2              case dir_left://要去左边
- 581   2                  switch(str_begin.hzfx){
- 582   3                      case dir_up://现在在上面
- 583   3                          fun_startdj(mot_dj4,-100);
- 584   3                          fun_delay(1,del_s);
- 585   3                          while(1){
- 586   4                              while(in_hz==1);
- 587   4                              fun_delay(25,del_ms);
- 588   4                              if(in_hz==0)
- 589   4                                  break;
- 590   4                          }
- 591   3                          break;
- 592   3                      case dir_down://现在在下面
- 593   3                          fun_startdj(mot_dj4,100);
- 594   3                          fun_delay(1,del_s);
- 595   3                          while(1){
- 596   4                              while(in_hz==1);
- 597   4                              fun_delay(25,del_ms);
- 598   4                              if(in_hz==0)
- 599   4                                  break;
- 600   4                          }
- 601   3                          break;
- 602   3                      case dir_right://现在在右面
- 603   3                          fun_startdj(mot_dj4,-100);
- 604   3                          fun_delay(1,del_s);
- 605   3                          while(1){
- 606   4                              while(in_hz==1);
- 607   4                              fun_delay(25,del_ms);
- 608   4                              if(in_hz==0)
- 609   4                                  break;
- 610   4                          }
- 611   3                          while(1){
- 612   4                              while(in_hz==0);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 11  
+ 578   3                      default:
+ 579   3                          break;
+ 580   3                  }
+ 581   2                  break;
+ 582   2              case dir_left://要去左边
+ 583   2                  switch(str_begin.hzfx){
+ 584   3                      case dir_up://现在在上面
+ 585   3                          fun_startdj(mot_dj4,-100);
+ 586   3                          fun_delay(1,del_s);
+ 587   3                          while(1){
+ 588   4                              while(in_hz==1);
+ 589   4                              fun_delay(25,del_ms);
+ 590   4                              if(in_hz==0)
+ 591   4                                  break;
+ 592   4                          }
+ 593   3                          break;
+ 594   3                      case dir_down://现在在下面
+ 595   3                          fun_startdj(mot_dj4,100);
+ 596   3                          fun_delay(1,del_s);
+ 597   3                          while(1){
+ 598   4                              while(in_hz==1);
+ 599   4                              fun_delay(25,del_ms);
+ 600   4                              if(in_hz==0)
+ 601   4                                  break;
+ 602   4                          }
+ 603   3                          break;
+ 604   3                      case dir_right://现在在右面
+ 605   3                          fun_startdj(mot_dj4,-100);
+ 606   3                          fun_delay(1,del_s);
+ 607   3                          while(1){
+ 608   4                              while(in_hz==1);
+ 609   4                              fun_delay(25,del_ms);
+ 610   4                              if(in_hz==0)
+ 611   4                                  break;
+ 612   4                          }
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 11  
 
- 613   4                              fun_delay(25,del_ms);
- 614   4                              if(in_hz==1)
- 615   4                                  break;
- 616   4                          }
- 617   3                          while(1){
- 618   4                              while(in_hz==1);
- 619   4                              fun_delay(25,del_ms);
- 620   4                              if(in_hz==0){
- 621   5                                  break;
- 622   5                              }
- 623   4                          }
- 624   3                          break;
- 625   3                      default:
+ 613   3                          while(1){
+ 614   4                              while(in_hz==0);
+ 615   4                              fun_delay(25,del_ms);
+ 616   4                              if(in_hz==1)
+ 617   4                                  break;
+ 618   4                          }
+ 619   3                          while(1){
+ 620   4                              while(in_hz==1);
+ 621   4                              fun_delay(25,del_ms);
+ 622   4                              if(in_hz==0){
+ 623   5                                  break;
+ 624   5                              }
+ 625   4                          }
  626   3                          break;
- 627   3                  }
- 628   2                  break;
- 629   2              case dir_right://要去右面
- 630   2                  switch(str_begin.hzfx){
- 631   3                      case dir_up://现在在前面
- 632   3                          fun_startdj(mot_dj4,100);
- 633   3                          fun_delay(1,del_s);
- 634   3                          while(1){
- 635   4                              while(in_hz==1);
- 636   4                              fun_delay(25,del_ms);
- 637   4                              if(in_hz==0)
- 638   4                                  break;
- 639   4                          }
- 640   3                          break;
- 641   3                      case dir_down://现在在下面
- 642   3                          fun_startdj(mot_dj4,-100);
- 643   3                          fun_delay(1,del_s);
- 644   3                          while(1){
- 645   4                              while(in_hz==1);
- 646   4                              fun_delay(25,del_ms);
- 647   4                              if(in_hz==0)
- 648   4                                  break;
- 649   4                          }
- 650   3                          break;
- 651   3                      case dir_left://现在在左面
- 652   3                          fun_startdj(mot_dj4,100);
- 653   3                          fun_delay(1,del_s);
- 654   3                          while(1){
- 655   4                              while(in_hz==1);
- 656   4                              fun_delay(25,del_ms);
- 657   4                              if(in_hz==0)
- 658   4                                  break;
- 659   4                          }
- 660   3                          while(1){
- 661   4                              while(in_hz==0);
- 662   4                              fun_delay(25,del_ms);
- 663   4                              if(in_hz==1)
- 664   4                                  break;
- 665   4                          }
- 666   3                          while(1){
- 667   4                              while(in_hz==1);
- 668   4                              fun_delay(25,del_ms);
- 669   4                              if(in_hz==0){
- 670   5                                  break;
- 671   5                              }
- 672   4                          }
- 673   3                          break;
- 674   3                      default:
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 12  
+ 627   3                      default:
+ 628   3                          break;
+ 629   3                  }
+ 630   2                  break;
+ 631   2              case dir_right://要去右面
+ 632   2                  switch(str_begin.hzfx){
+ 633   3                      case dir_up://现在在前面
+ 634   3                          fun_startdj(mot_dj4,100);
+ 635   3                          fun_delay(1,del_s);
+ 636   3                          while(1){
+ 637   4                              while(in_hz==1);
+ 638   4                              fun_delay(25,del_ms);
+ 639   4                              if(in_hz==0)
+ 640   4                                  break;
+ 641   4                          }
+ 642   3                          break;
+ 643   3                      case dir_down://现在在下面
+ 644   3                          fun_startdj(mot_dj4,-100);
+ 645   3                          fun_delay(1,del_s);
+ 646   3                          while(1){
+ 647   4                              while(in_hz==1);
+ 648   4                              fun_delay(25,del_ms);
+ 649   4                              if(in_hz==0)
+ 650   4                                  break;
+ 651   4                          }
+ 652   3                          break;
+ 653   3                      case dir_left://现在在左面
+ 654   3                          fun_startdj(mot_dj4,100);
+ 655   3                          fun_delay(1,del_s);
+ 656   3                          while(1){
+ 657   4                              while(in_hz==1);
+ 658   4                              fun_delay(25,del_ms);
+ 659   4                              if(in_hz==0)
+ 660   4                                  break;
+ 661   4                          }
+ 662   3                          while(1){
+ 663   4                              while(in_hz==0);
+ 664   4                              fun_delay(25,del_ms);
+ 665   4                              if(in_hz==1)
+ 666   4                                  break;
+ 667   4                          }
+ 668   3                          while(1){
+ 669   4                              while(in_hz==1);
+ 670   4                              fun_delay(25,del_ms);
+ 671   4                              if(in_hz==0){
+ 672   5                                  break;
+ 673   5                              }
+ 674   4                          }
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 12  
 
  675   3                          break;
- 676   3                  }
- 677   2                  break;
- 678   2              default:
+ 676   3                      default:
+ 677   3                          break;
+ 678   3                  }
  679   2                  break;
- 680   2          }
- 681   1          fun_stop(mot_dj4);
- 682   1          str_begin.hzfx=par_model;//存储运行结果
- 683   1      }//回转单步运动
- 684          void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz){
- 685   1          if(str_begin.hzfx!=par_hz){
- 686   2              fun_py1(tra_z);
- 687   2              switch(par_hz){//启动回转,在位则不启动
- 688   3                  case dir_up://回转至前方
- 689   3                      switch(str_begin.hzfx){
- 690   4                          case dir_down://现在在下方
- 691   4                              fun_startdj(mot_dj4,-100);
- 692   4                              break;
- 693   4                          case dir_left://现在在左边
- 694   4                              fun_startdj(mot_dj4,100);
- 695   4                              break;
- 696   4                          case dir_right://现在在右边
- 697   4                              fun_startdj(mot_dj4,-100);
- 698   4                              break;
- 699   4                          default:
+ 680   2              default:
+ 681   2                  break;
+ 682   2          }
+ 683   1          fun_stop(mot_dj4);
+ 684   1          str_begin.hzfx=par_model;//存储运行结果
+ 685   1      }//回转单步运动
+ 686          void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz){
+ 687   1          if(str_begin.hzfx!=par_hz){
+ 688   2              fun_py1(tra_z);
+ 689   2              switch(par_hz){//启动回转,在位则不启动
+ 690   3                  case dir_up://回转至前方
+ 691   3                      switch(str_begin.hzfx){
+ 692   4                          case dir_down://现在在下方
+ 693   4                              fun_startdj(mot_dj4,-100);
+ 694   4                              break;
+ 695   4                          case dir_left://现在在左边
+ 696   4                              fun_startdj(mot_dj4,100);
+ 697   4                              break;
+ 698   4                          case dir_right://现在在右边
+ 699   4                              fun_startdj(mot_dj4,-100);
  700   4                              break;
- 701   4                      }
- 702   3                      break;
- 703   3                  case dir_down://要去下面
- 704   3                      switch(str_begin.hzfx){
- 705   4                          case dir_up://现在在上面
- 706   4                              fun_startdj(mot_dj4,100);
- 707   4                              break;
- 708   4                          case dir_left://现在在左面
- 709   4                              fun_startdj(mot_dj4,-100);
- 710   4                              break;
- 711   4                          case dir_right://现在在右面
- 712   4                              fun_startdj(mot_dj4,100);
- 713   4                              break;
- 714   4                          default:
+ 701   4                          default:
+ 702   4                              break;
+ 703   4                      }
+ 704   3                      break;
+ 705   3                  case dir_down://要去下面
+ 706   3                      switch(str_begin.hzfx){
+ 707   4                          case dir_up://现在在上面
+ 708   4                              fun_startdj(mot_dj4,100);
+ 709   4                              break;
+ 710   4                          case dir_left://现在在左面
+ 711   4                              fun_startdj(mot_dj4,-100);
+ 712   4                              break;
+ 713   4                          case dir_right://现在在右面
+ 714   4                              fun_startdj(mot_dj4,100);
  715   4                              break;
- 716   4                      }
- 717   3                      break;
- 718   3                  case dir_left://要去左边
- 719   3                      switch(str_begin.hzfx){
- 720   4                          case dir_up://现在在上面
- 721   4                              fun_startdj(mot_dj4,-100);
- 722   4                              break;
- 723   4                          case dir_down://现在在下面
- 724   4                              fun_startdj(mot_dj4,100);
- 725   4                              break;
- 726   4                          case dir_right://现在在右面
- 727   4                              fun_startdj(mot_dj4,-100);
- 728   4                              break;
- 729   4                          default:
+ 716   4                          default:
+ 717   4                              break;
+ 718   4                      }
+ 719   3                      break;
+ 720   3                  case dir_left://要去左边
+ 721   3                      switch(str_begin.hzfx){
+ 722   4                          case dir_up://现在在上面
+ 723   4                              fun_startdj(mot_dj4,-100);
+ 724   4                              break;
+ 725   4                          case dir_down://现在在下面
+ 726   4                              fun_startdj(mot_dj4,100);
+ 727   4                              break;
+ 728   4                          case dir_right://现在在右面
+ 729   4                              fun_startdj(mot_dj4,-100);
  730   4                              break;
- 731   4                      }
- 732   3                      break;
- 733   3                  case dir_right://要去右面
- 734   3                      switch(str_begin.hzfx){
- 735   4                          case dir_up://现在在前面
- 736   4                              fun_startdj(mot_dj4,100);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 13  
+ 731   4                          default:
+ 732   4                              break;
+ 733   4                      }
+ 734   3                      break;
+ 735   3                  case dir_right://要去右面
+ 736   3                      switch(str_begin.hzfx){
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 13  
 
- 737   4                              break;
- 738   4                          case dir_down://现在在下面
- 739   4                              fun_startdj(mot_dj4,-100);
- 740   4                              break;
- 741   4                          case dir_left://现在在左面
- 742   4                              fun_startdj(mot_dj4,100);
- 743   4                              break;
- 744   4                          default:
+ 737   4                          case dir_up://现在在前面
+ 738   4                              fun_startdj(mot_dj4,100);
+ 739   4                              break;
+ 740   4                          case dir_down://现在在下面
+ 741   4                              fun_startdj(mot_dj4,-100);
+ 742   4                              break;
+ 743   4                          case dir_left://现在在左面
+ 744   4                              fun_startdj(mot_dj4,100);
  745   4                              break;
- 746   4                      }
- 747   3                      break;
- 748   3                  default:
+ 746   4                          default:
+ 747   4                              break;
+ 748   4                      }
  749   3                      break;
- 750   3              }
- 751   2          }
- 752   1          switch(par_py){
- 753   2              case tra_q://前平移(没有电机的呢个方向)
- 754   2                  while(1){
- 755   3                      fun_startdj(mot_dj2,100);
- 756   3                      while(in_qpy==1);
- 757   3                      fun_delay(20,del_ms);
- 758   3                      if(in_qpy==0){
- 759   4                          fun_delay(20,del_ms);
- 760   4                          break;
- 761   4                      }
- 762   3                  }
- 763   2                  break;
- 764   2              case tra_kq:
- 765   2                  fun_startdj(mot_dj2,100);
- 766   2                  fun_delay(str_cod.py1kqz,del_ms);
- 767   2                  break;
- 768   2              case tra_kh:
- 769   2                  fun_startdj(mot_dj2,-100);
- 770   2                  fun_delay(str_cod.py1zkh,del_ms);
- 771   2                  break;
- 772   2              case tra_h://后平移(有电机的呢个方向)
- 773   2                  while(1){
- 774   3                      fun_startdj(mot_dj2,-100);
- 775   3                      while(in_hpy==1);
- 776   3                      fun_delay(20,del_ms);
- 777   3                      if(in_hpy==0){
- 778   4                          fun_delay(20,del_ms);
- 779   4                          break;
- 780   4                      }
- 781   3                  }
- 782   2                  break;
- 783   2              default:
- 784   2                  break;
- 785   2          }
- 786   1          fun_stop(mot_dj2);
- 787   1          str_begin.pywz=par_py;//存储平移位置
- 788   1          if(str_begin.hzfx!=par_hz){
- 789   2              fun_select(sel_912);
- 790   2              switch(par_hz){
- 791   3                  case dir_up://回转至前方
- 792   3                      switch(str_begin.hzfx){
- 793   4                          case dir_down://现在在下方
- 794   4                              while(1){
- 795   5                                  while(in_hz==1);
- 796   5                                  fun_delay(25,del_ms);
- 797   5                                  if(in_hz==0)
- 798   5                                      break;
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 14  
+ 750   3                  default:
+ 751   3                      break;
+ 752   3              }
+ 753   2              switch(par_py){
+ 754   3                  case tra_q://前平移(没有电机的呢个方向)
+ 755   3                      while(1){
+ 756   4                          fun_startdj(mot_dj2,100);
+ 757   4                          while(in_qpy==1);
+ 758   4                          fun_delay(20,del_ms);
+ 759   4                          if(in_qpy==0){
+ 760   5                              fun_delay(20,del_ms);
+ 761   5                              break;
+ 762   5                          }
+ 763   4                      }
+ 764   3                      break;
+ 765   3                  case tra_kq:
+ 766   3                      fun_startdj(mot_dj2,100);
+ 767   3                      fun_delay(str_cod.py1kqz,del_ms);
+ 768   3                      break;
+ 769   3                  case tra_kh:
+ 770   3                      fun_startdj(mot_dj2,-100);
+ 771   3                      fun_delay(str_cod.py1zkh,del_ms);
+ 772   3                      break;
+ 773   3                  case tra_h://后平移(有电机的呢个方向)
+ 774   3                      while(1){
+ 775   4                          fun_startdj(mot_dj2,-100);
+ 776   4                          while(in_hpy==1);
+ 777   4                          fun_delay(20,del_ms);
+ 778   4                          if(in_hpy==0){
+ 779   5                              fun_delay(20,del_ms);
+ 780   5                              break;
+ 781   5                          }
+ 782   4                      }
+ 783   3                      break;
+ 784   3                  default:
+ 785   3                      break;
+ 786   3              }
+ 787   2              fun_stop(mot_dj2);
+ 788   2              str_begin.pywz=par_py;//存储平移位置
+ 789   2      
+ 790   2              fun_select(sel_912);
+ 791   2              switch(par_hz){
+ 792   3                  case dir_up://回转至前方
+ 793   3                      switch(str_begin.hzfx){
+ 794   4                          case dir_down://现在在下方
+ 795   4                              while(1){
+ 796   5                                  while(in_hz==1);
+ 797   5                                  fun_delay(25,del_ms);
+ 798   5                                  if(in_hz==0)
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 14  
 
- 799   5                              }
- 800   4                              while(1){
- 801   5                                  while(in_hz==0);
- 802   5                                  fun_delay(1,del_s);
- 803   5                                  if(in_hz==1)
- 804   5                                      break;
- 805   5                              }
- 806   4                              while(1){
- 807   5                                  while(in_hz==1);
- 808   5                                  fun_delay(25,del_ms);
- 809   5                                  if(in_hz==0)
- 810   5                                      break;
- 811   5                              }
- 812   4                              break;
- 813   4                          case dir_left://现在在左边
- 814   4                              while(1){
- 815   5                                  while(in_hz==1);
- 816   5                                  fun_delay(25,del_ms);
- 817   5                                  if(in_hz==0)
- 818   5                                      break;
- 819   5                              }
- 820   4                              break;
- 821   4                          case dir_right://现在在右边
- 822   4                              while(1){
- 823   5                                  while(in_hz==1);
- 824   5                                  fun_delay(25,del_ms);
- 825   5                                  if(in_hz==0)
- 826   5                                      break;
- 827   5                              }
- 828   4                              break;
- 829   4                          default:
- 830   4                              break;
- 831   4                      }
- 832   3                      break;
- 833   3                  case dir_down://要去下面
- 834   3                      switch(str_begin.hzfx){
- 835   4                          case dir_up://现在在上面
- 836   4                              while(1){
- 837   5                                  while(in_hz==1);
- 838   5                                  fun_delay(25,del_ms);
- 839   5                                  if(in_hz==0)
- 840   5                                      break;
- 841   5                              }
- 842   4                              while(1){
- 843   5                                  while(in_hz==0);
- 844   5                                  fun_delay(1,del_s);
- 845   5                                  if(in_hz==1)
- 846   5                                      break;
- 847   5                              }
- 848   4                              while(1){
- 849   5                                  while(in_hz==1);
- 850   5                                  fun_delay(25,del_ms);
- 851   5                                  if(in_hz==0)
- 852   5                                      break;
- 853   5                              }
- 854   4                              break;
- 855   4                          case dir_left://现在在左面
- 856   4                              while(1){
- 857   5                                  while(in_hz==1);
- 858   5                                  fun_delay(25,del_ms);
- 859   5                                  if(in_hz==0)
- 860   5                                      break;
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 15  
+ 799   5                                      break;
+ 800   5                              }
+ 801   4                              while(1){
+ 802   5                                  while(in_hz==0);
+ 803   5                                  fun_delay(1,del_s);
+ 804   5                                  if(in_hz==1)
+ 805   5                                      break;
+ 806   5                              }
+ 807   4                              while(1){
+ 808   5                                  while(in_hz==1);
+ 809   5                                  fun_delay(25,del_ms);
+ 810   5                                  if(in_hz==0)
+ 811   5                                      break;
+ 812   5                              }
+ 813   4                              break;
+ 814   4                          case dir_left://现在在左边
+ 815   4                              while(1){
+ 816   5                                  while(in_hz==1);
+ 817   5                                  fun_delay(25,del_ms);
+ 818   5                                  if(in_hz==0)
+ 819   5                                      break;
+ 820   5                              }
+ 821   4                              break;
+ 822   4                          case dir_right://现在在右边
+ 823   4                              while(1){
+ 824   5                                  while(in_hz==1);
+ 825   5                                  fun_delay(25,del_ms);
+ 826   5                                  if(in_hz==0)
+ 827   5                                      break;
+ 828   5                              }
+ 829   4                              break;
+ 830   4                          default:
+ 831   4                              break;
+ 832   4                      }
+ 833   3                      break;
+ 834   3                  case dir_down://要去下面
+ 835   3                      switch(str_begin.hzfx){
+ 836   4                          case dir_up://现在在上面
+ 837   4                              while(1){
+ 838   5                                  while(in_hz==1);
+ 839   5                                  fun_delay(25,del_ms);
+ 840   5                                  if(in_hz==0)
+ 841   5                                      break;
+ 842   5                              }
+ 843   4                              while(1){
+ 844   5                                  while(in_hz==0);
+ 845   5                                  fun_delay(1,del_s);
+ 846   5                                  if(in_hz==1)
+ 847   5                                      break;
+ 848   5                              }
+ 849   4                              while(1){
+ 850   5                                  while(in_hz==1);
+ 851   5                                  fun_delay(25,del_ms);
+ 852   5                                  if(in_hz==0)
+ 853   5                                      break;
+ 854   5                              }
+ 855   4                              break;
+ 856   4                          case dir_left://现在在左面
+ 857   4                              while(1){
+ 858   5                                  while(in_hz==1);
+ 859   5                                  fun_delay(25,del_ms);
+ 860   5                                  if(in_hz==0)
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 15  
 
- 861   5                              }
- 862   4                              break;
- 863   4                          case dir_right://现在在右面
- 864   4                              while(1){
- 865   5                                  while(in_hz==1);
- 866   5                                  fun_delay(25,del_ms);
- 867   5                                  if(in_hz==0)
- 868   5                                      break;
- 869   5                              }
- 870   4                              break;
- 871   4                          default:
- 872   4                              break;
- 873   4                      }
- 874   3                      break;
- 875   3                  case dir_left://要去左边
- 876   3                      switch(str_begin.hzfx){
- 877   4                          case dir_up://现在在上面
- 878   4                              while(1){
- 879   5                                  while(in_hz==1);
- 880   5                                  fun_delay(25,del_ms);
- 881   5                                  if(in_hz==0)
- 882   5                                      break;
- 883   5                              }
- 884   4                              break;
- 885   4                          case dir_down://现在在下面
- 886   4                              while(1){
- 887   5                                  while(in_hz==1);
- 888   5                                  fun_delay(25,del_ms);
- 889   5                                  if(in_hz==0)
- 890   5                                      break;
- 891   5                              }
- 892   4                              break;
- 893   4                          case dir_right://现在在右面
- 894   4                              while(1){
- 895   5                                  while(in_hz==1);
- 896   5                                  fun_delay(25,del_ms);
- 897   5                                  if(in_hz==0)
- 898   5                                      break;
- 899   5                              }
- 900   4                              while(1){
- 901   5                                  while(in_hz==0);
- 902   5                                  fun_delay(1,del_s);
- 903   5                                  if(in_hz==1)
- 904   5                                      break;
- 905   5                              }
- 906   4                              while(1){
- 907   5                                  while(in_hz==1);
- 908   5                                  fun_delay(25,del_ms);
- 909   5                                  if(in_hz==0){
- 910   6                                      break;
- 911   6                                  }
- 912   5                              }
- 913   4                              break;
- 914   4                          default:
- 915   4                              break;
- 916   4                      }
- 917   3                      break;
- 918   3                  case dir_right://要去右面
- 919   3                      switch(str_begin.hzfx){
- 920   4                          case dir_up://现在在前面
- 921   4                              while(1){
- 922   5                                  while(in_hz==1);
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 16  
+ 861   5                                      break;
+ 862   5                              }
+ 863   4                              break;
+ 864   4                          case dir_right://现在在右面
+ 865   4                              while(1){
+ 866   5                                  while(in_hz==1);
+ 867   5                                  fun_delay(25,del_ms);
+ 868   5                                  if(in_hz==0)
+ 869   5                                      break;
+ 870   5                              }
+ 871   4                              break;
+ 872   4                          default:
+ 873   4                              break;
+ 874   4                      }
+ 875   3                      break;
+ 876   3                  case dir_left://要去左边
+ 877   3                      switch(str_begin.hzfx){
+ 878   4                          case dir_up://现在在上面
+ 879   4                              while(1){
+ 880   5                                  while(in_hz==1);
+ 881   5                                  fun_delay(25,del_ms);
+ 882   5                                  if(in_hz==0)
+ 883   5                                      break;
+ 884   5                              }
+ 885   4                              break;
+ 886   4                          case dir_down://现在在下面
+ 887   4                              while(1){
+ 888   5                                  while(in_hz==1);
+ 889   5                                  fun_delay(25,del_ms);
+ 890   5                                  if(in_hz==0)
+ 891   5                                      break;
+ 892   5                              }
+ 893   4                              break;
+ 894   4                          case dir_right://现在在右面
+ 895   4                              while(1){
+ 896   5                                  while(in_hz==1);
+ 897   5                                  fun_delay(25,del_ms);
+ 898   5                                  if(in_hz==0)
+ 899   5                                      break;
+ 900   5                              }
+ 901   4                              while(1){
+ 902   5                                  while(in_hz==0);
+ 903   5                                  fun_delay(1,del_s);
+ 904   5                                  if(in_hz==1)
+ 905   5                                      break;
+ 906   5                              }
+ 907   4                              while(1){
+ 908   5                                  while(in_hz==1);
+ 909   5                                  fun_delay(25,del_ms);
+ 910   5                                  if(in_hz==0){
+ 911   6                                      break;
+ 912   6                                  }
+ 913   5                              }
+ 914   4                              break;
+ 915   4                          default:
+ 916   4                              break;
+ 917   4                      }
+ 918   3                      break;
+ 919   3                  case dir_right://要去右面
+ 920   3                      switch(str_begin.hzfx){
+ 921   4                          case dir_up://现在在前面
+ 922   4                              while(1){
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 16  
 
- 923   5                                  fun_delay(25,del_ms);
- 924   5                                  if(in_hz==0)
- 925   5                                      break;
- 926   5                              }
- 927   4                              break;
- 928   4                          case dir_down://现在在下面
- 929   4                              while(1){
- 930   5                                  while(in_hz==1);
- 931   5                                  fun_delay(25,del_ms);
- 932   5                                  if(in_hz==0)
- 933   5                                      break;
- 934   5                              }
- 935   4                              break;
- 936   4                          case dir_left://现在在左面
- 937   4                              while(1){
- 938   5                                  while(in_hz==1);
- 939   5                                  fun_delay(25,del_ms);
- 940   5                                  if(in_hz==0)
- 941   5                                      break;
- 942   5                              }
- 943   4                              while(1){
- 944   5                                  while(in_hz==0);
- 945   5                                  fun_delay(1,del_s);
- 946   5                                  if(in_hz==1)
- 947   5                                      break;
- 948   5                              }
- 949   4                              while(1){
- 950   5                                  while(in_hz==1);
- 951   5                                  fun_delay(25,del_ms);
- 952   5                                  if(in_hz==0){
- 953   6                                      break;
- 954   6                                  }
- 955   5                              }
- 956   4                              break;
- 957   4                          default:
- 958   4                              break;
- 959   4                      }
- 960   3                      break;
- 961   3                  default:
- 962   3                      break;
- 963   3              }
- 964   2              fun_stop(mot_dj4);
- 965   2              str_begin.hzfx=par_hz;//存储回转位置
- 966   2          }
- 967   1      }//回转单步运动
- 968          void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
- 969   1          bit loc_flag=0;
- 970   1          ui loc_xh=str_cod.mlinerqd/(0.5*(par_sd*par_sd+par_sd));
- 971   1          uc loc_con;
- 972   1          uc loc_l=par_sd,loc_r=par_sd;
- 973   1          for(loc_con=1;loc_con<par_sd;fun_delay(loc_xh,del_ms)){//确定路程的软启动程序
- 974   2              loc_r=loc_l=loc_con++;//恢复默认参数
- 975   2              if(in_ls3){//纠偏
- 976   3                  loc_l*=0.9;
- 977   3                  loc_r*=1.1;
- 978   3              }
- 979   2              if(in_ls6){
- 980   3                  loc_l*=1.1;
- 981   3                  loc_r*=0.9;
- 982   3              }  
- 983   2              if(in_ls2){
- 984   3                  loc_l*=0.8;
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 17  
+ 923   5                                  while(in_hz==1);
+ 924   5                                  fun_delay(25,del_ms);
+ 925   5                                  if(in_hz==0)
+ 926   5                                      break;
+ 927   5                              }
+ 928   4                              break;
+ 929   4                          case dir_down://现在在下面
+ 930   4                              while(1){
+ 931   5                                  while(in_hz==1);
+ 932   5                                  fun_delay(25,del_ms);
+ 933   5                                  if(in_hz==0)
+ 934   5                                      break;
+ 935   5                              }
+ 936   4                              break;
+ 937   4                          case dir_left://现在在左面
+ 938   4                              while(1){
+ 939   5                                  while(in_hz==1);
+ 940   5                                  fun_delay(25,del_ms);
+ 941   5                                  if(in_hz==0)
+ 942   5                                      break;
+ 943   5                              }
+ 944   4                              while(1){
+ 945   5                                  while(in_hz==0);
+ 946   5                                  fun_delay(1,del_s);
+ 947   5                                  if(in_hz==1)
+ 948   5                                      break;
+ 949   5                              }
+ 950   4                              while(1){
+ 951   5                                  while(in_hz==1);
+ 952   5                                  fun_delay(25,del_ms);
+ 953   5                                  if(in_hz==0){
+ 954   6                                      break;
+ 955   6                                  }
+ 956   5                              }
+ 957   4                              break;
+ 958   4                          default:
+ 959   4                              break;
+ 960   4                      }
+ 961   3                      break;
+ 962   3                  default:
+ 963   3                      break;
+ 964   3              }
+ 965   2              fun_stop(mot_dj4);
+ 966   2              str_begin.hzfx=par_hz;//存储回转位置
+ 967   2          }
+ 968   1          else
+ 969   1              fun_py1(par_py);
+ 970   1      }//回转单步运动
+ 971          void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
+ 972   1          bit loc_flag=0;
+ 973   1          ui loc_xh=str_cod.mlinerqd/(0.5*(par_sd*par_sd+par_sd));
+ 974   1          uc loc_con;
+ 975   1          uc loc_l=par_sd,loc_r=par_sd;
+ 976   1          for(loc_con=1;loc_con<par_sd;fun_delay(loc_xh,del_ms)){//确定路程的软启动程序
+ 977   2              loc_r=loc_l=loc_con++;//恢复默认参数
+ 978   2              if(in_ls3){//纠偏
+ 979   3                  loc_l*=0.9;
+ 980   3                  loc_r*=1.1;
+ 981   3              }
+ 982   2              if(in_ls6){
+ 983   3                  loc_l*=1.1;
+ 984   3                  loc_r*=0.9;
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 17  
 
- 985   3                  loc_r*=1.2;
- 986   3              }
- 987   2              if(in_ls7){
- 988   3                  loc_l*=1.2;
- 989   3                  loc_r*=0.8;
- 990   3              }
- 991   2              if(in_ls1){
- 992   3                  loc_l*=0.7;
- 993   3                  loc_r*=1.3;
- 994   3              }
- 995   2              if(in_ls8){
- 996   3                  loc_l*=1.3;
- 997   3                  loc_r*=0.7;
- 998   3              }
- 999   2              fun_startdj(mot_r,loc_r);
-1000   2              fun_startdj(mot_l,loc_l);
-1001   2          }
-1002   1          loc_con=0;
-1003   1          while(1){
-1004   2              if(((in_ls1)&&(in_ls7))||((in_ls2)&&(in_ls8)))
-1005   2                  loc_flag=1;
-1006   2              else if(loc_flag==1){
-1007   3                  loc_con++;
-1008   3                  loc_flag=0;
-1009   3                  if(loc_con>=par_num){
-1010   4                      if(par_model!=dir_up){
-1011   5                          if(par_model==dir_left){//左转
-1012   6                              fun_startdj(mot_r,par_sd);
-1013   6                              fun_startdj(mot_l,-10);
-1014   6                              fun_delay(500,del_ms);
-1015   6                              while(1){
-1016   7                                  while(!in_ls4||!in_ls5);
-1017   7                                  fun_delay(100,del_us);
-1018   7                                  if(in_ls4&&in_ls5){
-1019   8                                      fun_stop(mot_rl);
-1020   8                                      return;
-1021   8                                  }
-1022   7                              }
-1023   6                          }
-1024   5                          else if(par_model==dir_right){
-1025   6                              fun_startdj(mot_l,par_sd);
-1026   6                              fun_startdj(mot_r,-10);
-1027   6                              fun_delay(500,del_ms);
-1028   6                              while(1){
-1029   7                                  while(!in_ls4||!in_ls5);
-1030   7                                  fun_delay(100,del_us);
-1031   7                                  if(in_ls4&&in_ls5){
-1032   8                                      fun_stop(mot_rl);
-1033   8                                      return;
-1034   8                                  }
-1035   7                              }
-1036   6                          }
-1037   5                      }
-1038   4                      else{
-1039   5                          for(loc_con=par_sd;loc_con>0;fun_delay(loc_xh,del_ms)){//确定路程的软启动程�
+ 985   3              }  
+ 986   2              if(in_ls2){
+ 987   3                  loc_l*=0.8;
+ 988   3                  loc_r*=1.2;
+ 989   3              }
+ 990   2              if(in_ls7){
+ 991   3                  loc_l*=1.2;
+ 992   3                  loc_r*=0.8;
+ 993   3              }
+ 994   2              if(in_ls1){
+ 995   3                  loc_l*=0.7;
+ 996   3                  loc_r*=1.3;
+ 997   3              }
+ 998   2              if(in_ls8){
+ 999   3                  loc_l*=1.3;
+1000   3                  loc_r*=0.7;
+1001   3              }
+1002   2              fun_startdj(mot_r,loc_r);
+1003   2              fun_startdj(mot_l,loc_l);
+1004   2          }
+1005   1          loc_con=0;
+1006   1          while(1){
+1007   2              if(((in_ls1)&&(in_ls7))||((in_ls2)&&(in_ls8)))
+1008   2                  loc_flag=1;
+1009   2              else if(loc_flag==1){
+1010   3                  loc_con++;
+1011   3                  loc_flag=0;
+1012   3                  if(loc_con>=par_num){
+1013   4                      if(par_model!=dir_up){
+1014   5                          if(par_model==dir_left){//左转
+1015   6                              fun_startdj(mot_r,par_sd);
+1016   6                              fun_startdj(mot_l,-10);
+1017   6                              fun_delay(500,del_ms);
+1018   6                              while(1){
+1019   7                                  while(!in_ls4||!in_ls5);
+1020   7                                  fun_delay(100,del_us);
+1021   7                                  if(in_ls4&&in_ls5){
+1022   8                                      fun_stop(mot_rl);
+1023   8                                      return;
+1024   8                                  }
+1025   7                              }
+1026   6                          }
+1027   5                          else if(par_model==dir_right){
+1028   6                              fun_startdj(mot_l,par_sd);
+1029   6                              fun_startdj(mot_r,-10);
+1030   6                              fun_delay(500,del_ms);
+1031   6                              while(1){
+1032   7                                  while(!in_ls4||!in_ls5);
+1033   7                                  fun_delay(100,del_us);
+1034   7                                  if(in_ls4&&in_ls5){
+1035   8                                      fun_stop(mot_rl);
+1036   8                                      return;
+1037   8                                  }
+1038   7                              }
+1039   6                          }
+1040   5                      }
+1041   4                      else{
+1042   5                          for(loc_con=par_sd;loc_con>0;fun_delay(loc_xh,del_ms)){//确定路程的软启动程�
              -�
-1040   6                              loc_r=loc_l=loc_con--;//恢复默认参数
-1041   6                              if(in_ls3){//纠偏
-1042   7                                  loc_l*=0.9;
-1043   7                                  loc_r*=1.1;
-1044   7                              }
-1045   6                              if(in_ls6){
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 18  
+1043   6                              loc_r=loc_l=loc_con--;//恢复默认参数
+1044   6                              if(in_ls3){//纠偏
+1045   7                                  loc_l*=0.9;
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 18  
 
-1046   7                                  loc_l*=1.1;
-1047   7                                  loc_r*=0.9;
-1048   7                              }  
-1049   6                              if(in_ls2){
-1050   7                                  loc_l*=0.8;
-1051   7                                  loc_r*=1.2;
-1052   7                              }
-1053   6                              if(in_ls7){
-1054   7                                  loc_l*=1.2;
-1055   7                                  loc_r*=0.8;
-1056   7                              }
-1057   6                              if(in_ls1){
-1058   7                                  loc_l*=0.7;
-1059   7                                  loc_r*=1.3;
-1060   7                              }
-1061   6                              if(in_ls8){
-1062   7                                  loc_l*=1.3;
-1063   7                                  loc_r*=0.7;
-1064   7                              }
-1065   6                              fun_startdj(mot_r,loc_r);
-1066   6                              fun_startdj(mot_l,loc_l);
-1067   6                          }
-1068   5                          fun_stop(mot_rl);
-1069   5                          return;
-1070   5                      }
-1071   4                  }
-1072   3              }
-1073   2              loc_r=loc_l=par_sd;
-1074   2              if(in_ls3){//纠偏
-1075   3                  loc_l*=0.9;
-1076   3                  loc_r*=1.1;
-1077   3              }
-1078   2              if(in_ls6){
-1079   3                  loc_l*=1.1;
-1080   3                  loc_r*=0.9;
-1081   3              }  
-1082   2              if(in_ls2){
-1083   3                  loc_l*=0.8;
-1084   3                  loc_r*=1.2;
-1085   3              }
-1086   2              if(in_ls7){
-1087   3                  loc_l*=1.2;
-1088   3                  loc_r*=0.8;
-1089   3              }
-1090   2              if(in_ls1){
-1091   3                  loc_l*=0.7;
-1092   3                  loc_r*=1.3;
-1093   3              }
-1094   2              if(in_ls8){
-1095   3                  loc_l*=1.3;
-1096   3                  loc_r*=0.7;
-1097   3              }
-1098   2              fun_startdj(mot_l,loc_l);//更新电机参数
-1099   2              fun_startdj(mot_r,loc_r);
-1100   2          }
-1101   1      }//主函数普通巡线
-1102          void fun_stope2prom(){
-1103   1          IAP_CONTR = 0;                  //关闭IAP功能
-1104   1          IAP_CMD = 0;                    //清除命令
-1105   1          IAP_TRIG = 0;                   //清除触发寄存器
-1106   1          IAP_ADDRH = 0x80;               //数据指针指向非EEPROM区
-1107   1          IAP_ADDRL = 0;                  //清除IAP地址
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 19  
+1046   7                                  loc_r*=1.1;
+1047   7                              }
+1048   6                              if(in_ls6){
+1049   7                                  loc_l*=1.1;
+1050   7                                  loc_r*=0.9;
+1051   7                              }  
+1052   6                              if(in_ls2){
+1053   7                                  loc_l*=0.8;
+1054   7                                  loc_r*=1.2;
+1055   7                              }
+1056   6                              if(in_ls7){
+1057   7                                  loc_l*=1.2;
+1058   7                                  loc_r*=0.8;
+1059   7                              }
+1060   6                              if(in_ls1){
+1061   7                                  loc_l*=0.7;
+1062   7                                  loc_r*=1.3;
+1063   7                              }
+1064   6                              if(in_ls8){
+1065   7                                  loc_l*=1.3;
+1066   7                                  loc_r*=0.7;
+1067   7                              }
+1068   6                              fun_startdj(mot_r,loc_r);
+1069   6                              fun_startdj(mot_l,loc_l);
+1070   6                          }
+1071   5                          fun_stop(mot_rl);
+1072   5                          return;
+1073   5                      }
+1074   4                  }
+1075   3              }
+1076   2              loc_r=loc_l=par_sd;
+1077   2              if(in_ls3){//纠偏
+1078   3                  loc_l*=0.9;
+1079   3                  loc_r*=1.1;
+1080   3              }
+1081   2              if(in_ls6){
+1082   3                  loc_l*=1.1;
+1083   3                  loc_r*=0.9;
+1084   3              }  
+1085   2              if(in_ls2){
+1086   3                  loc_l*=0.8;
+1087   3                  loc_r*=1.2;
+1088   3              }
+1089   2              if(in_ls7){
+1090   3                  loc_l*=1.2;
+1091   3                  loc_r*=0.8;
+1092   3              }
+1093   2              if(in_ls1){
+1094   3                  loc_l*=0.7;
+1095   3                  loc_r*=1.3;
+1096   3              }
+1097   2              if(in_ls8){
+1098   3                  loc_l*=1.3;
+1099   3                  loc_r*=0.7;
+1100   3              }
+1101   2              fun_startdj(mot_l,loc_l);//更新电机参数
+1102   2              fun_startdj(mot_r,loc_r);
+1103   2          }
+1104   1      }//主函数普通巡线
+1105          void fun_stope2prom(){
+1106   1          IAP_CONTR = 0;                  //关闭IAP功能
+1107   1          IAP_CMD = 0;                    //清除命令
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 19  
 
-1108   1      }//关闭EEPROM功能(IapIdle)
-1109          uc fun_reade2prom(ui par_add){
-1110   1          uc loc_dat;                     //数据缓冲区
-1111   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
-1112   1          IAP_CMD = 1;                    //设置EEPROM读命令
-1113   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
-1114   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
-1115   1          IAP_TRIG = 0x5a;                //触发
-1116   1          IAP_TRIG = 0xa5;                //再次触发
-1117   1          fun_delay(10,del_us);           //稍等一会儿
-1118   1          loc_dat = IAP_DATA;             //读出EEPROM中的数据
-1119   1          fun_stope2prom();               //关闭EEPROM功能
-1120   1          return loc_dat;                 //返回读取结果
-1121   1      }//读取EEPROM数据
-1122          void fun_writee2prom(ui par_add,uc par_dat){
-1123   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
-1124   1          IAP_CMD = 2;                    //设置EEPROM写入命令
-1125   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
-1126   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
-1127   1          IAP_DATA = par_dat;             //写入数据
-1128   1          IAP_TRIG = 0x5a;                //触发
-1129   1          IAP_TRIG = 0xa5;                //再次触发
-1130   1          fun_delay(10,del_us);           //稍等一会儿
-1131   1          fun_stope2prom();               //关闭EEPROM功能
-1132   1      }//写EEPROM数据
-1133          void fun_cleane2prom(ui par_add){
-1134   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
-1135   1          IAP_CMD = 3;                    //设置EEPROM擦除命令
-1136   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
-1137   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
-1138   1          IAP_TRIG = 0x5a;                //触发
-1139   1          IAP_TRIG = 0xa5;                //再次触发
-1140   1          fun_delay(10,del_us);           //稍等一会儿
-1141   1          fun_stope2prom();               //关闭EEPROM功能
-1142   1      }//清除EEPROM数据
-1143          void fun_calibration(){
-1144   1          // fun_sj1(sjp_wz1);//升到最上位
-1145   1          fun_py1(tra_q);//移动到最前端
-1146   1          fun_py1(tra_h);//移动到最后端
-1147   1          def_timer0start//开始定时器
-1148   1          fun_py1(tra_q);//移动到前端并计时
-1149   1          fun_py1(tra_h);//移动到后端
-1150   1          def_timer0stop//停止定时器
-1151   1          var_timer0*=0.39;
-1152   1          str_cod.py1zh=str_cod.py1qz=var_timer0*0.5;
-1153   1          str_cod.py1qkh=str_cod.py1kqh=var_timer0*0.75;
-1154   1          str_cod.py1qkq=str_cod.py1khh=var_timer0*0.25;
-1155   1          str_cod.py1kqz=str_cod.py1zkh=var_timer0*0.25;
-1156   1          str_cod.py1kqkh=var_timer0*0.5;
-1157   1          var_timer0=0;
-1158   1          OUT(var_timer0)
-1159   1      }//自动校准参数
-1160          void fun_port(){
-1161   1          PCON|=0x80;       //使能波特率倍速位SMOD
-1162   1          SCON=0x50;        //8位数据,可变波特率
-1163   1          AUXR|=0x04;       //独立波特率发生器时钟为Fosc,即1T
-1164   1          BRT=0xD9;     //设定独立波特率发生器重装值
-1165   1          AUXR|=0x01;       //串口1选择独立波特率发生器为波特率发生器
-1166   1          AUXR|=0x10;       //启动独立波特率发生器
-1167   1          TI=1;//打开串口传输功能
-1168   1      }//串口初始化
-1169          void fun_zhuajian(
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 20  
+1108   1          IAP_TRIG = 0;                   //清除触发寄存器
+1109   1          IAP_ADDRH = 0x80;               //数据指针指向非EEPROM区
+1110   1          IAP_ADDRL = 0;                  //清除IAP地址
+1111   1      }//关闭EEPROM功能(IapIdle)
+1112          uc fun_reade2prom(ui par_add){
+1113   1          uc loc_dat;                     //数据缓冲区
+1114   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+1115   1          IAP_CMD = 1;                    //设置EEPROM读命令
+1116   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+1117   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+1118   1          IAP_TRIG = 0x5a;                //触发
+1119   1          IAP_TRIG = 0xa5;                //再次触发
+1120   1          fun_delay(10,del_us);           //稍等一会儿
+1121   1          loc_dat = IAP_DATA;             //读出EEPROM中的数据
+1122   1          fun_stope2prom();               //关闭EEPROM功能
+1123   1          return loc_dat;                 //返回读取结果
+1124   1      }//读取EEPROM数据
+1125          void fun_writee2prom(ui par_add,uc par_dat){
+1126   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+1127   1          IAP_CMD = 2;                    //设置EEPROM写入命令
+1128   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+1129   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+1130   1          IAP_DATA = par_dat;             //写入数据
+1131   1          IAP_TRIG = 0x5a;                //触发
+1132   1          IAP_TRIG = 0xa5;                //再次触发
+1133   1          fun_delay(10,del_us);           //稍等一会儿
+1134   1          fun_stope2prom();               //关闭EEPROM功能
+1135   1      }//写EEPROM数据
+1136          void fun_cleane2prom(ui par_add){
+1137   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+1138   1          IAP_CMD = 3;                    //设置EEPROM擦除命令
+1139   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+1140   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+1141   1          IAP_TRIG = 0x5a;                //触发
+1142   1          IAP_TRIG = 0xa5;                //再次触发
+1143   1          fun_delay(10,del_us);           //稍等一会儿
+1144   1          fun_stope2prom();               //关闭EEPROM功能
+1145   1      }//清除EEPROM数据
+1146          void fun_calibration(){
+1147   1          // fun_sj1(sjp_wz1);//升到最上位
+1148   1          fun_py1(tra_q);//移动到最前端
+1149   1          fun_py1(tra_h);//移动到最后端
+1150   1          def_timer0start//开始定时器
+1151   1          fun_py1(tra_q);//移动到前端并计时
+1152   1          fun_py1(tra_h);//移动到后端
+1153   1          def_timer0stop//停止定时器
+1154   1          var_timer0*=0.39;
+1155   1          str_cod.py1zh=str_cod.py1qz=var_timer0*0.5;
+1156   1          str_cod.py1qkh=str_cod.py1kqh=var_timer0*0.75;
+1157   1          str_cod.py1qkq=str_cod.py1khh=var_timer0*0.25;
+1158   1          str_cod.py1kqz=str_cod.py1zkh=var_timer0*0.25;
+1159   1          str_cod.py1kqkh=var_timer0*0.5;
+1160   1          var_timer0=0;
+1161   1          OUT(var_timer0)
+1162   1      }//自动校准参数
+1163          void fun_port(){
+1164   1          PCON|=0x80;       //使能波特率倍速位SMOD
+1165   1          SCON=0x50;        //8位数据,可变波特率
+1166   1          AUXR|=0x04;       //独立波特率发生器时钟为Fosc,即1T
+1167   1          BRT=0xD9;     //设定独立波特率发生器重装值
+1168   1          AUXR|=0x01;       //串口1选择独立波特率发生器为波特率发生器
+1169   1          AUXR|=0x10;       //启动独立波特率发生器
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 20  
 
-1170              uc par_01,uc par_02,uc par_03,uc par_04,uc par_41,uc par_42,uc par_43,uc par_44,
-1171              uc par_31,uc par_32,uc par_33,uc par_34,uc par_71,uc par_72,uc par_73,uc par_74){
-1172   1      
-1173   1          xdata uc loc_data[8][5][2];//三维数组,8个区,5个高度
-1174   1          xdata uc loc_high[8];
-1175   1          xdata uc loc_high03;
-1176   1          xdata uc loc_high47;
-1177   1          xdata uc loc_high07;
-1178   1          xdata uc loc_xh1,loc_xh2;
-1179   1      
-1180   1          memset(loc_data,0,sizeof(loc_data));//清空数组
-1181   1          //起始区件号
-1182   1          loc_data[0][1][0]=par_01;//传入形参:区0的第1号件件号(最高位)
-1183   1          loc_data[0][2][0]=par_02;//传入形参:区0的第2号件件号
-1184   1          loc_data[0][3][0]=par_03;//传入形参:区0的第3号件件号
-1185   1          loc_data[0][4][0]=par_04;//传入形参:区0的第4号件件号(最低位)
-1186   1          loc_data[4][1][0]=par_41;//传入形参:区4的第1号件件号(最高位)
-1187   1          loc_data[4][2][0]=par_42;//传入形参:区4的第2号件件号
-1188   1          loc_data[4][3][0]=par_43;//传入形参:区4的第3号件件号
-1189   1          loc_data[4][4][0]=par_44;//传入形参:区4的第4号件件号(最低位)
-1190   1          //目的区件号
-1191   1          loc_data[3][1][0]=par_31;//传入形参:区0的第1号件件号(最高位)
-1192   1          loc_data[3][2][0]=par_32;//传入形参:区0的第2号件件号
-1193   1          loc_data[3][3][0]=par_33;//传入形参:区0的第3号件件号
-1194   1          loc_data[3][4][0]=par_34;//传入形参:区0的第4号件件号(最低位)
-1195   1          loc_data[7][1][0]=par_71;//传入形参:区4的第1号件件号(最高位)
-1196   1          loc_data[7][2][0]=par_72;//传入形参:区4的第2号件件号
-1197   1          loc_data[7][3][0]=par_73;//传入形参:区4的第3号件件号
-1198   1          loc_data[7][4][0]=par_74;//传入形参:区4的第4号件件号(最低位)
-1199   1          //目的次序
-1200   1          loc_data[3][1][1]=1;//标准次序:区3的第1号目的次序号(最高位)
-1201   1          loc_data[3][2][1]=2;//标准次序:区3的第2号目的次序号
-1202   1          loc_data[3][3][1]=3;//标准次序:区3的第3号目的次序号
-1203   1          loc_data[3][4][1]=4;//标准次序:区3的第4号目的次序号(最低位)
-1204   1          loc_data[7][1][1]=5;//标准次序:区7的第1号目的次序号(最高位)
-1205   1          loc_data[7][2][1]=6;//标准次序:区7的第2号目的次序号
-1206   1          loc_data[7][3][1]=7;//标准次序:区7的第3号目的次序号
-1207   1          loc_data[7][4][1]=8;//标准次序:区7的第4号目的次序号(最低位)
-1208   1          //根据形参统一次序
-1209   1          for(loc_xh1=4;loc_xh1>0;loc_xh1--){
-1210   2                   if((loc_data[0][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[0][loc_xh1][0]!=0))
-1211   2                  loc_data[0][loc_xh1][1]=loc_data[3][1][1];
-1212   2              else if((loc_data[0][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[0][loc_xh1][0]!=0))
-1213   2                  loc_data[0][loc_xh1][1]=loc_data[3][2][1];
-1214   2              else if((loc_data[0][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[0][loc_xh1][0]!=0))
-1215   2                  loc_data[0][loc_xh1][1]=loc_data[3][3][1];
-1216   2              else if((loc_data[0][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[0][loc_xh1][0]!=0))
-1217   2                  loc_data[0][loc_xh1][1]=loc_data[3][4][1];
-1218   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[0][loc_xh1][0]!=0))
-1219   2                  loc_data[0][loc_xh1][1]=loc_data[7][1][1];
-1220   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[0][loc_xh1][0]!=0))
-1221   2                  loc_data[0][loc_xh1][1]=loc_data[7][2][1];
-1222   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[0][loc_xh1][0]!=0))
-1223   2                  loc_data[0][loc_xh1][1]=loc_data[7][3][1];
-1224   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[0][loc_xh1][0]!=0))
-1225   2                  loc_data[0][loc_xh1][1]=loc_data[7][4][1];
-1226   2      
-1227   2                   if((loc_data[4][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[4][loc_xh1][0]!=0))
-1228   2                  loc_data[4][loc_xh1][1]=loc_data[3][1][1];
-1229   2              else if((loc_data[4][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[4][loc_xh1][0]!=0))
-1230   2                  loc_data[4][loc_xh1][1]=loc_data[3][2][1];
-1231   2              else if((loc_data[4][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[4][loc_xh1][0]!=0))
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 21  
+1170   1          TI=1;//打开串口传输功能
+1171   1      }//串口初始化
+1172          void fun_zhuajian(
+1173              uc par_01,uc par_02,uc par_03,uc par_04,uc par_41,uc par_42,uc par_43,uc par_44,
+1174              uc par_31,uc par_32,uc par_33,uc par_34,uc par_71,uc par_72,uc par_73,uc par_74){
+1175   1      
+1176   1          xdata uc loc_data[8][5][2];//三维数组,8个区,5个高度
+1177   1          xdata uc loc_high[8];
+1178   1          xdata uc loc_high03=0;
+1179   1          xdata uc loc_high47=0;
+1180   1          xdata uc loc_high07=0;
+1181   1          xdata uc loc_xh1=0,loc_xh2=0;
+1182   1      
+1183   1          memset(loc_data,0,sizeof(loc_data));//清空数组
+1184   1          memset(loc_high,0,sizeof(loc_high));//清空数组
+1185   1          //起始区件号
+1186   1          loc_data[0][1][0]=par_01;//传入形参:区0的第1号件件号(最高位)
+1187   1          loc_data[0][2][0]=par_02;//传入形参:区0的第2号件件号
+1188   1          loc_data[0][3][0]=par_03;//传入形参:区0的第3号件件号
+1189   1          loc_data[0][4][0]=par_04;//传入形参:区0的第4号件件号(最低位)
+1190   1          loc_data[4][1][0]=par_41;//传入形参:区4的第1号件件号(最高位)
+1191   1          loc_data[4][2][0]=par_42;//传入形参:区4的第2号件件号
+1192   1          loc_data[4][3][0]=par_43;//传入形参:区4的第3号件件号
+1193   1          loc_data[4][4][0]=par_44;//传入形参:区4的第4号件件号(最低位)
+1194   1          //目的区件号
+1195   1          loc_data[3][1][0]=par_31;//传入形参:区0的第1号件件号(最高位)
+1196   1          loc_data[3][2][0]=par_32;//传入形参:区0的第2号件件号
+1197   1          loc_data[3][3][0]=par_33;//传入形参:区0的第3号件件号
+1198   1          loc_data[3][4][0]=par_34;//传入形参:区0的第4号件件号(最低位)
+1199   1          loc_data[7][1][0]=par_71;//传入形参:区4的第1号件件号(最高位)
+1200   1          loc_data[7][2][0]=par_72;//传入形参:区4的第2号件件号
+1201   1          loc_data[7][3][0]=par_73;//传入形参:区4的第3号件件号
+1202   1          loc_data[7][4][0]=par_74;//传入形参:区4的第4号件件号(最低位)
+1203   1          //目的次序
+1204   1          loc_data[3][1][1]=1;//标准次序:区3的第1号目的次序号(最高位)
+1205   1          loc_data[3][2][1]=2;//标准次序:区3的第2号目的次序号
+1206   1          loc_data[3][3][1]=3;//标准次序:区3的第3号目的次序号
+1207   1          loc_data[3][4][1]=4;//标准次序:区3的第4号目的次序号(最低位)
+1208   1          loc_data[7][1][1]=5;//标准次序:区7的第1号目的次序号(最高位)
+1209   1          loc_data[7][2][1]=6;//标准次序:区7的第2号目的次序号
+1210   1          loc_data[7][3][1]=7;//标准次序:区7的第3号目的次序号
+1211   1          loc_data[7][4][1]=8;//标准次序:区7的第4号目的次序号(最低位)
+1212   1          //根据形参统一次序
+1213   1          for(loc_xh1=4;loc_xh1>0;loc_xh1--){
+1214   2                   if((loc_data[0][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[0][loc_xh1][0]!=0))
+1215   2                  loc_data[0][loc_xh1][1]=loc_data[3][1][1];
+1216   2              else if((loc_data[0][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[0][loc_xh1][0]!=0))
+1217   2                  loc_data[0][loc_xh1][1]=loc_data[3][2][1];
+1218   2              else if((loc_data[0][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[0][loc_xh1][0]!=0))
+1219   2                  loc_data[0][loc_xh1][1]=loc_data[3][3][1];
+1220   2              else if((loc_data[0][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[0][loc_xh1][0]!=0))
+1221   2                  loc_data[0][loc_xh1][1]=loc_data[3][4][1];
+1222   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[0][loc_xh1][0]!=0))
+1223   2                  loc_data[0][loc_xh1][1]=loc_data[7][1][1];
+1224   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[0][loc_xh1][0]!=0))
+1225   2                  loc_data[0][loc_xh1][1]=loc_data[7][2][1];
+1226   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[0][loc_xh1][0]!=0))
+1227   2                  loc_data[0][loc_xh1][1]=loc_data[7][3][1];
+1228   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[0][loc_xh1][0]!=0))
+1229   2                  loc_data[0][loc_xh1][1]=loc_data[7][4][1];
+1230   2      
+1231   2                   if((loc_data[4][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[4][loc_xh1][0]!=0))
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 21  
 
-1232   2                  loc_data[4][loc_xh1][1]=loc_data[3][3][1];
-1233   2              else if((loc_data[4][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[4][loc_xh1][0]!=0))
-1234   2                  loc_data[4][loc_xh1][1]=loc_data[3][4][1];
-1235   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[4][loc_xh1][0]!=0))
-1236   2                  loc_data[4][loc_xh1][1]=loc_data[7][1][1];
-1237   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[4][loc_xh1][0]!=0))
-1238   2                  loc_data[4][loc_xh1][1]=loc_data[7][2][1];
-1239   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[4][loc_xh1][0]!=0))
-1240   2                  loc_data[4][loc_xh1][1]=loc_data[7][3][1];
-1241   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[4][loc_xh1][0]!=0))
-1242   2                  loc_data[4][loc_xh1][1]=loc_data[7][4][1];
-1243   2          }
-1244   1          //清空形参表(实际件序)
-1245   1          for(loc_xh1=0;loc_xh1<=7;loc_xh1++)
-1246   1              for(loc_xh2=0;loc_xh2<=4;loc_xh2++)
-1247   1                  loc_data[loc_xh1][loc_xh2][0]=0;
-1248   1          //转移04的序号
-1249   1          for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
-1250   2              loc_data[0][loc_xh1][0]=loc_data[0][loc_xh1][1];
-1251   2              loc_data[4][loc_xh1][0]=loc_data[4][loc_xh1][1];
-1252   2          }
-1253   1          //目的区除了3.7区全部清零
-1254   1          for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
-1255   2              loc_data[0][loc_xh1][1]=0;
-1256   2              loc_data[1][loc_xh1][1]=0;
-1257   2              loc_data[2][loc_xh1][1]=0;
-1258   2              loc_data[4][loc_xh1][1]=0;
-1259   2              loc_data[5][loc_xh1][1]=0;
-1260   2              loc_data[6][loc_xh1][1]=0;
-1261   2          }
-1262   1          //8个区的循环
-1263   1          for(loc_xh1=0;loc_xh1<=7;loc_xh1++){
-1264   2              loc_high[loc_xh1]=4;//默认为没有件
-1265   2              for(loc_xh2=0;loc_xh2<=4;loc_xh2++){//5个高度的循环
-1266   3                  if(loc_data[loc_xh1][loc_xh2][0]!=0){//如果放了件了
-1267   4                      loc_high[loc_xh1]=loc_xh2-1;//记录这个区最高空闲位置
-1268   4                      break;//继续区的循环
-1269   4                  }
-1270   3              }
-1271   2          }
-1272   1      
-1273   1          fun_sj1(sjp_wz1);
-1274   1          fun_sz1(han_s);
-1275   1      
-1276   1          while(1){
-1277   2              loc_high03=fun_min4(loc_high[0],loc_high[1],loc_high[2],loc_high[3]);
-1278   2              loc_high47=fun_min4(loc_high[4],loc_high[5],loc_high[6],loc_high[7]);
-1279   2              loc_high07=fun_min2(loc_high03,loc_high47);
-1280   2              if(str_begin.hzfx==dir_left){
-1281   3                  if(loc_high[0]<4){//如果区0有件
-1282   4                      if(loc_data[0][loc_high[0]+1][0]==loc_data[3][loc_high[3]][1]){//如果区0最高位等于
+1232   2                  loc_data[4][loc_xh1][1]=loc_data[3][1][1];
+1233   2              else if((loc_data[4][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[4][loc_xh1][0]!=0))
+1234   2                  loc_data[4][loc_xh1][1]=loc_data[3][2][1];
+1235   2              else if((loc_data[4][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[4][loc_xh1][0]!=0))
+1236   2                  loc_data[4][loc_xh1][1]=loc_data[3][3][1];
+1237   2              else if((loc_data[4][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[4][loc_xh1][0]!=0))
+1238   2                  loc_data[4][loc_xh1][1]=loc_data[3][4][1];
+1239   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[4][loc_xh1][0]!=0))
+1240   2                  loc_data[4][loc_xh1][1]=loc_data[7][1][1];
+1241   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[4][loc_xh1][0]!=0))
+1242   2                  loc_data[4][loc_xh1][1]=loc_data[7][2][1];
+1243   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[4][loc_xh1][0]!=0))
+1244   2                  loc_data[4][loc_xh1][1]=loc_data[7][3][1];
+1245   2              else if((loc_data[4][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[4][loc_xh1][0]!=0))
+1246   2                  loc_data[4][loc_xh1][1]=loc_data[7][4][1];
+1247   2          }
+1248   1          //清空形参表(实际件序)
+1249   1          for(loc_xh1=0;loc_xh1<=7;loc_xh1++)
+1250   1              for(loc_xh2=0;loc_xh2<=4;loc_xh2++)
+1251   1                  loc_data[loc_xh1][loc_xh2][0]=0;
+1252   1          for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
+1253   2              loc_data[0][loc_xh1][0]=loc_data[0][loc_xh1][1];
+1254   2              loc_data[4][loc_xh1][0]=loc_data[4][loc_xh1][1];
+1255   2          }//转移04的序号
+1256   1          for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
+1257   2              loc_data[0][loc_xh1][1]=0;
+1258   2              loc_data[1][loc_xh1][1]=0;
+1259   2              loc_data[2][loc_xh1][1]=0;
+1260   2              loc_data[4][loc_xh1][1]=0;
+1261   2              loc_data[5][loc_xh1][1]=0;
+1262   2              loc_data[6][loc_xh1][1]=0;
+1263   2          }//目的区除了3.7区全部清零
+1264   1          for(loc_xh1=0;loc_xh1<=7;loc_xh1++){
+1265   2              loc_high[loc_xh1]=4;//默认为没有件
+1266   2              for(loc_xh2=0;loc_xh2<=4;loc_xh2++){//5个高度的循环
+1267   3                  if(loc_data[loc_xh1][loc_xh2][0]!=0){//如果放了件了
+1268   4                      loc_high[loc_xh1]=loc_xh2-1;//记录这个区最高空闲位置
+1269   4                      break;//继续区的循环
+1270   4                  }
+1271   3              }
+1272   2          }//8个区的循环
+1273   1      
+1274   1          fun_sj1(sjp_wz1);
+1275   1          fun_sz1(han_s);
+1276   1      
+1277   1          while(1){
+1278   2              loc_high03=fun_min4(loc_high[0],loc_high[1],loc_high[2],loc_high[3]);
+1279   2              loc_high47=fun_min4(loc_high[4],loc_high[5],loc_high[6],loc_high[7]);
+1280   2              loc_high07=fun_min2(loc_high03,loc_high47);
+1281   2              if(str_begin.hzfx==dir_left){
+1282   3                  if(loc_high[0]<4){//如果区0有件
+1283   4                      if(loc_data[0][loc_high[0]+1][0]==loc_data[3][loc_high[3]][1]){//如果区0最高位等于
              -区3最高位件
-1283   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1284   5                          fun_pyhz2(tra_h,dir_left);//抓件位置0
-1285   5                          fun_sj1zt(loc_high[0]+1);//下降到区0最高位
-1286   5                          fun_sz1(han_j);//抓件
-1287   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1288   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
-1289   5                          fun_sj1zt(loc_high[3]);//下降到区3最高位
-1290   5                          fun_sz1(han_s);//松件
-1291   5      
-1292   5                          loc_data[3][loc_high[3]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到�
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 22  
+1284   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1285   5                          fun_pyhz2(tra_h,dir_left);//抓件位置0
+1286   5                          fun_sj1zt(loc_high[0]+1);//下降到区0最高位
+1287   5                          fun_sz1(han_j);//抓件
+1288   5                          fun_sj1zt(loc_high03-1);//上升到03方最高位
+1289   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
+1290   5                          fun_sj1zt(loc_high[3]);//下降到区3最高位
+1291   5                          fun_sz1(han_s);//松件
+1292   5      
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 22  
 
-             -�3区
-1293   5                          loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-1294   5                          loc_high[0]++;//更新区0最高位
-1295   5                          loc_high[3]--;//更新区3最高位
-1296   5                      }
-1297   4                      else if(loc_data[0][loc_high[0]+1][0]==loc_data[7][loc_high[7]][1]){//如果区0最高位�
+1293   5                          loc_data[3][loc_high[3]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3
+             -区
+1294   5                          loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+1295   5                          loc_high[0]++;//更新区0最高位
+1296   5                          loc_high[3]--;//更新区3最高位
+1297   5                      }
+1298   4                      else if(loc_data[0][loc_high[0]+1][0]==loc_data[7][loc_high[7]][1]){//如果区0最高位�
              -��于区7最高位件
-1298   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1299   5                          fun_pyhz2(tra_h,dir_left);//抓件位置0
-1300   5                          fun_sj1zt(loc_high[0]+1);//下降到区0最高位
-1301   5                          fun_sz1(han_j);//抓件
-1302   5                          fun_sj1zt(loc_high07);//上升到07方最高位
-1303   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
-1304   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
-1305   5                          fun_sz1(han_s);//松件
-1306   5      
-1307   5                          loc_data[7][loc_high[7]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到�
-             -�7区
-1308   5                          loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-1309   5                          loc_high[0]++;//更新区0最高位
-1310   5                          loc_high[7]--;//更新区7最高位
-1311   5                      }
-1312   4                      else{
-1313   5                          if((loc_high[1]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[1][loc_high[1]][0])){//�
+1299   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1300   5                          fun_pyhz2(tra_h,dir_left);//抓件位置0
+1301   5                          fun_sj1zt(loc_high[0]+1);//下降到区0最高位
+1302   5                          fun_sz1(han_j);//抓件
+1303   5                          fun_sj1zt(loc_high07-1);//上升到07方最高位
+1304   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
+1305   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
+1306   5                          fun_sz1(han_s);//松件
+1307   5      
+1308   5                          loc_data[7][loc_high[7]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了7
+             -区
+1309   5                          loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+1310   5                          loc_high[0]++;//更新区0最高位
+1311   5                          loc_high[7]--;//更新区7最高位
+1312   5                      }
+1313   4                      else{
+1314   5                          if((loc_high[1]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[1][loc_high[1]][0])){//�
              -�果区1能放得下,放在区1
-1314   6                              fun_sj1zt(loc_high03);//上升到03方最高位
-1315   6                              fun_pyhz2(tra_h,dir_left);//抓件位置0
-1316   6                              fun_sj1zt(loc_high[0]+1);//下降到区0最高位
-1317   6                              fun_sz1(han_j);//抓件
-1318   6                              fun_sj1zt(loc_high03);//上升到03方最高位
-1319   6                              fun_pyhz2(tra_kh,dir_left);//抓件位置1
-1320   6                              fun_sj1zt(loc_high[1]);//下降到区1最高位
-1321   6                              fun_sz1(han_s);//松件
-1322   6      
-1323   6                              loc_data[1][loc_high[1]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿�
-             -��了3区
-1324   6                              loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-1325   6                              loc_high[0]++;//更新区0最高位
-1326   6                              loc_high[1]--;//更新区3最高位
-1327   6                          }
-1328   5                          else{//否则放在区2
-1329   6                              fun_sj1zt(loc_high03);//上升到03方最高位
-1330   6                              fun_pyhz2(tra_h,dir_left);//抓件位置0
-1331   6                              fun_sj1zt(loc_high[0]+1);//下降到区0最高位
-1332   6                              fun_sz1(han_j);//抓件
-1333   6                              fun_sj1zt(loc_high03);//上升到03方最高位
-1334   6                              fun_pyhz2(tra_kq,dir_left);//抓件位置2
-1335   6                              fun_sj1zt(loc_high[2]);//下降到区2最高位
-1336   6                              fun_sz1(han_s);//松件
-1337   6      
-1338   6                              loc_data[2][loc_high[2]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿�
-             -��了3区
-1339   6                              loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-1340   6                              loc_high[0]++;//更新区0最高位
-1341   6                              loc_high[2]--;//更新区3最高位
-1342   6                          }
-1343   5                      }
-1344   4                  }
-1345   3                  else if(loc_high[1]<4){//如果区1有件
-1346   4                      if(loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1]){//如果区1最高位等于
-             -区3最高位件
-1347   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 23  
+1315   6                              fun_sj1zt(loc_high03);//上升到03方最高位
+1316   6                              fun_pyhz2(tra_h,dir_left);//抓件位置0
+1317   6                              fun_sj1zt(loc_high[0]+1);//下降到区0最高位
+1318   6                              fun_sz1(han_j);//抓件
+1319   6                              fun_sj1zt(loc_high03-1);//上升到03方最高位
+1320   6                              fun_pyhz2(tra_kh,dir_left);//抓件位置1
+1321   6                              fun_sj1zt(loc_high[1]);//下降到区1最高位
+1322   6                              fun_sz1(han_s);//松件
+1323   6      
+1324   6                              loc_data[1][loc_high[1]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到
+             -了3区
+1325   6                              loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+1326   6                              loc_high[0]++;//更新区0最高位
+1327   6                              loc_high[1]--;//更新区1最高位
+1328   6                          }
+1329   5                          else{//否则放在区2
+1330   6                              fun_sj1zt(loc_high03);//上升到03方最高位
+1331   6                              fun_pyhz2(tra_h,dir_left);//抓件位置0
+1332   6                              fun_sj1zt(loc_high[0]+1);//下降到区0最高位
+1333   6                              fun_sz1(han_j);//抓件
+1334   6                              if(loc_high03<=loc_high[2]-1)
+1335   6                                  fun_sj1zt(loc_high03);//上升到03方最高位
+1336   6                              else
+1337   6                                  fun_sj1zt(loc_high[2]-1);//上升到03方最高位
+1338   6                              fun_pyhz2(tra_kq,dir_left);//抓件位置2
+1339   6                              fun_sj1zt(loc_high[2]);//下降到区2最高位
+1340   6                              fun_sz1(han_s);//松件
+1341   6      
+1342   6                              loc_data[2][loc_high[2]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到
+             -了3区
+1343   6                              loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+1344   6                              loc_high[0]++;//更新区0最高位
+1345   6                              loc_high[2]--;//更新区3最高位
+1346   6                          }
+1347   5                      }
+1348   4                  }
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 23  
 
-1348   5                          fun_pyhz2(tra_kh,dir_left);//抓件位置1
-1349   5                          fun_sj1zt(loc_high[1]+1);//下降到区1最高位
-1350   5                          fun_sz1(han_j);//抓件
+1349   3                  else if(loc_high[1]<4){//如果区1有件
+1350   4                      if(loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1]){//如果区1最高位等于
+             -区3最高位件
 1351   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1352   5                          fun_pyhz2(tra_q,dir_left);//抓件位置2
-1353   5                          fun_sj1zt(loc_high[3]);//下降到区2最高位
-1354   5                          fun_sz1(han_s);//松件
-1355   5      
-1356   5                          loc_data[3][loc_high[3]+1][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到�
-             -�3区
-1357   5                          loc_data[1][loc_high[1]+1][0]=0;//1区木有了
-1358   5                          loc_high[1]++;//更新区1最高位
-1359   5                          loc_high[3]--;//更新区3最高位
-1360   5                      }
-1361   4                      else if(loc_data[1][loc_high[1]+1][0]==loc_data[7][loc_high[7]][1]){//如果区1最高位�
+1352   5                          fun_pyhz2(tra_kh,dir_left);//抓件位置1
+1353   5                          fun_sj1zt(loc_high[1]+1);//下降到区1最高位
+1354   5                          fun_sz1(han_j);//抓件
+1355   5                          if(loc_high03<=loc_high[3]-1)
+1356   5                              fun_sj1zt(loc_high03);//上升到03方最高位
+1357   5                          else
+1358   5                              fun_sj1zt(loc_high[3]-1);//上升到03方最高位
+1359   5                          fun_pyhz2(tra_q,dir_left);//抓件位置2
+1360   5                          fun_sj1zt(loc_high[3]);//下降到区2最高位
+1361   5                          fun_sz1(han_s);//松件
+1362   5      
+1363   5                          loc_data[3][loc_high[3]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了3
+             -区
+1364   5                          loc_data[1][loc_high[1]+1][0]=0;//1区木有了
+1365   5                          loc_high[1]++;//更新区1最高位
+1366   5                          loc_high[3]--;//更新区3最高位
+1367   5                      }
+1368   4                      else if(loc_data[1][loc_high[1]+1][0]==loc_data[7][loc_high[7]][1]){//如果区1最高位�
              -��于区7最高位件
-1362   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1363   5                          fun_pyhz2(tra_kh,dir_left);//抓件位置1
-1364   5                          fun_sj1zt(loc_high[1]+1);//下降到区1最高位
-1365   5                          fun_sz1(han_j);//抓件
-1366   5                          fun_sj1zt(loc_high07);//上升到07方最高位
-1367   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
-1368   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
-1369   5                          fun_sz1(han_s);//松件
-1370   5      
-1371   5                          loc_data[7][loc_high[7]+1][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到�
-             -�7区
-1372   5                          loc_data[1][loc_high[1]+1][0]=0;//1区木有了
-1373   5                          loc_high[1]++;//更新区1最高位
-1374   5                          loc_high[7]--;//更新区3最高位
-1375   5                      }
-1376   4                      else if(loc_data[1][loc_high[1]+1][0]>loc_data[2][loc_high[2]][0]){//如果区2能放得�
+1369   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1370   5                          fun_pyhz2(tra_kh,dir_left);//抓件位置1
+1371   5                          fun_sj1zt(loc_high[1]+1);//下降到区1最高位
+1372   5                          fun_sz1(han_j);//抓件
+1373   5                          if(loc_high07<=loc_high[7]-1)
+1374   5                              fun_sj1zt(loc_high07);//上升到03方最高位
+1375   5                          else
+1376   5                              fun_sj1zt(loc_high[7]-1);//上升到03方最高位
+1377   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
+1378   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
+1379   5                          fun_sz1(han_s);//松件
+1380   5      
+1381   5                          loc_data[7][loc_high[7]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了7
+             -区
+1382   5                          loc_data[1][loc_high[1]+1][0]=0;//1区木有了
+1383   5                          loc_high[1]++;//更新区1最高位
+1384   5                          loc_high[7]--;//更新区7最高位
+1385   5                      }
+1386   4                      else if(loc_data[1][loc_high[1]+1][0]>loc_data[2][loc_high[2]][0]){//如果区2能放得�
              -�,放在区2
-1377   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1378   5                          fun_pyhz2(tra_kh,dir_left);//抓件位置1
-1379   5                          fun_sj1zt(loc_high[1]+1);//下降到区1最高位
-1380   5                          fun_sz1(han_j);//抓件
-1381   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1382   5                          fun_pyhz2(tra_kq,dir_left);//抓件位置2
-1383   5                          fun_sj1zt(loc_high[2]);//下降到区2最高位
-1384   5                          fun_sz1(han_s);//松件
-1385   5      
-1386   5                          loc_data[2][loc_high[2]+1][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到�
-             -�2区
-1387   5                          loc_data[1][loc_high[1]+1][0]=0;//1区木有了
-1388   5                          loc_high[1]++;//更新区1最高位
-1389   5                          loc_high[2]--;//更新区3最高位
-1390   5                      }
-1391   4                  }
-1392   3                  else if(loc_high[2]<4){//如果区2有件
-1393   4                      if(loc_data[2][loc_high[2]+1][0]==loc_data[3][loc_high[3]][1]){//如果区2最高位等于
-             -区3最高位件
-1394   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1387   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1388   5                          fun_pyhz2(tra_kh,dir_left);//抓件位置1
+1389   5                          fun_sj1zt(loc_high[1]+1);//下降到区1最高位
+1390   5                          fun_sz1(han_j);//抓件
+1391   5                          if(loc_high03<=loc_high[2]-1)
+1392   5                              fun_sj1zt(loc_high03);//上升到03方最高位
+1393   5                          else
+1394   5                              fun_sj1zt(loc_high[2]-1);//上升到03方最高位
 1395   5                          fun_pyhz2(tra_kq,dir_left);//抓件位置2
-1396   5                          fun_sj1zt(loc_high[2]+1);//下降到区2最高位
-1397   5                          fun_sz1(han_j);//抓件
-1398   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1399   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
-1400   5                          fun_sj1zt(loc_high[2]);//下降到区3最高位
-1401   5                          fun_sz1(han_s);//松件
-1402   5      
-1403   5                          loc_data[3][loc_high[3]+1][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到�
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 24  
+1396   5                          fun_sj1zt(loc_high[2]);//下降到区2最高位
+1397   5                          fun_sz1(han_s);//松件
+1398   5      
+1399   5                          loc_data[2][loc_high[2]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了2
+             -区
+1400   5                          loc_data[1][loc_high[1]+1][0]=0;//1区木有了
+1401   5                          loc_high[1]++;//更新区1最高位
+1402   5                          loc_high[2]--;//更新区2最高位
+1403   5                      }
+1404   4                  }
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 24  
 
-             -�3区
-1404   5                          loc_data[2][loc_high[2]+1][0]=0;//2区木有了
-1405   5                          loc_high[2]++;//更新区2最高位
-1406   5                          loc_high[3]--;//更新区3最高位
-1407   5                      }
-1408   4                      else if(loc_data[2][loc_high[2]+1][0]==loc_data[7][loc_high[7]][1]){//如果区2最高位�
+1405   3                  else if(loc_high[2]<4){//如果区2有件
+1406   4                      if(loc_data[2][loc_high[2]+1][0]==loc_data[3][loc_high[3]][1]){//如果区2最高位等于
+             -区3最高位件
+1407   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1408   5                          fun_pyhz2(tra_kq,dir_left);//抓件位置2
+1409   5                          fun_sj1zt(loc_high[2]+1);//下降到区2最高位
+1410   5                          fun_sz1(han_j);//抓件
+1411   5                          if(loc_high03<=loc_high[3]-1)
+1412   5                              fun_sj1zt(loc_high03);//上升到03方最高位
+1413   5                          else
+1414   5                              fun_sj1zt(loc_high[3]-1);//上升到03方最高位
+1415   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
+1416   5                          fun_sj1zt(loc_high[2]);//下降到区3最高位
+1417   5                          fun_sz1(han_s);//松件
+1418   5      
+1419   5                          loc_data[3][loc_high[3]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了3
+             -区
+1420   5                          loc_data[2][loc_high[2]+1][0]=0;//2区木有了
+1421   5                          loc_high[2]++;//更新区2最高位
+1422   5                          loc_high[3]--;//更新区3最高位
+1423   5                      }
+1424   4                      else if(loc_data[2][loc_high[2]+1][0]==loc_data[7][loc_high[7]][1]){//如果区2最高位�
              -��于区7最高位件
-1409   5                          fun_sj1zt(loc_high03);//上升到03方最高位
-1410   5                          fun_pyhz2(tra_kq,dir_left);//抓件位置2
-1411   5                          fun_sj1zt(loc_high[2]+1);//下降到区2最高位
-1412   5                          fun_sz1(han_j);//抓件
-1413   5                          fun_sj1zt(loc_high07);//上升到07方最高位
-1414   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
-1415   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
-1416   5                          fun_sz1(han_s);//松件
-1417   5      
-1418   5                          loc_data[7][loc_high[7]+1][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到�
-             -�7区
-1419   5                          loc_data[2][loc_high[2]+1][0]=0;//2区木有了
-1420   5                          loc_high[2]++;//更新区2最高位
-1421   5                          loc_high[7]--;//更新区7最高位
-1422   5                      }
-1423   4                  }
-1424   3                  if((loc_data[3][4][0]==loc_data[3][4][1])&&
-1425   3                     (loc_data[3][3][0]==loc_data[3][3][1])&&
-1426   3                     (loc_data[3][2][0]==loc_data[3][2][1])&&
-1427   3                     (loc_data[3][1][0]==loc_data[3][1][1])){
-1428   4                      if((loc_data[7][4][0]==loc_data[7][4][1])&&
-1429   4                         (loc_data[7][3][0]==loc_data[7][3][1])&&
-1430   4                         (loc_data[7][2][0]==loc_data[7][2][1])&&
-1431   4                         (loc_data[7][1][0]==loc_data[7][1][1])){
-1432   5                          return;
-1433   5                      }
-1434   4                      else
-1435   4                          fun_hz1(dir_right);
-1436   4                  }
-1437   3              }
-1438   2              else if(str_begin.hzfx==dir_right){
-1439   3                  if(loc_high[4]<4){//如果区4有件
-1440   4                      if(loc_data[4][loc_high[4]+1][0]==loc_data[7][loc_high[7]][1]){//如果区4最高位等于
+1425   5                          fun_sj1zt(loc_high03);//上升到03方最高位
+1426   5                          fun_pyhz2(tra_kq,dir_left);//抓件位置2
+1427   5                          fun_sj1zt(loc_high[2]+1);//下降到区2最高位
+1428   5                          fun_sz1(han_j);//抓件
+1429   5                          if(loc_high07<=loc_high[7]-1)
+1430   5                              fun_sj1zt(loc_high07);//上升到03方最高位
+1431   5                          else
+1432   5                              fun_sj1zt(loc_high[7]-1);//上升到03方最高位
+1433   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
+1434   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
+1435   5                          fun_sz1(han_s);//松件
+1436   5      
+1437   5                          loc_data[7][loc_high[7]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了7
+             -区
+1438   5                          loc_data[2][loc_high[2]+1][0]=0;//2区木有了
+1439   5                          loc_high[2]++;//更新区2最高位
+1440   5                          loc_high[7]--;//更新区7最高位
+1441   5                      }
+1442   4                  }
+1443   3                  if((loc_data[3][4][0]==loc_data[3][4][1])&&
+1444   3                     (loc_data[3][3][0]==loc_data[3][3][1])&&
+1445   3                     (loc_data[3][2][0]==loc_data[3][2][1])&&
+1446   3                     (loc_data[3][1][0]==loc_data[3][1][1])){
+1447   4                      if((loc_data[7][4][0]==loc_data[7][4][1])&&
+1448   4                         (loc_data[7][3][0]==loc_data[7][3][1])&&
+1449   4                         (loc_data[7][2][0]==loc_data[7][2][1])&&
+1450   4                         (loc_data[7][1][0]==loc_data[7][1][1])){
+1451   5                          return;
+1452   5                      }
+1453   4                      else{
+1454   5                          fun_sj1(loc_high07);
+1455   5                          fun_hz1(dir_right);
+1456   5                      }
+1457   4                  }
+1458   3              }
+1459   2              else if(str_begin.hzfx==dir_right){
+1460   3                  if(loc_high[4]<4){//如果区4有件
+1461   4                      if(loc_data[4][loc_high[4]+1][0]==loc_data[7][loc_high[7]][1]){//如果区4最高位等于
              -区7最高位件
-1441   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1442   5                          fun_pyhz2(tra_q,dir_right);//抓件位置4
-1443   5                          fun_sj1zt(loc_high[4]+1);//下降到区4最高位
-1444   5                          fun_sz1(han_j);//抓件
-1445   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1446   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
-1447   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
-1448   5                          fun_sz1(han_s);//松件
-1449   5      
-1450   5                          loc_data[7][loc_high[7]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到�
-             -�7区
-1451   5                          loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-1452   5                          loc_high[4]++;//更新区4最高位
-1453   5                          loc_high[7]--;//更新区7最高位
-1454   5                      }
-1455   4                      else if(loc_data[4][loc_high[4]+1][0]==loc_data[3][loc_high[3]][1]){//如果区4最高位�
-             -��于区3最高位件
-1456   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1457   5                          fun_pyhz2(tra_q,dir_right);//抓件位置4
-1458   5                          fun_sj1zt(loc_high[4]+1);//下降到区4最高位
-1459   5                          fun_sz1(han_j);//抓件
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 25  
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 25  
 
-1460   5                          fun_sj1zt(loc_high07);//上升到07方最高位
-1461   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
-1462   5                          fun_sj1zt(loc_high[3]);//下降到区3最高位
-1463   5                          fun_sz1(han_s);//松件
-1464   5      
-1465   5                          loc_data[3][loc_high[3]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到�
-             -�3区
-1466   5                          loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-1467   5                          loc_high[4]++;//更新区4最高位
-1468   5                          loc_high[3]--;//更新区7最高位
-1469   5                      }
-1470   4                      else{
-1471   5                          if((loc_high[6]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[6][loc_high[6]][0])){//�
+1462   5                          fun_sj1zt(loc_high47);//上升到47方最高位
+1463   5                          fun_pyhz2(tra_q,dir_right);//抓件位置4
+1464   5                          fun_sj1zt(loc_high[4]+1);//下降到区4最高位
+1465   5                          fun_sz1(han_j);//抓件
+1466   5                          if(loc_high47<=loc_high[7]-1)
+1467   5                              fun_sj1zt(loc_high47);//上升到03方最高位
+1468   5                          else
+1469   5                              fun_sj1zt(loc_high[7]-1);//上升到03方最高位
+1470   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
+1471   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
+1472   5                          fun_sz1(han_s);//松件
+1473   5      
+1474   5                          loc_data[7][loc_high[7]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了7
+             -区
+1475   5                          loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+1476   5                          loc_high[4]++;//更新区4最高位
+1477   5                          loc_high[7]--;//更新区7最高位
+1478   5                      }
+1479   4                      else if(loc_data[4][loc_high[4]+1][0]==loc_data[3][loc_high[3]][1]){//如果区4最高位�
+             -��于区3最高位件
+1480   5                          fun_sj1zt(loc_high47);//上升到47方最高位
+1481   5                          fun_pyhz2(tra_q,dir_right);//抓件位置4
+1482   5                          fun_sj1zt(loc_high[4]+1);//下降到区4最高位
+1483   5                          fun_sz1(han_j);//抓件
+1484   5                          if(loc_high07<=loc_high[3]-1)
+1485   5                              fun_sj1zt(loc_high07);//上升到03方最高位
+1486   5                          else
+1487   5                              fun_sj1zt(loc_high[3]-1);//上升到03方最高位
+1488   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
+1489   5                          fun_sj1zt(loc_high[3]);//下降到区3最高位
+1490   5                          fun_sz1(han_s);//松件
+1491   5      
+1492   5                          loc_data[3][loc_high[3]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了3
+             -区
+1493   5                          loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+1494   5                          loc_high[4]++;//更新区4最高位
+1495   5                          loc_high[3]--;//更新区7最高位
+1496   5                      }
+1497   4                      else{
+1498   5                          if((loc_high[6]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[6][loc_high[6]][0])){//�
              -�果区6能放得下,放在区6
-1472   6                              fun_sj1zt(loc_high47);//上升到47方最高位
-1473   6                              fun_pyhz2(tra_q,dir_right);//抓件位置4
-1474   6                              fun_sj1zt(loc_high[4]+1);//下降到区4最高位
-1475   6                              fun_sz1(han_j);//抓件
-1476   6                              fun_sj1zt(loc_high07);//上升到07方最高位
-1477   6                              fun_pyhz2(tra_kq,dir_right);//抓件位置6
-1478   6                              fun_sj1zt(loc_high[6]);//下降到区6最高位
-1479   6                              fun_sz1(han_s);//松件
-1480   6      
-1481   6                              loc_data[6][loc_high[6]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿�
-             -��了6区
-1482   6                              loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-1483   6                              loc_high[4]++;//更新区4最高位
-1484   6                              loc_high[6]--;//更新区6最高位
-1485   6                          }
-1486   5                          else{//否则放在区5
-1487   6                              fun_sj1zt(loc_high47);//上升到47方最高位
-1488   6                              fun_pyhz2(tra_q,dir_right);//抓件位置4
-1489   6                              fun_sj1zt(loc_high[4]+1);//下降到区4最高位
-1490   6                              fun_sz1(han_j);//抓件
-1491   6                              fun_sj1zt(loc_high47);//上升到47方最高位
-1492   6                              fun_pyhz2(tra_kq,dir_right);//抓件位置2
-1493   6                              fun_sj1zt(loc_high[5]);//下降到区5最高位
-1494   6                              fun_sz1(han_s);//松件
-1495   6      
-1496   6                              loc_data[5][loc_high[5]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿�
-             -��了5区
-1497   6                              loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-1498   6                              loc_high[4]++;//更新区4最高位
-1499   6                              loc_high[5]--;//更新区6最高位
-1500   6                          }
-1501   5                      }
-1502   4                  }
-1503   3                  else if(loc_high[5]<4){//如果区5有件
-1504   4                      if(loc_data[5][loc_high[5]+1][0]==loc_data[7][loc_high[7]][1]){//如果区5最高位等于
-             -区7最高位件
-1505   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1506   5                          fun_pyhz2(tra_kq,dir_right);//抓件位置5
-1507   5                          fun_sj1zt(loc_high[5]+1);//下降到区5最高位
-1508   5                          fun_sz1(han_j);//抓件
-1509   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1510   5                          fun_pyhz2(tra_h,dir_right);//抓件位置2
-1511   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
-1512   5                          fun_sz1(han_s);//松件
-1513   5      
-1514   5                          loc_data[7][loc_high[7]+1][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到�
-             -�7区
-1515   5                          loc_data[5][loc_high[5]+1][0]=0;//5区木有了
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 26  
+1499   6                              fun_sj1zt(loc_high47);//上升到47方最高位
+1500   6                              fun_pyhz2(tra_q,dir_right);//抓件位置4
+1501   6                              fun_sj1zt(loc_high[4]+1);//下降到区4最高位
+1502   6                              fun_sz1(han_j);//抓件
+1503   6                              if(loc_high07<=loc_high[6]-1)
+1504   6                                  fun_sj1zt(loc_high07);//上升到03方最高位
+1505   6                              else
+1506   6                                  fun_sj1zt(loc_high[6]-1);//上升到03方最高位
+1507   6                              fun_pyhz2(tra_kq,dir_right);//抓件位置6
+1508   6                              fun_sj1zt(loc_high[6]);//下降到区6最高位
+1509   6                              fun_sz1(han_s);//松件
+1510   6      
+1511   6                              loc_data[6][loc_high[6]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到
+             -了6区
+1512   6                              loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+1513   6                              loc_high[4]++;//更新区4最高位
+1514   6                              loc_high[6]--;//更新区6最高位
+1515   6                          }
+1516   5                          else{//否则放在区5
+1517   6                              fun_sj1zt(loc_high47);//上升到47方最高位
+1518   6                              fun_pyhz2(tra_q,dir_right);//抓件位置4
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 26  
 
-1516   5                          loc_high[5]++;//更新区5最高位
-1517   5                          loc_high[7]--;//更新区7最高位
-1518   5                      }
-1519   4                      else if(loc_data[5][loc_high[5]+1][0]==loc_data[3][loc_high[3]][1]){//如果区5最高位�
-             -��于区3最高位件
-1520   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1521   5                          fun_pyhz2(tra_kq,dir_right);//抓件位置5
-1522   5                          fun_sj1zt(loc_high[5]+1);//下降到区5最高位
-1523   5                          fun_sz1(han_j);//抓件
-1524   5                          fun_sj1zt(loc_high07);//上升到07方最高位
-1525   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
-1526   5                          fun_sj1zt(loc_high[3]);//下降到区3最高位
-1527   5                          fun_sz1(han_s);//松件
-1528   5      
-1529   5                          loc_data[3][loc_high[3]+1][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到�
-             -�3区
-1530   5                          loc_data[5][loc_high[5]+1][0]=0;//5区木有了
-1531   5                          loc_high[5]++;//更新区5最高位
-1532   5                          loc_high[3]--;//更新区3最高位
-1533   5                      }
-1534   4                      else if(loc_data[5][loc_high[5]+1][0]>loc_data[6][loc_high[6]][0]){//如果区6能放得�
-             -�,放在区6
-1535   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1536   5                          fun_pyhz2(tra_kq,dir_right);//抓件位置5
-1537   5                          fun_sj1zt(loc_high[5]+1);//下降到区5最高位
-1538   5                          fun_sz1(han_j);//抓件
-1539   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1540   5                          fun_pyhz2(tra_kh,dir_right);//抓件位置2
-1541   5                          fun_sj1zt(loc_high[6]);//下降到区7最高位
-1542   5                          fun_sz1(han_s);//松件
-1543   5      
-1544   5                          loc_data[6][loc_high[6]+1][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到�
-             -�6区
-1545   5                          loc_data[5][loc_high[5]+1][0]=0;//5区木有了
-1546   5                          loc_high[5]++;//更新区5最高位
-1547   5                          loc_high[6]--;//更新区7最高位
-1548   5                      }
-1549   4                  }
-1550   3                  else if(loc_high[6]<4){//如果区6有件
-1551   4                      if(loc_data[6][loc_high[6]+1][0]==loc_data[7][loc_high[7]][1]){//如果区6最高位等于
+1519   6                              fun_sj1zt(loc_high[4]+1);//下降到区4最高位
+1520   6                              fun_sz1(han_j);//抓件
+1521   6                              if(loc_high47<=loc_high[5]-1)
+1522   6                                  fun_sj1zt(loc_high47);//上升到03方最高位
+1523   6                              else
+1524   6                                  fun_sj1zt(loc_high[5]-1);//上升到03方最高位
+1525   6                              fun_pyhz2(tra_kq,dir_right);//抓件位置2
+1526   6                              fun_sj1zt(loc_high[5]);//下降到区5最高位
+1527   6                              fun_sz1(han_s);//松件
+1528   6      
+1529   6                              loc_data[5][loc_high[5]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到
+             -了5区
+1530   6                              loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+1531   6                              loc_high[4]++;//更新区4最高位
+1532   6                              loc_high[5]--;//更新区6最高位
+1533   6                          }
+1534   5                      }
+1535   4                  }
+1536   3                  else if(loc_high[5]<4){//如果区5有件
+1537   4                      if(loc_data[5][loc_high[5]+1][0]==loc_data[7][loc_high[7]][1]){//如果区5最高位等于
              -区7最高位件
-1552   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1553   5                          fun_pyhz2(tra_kh,dir_right);//抓件位置6
-1554   5                          fun_sj1zt(loc_high[6]+1);//下降到区6最高位
-1555   5                          fun_sz1(han_j);//抓件
+1538   5                          fun_sj1zt(loc_high47);//上升到47方最高位
+1539   5                          fun_pyhz2(tra_kq,dir_right);//抓件位置5
+1540   5                          fun_sj1zt(loc_high[5]+1);//下降到区5最高位
+1541   5                          fun_sz1(han_j);//抓件
+1542   5                          if(loc_high47<=loc_high[7]-1)
+1543   5                              fun_sj1zt(loc_high47);//上升到03方最高位
+1544   5                          else
+1545   5                              fun_sj1zt(loc_high[7]-1);//上升到03方最高位
+1546   5                          fun_pyhz2(tra_h,dir_right);//抓件位置2
+1547   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
+1548   5                          fun_sz1(han_s);//松件
+1549   5      
+1550   5                          loc_data[7][loc_high[7]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了7
+             -区
+1551   5                          loc_data[5][loc_high[5]+1][0]=0;//5区木有了
+1552   5                          loc_high[5]++;//更新区5最高位
+1553   5                          loc_high[7]--;//更新区7最高位
+1554   5                      }
+1555   4                      else if(loc_data[5][loc_high[5]+1][0]==loc_data[3][loc_high[3]][1]){//如果区5最高位�
+             -��于区3最高位件
 1556   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1557   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
-1558   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
-1559   5                          fun_sz1(han_s);//松件
-1560   5      
-1561   5                          loc_data[7][loc_high[7]+1][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到�
-             -�7区
-1562   5                          loc_data[6][loc_high[6]+1][0]=0;//2区木有了
-1563   5                          loc_high[6]++;//更新区2最高位
-1564   5                          loc_high[7]--;//更新区7最高位
-1565   5                      }
-1566   4                      else if(loc_data[6][loc_high[6]+1][0]==loc_data[3][loc_high[3]][1]){//如果区6最高位�
+1557   5                          fun_pyhz2(tra_kq,dir_right);//抓件位置5
+1558   5                          fun_sj1zt(loc_high[5]+1);//下降到区5最高位
+1559   5                          fun_sz1(han_j);//抓件
+1560   5                          if(loc_high07<=loc_high[3]-1)
+1561   5                              fun_sj1zt(loc_high07);//上升到03方最高位
+1562   5                          else
+1563   5                              fun_sj1zt(loc_high[3]-1);//上升到03方最高位
+1564   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
+1565   5                          fun_sj1zt(loc_high[3]);//下降到区3最高位
+1566   5                          fun_sz1(han_s);//松件
+1567   5      
+1568   5                          loc_data[3][loc_high[3]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了3
+             -区
+1569   5                          loc_data[5][loc_high[5]+1][0]=0;//5区木有了
+1570   5                          loc_high[5]++;//更新区5最高位
+1571   5                          loc_high[3]--;//更新区3最高位
+1572   5                      }
+1573   4                      else if(loc_data[5][loc_high[5]+1][0]>loc_data[6][loc_high[6]][0]){//如果区6能放得�
+             -�,放在区6
+1574   5                          fun_sj1zt(loc_high47);//上升到47方最高位
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 27  
+
+1575   5                          fun_pyhz2(tra_kq,dir_right);//抓件位置5
+1576   5                          fun_sj1zt(loc_high[5]+1);//下降到区5最高位
+1577   5                          fun_sz1(han_j);//抓件
+1578   5                          if(loc_high47<=loc_high[6]-1)
+1579   5                              fun_sj1zt(loc_high47);//上升到03方最高位
+1580   5                          else
+1581   5                              fun_sj1zt(loc_high[6]-1);//上升到03方最高位
+1582   5                          fun_pyhz2(tra_kh,dir_right);//抓件位置2
+1583   5                          fun_sj1zt(loc_high[6]);//下降到区7最高位
+1584   5                          fun_sz1(han_s);//松件
+1585   5      
+1586   5                          loc_data[6][loc_high[6]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了6
+             -区
+1587   5                          loc_data[5][loc_high[5]+1][0]=0;//5区木有了
+1588   5                          loc_high[5]++;//更新区5最高位
+1589   5                          loc_high[6]--;//更新区7最高位
+1590   5                      }
+1591   4                  }
+1592   3                  else if(loc_high[6]<4){//如果区6有件
+1593   4                      if(loc_data[6][loc_high[6]+1][0]==loc_data[7][loc_high[7]][1]){//如果区6最高位等于
+             -区7最高位件
+1594   5                          fun_sj1zt(loc_high47);//上升到47方最高位
+1595   5                          fun_pyhz2(tra_kh,dir_right);//抓件位置6
+1596   5                          fun_sj1zt(loc_high[6]+1);//下降到区6最高位
+1597   5                          fun_sz1(han_j);//抓件
+1598   5                          if(loc_high47<=loc_high[7]-1)
+1599   5                              fun_sj1zt(loc_high47);//上升到03方最高位
+1600   5                          else
+1601   5                              fun_sj1zt(loc_high[7]-1);//上升到03方最高位
+1602   5                          fun_pyhz2(tra_h,dir_right);//抓件位置7
+1603   5                          fun_sj1zt(loc_high[7]);//下降到区7最高位
+1604   5                          fun_sz1(han_s);//松件
+1605   5      
+1606   5                          loc_data[7][loc_high[7]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了7
+             -区
+1607   5                          loc_data[6][loc_high[6]+1][0]=0;//2区木有了
+1608   5                          loc_high[6]++;//更新区2最高位
+1609   5                          loc_high[7]--;//更新区7最高位
+1610   5                      }
+1611   4                      else if(loc_data[6][loc_high[6]+1][0]==loc_data[3][loc_high[3]][1]){//如果区6最高位�
              -��于区3最高位件
-1567   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1568   5                          fun_pyhz2(tra_kh,dir_right);//抓件位置6
-1569   5                          fun_sj1zt(loc_high[6]+1);//下降到区6最高位
-1570   5                          fun_sz1(han_j);//抓件
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 27  
+1612   5                          fun_sj1zt(loc_high47);//上升到47方最高位
+1613   5                          fun_pyhz2(tra_kh,dir_right);//抓件位置6
+1614   5                          fun_sj1zt(loc_high[6]+1);//下降到区6最高位
+1615   5                          fun_sz1(han_j);//抓件
+1616   5                          if(loc_high07<=loc_high[3]-1)
+1617   5                              fun_sj1zt(loc_high07);//上升到03方最高位
+1618   5                          else
+1619   5                              fun_sj1zt(loc_high[3]-1);//上升到03方最高位
+1620   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
+1621   5                          fun_sj1zt(loc_high[3]);//下降到区7最高位
+1622   5                          fun_sz1(han_s);//松件
+1623   5      
+1624   5                          loc_data[3][loc_high[3]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了3
+             -区
+1625   5                          loc_data[6][loc_high[6]+1][0]=0;//2区木有了
+1626   5                          loc_high[6]++;//更新区2最高位
+1627   5                          loc_high[3]--;//更新区7最高位
+1628   5                      }
+1629   4                  }
+1630   3                  if((loc_data[7][4][0]==loc_data[7][4][1])&&
+1631   3                     (loc_data[7][3][0]==loc_data[7][3][1])&&
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 28  
 
-1571   5                          fun_sj1zt(loc_high47);//上升到47方最高位
-1572   5                          fun_pyhz2(tra_q,dir_left);//抓件位置3
-1573   5                          fun_sj1zt(loc_high[3]);//下降到区7最高位
-1574   5                          fun_sz1(han_s);//松件
-1575   5      
-1576   5                          loc_data[3][loc_high[3]+1][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到�
-             -�3区
-1577   5                          loc_data[6][loc_high[6]+1][0]=0;//2区木有了
-1578   5                          loc_high[6]++;//更新区2最高位
-1579   5                          loc_high[3]--;//更新区7最高位
-1580   5                      }
-1581   4                  }
-1582   3                  if((loc_data[7][4][0]==loc_data[7][4][1])&&
-1583   3                     (loc_data[7][3][0]==loc_data[7][3][1])&&
-1584   3                     (loc_data[7][2][0]==loc_data[7][2][1])&&
-1585   3                     (loc_data[7][1][0]==loc_data[7][1][1])){
-1586   4                      if((loc_data[3][4][0]==loc_data[3][4][1])&&
-1587   4                         (loc_data[3][3][0]==loc_data[3][3][1])&&
-1588   4                         (loc_data[3][2][0]==loc_data[3][2][1])&&
-1589   4                         (loc_data[3][1][0]==loc_data[3][1][1])){
-1590   5                          return;
-1591   5                      }
-1592   4                      else
-1593   4                          fun_hz1(dir_left);
-1594   4                  }
-1595   3              }
-1596   2              else{
-1597   3                  fun_hz1(dir_left);
-1598   3              }
-1599   2          }
-1600   1      }//自动抓奸
-1601          uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4){
-1602   1          return 
-1603   1          par_num1<par_num2?par_num1:par_num2<par_num2<par_num3?par_num2:par_num3?
-1604   1          par_num1<par_num2?par_num1:par_num2<par_num3<par_num4?par_num3:par_num4?
-1605   1          par_num1<par_num2?par_num1:par_num2:par_num3<par_num4?par_num3:par_num4:
-1606   1          par_num2<par_num3?par_num2:par_num3<par_num3<par_num4?par_num3:par_num4?
-1607   1          par_num2<par_num3?par_num2:par_num3:par_num3<par_num4?par_num3:par_num4;
-1608   1      }//求4个数的最小值
-1609          uc fun_min2(uc par_num1,uc par_num2){
-1610   1          return 
-1611   1          par_num1<par_num2?par_num1:par_num2;
-1612   1      }//求2个数的最小值
-1613          void fun_sj1zt(uc par_value){
-1614   1          switch(par_value){
-1615   2              case 0:
-1616   2                  fun_sj1(sjp_wz1);
-1617   2                  break;
-1618   2              case 1:
-1619   2                  fun_sj1(sjp_wz2);
-1620   2                  break;
-1621   2              case 2:
-1622   2                  fun_sj1(sjp_wz3);
-1623   2                  break;
-1624   2              case 3:
-1625   2                  fun_sj1(sjp_wz4);
-1626   2                  break;
-1627   2              case 4:
-1628   2                  fun_sj1(sjp_wz5);
-1629   2                  break;
-1630   2              default:
-1631   2                  break;
-C51 COMPILER V9.01   8023                                                                  03/07/2015 15:53:43 PAGE 28  
+1632   3                     (loc_data[7][2][0]==loc_data[7][2][1])&&
+1633   3                     (loc_data[7][1][0]==loc_data[7][1][1])){
+1634   4                      if((loc_data[3][4][0]==loc_data[3][4][1])&&
+1635   4                         (loc_data[3][3][0]==loc_data[3][3][1])&&
+1636   4                         (loc_data[3][2][0]==loc_data[3][2][1])&&
+1637   4                         (loc_data[3][1][0]==loc_data[3][1][1])){
+1638   5                          return;
+1639   5                      }
+1640   4                      else{
+1641   5                          fun_sj1(loc_high07);
+1642   5                          fun_hz1(dir_left);
+1643   5                      }
+1644   4                  }
+1645   3              }
+1646   2              else{
+1647   3                  fun_sj1(loc_high07);
+1648   3                  fun_hz1(dir_left);
+1649   3              }
+1650   2          }
+1651   1      }//自动抓件
+1652          uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4){
+1653   1          xdata uc loc_min=par_num1;
+1654   1          if(par_num2<loc_min)
+1655   1              loc_min=par_num2;
+1656   1          if(par_num3<loc_min)
+1657   1              loc_min=par_num3;
+1658   1          if(par_num4<loc_min)
+1659   1              loc_min=par_num4;
+1660   1          return loc_min;
+1661   1      }//求4个数的最小值
+1662          uc fun_min2(uc par_num1,uc par_num2){
+1663   1          return 
+1664   1          par_num1<par_num2?par_num1:par_num2;
+1665   1      }//求2个数的最小值
+1666          void fun_sj1zt(uc par_value){
+1667   1          switch(par_value){
+1668   2              case 0:
+1669   2                  fun_sj1(sjp_wz1);
+1670   2                  break;
+1671   2              case 1:
+1672   2                  fun_sj1(sjp_wz2);
+1673   2                  break;
+1674   2              case 2:
+1675   2                  fun_sj1(sjp_wz3);
+1676   2                  break;
+1677   2              case 3:
+1678   2                  fun_sj1(sjp_wz4);
+1679   2                  break;
+1680   2              case 4:
+1681   2                  fun_sj1(sjp_wz5);
+1682   2                  break;
+1683   2              default:
+1684   2                  break;
+1685   2          }
+1686   1      }//状态的升降单步,用来配合自动抓件
+1687          
+1688          uc fun_min(uc par_num,...){
+1689   1          uc xh;//循环
+1690   1          uc shu;//一个数
+1691   1          va_list argp;//保存结构
+1692   1          uc min;//最小值
+1693   1          va_start(argp,par_num);//argp指向传入的第一个可选参数，par_num是最后一个确定的参
+C51 COMPILER V9.01   8023                                                                  03/09/2015 18:13:12 PAGE 29  
 
-1632   2          }
-1633   1      }//状态的升降单步,用来配合自动抓奸
-1634          
+             -数
+1694   1          min=va_arg(argp,uc);//最小值为第一个可选参数
+1695   1          for(xh=1;xh<par_num;xh++){//循环指定次数
+1696   2              shu=va_arg(argp,uc);
+1697   2              if(shu<min){
+1698   3                  min=shu;
+1699   3              }
+1700   2              OUT(shu)
+1701   2          }
+1702   1          va_end(argp);
+1703   1          return shu;
+1704   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   8745    ----
+   CODE SIZE        =   9095    ----
    CONSTANT SIZE    =      5    ----
-   XDATA SIZE       =     47      93
+   XDATA SIZE       =     47      94
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2      38
+   DATA SIZE        =      2      60
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----       1
 END OF MODULE INFORMATION.

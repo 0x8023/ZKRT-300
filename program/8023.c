@@ -389,6 +389,8 @@ void fun_sj1(enum varENU_sjp par_model){
     str_begin.sjwz=par_model;//存储运行结果
 }//升降单步运动
 void fun_py1(enum varENU_tra par_model){
+    if(str_begin.pywz==par_model)
+        return;
     switch(par_model){
         case tra_q://前平移(没有电机的呢个方向)
             while(1){
@@ -748,44 +750,43 @@ void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz){
             default:
                 break;
         }
-    }
-    switch(par_py){
-        case tra_q://前平移(没有电机的呢个方向)
-            while(1){
+        switch(par_py){
+            case tra_q://前平移(没有电机的呢个方向)
+                while(1){
+                    fun_startdj(mot_dj2,100);
+                    while(in_qpy==1);
+                    fun_delay(20,del_ms);
+                    if(in_qpy==0){
+                        fun_delay(20,del_ms);
+                        break;
+                    }
+                }
+                break;
+            case tra_kq:
                 fun_startdj(mot_dj2,100);
-                while(in_qpy==1);
-                fun_delay(20,del_ms);
-                if(in_qpy==0){
-                    fun_delay(20,del_ms);
-                    break;
-                }
-            }
-            break;
-        case tra_kq:
-            fun_startdj(mot_dj2,100);
-            fun_delay(str_cod.py1kqz,del_ms);
-            break;
-        case tra_kh:
-            fun_startdj(mot_dj2,-100);
-            fun_delay(str_cod.py1zkh,del_ms);
-            break;
-        case tra_h://后平移(有电机的呢个方向)
-            while(1){
+                fun_delay(str_cod.py1kqz,del_ms);
+                break;
+            case tra_kh:
                 fun_startdj(mot_dj2,-100);
-                while(in_hpy==1);
-                fun_delay(20,del_ms);
-                if(in_hpy==0){
+                fun_delay(str_cod.py1zkh,del_ms);
+                break;
+            case tra_h://后平移(有电机的呢个方向)
+                while(1){
+                    fun_startdj(mot_dj2,-100);
+                    while(in_hpy==1);
                     fun_delay(20,del_ms);
-                    break;
+                    if(in_hpy==0){
+                        fun_delay(20,del_ms);
+                        break;
+                    }
                 }
-            }
-            break;
-        default:
-            break;
-    }
-    fun_stop(mot_dj2);
-    str_begin.pywz=par_py;//存储平移位置
-    if(str_begin.hzfx!=par_hz){
+                break;
+            default:
+                break;
+        }
+        fun_stop(mot_dj2);
+        str_begin.pywz=par_py;//存储平移位置
+
         fun_select(sel_912);
         switch(par_hz){
             case dir_up://回转至前方
@@ -964,6 +965,8 @@ void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz){
         fun_stop(mot_dj4);
         str_begin.hzfx=par_hz;//存储回转位置
     }
+    else
+        fun_py1(par_py);
 }//回转单步运动
 void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
     bit loc_flag=0;
@@ -1172,12 +1175,13 @@ void fun_zhuajian(
 
     xdata uc loc_data[8][5][2];//三维数组,8个区,5个高度
     xdata uc loc_high[8];
-    xdata uc loc_high03;
-    xdata uc loc_high47;
-    xdata uc loc_high07;
-    xdata uc loc_xh1,loc_xh2;
+    xdata uc loc_high03=0;
+    xdata uc loc_high47=0;
+    xdata uc loc_high07=0;
+    xdata uc loc_xh1=0,loc_xh2=0;
 
     memset(loc_data,0,sizeof(loc_data));//清空数组
+    memset(loc_high,0,sizeof(loc_high));//清空数组
     //起始区件号
     loc_data[0][1][0]=par_01;//传入形参:区0的第1号件件号(最高位)
     loc_data[0][2][0]=par_02;//传入形参:区0的第2号件件号
@@ -1245,12 +1249,10 @@ void fun_zhuajian(
     for(loc_xh1=0;loc_xh1<=7;loc_xh1++)
         for(loc_xh2=0;loc_xh2<=4;loc_xh2++)
             loc_data[loc_xh1][loc_xh2][0]=0;
-    //转移04的序号
     for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
         loc_data[0][loc_xh1][0]=loc_data[0][loc_xh1][1];
         loc_data[4][loc_xh1][0]=loc_data[4][loc_xh1][1];
-    }
-    //目的区除了3.7区全部清零
+    }//转移04的序号
     for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
         loc_data[0][loc_xh1][1]=0;
         loc_data[1][loc_xh1][1]=0;
@@ -1258,8 +1260,7 @@ void fun_zhuajian(
         loc_data[4][loc_xh1][1]=0;
         loc_data[5][loc_xh1][1]=0;
         loc_data[6][loc_xh1][1]=0;
-    }
-    //8个区的循环
+    }//目的区除了3.7区全部清零
     for(loc_xh1=0;loc_xh1<=7;loc_xh1++){
         loc_high[loc_xh1]=4;//默认为没有件
         for(loc_xh2=0;loc_xh2<=4;loc_xh2++){//5个高度的循环
@@ -1268,7 +1269,7 @@ void fun_zhuajian(
                 break;//继续区的循环
             }
         }
-    }
+    }//8个区的循环
 
     fun_sj1(sjp_wz1);
     fun_sz1(han_s);
@@ -1284,12 +1285,12 @@ void fun_zhuajian(
                     fun_pyhz2(tra_h,dir_left);//抓件位置0
                     fun_sj1zt(loc_high[0]+1);//下降到区0最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high03);//上升到03方最高位
+                    fun_sj1zt(loc_high03-1);//上升到03方最高位
                     fun_pyhz2(tra_q,dir_left);//抓件位置3
                     fun_sj1zt(loc_high[3]);//下降到区3最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[3][loc_high[3]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
+                    loc_data[3][loc_high[3]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
                     loc_data[0][loc_high[0]+1][0]=0;//0区木有了
                     loc_high[0]++;//更新区0最高位
                     loc_high[3]--;//更新区3最高位
@@ -1299,12 +1300,12 @@ void fun_zhuajian(
                     fun_pyhz2(tra_h,dir_left);//抓件位置0
                     fun_sj1zt(loc_high[0]+1);//下降到区0最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high07);//上升到07方最高位
+                    fun_sj1zt(loc_high07-1);//上升到07方最高位
                     fun_pyhz2(tra_h,dir_right);//抓件位置7
                     fun_sj1zt(loc_high[7]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[7][loc_high[7]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了7区
+                    loc_data[7][loc_high[7]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了7区
                     loc_data[0][loc_high[0]+1][0]=0;//0区木有了
                     loc_high[0]++;//更新区0最高位
                     loc_high[7]--;//更新区7最高位
@@ -1315,27 +1316,30 @@ void fun_zhuajian(
                         fun_pyhz2(tra_h,dir_left);//抓件位置0
                         fun_sj1zt(loc_high[0]+1);//下降到区0最高位
                         fun_sz1(han_j);//抓件
-                        fun_sj1zt(loc_high03);//上升到03方最高位
+                        fun_sj1zt(loc_high03-1);//上升到03方最高位
                         fun_pyhz2(tra_kh,dir_left);//抓件位置1
                         fun_sj1zt(loc_high[1]);//下降到区1最高位
                         fun_sz1(han_s);//松件
 
-                        loc_data[1][loc_high[1]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
+                        loc_data[1][loc_high[1]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
                         loc_data[0][loc_high[0]+1][0]=0;//0区木有了
                         loc_high[0]++;//更新区0最高位
-                        loc_high[1]--;//更新区3最高位
+                        loc_high[1]--;//更新区1最高位
                     }
                     else{//否则放在区2
                         fun_sj1zt(loc_high03);//上升到03方最高位
                         fun_pyhz2(tra_h,dir_left);//抓件位置0
                         fun_sj1zt(loc_high[0]+1);//下降到区0最高位
                         fun_sz1(han_j);//抓件
-                        fun_sj1zt(loc_high03);//上升到03方最高位
+                        if(loc_high03<=loc_high[2]-1)
+                            fun_sj1zt(loc_high03);//上升到03方最高位
+                        else
+                            fun_sj1zt(loc_high[2]-1);//上升到03方最高位
                         fun_pyhz2(tra_kq,dir_left);//抓件位置2
                         fun_sj1zt(loc_high[2]);//下降到区2最高位
                         fun_sz1(han_s);//松件
 
-                        loc_data[2][loc_high[2]+1][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
+                        loc_data[2][loc_high[2]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
                         loc_data[0][loc_high[0]+1][0]=0;//0区木有了
                         loc_high[0]++;//更新区0最高位
                         loc_high[2]--;//更新区3最高位
@@ -1348,12 +1352,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kh,dir_left);//抓件位置1
                     fun_sj1zt(loc_high[1]+1);//下降到区1最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high03);//上升到03方最高位
+                    if(loc_high03<=loc_high[3]-1)
+                        fun_sj1zt(loc_high03);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[3]-1);//上升到03方最高位
                     fun_pyhz2(tra_q,dir_left);//抓件位置2
                     fun_sj1zt(loc_high[3]);//下降到区2最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[3][loc_high[3]+1][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了3区
+                    loc_data[3][loc_high[3]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了3区
                     loc_data[1][loc_high[1]+1][0]=0;//1区木有了
                     loc_high[1]++;//更新区1最高位
                     loc_high[3]--;//更新区3最高位
@@ -1363,30 +1370,36 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kh,dir_left);//抓件位置1
                     fun_sj1zt(loc_high[1]+1);//下降到区1最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high07);//上升到07方最高位
+                    if(loc_high07<=loc_high[7]-1)
+                        fun_sj1zt(loc_high07);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[7]-1);//上升到03方最高位
                     fun_pyhz2(tra_h,dir_right);//抓件位置7
                     fun_sj1zt(loc_high[7]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[7][loc_high[7]+1][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了7区
+                    loc_data[7][loc_high[7]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了7区
                     loc_data[1][loc_high[1]+1][0]=0;//1区木有了
                     loc_high[1]++;//更新区1最高位
-                    loc_high[7]--;//更新区3最高位
+                    loc_high[7]--;//更新区7最高位
                 }
                 else if(loc_data[1][loc_high[1]+1][0]>loc_data[2][loc_high[2]][0]){//如果区2能放得下,放在区2
                     fun_sj1zt(loc_high03);//上升到03方最高位
                     fun_pyhz2(tra_kh,dir_left);//抓件位置1
                     fun_sj1zt(loc_high[1]+1);//下降到区1最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high03);//上升到03方最高位
+                    if(loc_high03<=loc_high[2]-1)
+                        fun_sj1zt(loc_high03);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[2]-1);//上升到03方最高位
                     fun_pyhz2(tra_kq,dir_left);//抓件位置2
                     fun_sj1zt(loc_high[2]);//下降到区2最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[2][loc_high[2]+1][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了2区
+                    loc_data[2][loc_high[2]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了2区
                     loc_data[1][loc_high[1]+1][0]=0;//1区木有了
                     loc_high[1]++;//更新区1最高位
-                    loc_high[2]--;//更新区3最高位
+                    loc_high[2]--;//更新区2最高位
                 }
             }
             else if(loc_high[2]<4){//如果区2有件
@@ -1395,12 +1408,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kq,dir_left);//抓件位置2
                     fun_sj1zt(loc_high[2]+1);//下降到区2最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high03);//上升到03方最高位
+                    if(loc_high03<=loc_high[3]-1)
+                        fun_sj1zt(loc_high03);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[3]-1);//上升到03方最高位
                     fun_pyhz2(tra_q,dir_left);//抓件位置3
                     fun_sj1zt(loc_high[2]);//下降到区3最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[3][loc_high[3]+1][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了3区
+                    loc_data[3][loc_high[3]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了3区
                     loc_data[2][loc_high[2]+1][0]=0;//2区木有了
                     loc_high[2]++;//更新区2最高位
                     loc_high[3]--;//更新区3最高位
@@ -1410,12 +1426,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kq,dir_left);//抓件位置2
                     fun_sj1zt(loc_high[2]+1);//下降到区2最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high07);//上升到07方最高位
+                    if(loc_high07<=loc_high[7]-1)
+                        fun_sj1zt(loc_high07);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[7]-1);//上升到03方最高位
                     fun_pyhz2(tra_h,dir_right);//抓件位置7
                     fun_sj1zt(loc_high[7]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[7][loc_high[7]+1][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了7区
+                    loc_data[7][loc_high[7]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了7区
                     loc_data[2][loc_high[2]+1][0]=0;//2区木有了
                     loc_high[2]++;//更新区2最高位
                     loc_high[7]--;//更新区7最高位
@@ -1431,8 +1450,10 @@ void fun_zhuajian(
                    (loc_data[7][1][0]==loc_data[7][1][1])){
                     return;
                 }
-                else
+                else{
+                    fun_sj1(loc_high07);
                     fun_hz1(dir_right);
+                }
             }
         }
         else if(str_begin.hzfx==dir_right){
@@ -1442,12 +1463,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_q,dir_right);//抓件位置4
                     fun_sj1zt(loc_high[4]+1);//下降到区4最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high47);//上升到47方最高位
+                    if(loc_high47<=loc_high[7]-1)
+                        fun_sj1zt(loc_high47);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[7]-1);//上升到03方最高位
                     fun_pyhz2(tra_h,dir_right);//抓件位置7
                     fun_sj1zt(loc_high[7]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[7][loc_high[7]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了7区
+                    loc_data[7][loc_high[7]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了7区
                     loc_data[4][loc_high[4]+1][0]=0;//4区木有了
                     loc_high[4]++;//更新区4最高位
                     loc_high[7]--;//更新区7最高位
@@ -1457,12 +1481,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_q,dir_right);//抓件位置4
                     fun_sj1zt(loc_high[4]+1);//下降到区4最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high07);//上升到07方最高位
+                    if(loc_high07<=loc_high[3]-1)
+                        fun_sj1zt(loc_high07);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[3]-1);//上升到03方最高位
                     fun_pyhz2(tra_q,dir_left);//抓件位置3
                     fun_sj1zt(loc_high[3]);//下降到区3最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[3][loc_high[3]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了3区
+                    loc_data[3][loc_high[3]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了3区
                     loc_data[4][loc_high[4]+1][0]=0;//4区木有了
                     loc_high[4]++;//更新区4最高位
                     loc_high[3]--;//更新区7最高位
@@ -1473,12 +1500,15 @@ void fun_zhuajian(
                         fun_pyhz2(tra_q,dir_right);//抓件位置4
                         fun_sj1zt(loc_high[4]+1);//下降到区4最高位
                         fun_sz1(han_j);//抓件
-                        fun_sj1zt(loc_high07);//上升到07方最高位
+                        if(loc_high07<=loc_high[6]-1)
+                            fun_sj1zt(loc_high07);//上升到03方最高位
+                        else
+                            fun_sj1zt(loc_high[6]-1);//上升到03方最高位
                         fun_pyhz2(tra_kq,dir_right);//抓件位置6
                         fun_sj1zt(loc_high[6]);//下降到区6最高位
                         fun_sz1(han_s);//松件
 
-                        loc_data[6][loc_high[6]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了6区
+                        loc_data[6][loc_high[6]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了6区
                         loc_data[4][loc_high[4]+1][0]=0;//4区木有了
                         loc_high[4]++;//更新区4最高位
                         loc_high[6]--;//更新区6最高位
@@ -1488,12 +1518,15 @@ void fun_zhuajian(
                         fun_pyhz2(tra_q,dir_right);//抓件位置4
                         fun_sj1zt(loc_high[4]+1);//下降到区4最高位
                         fun_sz1(han_j);//抓件
-                        fun_sj1zt(loc_high47);//上升到47方最高位
+                        if(loc_high47<=loc_high[5]-1)
+                            fun_sj1zt(loc_high47);//上升到03方最高位
+                        else
+                            fun_sj1zt(loc_high[5]-1);//上升到03方最高位
                         fun_pyhz2(tra_kq,dir_right);//抓件位置2
                         fun_sj1zt(loc_high[5]);//下降到区5最高位
                         fun_sz1(han_s);//松件
 
-                        loc_data[5][loc_high[5]+1][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了5区
+                        loc_data[5][loc_high[5]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了5区
                         loc_data[4][loc_high[4]+1][0]=0;//4区木有了
                         loc_high[4]++;//更新区4最高位
                         loc_high[5]--;//更新区6最高位
@@ -1506,12 +1539,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kq,dir_right);//抓件位置5
                     fun_sj1zt(loc_high[5]+1);//下降到区5最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high47);//上升到47方最高位
+                    if(loc_high47<=loc_high[7]-1)
+                        fun_sj1zt(loc_high47);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[7]-1);//上升到03方最高位
                     fun_pyhz2(tra_h,dir_right);//抓件位置2
                     fun_sj1zt(loc_high[7]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[7][loc_high[7]+1][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了7区
+                    loc_data[7][loc_high[7]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了7区
                     loc_data[5][loc_high[5]+1][0]=0;//5区木有了
                     loc_high[5]++;//更新区5最高位
                     loc_high[7]--;//更新区7最高位
@@ -1521,12 +1557,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kq,dir_right);//抓件位置5
                     fun_sj1zt(loc_high[5]+1);//下降到区5最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high07);//上升到07方最高位
+                    if(loc_high07<=loc_high[3]-1)
+                        fun_sj1zt(loc_high07);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[3]-1);//上升到03方最高位
                     fun_pyhz2(tra_q,dir_left);//抓件位置3
                     fun_sj1zt(loc_high[3]);//下降到区3最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[3][loc_high[3]+1][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了3区
+                    loc_data[3][loc_high[3]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了3区
                     loc_data[5][loc_high[5]+1][0]=0;//5区木有了
                     loc_high[5]++;//更新区5最高位
                     loc_high[3]--;//更新区3最高位
@@ -1536,12 +1575,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kq,dir_right);//抓件位置5
                     fun_sj1zt(loc_high[5]+1);//下降到区5最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high47);//上升到47方最高位
+                    if(loc_high47<=loc_high[6]-1)
+                        fun_sj1zt(loc_high47);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[6]-1);//上升到03方最高位
                     fun_pyhz2(tra_kh,dir_right);//抓件位置2
                     fun_sj1zt(loc_high[6]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[6][loc_high[6]+1][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了6区
+                    loc_data[6][loc_high[6]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了6区
                     loc_data[5][loc_high[5]+1][0]=0;//5区木有了
                     loc_high[5]++;//更新区5最高位
                     loc_high[6]--;//更新区7最高位
@@ -1553,12 +1595,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kh,dir_right);//抓件位置6
                     fun_sj1zt(loc_high[6]+1);//下降到区6最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high47);//上升到47方最高位
+                    if(loc_high47<=loc_high[7]-1)
+                        fun_sj1zt(loc_high47);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[7]-1);//上升到03方最高位
                     fun_pyhz2(tra_h,dir_right);//抓件位置7
                     fun_sj1zt(loc_high[7]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[7][loc_high[7]+1][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了7区
+                    loc_data[7][loc_high[7]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了7区
                     loc_data[6][loc_high[6]+1][0]=0;//2区木有了
                     loc_high[6]++;//更新区2最高位
                     loc_high[7]--;//更新区7最高位
@@ -1568,12 +1613,15 @@ void fun_zhuajian(
                     fun_pyhz2(tra_kh,dir_right);//抓件位置6
                     fun_sj1zt(loc_high[6]+1);//下降到区6最高位
                     fun_sz1(han_j);//抓件
-                    fun_sj1zt(loc_high47);//上升到47方最高位
+                    if(loc_high07<=loc_high[3]-1)
+                        fun_sj1zt(loc_high07);//上升到03方最高位
+                    else
+                        fun_sj1zt(loc_high[3]-1);//上升到03方最高位
                     fun_pyhz2(tra_q,dir_left);//抓件位置3
                     fun_sj1zt(loc_high[3]);//下降到区7最高位
                     fun_sz1(han_s);//松件
 
-                    loc_data[3][loc_high[3]+1][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了3区
+                    loc_data[3][loc_high[3]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了3区
                     loc_data[6][loc_high[6]+1][0]=0;//2区木有了
                     loc_high[6]++;//更新区2最高位
                     loc_high[3]--;//更新区7最高位
@@ -1589,22 +1637,27 @@ void fun_zhuajian(
                    (loc_data[3][1][0]==loc_data[3][1][1])){
                     return;
                 }
-                else
+                else{
+                    fun_sj1(loc_high07);
                     fun_hz1(dir_left);
+                }
             }
         }
         else{
+            fun_sj1(loc_high07);
             fun_hz1(dir_left);
         }
     }
 }//自动抓件
 uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4){
-    return 
-    par_num1<par_num2?par_num1:par_num2<par_num2<par_num3?par_num2:par_num3?
-    par_num1<par_num2?par_num1:par_num2<par_num3<par_num4?par_num3:par_num4?
-    par_num1<par_num2?par_num1:par_num2:par_num3<par_num4?par_num3:par_num4:
-    par_num2<par_num3?par_num2:par_num3<par_num3<par_num4?par_num3:par_num4?
-    par_num2<par_num3?par_num2:par_num3:par_num3<par_num4?par_num3:par_num4;
+    xdata uc loc_min=par_num1;
+    if(par_num2<loc_min)
+        loc_min=par_num2;
+    if(par_num3<loc_min)
+        loc_min=par_num3;
+    if(par_num4<loc_min)
+        loc_min=par_num4;
+    return loc_min;
 }//求4个数的最小值
 uc fun_min2(uc par_num1,uc par_num2){
     return 
@@ -1630,5 +1683,22 @@ void fun_sj1zt(uc par_value){
         default:
             break;
     }
-}//状态的升降单步,用来配合自动抓奸
+}//状态的升降单步,用来配合自动抓件
 
+uc fun_min(uc par_num,...){
+    uc xh;//循环
+    uc shu;//一个数
+    va_list argp;//保存结构
+    uc min;//最小值
+    va_start(argp,par_num);//argp指向传入的第一个可选参数，par_num是最后一个确定的参数
+    min=va_arg(argp,uc);//最小值为第一个可选参数
+    for(xh=1;xh<par_num;xh++){//循环指定次数
+        shu=va_arg(argp,uc);
+        if(shu<min){
+            min=shu;
+        }
+        OUT(shu)
+    }
+    va_end(argp);
+    return shu;
+}
