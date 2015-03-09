@@ -1597,7 +1597,7 @@ void fun_zhuajian(
             fun_hz1(dir_left);
         }
     }
-}//自动抓奸
+}//自动抓件
 uc fun_min4(uc par_num1,uc par_num2,uc par_num3,uc par_num4){
     return 
     par_num1<par_num2?par_num1:par_num2<par_num2<par_num3?par_num2:par_num3?
