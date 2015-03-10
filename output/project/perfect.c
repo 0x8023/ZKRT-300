@@ -17,22 +17,14 @@ void main(){
 //    def_stop
 //    
 
-
-
-    //OUT(a);
-    //demo("DEMO", "This", "is", "a", "demo!" ,"333333", "/0");
-    a=fun_min(5,1,2,3,4,5);
-    OUT(a);
-    MSG("STOP")
-    def_stop
-    printf("%d \n",a);
-
+a=fun_min(2,1,2);
     
     fun_calibration();
 
-    fun_zhuajian(1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8);
+    fun_zhuajian(1,6,2,4,0,0,0,0,6,4,1,2,0,0,0,0);
 
-
+   MSG("STOP")
+    def_stop
     //fun_mptline(5,60,dir_left);
 
     

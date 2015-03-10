@@ -25,3 +25,20 @@ int fun_max(uc par_num,...){
     va_end(loc_args);
     return loc_max;
 }
+uc fun_min(uc par_num,...){
+    uc xh;//循环
+    uc shu;//一个数
+    va_list argp;//保存结构
+    uc min;//最小值
+    va_start(argp,par_num);//argp指向传入的第一个可选参数，par_num是最后一个确定的参数
+    min=va_arg(argp,uc);//最小值为第一个可选参数
+    for(xh=1;xh<par_num;xh++){//循环指定次数
+        shu=va_arg(argp,uc);
+        if(shu<min){
+            min=shu;
+        }
+    }
+    va_end(argp);
+    return min;
+}
+
