@@ -17,11 +17,9 @@ void main(){
 //    def_stop
 //    
 
-a=fun_min(2,1,2);
-    
-    fun_calibration();
 
-    fun_zhuajian(1,6,2,4,0,0,0,0,6,4,1,2,0,0,0,0);
+    fun_calibration();
+    fun_zhuajian(3,2,1,4,0,0,0,0,1,2,3,4,0,0,0,0);
 
    MSG("STOP")
     def_stop

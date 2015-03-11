@@ -10,50 +10,6 @@ Project File Date:  03/04/2015
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(1421): error C141: syntax error near ')'
-PROGRAM\8023.C(1424): error C141: syntax error near '}'
-PROGRAM\8023.C(1441): error C187: not an lvalue
-PROGRAM\8023.C(1442): error C187: not an lvalue
-PROGRAM\8023.C(1458): error C187: not an lvalue
-PROGRAM\8023.C(1459): error C187: not an lvalue
-PROGRAM\8023.C(1475): error C187: not an lvalue
-PROGRAM\8023.C(1476): error C187: not an lvalue
-PROGRAM\8023.C(1494): error C187: not an lvalue
-PROGRAM\8023.C(1495): error C187: not an lvalue
-PROGRAM\8023.C(1511): error C187: not an lvalue
-PROGRAM\8023.C(1512): error C187: not an lvalue
-PROGRAM\8023.C(1547): error C187: not an lvalue
-PROGRAM\8023.C(1548): error C187: not an lvalue
-PROGRAM\8023.C(1564): error C187: not an lvalue
-PROGRAM\8023.C(1565): error C187: not an lvalue
-PROGRAM\8023.C(1582): error C187: not an lvalue
-PROGRAM\8023.C(1583): error C187: not an lvalue
-PROGRAM\8023.C(1599): error C187: not an lvalue
-PROGRAM\8023.C(1600): error C187: not an lvalue
-PROGRAM\8023.C(1619): error C187: not an lvalue
-PROGRAM\8023.C(1620): error C187: not an lvalue
-PROGRAM\8023.C(1636): error C187: not an lvalue
-PROGRAM\8023.C(1637): error C187: not an lvalue
-PROGRAM\8023.C(1653): error C187: not an lvalue
-PROGRAM\8023.C(1654): error C187: not an lvalue
-PROGRAM\8023.C(1672): error C187: not an lvalue
-PROGRAM\8023.C(1673): error C187: not an lvalue
-PROGRAM\8023.C(1689): error C187: not an lvalue
-PROGRAM\8023.C(1690): error C187: not an lvalue
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
@@ -76,92 +32,14 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(993): error C202: 'par_value': undefined identifier
-PROGRAM\8023.C(1227): error C141: syntax error near '4'
-PROGRAM\8023.C(1227): error C134: 'fun_min': mspace on function not permitted
-PROGRAM\8023.C(1227): error C244: 'fun_min': can't initialize, bad type or class
-PROGRAM\8023.C(1227): error C134: 'fun_min': mspace on function not permitted
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(1227): error C141: syntax error near '4'
-PROGRAM\8023.C(1227): error C134: 'fun_min': mspace on function not permitted
-PROGRAM\8023.C(1227): error C244: 'fun_min': can't initialize, bad type or class
-PROGRAM\8023.C(1227): error C134: 'fun_min': mspace on function not permitted
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(1539): error C202: 'loc_high07': undefined identifier
-PROGRAM\8023.C(1560): error C187: not an lvalue
-PROGRAM\8023.C(1561): error C187: not an lvalue
-PROGRAM\8023.C(1577): error C187: not an lvalue
-PROGRAM\8023.C(1578): error C187: not an lvalue
-PROGRAM\8023.C(1595): error C187: not an lvalue
-PROGRAM\8023.C(1596): error C187: not an lvalue
-PROGRAM\8023.C(1612): error C187: not an lvalue
-PROGRAM\8023.C(1613): error C187: not an lvalue
-PROGRAM\8023.C(1632): error C187: not an lvalue
-PROGRAM\8023.C(1633): error C187: not an lvalue
-PROGRAM\8023.C(1649): error C187: not an lvalue
-PROGRAM\8023.C(1650): error C187: not an lvalue
-PROGRAM\8023.C(1666): error C187: not an lvalue
-PROGRAM\8023.C(1667): error C187: not an lvalue
-PROGRAM\8023.C(1685): error C187: not an lvalue
-PROGRAM\8023.C(1686): error C187: not an lvalue
-PROGRAM\8023.C(1702): error C187: not an lvalue
-PROGRAM\8023.C(1703): error C187: not an lvalue
-PROGRAM\8023.C(1717): error C202: 'loc_high07': undefined identifier
-PROGRAM\8023.C(1723): error C202: 'loc_high07': undefined identifier
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(1717): error C202: 'loc_high07': undefined identifier
-PROGRAM\8023.C(1723): error C202: 'loc_high07': undefined identifier
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(1368): error C141: syntax error near '='
-PROGRAM\8023.C(1368): error C141: syntax error near '||'
-PROGRAM\8023.C(1368): error C141: syntax error near ')'
-PROGRAM\8023.C(1368): error C141: syntax error near ')'
-PROGRAM\8023.C(1382): error C187: not an lvalue
-PROGRAM\8023.C(1383): error C187: not an lvalue
-PROGRAM\8023.C(1404): error C187: not an lvalue
-PROGRAM\8023.C(1405): error C187: not an lvalue
-PROGRAM\8023.C(1421): error C187: not an lvalue
-PROGRAM\8023.C(1422): error C187: not an lvalue
-PROGRAM\8023.C(1438): error C187: not an lvalue
-PROGRAM\8023.C(1439): error C187: not an lvalue
-PROGRAM\8023.C(1460): error C187: not an lvalue
-PROGRAM\8023.C(1461): error C187: not an lvalue
-PROGRAM\8023.C(1477): error C187: not an lvalue
-PROGRAM\8023.C(1478): error C187: not an lvalue
-PROGRAM\8023.C(1496): error C187: not an lvalue
-PROGRAM\8023.C(1497): error C187: not an lvalue
-PROGRAM\8023.C(1515): error C141: syntax error near ')'
-PROGRAM\8023.C(1517): error C141: syntax error near 'else'
-PROGRAM\8023.C(1552): error C141: syntax error near ')'
-PROGRAM\8023.C(1560): error C141: syntax error near ')'
-PROGRAM\8023.C(1562): error C141: syntax error near 'else'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(1515): error C141: syntax error near ')'
-PROGRAM\8023.C(1517): error C141: syntax error near 'else'
-PROGRAM\8023.C(1552): error C141: syntax error near ')'
-PROGRAM\8023.C(1560): error C141: syntax error near ')'
-PROGRAM\8023.C(1562): error C141: syntax error near 'else'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(1552): error C141: syntax error near ')'
-目标未创建
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...

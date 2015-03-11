@@ -219,6 +219,6 @@
                              uc par_41,uc par_42,uc par_43,uc par_44,
                              uc par_31,uc par_32,uc par_33,uc par_34,
                              uc par_71,uc par_72,uc par_73,uc par_74);
-    extern uc fun_min(uc par_num,...);
+    extern uc fun_min(uc par_num,...);//求最小值
 /*---------------------------------------------------------------更新日志-----*/
 #endif
