@@ -32,6 +32,311 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
+PROGRAM\8023.C(1583): error C141: syntax error near '}'
+PROGRAM\8023.C(1602): error C187: not an lvalue
+PROGRAM\8023.C(1603): error C187: not an lvalue
+PROGRAM\8023.C(1619): error C187: not an lvalue
+PROGRAM\8023.C(1620): error C187: not an lvalue
+PROGRAM\8023.C(1636): error C187: not an lvalue
+PROGRAM\8023.C(1637): error C187: not an lvalue
+PROGRAM\8023.C(1658): error C187: not an lvalue
+PROGRAM\8023.C(1659): error C187: not an lvalue
+PROGRAM\8023.C(1680): error C187: not an lvalue
+PROGRAM\8023.C(1681): error C187: not an lvalue
+PROGRAM\8023.C(1697): error C187: not an lvalue
+PROGRAM\8023.C(1698): error C187: not an lvalue
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1365): error C141: syntax error near '{'
+PROGRAM\8023.C(1379): error C187: not an lvalue
+PROGRAM\8023.C(1380): error C187: not an lvalue
+PROGRAM\8023.C(1401): error C187: not an lvalue
+PROGRAM\8023.C(1402): error C187: not an lvalue
+PROGRAM\8023.C(1418): error C187: not an lvalue
+PROGRAM\8023.C(1419): error C187: not an lvalue
+PROGRAM\8023.C(1435): error C187: not an lvalue
+PROGRAM\8023.C(1436): error C187: not an lvalue
+PROGRAM\8023.C(1457): error C187: not an lvalue
+PROGRAM\8023.C(1458): error C187: not an lvalue
+PROGRAM\8023.C(1479): error C187: not an lvalue
+PROGRAM\8023.C(1480): error C187: not an lvalue
+PROGRAM\8023.C(1496): error C187: not an lvalue
+PROGRAM\8023.C(1497): error C187: not an lvalue
+PROGRAM\8023.C(1544): error C187: not an lvalue
+PROGRAM\8023.C(1545): error C187: not an lvalue
+PROGRAM\8023.C(1561): error C187: not an lvalue
+PROGRAM\8023.C(1562): error C187: not an lvalue
+PROGRAM\8023.C(1578): error C187: not an lvalue
+PROGRAM\8023.C(1579): error C187: not an lvalue
+PROGRAM\8023.C(1600): error C187: not an lvalue
+PROGRAM\8023.C(1601): error C187: not an lvalue
+PROGRAM\8023.C(1617): error C187: not an lvalue
+PROGRAM\8023.C(1618): error C187: not an lvalue
+PROGRAM\8023.C(1634): error C187: not an lvalue
+PROGRAM\8023.C(1635): error C187: not an lvalue
+PROGRAM\8023.C(1656): error C187: not an lvalue
+PROGRAM\8023.C(1657): error C187: not an lvalue
+PROGRAM\8023.C(1678): error C187: not an lvalue
+PROGRAM\8023.C(1679): error C187: not an lvalue
+PROGRAM\8023.C(1695): error C187: not an lvalue
+PROGRAM\8023.C(1696): error C187: not an lvalue
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+PROGRAM\8023.C(1663): error C141: syntax error near '{'
+PROGRAM\8023.C(1678): error C187: not an lvalue
+PROGRAM\8023.C(1679): error C187: not an lvalue
+PROGRAM\8023.C(1695): error C187: not an lvalue
+PROGRAM\8023.C(1696): error C187: not an lvalue
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",

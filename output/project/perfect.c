@@ -6,9 +6,9 @@ void main(){
         0,//Y坐标
         dir_up,//车头方向
         han_j,//手抓状态
-        sjp_wz2,//升降位置
-        tra_q,//平移位置
-        dir_left)//回转方向
+        sjp_wz3,//升降位置
+        tra_h,//平移位置
+        dir_right)//回转方向
 //    fun_sj1(sjp_wz1);
 //    fun_delay(1,del_s);
 //    WZ5
@@ -16,10 +16,10 @@ void main(){
 //    WZ2
 //    def_stop
 //    
-
+fun_hz1(dir_left);
 
     fun_calibration();
-    fun_zhuajian(3,2,1,4,0,0,0,0,1,2,3,4,0,0,0,0);
+    fun_zhuajian(1,2,3,4,5,6,7,8,1,2,7,4,8,5,3,6);
 
    MSG("STOP")
     def_stop

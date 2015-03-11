@@ -20,7 +20,8 @@
     /*手抓状态*/      str_begin.szzt=par_szzt;\
     /*升降位置*/      str_begin.sjwz=par_sjwz;\
     /*平移位置*/      str_begin.pywz=par_pywz;\
-    /*回转方向*/      str_begin.hzfx=par_hzfx;
+    /*回转方向*/      str_begin.hzfx=par_hzfx;\
+                      OUT("Ready!")
     #define def_stop fun_stop(mot_dj1);\
                      fun_stop(mot_dj2);\
                      fun_stop(mot_dj3);\
