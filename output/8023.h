@@ -21,7 +21,7 @@
     /*升降位置*/      str_begin.sjwz=par_sjwz;\
     /*平移位置*/      str_begin.pywz=par_pywz;\
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
-                      OUT("Ready!")
+                      MSG("Ready!")
     #define def_stop fun_stop(mot_dj1);\
                      fun_stop(mot_dj2);\
                      fun_stop(mot_dj3);\
@@ -40,7 +40,6 @@
     #define WZ5 fun_sj1(sjp_wz5);
     #define MSG(par_value) printf("%s \n",par_value);
     #define OUT(par_value) printf("%d \n",par_value);
-    #define MSGOUT(par_value,par_num) printf("%s:%d\n",par_value,par_num);
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
