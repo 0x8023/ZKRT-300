@@ -1828,3 +1828,74 @@ uc fun_min(uc par_num,...){
     va_end(loc_argp);//结束
     return loc_min;//退出
 }//求最小?
+void fun_test(){
+    fun_sz1(han_j);
+    fun_delay(1,del_s);
+    fun_sz1(han_s);
+    fun_delay(1,del_s);
+    fun_sz1(han_j);
+    fun_delay(1,del_s);
+    fun_sz1(han_s);
+    fun_delay(1,del_s);
+
+    str_begin.pywz=tra_h;
+    fun_py1(tra_q);
+    fun_delay(1,del_s);
+    fun_py1(tra_h);
+    fun_delay(1,del_s);
+    fun_py1(tra_q);
+    fun_delay(1,del_s);
+    fun_py1(tra_h);
+    fun_delay(1,del_s);
+
+    fun_sj1(sjp_wz1);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz2);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz3);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz4);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz5);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz4);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz3);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz2);
+    fun_delay(1,del_s);
+    fun_sj1(sjp_wz1);
+
+    str_now.hzfx=str_begin.hzfx;
+    str_begin.hzfx=dir_up;
+    fun_hz1(dir_right);
+    fun_delay(1,del_s);
+    fun_hz1(dir_up);
+    fun_delay(1,del_s);
+    fun_hz1(dir_right);
+    fun_delay(1,del_s);
+    fun_hz1(dir_up);
+    fun_delay(1,del_s);
+    str_begin.hzfx=str_now.hzfx;
+
+    fun_startdj(mot_rl,60);
+    fun_delay(1,del_s);
+    fun_stop(mot_rl);
+    fun_delay(1,del_s);
+
+    fun_startdj(mot_rl,-60);
+    fun_delay(1,del_s);
+    fun_stop(mot_rl);
+    fun_delay(1,del_s);
+
+    fun_startdj(mot_r,40);
+    fun_startdj(mot_l,-40);
+    fun_delay(1,del_s);
+    fun_stop(mot_rl);
+    fun_delay(1,del_s);
+
+    fun_startdj(mot_r,-40);
+    fun_startdj(mot_l,40);
+    fun_delay(1,del_s);
+    fun_stop(mot_rl);
+}//测试程序

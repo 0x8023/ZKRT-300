@@ -38,8 +38,8 @@
     #define WZ3 fun_sj1(sjp_wz3);
     #define WZ4 fun_sj1(sjp_wz4);
     #define WZ5 fun_sj1(sjp_wz5);
-    #define MSG(par_value) printf("%s \n",par_value);
-    #define OUT(par_value) printf("%d \n",par_value);
+    #define MSG(par_value) printf("%s\n",par_value);
+    #define OUT(par_value) printf("%d\n",par_value);
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
@@ -217,5 +217,6 @@
     extern void fun_port();//串口初始化
     extern void fun_zhuajian(ul par_04,ul par_37);//自动抓件
     extern uc fun_min(uc par_num,...);//求最小值
+    extern void fun_test();//测试
 /*---------------------------------------------------------------更新日志-----*/
 #endif

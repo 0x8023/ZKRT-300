@@ -5,7 +5,7 @@ void main(){
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
-        han_j,//手抓状态
+        han_s,//手抓状态
         sjp_wz3,//升降位置
         tra_h,//平移位置
         dir_right)//回转方向
@@ -16,8 +16,9 @@ void main(){
 //    WZ2
 //    def_stop
 //    
-
-
+    
+    fun_test();
+    def_stop
 
     fun_hz1(dir_left);
     fun_calibration();
@@ -37,47 +38,6 @@ void main(){
     fun_calibration();
     //fun_py1(tra_q);
     fun_py1(tra_kq);
-    
-
-    
-
-
-
-
-    fun_sj1(sjp_wz1);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz12);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz2);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz23);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz3);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz34);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz4);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz45);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz5);
-    fun_delay(1,del_s);
-
-    fun_sj1(sjp_wz45);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz4);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz34);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz3);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz23);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz2);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz12);
-    fun_delay(1,del_s);
-    fun_sj1(sjp_wz1);
 
     def_stop
 }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   4                      }while(--loc_i);
   53   3                  }
   54   2                  return;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 2   
 
   55   2              default:return;
   56   2          }
@@ -126,7 +126,7 @@ line level    source
  114   1          //PS_11=1;//升降位置3传感器置1 $?$
  115   1      
  116   1          out_en1=1;//电机1/3使能 $?$
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 3   
 
  117   1          out_en2=1;//电机2/4使能 $?$
  118   1          //out_motorselect=1;//电机片选为1 $?$
@@ -190,7 +190,7 @@ line level    source
  176   3                      fun_pwml(par_speed);out_pwml=0;
  177   3                      fun_pwmr(par_speed);out_pwmr=0;
  178   3                  }
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 4   
 
  179   2                  else if(par_speed<0){
  180   3                      fun_pwml(cabs(par_speed));out_pwml=1;
@@ -254,7 +254,7 @@ line level    source
  238   2                  out_motorselect=0;out_dir2=0;out_en2=1;break;
  239   2              default:
  240   2                  break;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 5   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 5   
 
  241   2          }
  242   1      }//停止电机
@@ -318,7 +318,7 @@ line level    source
  300   2                  fun_select(sel_58);
  301   2                  fun_delay(50,del_ms);
  302   2                  while(1){//要去的地方比较靠下,向下走                    
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 6   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 6   
 
  303   3                      while(in_wz2==1);
  304   3                      fun_delay(20,del_ms);
@@ -382,7 +382,7 @@ line level    source
  362   2                  break;
  363   2              case sjp_wz45:
  364   2                  if(par_model>str_begin.sjwz){
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 7   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 7   
 
  365   3                      fun_sj1(sjp_wz4);
  366   3                      fun_startdj(mot_dj3,-100);
@@ -446,7 +446,7 @@ line level    source
  424   3                          fun_delay(str_cod.py1kqh,del_ms);
  425   3                          break;
  426   3                  }
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 8   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 8   
 
  427   2                  break;
  428   2              case tra_z:
@@ -510,7 +510,7 @@ line level    source
  486   1          fun_select(sel_912);
  487   1          switch(par_model){
  488   2              case dir_up://回转至前方
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 9   
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 9   
 
  489   2                  switch(str_begin.hzfx){
  490   3                      case dir_down://现在在下方
@@ -574,7 +574,7 @@ line level    source
  548   4                              while(in_hz==0);
  549   4                              fun_delay(25,del_ms);
  550   4                              if(in_hz==1)
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 10  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 10  
 
  551   4                                  break;
  552   4                          }
@@ -638,7 +638,7 @@ line level    source
  610   4                              while(in_hz==1);
  611   4                              fun_delay(25,del_ms);
  612   4                              if(in_hz==0)
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 11  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 11  
 
  613   4                                  break;
  614   4                          }
@@ -702,7 +702,7 @@ line level    source
  672   4                              fun_delay(25,del_ms);
  673   4                              if(in_hz==0){
  674   5                                  break;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 12  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 12  
 
  675   5                              }
  676   4                          }
@@ -766,7 +766,7 @@ line level    source
  734   4                          case dir_right://现在在右面
  735   4                              fun_startdj(mot_dj4,100);
  736   4                              break;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 13  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 13  
 
  737   4                          default:
  738   4                              break;
@@ -830,7 +830,7 @@ line level    source
  796   5                                  if(in_hz==0)
  797   5                                      break;
  798   5                              }
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 14  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 14  
 
  799   4                              break;
  800   4                          case dir_left://现在在左边
@@ -894,7 +894,7 @@ line level    source
  858   4                          default:
  859   4                              break;
  860   4                      }
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 15  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 15  
 
  861   3                      break;
  862   3                  case dir_left://要去左边
@@ -958,7 +958,7 @@ line level    source
  920   5                                      break;
  921   5                              }
  922   4                              break;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 16  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 16  
 
  923   4                          case dir_left://现在在左面
  924   4                              while(1){
@@ -1022,7 +1022,7 @@ line level    source
  982   2                  break;
  983   2          }
  984   1      }//水平面位置状态,用来配合自动抓件
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 17  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 17  
 
  985          void fun_mptline(uc par_num,uc par_sd,enum varENU_dir par_model){
  986   1          bit loc_flag=0;
@@ -1086,7 +1086,7 @@ line level    source
 1044   6                              fun_delay(500,del_ms);
 1045   6                              while(1){
 1046   7                                  while(!in_ls4||!in_ls5);
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 18  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 18  
 
 1047   7                                  fun_delay(100,del_us);
 1048   7                                  if(in_ls4&&in_ls5){
@@ -1150,7 +1150,7 @@ line level    source
 1105   3                  loc_r*=0.8;
 1106   3              }
 1107   2              if(in_ls1){
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 19  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 19  
 
 1108   3                  loc_l*=0.7;
 1109   3                  loc_r*=1.3;
@@ -1214,7 +1214,7 @@ line level    source
 1167   1          def_timer0stop//停止定时器
 1168   1          var_timer0*=0.39;
 1169   1          str_cod.py1zh=str_cod.py1qz=var_timer0*0.5;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 20  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 20  
 
 1170   1          str_cod.py1qkh=str_cod.py1kqh=var_timer0*0.75;
 1171   1          str_cod.py1qkq=str_cod.py1khh=var_timer0*0.25;
@@ -1278,7 +1278,7 @@ line level    source
 1229   2                  loc_data[0][loc_xh1][1]=loc_data[3][4][1];
 1230   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[0][loc_xh1][0]!=0))
 1231   2                  loc_data[0][loc_xh1][1]=loc_data[7][1][1];
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 21  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 21  
 
 1232   2              else if((loc_data[0][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[0][loc_xh1][0]!=0))
 1233   2                  loc_data[0][loc_xh1][1]=loc_data[7][2][1];
@@ -1342,7 +1342,7 @@ line level    source
 1291   4                      fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高�
              -��
 1292   4                      fun_planezt(0);//平面状态0
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 22  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 22  
 
 1293   4                      fun_sj2(loc_high[0]+1);//下降到区0最高位
 1294   4                      fun_sz1(han_j);//抓件
@@ -1406,7 +1406,7 @@ line level    source
 1349   4                      fun_sj2(//上升到23最高位或向上一个格
 1350   4                          loc_high[1]<fun_min(2,loc_high[2],loc_high[3])-1?
 1351   4                          loc_high[1]:fun_min(2,loc_high[2],loc_high[3])-1);
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 23  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 23  
 
 1352   4                      fun_planezt(3);//平面状态3
 1353   4                      fun_sj2(loc_high[3]);//下降到区3最高位
@@ -1470,7 +1470,7 @@ line level    source
 1405   5                                  (loc_data[0][loc_high[0]+1][0]==loc_data[7][2][1])||
 1406   5                                  (loc_data[0][loc_high[0]+1][0]==loc_data[7][3][1])||
 1407   5                                  (loc_data[0][loc_high[0]+1][0]==loc_data[7][4][1])){
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 24  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 24  
 
 1408   6                              if(((loc_high[5]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[5][loc_high[5]][0]))
              -&&loc_high[5]>2){
@@ -1534,7 +1534,7 @@ line level    source
 1459   6      
 1460   6                              loc_data[1][loc_high[1]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到
              -了1区
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 25  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 25  
 
 1461   6                              loc_data[2][loc_high[2]+1][0]=0;//2区木有了
 1462   6                              loc_high[2]++;//更新区2最高位
@@ -1598,7 +1598,7 @@ line level    source
 1514   6                              fun_sz1(han_s);//松件
 1515   6      
 1516   6                              loc_data[0][loc_high[0]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 26  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 26  
 
              -了0区
 1517   6                              loc_data[1][loc_high[1]+1][0]=0;//1区木有了
@@ -1662,7 +1662,7 @@ line level    source
 1573   4                      fun_sj2(//上升到523最高位或向上一个格
 1574   4                          loc_high[4]<fun_min(3,loc_high[5],loc_high[2],loc_high[3])-1?
 1575   4                          loc_high[4]:fun_min(3,loc_high[5],loc_high[2],loc_high[3])-1);
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 27  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 27  
 
 1576   4                      fun_planezt(3);//平面状态3
 1577   4                      fun_sj2(loc_high[3]);//下降到区3最高位
@@ -1726,7 +1726,7 @@ line level    source
 1631   7                                  fun_sj2(loc_high[4]+1);//下降到区4最高位
 1632   7                                  fun_sz1(han_j);//抓件
 1633   7                                  fun_sj2(//上升到5最高位或向上一个格
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 28  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 28  
 
 1634   7                                      loc_high[4]<loc_high[5]-1?
 1635   7                                      loc_high[4]:loc_high[5]-1);
@@ -1790,7 +1790,7 @@ line level    source
 1686   6                              else if(((loc_high[2]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[2][loc_high[2]]
              -[0]))&&loc_high[2]>2){
 1687   7                                  MSG("4 --> 2")
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 29  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 29  
 
 1688   7                                  fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升�
              -�4567最高位
@@ -1854,7 +1854,7 @@ line level    source
 1740   6                              loc_high[6]++;//更新区6最高位
 1741   6                              loc_high[4]--;//更新区4最高位
 1742   6                          }//6 --> 4
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 30  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 30  
 
 1743   5                      }//如果区6有件
 1744   4                      else if(loc_high[5]<3){
@@ -1918,7 +1918,7 @@ line level    source
 1797   4                         (loc_data[0][2][0]==0)&&
 1798   4                         (loc_data[0][1][0]==0))
 1799   4                          break;
-C51 COMPILER V9.01   8023                                                                  03/19/2015 09:39:21 PAGE 31  
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 31  
 
 1800   4                      else{
 1801   5                          loc_flag=0;
@@ -1952,11 +1952,84 @@ line level    source
 1828   1          va_end(loc_argp);//结束
 1829   1          return loc_min;//退出
 1830   1      }//求最小?
+1831          void fun_test(){
+1832   1          fun_sz1(han_j);
+1833   1          fun_delay(1,del_s);
+1834   1          fun_sz1(han_s);
+1835   1          fun_delay(1,del_s);
+1836   1          fun_sz1(han_j);
+1837   1          fun_delay(1,del_s);
+1838   1          fun_sz1(han_s);
+1839   1          fun_delay(1,del_s);
+1840   1      
+1841   1          str_begin.pywz=tra_h;
+1842   1          fun_py1(tra_q);
+1843   1          fun_delay(1,del_s);
+1844   1          fun_py1(tra_h);
+1845   1          fun_delay(1,del_s);
+1846   1          fun_py1(tra_q);
+1847   1          fun_delay(1,del_s);
+1848   1          fun_py1(tra_h);
+1849   1          fun_delay(1,del_s);
+1850   1      
+1851   1          fun_sj1(sjp_wz1);
+1852   1          fun_delay(1,del_s);
+1853   1          fun_sj1(sjp_wz2);
+1854   1          fun_delay(1,del_s);
+1855   1          fun_sj1(sjp_wz3);
+1856   1          fun_delay(1,del_s);
+1857   1          fun_sj1(sjp_wz4);
+1858   1          fun_delay(1,del_s);
+1859   1          fun_sj1(sjp_wz5);
+1860   1          fun_delay(1,del_s);
+C51 COMPILER V9.01   8023                                                                  03/19/2015 17:07:39 PAGE 32  
+
+1861   1          fun_sj1(sjp_wz4);
+1862   1          fun_delay(1,del_s);
+1863   1          fun_sj1(sjp_wz3);
+1864   1          fun_delay(1,del_s);
+1865   1          fun_sj1(sjp_wz2);
+1866   1          fun_delay(1,del_s);
+1867   1          fun_sj1(sjp_wz1);
+1868   1      
+1869   1          str_now.hzfx=str_begin.hzfx;
+1870   1          str_begin.hzfx=dir_up;
+1871   1          fun_hz1(dir_right);
+1872   1          fun_delay(1,del_s);
+1873   1          fun_hz1(dir_up);
+1874   1          fun_delay(1,del_s);
+1875   1          fun_hz1(dir_right);
+1876   1          fun_delay(1,del_s);
+1877   1          fun_hz1(dir_up);
+1878   1          fun_delay(1,del_s);
+1879   1          str_begin.hzfx=str_now.hzfx;
+1880   1      
+1881   1          fun_startdj(mot_rl,60);
+1882   1          fun_delay(1,del_s);
+1883   1          fun_stop(mot_rl);
+1884   1          fun_delay(1,del_s);
+1885   1      
+1886   1          fun_startdj(mot_rl,-60);
+1887   1          fun_delay(1,del_s);
+1888   1          fun_stop(mot_rl);
+1889   1          fun_delay(1,del_s);
+1890   1      
+1891   1          fun_startdj(mot_r,40);
+1892   1          fun_startdj(mot_l,-40);
+1893   1          fun_delay(1,del_s);
+1894   1          fun_stop(mot_rl);
+1895   1          fun_delay(1,del_s);
+1896   1      
+1897   1          fun_startdj(mot_r,-40);
+1898   1          fun_startdj(mot_l,40);
+1899   1          fun_delay(1,del_s);
+1900   1          fun_stop(mot_rl);
+1901   1      }//测试程序
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =  12113    ----
-   CONSTANT SIZE    =    197    ----
+   CODE SIZE        =  12496    ----
+   CONSTANT SIZE    =    196    ----
    XDATA SIZE       =     47      91
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      2      45
