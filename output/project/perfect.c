@@ -21,7 +21,7 @@ void main(){
 
     fun_hz1(dir_left);
     fun_calibration();
-    fun_zhuajian(12345678,27641385);
+    fun_zhuajian(62514387,85237164);
 
     MSG("STOP")
     def_stop

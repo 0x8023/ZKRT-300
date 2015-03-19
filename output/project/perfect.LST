@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   PERFECT                                                               03/18/2015 16:43:09 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               03/19/2015 09:39:23 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
@@ -30,7 +30,7 @@ line level    source
   21   1      
   22   1          fun_hz1(dir_left);
   23   1          fun_calibration();
-  24   1          fun_zhuajian(12345678,27641385);
+  24   1          fun_zhuajian(62514387,85237164);
   25   1      
   26   1          MSG("STOP")
   27   1          def_stop
@@ -62,7 +62,7 @@ line level    source
   53   1          fun_sj1(sjp_wz23);
   54   1          fun_delay(1,del_s);
   55   1          fun_sj1(sjp_wz3);
-C51 COMPILER V9.01   PERFECT                                                               03/18/2015 16:43:09 PAGE 2   
+C51 COMPILER V9.01   PERFECT                                                               03/19/2015 09:39:23 PAGE 2   
 
   56   1          fun_delay(1,del_s);
   57   1          fun_sj1(sjp_wz34);

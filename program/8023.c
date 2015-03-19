@@ -1186,6 +1186,7 @@ void fun_zhuajian(ul par_04,ul par_37){
     xdata uc loc_data[8][5][2];//三维数组,8个区,5个高度
     xdata uc loc_high[8];//8个高度
     xdata uc loc_xh1=0,loc_xh2=0;//两个循环
+    xdata uc loc_flag=0;
 
     memset(loc_data,0,sizeof(loc_data));//清空数组
     memset(loc_high,0,sizeof(loc_high));//清空数组
@@ -1339,7 +1340,7 @@ void fun_zhuajian(ul par_04,ul par_37){
                 loc_high[2]++;//更新区2最高位
                 loc_high[3]--;//更新区3最高位
             }//2 --> 3
-            else if((loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[3]<4)){
+            else if((loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[1]<4)){
                 MSG("1 --> 3")
                 fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
                 fun_planezt(1);//平面状态1
@@ -1519,14 +1520,14 @@ void fun_zhuajian(ul par_04,ul par_37){
                     }//1 --> 0
                 }//如果区1有件
             }//不能一次拿出来的话
-            if((loc_data[3][4][0]==loc_data[3][4][1])&&
+            if(((loc_data[3][4][0]==loc_data[3][4][1])&&
                (loc_data[3][3][0]==loc_data[3][3][1])&&
                (loc_data[3][2][0]==loc_data[3][2][1])&&
                (loc_data[3][1][0]==loc_data[3][1][1])&&
                (loc_data[0][4][0]==0)&&
                (loc_data[0][3][0]==0)&&
                (loc_data[0][2][0]==0)&&
-               (loc_data[0][1][0]==0)){
+               (loc_data[0][1][0]==0))||(loc_flag++>200)){
                 if((loc_data[7][4][0]==loc_data[7][4][1])&&
                    (loc_data[7][3][0]==loc_data[7][3][1])&&
                    (loc_data[7][2][0]==loc_data[7][2][1])&&
@@ -1537,6 +1538,7 @@ void fun_zhuajian(ul par_04,ul par_37){
                    (loc_data[4][1][0]==0))
                     break;
                 else{
+                    loc_flag=0;
                     fun_sj1(fun_min(8,loc_high[0],loc_high[1],loc_high[2],loc_high[3],
                                       loc_high[4],loc_high[5],loc_high[6],loc_high[7]));
                     fun_hz1(dir_right);
@@ -1778,14 +1780,14 @@ void fun_zhuajian(ul par_04,ul par_37){
                     }//5 --> 4
                 }//如果区5有件
             }//不能一次拿出来的话
-            if((loc_data[7][4][0]==loc_data[7][4][1])&&
+            if(((loc_data[7][4][0]==loc_data[7][4][1])&&
                (loc_data[7][3][0]==loc_data[7][3][1])&&
                (loc_data[7][2][0]==loc_data[7][2][1])&&
                (loc_data[7][1][0]==loc_data[7][1][1])&&
                (loc_data[4][4][0]==0)&&
                (loc_data[4][3][0]==0)&&
                (loc_data[4][2][0]==0)&&
-               (loc_data[4][1][0]==0)){
+               (loc_data[4][1][0]==0))||(loc_flag++>200)){
                 if((loc_data[3][4][0]==loc_data[3][4][1])&&
                    (loc_data[3][3][0]==loc_data[3][3][1])&&
                    (loc_data[3][2][0]==loc_data[3][2][1])&&
@@ -1796,6 +1798,7 @@ void fun_zhuajian(ul par_04,ul par_37){
                    (loc_data[0][1][0]==0))
                     break;
                 else{
+                    loc_flag=0;
                     fun_sj1(fun_min(8,loc_high[0],loc_high[1],loc_high[2],loc_high[3],
                                       loc_high[4],loc_high[5],loc_high[6],loc_high[7]));
                     fun_hz1(dir_left);
