@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   PERFECT                                                               03/19/2015 17:07:41 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               03/25/2015 16:22:05 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
@@ -22,49 +22,48 @@ line level    source
   13   1      //    fun_delay(1,del_s);
   14   1      //    WZ5
   15   1      //    D(2000)
-  16   1      //    WZ2
-  17   1      //    def_stop
-  18   1      //    
-  19   1          
-  20   1          fun_test();
-  21   1          def_stop
-  22   1      
-  23   1          fun_hz1(dir_left);
-  24   1          fun_calibration();
-  25   1          fun_zhuajian(62514387,85237164);
-  26   1      
-  27   1          MSG("STOP")
-  28   1          def_stop
-  29   1          //fun_mptline(5,60,dir_left);
-  30   1      
-  31   1          
+  16   1      //    def_stop
+  17   1      
+  18   1      
+  19   1          fun_startdj(mot_rl,85);
+  20   1              while(1);
+  21   1      
+  22   1              
+  23   1          fun_calibration();
+  24   1          fun_zhuajian(15368724,68357241);
+  25   1      
+  26   1          MSG("STOP")
+  27   1          def_stop
+  28   1          //fun_mptline(5,60,dir_left);
+  29   1      
+  30   1          
+  31   1      
   32   1      
   33   1      
   34   1      
-  35   1      
-  36   1          WZ4
-  37   1          
-  38   1          fun_calibration();
-  39   1          //fun_py1(tra_q);
-  40   1          fun_py1(tra_kq);
-  41   1      
-  42   1          def_stop
-  43   1      }
-  44          void Int0Interrupt() interrupt 0{
-  45   1          ;
-  46   1      }
-  47          void Timer0Interrupt() interrupt 1 using 1{
-  48   1          fun_timer0();
-  49   1      }
-  50          void Timer1Interrupt() interrupt 3 using 1{
-  51   1          fun_timer1();
-  52   1      }
+  35   1          WZ4
+  36   1          
+  37   1          fun_calibration();
+  38   1          //fun_py1(tra_q);
+  39   1          fun_py1(tra_kq);
+  40   1      
+  41   1          def_stop
+  42   1      }
+  43          void Int0Interrupt() interrupt 0{
+  44   1          ;
+  45   1      }
+  46          void Timer0Interrupt() interrupt 1 using 1{
+  47   1          fun_timer0();
+  48   1      }
+  49          void Timer1Interrupt() interrupt 3 using 1{
+  50   1          fun_timer1();
+  51   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V9.01   PERFECT                                                               03/19/2015 17:07:41 PAGE 2   
+   CODE SIZE        =    106    ----
+C51 COMPILER V9.01   PERFECT                                                               03/25/2015 16:22:05 PAGE 2   
 
-   CODE SIZE        =    129    ----
    CONSTANT SIZE    =     16    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

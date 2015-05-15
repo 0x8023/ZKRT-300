@@ -12,6 +12,7 @@
     #define def_timer0stop TR0=0;//定时器0关闭
     #define def_timer1start TR1=1;//定时器1开启
     #define def_timer1stop TR1=0;//定时器1关闭
+    #define def_select(par_model) out_switchselect=par_model==sel_58?0:1;//传感器片选
     #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
     /*初始化*/        fun_initialization();\
     /*X坐标*/         str_begin.x=par_x;\
@@ -71,31 +72,6 @@
 
     sbit in_wz5=P2^4;//升降位置5传感器(最下位)
     sbit in_hz=P2^5;//回转传感器
-    /*
-        sbit DIR_R=P1^2;//PWMR的正反转控制位，1代表正
-        sbit DIR_L=P1^5;//PWML的正反转控制位，1代表正
-        sbit MOT_DIR1=P2^0;//电机1/3方向
-        sbit MOT_EN1=P2^1;//电机1/3使能
-        sbit MOT_DIR2=P2^2;//电机2/4方向
-        sbit MOT_EN2=P2^3;//电机2/4使能
-        sbit start_=P3^2;//启动按键
-        sbit SER_BS=P1^6;//接近开关片选
-        sbit MOT_BS=P1^7;//电机输出片选
-        sbit LAMP=P3^7;//警灯输出
-
-        sbit PS_1=P3^4;
-        sbit PS_2=P3^3;
-        sbit PS_3=P3^5;
-        sbit PS_4=P3^6;
-        bit PS_5;
-        bit PS_6;
-        bit PS_7; 
-        bit PS_8;
-        sbit PS_9 =P2^4;
-        sbit PS_10=P2^5;
-        sbit PS_11=P2^6; 
-        sbit PS_12=P2^7;
-    */
 /*----------------------------------------------------------------Out Put-----*/
     sbit out_pwmr=P1^2;//PWMR的正反转控制位，1代表正(DIR_R)
     sbit out_pwml=P1^5;//PWML的正反转控制位，1代表正(DIR_L)
@@ -170,9 +146,10 @@
         ui mlinerqd;//默认主函数巡线软起动时间为500毫秒
         ui mlineqc;//默认主函数巡线前冲时间为500毫秒
 
-        ui sj1bzw;
-        ui sj1zjw;
+        ui sj1bzw;//升降标准位延时
+        ui sj1zjw;//升降中间位延时
 
+        uc py1bz;
         ui py1qkq;
         ui py1kqz;
         ui py1zkh;
@@ -182,11 +159,14 @@
         ui py1kqkh;
         ui py1qkh;
         ui py1kqh;
+
+        ui hz1bz;
     };//参数
 
     extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
     extern xdata struct str_parameter str_cod;
-    extern ui var_timer0;
+    extern ul var_timer0;
+    extern bit var_online;
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//1毫秒定时器0初始化
@@ -194,29 +174,22 @@
     extern void fun_timer0();//1毫秒定时器0处理函数
     extern void fun_timer1();//20毫秒定时器1处理函数
     extern void fun_wait();//等待按键
-    extern void fun_select(enum varENU_sel par_model);//传感器片选
     extern void fun_initialization();//初始化函数
     extern void fun_pwminit();//PWM初始化
     extern void fun_pwmr(uc par_value);//右路PWM输出
     extern void fun_pwml(uc par_value);//左路PWM输出
-    extern void fun_startdj(enum varENU_mot par_model,char par_speed);//启动电机
-    extern void fun_stop(enum varENU_mot par_model);//停止电机
+    extern void fun_motors(enum varENU_mot par_model,char par_speed);//操作电机
     extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
-    extern void fun_sj2(char par_value);//升降第一次重写,用来配合抓件
-    extern void fun_pyhz2(enum varENU_tra par_py,enum varENU_dir par_hz);//平移回转同步运动,用来配合升降
-    extern void fun_planezt(uc par_model);
-    extern void fun_mptline(uc par_num,uc par_sd,enum varENU_dir);//主函数普通巡线
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
     extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
     extern void fun_calibration();//自动校准参数
     extern void fun_port();//串口初始化
-    extern void fun_zhuajian(ul par_04,ul par_37);//自动抓件
-    extern uc fun_min(uc par_num,...);//求最小值
     extern void fun_test();//测试
+    extern uc fun_min(uc par_num,...);//求最小值
 /*---------------------------------------------------------------更新日志-----*/
 #endif
