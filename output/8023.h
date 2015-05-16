@@ -8,10 +8,11 @@
     #include "stdio.h"//串口调戏
     #include "stdarg.h"//可变参数
 /*----------------------------------------------------------define 宏定义-----*/
-    #define def_timer0start TR0=1;//定时器0开启
-    #define def_timer0stop TR0=0;//定时器0关闭
-    #define def_timer1start TR1=1;//定时器1开启
-    #define def_timer1stop TR1=0;//定时器1关闭
+    #define def_timer0start TR0=1;  //定时器0开启
+    #define def_timer0stop TR0=0;   //定时器0关闭
+    #define def_timer1start TR1=1;  //定时器1开启
+    #define def_timer1stop TR1=0;   //定时器1关闭
+    #define def_parend 0x96         //可变参数函数形参停止标志
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1;//传感器片选
     #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
     /*初始化*/        fun_initialization();\
@@ -23,10 +24,10 @@
     /*平移位置*/      str_begin.pywz=par_pywz;\
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
                       MSG("Ready!")
-    #define def_stop fun_stop(mot_dj1);\
-                     fun_stop(mot_dj2);\
-                     fun_stop(mot_dj3);\
-                     fun_stop(mot_dj4);\
+    #define def_stop fun_stop(mot_szdj);\
+                     fun_stop(mot_pydj);\
+                     fun_stop(mot_sjdj);\
+                     fun_stop(mot_hzdj);\
                      fun_stop(mot_rl);\
                      EA=0;\
                      while(1);
@@ -96,10 +97,10 @@
         mot_l,
         mot_r,
         mot_rl,
-        mot_dj1,
-        mot_dj2,
-        mot_dj3,
-        mot_dj4
+        mot_szdj,//电机1
+        mot_pydj,//电机2
+        mot_sjdj,//电机3
+        mot_hzdj//电机4
     };//电机选择
     enum varENU_dir{
         dir_up,
@@ -136,6 +137,12 @@
     struct str_state{
         char x;//X坐标
         char y;//Y坐标
+        char szsd;//手抓速度
+        char pysd;//平移速度
+        char sjsd;//升降速度
+        char hzsd;//回转速度
+        char leftsd;//左轮电机速度
+        char rightsd;//右轮电机速度
         enum varENU_dir ctfx;//车头方向
         enum varENU_han szzt;//手抓状态
         enum varENU_sjp sjwz;//升降位置
@@ -143,30 +150,31 @@
         enum varENU_dir hzfx;//回转方向
     };
     struct str_parameter{
-        ui mlinerqd;//默认主函数巡线软起动时间为500毫秒
-        ui mlineqc;//默认主函数巡线前冲时间为500毫秒
+        ui mlinerqd; //默认主函数巡线软起动时间为500毫秒
+        ui mlineqc;  //默认主函数巡线前冲时间为500毫秒
 
-        ui sj1bzw;//升降标准位延时
-        ui sj1zjw;//升降中间位延时
+        ui sj1bzw;   //升降标准位延时
+        ui sj1zjw;   //升降中间位延时
 
-        uc py1bz;
-        ui py1qkq;
-        ui py1kqz;
-        ui py1zkh;
-        ui py1khh;
-        ui py1qz;
-        ui py1zh;
-        ui py1kqkh;
-        ui py1qkh;
-        ui py1kqh;
+        uc py1bz;    //fun_py1标准位延时
+        ui py1qkq;   //fun_py1前到靠前延时参数
+        ui py1kqz;   //fun_py1靠前到中间延时
+        ui py1zkh;   //fun_py1中间到靠后延时
+        ui py1khh;   //fun_py1靠后到后延时
+        ui py1qz;    //fun_py1前到中间延时
+        ui py1zh;    //fun_py1中间到后延时
+        ui py1kqkh;  //fun_py1靠前到靠后延时
+        ui py1qkh;   //fun_py1前到靠后延时
+        ui py1kqh;   //fun_py1靠前到后延时
 
-        ui hz1bz;
+        ui hz1bz;    //fun_hz1标准位延时
     };//参数
 
     extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
-    extern xdata struct str_parameter str_cod;
-    extern ul var_timer0;
-    extern bit var_online;
+    extern xdata struct str_parameter str_cod;//一些固定的参数,一般保持默认即可
+    extern ul var_timer0;//timer0毫秒级计时器计数位
+    extern bit var_online;//在线标志位
+    extern ui var_crossedline;//已经走过的线
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//1毫秒定时器0初始化
@@ -183,6 +191,10 @@
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
+    extern void fun_timerfl();//定时器巡线
+    extern void fun_dtjp(uc par_speed);//动态纠偏
+    extern void fun_jtjp(uc par_time,uc par_intensity);//静态纠偏
+    extern void fun_timercorner();//定时器转弯
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
@@ -191,5 +203,6 @@
     extern void fun_port();//串口初始化
     extern void fun_test();//测试
     extern uc fun_min(uc par_num,...);//求最小值
+
 /*---------------------------------------------------------------更新日志-----*/
 #endif

@@ -2,24 +2,27 @@
 xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
 xdata struct str_parameter str_cod={
     /*ui str_cod.mlinerqd*/25000,//默认主函数巡线软起动路程为25000
-    /*ui str_cod.mlineqc*/200,//默认主函数巡线前冲时间为500毫秒
+    /*ui str_cod.mlineqc*/200,   //默认主函数巡线前冲时间为500毫秒
 
-    /*ui str_cod.sj1bzw*/58,//升降标准位延时
-    /*ui str_cod.sj1zjw*/800,//升降中间位延时
+    /*ui str_cod.sj1bzw*/58,     //升降标准位延时
+    /*ui str_cod.sj1zjw*/800,    //升降中间位延时
 
-    /*ui str_cod.py1qkq*/666,
-    /*ui str_cod.py1kqz*/684,
-    /*ui str_cod.py1zkh*/684,
-    /*ui str_cod.py1khh*/666,
-    /*ui str_cod.py1qz*/500,
-    /*ui str_cod.py1zh*/500,
-    /*ui str_cod.py1kqkh*/1480,
-    /*ui str_cod.py1qkh*/2122,
-    /*ui str_cod.py1kqh*/2122
+    /*ui str_cod.py1bz*/20,      //fun_py1标准位延时
+    /*ui str_cod.py1qkq*/666,    //fun_py1前到靠前延时参数
+    /*ui str_cod.py1kqz*/684,    //fun_py1靠前到中间延时
+    /*ui str_cod.py1zkh*/684,    //fun_py1中间到靠后延时
+    /*ui str_cod.py1khh*/666,    //fun_py1靠后到后延时
+    /*ui str_cod.py1qz*/500,     //fun_py1前到中间延时
+    /*ui str_cod.py1zh*/500,     //fun_py1中间到后延时
+    /*ui str_cod.py1kqkh*/1480,  //fun_py1靠前到靠后延时
+    /*ui str_cod.py1qkh*/2122,   //fun_py1前到靠后延时
+    /*ui str_cod.py1kqh*/2122,   //fun_py1靠前到后延时
+
+    /*ui str_cod.hz1bz*/20      //fun_hz1标准位延时
 };
 ul var_timer0=0;
 bit var_online=0;
-
+ui var_crossedline;
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
@@ -82,8 +85,8 @@ void fun_timer0(){
     TH0=0xD1;
     _nop_();
     var_timer0++;
+    fun_timerfl();
 
-        
 }//1毫秒定时器0处理函数
 void fun_timer1(){
 
@@ -153,6 +156,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
         par_speed=-100;
     switch(par_model){
         case mot_l://左轮电机
+            if(str_begin.leftsd==par_model)
+                return;
+            else
+                str_begin.leftsd=par_model;
             if(par_speed==0){
                 fun_pwml(0);out_pwml=0;
             }
@@ -164,6 +171,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
             }
             break;
         case mot_r://右轮电机
+            if(str_begin.rightsd==par_model)
+                return;
+            else
+                str_begin.rightsd=par_model;
             if(par_speed==0){
                 fun_pwmr(0);out_pwmr=0;
             }
@@ -175,6 +186,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
             }
             break;
         case mot_rl://左右轮同步
+            if((str_begin.leftsd==par_model)&&(str_begin.rightsd==par_model))
+                return;
+            else
+                str_begin.leftsd=str_begin.rightsd=par_model;
             if(par_speed==0){
                 CR=0;
                 fun_pwmr(0);out_pwmr=0;
@@ -191,7 +206,11 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
                 fun_pwmr(cabs(par_speed));out_pwmr=1;
             }
             break;
-        case mot_dj1://正转为抓紧，反转为松开
+        case mot_szdj://正转为抓紧，反转为松开
+            if(str_begin.szsd==par_model)
+                return;
+            else
+                str_begin.szsd=par_model;
             if(par_speed==0){
                 out_motorselect=1;out_dir1=0;out_en1=1;
             }
@@ -202,7 +221,11 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
                 out_motorselect=1;out_dir1=0;out_en1=0;
             }
             break;
-        case mot_dj2://正转是向无电机一方转,反转为向有电机一方转
+        case mot_pydj://正转是向无电机一方转,反转为向有电机一方转
+            if(str_begin.pysd==par_model)
+                return;
+            else
+                str_begin.pysd=par_model;
             if(par_speed==0){
                 out_motorselect=1;out_dir2=0;out_en2=1;
             }
@@ -213,7 +236,11 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
                 out_motorselect=1;out_dir2=0;out_en2=0;
             }
             break;
-        case mot_dj3://向上为正转,向下为反转
+        case mot_sjdj://向上为正转,向下为反转
+            if(str_begin.sjsd==par_model)
+                return;
+            else
+                str_begin.sjsd=par_model;
             if(par_speed==0){
                 out_motorselect=0;out_dir1=0;out_en1=1;
             }
@@ -224,7 +251,11 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
                 out_motorselect=0;out_dir1=1;out_en1=0;
             }
             break;
-        case mot_dj4://顺时针为正转,逆时针为反转
+        case mot_hzdj://顺时针为正转,逆时针为反转
+            if(str_begin.hzsd==par_model)
+                return;
+            else
+                str_begin.hzsd=par_model;
             if(par_speed==0){
                 out_motorselect=0;out_dir2=0;out_en2=1;
             }
@@ -238,45 +269,45 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
         default:
             break;
     }
-}//操作电motors机
+}//操作电机
 void fun_sz1(enum varENU_han par_model){
     if(str_begin.szzt==par_model)
         return;
     if(par_model==han_s){//手抓松
-        fun_motors(mot_dj1,-100);
+        fun_motors(mot_szdj,-100);
         while(in_s==1);
     }
     else{//手抓紧
-        fun_motors(mot_dj1,100);
+        fun_motors(mot_szdj,100);
         while(in_j==1);
     }
     fun_delay(20,del_ms);
-    fun_motors(mot_dj1,0);
+    fun_motors(mot_szdj,0);
     str_begin.szzt=par_model;//存储运行结果
 }//手抓单步运动
 void fun_sj1(enum varENU_sjp par_model){
-    if(par_model==str_begin.sjwz)
+    if(str_begin.sjwz==par_model)
        return;
     switch(par_model){
         case sjp_wz1://升降位置1(最上位)
-            fun_motors(mot_dj3,100);
+            fun_motors(mot_sjdj,100);
             def_select(sel_58);
             while(in_wz1==1);
             fun_delay(str_cod.sj1bzw,del_ms);
             break;
         case sjp_wz12:
             if(par_model>str_begin.sjwz){
-                fun_motors(mot_dj3,-100);
+                fun_motors(mot_sjdj,-100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_sj1(sjp_wz2);
-                fun_motors(mot_dj3,100);
+                fun_motors(mot_sjdj,100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz2://升降位置2
-            fun_motors(mot_dj3,par_model<str_begin.sjwz?100:-100);
+            fun_motors(mot_sjdj,par_model<str_begin.sjwz?100:-100);
             def_select(sel_58);
             while(in_wz2==1);
             fun_delay(str_cod.sj1bzw,del_ms);
@@ -284,17 +315,17 @@ void fun_sj1(enum varENU_sjp par_model){
         case sjp_wz23:
             if(par_model>str_begin.sjwz){
                 fun_sj1(sjp_wz2);
-                fun_motors(mot_dj3,-100);
+                fun_motors(mot_sjdj,-100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_sj1(sjp_wz3);
-                fun_motors(mot_dj3,100);
+                fun_motors(mot_sjdj,100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz3://升降位置3
-            fun_motors(mot_dj3,par_model<str_begin.sjwz?100:-100);
+            fun_motors(mot_sjdj,par_model<str_begin.sjwz?100:-100);
             def_select(sel_58);
             while(in_wz3==1);
             fun_delay(str_cod.sj1bzw,del_ms);
@@ -302,17 +333,17 @@ void fun_sj1(enum varENU_sjp par_model){
         case sjp_wz34:
             if(par_model>str_begin.sjwz){
                 fun_sj1(sjp_wz3);
-                fun_motors(mot_dj3,-100);
+                fun_motors(mot_sjdj,-100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
                 fun_sj1(sjp_wz4);
-                fun_motors(mot_dj3,100);
+                fun_motors(mot_sjdj,100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz4://升降位置4
-            fun_motors(mot_dj3,par_model<str_begin.sjwz?100:-100);
+            fun_motors(mot_sjdj,par_model<str_begin.sjwz?100:-100);
             def_select(sel_58);
             while(in_wz4==1);
             fun_delay(str_cod.sj1bzw,del_ms);
@@ -320,16 +351,16 @@ void fun_sj1(enum varENU_sjp par_model){
         case sjp_wz45:
             if(par_model>str_begin.sjwz){
                 fun_sj1(sjp_wz4);
-                fun_motors(mot_dj3,-100);
+                fun_motors(mot_sjdj,-100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             else{//要去的地方在上面，向上走
-                fun_motors(mot_dj3,100);
+                fun_motors(mot_sjdj,100);
                 fun_delay(str_cod.sj1zjw,del_ms);
             }
             break;
         case sjp_wz5://升降位置5
-            fun_motors(mot_dj3,-100);
+            fun_motors(mot_sjdj,-100);
             def_select(sel_912);
             while(in_wz5==1);
             fun_delay(str_cod.sj1bzw,del_ms);
@@ -337,7 +368,7 @@ void fun_sj1(enum varENU_sjp par_model){
         default:
             break;
     }
-    fun_motors(mot_dj3,0);
+    fun_motors(mot_sjdj,0);
     str_begin.sjwz=par_model;//存储运行结果
 }//升降单步运动
 void fun_py1(enum varENU_tra par_model){
@@ -345,26 +376,26 @@ void fun_py1(enum varENU_tra par_model){
         return;
     switch(par_model){
         case tra_q://前平移(没有电机的呢个方向)
-            fun_motors(mot_dj2,100);
+            fun_motors(mot_pydj,100);
             while(in_qpy==1);
             fun_delay(str_cod.py1bz,del_ms);
             break;
         case tra_kq:
             switch(str_begin.pywz){
                 case tra_q:
-                    fun_motors(mot_dj2,-100);
+                    fun_motors(mot_pydj,-100);
                     fun_delay(str_cod.py1qkq,del_ms);
                     break;
                 case tra_z:
-                    fun_motors(mot_dj2,100);
+                    fun_motors(mot_pydj,100);
                     fun_delay(str_cod.py1kqz,del_ms);
                     break;
                 case tra_kh:
-                    fun_motors(mot_dj2,100);
+                    fun_motors(mot_pydj,100);
                     fun_delay(str_cod.py1kqkh,del_ms);
                     break;
                 case tra_h:
-                    fun_motors(mot_dj2,100);
+                    fun_motors(mot_pydj,100);
                     fun_delay(str_cod.py1kqh,del_ms);
                     break;
             }
@@ -372,19 +403,19 @@ void fun_py1(enum varENU_tra par_model){
         case tra_z:
             switch(str_begin.pywz){
                 case tra_q:
-                    fun_motors(mot_dj2,-100);
+                    fun_motors(mot_pydj,-100);
                     fun_delay(str_cod.py1qz,del_ms);
                     break;
                 case tra_kq:
-                    fun_motors(mot_dj2,-100);
+                    fun_motors(mot_pydj,-100);
                     fun_delay(str_cod.py1kqz,del_ms);
                     break;
                 case tra_kh:
-                    fun_motors(mot_dj2,100);
+                    fun_motors(mot_pydj,100);
                     fun_delay(str_cod.py1zkh,del_ms);
                     break;
                 case tra_h:
-                    fun_motors(mot_dj2,100);
+                    fun_motors(mot_pydj,100);
                     fun_delay(str_cod.py1zh,del_ms);
                     break;
             }
@@ -392,41 +423,43 @@ void fun_py1(enum varENU_tra par_model){
         case tra_kh:
             switch(str_begin.pywz){
                 case tra_q:
-                    fun_motors(mot_dj2,-100);
+                    fun_motors(mot_pydj,-100);
                     fun_delay(str_cod.py1qkh,del_ms);
                     break;
                 case tra_kq:
-                    fun_motors(mot_dj2,-100);
+                    fun_motors(mot_pydj,-100);
                     fun_delay(str_cod.py1kqkh,del_ms);
                     break;
                 case tra_z:
-                    fun_motors(mot_dj2,-100);
+                    fun_motors(mot_pydj,-100);
                     fun_delay(str_cod.py1zkh,del_ms);
                     break;
                 case tra_h:
-                    fun_motors(mot_dj2,100);
+                    fun_motors(mot_pydj,100);
                     fun_delay(str_cod.py1khh,del_ms);
                     break;
             }
             break;
         case tra_h://后平移(有电机的呢个方向)
-            fun_motors(mot_dj2,-100);
+            fun_motors(mot_pydj,-100);
             while(in_hpy==1);
             fun_delay(str_cod.py1bz,del_ms);
             break;
         default:
             break;
     }
-    fun_motors(mot_dj2,0);
+    fun_motors(mot_pydj,0);
     str_begin.pywz=par_model;//存储运行结果
 }//平移单步运动
 void fun_hz1(enum varENU_dir par_model){
+    if(str_begin.hzfx==par_model)
+        return;
     def_select(sel_912);
     switch(par_model){
         case dir_up://回转至前方
             switch(str_begin.hzfx){
                 case dir_down://现在在下方
-                    fun_motors(mot_dj4,-100);
+                    fun_motors(mot_hzdj,-100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     while(in_hz==0);
@@ -434,13 +467,13 @@ void fun_hz1(enum varENU_dir par_model){
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 case dir_left://现在在左边
-                    fun_motors(mot_dj4,100);
+                    fun_motors(mot_hzdj,100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 case dir_right://现在在右边
-                    fun_motors(mot_dj4,-100);
+                    fun_motors(mot_hzdj,-100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
@@ -452,7 +485,7 @@ void fun_hz1(enum varENU_dir par_model){
         case dir_down://要去下面
             switch(str_begin.hzfx){
                 case dir_up://现在在上面
-                    fun_motors(mot_dj4,100);
+                    fun_motors(mot_hzdj,100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     while(in_hz==0);
@@ -460,14 +493,14 @@ void fun_hz1(enum varENU_dir par_model){
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 case dir_left://现在在左面
-                    fun_motors(mot_dj4,-100);
+                    fun_motors(mot_hzdj,-100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                     break;
                 case dir_right://现在在右面
-                    fun_motors(mot_dj4,100);
+                    fun_motors(mot_hzdj,100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
@@ -479,21 +512,21 @@ void fun_hz1(enum varENU_dir par_model){
         case dir_left://要去左边
             switch(str_begin.hzfx){
                 case dir_up://现在在上面
-                    fun_motors(mot_dj4,-100);
+                    fun_motors(mot_hzdj,-100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                     break;
                 case dir_down://现在在下面
-                    fun_motors(mot_dj4,100);
+                    fun_motors(mot_hzdj,100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                     break;
                 case dir_right://现在在右面
-                    fun_motors(mot_dj4,-100);
+                    fun_motors(mot_hzdj,-100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     while(in_hz==0);
@@ -507,19 +540,19 @@ void fun_hz1(enum varENU_dir par_model){
         case dir_right://要去右面
             switch(str_begin.hzfx){
                 case dir_up://现在在前面
-                    fun_motors(mot_dj4,100);
+                    fun_motors(mot_hzdj,100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 case dir_down://现在在下面
-                    fun_motors(mot_dj4,-100);
+                    fun_motors(mot_hzdj,-100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 case dir_left://现在在左面
-                    fun_motors(mot_dj4,100);
+                    fun_motors(mot_hzdj,100);
                     fun_delay(1,del_s);
                     while(in_hz==1);
                     while(in_hz==0);
@@ -533,17 +566,53 @@ void fun_hz1(enum varENU_dir par_model){
         default:
             break;
     }
-    fun_motors(mot_dj4,0);
+    fun_motors(mot_hzdj,0);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
 void fun_timerfl(){
-    if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7))
-    var_online=1;
-    else if(var_online==1){
-        ;
-        //走了一条线
+    if(var_crossedline){
+        if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7))
+            var_online=1;
+        else if(var_online==1){
+            var_online=0;
+            var_crossedline--;
+        }
     }
 }//定时器巡线
+void fun_dtjp(uc par_speed){
+    uc loc_sdl=par_speed,loc_sdr=par_speed;
+    if(var_online==0){
+        if(in_ls1&&!in_ls8){
+            loc_sdl*=0.5;
+            loc_sdr*=1.5;
+        }
+        if(in_ls8&&!in_ls1){
+            loc_sdl*=1.5;
+            loc_sdr*=0.5;
+        }
+        if(in_ls2&&!in_ls7){
+            loc_sdl*=0.7;
+            loc_sdr*=1.3;
+        }
+        if(in_ls7&&!in_ls2){
+            loc_sdl*=1.3;
+            loc_sdr*=0.7;
+        }
+        if(in_ls3&&!in_ls6){
+            loc_sdl*=0.9;
+            loc_sdr*=1.1;
+        }
+        if(in_ls6&&!in_ls3){
+            loc_sdl*=1.1;
+            loc_sdr*=0.9;
+        }
+    }
+    fun_motors(dir_left,loc_sdl);
+    fun_motors(dir_right,loc_sdr);
+}//动态纠偏函数
+void fun_jtjp(uc par_time,uc par_intensity){
+    ;
+}//静态纠偏函数
 void fun_timercorner(){
     ;
 }//定时器转弯
@@ -605,13 +674,13 @@ void fun_calibration(){
     str_cod.py1kqkh=loc_time*0.5;
 }//自动校准平移参数
 void fun_port(){
-    PCON|=0x80;       //使能波特率倍速位SMOD
-    SCON=0x50;        //8位数据,可变波特率
-    AUXR|=0x04;       //独立波特率发生器时钟为Fosc,即1T
-    BRT=0xD9;     //设定独立波特率发生器重装值
-    AUXR|=0x01;       //串口1选择独立波特率发生器为波特率发生器
-    AUXR|=0x10;       //启动独立波特率发生器
-    TI=1;//打开串口传输功能
+    PCON|=0x80;     //使能波特率倍速位SMOD
+    SCON=0x50;      //8位数据,可变波特率
+    AUXR|=0x04;     //独立波特率发生器时钟为Fosc,即1T
+    BRT=0xD9;       //设定独立波特率发生器重装值
+    AUXR|=0x01;     //串口1选择独立波特率发生器为波特率发生器
+    AUXR|=0x10;     //启动独立波特率发生器
+    TI=1;           //打开串口传输功能
 }//串口初始化
 void fun_test(){
     fun_sz1(han_j);
@@ -686,16 +755,15 @@ void fun_test(){
 }//测试程序
 uc fun_min(uc par_num,...){
     va_list loc_argp;//保存参数结构
-    uc loc_xh;//循环
+    uc loc_min=par_num;//现在的最小值就是第一个
     uc loc_shu;//当前参数
-    uc loc_min;//最小值
     va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确定的参数
-    loc_min=va_arg(loc_argp,uc);//第一个参数传入
-    for(loc_xh=1;loc_xh<par_num;loc_xh++){//指定循环次数
-        loc_shu=va_arg(loc_argp,uc);//取出一个参数
+    loc_shu=va_arg(loc_argp,uc);//取出下一个参数
+    do{
         if(loc_shu<loc_min)
             loc_min=loc_shu;
-    }
+        loc_shu=va_arg(loc_argp,uc);//取出下一个参数
+    }while(loc_shu!=def_parend);
     va_end(loc_argp);//结束
     return loc_min;//退出
 }//求最小值
