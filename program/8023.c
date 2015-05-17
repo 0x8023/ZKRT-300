@@ -22,7 +22,7 @@ xdata struct str_parameter str_cod={
 };
 ul var_timer0=0;
 bit var_online=0;
-ui var_crossedline;
+ui var_crossedline=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
@@ -89,12 +89,9 @@ void fun_timer0(){
 
 }//1毫秒定时器0处理函数
 void fun_timer1(){
-
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
-
-
 
 }//20毫秒定时器1处理函数
 void fun_wait(){
@@ -134,18 +131,18 @@ void fun_initialization(){
     fun_wait();
 }//初始化
 void fun_pwminit(){
-    CCON=0x00;
-    CH=0;
+    CCON=0x00;//PAC寄存控制器
+    CH=0;//重置PAC计时器
     CL=0;
-    CMOD=0x00;
+    CMOD=0x08;//不分频
 }//PWM初始化
 void fun_pwmr(uc par_value){
-    CCAP0H=CCAP0L=par_value*2.5;//控制输出的占空比
+    CCAP0H=CCAP0L=par_value*2.55;//控制输出的占空比
     CCAPM0=0X42;//8位PWM输出，无中断
     PCA_PWM0=0x00;
 }//右路PWM输出
 void fun_pwml(uc par_value){
-    CCAP1H=CCAP1L=par_value*2.5;//控制输出的占空比
+    CCAP1H=CCAP1L=par_value*2.55;//控制输出的占空比
     CCAPM1=0X42;//8位PWM输出，无中断
     PCA_PWM1=0x00;
 }//左路PWM输出
@@ -578,6 +575,8 @@ void fun_timerfl(){
             var_crossedline--;
         }
     }
+    else
+        fun_motors(mot_rl,0);
 }//定时器巡线
 void fun_timerturn(){
     ;
@@ -650,9 +649,6 @@ void fun_jtjp(){
         }
     }
 }//静态纠偏
-void fun_timercorner(){
-    ;
-}//定时器转弯
 void fun_stope2prom(){
     IAP_CONTR = 0;                  //关闭IAP功能
     IAP_CMD = 0;                    //清除命令

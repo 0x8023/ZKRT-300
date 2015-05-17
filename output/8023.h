@@ -195,7 +195,6 @@
     extern void fun_timerturn();//定时器转弯
     extern void fun_dtjp(uc par_speed);//动态纠偏
     extern void fun_jtjp();//静态纠偏
-    extern void fun_timercorner();//定时器转弯
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM

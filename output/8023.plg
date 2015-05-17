@@ -10,48 +10,6 @@ Project File Date:  03/04/2015
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(613): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(613): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(610): error C202: 'mot_left': undefined identifier
-PROGRAM\8023.C(611): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(621): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(622): error C202: 'mot_left': undefined identifier
-PROGRAM\8023.C(625): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(626): error C202: 'mot_left': undefined identifier
-PROGRAM\8023.C(630): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(631): error C202: 'mot_left': undefined identifier
-PROGRAM\8023.C(634): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(635): error C202: 'mot_left': undefined identifier
-PROGRAM\8023.C(639): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(640): error C202: 'mot_left': undefined identifier
-PROGRAM\8023.C(643): error C202: 'mot_right': undefined identifier
-PROGRAM\8023.C(644): error C202: 'mot_left': undefined identifier
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
