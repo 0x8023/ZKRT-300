@@ -192,8 +192,9 @@
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
     extern void fun_timerfl();//定时器巡线
+    extern void fun_timerturn();//定时器转弯
     extern void fun_dtjp(uc par_speed);//动态纠偏
-    extern void fun_jtjp(uc par_time,uc par_intensity);//静态纠偏
+    extern void fun_jtjp();//静态纠偏
     extern void fun_timercorner();//定时器转弯
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据

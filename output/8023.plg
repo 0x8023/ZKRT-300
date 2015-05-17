@@ -10,410 +10,6 @@ Project File Date:  03/04/2015
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(697): error C141: syntax error near ';'
-PROGRAM\8023.C(697): error C141: syntax error near ')'
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(610): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(610): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(610): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(610): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(610): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(610): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(611): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(611): warning C280: 'par_intensity': unreferenced local variable
-PROGRAM\8023.C(757): error C141: syntax error near 'uc'
-PROGRAM\8023.C(757): error C202: 'loc_min': undefined identifier
-PROGRAM\8023.C(758): error C141: syntax error near 'uc'
-PROGRAM\8023.C(758): error C202: 'loc_shu': undefined identifier
-PROGRAM\8023.C(760): error C202: 'loc_shu': undefined identifier
-PROGRAM\8023.C(761): error C202: 'loc_min': undefined identifier
-PROGRAM\8023.C(762): error C202: 'loc_shu': undefined identifier
-PROGRAM\8023.C(763): error C202: 'loc_shu': undefined identifier
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(611): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(611): warning C280: 'par_intensity': unreferenced local variable
-PROGRAM\8023.C(757): error C141: syntax error near 'uc'
-PROGRAM\8023.C(757): error C202: 'loc_min': undefined identifier
-PROGRAM\8023.C(758): error C141: syntax error near 'uc'
-PROGRAM\8023.C(758): error C202: 'loc_shu': undefined identifier
-PROGRAM\8023.C(760): error C202: 'loc_shu': undefined identifier
-PROGRAM\8023.C(761): error C202: 'loc_min': undefined identifier
-PROGRAM\8023.C(762): error C202: 'loc_shu': undefined identifier
-PROGRAM\8023.C(763): error C202: 'loc_shu': undefined identifier
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(611): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(611): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-"E:\Sublime Text\sublime_text.exe" "D:\Robot\ZKRT-300\OUTPUT\8023.H"
-"E:\Sublime Text\sublime_text.exe" "D:\Robot\ZKRT-300\OUTPUT\8023.H"
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(611): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(611): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(90): error C202: 'fun_timerfl': undefined identifier
-PROGRAM\8023.C(90): error C141: syntax error near '}'
-PROGRAM\8023.C(573): error C202: 'loc_line': undefined identifier
-PROGRAM\8023.C(578): error C202: 'loc_line': undefined identifier
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(92): warning C206: 'fun_timerfl': missing function-prototype
-PROGRAM\8023.C(92): error C267: 'fun_timerfl': requires ANSI-style prototype
-PROGRAM\8023.C(577): error C231: 'fun_timerfl': redefinition
-PROGRAM\8023.C(578): error C202: 'loc_line': undefined identifier
-PROGRAM\8023.C(583): error C202: 'loc_line': undefined identifier
-PROGRAM\8023.C(586): error C231: 'fun_timerfl': redefinition
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(92): warning C206: 'fun_timerfl': missing function-prototype
-PROGRAM\8023.C(92): error C267: 'fun_timerfl': requires ANSI-style prototype
-PROGRAM\8023.C(577): error C231: 'fun_timerfl': redefinition
-PROGRAM\8023.C(586): error C231: 'fun_timerfl': redefinition
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(583): warning C275: expression with possibly no effect
-PROGRAM\8023.C(618): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(618): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 3 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(583): warning C275: expression with possibly no effect
-PROGRAM\8023.C(618): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(618): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 3 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(618): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(618): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(583): warning C275: expression with possibly no effect
-PROGRAM\8023.C(618): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(618): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 3 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(618): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(618): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(618): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(618): warning C280: 'par_intensity': unreferenced local variable
-creating library .\output\8023.LIB...
-TRANSFER
-".\output\STARTUP.obj",
-".\output\8023.obj" 
-TO ".\output\8023.LIB"
-LIB51 LIBRARY MANAGER V4.24
-COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
-PROGRAM\8023.C(88): warning C209: '_fun_timerfl': too few actual parameters
-PROGRAM\8023.C(572): error C236: '_fun_timerfl': different length of parameter lists
-目标未创建
-Build target '目标 1'
-assembling STARTUP.A51...
-compiling 8023.c...
 PROGRAM\8023.C(613): warning C280: 'par_time': unreferenced local variable
 PROGRAM\8023.C(613): warning C280: 'par_intensity': unreferenced local variable
 creating library .\output\8023.LIB...
@@ -427,8 +23,24 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
 Build target '目标 1'
 assembling STARTUP.A51...
 compiling 8023.c...
-PROGRAM\8023.C(613): warning C280: 'par_time': unreferenced local variable
-PROGRAM\8023.C(613): warning C280: 'par_intensity': unreferenced local variable
+PROGRAM\8023.C(610): error C202: 'mot_left': undefined identifier
+PROGRAM\8023.C(611): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(621): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(622): error C202: 'mot_left': undefined identifier
+PROGRAM\8023.C(625): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(626): error C202: 'mot_left': undefined identifier
+PROGRAM\8023.C(630): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(631): error C202: 'mot_left': undefined identifier
+PROGRAM\8023.C(634): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(635): error C202: 'mot_left': undefined identifier
+PROGRAM\8023.C(639): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(640): error C202: 'mot_left': undefined identifier
+PROGRAM\8023.C(643): error C202: 'mot_right': undefined identifier
+PROGRAM\8023.C(644): error C202: 'mot_left': undefined identifier
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
 creating library .\output\8023.LIB...
 TRANSFER
 ".\output\STARTUP.obj",
@@ -436,4 +48,37 @@ TRANSFER
 TO ".\output\8023.LIB"
 LIB51 LIBRARY MANAGER V4.24
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
-".\output\8023.LIB" - 0 Error(s), 2 Warning(s).
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling 8023.c...
+creating library .\output\8023.LIB...
+TRANSFER
+".\output\STARTUP.obj",
+".\output\8023.obj" 
+TO ".\output\8023.LIB"
+LIB51 LIBRARY MANAGER V4.24
+COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2002
+".\output\8023.LIB" - 0 Error(s), 0 Warning(s).

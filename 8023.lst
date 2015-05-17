@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 1   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   3                      loc_k=245;
   53   3                      do{
   54   4                          do{
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 2   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 2   
 
   55   5                              while(--loc_k);
   56   5                          }while(--loc_j);
@@ -98,7 +98,7 @@ line level    source
   86   1          _nop_();
   87   1          var_timer0++;
   88   1          fun_timerfl();
-  89   1              
+  89   1      
   90   1      }//1毫秒定时器0处理函数
   91          void fun_timer1(){
   92   1      
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1          P2M1=0xf0;//P2口4-7输入
  116   1          P2M0=0x0f;//P2口0-3输出
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 3   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 3   
 
  117   1      
  118   1          //PS_2=1;//手抓松传感器置1 $?$
@@ -190,7 +190,7 @@ line level    source
  176   2                  else
  177   2                      str_begin.rightsd=par_model;
  178   2                  if(par_speed==0){
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 4   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 4   
 
  179   3                      fun_pwmr(0);out_pwmr=0;
  180   3                  }
@@ -254,7 +254,7 @@ line level    source
  238   2                  break;
  239   2              case mot_sjdj://向上为正转,向下为反转
  240   2                  if(str_begin.sjsd==par_model)
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 5   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 5   
 
  241   2                      return;
  242   2                  else
@@ -318,7 +318,7 @@ line level    source
  300   3                      fun_motors(mot_sjdj,-100);
  301   3                      fun_delay(str_cod.sj1zjw,del_ms);
  302   3                  }
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 6   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 6   
 
  303   2                  else{//要去的地方在上面，向上走
  304   3                      fun_sj1(sjp_wz2);
@@ -382,7 +382,7 @@ line level    source
  362   2              case sjp_wz5://升降位置5
  363   2                  fun_motors(mot_sjdj,-100);
  364   2                  def_select(sel_912);
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 7   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 7   
 
  365   2                  while(in_wz5==1);
  366   2                  fun_delay(str_cod.sj1bzw,del_ms);
@@ -446,7 +446,7 @@ line level    source
  424   2                  switch(str_begin.pywz){
  425   3                      case tra_q:
  426   3                          fun_motors(mot_pydj,-100);
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 8   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 8   
 
  427   3                          fun_delay(str_cod.py1qkh,del_ms);
  428   3                          break;
@@ -510,7 +510,7 @@ line level    source
  486   2                  switch(str_begin.hzfx){
  487   3                      case dir_up://现在在上面
  488   3                          fun_motors(mot_hzdj,100);
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 9   
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 9   
 
  489   3                          fun_delay(1,del_s);
  490   3                          while(in_hz==1);
@@ -574,7 +574,7 @@ line level    source
  548   3                      case dir_down://现在在下面
  549   3                          fun_motors(mot_hzdj,-100);
  550   3                          fun_delay(1,del_s);
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 10  
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 10  
 
  551   3                          while(in_hz==1);
  552   3                          fun_delay(str_cod.hz1bz,del_ms);
@@ -607,214 +607,251 @@ line level    source
  579   3              }
  580   2          }
  581   1      }//定时器巡线
- 582          void fun_dtjp(uc par_speed){
- 583   1          uc loc_sdl=par_speed,loc_sdr=par_speed;
- 584   1          if(var_online==0){
- 585   2              if(in_ls1&&!in_ls8){
- 586   3                  loc_sdl*=0.5;
- 587   3                  loc_sdr*=1.5;
- 588   3              }
- 589   2              if(in_ls8&&!in_ls1){
- 590   3                  loc_sdl*=1.5;
- 591   3                  loc_sdr*=0.5;
- 592   3              }
- 593   2              if(in_ls2&&!in_ls7){
- 594   3                  loc_sdl*=0.7;
- 595   3                  loc_sdr*=1.3;
- 596   3              }
- 597   2              if(in_ls7&&!in_ls2){
- 598   3                  loc_sdl*=1.3;
- 599   3                  loc_sdr*=0.7;
- 600   3              }
- 601   2              if(in_ls3&&!in_ls6){
- 602   3                  loc_sdl*=0.9;
- 603   3                  loc_sdr*=1.1;
- 604   3              }
- 605   2              if(in_ls6&&!in_ls3){
- 606   3                  loc_sdl*=1.1;
- 607   3                  loc_sdr*=0.9;
- 608   3              }
- 609   2          }
- 610   1          fun_motors(dir_left,loc_sdl);
- 611   1          fun_motors(dir_right,loc_sdr);
- 612   1      }//动态纠偏函数
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 11  
+ 582          void fun_timerturn(){
+ 583   1          ;
+ 584   1      }//定时器转弯
+ 585          void fun_dtjp(uc par_speed){
+ 586   1          uc loc_sdl=par_speed,loc_sdr=par_speed;
+ 587   1          if(var_online==0){
+ 588   2              if(in_ls1&&!in_ls8){
+ 589   3                  loc_sdl*=0.5;
+ 590   3                  loc_sdr*=1.5;
+ 591   3              }
+ 592   2              if(in_ls8&&!in_ls1){
+ 593   3                  loc_sdl*=1.5;
+ 594   3                  loc_sdr*=0.5;
+ 595   3              }
+ 596   2              if(in_ls2&&!in_ls7){
+ 597   3                  loc_sdl*=0.7;
+ 598   3                  loc_sdr*=1.3;
+ 599   3              }
+ 600   2              if(in_ls7&&!in_ls2){
+ 601   3                  loc_sdl*=1.3;
+ 602   3                  loc_sdr*=0.7;
+ 603   3              }
+ 604   2              if(in_ls3&&!in_ls6){
+ 605   3                  loc_sdl*=0.9;
+ 606   3                  loc_sdr*=1.1;
+ 607   3              }
+ 608   2              if(in_ls6&&!in_ls3){
+ 609   3                  loc_sdl*=1.1;
+ 610   3                  loc_sdr*=0.9;
+ 611   3              }
+ 612   2          }
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 11  
 
- 613          void fun_jtjp(uc par_time,uc par_intensity){
- 614   1          ;
- 615   1      }//静态纠偏函数
-*** WARNING C280 IN LINE 613 OF PROGRAM\8023.C: 'par_time': unreferenced local variable
-*** WARNING C280 IN LINE 613 OF PROGRAM\8023.C: 'par_intensity': unreferenced local variable
- 616          void fun_timercorner(){
- 617   1          ;
- 618   1      }//定时器转弯
- 619          void fun_stope2prom(){
- 620   1          IAP_CONTR = 0;                  //关闭IAP功能
- 621   1          IAP_CMD = 0;                    //清除命令
- 622   1          IAP_TRIG = 0;                   //清除触发寄存器
- 623   1          IAP_ADDRH = 0x80;               //数据指针指向非EEPROM区
- 624   1          IAP_ADDRL = 0;                  //清除IAP地址
- 625   1      }//关闭EEPROM功能(IapIdle)
- 626          uc fun_reade2prom(ui par_add){
- 627   1          uc loc_dat;                     //数据缓冲区
- 628   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
- 629   1          IAP_CMD = 1;                    //设置EEPROM读命令
- 630   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
- 631   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
- 632   1          IAP_TRIG = 0x5a;                //触发
- 633   1          IAP_TRIG = 0xa5;                //再次触发
- 634   1          fun_delay(10,del_us);           //稍等一会儿
- 635   1          loc_dat = IAP_DATA;             //读出EEPROM中的数据
- 636   1          fun_stope2prom();               //关闭EEPROM功能
- 637   1          return loc_dat;                 //返回读取结果
- 638   1      }//读取EEPROM数据
- 639          void fun_writee2prom(ui par_add,uc par_dat){
- 640   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
- 641   1          IAP_CMD = 2;                    //设置EEPROM写入命令
- 642   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
- 643   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
- 644   1          IAP_DATA = par_dat;             //写入数据
- 645   1          IAP_TRIG = 0x5a;                //触发
- 646   1          IAP_TRIG = 0xa5;                //再次触发
- 647   1          fun_delay(10,del_us);           //稍等一会儿
- 648   1          fun_stope2prom();               //关闭EEPROM功能
- 649   1      }//写EEPROM数据
- 650          void fun_cleane2prom(ui par_add){
- 651   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
- 652   1          IAP_CMD = 3;                    //设置EEPROM擦除命令
- 653   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
- 654   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
- 655   1          IAP_TRIG = 0x5a;                //触发
- 656   1          IAP_TRIG = 0xa5;                //再次触发
- 657   1          fun_delay(10,del_us);           //稍等一会儿
- 658   1          fun_stope2prom();               //关闭EEPROM功能
- 659   1      }//清除EEPROM数据
- 660          void fun_calibration(){
- 661   1          // fun_sj1(sjp_wz1);//升到最上位
- 662   1          ul loc_time;
- 663   1          fun_py1(tra_q);//移动到最前端
- 664   1          fun_py1(tra_h);//移动到最后端
- 665   1          loc_time=var_timer0;
- 666   1          fun_py1(tra_q);//移动到前端并计时
- 667   1          fun_py1(tra_h);//移动到后端
- 668   1          loc_time=var_timer0-loc_time;
- 669   1          loc_time*=0.39;
- 670   1          str_cod.py1zh=str_cod.py1qz=loc_time*0.5;
- 671   1          str_cod.py1qkh=str_cod.py1kqh=loc_time*0.75;
- 672   1          str_cod.py1qkq=str_cod.py1khh=loc_time*0.25;
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 12  
+ 613   1          fun_motors(mot_r,loc_sdl);
+ 614   1          fun_motors(mot_l,loc_sdr);
+ 615   1      }//动态纠偏
+ 616          void fun_jtjp(){
+ 617   1          while(1){
+ 618   2              if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
+ 619   3                  fun_delay(10,del_ms);
+ 620   3                  fun_motors(mot_rl,0);
+ 621   3                  return;
+ 622   3              }
+ 623   2              if(in_ls2||in_ls1){
+ 624   3                  fun_motors(mot_l,16);
+ 625   3                  fun_motors(mot_r,-16);
+ 626   3              }
+ 627   2              else if(in_ls7||in_ls8){
+ 628   3                  fun_motors(mot_l,-16);
+ 629   3                  fun_motors(mot_r,16);
+ 630   3              }
+ 631   2              else{
+ 632   3                  if(!in_ls4){
+ 633   4                      fun_motors(mot_l,-12);
+ 634   4                      fun_motors(mot_r,12);
+ 635   4                  }
+ 636   3                  else if(!in_ls5){
+ 637   4                      fun_motors(mot_l,12);
+ 638   4                      fun_motors(mot_r,-12);
+ 639   4                  }
+ 640   3                  else{
+ 641   4                      if(in_ls6&&!in_ls3){
+ 642   5                          fun_motors(mot_l,-8);
+ 643   5                          fun_motors(mot_r,8);
+ 644   5                      }
+ 645   4                      if(in_ls3&&!in_ls6){
+ 646   5                          fun_motors(mot_l,8);
+ 647   5                          fun_motors(mot_r,-8);
+ 648   5                      }
+ 649   4                  }
+ 650   3              }
+ 651   2          }
+ 652   1      }//静态纠偏
+ 653          void fun_timercorner(){
+ 654   1          ;
+ 655   1      }//定时器转弯
+ 656          void fun_stope2prom(){
+ 657   1          IAP_CONTR = 0;                  //关闭IAP功能
+ 658   1          IAP_CMD = 0;                    //清除命令
+ 659   1          IAP_TRIG = 0;                   //清除触发寄存器
+ 660   1          IAP_ADDRH = 0x80;               //数据指针指向非EEPROM区
+ 661   1          IAP_ADDRL = 0;                  //清除IAP地址
+ 662   1      }//关闭EEPROM功能(IapIdle)
+ 663          uc fun_reade2prom(ui par_add){
+ 664   1          uc loc_dat;                     //数据缓冲区
+ 665   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+ 666   1          IAP_CMD = 1;                    //设置EEPROM读命令
+ 667   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+ 668   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+ 669   1          IAP_TRIG = 0x5a;                //触发
+ 670   1          IAP_TRIG = 0xa5;                //再次触发
+ 671   1          fun_delay(10,del_us);           //稍等一会儿
+ 672   1          loc_dat = IAP_DATA;             //读出EEPROM中的数据
+ 673   1          fun_stope2prom();               //关闭EEPROM功能
+ 674   1          return loc_dat;                 //返回读取结果
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 12  
 
- 673   1          str_cod.py1kqz=str_cod.py1zkh=loc_time*0.25;
- 674   1          str_cod.py1kqkh=loc_time*0.5;
- 675   1      }//自动校准平移参数
- 676          void fun_port(){
- 677   1          PCON|=0x80;     //使能波特率倍速位SMOD
- 678   1          SCON=0x50;      //8位数据,可变波特率
- 679   1          AUXR|=0x04;     //独立波特率发生器时钟为Fosc,即1T
- 680   1          BRT=0xD9;       //设定独立波特率发生器重装值
- 681   1          AUXR|=0x01;     //串口1选择独立波特率发生器为波特率发生器
- 682   1          AUXR|=0x10;     //启动独立波特率发生器
- 683   1          TI=1;           //打开串口传输功能
- 684   1      }//串口初始化
- 685          void fun_test(){
- 686   1          fun_sz1(han_j);
- 687   1          fun_delay(1,del_s);
- 688   1          fun_sz1(han_s);
- 689   1          fun_delay(1,del_s);
- 690   1          fun_sz1(han_j);
- 691   1          fun_delay(1,del_s);
- 692   1          fun_sz1(han_s);
- 693   1          fun_delay(1,del_s);
- 694   1      
- 695   1          str_begin.pywz=tra_h;
- 696   1          fun_py1(tra_q);
- 697   1          fun_delay(1,del_s);
- 698   1          fun_py1(tra_h);
- 699   1          fun_delay(1,del_s);
- 700   1          fun_py1(tra_q);
- 701   1          fun_delay(1,del_s);
- 702   1          fun_py1(tra_h);
- 703   1          fun_delay(1,del_s);
- 704   1      
- 705   1          fun_sj1(sjp_wz1);
- 706   1          fun_delay(1,del_s);
- 707   1          fun_sj1(sjp_wz2);
- 708   1          fun_delay(1,del_s);
- 709   1          fun_sj1(sjp_wz3);
- 710   1          fun_delay(1,del_s);
- 711   1          fun_sj1(sjp_wz4);
- 712   1          fun_delay(1,del_s);
- 713   1          fun_sj1(sjp_wz5);
- 714   1          fun_delay(1,del_s);
- 715   1          fun_sj1(sjp_wz4);
- 716   1          fun_delay(1,del_s);
- 717   1          fun_sj1(sjp_wz3);
- 718   1          fun_delay(1,del_s);
- 719   1          fun_sj1(sjp_wz2);
- 720   1          fun_delay(1,del_s);
- 721   1          fun_sj1(sjp_wz1);
- 722   1      
- 723   1          str_now.hzfx=str_begin.hzfx;
- 724   1          str_begin.hzfx=dir_up;
- 725   1          fun_hz1(dir_right);
+ 675   1      }//读取EEPROM数据
+ 676          void fun_writee2prom(ui par_add,uc par_dat){
+ 677   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+ 678   1          IAP_CMD = 2;                    //设置EEPROM写入命令
+ 679   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+ 680   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+ 681   1          IAP_DATA = par_dat;             //写入数据
+ 682   1          IAP_TRIG = 0x5a;                //触发
+ 683   1          IAP_TRIG = 0xa5;                //再次触发
+ 684   1          fun_delay(10,del_us);           //稍等一会儿
+ 685   1          fun_stope2prom();               //关闭EEPROM功能
+ 686   1      }//写EEPROM数据
+ 687          void fun_cleane2prom(ui par_add){
+ 688   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+ 689   1          IAP_CMD = 3;                    //设置EEPROM擦除命令
+ 690   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+ 691   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+ 692   1          IAP_TRIG = 0x5a;                //触发
+ 693   1          IAP_TRIG = 0xa5;                //再次触发
+ 694   1          fun_delay(10,del_us);           //稍等一会儿
+ 695   1          fun_stope2prom();               //关闭EEPROM功能
+ 696   1      }//清除EEPROM数据
+ 697          void fun_calibration(){
+ 698   1          // fun_sj1(sjp_wz1);//升到最上位
+ 699   1          ul loc_time;
+ 700   1          fun_py1(tra_q);//移动到最前端
+ 701   1          fun_py1(tra_h);//移动到最后端
+ 702   1          loc_time=var_timer0;
+ 703   1          fun_py1(tra_q);//移动到前端并计时
+ 704   1          fun_py1(tra_h);//移动到后端
+ 705   1          loc_time=var_timer0-loc_time;
+ 706   1          loc_time*=0.39;
+ 707   1          str_cod.py1zh=str_cod.py1qz=loc_time*0.5;
+ 708   1          str_cod.py1qkh=str_cod.py1kqh=loc_time*0.75;
+ 709   1          str_cod.py1qkq=str_cod.py1khh=loc_time*0.25;
+ 710   1          str_cod.py1kqz=str_cod.py1zkh=loc_time*0.25;
+ 711   1          str_cod.py1kqkh=loc_time*0.5;
+ 712   1      }//自动校准平移参数
+ 713          void fun_port(){
+ 714   1          PCON|=0x80;     //使能波特率倍速位SMOD
+ 715   1          SCON=0x50;      //8位数据,可变波特率
+ 716   1          AUXR|=0x04;     //独立波特率发生器时钟为Fosc,即1T
+ 717   1          BRT=0xD9;       //设定独立波特率发生器重装值
+ 718   1          AUXR|=0x01;     //串口1选择独立波特率发生器为波特率发生器
+ 719   1          AUXR|=0x10;     //启动独立波特率发生器
+ 720   1          TI=1;           //打开串口传输功能
+ 721   1      }//串口初始化
+ 722          void fun_test(){
+ 723   1          fun_sz1(han_j);
+ 724   1          fun_delay(1,del_s);
+ 725   1          fun_sz1(han_s);
  726   1          fun_delay(1,del_s);
- 727   1          fun_hz1(dir_up);
+ 727   1          fun_sz1(han_j);
  728   1          fun_delay(1,del_s);
- 729   1          fun_hz1(dir_right);
+ 729   1          fun_sz1(han_s);
  730   1          fun_delay(1,del_s);
- 731   1          fun_hz1(dir_up);
- 732   1          fun_delay(1,del_s);
- 733   1          str_begin.hzfx=str_now.hzfx;
- 734   1      
-C51 COMPILER V9.01   8023                                                                  05/16/2015 16:54:55 PAGE 13  
-
- 735   1          fun_motors(mot_rl,60);
+ 731   1      
+ 732   1          str_begin.pywz=tra_h;
+ 733   1          fun_py1(tra_q);
+ 734   1          fun_delay(1,del_s);
+ 735   1          fun_py1(tra_h);
  736   1          fun_delay(1,del_s);
- 737   1          fun_motors(mot_rl,0);
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 13  
+
+ 737   1          fun_py1(tra_q);
  738   1          fun_delay(1,del_s);
- 739   1      
- 740   1          fun_motors(mot_rl,-60);
- 741   1          fun_delay(1,del_s);
- 742   1          fun_motors(mot_rl,0);
+ 739   1          fun_py1(tra_h);
+ 740   1          fun_delay(1,del_s);
+ 741   1      
+ 742   1          fun_sj1(sjp_wz1);
  743   1          fun_delay(1,del_s);
- 744   1      
- 745   1          fun_motors(mot_r,40);
- 746   1          fun_motors(mot_l,-40);
+ 744   1          fun_sj1(sjp_wz2);
+ 745   1          fun_delay(1,del_s);
+ 746   1          fun_sj1(sjp_wz3);
  747   1          fun_delay(1,del_s);
- 748   1          fun_motors(mot_rl,0);
+ 748   1          fun_sj1(sjp_wz4);
  749   1          fun_delay(1,del_s);
- 750   1      
- 751   1          fun_motors(mot_r,-40);
- 752   1          fun_motors(mot_l,40);
+ 750   1          fun_sj1(sjp_wz5);
+ 751   1          fun_delay(1,del_s);
+ 752   1          fun_sj1(sjp_wz4);
  753   1          fun_delay(1,del_s);
- 754   1          fun_motors(mot_rl,0);
- 755   1      }//测试程序
- 756          uc fun_min(uc par_num,...){
- 757   1          va_list loc_argp;//保存参数结构
- 758   1          uc loc_min=par_num;//现在的最小值就是第一个
- 759   1          uc loc_shu;//当前参数
- 760   1          va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确�
+ 754   1          fun_sj1(sjp_wz3);
+ 755   1          fun_delay(1,del_s);
+ 756   1          fun_sj1(sjp_wz2);
+ 757   1          fun_delay(1,del_s);
+ 758   1          fun_sj1(sjp_wz1);
+ 759   1      
+ 760   1          str_now.hzfx=str_begin.hzfx;
+ 761   1          str_begin.hzfx=dir_up;
+ 762   1          fun_hz1(dir_right);
+ 763   1          fun_delay(1,del_s);
+ 764   1          fun_hz1(dir_up);
+ 765   1          fun_delay(1,del_s);
+ 766   1          fun_hz1(dir_right);
+ 767   1          fun_delay(1,del_s);
+ 768   1          fun_hz1(dir_up);
+ 769   1          fun_delay(1,del_s);
+ 770   1          str_begin.hzfx=str_now.hzfx;
+ 771   1      
+ 772   1          fun_motors(mot_rl,60);
+ 773   1          fun_delay(1,del_s);
+ 774   1          fun_motors(mot_rl,0);
+ 775   1          fun_delay(1,del_s);
+ 776   1      
+ 777   1          fun_motors(mot_rl,-60);
+ 778   1          fun_delay(1,del_s);
+ 779   1          fun_motors(mot_rl,0);
+ 780   1          fun_delay(1,del_s);
+ 781   1      
+ 782   1          fun_motors(mot_r,40);
+ 783   1          fun_motors(mot_l,-40);
+ 784   1          fun_delay(1,del_s);
+ 785   1          fun_motors(mot_rl,0);
+ 786   1          fun_delay(1,del_s);
+ 787   1      
+ 788   1          fun_motors(mot_r,-40);
+ 789   1          fun_motors(mot_l,40);
+ 790   1          fun_delay(1,del_s);
+ 791   1          fun_motors(mot_rl,0);
+ 792   1      }//测试程序
+ 793          uc fun_min(uc par_num,...){
+ 794   1          va_list loc_argp;//保存参数结构
+ 795   1          uc loc_min=par_num;//现在的最小值就是第一个
+ 796   1          uc loc_shu;//当前参数
+ 797   1          va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确�
              -��的参数
- 761   1          loc_shu=va_arg(loc_argp,uc);//取出下一个参数
- 762   1          do{
- 763   2              if(loc_shu<loc_min)
- 764   2                  loc_min=loc_shu;
- 765   2              loc_shu=va_arg(loc_argp,uc);//取出下一个参数
- 766   2          }while(loc_shu!=def_parend);
- 767   1          va_end(loc_argp);//结束
- 768   1          return loc_min;//退出
- 769   1      }//求最小值
+C51 COMPILER V9.01   8023                                                                  05/17/2015 10:05:02 PAGE 14  
+
+ 798   1          loc_shu=va_arg(loc_argp,uc);//取出下一个参数
+ 799   1          do{
+ 800   2              if(loc_shu<loc_min)
+ 801   2                  loc_min=loc_shu;
+ 802   2              loc_shu=va_arg(loc_argp,uc);//取出下一个参数
+ 803   2          }while(loc_shu!=def_parend);
+ 804   1          va_end(loc_argp);//结束
+ 805   1          return loc_min;//退出
+ 806   1      }//求最小值
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2894    ----
+   CODE SIZE        =   3046    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     68    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      6      36
+   DATA SIZE        =      6      34
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -579,6 +579,9 @@ void fun_timerfl(){
         }
     }
 }//定时器巡线
+void fun_timerturn(){
+    ;
+}//定时器转弯
 void fun_dtjp(uc par_speed){
     uc loc_sdl=par_speed,loc_sdr=par_speed;
     if(var_online==0){
@@ -607,12 +610,46 @@ void fun_dtjp(uc par_speed){
             loc_sdr*=0.9;
         }
     }
-    fun_motors(dir_left,loc_sdl);
-    fun_motors(dir_right,loc_sdr);
-}//动态纠偏函数
-void fun_jtjp(uc par_time,uc par_intensity){
-    ;
-}//静态纠偏函数
+    fun_motors(mot_r,loc_sdl);
+    fun_motors(mot_l,loc_sdr);
+}//动态纠偏
+void fun_jtjp(){
+    while(1){
+        if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
+            fun_delay(10,del_ms);
+            fun_motors(mot_rl,0);
+            return;
+        }
+        if(in_ls2||in_ls1){
+            fun_motors(mot_l,16);
+            fun_motors(mot_r,-16);
+        }
+        else if(in_ls7||in_ls8){
+            fun_motors(mot_l,-16);
+            fun_motors(mot_r,16);
+        }
+        else{
+            if(!in_ls4){
+                fun_motors(mot_l,-12);
+                fun_motors(mot_r,12);
+            }
+            else if(!in_ls5){
+                fun_motors(mot_l,12);
+                fun_motors(mot_r,-12);
+            }
+            else{
+                if(in_ls6&&!in_ls3){
+                    fun_motors(mot_l,-8);
+                    fun_motors(mot_r,8);
+                }
+                if(in_ls3&&!in_ls6){
+                    fun_motors(mot_l,8);
+                    fun_motors(mot_r,-8);
+                }
+            }
+        }
+    }
+}//静态纠偏
 void fun_timercorner(){
     ;
 }//定时器转弯
