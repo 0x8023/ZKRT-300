@@ -107,7 +107,7 @@
         dir_down,
         dir_left,
         dir_right
-    };//车头方向
+    };//方向
     enum varENU_tra{
         tra_q,//没有电机的一方
         tra_kq,
@@ -134,6 +134,11 @@
         tur_l,
         tur_r
     };//回转状态
+    enum varENU_tfl{
+        tfl_line,
+        tfl_cache,
+        tfl_turn
+    };//
     struct str_state{
         char x;//X坐标
         char y;//Y坐标
@@ -169,6 +174,11 @@
 
         ui hz1bz;    //fun_hz1标准位延时
     };//参数
+    struct str_timerfolline{
+        char line[4];//走的线
+        ui cache[3];//前冲
+        enum varENU_dir turn[4];//转弯
+    };//定时器巡线
 
     extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
     extern xdata struct str_parameter str_cod;//一些固定的参数,一般保持默认即可
