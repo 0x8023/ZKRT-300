@@ -12,7 +12,8 @@
     #define def_timer0stop TR0=0;   //定时器0关闭
     #define def_timer1start TR1=1;  //定时器1开启
     #define def_timer1stop TR1=0;   //定时器1关闭
-    #define def_parend 0x96         //可变参数函数形参停止标志
+    #define def_end 0xFF         //不确定元素结束标志位
+    #define def_speed(par_model) str_tfl.speed=par_model;//设置走动速度
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1;//传感器片选
     #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
     /*初始化*/        fun_initialization();\
@@ -24,12 +25,13 @@
     /*平移位置*/      str_begin.pywz=par_pywz;\
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
                       MSG("Ready!")
-    #define def_stop fun_stop(mot_szdj);\
-                     fun_stop(mot_pydj);\
-                     fun_stop(mot_sjdj);\
-                     fun_stop(mot_hzdj);\
-                     fun_stop(mot_rl);\
-                     EA=0;\
+    #define def_stop EA=0;\
+                     str_tfl.speed=0;\
+                     fun_motors(mot_szdj,0);\
+                     fun_motors(mot_pydj,0);\
+                     fun_motors(mot_sjdj,0);\
+                     fun_motors(mot_hzdj,0);\
+                     fun_motors(mot_rl,0);\
                      while(1);
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
@@ -131,14 +133,21 @@
         han_s
     };//手抓状态
     enum varENU_tur{
-        tur_l,
-        tur_r
-    };//回转状态
+        tur_l90,
+        tur_r90,
+        tur_l180,
+        tur_r180
+    };//转弯模式
     enum varENU_tfl{
         tfl_line,
         tfl_cache,
         tfl_turn
-    };//
+    };//选择执行的动作
+    enum varENU_tf{
+        tf_null,
+        tf_ture,
+        tf_false
+    };//判断用的,空,对和错
     struct str_state{
         char x;//X坐标
         char y;//Y坐标
@@ -173,18 +182,23 @@
         ui py1kqh;   //fun_py1靠前到后延时
 
         ui hz1bz;    //fun_hz1标准位延时
+
+        ui turn90;   //90度转弯屏蔽延时
+        ui turn180;  //180度转弯屏蔽延时
     };//参数
     struct str_timerfolline{
-        char line[4];//走的线
-        ui cache[3];//前冲
-        enum varENU_dir turn[4];//转弯
-    };//定时器巡线
-
+        char step[32];
+        pc run;
+        char gospeed;
+        char turnspeed;
+        char doing;
+        uc online;
+        ul delay;
+    };//定时器移动
     extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
     extern xdata struct str_parameter str_cod;//一些固定的参数,一般保持默认即可
+    extern xdata struct str_timerfolline str_tfl;//一些固定的参数,一般保持默认即可
     extern ul var_timer0;//timer0毫秒级计时器计数位
-    extern bit var_online;//在线标志位
-    extern ui var_crossedline;//已经走过的线
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
     extern void fun_timer0init();//1毫秒定时器0初始化
@@ -201,9 +215,7 @@
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
-    extern void fun_timerfl();//定时器巡线
-    extern void fun_timerturn();//定时器转弯
-    extern void fun_dtjp(uc par_speed);//动态纠偏
+    extern void fun_dtjp();//动态纠偏
     extern void fun_jtjp();//静态纠偏
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据

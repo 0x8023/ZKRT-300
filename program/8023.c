@@ -18,11 +18,12 @@ xdata struct str_parameter str_cod={
     /*ui str_cod.py1qkh*/2122,   //fun_py1前到靠后延时
     /*ui str_cod.py1kqh*/2122,   //fun_py1靠前到后延时
 
-    /*ui str_cod.hz1bz*/20      //fun_hz1标准位延时
+    /*ui str_cod.hz1bz*/20,      //fun_hz1标准位延时
+
+    /*ui turn90;*/500,           //90度转弯屏蔽延时
+    /*ui turn180;*/2000          //180度转弯屏蔽延时
 };
 ul var_timer0=0;
-bit var_online=0;
-ui var_crossedline=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
     switch(par_model){
@@ -81,17 +82,85 @@ void fun_timer1init(){
     EA=1;
 }//20毫秒定时器1初始化
 void fun_timer0(){
+    static uc loc_con=0;
     TL0=0x20;
     TH0=0xD1;
     _nop_();
     var_timer0++;
-    fun_timerfl();
-
+    if(str_tfl.doing==tf_ture)
+        switch(*str_tfl.run){
+            case def_end:
+                str_tfl.doing=tf_false;
+                memset(str_tfl.step,0,sizeof(str_tfl.step));
+                str_tfl.run=&str_tfl.step;
+                break;
+            case tfl_line:
+                if(*(str_tfl.run+1)){
+                    if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7))
+                        str_tfl.online=tf_ture;
+                    else if(str_tfl.online==tf_ture){
+                        str_tfl.online=tf_false;
+                        (*(str_tfl.run+1))--;
+                    }
+                }
+                else{
+                    str_tfl.gospeed=0;
+                    fun_motors(mot_rl,0);
+                    str_tfl.run+=2;
+                }
+                break;
+            case tfl_turn:
+                switch(loc_con){
+                    case 0:
+                        switch(*(str_tfl.run+1)){
+                            case tur_r90:
+                                fun_motors(mot_l,str_tfl.turnspeed);
+                                fun_motors(mot_r,-str_tfl.turnspeed);
+                                str_tfl.delay=var_timer0+str_cod.turn90;
+                                break;
+                            case tur_l90:
+                                fun_motors(mot_l,-str_tfl.turnspeed);
+                                fun_motors(mot_r,str_tfl.turnspeed);
+                                str_tfl.delay=var_timer0+str_cod.turn90;
+                                break;
+                            case tur_r180:
+                                fun_motors(mot_l,str_tfl.turnspeed);
+                                fun_motors(mot_r,-str_tfl.turnspeed);
+                                str_tfl.delay=var_timer0+str_cod.turn180;
+                                break;
+                            case tur_l180:
+                                fun_motors(mot_l,-str_tfl.turnspeed);
+                                fun_motors(mot_r,str_tfl.turnspeed);
+                                str_tfl.delay=var_timer0+str_cod.turn180;
+                                break;
+                        }
+                        loc_con++;
+                        break;
+                    case 1:
+                        if(str_tfl.delay<=var_timer0)
+                            loc_con++;
+                        break;
+                    case 2:
+                        if(in_ls4&&in_ls5){
+                            fun_motors(mot_rl,0);
+                            str_tfl.run+=2;
+                            loc_con=0;
+                        }
+                        break;
+                }
+                break;
+            case tfl_cache:
+                ;
+        }
 }//1毫秒定时器0处理函数
 void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
+
+    if(str_tfl.online==tf_false){
+        fun_dtjp();
+    }
 
 }//20毫秒定时器1处理函数
 void fun_wait(){
@@ -566,48 +635,31 @@ void fun_hz1(enum varENU_dir par_model){
     fun_motors(mot_hzdj,0);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
-void fun_timerfl(){
-    if(var_crossedline){
-        if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7))
-            var_online=1;
-        else if(var_online==1){
-            var_online=0;
-            var_crossedline--;
-        }
+void fun_dtjp(){
+    uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
+    if(in_ls1&&!in_ls8){
+        loc_sdl*=0.5;
+        loc_sdr*=1.5;
     }
-    else
-        fun_motors(mot_rl,0);
-}//定时器巡线
-void fun_timerturn(){
-    ;
-}//定时器转弯
-void fun_dtjp(uc par_speed){
-    uc loc_sdl=par_speed,loc_sdr=par_speed;
-    if(var_online==0){
-        if(in_ls1&&!in_ls8){
-            loc_sdl*=0.5;
-            loc_sdr*=1.5;
-        }
-        if(in_ls8&&!in_ls1){
-            loc_sdl*=1.5;
-            loc_sdr*=0.5;
-        }
-        if(in_ls2&&!in_ls7){
-            loc_sdl*=0.7;
-            loc_sdr*=1.3;
-        }
-        if(in_ls7&&!in_ls2){
-            loc_sdl*=1.3;
-            loc_sdr*=0.7;
-        }
-        if(in_ls3&&!in_ls6){
-            loc_sdl*=0.9;
-            loc_sdr*=1.1;
-        }
-        if(in_ls6&&!in_ls3){
-            loc_sdl*=1.1;
-            loc_sdr*=0.9;
-        }
+    if(in_ls8&&!in_ls1){
+        loc_sdl*=1.5;
+        loc_sdr*=0.5;
+    }
+    if(in_ls2&&!in_ls7){
+        loc_sdl*=0.7;
+        loc_sdr*=1.3;
+    }
+    if(in_ls7&&!in_ls2){
+        loc_sdl*=1.3;
+        loc_sdr*=0.7;
+    }
+    if(in_ls3&&!in_ls6){
+        loc_sdl*=0.9;
+        loc_sdr*=1.1;
+    }
+    if(in_ls6&&!in_ls3){
+        loc_sdl*=1.1;
+        loc_sdr*=0.9;
     }
     fun_motors(mot_r,loc_sdl);
     fun_motors(mot_l,loc_sdr);
@@ -796,7 +848,7 @@ uc fun_min(uc par_num,...){
         if(loc_shu<loc_min)
             loc_min=loc_shu;
         loc_shu=va_arg(loc_argp,uc);//取出下一个参数
-    }while(loc_shu!=def_parend);
+    }while(loc_shu!=def_end);
     va_end(loc_argp);//结束
     return loc_min;//退出
 }//求最小值
