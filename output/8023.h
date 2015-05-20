@@ -217,6 +217,7 @@
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
     extern void fun_dtjp();//动态纠偏
     extern void fun_jtjp();//静态纠偏
+    extern void fun_timermove();//定时器移动
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM

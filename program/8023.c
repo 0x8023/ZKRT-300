@@ -82,86 +82,20 @@ void fun_timer1init(){
     EA=1;
 }//20毫秒定时器1初始化
 void fun_timer0(){
-    static uc loc_con=0;
     TL0=0x20;
     TH0=0xD1;
     _nop_();
     var_timer0++;
-    if(str_tfl.doing==tf_ture)
-        switch(*str_tfl.run){
-            case def_end:
-                str_tfl.doing=tf_false;
-                memset(str_tfl.step,0,sizeof(str_tfl.step));
-                str_tfl.run=&str_tfl.step;
-                break;
-            case tfl_line:
-                if(*(str_tfl.run+1)){
-                    if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7))
-                        str_tfl.online=tf_ture;
-                    else if(str_tfl.online==tf_ture){
-                        str_tfl.online=tf_false;
-                        (*(str_tfl.run+1))--;
-                    }
-                }
-                else{
-                    str_tfl.gospeed=0;
-                    fun_motors(mot_rl,0);
-                    str_tfl.run+=2;
-                }
-                break;
-            case tfl_turn:
-                switch(loc_con){
-                    case 0:
-                        switch(*(str_tfl.run+1)){
-                            case tur_r90:
-                                fun_motors(mot_l,str_tfl.turnspeed);
-                                fun_motors(mot_r,-str_tfl.turnspeed);
-                                str_tfl.delay=var_timer0+str_cod.turn90;
-                                break;
-                            case tur_l90:
-                                fun_motors(mot_l,-str_tfl.turnspeed);
-                                fun_motors(mot_r,str_tfl.turnspeed);
-                                str_tfl.delay=var_timer0+str_cod.turn90;
-                                break;
-                            case tur_r180:
-                                fun_motors(mot_l,str_tfl.turnspeed);
-                                fun_motors(mot_r,-str_tfl.turnspeed);
-                                str_tfl.delay=var_timer0+str_cod.turn180;
-                                break;
-                            case tur_l180:
-                                fun_motors(mot_l,-str_tfl.turnspeed);
-                                fun_motors(mot_r,str_tfl.turnspeed);
-                                str_tfl.delay=var_timer0+str_cod.turn180;
-                                break;
-                        }
-                        loc_con++;
-                        break;
-                    case 1:
-                        if(str_tfl.delay<=var_timer0)
-                            loc_con++;
-                        break;
-                    case 2:
-                        if(in_ls4&&in_ls5){
-                            fun_motors(mot_rl,0);
-                            str_tfl.run+=2;
-                            loc_con=0;
-                        }
-                        break;
-                }
-                break;
-            case tfl_cache:
-                ;
-        }
+    if(str_tfl.doing==tf_ture)//如果正在移动
+        fun_timermove();
 }//1毫秒定时器0处理函数
 void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
-
-    if(str_tfl.online==tf_false){
-        fun_dtjp();
-    }
-
+    if(*str_tfl.run==tfl_line||*str_tfl.run==tfl_cache)//如果小车在前冲状态或巡线状态
+        if(str_tfl.online==tf_false)//如果小车不在线
+            fun_dtjp();//启动动态纠偏
 }//20毫秒定时器1处理函数
 void fun_wait(){
     while(in_start==1);
@@ -701,6 +635,88 @@ void fun_jtjp(){
         }
     }
 }//静态纠偏
+void fun_timermove(){
+    static uc loc_con=0;
+    switch(*str_tfl.run){//选择运行方式
+        case def_end://运行结束
+            str_tfl.doing=tf_false;//移动结束
+            memset(str_tfl.step,0,sizeof(str_tfl.step));//清空step数组
+            str_tfl.run=str_tfl.step;//指针指向step的第一个元素
+            break;
+        case tfl_line://运行巡线
+            if(*(str_tfl.run+1)){//如果参数为非0数
+                if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7)){//如果中间6个灯全亮,左右亮任意一个
+                    str_tfl.online=tf_ture;//标志位记录在线
+                    //fun_motors(mot_rl,gospeed);//按照常规速度过线
+                }
+                else if(str_tfl.online==tf_ture){//如果标志位记录在线,而且不符合在线特征
+                    str_tfl.online=tf_false;//标志位记录不在线
+                    (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
+                }
+            }
+            else{//如果线走完了
+                str_tfl.run+=2;//指针指向下一组过程
+                fun_motors(mot_rl,0);//停止电机运动
+            }
+            break;
+        case tfl_turn://运行转弯
+            switch(loc_con){//分步运行标志位
+                case 0://第一步
+                    switch(*(str_tfl.run+1)){//获取参数
+                        case tur_r90://右转90
+                            fun_motors(mot_l,str_tfl.turnspeed);//左轮向前
+                            fun_motors(mot_r,-str_tfl.turnspeed);//右轮向后
+                            str_tfl.delay=var_timer0+str_cod.turn90;//计时
+                            break;
+                        case tur_l90://左转90
+                            fun_motors(mot_l,-str_tfl.turnspeed);//左轮向后
+                            fun_motors(mot_r,str_tfl.turnspeed);//右轮向前
+                            str_tfl.delay=var_timer0+str_cod.turn90;//计时
+                            break;
+                        case tur_r180://右转180
+                            fun_motors(mot_l,str_tfl.turnspeed);//左轮向前
+                            fun_motors(mot_r,-str_tfl.turnspeed);//右轮向后
+                            str_tfl.delay=var_timer0+str_cod.turn180;//计时
+                            break;
+                        case tur_l180://左转180
+                            fun_motors(mot_l,-str_tfl.turnspeed);//左轮向后
+                            fun_motors(mot_r,str_tfl.turnspeed);//左轮向前
+                            str_tfl.delay=var_timer0+str_cod.turn180;//计时
+                            break;
+                    }
+                    loc_con++;//执行下一步
+                    break;
+                case 1://第二步
+                    if(str_tfl.delay<=var_timer0)//计时时间到
+                        loc_con++;//执行下一步
+                    break;
+                case 2://第三步
+                    if(in_ls4&&in_ls5){//如果中间两个灯亮
+                        str_tfl.run+=2;//指针指向下一组过程
+                        fun_motors(mot_rl,0);//停止电机
+                        str_tfl.delay=0;//延时计数器归零
+                        loc_con=0;//分步运行标志位归零
+                    }
+                    break;
+            }
+            break;
+        case tfl_cache://运行前冲
+            switch(loc_con){
+                case 0:
+                    str_tfl.delay=var_timer0+(*(str_tfl.run+1)*10);
+                    loc_con++;//执行下一步
+                    break;
+                case 1:
+                    if(str_tfl.delay<=var_timer0){//计时时间到
+                        str_tfl.run+=2;//指针指向下一组过程
+                        fun_motors(mot_rl,0);//停止电机
+                        str_tfl.delay=0;//延时计数器归零
+                        loc_con=0;//分步运行标志位归零
+                    }
+                    break;
+            }
+    }
+}//定时器移动
 void fun_stope2prom(){
     IAP_CONTR = 0;                  //关闭IAP功能
     IAP_CMD = 0;                    //清除命令

@@ -221,10 +221,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>38</ColumnNumber>
+      <ColumnNumber>103</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>834</TopLine>
-      <CurrentLine>855</CurrentLine>
+      <CurrentLine>848</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -1634,9 +1634,9 @@
         </Doc>
         <Doc>
           <Name>.\program\8023.c</Name>
-          <ColumnNumber>38</ColumnNumber>
+          <ColumnNumber>103</ColumnNumber>
           <TopLine>834</TopLine>
-          <CurrentLine>855</CurrentLine>
+          <CurrentLine>848</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>
