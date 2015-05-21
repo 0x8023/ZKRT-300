@@ -221,10 +221,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>103</ColumnNumber>
+      <ColumnNumber>34</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>834</TopLine>
-      <CurrentLine>848</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>26</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\program\8023.c</PathWithFileName>
       <FilenameWithoutPath>8023.c</FilenameWithoutPath>
@@ -259,8 +259,8 @@
 
   <AlienFiles>
     <PathWithFilename>D:\Robot\ZKRT-300\OUTPUT\8023.H</PathWithFilename>
-    <TopLine>125</TopLine>
-    <CurrentLine>143</CurrentLine>
+    <TopLine>173</TopLine>
+    <CurrentLine>200</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1628,15 +1628,15 @@
       <Documents>
         <Doc>
           <Name>./OUTPUT/8023.H</Name>
-          <ColumnNumber>0</ColumnNumber>
-          <TopLine>125</TopLine>
-          <CurrentLine>143</CurrentLine>
+          <ColumnNumber>4</ColumnNumber>
+          <TopLine>173</TopLine>
+          <CurrentLine>200</CurrentLine>
         </Doc>
         <Doc>
           <Name>.\program\8023.c</Name>
-          <ColumnNumber>103</ColumnNumber>
-          <TopLine>834</TopLine>
-          <CurrentLine>848</CurrentLine>
+          <ColumnNumber>34</ColumnNumber>
+          <TopLine>1</TopLine>
+          <CurrentLine>26</CurrentLine>
         </Doc>
         <Doc>
           <Name>H:\PROGRAM\KEIL\C51\INC\STC\STC12C5A60S2.H</Name>

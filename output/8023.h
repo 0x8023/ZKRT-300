@@ -26,7 +26,7 @@
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
                       MSG("Ready!")
     #define def_stop EA=0;\
-                     str_tfl.speed=0;\
+                     str_tfl.gospeed=0;\
                      fun_motors(mot_szdj,0);\
                      fun_motors(mot_pydj,0);\
                      fun_motors(mot_sjdj,0);\
@@ -210,7 +210,7 @@
     extern void fun_pwminit();//PWM初始化
     extern void fun_pwmr(uc par_value);//右路PWM输出
     extern void fun_pwml(uc par_value);//左路PWM输出
-    extern void fun_motors(enum varENU_mot par_model,char par_speed);//操作电机
+    extern void fun_motors(enum varENU_mot par_model,char par_speed) reentrant;//操作电机(可重入)
     extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动

@@ -174,7 +174,7 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>4</ColumnNumber>
+      <ColumnNumber>15</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>1</TopLine>
       <CurrentLine>14</CurrentLine>
@@ -200,8 +200,8 @@
 
   <AlienFiles>
     <PathWithFilename>D:\Robot\ZKRT-300\output\8023.H</PathWithFilename>
-    <TopLine>170</TopLine>
-    <CurrentLine>170</CurrentLine>
+    <TopLine>67</TopLine>
+    <CurrentLine>83</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1595,7 +1595,7 @@
       <Documents>
         <Doc>
           <Name>.\perfect.c</Name>
-          <ColumnNumber>4</ColumnNumber>
+          <ColumnNumber>15</ColumnNumber>
           <TopLine>1</TopLine>
           <CurrentLine>14</CurrentLine>
         </Doc>
@@ -1608,8 +1608,8 @@
         <Doc>
           <Name>../8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
-          <TopLine>170</TopLine>
-          <CurrentLine>170</CurrentLine>
+          <TopLine>67</TopLine>
+          <CurrentLine>83</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

@@ -23,6 +23,7 @@ xdata struct str_parameter str_cod={
     /*ui turn90;*/500,           //90度转弯屏蔽延时
     /*ui turn180;*/2000          //180度转弯屏蔽延时
 };
+xdata struct str_timerfolline str_tfl;
 ul var_timer0=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
     ui loc_con=par_value;
@@ -149,7 +150,7 @@ void fun_pwml(uc par_value){
     CCAPM1=0X42;//8位PWM输出，无中断
     PCA_PWM1=0x00;
 }//左路PWM输出
-void fun_motors(enum varENU_mot par_model,char par_speed){
+void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
     if(par_speed>100)
         par_speed=100;
     else if(par_speed<-100)
@@ -269,7 +270,7 @@ void fun_motors(enum varENU_mot par_model,char par_speed){
         default:
             break;
     }
-}//操作电机
+}//操作电机(可重入)
 void fun_sz1(enum varENU_han par_model){
     if(str_begin.szzt==par_model)
         return;
@@ -867,4 +868,4 @@ uc fun_min(uc par_num,...){
     }while(loc_shu!=def_end);
     va_end(loc_argp);//结束
     return loc_min;//退出
-}//求最小值
+}//求最小� 

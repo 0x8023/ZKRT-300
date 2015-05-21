@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   PERFECT                                                               03/25/2015 16:22:05 PAGE 1   
+C51 COMPILER V9.01   PERFECT                                                               05/21/2015 08:34:56 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
@@ -8,66 +8,35 @@ COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE perfect.c BROWSE DEBUG OBJE
 line level    source
 
    1          #include "../8023.h"
-   2              int a=5;
-   3          void main(){
-   4   1          def_start(
-  11   1              0,//X坐标
-  11   1              0,//Y坐标
-  11   1              dir_up,//车头方向
-  11   1              han_s,//手抓状态
-  11   1              sjp_wz3,//升降位置
-  11   1              tra_h,//平移位置
-  11   1              dir_right)//回转方向
-  12   1      //    fun_sj1(sjp_wz1);
-  13   1      //    fun_delay(1,del_s);
-  14   1      //    WZ5
-  15   1      //    D(2000)
-  16   1      //    def_stop
-  17   1      
-  18   1      
-  19   1          fun_startdj(mot_rl,85);
-  20   1              while(1);
-  21   1      
-  22   1              
-  23   1          fun_calibration();
-  24   1          fun_zhuajian(15368724,68357241);
-  25   1      
-  26   1          MSG("STOP")
-  27   1          def_stop
-  28   1          //fun_mptline(5,60,dir_left);
-  29   1      
-  30   1          
-  31   1      
-  32   1      
-  33   1      
-  34   1      
-  35   1          WZ4
-  36   1          
-  37   1          fun_calibration();
-  38   1          //fun_py1(tra_q);
-  39   1          fun_py1(tra_kq);
-  40   1      
-  41   1          def_stop
-  42   1      }
-  43          void Int0Interrupt() interrupt 0{
-  44   1          ;
-  45   1      }
-  46          void Timer0Interrupt() interrupt 1 using 1{
-  47   1          fun_timer0();
-  48   1      }
-  49          void Timer1Interrupt() interrupt 3 using 1{
-  50   1          fun_timer1();
-  51   1      }
+   2          void main(){
+   3   1          def_start(
+  10   1              0,//X坐标
+  10   1              0,//Y坐标
+  10   1              dir_up,//车头方向
+  10   1              han_s,//手抓状态
+  10   1              sjp_wz3,//升降位置
+  10   1              tra_h,//平移位置
+  10   1              dir_right)//回转方向
+  11   1      
+  12   1          def_stop
+  13   1      }
+  14          void Int0Interrupt() interrupt 0{
+  15   1          ;
+  16   1      }
+  17          void Timer0Interrupt() interrupt 1 using 1{
+  18   1          fun_timer0();
+  19   1      }
+  20          void Timer1Interrupt() interrupt 3 using 1{
+  21   1          fun_timer1();
+  22   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    106    ----
-C51 COMPILER V9.01   PERFECT                                                               03/25/2015 16:22:05 PAGE 2   
-
-   CONSTANT SIZE    =     16    ----
+   CODE SIZE        =    142    ----
+   CONSTANT SIZE    =     11    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2    ----
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
