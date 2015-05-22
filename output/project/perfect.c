@@ -20,3 +20,5 @@ void Timer0Interrupt() interrupt 1 using 1{
 void Timer1Interrupt() interrupt 3 using 1{
     fun_timer1();
 }
+
+//测试WEBIDE
