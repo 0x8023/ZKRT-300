@@ -868,4 +868,4 @@ uc fun_min(uc par_num,...){
     }while(loc_shu!=def_end);
     va_end(loc_argp);//结束
     return loc_min;//退出
-}//求最小� 
+}//求最小值
