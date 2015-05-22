@@ -869,3 +869,5 @@ uc fun_min(uc par_num,...){
     va_end(loc_argp);//结束
     return loc_min;//退出
 }//求最小值
+
+//gegeda
