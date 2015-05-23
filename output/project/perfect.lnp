@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"perfect.obj",
+"..\8023.LIB" 
+TO "perfect" 
+RAMSIZE(256) 
+DISABLEWARNING (16) 

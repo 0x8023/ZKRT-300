@@ -1,0 +1,45 @@
+C51 COMPILER V9.01   PERFECT                                                               05/21/2015 08:34:56 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE PERFECT
+OBJECT MODULE PLACED IN perfect.OBJ
+COMPILER INVOKED BY: H:\Program\keil\C51\BIN\C51.EXE perfect.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "../8023.h"
+   2          void main(){
+   3   1          def_start(
+  10   1              0,//X坐标
+  10   1              0,//Y坐标
+  10   1              dir_up,//车头方向
+  10   1              han_s,//手抓状态
+  10   1              sjp_wz3,//升降位置
+  10   1              tra_h,//平移位置
+  10   1              dir_right)//回转方向
+  11   1      
+  12   1          def_stop
+  13   1      }
+  14          void Int0Interrupt() interrupt 0{
+  15   1          ;
+  16   1      }
+  17          void Timer0Interrupt() interrupt 1 using 1{
+  18   1          fun_timer0();
+  19   1      }
+  20          void Timer1Interrupt() interrupt 3 using 1{
+  21   1          fun_timer1();
+  22   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    142    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
