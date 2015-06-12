@@ -1,19 +1,18 @@
 #ifndef __8023_H__
 #define __8023_H__
 /*-------------------------------------------------------------头文件引入-----*/
-    #include "STC12c5a60s2.h"//单片机头文件
-    #include "intrins.h"//_nop_与循环位移
-    #include "math.h"//数学运算
-    #include "string.h"//字符串
-    #include "stdio.h"//串口调戏
-    #include "stdarg.h"//可变参数
+    #include "STC12c5a60s2.h"   //单片机头文件
+    #include "intrins.h"        //_nop_与循环位移
+    #include "math.h"           //数学运算
+    #include "string.h"         //字符串
+    #include "stdio.h"          //串口调戏
+    #include "stdarg.h"         //可变参数
 /*----------------------------------------------------------define 宏定义-----*/
     #define def_timer0start TR0=1;  //定时器0开启
     #define def_timer0stop TR0=0;   //定时器0关闭
     #define def_timer1start TR1=1;  //定时器1开启
     #define def_timer1stop TR1=0;   //定时器1关闭
-    #define def_end 0xFF         //不确定元素结束标志位
-    #define def_speed(par_model) str_tfl.speed=par_model;//设置走动速度
+    #define def_end 0xFF            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1;//传感器片选
     #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
     /*初始化*/        fun_initialization();\
@@ -53,38 +52,38 @@
     typedef char* pc;                     //char* --> pc
     typedef unsigned long ul;     //unsigned long --> ul
 /*-----------------------------------------------------------------In Put-----*/
-    sbit in_start=P3^2;//启动按键(start_)
-    sbit in_ls1=P0^7;//1号传感器(靠近左侧,下侧传感器灯,无信号低电平)
-    sbit in_ls2=P0^6;//2号传感器
-    sbit in_ls3=P0^5;//3号传感器
-    sbit in_ls4=P0^4;//4号传感器
-    sbit in_ls5=P0^3;//5号传感器
-    sbit in_ls6=P0^2;//6号传感器
-    sbit in_ls7=P0^1;//7号传感器
-    sbit in_ls8=P0^0;//8号传感器(靠近右侧,上侧传感器灯)
+    sbit in_start=P3^2; //启动按键(start_)
+    sbit in_ls1=P0^7;   //1号传感器(靠近左侧,下侧传感器灯,无信号低电平)
+    sbit in_ls2=P0^6;   //2号传感器
+    sbit in_ls3=P0^5;   //3号传感器
+    sbit in_ls4=P0^4;   //4号传感器
+    sbit in_ls5=P0^3;   //5号传感器
+    sbit in_ls6=P0^2;   //6号传感器
+    sbit in_ls7=P0^1;   //7号传感器
+    sbit in_ls8=P0^0;   //8号传感器(靠近右侧,上侧传感器灯)
 
-    sbit in_j=P3^4;//手抓紧传感器
-    sbit in_s=P3^3;//手抓松传感器
-    sbit in_qpy=P3^5;//平移前平移传感器
-    sbit in_hpy=P3^6;//平移后平移传感器
+    sbit in_j=P3^4;     //手抓紧传感器
+    sbit in_s=P3^3;     //手抓松传感器
+    sbit in_qpy=P3^5;   //平移前平移传感器
+    sbit in_hpy=P3^6;   //平移后平移传感器
 
-    sbit in_wz1=P2^4;//升降位置1传感器(最上位)
-    sbit in_wz2=P2^5;//升降位置2传感器
-    sbit in_wz3=P2^6;//升降位置3传感器
-    sbit in_wz4=P2^7;//升降位置4传感器
+    sbit in_wz1=P2^4;   //升降位置1传感器(最上位)
+    sbit in_wz2=P2^5;   //升降位置2传感器
+    sbit in_wz3=P2^6;   //升降位置3传感器
+    sbit in_wz4=P2^7;   //升降位置4传感器
 
-    sbit in_wz5=P2^4;//升降位置5传感器(最下位)
-    sbit in_hz=P2^5;//回转传感器
+    sbit in_wz5=P2^4;   //升降位置5传感器(最下位)
+    sbit in_hz=P2^5;    //回转传感器
 /*----------------------------------------------------------------Out Put-----*/
-    sbit out_pwmr=P1^2;//PWMR的正反转控制位，1代表正(DIR_R)
-    sbit out_pwml=P1^5;//PWML的正反转控制位，1代表正(DIR_L)
-    sbit out_dir1=P2^0;//电机1/3方向(MOT_DIR1)
-    sbit out_en1=P2^1;//电机1/3使能(MOT_EN1)
-    sbit out_dir2=P2^2;//电机2/4方向(MOT_DIR2)
-    sbit out_en2=P2^3;//电机2/4使能(MOT_EN2)
-    sbit out_switchselect=P1^6;//接近开关片选(SER_BS)
-    sbit out_motorselect=P1^7;//电机输出片选(MOT_BS)
-    sbit out_lamp=P3^7;//红外输出(LAMP)(低电平打开)
+    sbit out_pwmr=P1^2;         //PWMR的正反转控制位,1代表正(DIR_R)
+    sbit out_pwml=P1^5;         //PWML的正反转控制位,1代表正(DIR_L)
+    sbit out_dir1=P2^0;         //电机1/3方向(MOT_DIR1)
+    sbit out_en1=P2^1;          //电机1/3使能(MOT_EN1)
+    sbit out_dir2=P2^2;         //电机2/4方向(MOT_DIR2)
+    sbit out_en2=P2^3;          //电机2/4使能(MOT_EN2)
+    sbit out_switchselect=P1^6; //接近开关片选(SER_BS)
+    sbit out_motorselect=P1^7;  //电机输出片选(MOT_BS)
+    sbit out_lamp=P3^7;         //红外输出(LAMP)(低电平打开)
 /*---------------------------------------------------------------变量声明-----*/
     enum varENU_del{
         del_us,
@@ -99,10 +98,10 @@
         mot_l,
         mot_r,
         mot_rl,
-        mot_szdj,//电机1
-        mot_pydj,//电机2
-        mot_sjdj,//电机3
-        mot_hzdj//电机4
+        mot_szdj,   //电机1
+        mot_pydj,   //电机2
+        mot_sjdj,   //电机3
+        mot_hzdj    //电机4
     };//电机选择
     enum varENU_dir{
         dir_up,
@@ -142,26 +141,26 @@
         tfl_line,
         tfl_cache,
         tfl_turn
-    };//选择执行的动作
+    };//执行动作
     enum varENU_tf{
         tf_null,
         tf_ture,
         tf_false
     };//判断用的,空,对和错
     struct str_state{
-        char x;//X坐标
-        char y;//Y坐标
-        char szsd;//手抓速度
-        char pysd;//平移速度
-        char sjsd;//升降速度
-        char hzsd;//回转速度
-        char leftsd;//左轮电机速度
-        char rightsd;//右轮电机速度
-        enum varENU_dir ctfx;//车头方向
-        enum varENU_han szzt;//手抓状态
-        enum varENU_sjp sjwz;//升降位置
-        enum varENU_tra pywz;//平移位置
-        enum varENU_dir hzfx;//回转方向
+        char x;                 //X坐标
+        char y;                 //Y坐标
+        char szsd;              //手抓速度
+        char pysd;              //平移速度
+        char sjsd;              //升降速度
+        char hzsd;              //回转速度
+        char leftsd;            //左轮电机速度
+        char rightsd;           //右轮电机速度
+        enum varENU_dir ctfx;   //车头方向
+        enum varENU_han szzt;   //手抓状态
+        enum varENU_sjp sjwz;   //升降位置
+        enum varENU_tra pywz;   //平移位置
+        enum varENU_dir hzfx;   //回转方向
     };
     struct str_parameter{
         ui mlinerqd; //默认主函数巡线软起动时间为500毫秒
@@ -187,17 +186,17 @@
         ui turn180;  //180度转弯屏蔽延时
     };//参数
     struct str_timerfolline{
-        char step[32];
-        pc run;
-        char gospeed;
-        char turnspeed;
-        char doing;
-        uc online;
-        ul delay;
+        char step[32];      //步骤参数数据
+        pc run;             //正在运行的步骤(指针)
+        char gospeed;       //运巡线行速度
+        char turnspeed;     //转弯运行速度
+        char doing;         //正在移动标志位
+        char online;        //在线标志位
+        ul delay;           //延时变量
     };//定时器移动
     extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
     extern xdata struct str_parameter str_cod;//一些固定的参数,一般保持默认即可
-    extern xdata struct str_timerfolline str_tfl;//一些固定的参数,一般保持默认即可
+    extern xdata struct str_timerfolline str_tfl;//定时器巡线
     extern ul var_timer0;//timer0毫秒级计时器计数位
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model);//延时

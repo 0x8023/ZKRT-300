@@ -201,7 +201,7 @@
   <AlienFiles>
     <PathWithFilename>D:\Robot\ZKRT-300\output\8023.H</PathWithFilename>
     <TopLine>67</TopLine>
-    <CurrentLine>83</CurrentLine>
+    <CurrentLine>67</CurrentLine>
     <Constant>0</Constant>
     <WindowPosition>
       <length>0</length>
@@ -1609,7 +1609,7 @@
           <Name>../8023.H</Name>
           <ColumnNumber>0</ColumnNumber>
           <TopLine>67</TopLine>
-          <CurrentLine>83</CurrentLine>
+          <CurrentLine>67</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>
