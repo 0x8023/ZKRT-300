@@ -571,7 +571,9 @@ void fun_hz1(enum varENU_dir par_model){
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
 void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
-    
+    switch(){
+        ;
+    }
 }
 void fun_dtjp(){
     uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
