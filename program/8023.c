@@ -94,7 +94,7 @@ void fun_timer1(){
     TL1=0xE0;
     TH1=0xB1;
     _nop_();
-    if(*str_tfl.run==tfl_line||*str_tfl.run==tfl_cache)//如果小车在前冲状态或巡线状态
+    if((*str_tfl.run==tfl_line)||(*str_tfl.run==tfl_cache))//如果小车在前冲状态或巡线状态
         if(str_tfl.online==tf_false)//如果小车不在线
             fun_dtjp();//启动动态纠偏
 }//20毫秒定时器1处理函数
@@ -154,7 +154,7 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
     if(par_speed>100)
         par_speed=100;
     else if(par_speed<-100)
-        par_speed=-100;
+        par_speed=-100;//速度最多100,最少-100
     switch(par_model){
         case mot_l://左轮电机
             if(str_begin.leftsd==par_model)
