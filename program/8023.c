@@ -286,6 +286,86 @@ void fun_sz1(enum varENU_han par_model){
     fun_motors(mot_szdj,0);
     str_begin.szzt=par_model;//存储运行结果
 }//手抓单步运动
+void fun_py1(enum varENU_tra par_model){
+    if(str_begin.pywz==par_model)
+        return;
+    switch(par_model){
+        case tra_q://前平移(没有电机的呢个方向)
+            fun_motors(mot_pydj,100);
+            while(in_qpy==1);
+            fun_delay(str_cod.py1bz,del_ms);
+            break;
+        case tra_kq:
+            switch(str_begin.pywz){
+                case tra_q:
+                    fun_motors(mot_pydj,-100);
+                    fun_delay(str_cod.py1qkq,del_ms);
+                    break;
+                case tra_z:
+                    fun_motors(mot_pydj,100);
+                    fun_delay(str_cod.py1kqz,del_ms);
+                    break;
+                case tra_kh:
+                    fun_motors(mot_pydj,100);
+                    fun_delay(str_cod.py1kqkh,del_ms);
+                    break;
+                case tra_h:
+                    fun_motors(mot_pydj,100);
+                    fun_delay(str_cod.py1kqh,del_ms);
+                    break;
+            }
+            break;
+        case tra_z:
+            switch(str_begin.pywz){
+                case tra_q:
+                    fun_motors(mot_pydj,-100);
+                    fun_delay(str_cod.py1qz,del_ms);
+                    break;
+                case tra_kq:
+                    fun_motors(mot_pydj,-100);
+                    fun_delay(str_cod.py1kqz,del_ms);
+                    break;
+                case tra_kh:
+                    fun_motors(mot_pydj,100);
+                    fun_delay(str_cod.py1zkh,del_ms);
+                    break;
+                case tra_h:
+                    fun_motors(mot_pydj,100);
+                    fun_delay(str_cod.py1zh,del_ms);
+                    break;
+            }
+            break;
+        case tra_kh:
+            switch(str_begin.pywz){
+                case tra_q:
+                    fun_motors(mot_pydj,-100);
+                    fun_delay(str_cod.py1qkh,del_ms);
+                    break;
+                case tra_kq:
+                    fun_motors(mot_pydj,-100);
+                    fun_delay(str_cod.py1kqkh,del_ms);
+                    break;
+                case tra_z:
+                    fun_motors(mot_pydj,-100);
+                    fun_delay(str_cod.py1zkh,del_ms);
+                    break;
+                case tra_h:
+                    fun_motors(mot_pydj,100);
+                    fun_delay(str_cod.py1khh,del_ms);
+                    break;
+            }
+            break;
+        case tra_h://后平移(有电机的呢个方向)
+            fun_motors(mot_pydj,-100);
+            while(in_hpy==1);
+            fun_delay(str_cod.py1bz,del_ms);
+            break;
+        default:
+            break;
+    }
+    fun_motors(mot_pydj,0);
+    str_begin.pywz=par_model;//存储运行结果
+}//平移单步运动
 void fun_sj1(enum varENU_sjp par_model){
     if(str_begin.sjwz==par_model)
        return;
@@ -372,86 +452,6 @@ void fun_sj1(enum varENU_sjp par_model){
     fun_motors(mot_sjdj,0);
     str_begin.sjwz=par_model;//存储运行结果
 }//升降单步运动
-void fun_py1(enum varENU_tra par_model){
-    if(str_begin.pywz==par_model)
-        return;
-    switch(par_model){
-        case tra_q://前平移(没有电机的呢个方向)
-            fun_motors(mot_pydj,100);
-            while(in_qpy==1);
-            fun_delay(str_cod.py1bz,del_ms);
-            break;
-        case tra_kq:
-            switch(str_begin.pywz){
-                case tra_q:
-                    fun_motors(mot_pydj,-100);
-                    fun_delay(str_cod.py1qkq,del_ms);
-                    break;
-                case tra_z:
-                    fun_motors(mot_pydj,100);
-                    fun_delay(str_cod.py1kqz,del_ms);
-                    break;
-                case tra_kh:
-                    fun_motors(mot_pydj,100);
-                    fun_delay(str_cod.py1kqkh,del_ms);
-                    break;
-                case tra_h:
-                    fun_motors(mot_pydj,100);
-                    fun_delay(str_cod.py1kqh,del_ms);
-                    break;
-            }
-            break;
-        case tra_z:
-            switch(str_begin.pywz){
-                case tra_q:
-                    fun_motors(mot_pydj,-100);
-                    fun_delay(str_cod.py1qz,del_ms);
-                    break;
-                case tra_kq:
-                    fun_motors(mot_pydj,-100);
-                    fun_delay(str_cod.py1kqz,del_ms);
-                    break;
-                case tra_kh:
-                    fun_motors(mot_pydj,100);
-                    fun_delay(str_cod.py1zkh,del_ms);
-                    break;
-                case tra_h:
-                    fun_motors(mot_pydj,100);
-                    fun_delay(str_cod.py1zh,del_ms);
-                    break;
-            }
-            break;
-        case tra_kh:
-            switch(str_begin.pywz){
-                case tra_q:
-                    fun_motors(mot_pydj,-100);
-                    fun_delay(str_cod.py1qkh,del_ms);
-                    break;
-                case tra_kq:
-                    fun_motors(mot_pydj,-100);
-                    fun_delay(str_cod.py1kqkh,del_ms);
-                    break;
-                case tra_z:
-                    fun_motors(mot_pydj,-100);
-                    fun_delay(str_cod.py1zkh,del_ms);
-                    break;
-                case tra_h:
-                    fun_motors(mot_pydj,100);
-                    fun_delay(str_cod.py1khh,del_ms);
-                    break;
-            }
-            break;
-        case tra_h://后平移(有电机的呢个方向)
-            fun_motors(mot_pydj,-100);
-            while(in_hpy==1);
-            fun_delay(str_cod.py1bz,del_ms);
-            break;
-        default:
-            break;
-    }
-    fun_motors(mot_pydj,0);
-    str_begin.pywz=par_model;//存储运行结果
-}//平移单步运动
 void fun_hz1(enum varENU_dir par_model){
     if(str_begin.hzfx==par_model)
         return;
@@ -570,6 +570,9 @@ void fun_hz1(enum varENU_dir par_model){
     fun_motors(mot_hzdj,0);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
+void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
+    
+}
 void fun_dtjp(){
     uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
     if(in_ls1&&!in_ls8){
