@@ -1,14 +1,16 @@
 #include "../8023.h"
 void main(){
-    def_start(
+    def_start(//在此输入小车目前的状态
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
         han_s,//手抓状态
-        sjp_wz3,//升降位置
+        sjp_3,//升降位置
         tra_h,//平移位置
         dir_right)//回转方向
+    /*请从下一行开始写你的程序*/
 
+    /*你的程序到此为止,请不要再继续改动*/
     def_stop
 }
 void Int0Interrupt() interrupt 0{

@@ -25,13 +25,13 @@
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
                       MSG("Ready!")
     #define def_stop EA=0;\
-                     str_tfl.gospeed=0;\
-                     fun_motors(mot_szdj,0);\
-                     fun_motors(mot_pydj,0);\
-                     fun_motors(mot_sjdj,0);\
-                     fun_motors(mot_hzdj,0);\
-                     fun_motors(mot_rl,0);\
-                     while(1);
+    /*速度归零*/     str_tfl.gospeed=0;\
+    /*手抓速度归零*/ fun_motors(mot_sz,0);\
+    /*平移速度归零*/ fun_motors(mot_py,0);\
+    /*手抓速度归零*/ fun_motors(mot_sj,0);\
+    /*手抓速度归零*/ fun_motors(mot_hz,0);\
+    /*左右速度归零*/ fun_motors(mot_rl,0);\
+    /*死循环*/       while(1);
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
     #define J fun_sz1(han_j);
@@ -85,68 +85,71 @@
     sbit out_motorselect=P1^7;  //电机输出片选(MOT_BS)
     sbit out_lamp=P3^7;         //红外输出(LAMP)(低电平打开)
 /*---------------------------------------------------------------变量声明-----*/
+    enum varENU_tf{
+        tf_null=0,
+        tf_ture=1,
+        tf_false=2
+    };//判断用的,空,对和错
     enum varENU_del{
-        del_us,
-        del_ms,
-        del_s
+        del_us=10,
+        del_ms=11,
+        del_s=12
     };//延时模式选择
     enum varENU_sel{
-        sel_58,
-        sel_912
+        sel_58=20,
+        sel_912=21
     };//传感器片选
     enum varENU_mot{
-        mot_l,
-        mot_r,
-        mot_rl,
-        mot_szdj,   //电机1
-        mot_pydj,   //电机2
-        mot_sjdj,   //电机3
-        mot_hzdj    //电机4
+        mot_l=30,
+        mot_r=31,
+        mot_rl=32,
+        mot_sz=33,   //电机1
+        mot_py=34,   //电机2
+        mot_sj=35,   //电机3
+        mot_hz=36    //电机4
     };//电机选择
     enum varENU_dir{
-        dir_up,
-        dir_down,
-        dir_left,
-        dir_right
+        dir_up=40,
+        dir_down=41,
+        dir_left=42,
+        dir_right=43
     };//方向
     enum varENU_tra{
-        tra_q,//没有电机的一方
-        tra_kq,
-        tra_z,
-        tra_kh,
-        tra_h//有电机的一方
+        tra_q=50,//没有电机的一方
+        tra_kq=51,
+        tra_z=52,
+        tra_kh=53,
+        tra_h=54//有电机的一方
     };//平移位置
     enum varENU_sjp{
-        sjp_wz1,
-        sjp_wz12,
-        sjp_wz2,
-        sjp_wz23,
-        sjp_wz3,
-        sjp_wz34,
-        sjp_wz4,
-        sjp_wz45,
-        sjp_wz5
+        sjp_1=60,
+        sjp_12=61,
+        sjp_2=62,
+        sjp_23=63,
+        sjp_3=64,
+        sjp_34=65,
+        sjp_4=66,
+        sjp_45=67,
+        sjp_5=68
     };//升降位置
     enum varENU_han{
-        han_j,
-        han_s
+        han_j=70,
+        han_s=71
     };//手抓状态
     enum varENU_tur{
-        tur_l90,
-        tur_r90,
-        tur_l180,
-        tur_r180
+        tur_l90=80,
+        tur_r90=81,
+        tur_l180=82,
+        tur_r180=83
     };//转弯模式
     enum varENU_tfl{
-        tfl_line,
-        tfl_cache,
-        tfl_turn
-    };//执行动作
-    enum varENU_tf{
-        tf_null,
-        tf_ture,
-        tf_false
-    };//判断用的,空,对和错
+        tfl_line=90,    //巡线
+        tfl_cache=91,   //前冲
+        tfl_turn=92,    //转弯
+        tfl_start=93,   //带加速的前冲
+        tfl_end=94      //带减速的前冲
+    };//定时器巡线执行动作
+
     struct str_state{
         char x;                 //X坐标
         char y;                 //Y坐标
@@ -194,12 +197,12 @@
         char online;        //在线标志位
         ul delay;           //延时变量
     };//定时器移动
-    extern xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
-    extern xdata struct str_parameter str_cod;//一些固定的参数,一般保持默认即可
-    extern xdata struct str_timerfolline str_tfl;//定时器巡线
-    extern ul var_timer0;//timer0毫秒级计时器计数位
+    extern xdata struct str_state str_begin,str_now,str_next;   //分别为:起始状态/当前状态/目标状态
+    extern xdata struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
+    extern xdata struct str_timerfolline str_tfl;               //定时器巡线
+    extern ul var_timer0;                                       //timer0毫秒级计时器计数位
 /*---------------------------------------------------------------函数声明-----*/
-    extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
+    extern void fun_delay(ui par_value,enum varENU_del par_model); //延时
     extern void fun_timer0init();//1毫秒定时器0初始化
     extern void fun_timer1init();//20毫秒定时器1初始化
     extern void fun_timer0();//1毫秒定时器0处理函数
@@ -218,13 +221,14 @@
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
     extern void fun_stope2prom();//停止EEPROM服务
-    extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
+    extern uc   fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
     extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
     extern void fun_calibration();//自动校准参数
     extern void fun_port();//串口初始化
     extern void fun_test();//测试
-    extern uc fun_min(uc par_num,...);//求最小值
+    extern uc   fun_min(uc par_num,...);//求最小值
+    extern void fun_coordinate();//自动巡线之坐标
 
 /*---------------------------------------------------------------更新日志-----*/
 #endif
