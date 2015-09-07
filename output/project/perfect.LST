@@ -1,9 +1,9 @@
-C51 COMPILER V9.54   PERFECT                                                               09/02/2015 18:46:25 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               09/07/2015 15:45:25 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
 OBJECT MODULE PLACED IN perfect.OBJ
-COMPILER INVOKED BY: D:\MyProgram\keil\C51\BIN\C51.EXE perfect.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+COMPILER INVOKED BY: D:\MyProgram\keil\C51\BIN\C51.EXE perfect.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
 
 line level    source
 
@@ -18,7 +18,7 @@ line level    source
   10   1              tra_h,//平移位置
   10   1              dir_right)//回转方向
   11   1          /*请从下一行开始写你的程序*/
-  12   1      
+  12   1                      fun_test();
   13   1          /*你的程序到此为止,请不要再继续改动*/
   14   1          def_stop
   15   1      }
@@ -34,7 +34,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    148    ----
+   CODE SIZE        =    151    ----
    CONSTANT SIZE    =     11    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

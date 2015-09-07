@@ -9,7 +9,7 @@ void main(){
         tra_h,//平移位置
         dir_right)//回转方向
     /*请从下一行开始写你的程序*/
-
+		fun_test();
     /*你的程序到此为止,请不要再继续改动*/
     def_stop
 }

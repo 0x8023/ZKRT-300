@@ -155,10 +155,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
         par_speed=-100;//速度最多100,最少-100
     switch(par_model){
         case mot_l://左轮电机
-            if(str_begin.leftsd==par_model)
+            if(str_begin.leftsd==par_speed)
                 return;
             else
-                str_begin.leftsd=par_model;
+                str_begin.leftsd=par_speed;
             if(par_speed==0){
                 fun_pwml(0);out_pwml=0;
             }
@@ -170,10 +170,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
             }
             break;
         case mot_r://右轮电机
-            if(str_begin.rightsd==par_model)
+            if(str_begin.rightsd==par_speed)
                 return;
             else
-                str_begin.rightsd=par_model;
+                str_begin.rightsd=par_speed;
             if(par_speed==0){
                 fun_pwmr(0);out_pwmr=0;
             }
@@ -185,10 +185,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
             }
             break;
         case mot_rl://左右轮同步
-            if((str_begin.leftsd==par_model)&&(str_begin.rightsd==par_model))
+            if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
                 return;
             else
-                str_begin.leftsd=str_begin.rightsd=par_model;
+                str_begin.leftsd=str_begin.rightsd=par_speed;
             if(par_speed==0){
                 CR=0;
                 fun_pwmr(0);out_pwmr=0;
@@ -206,10 +206,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
             }
             break;
         case mot_sz://正转为抓紧，反转为松开
-            if(str_begin.szsd==par_model)
+            if(str_begin.szsd==par_speed)
                 return;
             else
-                str_begin.szsd=par_model;
+                str_begin.szsd=par_speed;
             if(par_speed==0){
                 out_motorselect=1;out_dir1=0;out_en1=1;
             }
@@ -221,10 +221,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
             }
             break;
         case mot_py://正转是向无电机一方转,反转为向有电机一方转
-            if(str_begin.pysd==par_model)
+            if(str_begin.pysd==par_speed)
                 return;
             else
-                str_begin.pysd=par_model;
+                str_begin.pysd=par_speed;
             if(par_speed==0){
                 out_motorselect=1;out_dir2=0;out_en2=1;
             }
@@ -236,10 +236,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
             }
             break;
         case mot_sj://向上为正转,向下为反转
-            if(str_begin.sjsd==par_model)
+            if(str_begin.sjsd==par_speed)
                 return;
             else
-                str_begin.sjsd=par_model;
+                str_begin.sjsd=par_speed;
             if(par_speed==0){
                 out_motorselect=0;out_dir1=0;out_en1=1;
             }
@@ -251,10 +251,10 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
             }
             break;
         case mot_hz://顺时针为正转,逆时针为反转
-            if(str_begin.hzsd==par_model)
+            if(str_begin.hzsd==par_speed)
                 return;
             else
-                str_begin.hzsd=par_model;
+                str_begin.hzsd=par_speed;
             if(par_speed==0){
                 out_motorselect=0;out_dir2=0;out_en2=1;
             }
@@ -568,11 +568,13 @@ void fun_hz1(enum varENU_dir par_model){
     fun_motors(mot_hz,0);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
+
 //void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
 //    switch(){
 //        ;
 //    }
 //}
+
 void fun_dtjp(){
     uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
     if(in_ls1&&!in_ls8){
