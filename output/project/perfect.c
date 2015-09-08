@@ -1,4 +1,5 @@
 #include "../8023.h"
+
 void main(){
     def_start(//在此输入小车目前的状态
         0,//X坐标
@@ -9,7 +10,37 @@ void main(){
         tra_h,//平移位置
         dir_right)//回转方向
     /*请从下一行开始写你的程序*/
-		fun_test();
+	//fun_test();
+	fun_sj1(sjp_1);
+	fun_calibration();
+	fun_sj1(sjp_4);
+	
+	fun_py1(tra_q);
+	fun_sj1(sjp_5);
+	
+	
+	
+	fun_py1(tra_h);
+	D(2000)
+	fun_py1(tra_kh);
+	D(2000)
+	fun_py1(tra_z);
+	D(2000)
+	fun_py1(tra_kq);
+	D(2000)
+	fun_py1(tra_q);
+
+	D(2000)
+	fun_py1(tra_q);
+	D(2000)
+	fun_py1(tra_kq);
+	D(2000)
+	fun_py1(tra_z);
+	D(2000)
+	fun_py1(tra_kh);
+	D(2000)
+	fun_py1(tra_h);
+	
     /*你的程序到此为止,请不要再继续改动*/
     def_stop
 }

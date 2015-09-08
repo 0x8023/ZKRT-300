@@ -31,6 +31,7 @@
     /*初始化定时器0*/ fun_timer0init();\
     /*初始化定时器1*/ fun_timer1init();\
     /*初始化串口*/    fun_port();\
+    /*打开定时器0*/   TR0=1;\
     /*-------------*/ \
     /*X坐标*/         str_begin.x=par_x;\
     /*Y坐标*/         str_begin.y=par_y;\
@@ -50,7 +51,6 @@
     /*按键置1*/       in_start=1;\
     /*输出Ready!*/    MSG("Ready!")\
     /*等待按键*/      fun_wait();
-
     #define def_stop EA=0;\
     /*速度归零*/     str_tfl.gospeed=0;\
     /*手抓速度归零*/ fun_motors(mot_sz,0);\

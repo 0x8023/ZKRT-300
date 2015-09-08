@@ -94,7 +94,8 @@ void fun_timer1(){
     TH1=0xB1;
     if((*str_tfl.run==tfl_line)||(*str_tfl.run==tfl_cache))//如果小车在前冲状态或巡线状态
         if(str_tfl.online==tf_false)//如果小车不在线
-            fun_dtjp();//启动动态纠偏
+            if(!in_ls4||!in_ls5)//4.5有任意一个不亮
+                fun_dtjp();//启动动态纠偏
 }//20毫秒定时器1处理函数
 void fun_wait(){
     while(in_start==1);
@@ -547,30 +548,30 @@ void fun_hz1(enum varENU_dir par_model){
 
 void fun_dtjp(){
     uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
-    if(in_ls1&&!in_ls8){
-        loc_sdl*=0.5;
-        loc_sdr*=1.5;
-    }
-    if(in_ls8&&!in_ls1){
-        loc_sdl*=1.5;
-        loc_sdr*=0.5;
-    }
-    if(in_ls2&&!in_ls7){
-        loc_sdl*=0.7;
-        loc_sdr*=1.3;
-    }
-    if(in_ls7&&!in_ls2){
-        loc_sdl*=1.3;
-        loc_sdr*=0.7;
-    }
-    if(in_ls3&&!in_ls6){
-        loc_sdl*=0.9;
-        loc_sdr*=1.1;
-    }
-    if(in_ls6&&!in_ls3){
-        loc_sdl*=1.1;
-        loc_sdr*=0.9;
-    }
+    if(in_ls1&&!in_ls8){//1亮8不亮
+        loc_sdl*=0.5;//左减速
+        loc_sdr*=1.5;//右加速
+    }//向左转
+    if(in_ls8&&!in_ls1){//8亮1不亮
+        loc_sdl*=1.5;//左加速
+        loc_sdr*=0.5;//右减速
+    }//向右转
+    if(in_ls2&&!in_ls7){//2亮7不亮
+        loc_sdl*=0.7;//左减速
+        loc_sdr*=1.3;//右加速
+    }//向左转
+    if(in_ls7&&!in_ls2){//7亮2不亮
+        loc_sdl*=1.3;//左加速
+        loc_sdr*=0.7;//右减速
+    }//向右转
+    if(in_ls3&&!in_ls6){//3亮6不亮
+        loc_sdl*=0.9;//左减速
+        loc_sdr*=1.1;//右加速
+    }//向左转
+    if(in_ls6&&!in_ls3){//6亮3不亮
+        loc_sdl*=1.1;//左加速
+        loc_sdr*=0.9;//右减速
+    }//向右转
     fun_motors(mot_r,loc_sdl);
     fun_motors(mot_l,loc_sdr);
 }//动态纠偏
@@ -751,12 +752,16 @@ void fun_calibration(){
     fun_py1(tra_q);//移动到前端并计时
     fun_py1(tra_h);//移动到后端
     loc_time=var_timer-loc_time;
-    loc_time*=0.39;
-    str_cod.py1zh=str_cod.py1qz=loc_time*0.5;
-    str_cod.py1qkh=str_cod.py1kqh=loc_time*0.75;
-    str_cod.py1qkq=str_cod.py1khh=loc_time*0.25;
-    str_cod.py1kqz=str_cod.py1zkh=loc_time*0.25;
-    str_cod.py1kqkh=loc_time*0.5;
+    loc_time*=0.32;
+    str_cod.py1zh=loc_time*0.5;//从后到中间
+    str_cod.py1qz=loc_time*0.5;//从前到中间
+    str_cod.py1qkh=loc_time*0.75;//从前到靠后
+    str_cod.py1kqh=loc_time*0.75;//从靠前到后
+    str_cod.py1qkq=loc_time*0.34;//从前到靠前
+    str_cod.py1khh=loc_time*0.28;//从后到靠后√
+    str_cod.py1kqz=loc_time*0.28;//从靠前到中间√
+    str_cod.py1zkh=loc_time*0.30;//从靠后到中间√
+    str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
 }//自动校准平移参数
 void fun_port(){
     PCON|=0x80;     //使能波特率倍速位SMOD
