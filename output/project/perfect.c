@@ -18,7 +18,7 @@ void main(){
 	fun_py1(tra_q);
 	fun_sj1(sjp_5);
 	
-	
+	fun_py1(tra_q);
 	
 	fun_py1(tra_h);
 	D(2000)

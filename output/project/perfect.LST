@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               09/08/2015 17:29:51 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               09/09/2015 08:13:07 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -27,7 +27,7 @@ line level    source
   18   1              fun_py1(tra_q);
   19   1              fun_sj1(sjp_5);
   20   1              
-  21   1              
+  21   1              fun_py1(tra_q);
   22   1              
   23   1              fun_py1(tra_h);
   24   1              D(2000)
@@ -62,12 +62,12 @@ line level    source
   53          void Timer1Interrupt() interrupt 3 using 1{
   54   1          fun_timer1();
   55   1      }
-C51 COMPILER V9.54   PERFECT                                                               09/08/2015 17:29:51 PAGE 2   
+C51 COMPILER V9.54   PERFECT                                                               09/09/2015 08:13:07 PAGE 2   
 
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    382    ----
+   CODE SIZE        =    387    ----
    CONSTANT SIZE    =     11    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
