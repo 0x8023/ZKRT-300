@@ -19,16 +19,25 @@ CPU DLL:         S8051.DLL V3.100.0.0
 Dialog DLL:      DP51.DLL V2.62.0.1 
 <h2>Project:</h2>
 D:\8023\ÎÄµµ\Project\ZKRT-300\output\project\perfect.uvproj
-Project File Date:  09/02/2015
+Project File Date:  09/09/2015
 
 <h2>Output:</h2>
 Rebuild target 'Ä¿±ê 1'
 assembling STARTUP.A51...
 compiling perfect.c...
+perfect.c(109): warning C294: unreachable code
 linking...
-Program Size: data=75.1 xdata=115 code=7153
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_FUN_MOTORS?8023
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?TIMER0INTERRUPT?PERFECT
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_FUN_MOTORS?8023
+    CALLER1: ?PR?TIMER0INTERRUPT?PERFECT
+    CALLER2: ?PR?TIMER1INTERRUPT?PERFECT
+Program Size: data=82.1 xdata=115 code=7012
 creating hex file from "perfect"...
-"perfect" - 0 Error(s), 0 Warning(s).
+"perfect" - 0 Error(s), 3 Warning(s).
 </pre>
 </body>
 </html>

@@ -63,11 +63,11 @@
     #define D(par_ms) fun_delay(par_ms,del_ms);
     #define J fun_sz1(han_j);
     #define S fun_sz1(han_s);
-    #define WZ1 fun_sj1(sjp_wz1);
-    #define WZ2 fun_sj1(sjp_wz2);
-    #define WZ3 fun_sj1(sjp_wz3);
-    #define WZ4 fun_sj1(sjp_wz4);
-    #define WZ5 fun_sj1(sjp_wz5);
+    #define WZ1 fun_sj1(sjp_1);
+    #define WZ2 fun_sj1(sjp_2);
+    #define WZ3 fun_sj1(sjp_3);
+    #define WZ4 fun_sj1(sjp_4);
+    #define WZ5 fun_sj1(sjp_5);
     #define MSG(par_value) printf("%s\n",par_value);
     #define OUT(par_value) printf("%d\n",par_value);
 /*-----------------------------------------------------------变量类型说明-----*/
@@ -238,7 +238,7 @@
     extern void fun_pwminit();//PWM初始化
     extern void fun_pwmr(uc par_value);//右路PWM输出
     extern void fun_pwml(uc par_value);//左路PWM输出
-    extern void fun_motors(enum varENU_mot par_model,char par_speed) reentrant;//操作电机(可重入)
+    extern void fun_motors(enum varENU_mot par_model,char par_speed);//操作电机
     extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动

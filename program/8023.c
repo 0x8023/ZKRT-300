@@ -94,7 +94,7 @@ void fun_timer1(){
     TH1=0xB1;
     if((*str_tfl.run==tfl_line)||(*str_tfl.run==tfl_cache))//如果小车在前冲状态或巡线状态
         if(str_tfl.online==tf_false)//如果小车不在线
-            if(!in_ls4||!in_ls5)//4.5有任意一个不亮
+            //if(!in_ls4||!in_ls5)//4.5有任意一个不亮
                 fun_dtjp();//启动动态纠偏
 }//20毫秒定时器1处理函数
 void fun_wait(){
@@ -110,16 +110,16 @@ void fun_pwminit(){
     CMOD=0x08;//不分频
 }//PWM初始化
 void fun_pwmr(uc par_value){
-    CCAP0H=CCAP0L=par_value*2.55;//控制输出的占空比
+    CCAP0H=CCAP0L=par_value*25/10;//控制输出的占空比
     CCAPM0=0X42;//8位PWM输出，无中断
     PCA_PWM0=0x00;
 }//右路PWM输出
 void fun_pwml(uc par_value){
-    CCAP1H=CCAP1L=par_value*2.55;//控制输出的占空比
+    CCAP1H=CCAP1L=par_value*25/10;//控制输出的占空比
     CCAPM1=0X42;//8位PWM输出，无中断
     PCA_PWM1=0x00;
 }//左路PWM输出
-void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
+void fun_motors(enum varENU_mot par_model,char par_speed){
     if(par_speed>100)
         par_speed=100;
     else if(par_speed<-100)
@@ -239,7 +239,7 @@ void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
         default:
             break;
     }
-}//操作电机(可重入)
+}//操作电机
 void fun_sz1(enum varENU_han par_model){
     if(str_begin.szzt==par_model)
         return;
@@ -572,8 +572,8 @@ void fun_dtjp(){
         loc_sdl*=1.1;//左加速
         loc_sdr*=0.9;//右减速
     }//向右转
-    fun_motors(mot_r,loc_sdl);
-    fun_motors(mot_l,loc_sdr);
+    fun_motors(mot_r,loc_sdr);
+    fun_motors(mot_l,loc_sdl);
 }//动态纠偏
 void fun_jtjp(){
     while(1){
@@ -665,7 +665,7 @@ void fun_timermove(){
                     loc_con++;//执行下一步
                     break;
                 case 1://第二步
-                    if(str_tfl.delay>=var_timer)//计时时间到
+                    if(str_tfl.delay<=var_timer)//计时时间到
                         loc_con++;//执行下一步
                     break;
                 case 2://第三步
@@ -752,15 +752,15 @@ void fun_calibration(){
     fun_py1(tra_q);//移动到前端并计时
     fun_py1(tra_h);//移动到后端
     loc_time=var_timer-loc_time;
-    loc_time*=0.32;
+    loc_time*=0.5;
     str_cod.py1zh=loc_time*0.5;//从后到中间
     str_cod.py1qz=loc_time*0.5;//从前到中间
     str_cod.py1qkh=loc_time*0.75;//从前到靠后
-    str_cod.py1kqh=loc_time*0.75;//从靠前到后
+    str_cod.py1kqh=loc_time*0.564;//从靠前到后
     str_cod.py1qkq=loc_time*0.34;//从前到靠前
-    str_cod.py1khh=loc_time*0.28;//从后到靠后√
-    str_cod.py1kqz=loc_time*0.28;//从靠前到中间√
-    str_cod.py1zkh=loc_time*0.30;//从靠后到中间√
+    str_cod.py1khh=loc_time*0.2701;//从后到靠后
+    str_cod.py1kqz=loc_time*0.189;//从靠前到中间
+    str_cod.py1zkh=loc_time*0.20;//从靠后到中间.
     str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
 }//自动校准平移参数
 void fun_port(){

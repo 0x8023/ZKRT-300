@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 1   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   3                      loc_i=46;
   53   3                      loc_j=153;
   54   3                      loc_k=245;
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 2   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 2   
 
   55   3                      do{
   56   4                          do{
@@ -106,7 +106,7 @@ line level    source
   94   1          TH1=0xB1;
   95   1          if((*str_tfl.run==tfl_line)||(*str_tfl.run==tfl_cache))//如果小车在前冲状态或巡线状态
   96   1              if(str_tfl.online==tf_false)//如果小车不在线
-  97   1                  if(!in_ls4||!in_ls5)//4.5有任意一个不亮
+  97   1                  //if(!in_ls4||!in_ls5)//4.5有任意一个不亮
   98   1                      fun_dtjp();//启动动态纠偏
   99   1      }//20毫秒定时器1处理函数
  100          void fun_wait(){
@@ -122,18 +122,18 @@ line level    source
  110   1          CMOD=0x08;//不分频
  111   1      }//PWM初始化
  112          void fun_pwmr(uc par_value){
- 113   1          CCAP0H=CCAP0L=par_value*2.55;//控制输出的占空比
+ 113   1          CCAP0H=CCAP0L=par_value*25/10;//控制输出的占空比
  114   1          CCAPM0=0X42;//8位PWM输出，无中断
  115   1          PCA_PWM0=0x00;
  116   1      }//右路PWM输出
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 3   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 3   
 
  117          void fun_pwml(uc par_value){
- 118   1          CCAP1H=CCAP1L=par_value*2.55;//控制输出的占空比
+ 118   1          CCAP1H=CCAP1L=par_value*25/10;//控制输出的占空比
  119   1          CCAPM1=0X42;//8位PWM输出，无中断
  120   1          PCA_PWM1=0x00;
  121   1      }//左路PWM输出
- 122          void fun_motors(enum varENU_mot par_model,char par_speed) reentrant{
+ 122          void fun_motors(enum varENU_mot par_model,char par_speed){
  123   1          if(par_speed>100)
  124   1              par_speed=100;
  125   1          else if(par_speed<-100)
@@ -190,7 +190,7 @@ line level    source
  176   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
  177   3                  }
  178   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 4   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 4   
 
  179   2              case mot_sz://正转为抓紧，反转为松开
  180   2                  if(str_begin.szsd==par_speed)
@@ -254,7 +254,7 @@ line level    source
  238   2                  break;
  239   2              default:
  240   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 5   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 5   
 
  241   2          }
  242   1      }//操作电机(可重入)
@@ -318,7 +318,7 @@ line level    source
  300   3                          break;
  301   3                      case tra_h:
  302   3                          fun_motors(mot_py,100);
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 6   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 6   
 
  303   3                          fun_delay(str_cod.py1zh,del_ms);
  304   3                          break;
@@ -382,7 +382,7 @@ line level    source
  362   2                  while(in_wz2==1);
  363   2                  fun_delay(str_cod.sj1bzw,del_ms);
  364   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 7   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 7   
 
  365   2              case sjp_23:
  366   2                  if(par_model>str_begin.sjwz){
@@ -446,7 +446,7 @@ line level    source
  424          void fun_hz1(enum varENU_dir par_model){
  425   1          if(str_begin.hzfx==par_model)
  426   1              return;
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 8   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 8   
 
  427   1          def_select(sel_912);
  428   1          switch(par_model){
@@ -510,7 +510,7 @@ line level    source
  486   3                          fun_delay(1,del_s);
  487   3                          while(in_hz==1);
  488   3                          fun_delay(str_cod.hz1bz,del_ms);
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 9   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 9   
 
  489   3                          break;
  490   3                          break;
@@ -574,7 +574,7 @@ line level    source
  548          
  549          void fun_dtjp(){
  550   1          uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 10  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 10  
 
  551   1          if(in_ls1&&!in_ls8){//1亮8不亮
  552   2              loc_sdl*=0.5;//左减速
@@ -600,8 +600,8 @@ line level    source
  572   2              loc_sdl*=1.1;//左加速
  573   2              loc_sdr*=0.9;//右减速
  574   2          }//向右转
- 575   1          fun_motors(mot_r,loc_sdl);
- 576   1          fun_motors(mot_l,loc_sdr);
+ 575   1          fun_motors(mot_r,loc_sdr);
+ 576   1          fun_motors(mot_l,loc_sdl);
  577   1      }//动态纠偏
  578          void fun_jtjp(){
  579   1          while(1){
@@ -638,7 +638,7 @@ line level    source
  610   5                      }
  611   4                  }
  612   3              }
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 11  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 11  
 
  613   2          }
  614   1      }//静态纠偏
@@ -696,13 +696,13 @@ line level    source
  665   3                          loc_con++;//执行下一步
  666   3                          break;
  667   3                      case 1://第二步
- 668   3                          if(str_tfl.delay>=var_timer)//计时时间到
+ 668   3                          if(str_tfl.delay<=var_timer)//计时时间到
  669   3                              loc_con++;//执行下一步
  670   3                          break;
  671   3                      case 2://第三步
  672   3                          if(in_ls4&&in_ls5){//如果中间两个灯亮
  673   4                              fun_motors(mot_rl,0);//停止电机
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 12  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 12  
 
  674   4                              str_tfl.run+=2;//指针指向下一组过程
  675   4                              str_tfl.delay=0;//延时计数器归零
@@ -766,7 +766,7 @@ line level    source
  733   1          fun_delay(10,del_us);           //稍等一会儿
  734   1          fun_stope2prom();               //关闭EEPROM功能
  735   1      }//写EEPROM数据
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 13  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 13  
 
  736          void fun_cleane2prom(ui par_add){
  737   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
@@ -787,15 +787,15 @@ line level    source
  752   1          fun_py1(tra_q);//移动到前端并计时
  753   1          fun_py1(tra_h);//移动到后端
  754   1          loc_time=var_timer-loc_time;
- 755   1          loc_time*=0.32;
+ 755   1          loc_time*=0.5;
  756   1          str_cod.py1zh=loc_time*0.5;//从后到中间
  757   1          str_cod.py1qz=loc_time*0.5;//从前到中间
  758   1          str_cod.py1qkh=loc_time*0.75;//从前到靠后
- 759   1          str_cod.py1kqh=loc_time*0.75;//从靠前到后
+ 759   1          str_cod.py1kqh=loc_time*0.564;//从靠前到后
  760   1          str_cod.py1qkq=loc_time*0.34;//从前到靠前
- 761   1          str_cod.py1khh=loc_time*0.28;//从后到靠后√
- 762   1          str_cod.py1kqz=loc_time*0.28;//从靠前到中间√
- 763   1          str_cod.py1zkh=loc_time*0.30;//从靠后到中间√
+ 761   1          str_cod.py1khh=loc_time*0.2701;//从后到靠后
+ 762   1          str_cod.py1kqz=loc_time*0.189;//从靠前到中间
+ 763   1          str_cod.py1zkh=loc_time*0.20;//从靠后到中间.
  764   1          str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
  765   1      }//自动校准平移参数
  766          void fun_port(){
@@ -830,7 +830,7 @@ line level    source
  795   1          fun_sj1(sjp_1);
  796   1          fun_delay(1,del_s);
  797   1          fun_sj1(sjp_2);
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 14  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 14  
 
  798   1          fun_delay(1,del_s);
  799   1          fun_sj1(sjp_3);
@@ -894,7 +894,7 @@ line level    source
  856   2          }while(loc_shu!=def_end);
  857   1          va_end(loc_argp);//结束
  858   1          return loc_min;//退出
-C51 COMPILER V9.54   8023                                                                  09/08/2015 17:29:48 PAGE 15  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 07:39:15 PAGE 15  
 
  859   1      }//求最小值
  860          void fun_coordinate(){
@@ -903,11 +903,11 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   3726    ----
+   CODE SIZE        =   3653    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =    115    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      5      32
+   DATA SIZE        =      5      33
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
