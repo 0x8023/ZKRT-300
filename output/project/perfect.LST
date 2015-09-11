@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               09/11/2015 07:39:18 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               09/11/2015 14:19:24 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -8,133 +8,206 @@ COMPILER INVOKED BY: D:\MyProgram\keil\C51\BIN\C51.EXE perfect.c OPTIMIZE(8,SPEE
 line level    source
 
    1          #include "../8023.h"
-   2          void main(){
-   3   1          def_start(//在此输入小车目前的状态
-  10   1              0,//X坐标
-  10   1              0,//Y坐标
-  10   1              dir_up,//车头方向
-  10   1              han_s,//手抓状态
-  10   1              sjp_3,//升降位置
-  10   1              tra_h,//平移位置
-  10   1              dir_up)//回转方向
-  11   1          /*请从下一行开始写你的程序*/
-  12   1              //fun_test();
-  13   1              
-  14   1              def_timer0start
-  15   1              def_timer1start
+   2          #define D2 D(2000);
+   3          #define D3 D(3000);
+   4          #define D4 D(4000);
+   5          void main(){
+   6   1          def_start(//在此输入小车目前的状态
+  13   1              0,//X坐标
+  13   1              0,//Y坐标
+  13   1              dir_up,//车头方向
+  13   1              han_s,//手抓状态
+  13   1              sjp_3,//升降位置
+  13   1              tra_h,//平移位置
+  13   1              dir_up)//回转方向
+  14   1          /*请从下一行开始写你的程序*/
+  15   1              //fun_test();
   16   1      
-  17   1              str_tfl.step[0]=tfl_line;
-  18   1              str_tfl.step[1]=5;
-  19   1              str_tfl.step[2]=def_end;
-  20   1              
-  21   1              str_tfl.run=&str_tfl.step[0];
-  22   1              str_tfl.gospeed=50;
-  23   1              str_tfl.online=tf_false;
-  24   1              str_tfl.doing=tf_ture;
+  17   1                str_tfl.step[0]=tfl_line;
+  18   1                str_tfl.step[1]=3;
+  19   1      
+  20   1                str_tfl.step[2]=tfl_cache;
+  21   1                str_tfl.step[3]=80;
+  22   1              
+  23   1                str_tfl.step[4]=tfl_turn;
+  24   1                str_tfl.step[5]=tur_r90;
   25   1              
-  26   1              while(1);
-  27   1              
-  28   1      
-  29   1              /*
-  30   1          fun_sj1(sjp_3);
-  31   1              fun_sj1(sjp_5);
-  32   1              //D(2000);
-  33   1              fun_py1(tra_q);
-  34   1              //D(2000);
-  35   1              fun_py1(tra_h);
-  36   1              //D(2000);
-  37   1              
-  38   1              fun_py1(tra_kh);
-  39   1              //D(2000);
-  40   1              fun_sj1(sjp_5);
-  41   1              fun_sz1(han_j);
-  42   1              //D(2000);
-  43   1              fun_sj1(sjp_3);
-  44   1              //D(2000);
-  45   1              fun_py1(tra_q);
-  46   1              //D(2000);
-  47   1              fun_sj1(sjp_5);
-  48   1              //D(2000);
-  49   1              fun_sz1(han_s);
-  50   1              //D(2000);
-  51   1              
-  52   1          fun_sj1(sjp_3);
-  53   1              //D(2000);
-  54   1              fun_py1(tra_kq);
-  55   1              //D(2000);
-C51 COMPILER V9.54   PERFECT                                                               09/11/2015 07:39:18 PAGE 2   
+  26   1      
+  27   1                str_tfl.step[6]=tfl_line;
+  28   1                str_tfl.step[7]=2;
+  29   1                
+  30   1                str_tfl.step[8]=def_end;
+  31   1              
+  32   1                str_tfl.online=tf_false;
+  33   1            str_tfl.run=str_tfl.step;
+  34   1                str_tfl.gospeed=40;
+  35   1                str_tfl.turnspeed=40;
+  36   1                str_tfl.doing=tf_ture;
+  37   1                while(1);
+  38   1                
+  39   1               // fun_hz1(dir_up);
+  40   1               // fun_motorsrl(mot_r,60);
+  41   1              
+  42   1      
+  43   1                
+  44   1               /*
+  45   1                fun_hz1(dir_up);
+  46   1                fun_sj1(sjp_3);
+  47   1            fun_hz1(dir_right);  //回转180
+  48   1            D3
+  49   1            fun_hz1(dir_left);   //回转180
+  50   1      
+  51   1            fun_py1(tra_q);  //前移
+  52   1            D3
+  53   1            fun_py1(tra_h);  //后移
+  54   1      
+  55   1            fun_sz1(han_j);  //手抓紧
+C51 COMPILER V9.54   PERFECT                                                               09/11/2015 14:19:24 PAGE 2   
 
-  56   1              fun_sj1(sjp_5);
-  57   1              //D(2000);
-  58   1              fun_sz1(han_j);
-  59   1              //D(2000);
-  60   1              fun_sj1(sjp_3);
-  61   1              //D(2000);
-  62   1              fun_py1(tra_h);
-  63   1              //D(2000);
-  64   1              fun_sj1(sjp_5);
-  65   1              //D(2000);
-  66   1              fun_sz1(han_s);
-  67   1              //D(2000);
-  68   1              
+  56   1            D3
+  57   1            fun_sz1(han_s);   //手抓松
+  58   1      
+  59   1            fun_sj1(sjp_5);  //下降5
+  60   1            fun_sj1(sjp_2);  //上升2
+  61   1            D3
+  62   1            fun_sj1(sjp_1);  //上升1
+  63   1            D3
+  64   1            fun_sj1(sjp_2);//下降2
+  65   1            D3
+  66   1            fun_sj1(sjp_5);//下降5
+  67   1            D3
+  68   1      
   69   1      
-  70   1              fun_py1(tra_h);
-  71   1      
-  72   1              def_stop
-  73   1              */
-  74   1              
-  75   1              
-  76   1      
-  77   1              /*
-  78   1              fun_sj1(sjp_1);
-  79   1              fun_calibration();
-  80   1              fun_sj1(sjp_4);
-  81   1              
-  82   1              fun_py1(tra_q);
-  83   1              fun_sj1(sjp_5);
-  84   1              
-  85   1              fun_py1(tra_q);
-  86   1              
-  87   1              fun_py1(tra_h);
-  88   1              D(2000)
-  89   1              fun_py1(tra_kh);
-  90   1              D(2000)
-  91   1              fun_py1(tra_z);
-  92   1              D(2000)
-  93   1              fun_py1(tra_kq);
-  94   1              D(2000)
-  95   1              fun_py1(tra_q);
-  96   1      
-  97   1              D(2000)
-  98   1              fun_py1(tra_q);
-  99   1              D(2000)
- 100   1              fun_py1(tra_kq);
- 101   1              D(2000)
- 102   1              fun_py1(tra_z);
- 103   1              D(2000)
- 104   1              fun_py1(tra_kh);
- 105   1              D(2000)
+  70   1            
+  71   1                fun_motors(mot_rl,-58);//后退5秒
+  72   1            D2
+  73   1            
+  74   1                fun_motors(mot_rl,45);//前进4秒
+  75   1            D2
+  76   1                
+  77   1                
+  78   1            fun_motors(mot_l,-15);  //左转90
+  79   1                
+  80   1                fun_motors(mot_r,18);
+  81   1            D3
+  82   1       */
+  83   1            
+  84   1              /*      
+  85   1              def_timer0start
+  86   1              def_timer1start
+  87   1      
+  88   1              str_tfl.step[0]=tfl_line;
+  89   1              str_tfl.step[1]=5;
+  90   1              str_tfl.step[2]=def_end;
+  91   1              
+  92   1              str_tfl.run=&str_tfl.step[0];
+  93   1              str_tfl.gospeed=50;
+  94   1              str_tfl.online=tf_false;
+  95   1              str_tfl.doing=tf_ture;
+  96   1              
+  97   1              while(1);
+  98   1              
+  99   1      */
+ 100   1              /*
+ 101   1          fun_sj1(sjp_3);
+ 102   1              fun_sj1(sjp_5);
+ 103   1              //D(2000);
+ 104   1              fun_py1(tra_q);
+ 105   1              //D(2000);
  106   1              fun_py1(tra_h);
- 107   1              */
- 108   1          /*你的程序到此为止,请不要再继续改动*/
- 109   1          def_stop
- 110   1      }
- 111          void Int0Interrupt() interrupt 0{
- 112   1          ;
- 113   1      }
- 114          void Timer0Interrupt() interrupt 1 using 1{
- 115   1          fun_timer0();
- 116   1      }
- 117          void Timer1Interrupt() interrupt 3 using 1{
-C51 COMPILER V9.54   PERFECT                                                               09/11/2015 07:39:18 PAGE 3   
+ 107   1              //D(2000);
+ 108   1              
+ 109   1              fun_py1(tra_kh);
+ 110   1              //D(2000);
+ 111   1              fun_sj1(sjp_5);
+ 112   1              fun_sz1(han_j);
+ 113   1              //D(2000);
+ 114   1              fun_sj1(sjp_3);
+ 115   1              //D(2000);
+ 116   1              fun_py1(tra_q);
+ 117   1              //D(2000);
+C51 COMPILER V9.54   PERFECT                                                               09/11/2015 14:19:24 PAGE 3   
 
- 118   1          fun_timer1();
- 119   1      }
-*** WARNING C294 IN LINE 109 OF perfect.c: unreachable code
+ 118   1              fun_sj1(sjp_5);
+ 119   1              //D(2000);
+ 120   1              fun_sz1(han_s);
+ 121   1              //D(2000);
+ 122   1              
+ 123   1          fun_sj1(sjp_3);
+ 124   1              //D(2000);
+ 125   1              fun_py1(tra_kq);
+ 126   1              //D(2000);
+ 127   1              fun_sj1(sjp_5);
+ 128   1              //D(2000);
+ 129   1              fun_sz1(han_j);
+ 130   1              //D(2000);
+ 131   1              fun_sj1(sjp_3);
+ 132   1              //D(2000);
+ 133   1              fun_py1(tra_h);
+ 134   1              //D(2000);
+ 135   1              fun_sj1(sjp_5);
+ 136   1              //D(2000);
+ 137   1              fun_sz1(han_s);
+ 138   1              //D(2000);
+ 139   1              
+ 140   1      
+ 141   1              fun_py1(tra_h);
+ 142   1      
+ 143   1              def_stop
+ 144   1              */
+ 145   1              
+ 146   1              
+ 147   1      
+ 148   1              /*
+ 149   1              fun_sj1(sjp_1);
+ 150   1              fun_calibration();
+ 151   1              fun_sj1(sjp_4);
+ 152   1              
+ 153   1              fun_py1(tra_q);
+ 154   1              fun_sj1(sjp_5);
+ 155   1              
+ 156   1              fun_py1(tra_q);
+ 157   1              
+ 158   1              fun_py1(tra_h);
+ 159   1              D(2000)
+ 160   1              fun_py1(tra_kh);
+ 161   1              D(2000)
+ 162   1              fun_py1(tra_z);
+ 163   1              D(2000)
+ 164   1              fun_py1(tra_kq);
+ 165   1              D(2000)
+ 166   1              fun_py1(tra_q);
+ 167   1      
+ 168   1              D(2000)
+ 169   1              fun_py1(tra_q);
+ 170   1              D(2000)
+ 171   1              fun_py1(tra_kq);
+ 172   1              D(2000)
+ 173   1              fun_py1(tra_z);
+ 174   1              D(2000)
+ 175   1              fun_py1(tra_kh);
+ 176   1              D(2000)
+ 177   1              fun_py1(tra_h);
+ 178   1              */
+ 179   1          /*你的程序到此为止,请不要再继续改动*/
+C51 COMPILER V9.54   PERFECT                                                               09/11/2015 14:19:24 PAGE 4   
+
+ 180   1          def_stop
+ 181   1      }
+ 182          void Int0Interrupt() interrupt 0{
+ 183   1          ;
+ 184   1      }
+ 185          void Timer0Interrupt() interrupt 1 using 1{
+ 186   1          fun_timer0();
+ 187   1      }
+ 188          void Timer1Interrupt() interrupt 3 using 1{
+ 189   1          fun_timer1();
+ 190   1      }
+*** WARNING C294 IN LINE 180 OF perfect.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    234    ----
+   CODE SIZE        =    242    ----
    CONSTANT SIZE    =     11    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

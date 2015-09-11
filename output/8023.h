@@ -25,13 +25,13 @@
     /*-------------*/ \
     /*电机1/3使能*/   out_en1=1;\
     /*电机2/4使能*/   out_en2=1;\
+    /*PAC计数器归零*/ CR=0;\
     /*电机片选为0*/   out_motorselect=0;\
                       \
     /*PWM的初始化*/   fun_pwminit();\
     /*初始化定时器0*/ fun_timer0init();\
     /*初始化定时器1*/ fun_timer1init();\
     /*初始化串口*/    fun_port();\
-    /*打开定时器0*/   TR0=1;\
     /*-------------*/ \
     /*X坐标*/         str_begin.x=par_x;\
     /*Y坐标*/         str_begin.y=par_y;\
@@ -42,22 +42,26 @@
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
     /*-------------*/ \
     /*速度归零*/      str_tfl.gospeed=0;\
-    /*手抓速度归零*/  fun_motors(mot_sz,0);\
-    /*平移速度归零*/  fun_motors(mot_py,0);\
-    /*手抓速度归零*/  fun_motors(mot_sj,0);\
-    /*手抓速度归零*/  fun_motors(mot_hz,0);\
-    /*左右速度归零*/  fun_motors(mot_rl,0);\
+    /*手抓速度归零*/  str_begin.szsd=0;\
+    /*平移速度归零*/  str_begin.pysd=0;\
+    /*手抓速度归零*/  str_begin.sjsd=0;\
+    /*手抓速度归零*/  str_begin.hzsd=0;\
+    /*左右速度归零*/  str_begin.leftsd=str_begin.rightsd=0;\
     /*-------------*/ \
+    /*打开定时器0*/   TR0=1;\
+    /*打开定时器1*/   TR1=1;\
     /*按键置1*/       in_start=1;\
     /*输出Ready!*/    MSG("Ready!")\
     /*等待按键*/      fun_wait();
     #define def_stop EA=0;\
     /*速度归零*/     str_tfl.gospeed=0;\
-    /*手抓速度归零*/ fun_motors(mot_sz,0);\
-    /*平移速度归零*/ fun_motors(mot_py,0);\
-    /*手抓速度归零*/ fun_motors(mot_sj,0);\
-    /*手抓速度归零*/ fun_motors(mot_hz,0);\
-    /*左右速度归零*/ fun_motors(mot_rl,0);\
+    /*手抓速度归零*/ fun_motors14(mot_sz,0);\
+    /*平移速度归零*/ fun_motors14(mot_py,0);\
+    /*手抓速度归零*/ fun_motors14(mot_sj,0);\
+    /*手抓速度归零*/ fun_motors14(mot_hz,0);\
+    /*左右速度归零*/ fun_pwmr(0);\
+                     fun_pwml(0);\
+                     CR=0;\
     /*死循环*/       while(1);
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
@@ -238,12 +242,12 @@
     extern void fun_pwminit();//PWM初始化
     extern void fun_pwmr(uc par_value);//右路PWM输出
     extern void fun_pwml(uc par_value);//左路PWM输出
-    extern void fun_motors(enum varENU_mot par_model,char par_speed);//操作电机
+    extern void fun_motors14(enum varENU_mot par_model,char par_speed);//主函数操作14电机
+    extern void fun_motorsrl(enum varENU_mot par_model,char par_speed);//定时器操作左右轮
     extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
-    extern void fun_dtjp();//动态纠偏
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
     extern void fun_stope2prom();//停止EEPROM服务
@@ -255,6 +259,5 @@
     extern void fun_test();//测试
     extern uc   fun_min(uc par_num,...);//求最小值
     extern void fun_coordinate();//自动巡线之坐标
-
 /*---------------------------------------------------------------更新日志-----*/
 #endif
