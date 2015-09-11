@@ -220,7 +220,7 @@
         ui turn180;  //180度转弯屏蔽延时
     };//参数
     struct str_timerfolline{
-        char step[32];      //步骤参数数据
+        char step[64];      //步骤参数数据
         pc run;             //正在运行的步骤(指针)
         char gospeed;       //运巡线行速度
         char turnspeed;     //转弯运行速度

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 1   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   3                      loc_i=46;
   53   3                      loc_j=153;
   54   3                      loc_k=245;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 2   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 2   
 
   55   3                      do{
   56   4                          do{
@@ -126,7 +126,7 @@ line level    source
  114   1          CCAP1H=CCAP1L=par_value*25/10;//控制输出的占空比
  115   1          CCAPM1=0X42;//8位PWM输出，无中断
  116   1          PCA_PWM1=0x00;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 3   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 3   
 
  117   1      }//左路PWM输出
  118          void fun_motors14(enum varENU_mot par_model,char par_speed){
@@ -190,7 +190,7 @@ line level    source
  176   3                  }
  177   2                  else if(par_speed>0){
  178   3                      out_motorselect=0;out_dir2=0;out_en2=0;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 4   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 4   
 
  179   3                  }
  180   2                  else if(par_speed<0){
@@ -254,7 +254,7 @@ line level    source
  238   3                  }
  239   2                  else if(par_speed<0){
  240   3                      CR=1;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 5   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 5   
 
  241   3                      fun_pwml(cabs(par_speed));out_pwml=1;
  242   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
@@ -318,7 +318,7 @@ line level    source
  300   3                          fun_motors14(mot_py,-100);
  301   3                          fun_delay(str_cod.py1kqz,del_ms);
  302   3                          break;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 6   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 6   
 
  303   3                      case tra_kh:
  304   3                          fun_motors14(mot_py,100);
@@ -382,7 +382,7 @@ line level    source
  362   3                      fun_delay(str_cod.sj1zjw,del_ms);
  363   3                  }
  364   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 7   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 7   
 
  365   2              case sjp_2://升降位置2
  366   2                  fun_motors14(mot_sj,par_model<str_begin.sjwz?100:-100);
@@ -446,7 +446,7 @@ line level    source
  424   2              default:
  425   2                  break;
  426   2          }
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 8   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 8   
 
  427   1          fun_motors14(mot_sj,0);
  428   1          str_begin.sjwz=par_model;//存储运行结果
@@ -510,7 +510,7 @@ line level    source
  486   3                  }
  487   2                  break;
  488   2              case dir_left://要去左边
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 9   
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 9   
 
  489   2                  switch(str_begin.hzfx){
  490   3                      case dir_up://现在在上面
@@ -574,7 +574,7 @@ line level    source
  548          
  549          //void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
  550          //    switch(){
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 10  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 10  
 
  551          //        ;
  552          //    }
@@ -638,7 +638,7 @@ line level    source
  609   4                          str_tfl.online=tf_false;//标志位记录不在线
  610   4                          (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
  611   4                      }
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 11  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 11  
 
  612   3                      else{
  613   4                          if(in_ls1&&!in_ls8){//1亮8不亮
@@ -702,7 +702,7 @@ line level    source
  671   3                          loc_con++;//执行下一步
  672   3                          break;
  673   3                      case 1://第二步
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 12  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 12  
 
  674   3                          if(str_tfl.delay<=var_timer)//计时时间到
  675   3                              loc_con++;//执行下一步
@@ -766,7 +766,7 @@ line level    source
  732   2      
  733   2                  break;
  734   2              case tfl_end://运行带减速的前冲
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 13  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 13  
 
  735   2      
  736   2                  break;
@@ -830,7 +830,7 @@ line level    source
  794   1          str_cod.py1qkq=loc_time*0.34;//从前到靠前
  795   1          str_cod.py1khh=loc_time*0.2701;//从后到靠后
  796   1          str_cod.py1kqz=loc_time*0.189;//从靠前到中间
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 14  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 14  
 
  797   1          str_cod.py1zkh=loc_time*0.20;//从靠后到中间.
  798   1          str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
@@ -894,7 +894,7 @@ line level    source
  856   1          fun_delay(1,del_s);
  857   1          str_begin.hzfx=str_now.hzfx;
  858   1      
-C51 COMPILER V9.54   8023                                                                  09/11/2015 14:19:22 PAGE 15  
+C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 15  
 
  859   1          fun_motors14(mot_rl,60);
  860   1          fun_delay(1,del_s);
@@ -940,7 +940,7 @@ line level    source
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =   3790    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =    115    ----
+   XDATA SIZE       =    147    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      5      30
    IDATA SIZE       =   ----    ----

@@ -14,26 +14,79 @@ void main(){
     /*请从下一行开始写你的程序*/
 	//fun_test();
 
-	  str_tfl.step[0]=tfl_line;
-	  str_tfl.step[1]=3;
 
+	  str_tfl.step[0]=tfl_line;
+	  str_tfl.step[1]=2;
 	  str_tfl.step[2]=tfl_cache;
-	  str_tfl.step[3]=80;
-	
+      str_tfl.step[3]=75;
+
 	  str_tfl.step[4]=tfl_turn;
-	  str_tfl.step[5]=tur_r90;
-	
+	  str_tfl.step[5]=tur_l90;
 
 	  str_tfl.step[6]=tfl_line;
-	  str_tfl.step[7]=2;
+	  str_tfl.step[7]=3;
+      str_tfl.step[8]=tfl_cache;
+      str_tfl.step[9]=75;
+
+	  str_tfl.step[10]=tfl_turn;
+	  str_tfl.step[11]=tur_l90;
+
+	  str_tfl.step[12]=tfl_line;
+	  str_tfl.step[13]=2;
+      str_tfl.step[14]=tfl_cache;
+      str_tfl.step[15]=75;
+
+	  str_tfl.step[16]=tfl_turn;
+	  str_tfl.step[17]=tur_r90;
+
+	  str_tfl.step[18]=tfl_line;
+	  str_tfl.step[19]=3;
+      str_tfl.step[20]=tfl_cache;
+      str_tfl.step[21]=75;
+
+	  str_tfl.step[22]=tfl_turn;
+	  str_tfl.step[23]=tur_r90;
+
+	  str_tfl.step[24]=tfl_line;
+	  str_tfl.step[25]=2;
+      str_tfl.step[26]=tfl_cache;
+      str_tfl.step[27]=75;
+
+	  str_tfl.step[28]=tfl_turn;
+	  str_tfl.step[29]=tur_r90;
+
+	  str_tfl.step[30]=tfl_line;
+	  str_tfl.step[31]=3;
+      str_tfl.step[32]=tfl_cache;
+      str_tfl.step[33]=75;
+
+	  str_tfl.step[34]=tfl_turn;
+	  str_tfl.step[35]=tur_r90;
+
+	  str_tfl.step[36]=tfl_line;
+	  str_tfl.step[37]=2;
+      str_tfl.step[38]=tfl_cache;
+      str_tfl.step[39]=75;
+
+	  str_tfl.step[40]=tfl_turn;
+	  str_tfl.step[41]=tur_l90;
+
+	  str_tfl.step[42]=tfl_line;
+	  str_tfl.step[43]=3;
+      str_tfl.step[44]=tfl_cache;
+      str_tfl.step[45]=75;
+
+	  str_tfl.step[46]=tfl_turn;
+	  str_tfl.step[47]=tur_l90;
 	  
-	  str_tfl.step[8]=def_end;
-	
+	  str_tfl.step[48]=def_end;
+	 
 	  str_tfl.online=tf_false;
       str_tfl.run=str_tfl.step;
 	  str_tfl.gospeed=40;
 	  str_tfl.turnspeed=40;
 	  str_tfl.doing=tf_ture;
+	  
 	  while(1);
 	  
 	 // fun_hz1(dir_up);
