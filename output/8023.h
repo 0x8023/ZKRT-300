@@ -42,11 +42,11 @@
     /*回转方向*/      str_begin.hzfx=par_hzfx;\
     /*-------------*/ \
     /*速度归零*/      str_tfl.gospeed=0;\
-    /*手抓速度归零*/  str_begin.szsd=0;\
-    /*平移速度归零*/  str_begin.pysd=0;\
-    /*手抓速度归零*/  str_begin.sjsd=0;\
-    /*手抓速度归零*/  str_begin.hzsd=0;\
-    /*左右速度归零*/  str_begin.leftsd=str_begin.rightsd=0;\
+    /*手抓速度归零*/  fun_motors(mot_sz,0);\
+    /*平移速度归零*/  fun_motors(mot_py,0);\
+    /*手抓速度归零*/  fun_motors(mot_sj,0);\
+    /*手抓速度归零*/  fun_motors(mot_hz,0);\
+    /*左右速度归零*/  fun_motors(mot_rl,0);\
     /*-------------*/ \
     /*打开定时器0*/   TR0=1;\
     /*打开定时器1*/   TR1=1;\
@@ -55,13 +55,11 @@
     /*等待按键*/      fun_wait();
     #define def_stop EA=0;\
     /*速度归零*/     str_tfl.gospeed=0;\
-    /*手抓速度归零*/ fun_motors14(mot_sz,0);\
-    /*平移速度归零*/ fun_motors14(mot_py,0);\
-    /*手抓速度归零*/ fun_motors14(mot_sj,0);\
-    /*手抓速度归零*/ fun_motors14(mot_hz,0);\
-    /*左右速度归零*/ fun_pwmr(0);\
-                     fun_pwml(0);\
-                     CR=0;\
+    /*手抓速度归零*/ fun_motors(mot_sz,0);\
+    /*平移速度归零*/ fun_motors(mot_py,0);\
+    /*手抓速度归零*/ fun_motors(mot_sj,0);\
+    /*手抓速度归零*/ fun_motors(mot_hz,0);\
+    /*左右速度归零*/ fun_motors(mot_rl,0);\
     /*死循环*/       while(1);
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
@@ -242,7 +240,7 @@
     extern void fun_pwminit();//PWM初始化
     extern void fun_pwmr(uc par_value);//右路PWM输出
     extern void fun_pwml(uc par_value);//左路PWM输出
-    extern void fun_motors14(enum varENU_mot par_model,char par_speed);//主函数操作14电机
+    extern void fun_motors(enum varENU_mot par_model,char par_speed);//主函数操作电机
     extern void fun_motorsrl(enum varENU_mot par_model,char par_speed);//定时器操作左右轮
     extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
@@ -250,6 +248,9 @@
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
+    extern void fun_folline(uc par_con,uc par_speed);//主函数巡线
+    extern void fun_turn(enum varENU_tur par_model,uc par_speed);//主函数转弯
+    extern void fun_qc(uc par_time,uc par_speed);//主函数前冲
     extern void fun_stope2prom();//停止EEPROM服务
     extern uc   fun_reade2prom(ui par_add);//读取EEPROM数据
     extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
@@ -259,5 +260,8 @@
     extern void fun_test();//测试
     extern uc   fun_min(uc par_num,...);//求最小值
     extern void fun_coordinate();//自动巡线之坐标
+    extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
+    extern void fun_zhuajian();//从起始区走到抓件区
+    extern void fun_back();//从抓件区回到起始区
 /*---------------------------------------------------------------更新日志-----*/
 #endif

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 1   
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   3                      loc_i=46;
   53   3                      loc_j=153;
   54   3                      loc_k=245;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 2   
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 2   
 
   55   3                      do{
   56   4                          do{
@@ -126,826 +126,1053 @@ line level    source
  114   1          CCAP1H=CCAP1L=par_value*25/10;//控制输出的占空比
  115   1          CCAPM1=0X42;//8位PWM输出，无中断
  116   1          PCA_PWM1=0x00;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 3   
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 3   
 
  117   1      }//左路PWM输出
- 118          void fun_motors14(enum varENU_mot par_model,char par_speed){
+ 118          void fun_motors(enum varENU_mot par_model,char par_speed){
  119   1          if(par_speed>100)
  120   1              par_speed=100;
  121   1          else if(par_speed<-100)
  122   1              par_speed=-100;//速度最多100,最少-100
  123   1          switch(par_model){
- 124   2              case mot_sz://正转为抓紧，反转为松开
- 125   2                  if(str_begin.szsd==par_speed)
+ 124   2              case mot_l://左轮电机
+ 125   2                  if(str_begin.leftsd==par_speed)
  126   2                      return;
  127   2                  else
- 128   2                      str_begin.szsd=par_speed;
+ 128   2                      str_begin.leftsd=par_speed;
  129   2                  if(par_speed==0){
- 130   3                      out_motorselect=1;out_dir1=0;out_en1=1;
+ 130   3                      fun_pwml(0);out_pwml=0;
  131   3                  }
  132   2                  else if(par_speed>0){
- 133   3                      out_motorselect=1;out_dir1=1;out_en1=0;
+ 133   3                      CR=1;fun_pwml(par_speed);out_pwml=0;
  134   3                  }
  135   2                  else if(par_speed<0){
- 136   3                      out_motorselect=1;out_dir1=0;out_en1=0;
+ 136   3                      CR=1;fun_pwml(cabs(par_speed));out_pwml=1;
  137   3                  }
  138   2                  break;
- 139   2              case mot_py://正转是向无电机一方转,反转为向有电机一方转
- 140   2                  if(str_begin.pysd==par_speed)
+ 139   2              case mot_r://右轮电机
+ 140   2                  if(str_begin.rightsd==par_speed)
  141   2                      return;
  142   2                  else
- 143   2                      str_begin.pysd=par_speed;
+ 143   2                      str_begin.rightsd=par_speed;
  144   2                  if(par_speed==0){
- 145   3                      out_motorselect=1;out_dir2=0;out_en2=1;
+ 145   3                      fun_pwmr(0);out_pwmr=0;
  146   3                  }
  147   2                  else if(par_speed>0){
- 148   3                      out_motorselect=1;out_dir2=1;out_en2=0;
+ 148   3                      CR=1;fun_pwmr(par_speed);out_pwmr=0;
  149   3                  }
  150   2                  else if(par_speed<0){
- 151   3                      out_motorselect=1;out_dir2=0;out_en2=0;
+ 151   3                      CR=1;fun_pwmr(cabs(par_speed));out_pwmr=1;
  152   3                  }
  153   2                  break;
- 154   2              case mot_sj://向上为正转,向下为反转
- 155   2                  if(str_begin.sjsd==par_speed)
+ 154   2              case mot_rl://左右轮同步
+ 155   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
  156   2                      return;
  157   2                  else
- 158   2                      str_begin.sjsd=par_speed;
+ 158   2                      str_begin.leftsd=str_begin.rightsd=par_speed;
  159   2                  if(par_speed==0){
- 160   3                      out_motorselect=0;out_dir1=0;out_en1=1;
- 161   3                  }
- 162   2                  else if(par_speed>0){
- 163   3                      out_motorselect=0;out_dir1=0;out_en1=0;
- 164   3                  }
- 165   2                  else if(par_speed<0){
- 166   3                      out_motorselect=0;out_dir1=1;out_en1=0;
- 167   3                  }
- 168   2                  break;
- 169   2              case mot_hz://顺时针为正转,逆时针为反转
- 170   2                  if(str_begin.hzsd==par_speed)
- 171   2                      return;
- 172   2                  else
- 173   2                      str_begin.hzsd=par_speed;
- 174   2                  if(par_speed==0){
- 175   3                      out_motorselect=0;out_dir2=0;out_en2=1;
- 176   3                  }
- 177   2                  else if(par_speed>0){
- 178   3                      out_motorselect=0;out_dir2=0;out_en2=0;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 4   
+ 160   3                      CR=0;
+ 161   3                      fun_pwmr(0);out_pwmr=0;
+ 162   3                      fun_pwml(0);out_pwml=0;
+ 163   3                  }
+ 164   2                  else if(par_speed>0){
+ 165   3                      CR=1;
+ 166   3                      fun_pwml(par_speed);out_pwml=0;
+ 167   3                      fun_pwmr(par_speed);out_pwmr=0;
+ 168   3                  }
+ 169   2                  else if(par_speed<0){
+ 170   3                      CR=1;
+ 171   3                      fun_pwml(cabs(par_speed));out_pwml=1;
+ 172   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 173   3                  }
+ 174   2                  break;
+ 175   2              case mot_sz://正转为抓紧，反转为松开
+ 176   2                  if(str_begin.szsd==par_speed)
+ 177   2                      return;
+ 178   2                  else
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 4   
 
- 179   3                  }
- 180   2                  else if(par_speed<0){
- 181   3                      out_motorselect=0;out_dir2=1;out_en2=0;
+ 179   2                      str_begin.szsd=par_speed;
+ 180   2                  if(par_speed==0){
+ 181   3                      out_motorselect=1;out_dir1=0;out_en1=1;
  182   3                  }
- 183   2                  break;
- 184   2              default:
- 185   2                  break;
- 186   2          }
- 187   1      }//主函数操作14电机
- 188          void fun_motorsrl(enum varENU_mot par_model,char par_speed){
- 189   1          if(par_speed>100)
- 190   1              par_speed=100;
- 191   1          else if(par_speed<-100)
- 192   1              par_speed=-100;//速度最多100,最少-100
- 193   1          switch(par_model){
- 194   2              case mot_l://左轮电机
- 195   2                  if(str_begin.leftsd==par_speed)
- 196   2                      return;
- 197   2                  else
- 198   2                      str_begin.leftsd=par_speed;
- 199   2                  if(par_speed==0){
- 200   3                      fun_pwml(0);out_pwml=0;
- 201   3                  }
- 202   2                  else if(par_speed>0){
- 203   3                      CR=1;fun_pwml(par_speed);out_pwml=0;
- 204   3                  }
- 205   2                  else if(par_speed<0){
- 206   3                      CR=1;fun_pwml(cabs(par_speed));out_pwml=1;
- 207   3                  }
- 208   2                  break;
- 209   2              case mot_r://右轮电机
- 210   2                  if(str_begin.rightsd==par_speed)
- 211   2                      return;
- 212   2                  else
- 213   2                      str_begin.rightsd=par_speed;
- 214   2                  if(par_speed==0){
- 215   3                      fun_pwmr(0);out_pwmr=0;
- 216   3                  }
- 217   2                  else if(par_speed>0){
- 218   3                      CR=1;fun_pwmr(par_speed);out_pwmr=0;
- 219   3                  }
- 220   2                  else if(par_speed<0){
- 221   3                      CR=1;fun_pwmr(cabs(par_speed));out_pwmr=1;
- 222   3                  }
- 223   2                  break;
- 224   2              case mot_rl://左右轮同步
- 225   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
- 226   2                      return;
- 227   2                  else
- 228   2                      str_begin.leftsd=str_begin.rightsd=par_speed;
- 229   2                  if(par_speed==0){
- 230   3                      CR=0;
- 231   3                      fun_pwmr(0);out_pwmr=0;
- 232   3                      fun_pwml(0);out_pwml=0;
+ 183   2                  else if(par_speed>0){
+ 184   3                      out_motorselect=1;out_dir1=1;out_en1=0;
+ 185   3                  }
+ 186   2                  else if(par_speed<0){
+ 187   3                      out_motorselect=1;out_dir1=0;out_en1=0;
+ 188   3                  }
+ 189   2                  break;
+ 190   2              case mot_py://正转是向无电机一方转,反转为向有电机一方转
+ 191   2                  if(str_begin.pysd==par_speed)
+ 192   2                      return;
+ 193   2                  else
+ 194   2                      str_begin.pysd=par_speed;
+ 195   2                  if(par_speed==0){
+ 196   3                      out_motorselect=1;out_dir2=0;out_en2=1;
+ 197   3                  }
+ 198   2                  else if(par_speed>0){
+ 199   3                      out_motorselect=1;out_dir2=1;out_en2=0;
+ 200   3                  }
+ 201   2                  else if(par_speed<0){
+ 202   3                      out_motorselect=1;out_dir2=0;out_en2=0;
+ 203   3                  }
+ 204   2                  break;
+ 205   2              case mot_sj://向上为正转,向下为反转
+ 206   2                  if(str_begin.sjsd==par_speed)
+ 207   2                      return;
+ 208   2                  else
+ 209   2                      str_begin.sjsd=par_speed;
+ 210   2                  if(par_speed==0){
+ 211   3                      out_motorselect=0;out_dir1=0;out_en1=1;
+ 212   3                  }
+ 213   2                  else if(par_speed>0){
+ 214   3                      out_motorselect=0;out_dir1=0;out_en1=0;
+ 215   3                  }
+ 216   2                  else if(par_speed<0){
+ 217   3                      out_motorselect=0;out_dir1=1;out_en1=0;
+ 218   3                  }
+ 219   2                  break;
+ 220   2              case mot_hz://顺时针为正转,逆时针为反转
+ 221   2                  if(str_begin.hzsd==par_speed)
+ 222   2                      return;
+ 223   2                  else
+ 224   2                      str_begin.hzsd=par_speed;
+ 225   2                  if(par_speed==0){
+ 226   3                      out_motorselect=0;out_dir2=0;out_en2=1;
+ 227   3                  }
+ 228   2                  else if(par_speed>0){
+ 229   3                      out_motorselect=0;out_dir2=0;out_en2=0;
+ 230   3                  }
+ 231   2                  else if(par_speed<0){
+ 232   3                      out_motorselect=0;out_dir2=1;out_en2=0;
  233   3                  }
- 234   2                  else if(par_speed>0){
- 235   3                      CR=1;
- 236   3                      fun_pwml(par_speed);out_pwml=0;
- 237   3                      fun_pwmr(par_speed);out_pwmr=0;
- 238   3                  }
- 239   2                  else if(par_speed<0){
- 240   3                      CR=1;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 5   
+ 234   2                  break;
+ 235   2              default:
+ 236   2                  break;
+ 237   2          }
+ 238   1      }//主函数操作电机
+ 239          void fun_motorsrl(enum varENU_mot par_model,char par_speed){
+ 240   1          if(par_speed>100)
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 5   
 
- 241   3                      fun_pwml(cabs(par_speed));out_pwml=1;
- 242   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
- 243   3                  }
- 244   2                  break;
- 245   2              default:
- 246   2                  break;
- 247   2          }
- 248   1      }//定时器操作左右轮
- 249          void fun_sz1(enum varENU_han par_model){
- 250   1          if(str_begin.szzt==par_model)
- 251   1              return;
- 252   1          if(par_model==han_s){//手抓松
- 253   2              fun_motors14(mot_sz,-100);
- 254   2              while(in_s==1);
- 255   2          }
- 256   1          else{//手抓紧
- 257   2              fun_motors14(mot_sz,100);
- 258   2              while(in_j==1);
- 259   2          }
- 260   1          fun_delay(20,del_ms);
- 261   1          fun_motors14(mot_sz,0);
- 262   1          str_begin.szzt=par_model;//存储运行结果
- 263   1      }//手抓单步运动
- 264          void fun_py1(enum varENU_tra par_model){
- 265   1          if(str_begin.pywz==par_model)
- 266   1              return;
- 267   1          switch(par_model){
- 268   2              case tra_q://前平移(没有电机的呢个方向)
- 269   2                  fun_motors14(mot_py,100);
- 270   2                  while(in_qpy==1);
- 271   2                  fun_delay(str_cod.py1bz,del_ms);
- 272   2                  break;
- 273   2              case tra_kq:
- 274   2                  switch(str_begin.pywz){
- 275   3                      case tra_q:
- 276   3                          fun_motors14(mot_py,-100);
- 277   3                          fun_delay(str_cod.py1qkq,del_ms);
- 278   3                          break;
- 279   3                      case tra_z:
- 280   3                          fun_motors14(mot_py,100);
- 281   3                          fun_delay(str_cod.py1kqz,del_ms);
- 282   3                          break;
- 283   3                      case tra_kh:
- 284   3                          fun_motors14(mot_py,100);
- 285   3                          fun_delay(str_cod.py1kqkh,del_ms);
- 286   3                          break;
- 287   3                      case tra_h:
- 288   3                          fun_motors14(mot_py,100);
- 289   3                          fun_delay(str_cod.py1kqh,del_ms);
- 290   3                          break;
- 291   3                  }
- 292   2                  break;
- 293   2              case tra_z:
- 294   2                  switch(str_begin.pywz){
- 295   3                      case tra_q:
- 296   3                          fun_motors14(mot_py,-100);
- 297   3                          fun_delay(str_cod.py1qz,del_ms);
- 298   3                          break;
- 299   3                      case tra_kq:
- 300   3                          fun_motors14(mot_py,-100);
- 301   3                          fun_delay(str_cod.py1kqz,del_ms);
- 302   3                          break;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 6   
+ 241   1              par_speed=100;
+ 242   1          else if(par_speed<-100)
+ 243   1              par_speed=-100;//速度最多100,最少-100
+ 244   1          switch(par_model){
+ 245   2              case mot_l://左轮电机
+ 246   2                  if(str_begin.leftsd==par_speed)
+ 247   2                      return;
+ 248   2                  else
+ 249   2                      str_begin.leftsd=par_speed;
+ 250   2                  if(par_speed==0){
+ 251   3                      fun_pwml(0);out_pwml=0;
+ 252   3                  }
+ 253   2                  else if(par_speed>0){
+ 254   3                      CR=1;fun_pwml(par_speed);out_pwml=0;
+ 255   3                  }
+ 256   2                  else if(par_speed<0){
+ 257   3                      CR=1;fun_pwml(cabs(par_speed));out_pwml=1;
+ 258   3                  }
+ 259   2                  break;
+ 260   2              case mot_r://右轮电机
+ 261   2                  if(str_begin.rightsd==par_speed)
+ 262   2                      return;
+ 263   2                  else
+ 264   2                      str_begin.rightsd=par_speed;
+ 265   2                  if(par_speed==0){
+ 266   3                      fun_pwmr(0);out_pwmr=0;
+ 267   3                  }
+ 268   2                  else if(par_speed>0){
+ 269   3                      CR=1;fun_pwmr(par_speed);out_pwmr=0;
+ 270   3                  }
+ 271   2                  else if(par_speed<0){
+ 272   3                      CR=1;fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 273   3                  }
+ 274   2                  break;
+ 275   2              case mot_rl://左右轮同步
+ 276   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
+ 277   2                      return;
+ 278   2                  else
+ 279   2                      str_begin.leftsd=str_begin.rightsd=par_speed;
+ 280   2                  if(par_speed==0){
+ 281   3                      CR=0;
+ 282   3                      fun_pwmr(0);out_pwmr=0;
+ 283   3                      fun_pwml(0);out_pwml=0;
+ 284   3                  }
+ 285   2                  else if(par_speed>0){
+ 286   3                      CR=1;
+ 287   3                      fun_pwml(par_speed);out_pwml=0;
+ 288   3                      fun_pwmr(par_speed);out_pwmr=0;
+ 289   3                  }
+ 290   2                  else if(par_speed<0){
+ 291   3                      CR=1;
+ 292   3                      fun_pwml(cabs(par_speed));out_pwml=1;
+ 293   3                      fun_pwmr(cabs(par_speed));out_pwmr=1;
+ 294   3                  }
+ 295   2                  break;
+ 296   2              default:
+ 297   2                  break;
+ 298   2          }
+ 299   1      }//定时器操作左右轮
+ 300          void fun_sz1(enum varENU_han par_model){
+ 301   1          if(str_begin.szzt==par_model)
+ 302   1              return;
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 6   
 
- 303   3                      case tra_kh:
- 304   3                          fun_motors14(mot_py,100);
- 305   3                          fun_delay(str_cod.py1zkh,del_ms);
- 306   3                          break;
- 307   3                      case tra_h:
- 308   3                          fun_motors14(mot_py,100);
- 309   3                          fun_delay(str_cod.py1zh,del_ms);
- 310   3                          break;
- 311   3                  }
- 312   2                  break;
- 313   2              case tra_kh:
- 314   2                  switch(str_begin.pywz){
- 315   3                      case tra_q:
- 316   3                          fun_motors14(mot_py,-100);
- 317   3                          fun_delay(str_cod.py1qkh,del_ms);
- 318   3                          break;
- 319   3                      case tra_kq:
- 320   3                          fun_motors14(mot_py,-100);
- 321   3                          fun_delay(str_cod.py1kqkh,del_ms);
- 322   3                          break;
- 323   3                      case tra_z:
- 324   3                          fun_motors14(mot_py,-100);
- 325   3                          fun_delay(str_cod.py1zkh,del_ms);
- 326   3                          break;
- 327   3                      case tra_h:
- 328   3                          fun_motors14(mot_py,100);
- 329   3                          fun_delay(str_cod.py1khh,del_ms);
- 330   3                          break;
- 331   3                  }
- 332   2                  break;
- 333   2              case tra_h://后平移(有电机的呢个方向)
- 334   2                  fun_motors14(mot_py,-100);
- 335   2                  while(in_hpy==1);
- 336   2                  fun_delay(str_cod.py1bz,del_ms);
- 337   2                  break;
- 338   2              default:
- 339   2                  break;
- 340   2          }
- 341   1          fun_motors14(mot_py,0);
- 342   1          str_begin.pywz=par_model;//存储运行结果
- 343   1      }//平移单步运动
- 344          void fun_sj1(enum varENU_sjp par_model){
- 345   1          if(str_begin.sjwz==par_model)
- 346   1             return;
- 347   1          switch(par_model){
- 348   2              case sjp_1://升降位置1(最上位)
- 349   2                  fun_motors14(mot_sj,100);
- 350   2                  def_select(sel_58);
- 351   2                  while(in_wz1==1);
- 352   2                  fun_delay(str_cod.sj1bzw,del_ms);
- 353   2                  break;
- 354   2              case sjp_12:
- 355   2                  if(par_model>str_begin.sjwz){
- 356   3                      fun_motors14(mot_sj,-100);
- 357   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 358   3                  }
- 359   2                  else{//要去的地方在上面，向上走
- 360   3                      fun_sj1(sjp_2);
- 361   3                      fun_motors14(mot_sj,100);
- 362   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 363   3                  }
- 364   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 7   
+ 303   1          if(par_model==han_s){//手抓松
+ 304   2              fun_motors(mot_sz,-100);
+ 305   2              while(in_s==1);
+ 306   2          }
+ 307   1          else{//手抓紧
+ 308   2              fun_motors(mot_sz,100);
+ 309   2              while(in_j==1);
+ 310   2          }
+ 311   1          fun_delay(20,del_ms);
+ 312   1          fun_motors(mot_sz,0);
+ 313   1          str_begin.szzt=par_model;//存储运行结果
+ 314   1      }//手抓单步运动
+ 315          void fun_py1(enum varENU_tra par_model){
+ 316   1          if(str_begin.pywz==par_model)
+ 317   1              return;
+ 318   1          switch(par_model){
+ 319   2              case tra_q://前平移(没有电机的呢个方向)
+ 320   2                  fun_motors(mot_py,100);
+ 321   2                  while(in_qpy==1);
+ 322   2                  fun_delay(str_cod.py1bz,del_ms);
+ 323   2                  break;
+ 324   2              case tra_kq:
+ 325   2                  switch(str_begin.pywz){
+ 326   3                      case tra_q:
+ 327   3                          fun_motors(mot_py,-100);
+ 328   3                          fun_delay(str_cod.py1qkq,del_ms);
+ 329   3                          break;
+ 330   3                      case tra_z:
+ 331   3                          fun_motors(mot_py,100);
+ 332   3                          fun_delay(str_cod.py1kqz,del_ms);
+ 333   3                          break;
+ 334   3                      case tra_kh:
+ 335   3                          fun_motors(mot_py,100);
+ 336   3                          fun_delay(str_cod.py1kqkh,del_ms);
+ 337   3                          break;
+ 338   3                      case tra_h:
+ 339   3                          fun_motors(mot_py,100);
+ 340   3                          fun_delay(str_cod.py1kqh,del_ms);
+ 341   3                          break;
+ 342   3                  }
+ 343   2                  break;
+ 344   2              case tra_z:
+ 345   2                  switch(str_begin.pywz){
+ 346   3                      case tra_q:
+ 347   3                          fun_motors(mot_py,-100);
+ 348   3                          fun_delay(str_cod.py1qz,del_ms);
+ 349   3                          break;
+ 350   3                      case tra_kq:
+ 351   3                          fun_motors(mot_py,-100);
+ 352   3                          fun_delay(str_cod.py1kqz,del_ms);
+ 353   3                          break;
+ 354   3                      case tra_kh:
+ 355   3                          fun_motors(mot_py,100);
+ 356   3                          fun_delay(str_cod.py1zkh,del_ms);
+ 357   3                          break;
+ 358   3                      case tra_h:
+ 359   3                          fun_motors(mot_py,100);
+ 360   3                          fun_delay(str_cod.py1zh,del_ms);
+ 361   3                          break;
+ 362   3                  }
+ 363   2                  break;
+ 364   2              case tra_kh:
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 7   
 
- 365   2              case sjp_2://升降位置2
- 366   2                  fun_motors14(mot_sj,par_model<str_begin.sjwz?100:-100);
- 367   2                  def_select(sel_58);
- 368   2                  while(in_wz2==1);
- 369   2                  fun_delay(str_cod.sj1bzw,del_ms);
- 370   2                  break;
- 371   2              case sjp_23:
- 372   2                  if(par_model>str_begin.sjwz){
- 373   3                      fun_sj1(sjp_2);
- 374   3                      fun_motors14(mot_sj,-100);
- 375   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 376   3                  }
- 377   2                  else{//要去的地方在上面，向上走
- 378   3                      fun_sj1(sjp_3);
- 379   3                      fun_motors14(mot_sj,100);
- 380   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 381   3                  }
- 382   2                  break;
- 383   2              case sjp_3://升降位置3
- 384   2                  fun_motors14(mot_sj,par_model<str_begin.sjwz?100:-100);
- 385   2                  def_select(sel_58);
- 386   2                  while(in_wz3==1);
- 387   2                  fun_delay(str_cod.sj1bzw,del_ms);
+ 365   2                  switch(str_begin.pywz){
+ 366   3                      case tra_q:
+ 367   3                          fun_motors(mot_py,-100);
+ 368   3                          fun_delay(str_cod.py1qkh,del_ms);
+ 369   3                          break;
+ 370   3                      case tra_kq:
+ 371   3                          fun_motors(mot_py,-100);
+ 372   3                          fun_delay(str_cod.py1kqkh,del_ms);
+ 373   3                          break;
+ 374   3                      case tra_z:
+ 375   3                          fun_motors(mot_py,-100);
+ 376   3                          fun_delay(str_cod.py1zkh,del_ms);
+ 377   3                          break;
+ 378   3                      case tra_h:
+ 379   3                          fun_motors(mot_py,100);
+ 380   3                          fun_delay(str_cod.py1khh,del_ms);
+ 381   3                          break;
+ 382   3                  }
+ 383   2                  break;
+ 384   2              case tra_h://后平移(有电机的呢个方向)
+ 385   2                  fun_motors(mot_py,-100);
+ 386   2                  while(in_hpy==1);
+ 387   2                  fun_delay(str_cod.py1bz,del_ms);
  388   2                  break;
- 389   2              case sjp_34:
- 390   2                  if(par_model>str_begin.sjwz){
- 391   3                      fun_sj1(sjp_3);
- 392   3                      fun_motors14(mot_sj,-100);
- 393   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 394   3                  }
- 395   2                  else{//要去的地方在上面，向上走
- 396   3                      fun_sj1(sjp_4);
- 397   3                      fun_motors14(mot_sj,100);
- 398   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 399   3                  }
- 400   2                  break;
- 401   2              case sjp_4://升降位置4
- 402   2                  fun_motors14(mot_sj,par_model<str_begin.sjwz?100:-100);
- 403   2                  def_select(sel_58);
- 404   2                  while(in_wz4==1);
- 405   2                  fun_delay(str_cod.sj1bzw,del_ms);
- 406   2                  break;
- 407   2              case sjp_45:
- 408   2                  if(par_model>str_begin.sjwz){
- 409   3                      fun_sj1(sjp_4);
- 410   3                      fun_motors14(mot_sj,-100);
- 411   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 412   3                  }
- 413   2                  else{//要去的地方在上面，向上走
- 414   3                      fun_motors14(mot_sj,100);
- 415   3                      fun_delay(str_cod.sj1zjw,del_ms);
- 416   3                  }
- 417   2                  break;
- 418   2              case sjp_5://升降位置5
- 419   2                  fun_motors14(mot_sj,-100);
- 420   2                  def_select(sel_912);
- 421   2                  while(in_wz5==1);
- 422   2                  fun_delay(str_cod.sj1bzw,del_ms);
- 423   2                  break;
- 424   2              default:
- 425   2                  break;
- 426   2          }
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 8   
+ 389   2              default:
+ 390   2                  break;
+ 391   2          }
+ 392   1          fun_motors(mot_py,0);
+ 393   1          str_begin.pywz=par_model;//存储运行结果
+ 394   1      }//平移单步运动
+ 395          void fun_sj1(enum varENU_sjp par_model){
+ 396   1          if(str_begin.sjwz==par_model)
+ 397   1             return;
+ 398   1          switch(par_model){
+ 399   2              case sjp_1://升降位置1(最上位)
+ 400   2                  fun_motors(mot_sj,100);
+ 401   2                  def_select(sel_58);
+ 402   2                  while(in_wz1==1);
+ 403   2                  fun_delay(str_cod.sj1bzw,del_ms);
+ 404   2                  break;
+ 405   2              case sjp_12:
+ 406   2                  if(par_model>str_begin.sjwz){
+ 407   3                      fun_motors(mot_sj,-100);
+ 408   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 409   3                  }
+ 410   2                  else{//要去的地方在上面，向上走
+ 411   3                      fun_sj1(sjp_2);
+ 412   3                      fun_motors(mot_sj,100);
+ 413   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 414   3                  }
+ 415   2                  break;
+ 416   2              case sjp_2://升降位置2
+ 417   2                  fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+ 418   2                  def_select(sel_58);
+ 419   2                  while(in_wz2==1);
+ 420   2                  fun_delay(str_cod.sj1bzw,del_ms);
+ 421   2                  break;
+ 422   2              case sjp_23:
+ 423   2                  if(par_model>str_begin.sjwz){
+ 424   3                      fun_sj1(sjp_2);
+ 425   3                      fun_motors(mot_sj,-100);
+ 426   3                      fun_delay(str_cod.sj1zjw,del_ms);
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 8   
 
- 427   1          fun_motors14(mot_sj,0);
- 428   1          str_begin.sjwz=par_model;//存储运行结果
- 429   1      }//升降单步运动
- 430          void fun_hz1(enum varENU_dir par_model){
- 431   1          if(str_begin.hzfx==par_model)
- 432   1              return;
- 433   1          def_select(sel_912);
- 434   1          switch(par_model){
- 435   2              case dir_up://回转至前方
- 436   2                  switch(str_begin.hzfx){
- 437   3                      case dir_down://现在在下方
- 438   3                          fun_motors14(mot_hz,-100);
- 439   3                          fun_delay(1,del_s);
- 440   3                          while(in_hz==1);
- 441   3                          while(in_hz==0);
- 442   3                          while(in_hz==1);
- 443   3                          fun_delay(str_cod.hz1bz,del_ms);
- 444   3                          break;
- 445   3                      case dir_left://现在在左边
- 446   3                          fun_motors14(mot_hz,100);
- 447   3                          fun_delay(1,del_s);
- 448   3                          while(in_hz==1);
- 449   3                          fun_delay(str_cod.hz1bz,del_ms);
- 450   3                          break;
- 451   3                      case dir_right://现在在右边
- 452   3                          fun_motors14(mot_hz,-100);
- 453   3                          fun_delay(1,del_s);
- 454   3                          while(in_hz==1);
- 455   3                          fun_delay(str_cod.hz1bz,del_ms);
- 456   3                          break;
- 457   3                      default:
- 458   3                          break;
- 459   3                  }
- 460   2                  break;
- 461   2              case dir_down://要去下面
- 462   2                  switch(str_begin.hzfx){
- 463   3                      case dir_up://现在在上面
- 464   3                          fun_motors14(mot_hz,100);
- 465   3                          fun_delay(1,del_s);
- 466   3                          while(in_hz==1);
- 467   3                          while(in_hz==0);
- 468   3                          while(in_hz==1);
- 469   3                          fun_delay(str_cod.hz1bz,del_ms);
- 470   3                          break;
- 471   3                      case dir_left://现在在左面
- 472   3                          fun_motors14(mot_hz,-100);
- 473   3                          fun_delay(1,del_s);
- 474   3                          while(in_hz==1);
- 475   3                          fun_delay(str_cod.hz1bz,del_ms);
- 476   3                          break;
- 477   3                          break;
- 478   3                      case dir_right://现在在右面
- 479   3                          fun_motors14(mot_hz,100);
- 480   3                          fun_delay(1,del_s);
- 481   3                          while(in_hz==1);
- 482   3                          fun_delay(str_cod.hz1bz,del_ms);
- 483   3                          break;
- 484   3                      default:
- 485   3                          break;
- 486   3                  }
- 487   2                  break;
- 488   2              case dir_left://要去左边
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 9   
+ 427   3                  }
+ 428   2                  else{//要去的地方在上面，向上走
+ 429   3                      fun_sj1(sjp_3);
+ 430   3                      fun_motors(mot_sj,100);
+ 431   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 432   3                  }
+ 433   2                  break;
+ 434   2              case sjp_3://升降位置3
+ 435   2                  fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+ 436   2                  def_select(sel_58);
+ 437   2                  while(in_wz3==1);
+ 438   2                  fun_delay(str_cod.sj1bzw,del_ms);
+ 439   2                  break;
+ 440   2              case sjp_34:
+ 441   2                  if(par_model>str_begin.sjwz){
+ 442   3                      fun_sj1(sjp_3);
+ 443   3                      fun_motors(mot_sj,-100);
+ 444   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 445   3                  }
+ 446   2                  else{//要去的地方在上面，向上走
+ 447   3                      fun_sj1(sjp_4);
+ 448   3                      fun_motors(mot_sj,100);
+ 449   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 450   3                  }
+ 451   2                  break;
+ 452   2              case sjp_4://升降位置4
+ 453   2                  fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+ 454   2                  def_select(sel_58);
+ 455   2                  while(in_wz4==1);
+ 456   2                  fun_delay(str_cod.sj1bzw,del_ms);
+ 457   2                  break;
+ 458   2              case sjp_45:
+ 459   2                  if(par_model>str_begin.sjwz){
+ 460   3                      fun_sj1(sjp_4);
+ 461   3                      fun_motors(mot_sj,-100);
+ 462   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 463   3                  }
+ 464   2                  else{//要去的地方在上面，向上走
+ 465   3                      fun_motors(mot_sj,100);
+ 466   3                      fun_delay(str_cod.sj1zjw,del_ms);
+ 467   3                  }
+ 468   2                  break;
+ 469   2              case sjp_5://升降位置5
+ 470   2                  fun_motors(mot_sj,-100);
+ 471   2                  def_select(sel_912);
+ 472   2                  while(in_wz5==1);
+ 473   2                  fun_delay(str_cod.sj1bzw,del_ms);
+ 474   2                  break;
+ 475   2              default:
+ 476   2                  break;
+ 477   2          }
+ 478   1          fun_motors(mot_sj,0);
+ 479   1          str_begin.sjwz=par_model;//存储运行结果
+ 480   1      }//升降单步运动
+ 481          void fun_hz1(enum varENU_dir par_model){
+ 482   1          if(str_begin.hzfx==par_model)
+ 483   1              return;
+ 484   1          def_select(sel_912);
+ 485   1          switch(par_model){
+ 486   2              case dir_up://回转至前方
+ 487   2                  switch(str_begin.hzfx){
+ 488   3                      case dir_down://现在在下方
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 9   
 
- 489   2                  switch(str_begin.hzfx){
- 490   3                      case dir_up://现在在上面
- 491   3                          fun_motors14(mot_hz,-100);
- 492   3                          fun_delay(1,del_s);
+ 489   3                          fun_motors(mot_hz,-100);
+ 490   3                          fun_delay(1,del_s);
+ 491   3                          while(in_hz==1);
+ 492   3                          while(in_hz==0);
  493   3                          while(in_hz==1);
  494   3                          fun_delay(str_cod.hz1bz,del_ms);
  495   3                          break;
- 496   3                          break;
- 497   3                      case dir_down://现在在下面
- 498   3                          fun_motors14(mot_hz,100);
- 499   3                          fun_delay(1,del_s);
- 500   3                          while(in_hz==1);
- 501   3                          fun_delay(str_cod.hz1bz,del_ms);
- 502   3                          break;
- 503   3                          break;
- 504   3                      case dir_right://现在在右面
- 505   3                          fun_motors14(mot_hz,-100);
- 506   3                          fun_delay(1,del_s);
- 507   3                          while(in_hz==1);
- 508   3                          while(in_hz==0);
- 509   3                          while(in_hz==1);
- 510   3                          fun_delay(str_cod.hz1bz,del_ms);
- 511   3                          break;
- 512   3                      default:
- 513   3                          break;
- 514   3                  }
- 515   2                  break;
- 516   2              case dir_right://要去右面
- 517   2                  switch(str_begin.hzfx){
- 518   3                      case dir_up://现在在前面
- 519   3                          fun_motors14(mot_hz,100);
- 520   3                          fun_delay(1,del_s);
- 521   3                          while(in_hz==1);
- 522   3                          fun_delay(str_cod.hz1bz,del_ms);
- 523   3                          break;
- 524   3                      case dir_down://现在在下面
- 525   3                          fun_motors14(mot_hz,-100);
- 526   3                          fun_delay(1,del_s);
- 527   3                          while(in_hz==1);
- 528   3                          fun_delay(str_cod.hz1bz,del_ms);
- 529   3                          break;
- 530   3                      case dir_left://现在在左面
- 531   3                          fun_motors14(mot_hz,100);
- 532   3                          fun_delay(1,del_s);
- 533   3                          while(in_hz==1);
- 534   3                          while(in_hz==0);
- 535   3                          while(in_hz==1);
- 536   3                          fun_delay(str_cod.hz1bz,del_ms);
- 537   3                          break;
- 538   3                      default:
- 539   3                          break;
- 540   3                  }
- 541   2                  break;
- 542   2              default:
- 543   2                  break;
- 544   2          }
- 545   1          fun_motors14(mot_hz,0);
- 546   1          str_begin.hzfx=par_model;//存储运行结果
- 547   1      }//回转单步运动
- 548          
- 549          //void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
- 550          //    switch(){
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 10  
+ 496   3                      case dir_left://现在在左边
+ 497   3                          fun_motors(mot_hz,100);
+ 498   3                          fun_delay(1,del_s);
+ 499   3                          while(in_hz==1);
+ 500   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 501   3                          break;
+ 502   3                      case dir_right://现在在右边
+ 503   3                          fun_motors(mot_hz,-100);
+ 504   3                          fun_delay(1,del_s);
+ 505   3                          while(in_hz==1);
+ 506   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 507   3                          break;
+ 508   3                      default:
+ 509   3                          break;
+ 510   3                  }
+ 511   2                  break;
+ 512   2              case dir_down://要去下面
+ 513   2                  switch(str_begin.hzfx){
+ 514   3                      case dir_up://现在在上面
+ 515   3                          fun_motors(mot_hz,100);
+ 516   3                          fun_delay(1,del_s);
+ 517   3                          while(in_hz==1);
+ 518   3                          while(in_hz==0);
+ 519   3                          while(in_hz==1);
+ 520   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 521   3                          break;
+ 522   3                      case dir_left://现在在左面
+ 523   3                          fun_motors(mot_hz,-100);
+ 524   3                          fun_delay(1,del_s);
+ 525   3                          while(in_hz==1);
+ 526   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 527   3                          break;
+ 528   3                          break;
+ 529   3                      case dir_right://现在在右面
+ 530   3                          fun_motors(mot_hz,100);
+ 531   3                          fun_delay(1,del_s);
+ 532   3                          while(in_hz==1);
+ 533   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 534   3                          break;
+ 535   3                      default:
+ 536   3                          break;
+ 537   3                  }
+ 538   2                  break;
+ 539   2              case dir_left://要去左边
+ 540   2                  switch(str_begin.hzfx){
+ 541   3                      case dir_up://现在在上面
+ 542   3                          fun_motors(mot_hz,-100);
+ 543   3                          fun_delay(1,del_s);
+ 544   3                          while(in_hz==1);
+ 545   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 546   3                          break;
+ 547   3                          break;
+ 548   3                      case dir_down://现在在下面
+ 549   3                          fun_motors(mot_hz,100);
+ 550   3                          fun_delay(1,del_s);
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 10  
 
- 551          //        ;
- 552          //    }
- 553          //}
- 554          
- 555          void fun_jtjp(){
- 556   1          while(1){
- 557   2              if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
- 558   3                  fun_delay(10,del_ms);
- 559   3                  fun_motors14(mot_rl,0);
- 560   3                  return;
- 561   3              }
- 562   2              if(in_ls2||in_ls1){
- 563   3                  fun_motors14(mot_l,16);
- 564   3                  fun_motors14(mot_r,-16);
- 565   3              }
- 566   2              else if(in_ls7||in_ls8){
- 567   3                  fun_motors14(mot_l,-16);
- 568   3                  fun_motors14(mot_r,16);
- 569   3              }
- 570   2              else{
- 571   3                  if(!in_ls4){
- 572   4                      fun_motors14(mot_l,-12);
- 573   4                      fun_motors14(mot_r,12);
- 574   4                  }
- 575   3                  else if(!in_ls5){
- 576   4                      fun_motors14(mot_l,12);
- 577   4                      fun_motors14(mot_r,-12);
- 578   4                  }
- 579   3                  else{
- 580   4                      if(in_ls6&&!in_ls3){
- 581   5                          fun_motors14(mot_l,-8);
- 582   5                          fun_motors14(mot_r,8);
- 583   5                      }
- 584   4                      if(in_ls3&&!in_ls6){
- 585   5                          fun_motors14(mot_l,8);
- 586   5                          fun_motors14(mot_r,-8);
- 587   5                      }
- 588   4                  }
- 589   3              }
- 590   2          }
- 591   1      }//静态纠偏
- 592          void fun_timermove(){
- 593   1          static uc loc_con=0;//需要分步做的动作需要用到此静态私有分步标志位
- 594   1          uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
- 595   1          switch(*str_tfl.run){//选择运行方式
- 596   2              case def_end://运行结束
- 597   2                  fun_motorsrl(mot_rl,0);//再次停止电机运动
- 598   2                  str_tfl.doing=tf_false;//移动结束
- 599   2                  memset(str_tfl.step,0,sizeof(str_tfl.step));//清空step数组
- 600   2                  str_tfl.run=str_tfl.step;//指针指向step的第一个元素
- 601   2                  break;
- 602   2              case tfl_line://运行巡线
- 603   2                  if(*(str_tfl.run+1)){//如果参数为非0数
- 604   3                      if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7)){//如果中间6个�
+ 551   3                          while(in_hz==1);
+ 552   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 553   3                          break;
+ 554   3                          break;
+ 555   3                      case dir_right://现在在右面
+ 556   3                          fun_motors(mot_hz,-100);
+ 557   3                          fun_delay(1,del_s);
+ 558   3                          while(in_hz==1);
+ 559   3                          while(in_hz==0);
+ 560   3                          while(in_hz==1);
+ 561   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 562   3                          break;
+ 563   3                      default:
+ 564   3                          break;
+ 565   3                  }
+ 566   2                  break;
+ 567   2              case dir_right://要去右面
+ 568   2                  switch(str_begin.hzfx){
+ 569   3                      case dir_up://现在在前面
+ 570   3                          fun_motors(mot_hz,100);
+ 571   3                          fun_delay(1,del_s);
+ 572   3                          while(in_hz==1);
+ 573   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 574   3                          break;
+ 575   3                      case dir_down://现在在下面
+ 576   3                          fun_motors(mot_hz,-100);
+ 577   3                          fun_delay(1,del_s);
+ 578   3                          while(in_hz==1);
+ 579   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 580   3                          break;
+ 581   3                      case dir_left://现在在左面
+ 582   3                          fun_motors(mot_hz,100);
+ 583   3                          fun_delay(1,del_s);
+ 584   3                          while(in_hz==1);
+ 585   3                          while(in_hz==0);
+ 586   3                          while(in_hz==1);
+ 587   3                          fun_delay(str_cod.hz1bz,del_ms);
+ 588   3                          break;
+ 589   3                      default:
+ 590   3                          break;
+ 591   3                  }
+ 592   2                  break;
+ 593   2              default:
+ 594   2                  break;
+ 595   2          }
+ 596   1          fun_motors(mot_hz,0);
+ 597   1          str_begin.hzfx=par_model;//存储运行结果
+ 598   1      }//回转单步运动
+ 599          
+ 600          //void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
+ 601          //    switch(){
+ 602          //        ;
+ 603          //    }
+ 604          //}
+ 605          
+ 606          void fun_jtjp(){
+ 607   1          while(1){
+ 608   2              if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
+ 609   3                  fun_delay(10,del_ms);
+ 610   3                  fun_motors(mot_rl,0);
+ 611   3                  return;
+ 612   3              }
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 11  
+
+ 613   2              if(in_ls2||in_ls1){
+ 614   3                  fun_motors(mot_l,16);
+ 615   3                  fun_motors(mot_r,-16);
+ 616   3              }
+ 617   2              else if(in_ls7||in_ls8){
+ 618   3                  fun_motors(mot_l,-16);
+ 619   3                  fun_motors(mot_r,16);
+ 620   3              }
+ 621   2              else{
+ 622   3                  if(!in_ls4){
+ 623   4                      fun_motors(mot_l,-12);
+ 624   4                      fun_motors(mot_r,12);
+ 625   4                  }
+ 626   3                  else if(!in_ls5){
+ 627   4                      fun_motors(mot_l,12);
+ 628   4                      fun_motors(mot_r,-12);
+ 629   4                  }
+ 630   3                  else{
+ 631   4                      if(in_ls6&&!in_ls3){
+ 632   5                          fun_motors(mot_l,-8);
+ 633   5                          fun_motors(mot_r,8);
+ 634   5                      }
+ 635   4                      if(in_ls3&&!in_ls6){
+ 636   5                          fun_motors(mot_l,8);
+ 637   5                          fun_motors(mot_r,-8);
+ 638   5                      }
+ 639   4                  }
+ 640   3              }
+ 641   2          }
+ 642   1      }//静态纠偏
+ 643          void fun_timermove(){
+ 644   1          static uc loc_con=0;//需要分步做的动作需要用到此静态私有分步标志位
+ 645   1          uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
+ 646   1          switch(*str_tfl.run){//选择运行方式
+ 647   2              case def_end://运行结束
+ 648   2                  fun_motorsrl(mot_rl,0);//再次停止电机运动
+ 649   2                  str_tfl.doing=tf_false;//移动结束
+ 650   2                  memset(str_tfl.step,0,sizeof(str_tfl.step));//清空step数组
+ 651   2                  str_tfl.run=str_tfl.step;//指针指向step的第一个元素
+ 652   2                  break;
+ 653   2              case tfl_line://运行巡线
+ 654   2                  if(*(str_tfl.run+1)){//如果参数为非0数
+ 655   3                      if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7)){//如果中间6个�
              -�全亮,左右亮任意一个
- 605   4                          str_tfl.online=tf_ture;//标志位记录在线
- 606   4                          fun_motorsrl(mot_rl,str_tfl.gospeed);//按照常规速度过线
- 607   4                      }
- 608   3                      else if(str_tfl.online==tf_ture){//如果标志位记录在线,而且不符合在线特征
- 609   4                          str_tfl.online=tf_false;//标志位记录不在线
- 610   4                          (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
- 611   4                      }
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 11  
+ 656   4                          str_tfl.online=tf_ture;//标志位记录在线
+ 657   4                          fun_motorsrl(mot_rl,str_tfl.gospeed);//按照常规速度过线
+ 658   4                      }
+ 659   3                      else if(str_tfl.online==tf_ture){//如果标志位记录在线,而且不符合在线特征
+ 660   4                          str_tfl.online=tf_false;//标志位记录不在线
+ 661   4                          (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
+ 662   4                      }
+ 663   3                      else{
+ 664   4                          if(in_ls1&&!in_ls8){//1亮8不亮
+ 665   5                              loc_sdl*=0.5;//左减速
+ 666   5                              loc_sdr*=1.5;//右加速
+ 667   5                          }//向左转
+ 668   4                          if(in_ls8&&!in_ls1){//8亮1不亮
+ 669   5                              loc_sdl*=1.5;//左加速
+ 670   5                              loc_sdr*=0.5;//右减速
+ 671   5                          }//向右转
+ 672   4                          if(in_ls2&&!in_ls7){//2亮7不亮
+ 673   5                              loc_sdl*=0.7;//左减速
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 12  
 
- 612   3                      else{
- 613   4                          if(in_ls1&&!in_ls8){//1亮8不亮
- 614   5                              loc_sdl*=0.5;//左减速
- 615   5                              loc_sdr*=1.5;//右加速
- 616   5                          }//向左转
- 617   4                          if(in_ls8&&!in_ls1){//8亮1不亮
- 618   5                              loc_sdl*=1.5;//左加速
- 619   5                              loc_sdr*=0.5;//右减速
- 620   5                          }//向右转
- 621   4                          if(in_ls2&&!in_ls7){//2亮7不亮
- 622   5                              loc_sdl*=0.7;//左减速
- 623   5                              loc_sdr*=1.3;//右加速
- 624   5                          }//向左转
- 625   4                          if(in_ls7&&!in_ls2){//7亮2不亮
- 626   5                              loc_sdl*=1.3;//左加速
- 627   5                              loc_sdr*=0.7;//右减速
- 628   5                          }//向右转
- 629   4                          if(in_ls3&&!in_ls6){//3亮6不亮
- 630   5                              loc_sdl*=0.9;//左减速
- 631   5                              loc_sdr*=1.1;//右加速
- 632   5                          }//向左转
- 633   4                          if(in_ls6&&!in_ls3){//6亮3不亮
- 634   5                              loc_sdl*=1.1;//左加速
- 635   5                              loc_sdr*=0.9;//右减速
- 636   5                          }//向右转
- 637   4                          fun_motorsrl(mot_r,loc_sdr);
- 638   4                          fun_motorsrl(mot_l,loc_sdl);
- 639   4                      }
- 640   3                  }
- 641   2                  else{//如果线走完了
- 642   3                      str_tfl.run+=2;//指针指向下一组过程
- 643   3                      fun_motorsrl(mot_rl,0);//停止电机运动
- 644   3                  }
- 645   2                  break;
- 646   2              case tfl_turn://运行转弯
- 647   2                  switch(loc_con){//分步运行标志位
- 648   3                      case 0://第一步
- 649   3                          switch(*(str_tfl.run+1)){//获取参数
- 650   4                              case tur_r90://右转90
- 651   4                                  fun_motorsrl(mot_l,str_tfl.turnspeed);//左轮向前
- 652   4                                  fun_motorsrl(mot_r,-str_tfl.turnspeed);//右轮向后
- 653   4                                  str_tfl.delay=var_timer+str_cod.turn90;//计时
- 654   4                                  break;
- 655   4                              case tur_l90://左转90
- 656   4                                  fun_motorsrl(mot_l,-str_tfl.turnspeed);//左轮向后
- 657   4                                  fun_motorsrl(mot_r,str_tfl.turnspeed);//右轮向前
- 658   4                                  str_tfl.delay=var_timer+str_cod.turn90;//计时
- 659   4                                  break;
- 660   4                              case tur_r180://右转180
- 661   4                                  fun_motorsrl(mot_l,str_tfl.turnspeed);//左轮向前
- 662   4                                  fun_motorsrl(mot_r,-str_tfl.turnspeed);//右轮向后
- 663   4                                  str_tfl.delay=var_timer+str_cod.turn180;//计时
- 664   4                                  break;
- 665   4                              case tur_l180://左转180
- 666   4                                  fun_motorsrl(mot_l,-str_tfl.turnspeed);//左轮向后
- 667   4                                  fun_motorsrl(mot_r,str_tfl.turnspeed);//左轮向前
- 668   4                                  str_tfl.delay=var_timer+str_cod.turn180;//计时
- 669   4                                  break;
- 670   4                          }
- 671   3                          loc_con++;//执行下一步
- 672   3                          break;
- 673   3                      case 1://第二步
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 12  
+ 674   5                              loc_sdr*=1.3;//右加速
+ 675   5                          }//向左转
+ 676   4                          if(in_ls7&&!in_ls2){//7亮2不亮
+ 677   5                              loc_sdl*=1.3;//左加速
+ 678   5                              loc_sdr*=0.7;//右减速
+ 679   5                          }//向右转
+ 680   4                          if(in_ls3&&!in_ls6){//3亮6不亮
+ 681   5                              loc_sdl*=0.9;//左减速
+ 682   5                              loc_sdr*=1.1;//右加速
+ 683   5                          }//向左转
+ 684   4                          if(in_ls6&&!in_ls3){//6亮3不亮
+ 685   5                              loc_sdl*=1.1;//左加速
+ 686   5                              loc_sdr*=0.9;//右减速
+ 687   5                          }//向右转
+ 688   4                          fun_motorsrl(mot_r,loc_sdr);
+ 689   4                          fun_motorsrl(mot_l,loc_sdl);
+ 690   4                      }
+ 691   3                  }
+ 692   2                  else{//如果线走完了
+ 693   3                      str_tfl.run+=2;//指针指向下一组过程
+ 694   3                      fun_motorsrl(mot_rl,0);//停止电机运动
+ 695   3                  }
+ 696   2                  break;
+ 697   2              case tfl_turn://运行转弯
+ 698   2                  switch(loc_con){//分步运行标志位
+ 699   3                      case 0://第一步
+ 700   3                          switch(*(str_tfl.run+1)){//获取参数
+ 701   4                              case tur_r90://右转90
+ 702   4                                  fun_motorsrl(mot_l,str_tfl.turnspeed);//左轮向前
+ 703   4                                  fun_motorsrl(mot_r,-str_tfl.turnspeed);//右轮向后
+ 704   4                                  str_tfl.delay=var_timer+str_cod.turn90;//计时
+ 705   4                                  break;
+ 706   4                              case tur_l90://左转90
+ 707   4                                  fun_motorsrl(mot_l,-str_tfl.turnspeed);//左轮向后
+ 708   4                                  fun_motorsrl(mot_r,str_tfl.turnspeed);//右轮向前
+ 709   4                                  str_tfl.delay=var_timer+str_cod.turn90;//计时
+ 710   4                                  break;
+ 711   4                              case tur_r180://右转180
+ 712   4                                  fun_motorsrl(mot_l,str_tfl.turnspeed);//左轮向前
+ 713   4                                  fun_motorsrl(mot_r,-str_tfl.turnspeed);//右轮向后
+ 714   4                                  str_tfl.delay=var_timer+str_cod.turn180;//计时
+ 715   4                                  break;
+ 716   4                              case tur_l180://左转180
+ 717   4                                  fun_motorsrl(mot_l,-str_tfl.turnspeed);//左轮向后
+ 718   4                                  fun_motorsrl(mot_r,str_tfl.turnspeed);//左轮向前
+ 719   4                                  str_tfl.delay=var_timer+str_cod.turn180;//计时
+ 720   4                                  break;
+ 721   4                          }
+ 722   3                          loc_con++;//执行下一步
+ 723   3                          break;
+ 724   3                      case 1://第二步
+ 725   3                          if(str_tfl.delay<=var_timer)//计时时间到
+ 726   3                              loc_con++;//执行下一步
+ 727   3                          break;
+ 728   3                      case 2://第三步
+ 729   3                          if(in_ls4&&in_ls5){//如果中间两个灯亮
+ 730   4                              fun_motorsrl(mot_rl,0);//停止电机
+ 731   4                              str_tfl.run+=2;//指针指向下一组过程
+ 732   4                              str_tfl.delay=0;//延时计数器归零
+ 733   4                              loc_con=0;//分步运行标志位归零
+ 734   4                          }
+ 735   3                          break;
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 13  
 
- 674   3                          if(str_tfl.delay<=var_timer)//计时时间到
- 675   3                              loc_con++;//执行下一步
- 676   3                          break;
- 677   3                      case 2://第三步
- 678   3                          if(in_ls4&&in_ls5){//如果中间两个灯亮
- 679   4                              fun_motorsrl(mot_rl,0);//停止电机
- 680   4                              str_tfl.run+=2;//指针指向下一组过程
- 681   4                              str_tfl.delay=0;//延时计数器归零
- 682   4                              loc_con=0;//分步运行标志位归零
- 683   4                          }
- 684   3                          break;
- 685   3                  }
- 686   2                  break;
- 687   2              case tfl_cache://运行前冲
- 688   2                  switch(loc_con){
- 689   3                      case 0://第一步
- 690   3                          str_tfl.delay=var_timer+((*(str_tfl.run+1))*10);//延时时间(毫秒)为参数的10�
+ 736   3                  }
+ 737   2                  break;
+ 738   2              case tfl_cache://运行前冲
+ 739   2                  switch(loc_con){
+ 740   3                      case 0://第一步
+ 741   3                          str_tfl.delay=var_timer+((*(str_tfl.run+1))*10);//延时时间(毫秒)为参数的10�
              -�
- 691   3                          loc_con++;//执行下一步
- 692   3                          break;
- 693   3                      case 1://第二步
- 694   3                          if(str_tfl.delay<=var_timer){//计时时间到
- 695   4                              fun_motorsrl(mot_rl,0);//停止电机
- 696   4                              str_tfl.run+=2;//指针指向下一组过程
- 697   4                              str_tfl.delay=0;//延时计数器归零
- 698   4                              loc_con=0;//分步运行标志位归零
- 699   4                          }
- 700   3                          else{
- 701   4                              if(in_ls1&&!in_ls8){//1亮8不亮
- 702   5                                  loc_sdl*=0.5;//左减速
- 703   5                                  loc_sdr*=1.5;//右加速
- 704   5                              }//向左转
- 705   4                              if(in_ls8&&!in_ls1){//8亮1不亮
- 706   5                                  loc_sdl*=1.5;//左加速
- 707   5                                  loc_sdr*=0.5;//右减速
- 708   5                              }//向右转
- 709   4                              if(in_ls2&&!in_ls7){//2亮7不亮
- 710   5                                  loc_sdl*=0.7;//左减速
- 711   5                                  loc_sdr*=1.3;//右加速
- 712   5                              }//向左转
- 713   4                              if(in_ls7&&!in_ls2){//7亮2不亮
- 714   5                                  loc_sdl*=1.3;//左加速
- 715   5                                  loc_sdr*=0.7;//右减速
- 716   5                              }//向右转
- 717   4                              if(in_ls3&&!in_ls6){//3亮6不亮
- 718   5                                  loc_sdl*=0.9;//左减速
- 719   5                                  loc_sdr*=1.1;//右加速
- 720   5                              }//向左转
- 721   4                              if(in_ls6&&!in_ls3){//6亮3不亮
- 722   5                                  loc_sdl*=1.1;//左加速
- 723   5                                  loc_sdr*=0.9;//右减速
- 724   5                              }//向右转
- 725   4                              fun_motorsrl(mot_r,loc_sdr);
- 726   4                              fun_motorsrl(mot_l,loc_sdl);
- 727   4                          }
- 728   3                          break;
- 729   3                  }
- 730   2                  break;
- 731   2              case tfl_start://运行带加速的前冲
- 732   2      
- 733   2                  break;
- 734   2              case tfl_end://运行带减速的前冲
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 13  
+ 742   3                          loc_con++;//执行下一步
+ 743   3                          break;
+ 744   3                      case 1://第二步
+ 745   3                          if(str_tfl.delay<=var_timer){//计时时间到
+ 746   4                              fun_motorsrl(mot_rl,0);//停止电机
+ 747   4                              str_tfl.run+=2;//指针指向下一组过程
+ 748   4                              str_tfl.delay=0;//延时计数器归零
+ 749   4                              loc_con=0;//分步运行标志位归零
+ 750   4                          }
+ 751   3                          else{
+ 752   4                              if(in_ls1&&!in_ls8){//1亮8不亮
+ 753   5                                  loc_sdl*=0.5;//左减速
+ 754   5                                  loc_sdr*=1.5;//右加速
+ 755   5                              }//向左转
+ 756   4                              if(in_ls8&&!in_ls1){//8亮1不亮
+ 757   5                                  loc_sdl*=1.5;//左加速
+ 758   5                                  loc_sdr*=0.5;//右减速
+ 759   5                              }//向右转
+ 760   4                              if(in_ls2&&!in_ls7){//2亮7不亮
+ 761   5                                  loc_sdl*=0.7;//左减速
+ 762   5                                  loc_sdr*=1.3;//右加速
+ 763   5                              }//向左转
+ 764   4                              if(in_ls7&&!in_ls2){//7亮2不亮
+ 765   5                                  loc_sdl*=1.3;//左加速
+ 766   5                                  loc_sdr*=0.7;//右减速
+ 767   5                              }//向右转
+ 768   4                              if(in_ls3&&!in_ls6){//3亮6不亮
+ 769   5                                  loc_sdl*=0.9;//左减速
+ 770   5                                  loc_sdr*=1.1;//右加速
+ 771   5                              }//向左转
+ 772   4                              if(in_ls6&&!in_ls3){//6亮3不亮
+ 773   5                                  loc_sdl*=1.1;//左加速
+ 774   5                                  loc_sdr*=0.9;//右减速
+ 775   5                              }//向右转
+ 776   4                              fun_motorsrl(mot_r,loc_sdr);
+ 777   4                              fun_motorsrl(mot_l,loc_sdl);
+ 778   4                          }
+ 779   3                          break;
+ 780   3                  }
+ 781   2                  break;
+ 782   2              case tfl_start://运行带加速的前冲
+ 783   2      
+ 784   2                  break;
+ 785   2              case tfl_end://运行带减速的前冲
+ 786   2      
+ 787   2                  break;
+ 788   2          }
+ 789   1      }//定时器移动
+ 790          void fun_folline(uc par_con,uc par_speed){
+ 791   1          uc loc_con=par_con;//巡线条数标志位
+ 792   1          uc loc_sdr,loc_sdl;//左右轮速度
+ 793   1          uc loc_online;//在线标志位
+ 794   1          while(loc_con){
+ 795   2              if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7)){//如果中间6个灯全亮,
+             -左右亮任意一个
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 14  
 
- 735   2      
- 736   2                  break;
- 737   2          }
- 738   1      }//定时器移动
- 739          void fun_stope2prom(){
- 740   1          IAP_CONTR = 0;                  //关闭IAP功能
- 741   1          IAP_CMD = 0;                    //清除命令
- 742   1          IAP_TRIG = 0;                   //清除触发寄存器
- 743   1          IAP_ADDRH = 0x80;               //数据指针指向非EEPROM区
- 744   1          IAP_ADDRL = 0;                  //清除IAP地址
- 745   1      }//关闭EEPROM功能(IapIdle)
- 746          uc fun_reade2prom(ui par_add){
- 747   1          uc loc_dat;                     //数据缓冲区
- 748   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
- 749   1          IAP_CMD = 1;                    //设置EEPROM读命令
- 750   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
- 751   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
- 752   1          IAP_TRIG = 0x5a;                //触发
- 753   1          IAP_TRIG = 0xa5;                //再次触发
- 754   1          fun_delay(10,del_us);           //稍等一会儿
- 755   1          loc_dat = IAP_DATA;             //读出EEPROM中的数据
- 756   1          fun_stope2prom();               //关闭EEPROM功能
- 757   1          return loc_dat;                 //返回读取结果
- 758   1      }//读取EEPROM数据
- 759          void fun_writee2prom(ui par_add,uc par_dat){
- 760   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
- 761   1          IAP_CMD = 2;                    //设置EEPROM写入命令
- 762   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
- 763   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
- 764   1          IAP_DATA = par_dat;             //写入数据
- 765   1          IAP_TRIG = 0x5a;                //触发
- 766   1          IAP_TRIG = 0xa5;                //再次触发
- 767   1          fun_delay(10,del_us);           //稍等一会儿
- 768   1          fun_stope2prom();               //关闭EEPROM功能
- 769   1      }//写EEPROM数据
- 770          void fun_cleane2prom(ui par_add){
- 771   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
- 772   1          IAP_CMD = 3;                    //设置EEPROM擦除命令
- 773   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
- 774   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
- 775   1          IAP_TRIG = 0x5a;                //触发
- 776   1          IAP_TRIG = 0xa5;                //再次触发
- 777   1          fun_delay(10,del_us);           //稍等一会儿
- 778   1          fun_stope2prom();               //关闭EEPROM功能
- 779   1      }//清除EEPROM数据
- 780          void fun_calibration(){
- 781   1          // fun_sj1(sjp_1);//升到最上位
- 782   1          ul loc_time;
- 783   1          fun_py1(tra_q);//移动到最前端
- 784   1          fun_py1(tra_h);//移动到最后端
- 785   1          loc_time=var_timer;
- 786   1          fun_py1(tra_q);//移动到前端并计时
- 787   1          fun_py1(tra_h);//移动到后端
- 788   1          loc_time=var_timer-loc_time;
- 789   1          loc_time*=0.5;
- 790   1          str_cod.py1zh=loc_time*0.5;//从后到中间
- 791   1          str_cod.py1qz=loc_time*0.5;//从前到中间
- 792   1          str_cod.py1qkh=loc_time*0.75;//从前到靠后
- 793   1          str_cod.py1kqh=loc_time*0.564;//从靠前到后
- 794   1          str_cod.py1qkq=loc_time*0.34;//从前到靠前
- 795   1          str_cod.py1khh=loc_time*0.2701;//从后到靠后
- 796   1          str_cod.py1kqz=loc_time*0.189;//从靠前到中间
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 14  
+ 796   3                  loc_online=tf_ture;//标志位记录在线
+ 797   3                  fun_motors(mot_rl,par_speed);//按照常规速度过线
+ 798   3              }
+ 799   2              else if(loc_online==tf_ture){//如果标志位记录在线,而且不符合在线特征
+ 800   3                  loc_online=tf_false;//标志位记录不在线
+ 801   3                  loc_con--;//参数值减1,记录已经走了一条线
+ 802   3              }
+ 803   2              else{
+ 804   3                  loc_sdr=loc_sdl=par_speed;
+ 805   3                  if(in_ls1&&!in_ls8){//1亮8不亮
+ 806   4                      loc_sdl*=0.5;//左减速
+ 807   4                      loc_sdr*=1.5;//右加速
+ 808   4                  }//向左转
+ 809   3                  if(in_ls8&&!in_ls1){//8亮1不亮
+ 810   4                      loc_sdl*=1.5;//左加速
+ 811   4                      loc_sdr*=0.5;//右减速
+ 812   4                  }//向右转
+ 813   3                  if(in_ls2&&!in_ls7){//2亮7不亮
+ 814   4                      loc_sdl*=0.7;//左减速
+ 815   4                      loc_sdr*=1.3;//右加速
+ 816   4                  }//向左转
+ 817   3                  if(in_ls7&&!in_ls2){//7亮2不亮
+ 818   4                      loc_sdl*=1.3;//左加速
+ 819   4                      loc_sdr*=0.7;//右减速
+ 820   4                  }//向右转
+ 821   3                  if(in_ls3&&!in_ls6){//3亮6不亮
+ 822   4                      loc_sdl*=0.9;//左减速
+ 823   4                      loc_sdr*=1.1;//右加速
+ 824   4                  }//向左转
+ 825   3                  if(in_ls6&&!in_ls3){//6亮3不亮
+ 826   4                      loc_sdl*=1.1;//左加速
+ 827   4                      loc_sdr*=0.9;//右减速
+ 828   4                  }//向右转
+ 829   3                  fun_motors(mot_r,loc_sdr);
+ 830   3                  fun_motors(mot_l,loc_sdl);
+ 831   3                  fun_delay(1,del_ms);
+ 832   3              }
+ 833   2          }//如果巡线条数不为0
+ 834   1          fun_qc(65,40);
+ 835   1      }//主函数巡线
+ 836          void fun_turn(enum varENU_tur par_model,uc par_speed){
+ 837   1          switch(par_model){//获取参数
+ 838   2              case tur_r90://右转90
+ 839   2                  fun_motors(mot_l,par_speed);//左轮向前
+ 840   2                  fun_motors(mot_r,-par_speed);//右轮向后
+ 841   2                  fun_delay(str_cod.turn90,del_ms);//计时
+ 842   2                  break;
+ 843   2              case tur_l90://左转90
+ 844   2                  fun_motors(mot_l,-par_speed);//左轮向后
+ 845   2                  fun_motors(mot_r,par_speed);//右轮向前
+ 846   2                  fun_delay(str_cod.turn90,del_ms);//计时
+ 847   2                  break;
+ 848   2              case tur_r180://右转180
+ 849   2                  fun_motors(mot_l,par_speed);//左轮向前
+ 850   2                  fun_motors(mot_r,-par_speed);//右轮向后
+ 851   2                  fun_delay(str_cod.turn180,del_ms);//计时
+ 852   2                  break;
+ 853   2              case tur_l180://左转180
+ 854   2                  fun_motors(mot_l,-par_speed);//左轮向后
+ 855   2                  fun_motors(mot_r,par_speed);//左轮向前
+ 856   2                  fun_delay(str_cod.turn180,del_ms);//计时
+ 857   2                  break;
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 15  
 
- 797   1          str_cod.py1zkh=loc_time*0.20;//从靠后到中间.
- 798   1          str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
- 799   1      }//自动校准平移参数
- 800          void fun_port(){
- 801   1          PCON|=0x80;     //使能波特率倍速位SMOD
- 802   1          SCON=0x50;      //8位数据,可变波特率
- 803   1          AUXR|=0x04;     //独立波特率发生器时钟为Fosc,即1T
- 804   1          BRT=0xD9;       //设定独立波特率发生器重装值
- 805   1          AUXR|=0x01;     //串口1选择独立波特率发生器为波特率发生器
- 806   1          AUXR|=0x10;     //启动独立波特率发生器
- 807   1          TI=1;           //打开串口传输功能
- 808   1      }//串口初始化
- 809          void fun_test(){
- 810   1          fun_sz1(han_j);
- 811   1          fun_delay(1,del_s);
- 812   1          fun_sz1(han_s);
- 813   1          fun_delay(1,del_s);
- 814   1          fun_sz1(han_j);
- 815   1          fun_delay(1,del_s);
- 816   1          fun_sz1(han_s);
- 817   1          fun_delay(1,del_s);
- 818   1      
- 819   1          str_begin.pywz=tra_h;
- 820   1          fun_py1(tra_q);
- 821   1          fun_delay(1,del_s);
- 822   1          fun_py1(tra_h);
- 823   1          fun_delay(1,del_s);
- 824   1          fun_py1(tra_q);
- 825   1          fun_delay(1,del_s);
- 826   1          fun_py1(tra_h);
- 827   1          fun_delay(1,del_s);
- 828   1      
- 829   1          fun_sj1(sjp_1);
- 830   1          fun_delay(1,del_s);
- 831   1          fun_sj1(sjp_2);
- 832   1          fun_delay(1,del_s);
- 833   1          fun_sj1(sjp_3);
- 834   1          fun_delay(1,del_s);
- 835   1          fun_sj1(sjp_4);
- 836   1          fun_delay(1,del_s);
- 837   1          fun_sj1(sjp_5);
- 838   1          fun_delay(1,del_s);
- 839   1          fun_sj1(sjp_4);
- 840   1          fun_delay(1,del_s);
- 841   1          fun_sj1(sjp_3);
- 842   1          fun_delay(1,del_s);
- 843   1          fun_sj1(sjp_2);
- 844   1          fun_delay(1,del_s);
- 845   1          fun_sj1(sjp_1);
- 846   1      
- 847   1          str_now.hzfx=str_begin.hzfx;
- 848   1          str_begin.hzfx=dir_up;
- 849   1          fun_hz1(dir_right);
- 850   1          fun_delay(1,del_s);
- 851   1          fun_hz1(dir_up);
- 852   1          fun_delay(1,del_s);
- 853   1          fun_hz1(dir_right);
- 854   1          fun_delay(1,del_s);
- 855   1          fun_hz1(dir_up);
- 856   1          fun_delay(1,del_s);
- 857   1          str_begin.hzfx=str_now.hzfx;
- 858   1      
-C51 COMPILER V9.54   8023                                                                  09/11/2015 16:28:36 PAGE 15  
+ 858   2          }
+ 859   1          while(!in_ls4||!in_ls5);
+ 860   1          fun_motors(mot_rl,0);//停止电机
+ 861   1      }//主函数转弯
+ 862          void fun_qc(uc par_time,uc par_speed){
+ 863   1          uc loc_sdr,loc_sdl;//左右轮速度
+ 864   1          str_tfl.delay=var_timer+par_time*10;//延时时间(毫秒)为参数的10倍
+ 865   1          while(str_tfl.delay>var_timer){
+ 866   2              loc_sdr=loc_sdl=par_speed;
+ 867   2              if(in_ls1&&!in_ls8){//1亮8不亮
+ 868   3                  loc_sdl*=0.5;//左减速
+ 869   3                  loc_sdr*=1.5;//右加速
+ 870   3              }//向左转
+ 871   2              if(in_ls8&&!in_ls1){//8亮1不亮
+ 872   3                  loc_sdl*=1.5;//左加速
+ 873   3                  loc_sdr*=0.5;//右减速
+ 874   3              }//向右转
+ 875   2              if(in_ls2&&!in_ls7){//2亮7不亮
+ 876   3                  loc_sdl*=0.7;//左减速
+ 877   3                  loc_sdr*=1.3;//右加速
+ 878   3              }//向左转
+ 879   2              if(in_ls7&&!in_ls2){//7亮2不亮
+ 880   3                  loc_sdl*=1.3;//左加速
+ 881   3                  loc_sdr*=0.7;//右减速
+ 882   3              }//向右转
+ 883   2              if(in_ls3&&!in_ls6){//3亮6不亮
+ 884   3                  loc_sdl*=0.9;//左减速
+ 885   3                  loc_sdr*=1.1;//右加速
+ 886   3              }//向左转
+ 887   2              if(in_ls6&&!in_ls3){//6亮3不亮
+ 888   3                  loc_sdl*=1.1;//左加速
+ 889   3                  loc_sdr*=0.9;//右减速
+ 890   3              }//向右转
+ 891   2              fun_motors(mot_r,loc_sdr);
+ 892   2              fun_motors(mot_l,loc_sdl);
+ 893   2              fun_delay(1,del_ms);
+ 894   2          }
+ 895   1          fun_motors(mot_rl,0);//停止电机
+ 896   1      }//主函数前冲
+ 897          void fun_stope2prom(){
+ 898   1          IAP_CONTR = 0;                  //关闭IAP功能
+ 899   1          IAP_CMD = 0;                    //清除命令
+ 900   1          IAP_TRIG = 0;                   //清除触发寄存器
+ 901   1          IAP_ADDRH = 0x80;               //数据指针指向非EEPROM区
+ 902   1          IAP_ADDRL = 0;                  //清除IAP地址
+ 903   1      }//关闭EEPROM功能(IapIdle)
+ 904          uc fun_reade2prom(ui par_add){
+ 905   1          uc loc_dat;                     //数据缓冲区
+ 906   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+ 907   1          IAP_CMD = 1;                    //设置EEPROM读命令
+ 908   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+ 909   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+ 910   1          IAP_TRIG = 0x5a;                //触发
+ 911   1          IAP_TRIG = 0xa5;                //再次触发
+ 912   1          fun_delay(10,del_us);           //稍等一会儿
+ 913   1          loc_dat = IAP_DATA;             //读出EEPROM中的数据
+ 914   1          fun_stope2prom();               //关闭EEPROM功能
+ 915   1          return loc_dat;                 //返回读取结果
+ 916   1      }//读取EEPROM数据
+ 917          void fun_writee2prom(ui par_add,uc par_dat){
+ 918   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+ 919   1          IAP_CMD = 2;                    //设置EEPROM写入命令
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 16  
 
- 859   1          fun_motors14(mot_rl,60);
- 860   1          fun_delay(1,del_s);
- 861   1          fun_motors14(mot_rl,0);
- 862   1          fun_delay(1,del_s);
- 863   1      
- 864   1          fun_motors14(mot_rl,-60);
- 865   1          fun_delay(1,del_s);
- 866   1          fun_motors14(mot_rl,0);
- 867   1          fun_delay(1,del_s);
- 868   1      
- 869   1          fun_motors14(mot_r,40);
- 870   1          fun_motors14(mot_l,-40);
- 871   1          fun_delay(1,del_s);
- 872   1          fun_motors14(mot_rl,0);
- 873   1          fun_delay(1,del_s);
- 874   1      
- 875   1          fun_motors14(mot_r,-40);
- 876   1          fun_motors14(mot_l,40);
- 877   1          fun_delay(1,del_s);
- 878   1          fun_motors14(mot_rl,0);
- 879   1      }//测试程序
- 880          uc fun_min(uc par_num,...){
- 881   1          va_list loc_argp;//保存参数结构
- 882   1          uc loc_min=par_num;//现在的最小值就是第一个
- 883   1          uc loc_shu;//当前参数
- 884   1          va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确�
+ 920   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+ 921   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+ 922   1          IAP_DATA = par_dat;             //写入数据
+ 923   1          IAP_TRIG = 0x5a;                //触发
+ 924   1          IAP_TRIG = 0xa5;                //再次触发
+ 925   1          fun_delay(10,del_us);           //稍等一会儿
+ 926   1          fun_stope2prom();               //关闭EEPROM功能
+ 927   1      }//写EEPROM数据
+ 928          void fun_cleane2prom(ui par_add){
+ 929   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
+ 930   1          IAP_CMD = 3;                    //设置EEPROM擦除命令
+ 931   1          IAP_ADDRL = par_add;            //设置EEPROM地址低八位
+ 932   1          IAP_ADDRH = par_add >> 8;       //设置EEPROM地址高八位
+ 933   1          IAP_TRIG = 0x5a;                //触发
+ 934   1          IAP_TRIG = 0xa5;                //再次触发
+ 935   1          fun_delay(10,del_us);           //稍等一会儿
+ 936   1          fun_stope2prom();               //关闭EEPROM功能
+ 937   1      }//清除EEPROM数据
+ 938          void fun_calibration(){
+ 939   1          // fun_sj1(sjp_1);//升到最上位
+ 940   1          ul loc_time;
+ 941   1          fun_py1(tra_q);//移动到最前端
+ 942   1          fun_py1(tra_h);//移动到最后端
+ 943   1          loc_time=var_timer;
+ 944   1          fun_py1(tra_q);//移动到前端并计时
+ 945   1          fun_py1(tra_h);//移动到后端
+ 946   1          loc_time=var_timer-loc_time;
+ 947   1          loc_time*=0.5;
+ 948   1          str_cod.py1zh=loc_time*0.5;//从后到中间
+ 949   1          str_cod.py1qz=loc_time*0.5;//从前到中间
+ 950   1          str_cod.py1qkh=loc_time*0.75;//从前到靠后
+ 951   1          str_cod.py1kqh=loc_time*0.564;//从靠前到后
+ 952   1          str_cod.py1qkq=loc_time*0.34;//从前到靠前
+ 953   1          str_cod.py1khh=loc_time*0.2701;//从后到靠后
+ 954   1          str_cod.py1kqz=loc_time*0.189;//从靠前到中间
+ 955   1          str_cod.py1zkh=loc_time*0.20;//从靠后到中间.
+ 956   1          str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
+ 957   1      }//自动校准平移参数
+ 958          void fun_port(){
+ 959   1          /*
+ 960   1          PCON|=0x80;     //使能波特率倍速位SMOD
+ 961   1          SCON=0x50;      //8位数据,可变波特率
+ 962   1          AUXR|=0x04;     //独立波特率发生器时钟为Fosc,即1T
+ 963   1          BRT=0xD9;       //设定独立波特率发生器重装值
+ 964   1          AUXR|=0x01;     //串口1选择独立波特率发生器为波特率发生器
+ 965   1          AUXR|=0x10;     //启动独立波特率发生器
+ 966   1          TI=1;           //打开串口传输功能
+ 967   1          */
+ 968   1          //38400bps@30.000MHz
+ 969   1          PCON |= 0x80;       //使能波特率倍速位SMOD
+ 970   1          SCON = 0x50;        //8位数据,可变波特率
+ 971   1          AUXR |= 0x04;       //独立波特率发生器时钟为Fosc,即1T
+ 972   1          BRT = 0xCF;     //设定独立波特率发生器重装值
+ 973   1          AUXR |= 0x01;       //串口1选择独立波特率发生器为波特率发生器
+ 974   1          AUXR |= 0x10;       //启动独立波特率发生器
+ 975   1          TI=1;           //打开串口传输功能
+ 976   1      }//串口初始化
+ 977          void fun_test(){
+ 978   1          fun_sz1(han_j);
+ 979   1          fun_delay(1,del_s);
+ 980   1          fun_sz1(han_s);
+ 981   1          fun_delay(1,del_s);
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 17  
+
+ 982   1          fun_sz1(han_j);
+ 983   1          fun_delay(1,del_s);
+ 984   1          fun_sz1(han_s);
+ 985   1          fun_delay(1,del_s);
+ 986   1      
+ 987   1          str_begin.pywz=tra_h;
+ 988   1          fun_py1(tra_q);
+ 989   1          fun_delay(1,del_s);
+ 990   1          fun_py1(tra_h);
+ 991   1          fun_delay(1,del_s);
+ 992   1          fun_py1(tra_q);
+ 993   1          fun_delay(1,del_s);
+ 994   1          fun_py1(tra_h);
+ 995   1          fun_delay(1,del_s);
+ 996   1      
+ 997   1          fun_sj1(sjp_1);
+ 998   1          fun_delay(1,del_s);
+ 999   1          fun_sj1(sjp_2);
+1000   1          fun_delay(1,del_s);
+1001   1          fun_sj1(sjp_3);
+1002   1          fun_delay(1,del_s);
+1003   1          fun_sj1(sjp_4);
+1004   1          fun_delay(1,del_s);
+1005   1          fun_sj1(sjp_5);
+1006   1          fun_delay(1,del_s);
+1007   1          fun_sj1(sjp_4);
+1008   1          fun_delay(1,del_s);
+1009   1          fun_sj1(sjp_3);
+1010   1          fun_delay(1,del_s);
+1011   1          fun_sj1(sjp_2);
+1012   1          fun_delay(1,del_s);
+1013   1          fun_sj1(sjp_1);
+1014   1      
+1015   1          str_now.hzfx=str_begin.hzfx;
+1016   1          str_begin.hzfx=dir_up;
+1017   1          fun_hz1(dir_right);
+1018   1          fun_delay(1,del_s);
+1019   1          fun_hz1(dir_up);
+1020   1          fun_delay(1,del_s);
+1021   1          fun_hz1(dir_right);
+1022   1          fun_delay(1,del_s);
+1023   1          fun_hz1(dir_up);
+1024   1          fun_delay(1,del_s);
+1025   1          str_begin.hzfx=str_now.hzfx;
+1026   1      
+1027   1          fun_motors(mot_rl,60);
+1028   1          fun_delay(1,del_s);
+1029   1          fun_motors(mot_rl,0);
+1030   1          fun_delay(1,del_s);
+1031   1      
+1032   1          fun_motors(mot_rl,-60);
+1033   1          fun_delay(1,del_s);
+1034   1          fun_motors(mot_rl,0);
+1035   1          fun_delay(1,del_s);
+1036   1      
+1037   1          fun_motors(mot_r,40);
+1038   1          fun_motors(mot_l,-40);
+1039   1          fun_delay(1,del_s);
+1040   1          fun_motors(mot_rl,0);
+1041   1          fun_delay(1,del_s);
+1042   1      
+1043   1          fun_motors(mot_r,-40);
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 18  
+
+1044   1          fun_motors(mot_l,40);
+1045   1          fun_delay(1,del_s);
+1046   1          fun_motors(mot_rl,0);
+1047   1      }//测试程序
+1048          uc fun_min(uc par_num,...){
+1049   1          va_list loc_argp;//保存参数结构
+1050   1          uc loc_min=par_num;//现在的最小值就是第一个
+1051   1          uc loc_shu;//当前参数
+1052   1          va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确�
              -��的参数
- 885   1          loc_shu=va_arg(loc_argp,uc);//取出下一个参数
- 886   1          do{
- 887   2              if(loc_shu<loc_min)
- 888   2                  loc_min=loc_shu;
- 889   2              loc_shu=va_arg(loc_argp,uc);//取出下一个参数
- 890   2          }while(loc_shu!=def_end);
- 891   1          va_end(loc_argp);//结束
- 892   1          return loc_min;//退出
- 893   1      }//求最小值
- 894          void fun_coordinate(){
- 895   1          
- 896   1      }//自动巡线之坐标
+1053   1          loc_shu=va_arg(loc_argp,uc);//取出下一个参数
+1054   1          do{
+1055   2              if(loc_shu<loc_min)
+1056   2                  loc_min=loc_shu;
+1057   2              loc_shu=va_arg(loc_argp,uc);//取出下一个参数
+1058   2          }while(loc_shu!=def_end);
+1059   1          va_end(loc_argp);//结束
+1060   1          return loc_min;//退出
+1061   1      }//求最小值
+1062          void fun_coordinate(){
+1063   1          
+1064   1      }//自动巡线之坐标
+1065          void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
+1066   1          xdata uc loc_data[8][5];
+1067   1          //将参数切片传递给数组的各个元素
+1068   1          loc_data[3][2]=(par_37/10000000)%10;
+1069   1          loc_data[3][3]=(par_37/1000000)%10;
+1070   1          loc_data[3][4]=(par_37/100000)%10;
+1071   1          loc_data[3][5]=(par_37/10000)%10;
+1072   1          loc_data[7][2]=(par_37/1000)%10;
+1073   1          loc_data[7][3]=(par_37/100)%10;
+1074   1          loc_data[7][4]=(par_37/10)%10;
+1075   1          loc_data[7][5]=par_37%10;
+1076   1      
+1077   1          loc_data[0][2]=(par_04/10000000)%10;
+1078   1          loc_data[0][3]=(par_04/1000000)%10;
+1079   1          loc_data[0][4]=(par_04/100000)%10;
+1080   1          loc_data[0][5]=(par_04/10000)%10;
+1081   1          loc_data[4][2]=(par_04/1000)%10;
+1082   1          loc_data[4][3]=(par_04/100)%10;
+1083   1          loc_data[4][4]=(par_04/10)%10;
+1084   1          loc_data[4][5]=par_04%10;
+1085   1      
+1086   1          if(str_begin.hzfx==dir_up||str_begin.hzfx==dir_down)//如果回转方向在上下
+1087   1              fun_hz1(dir_right);//那么就移到右边
+1088   1          while(0){
+1089   2              if(str_begin.hzfx==dir_right){
+1090   3                  ;
+1091   3              }//如果在右边
+1092   2              else{
+1093   3                  ;
+1094   3              }//如果在左边
+1095   2          }
+1096   1      
+1097   1      }//自动抓件
+1098          void fun_zhuajian(){
+1099   1          fun_folline(2,70);
+1100   1          fun_turn(tur_l90,40);
+1101   1          fun_folline(1,40);
+1102   1      }//从起始区走到抓件区
+1103          void fun_back(){
+1104   1          fun_motors(mot_rl,-20);
+C51 COMPILER V9.54   8023                                                                  09/13/2015 15:13:32 PAGE 19  
+
+1105   1          fun_delay(1,del_s);
+1106   1      
+1107   1          fun_motors(mot_rl,-50);
+1108   1          fun_delay(1,del_s);
+1109   1      
+1110   1          fun_motors(mot_r,-50);
+1111   1          fun_motors(mot_l,-20);
+1112   1          fun_delay(1,del_s);
+1113   1      }//从抓件区回到起始区
+*** WARNING C294 IN LINE 1089 OF program\8023.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   3790    ----
+   CODE SIZE        =   5642    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =    147    ----
+   XDATA SIZE       =    147      40
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      5      30
+   DATA SIZE        =      5      51
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
