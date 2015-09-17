@@ -596,13 +596,155 @@ void fun_hz1(enum varENU_dir par_model){
     fun_motors(mot_hz,0);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
-
-//void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){//平移回转同步运动
-//    switch(){
-//        ;
-//    }
-//}
-
+void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
+    switch(par_hzmodel){
+        case dir_left://要去左边
+            switch(str_begin.hzfx){
+                case dir_right://现在在右边
+                
+                    break;
+                case dir_up://现在在上面
+                
+                    break;
+                case dir_down://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        case dir_right://要去右边
+            switch(str_begin.hzfx){
+                case dir_left://现在在左边
+                
+                    break;
+                case dir_up://现在在上面
+                
+                    break;
+                case dir_down://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        case dir_up://要去上面
+            switch(str_begin.hzfx){
+                case dir_left://现在在左边
+                
+                    break;
+                case dir_right://现在在右边
+                
+                    break;
+                case dir_down://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        case dir_down://要去下面
+            switch(str_begin.hzfx){
+                case dir_left://现在在左边
+                
+                    break;
+                case dir_right://现在在右边
+                
+                    break;
+                case dir_up://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        default:
+            break;
+    }//获取现在要去的回转位置
+    switch(par_pymodel){
+        case tra_q://要去前面
+        
+            break;
+        case tra_kq://要去靠前
+        
+            break;
+        case tra_z://要去中间
+        
+            break;
+        case tra_kh://要去靠后
+        
+            break;
+        case tra_h://要去后面
+        
+            break;
+        default:
+            break;
+    }//获取现在平移所在的位置
+    switch(par_hzmodel){
+        case dir_left://要去左边
+            switch(str_begin.hzfx){
+                case dir_right://现在在右边
+                
+                    break;
+                case dir_up://现在在上面
+                
+                    break;
+                case dir_down://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        case dir_right://要去右边
+            switch(str_begin.hzfx){
+                case dir_left://现在在左边
+                
+                    break;
+                case dir_up://现在在上面
+                
+                    break;
+                case dir_down://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        case dir_up://要去上面
+            switch(str_begin.hzfx){
+                case dir_left://现在在左边
+                
+                    break;
+                case dir_right://现在在右边
+                
+                    break;
+                case dir_down://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        case dir_down://要去下面
+            switch(str_begin.hzfx){
+                case dir_left://现在在左边
+                
+                    break;
+                case dir_right://现在在右边
+                
+                    break;
+                case dir_up://现在在下面
+                
+                    break;
+                default:
+                    break;
+            }//获取现在回转所在的位置
+            break;
+        default:
+            break;
+    }//获取现在要去的回转位置
+}//平移回转同步运动
 void fun_jtjp(){
     while(1){
         if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
@@ -642,7 +784,7 @@ void fun_jtjp(){
 }//静态纠偏
 void fun_timermove(){
     static uc loc_con=0;//需要分步做的动作需要用到此静态私有分步标志位
-    uc loc_sdl=str_tfl.gospeed,loc_sdr=str_tfl.gospeed;
+    uc loc_sdl,loc_sdr;//左轮速度和右轮速度的局部变量
     switch(*str_tfl.run){//选择运行方式
         case def_end://运行结束
             fun_motorsrl(mot_rl,0);//再次停止电机运动
@@ -661,6 +803,7 @@ void fun_timermove(){
                     (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
                 }
                 else{
+                    loc_sdl=loc_sdr=str_tfl.gospeed;//巡线速度为str_tfl.gospeed
                     if(in_ls1&&!in_ls8){//1亮8不亮
                         loc_sdl*=0.5;//左减速
                         loc_sdr*=1.5;//右加速
@@ -749,6 +892,7 @@ void fun_timermove(){
                         loc_con=0;//分步运行标志位归零
                     }
                     else{
+                        loc_sdl=loc_sdr=str_tfl.cachespeed;//前冲速度为str_tfl.cachespeed
                         if(in_ls1&&!in_ls8){//1亮8不亮
                             loc_sdl*=0.5;//左减速
                             loc_sdr*=1.5;//右加速
@@ -1063,38 +1207,166 @@ void fun_coordinate(){
     
 }//自动巡线之坐标
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
-    xdata uc loc_data[8][5];
-    //将参数切片传递给数组的各个元素
-    loc_data[3][2]=(par_37/10000000)%10;
-    loc_data[3][3]=(par_37/1000000)%10;
-    loc_data[3][4]=(par_37/100000)%10;
-    loc_data[3][5]=(par_37/10000)%10;
-    loc_data[7][2]=(par_37/1000)%10;
-    loc_data[7][3]=(par_37/100)%10;
-    loc_data[7][4]=(par_37/10)%10;
-    loc_data[7][5]=par_37%10;
+    xdata uc loc_data[8][5][2];//8个抓件区(0~7),5个高度(0~4),0为现在件序/1为最终件序
+    xdata uc loc_high[8];//8个高度,每个为0-4(位置1~位置5),5表示没有件
+    memset(loc_data,0,sizeof(loc_data));//清空数组
+    
+    //将现有件序参数切片传递给数组的各个元素
+    loc_data[0][2][0]=(par_04/10000000)%10;
+    loc_data[0][3][0]=(par_04/1000000)%10;
+    loc_data[0][4][0]=(par_04/100000)%10;
+    loc_data[0][5][0]=(par_04/10000)%10;
+    loc_data[4][2][0]=(par_04/1000)%10;
+    loc_data[4][3][0]=(par_04/100)%10;
+    loc_data[4][4][0]=(par_04/10)%10;
+    loc_data[4][5][0]=par_04%10;
+    //将最终件序参数切片传递给数组的各个元素
+    loc_data[3][2][0]=(par_37/10000000)%10;
+    loc_data[3][3][0]=(par_37/1000000)%10;
+    loc_data[3][4][0]=(par_37/100000)%10;
+    loc_data[3][5][0]=(par_37/10000)%10;
+    loc_data[7][2][0]=(par_37/1000)%10;
+    loc_data[7][3][0]=(par_37/100)%10;
+    loc_data[7][4][0]=(par_37/10)%10;
+    loc_data[7][5][0]=par_37%10;
 
-    loc_data[0][2]=(par_04/10000000)%10;
-    loc_data[0][3]=(par_04/1000000)%10;
-    loc_data[0][4]=(par_04/100000)%10;
-    loc_data[0][5]=(par_04/10000)%10;
-    loc_data[4][2]=(par_04/1000)%10;
-    loc_data[4][3]=(par_04/100)%10;
-    loc_data[4][4]=(par_04/10)%10;
-    loc_data[4][5]=par_04%10;
+    //将次序传入数组
+    loc_data[3][2][1]=1;
+    loc_data[3][3][1]=2;
+    loc_data[3][4][1]=3;
+    loc_data[3][5][1]=4;
+    loc_data[7][2][1]=5;
+    loc_data[7][3][1]=6;
+    loc_data[7][4][1]=7;
+    loc_data[7][5][1]=8;
 
     if(str_begin.hzfx==dir_up||str_begin.hzfx==dir_down)//如果回转方向在上下
         fun_hz1(dir_right);//那么就移到右边
     while(0){
         if(str_begin.hzfx==dir_right){
-            ;
+            if(loc_high[0]<5){
+                if((loc_data[0][loc_high[0]][0]==loc_data[3][1][1])||
+                (loc_data[0][loc_high[0]][0]==loc_data[3][2][1])||
+                (loc_data[0][loc_high[0]][0]==loc_data[3][3][1])||
+                (loc_data[0][loc_high[0]][0]==loc_data[3][4][1])){
+                    if(loc_data[0][loc_high[0]][0]==loc_data[3][loc_high[3]][1]){
+                        MSG("0 --> 3")
+                    }//0 --> 3
+                    else{
+                        if(/*0 --> 1*/){
+                            /* code */
+                        }//0 --> 1
+                        else if(/*0 --> 2*/){
+                            /* code */
+                        }//0 --> 2
+                    }//不能一次到位的话
+                }//如果0区最上面的件应该放在3区
+                else if((loc_data[0][loc_high[0]][0]==loc_data[7][1][1])||
+                (loc_data[0][loc_high[0]][0]==loc_data[7][2][1])||
+                (loc_data[0][loc_high[0]][0]==loc_data[7][3][1])||
+                (loc_data[0][loc_high[0]][0]==loc_data[7][4][1])){
+                    if(loc_data[0][loc_high[0]][0]==loc_data[7][loc_high[7]][1]){
+                        MSG("0 --> 7")
+                    }//0 --> 7
+                    else{
+                        if(/*0 --> 5*/){
+                            /* code */
+                        }//0 --> 5
+                        else if(/*0 --> 6*/){
+                            /* code */
+                        }//0 --> 6
+                    }//不能一次到位的话
+                }//如果0区最上面的件应该放在7区
+            }//如果0区有件
+            if(loc_high[1]<5){
+                if(loc_data[1][loc_high[1]][0]==loc_data[3][loc_high[3]][1]){
+                    MSG("1 --> 3")
+                }//1 --> 3
+                else if(loc_data[1][loc_high[1]][0]==loc_data[7][loc_high[7]][1]){
+                    MSG("1 --> 7")
+                }//1 --> 7
+            }//如果1区有件
+            if(loc_high[2]<5){
+                if(loc_data[2][loc_high[2]][0]==loc_data[3][loc_high[3]][1]){
+                    MSG("2 --> 3")
+                }//2 --> 3
+                else if(loc_data[2][loc_high[2]][0]==loc_data[7][loc_high[7]][1]){
+                    MSG("2 --> 7")
+                }//2 --> 7
+            }//如果2区有件
         }//如果在右边
         else{
-            ;
+            if(loc_high[4]<5){
+                if(loc_data[4][loc_high[4]][0]==loc_data[7][loc_high[7]][1]){
+                    MSG("4 --> 7")
+                }//4 --> 7
+                else if(loc_data[4][loc_high[4]][0]==loc_data[3][loc_high[3]][1]){
+                    MSG("4 --> 3")
+                }//4 --> 3
+            }//如果区4有件
+            if(loc_high[5]<5){
+                if(loc_data[5][loc_high[5]][0]==loc_data[7][loc_high[7]][1]){
+                    MSG("5 --> 7")
+                }//5 --> 7
+                else if(loc_data[5][loc_high[5]][0]==loc_data[3][loc_high[3]][1]){
+                    MSG("5 --> 3")
+                }//5 --> 3
+            }//如果区5有件
+            if(loc_high[6]<5){
+                if(loc_data[6][loc_high[6]][0]==loc_data[7][loc_high[7]][1]){
+                    MSG("6 --> 7")
+                }//6 --> 7
+                else if(loc_data[6][loc_high[6]][0]==loc_data[3][loc_high[3]][1]){
+                    MSG("6 --> 3")
+                }//6 --> 3
+            }//如果区6有件
         }//如果在左边
     }
-
 }//自动抓件
+void fun_zjzt(uc par_model){
+    switch(par_model){
+        case 0:
+            fun_py1(tra_z);
+            fun_hz1(dir_left);
+            fun_py1(tra_h);
+            break;
+        case 1:
+            fun_py1(tra_z);
+            fun_hz1(dir_left);
+            fun_py1(tra_kh);
+            break;
+        case 2:
+            fun_py1(tra_z);
+            fun_hz1(dir_left);
+            fun_py1(tra_kq);
+            break;
+        case 3:
+            fun_py1(tra_z);
+            fun_hz1(dir_left);
+            fun_py1(tra_q);
+            break;
+        case 4:
+            fun_py1(tra_z);
+            fun_hz1(dir_right);
+            fun_py1(tra_q);
+            break;
+        case 5:
+            fun_py1(tra_z);
+            fun_hz1(dir_right);
+            fun_py1(tra_kq);
+            break;
+        case 6:
+            fun_py1(tra_z);
+            fun_hz1(dir_right);
+            fun_py1(tra_kh);
+            break;
+        case 7:
+            fun_py1(tra_z);
+            fun_hz1(dir_right);
+            fun_py1(tra_h);
+            break;
+    }
+}//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
 void fun_zhuajian(){
     fun_folline(2,70);
     fun_turn(tur_l90,40);

@@ -222,6 +222,7 @@
         pc run;             //正在运行的步骤(指针)
         char gospeed;       //运巡线行速度
         char turnspeed;     //转弯运行速度
+        char cachespeed;    //前冲速度
         char doing;         //正在移动标志位
         char online;        //在线标志位
         ul delay;           //延时变量
@@ -246,6 +247,7 @@
     extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py1(enum varENU_tra par_model);//平移单步运动
     extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
+    extern void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
     extern void fun_folline(uc par_con,uc par_speed);//主函数巡线
@@ -261,6 +263,7 @@
     extern uc   fun_min(uc par_num,...);//求最小值
     extern void fun_coordinate();//自动巡线之坐标
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
+    extern void fun_zjzt(uc par_model);//抓件状态
     extern void fun_zhuajian();//从起始区走到抓件区
     extern void fun_back();//从抓件区回到起始区
 /*---------------------------------------------------------------更新日志-----*/

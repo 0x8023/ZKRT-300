@@ -1024,637 +1024,637 @@ void fun_port(){
     AUXR|=0x10;       //启动独立波特率发生器
     TI=1;//打开串口传输功能
 }//串口初始化
-    // void fun_zhuajian(ul par_04,ul par_37){
-    //     xdata uc loc_data[8][5][2];//三维数组,8个区,5个高度
-    //     xdata uc loc_high[8];//8个高度
-    //     xdata uc loc_xh1=0,loc_xh2=0;//两个循环
-    //     xdata uc loc_flag=0;
+    void fun_zhuajian(ul par_04,ul par_37){
+        xdata uc loc_data[8][5][2];//三维数组,8个区,5个高度
+        xdata uc loc_high[8];//8个高度
+        xdata uc loc_xh1=0,loc_xh2=0;//两个循环
+        xdata uc loc_flag=0;
 
-    //     memset(loc_data,0,sizeof(loc_data));//清空数组
-    //     memset(loc_high,0,sizeof(loc_high));//清空数组
-    //     //起始区件号
-    //     loc_data[0][1][0]=(par_04/10000000)%10;//传入形参:区0的第1号件件号(最高位)
-    //     loc_data[0][2][0]=(par_04/1000000)%10;//传入形参:区0的第2号件件号
-    //     loc_data[0][3][0]=(par_04/100000)%10;//传入形参:区0的第3号件件号
-    //     loc_data[0][4][0]=(par_04/10000)%10;//传入形参:区0的第4号件件号(最低位)
-    //     loc_data[4][1][0]=(par_04/1000)%10;//传入形参:区4的第1号件件号(最高位)
-    //     loc_data[4][2][0]=(par_04/100)%10;//传入形参:区4的第2号件件号
-    //     loc_data[4][3][0]=(par_04/10)%10;//传入形参:区4的第3号件件号
-    //     loc_data[4][4][0]=par_04%10;//传入形参:区4的第4号件件号(最低位)
-    //     //目的区件号
-    //     loc_data[3][1][0]=(par_37/10000000)%10;//传入形参:区0的第1号件件号(最高位)
-    //     loc_data[3][2][0]=(par_37/1000000)%10;//传入形参:区0的第2号件件号
-    //     loc_data[3][3][0]=(par_37/100000)%10;//传入形参:区0的第3号件件号
-    //     loc_data[3][4][0]=(par_37/10000)%10;//传入形参:区0的第4号件件号(最低位)
-    //     loc_data[7][1][0]=(par_37/1000)%10;//传入形参:区4的第1号件件号(最高位)
-    //     loc_data[7][2][0]=(par_37/100)%10;//传入形参:区4的第2号件件号
-    //     loc_data[7][3][0]=(par_37/10)%10;//传入形参:区4的第3号件件号
-    //     loc_data[7][4][0]=par_37%10;//传入形参:区4的第4号件件号(最低位)
-    //     //目的次序
-    //     loc_data[3][1][1]=1;//标准次序:区3的第1号目的次序号(最高位)
-    //     loc_data[3][2][1]=2;//标准次序:区3的第2号目的次序号
-    //     loc_data[3][3][1]=3;//标准次序:区3的第3号目的次序号
-    //     loc_data[3][4][1]=4;//标准次序:区3的第4号目的次序号(最低位)
-    //     loc_data[7][1][1]=5;//标准次序:区7的第1号目的次序号(最高位)
-    //     loc_data[7][2][1]=6;//标准次序:区7的第2号目的次序号
-    //     loc_data[7][3][1]=7;//标准次序:区7的第3号目的次序号
-    //     loc_data[7][4][1]=8;//标准次序:区7的第4号目的次序号(最低位)
-    //     //根据形参统一次序
-    //     for(loc_xh1=4;loc_xh1>0;loc_xh1--){
-    //         if((loc_data[0][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[3][1][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[3][2][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[3][3][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[3][4][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[7][1][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[7][2][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[7][3][1];
-    //         else if((loc_data[0][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[0][loc_xh1][0]!=0))
-    //             loc_data[0][loc_xh1][1]=loc_data[7][4][1];
+        memset(loc_data,0,sizeof(loc_data));//清空数组
+        memset(loc_high,0,sizeof(loc_high));//清空数组
+        //起始区件号
+        loc_data[0][1][0]=(par_04/10000000)%10;//传入形参:区0的第1号件件号(最高位)
+        loc_data[0][2][0]=(par_04/1000000)%10;//传入形参:区0的第2号件件号
+        loc_data[0][3][0]=(par_04/100000)%10;//传入形参:区0的第3号件件号
+        loc_data[0][4][0]=(par_04/10000)%10;//传入形参:区0的第4号件件号(最低位)
+        loc_data[4][1][0]=(par_04/1000)%10;//传入形参:区4的第1号件件号(最高位)
+        loc_data[4][2][0]=(par_04/100)%10;//传入形参:区4的第2号件件号
+        loc_data[4][3][0]=(par_04/10)%10;//传入形参:区4的第3号件件号
+        loc_data[4][4][0]=par_04%10;//传入形参:区4的第4号件件号(最低位)
+        //目的区件号
+        loc_data[3][1][0]=(par_37/10000000)%10;//传入形参:区0的第1号件件号(最高位)
+        loc_data[3][2][0]=(par_37/1000000)%10;//传入形参:区0的第2号件件号
+        loc_data[3][3][0]=(par_37/100000)%10;//传入形参:区0的第3号件件号
+        loc_data[3][4][0]=(par_37/10000)%10;//传入形参:区0的第4号件件号(最低位)
+        loc_data[7][1][0]=(par_37/1000)%10;//传入形参:区4的第1号件件号(最高位)
+        loc_data[7][2][0]=(par_37/100)%10;//传入形参:区4的第2号件件号
+        loc_data[7][3][0]=(par_37/10)%10;//传入形参:区4的第3号件件号
+        loc_data[7][4][0]=par_37%10;//传入形参:区4的第4号件件号(最低位)
+        //目的次序
+        loc_data[3][1][1]=1;//标准次序:区3的第1号目的次序号(最高位)
+        loc_data[3][2][1]=2;//标准次序:区3的第2号目的次序号
+        loc_data[3][3][1]=3;//标准次序:区3的第3号目的次序号
+        loc_data[3][4][1]=4;//标准次序:区3的第4号目的次序号(最低位)
+        loc_data[7][1][1]=5;//标准次序:区7的第1号目的次序号(最高位)
+        loc_data[7][2][1]=6;//标准次序:区7的第2号目的次序号
+        loc_data[7][3][1]=7;//标准次序:区7的第3号目的次序号
+        loc_data[7][4][1]=8;//标准次序:区7的第4号目的次序号(最低位)
+        //根据形参统一次序
+        for(loc_xh1=4;loc_xh1>0;loc_xh1--){
+            if((loc_data[0][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[3][1][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[3][2][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[3][3][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[3][4][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[7][1][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[7][2][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[7][3][1];
+            else if((loc_data[0][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[0][loc_xh1][0]!=0))
+                loc_data[0][loc_xh1][1]=loc_data[7][4][1];
 
-    //         if((loc_data[4][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[3][1][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[3][2][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[3][3][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[3][4][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[7][1][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[7][2][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[7][3][1];
-    //         else if((loc_data[4][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[4][loc_xh1][0]!=0))
-    //             loc_data[4][loc_xh1][1]=loc_data[7][4][1];
-    //     }
-    //     //清空形参表(实际件序)
-    //     for(loc_xh1=0;loc_xh1<=7;loc_xh1++)
-    //         for(loc_xh2=0;loc_xh2<=4;loc_xh2++)
-    //             loc_data[loc_xh1][loc_xh2][0]=0;
-    //     for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
-    //         loc_data[0][loc_xh1][0]=loc_data[0][loc_xh1][1];
-    //         loc_data[4][loc_xh1][0]=loc_data[4][loc_xh1][1];
-    //     }//转移04的序号
-    //     for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
-    //         loc_data[0][loc_xh1][1]=0;
-    //         loc_data[1][loc_xh1][1]=0;
-    //         loc_data[2][loc_xh1][1]=0;
-    //         loc_data[4][loc_xh1][1]=0;
-    //         loc_data[5][loc_xh1][1]=0;
-    //         loc_data[6][loc_xh1][1]=0;
-    //     }//目的区除了3.7区全部清零
-    //     for(loc_xh1=0;loc_xh1<=7;loc_xh1++){
-    //         loc_high[loc_xh1]=4;//默认为没有件
-    //         for(loc_xh2=0;loc_xh2<=4;loc_xh2++){//5个高度的循环
-    //             if(loc_data[loc_xh1][loc_xh2][0]!=0){//如果放了件了
-    //                 loc_high[loc_xh1]=loc_xh2-1;//记录这个区最高空闲位置
-    //                 break;//继续区的循环
-    //             }
-    //         }
-    //     }//8个区的循环
+            if((loc_data[4][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[3][1][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[3][2][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[3][3][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[3][3][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[3][4][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[3][4][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[7][1][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[7][1][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[7][2][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[7][2][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[7][3][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[7][3][1];
+            else if((loc_data[4][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[4][loc_xh1][0]!=0))
+                loc_data[4][loc_xh1][1]=loc_data[7][4][1];
+        }
+        //清空形参表(实际件序)
+        for(loc_xh1=0;loc_xh1<=7;loc_xh1++)
+            for(loc_xh2=0;loc_xh2<=4;loc_xh2++)
+                loc_data[loc_xh1][loc_xh2][0]=0;
+        for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
+            loc_data[0][loc_xh1][0]=loc_data[0][loc_xh1][1];
+            loc_data[4][loc_xh1][0]=loc_data[4][loc_xh1][1];
+        }//转移04的序号
+        for(loc_xh1=0;loc_xh1<=4;loc_xh1++){
+            loc_data[0][loc_xh1][1]=0;
+            loc_data[1][loc_xh1][1]=0;
+            loc_data[2][loc_xh1][1]=0;
+            loc_data[4][loc_xh1][1]=0;
+            loc_data[5][loc_xh1][1]=0;
+            loc_data[6][loc_xh1][1]=0;
+        }//目的区除了3.7区全部清零
+        for(loc_xh1=0;loc_xh1<=7;loc_xh1++){
+            loc_high[loc_xh1]=4;//默认为没有件
+            for(loc_xh2=0;loc_xh2<=4;loc_xh2++){//5个高度的循环
+                if(loc_data[loc_xh1][loc_xh2][0]!=0){//如果放了件了
+                    loc_high[loc_xh1]=loc_xh2-1;//记录这个区最高空闲位置
+                    break;//继续区的循环
+                }
+            }
+        }//8个区的循环
 
-    //     fun_sj1(sjp_wz1);
-    //     fun_sz1(han_s);
-    //     if((str_begin.hzfx==dir_up)||(str_begin.hzfx==dir_down))//不在左右位转到左位
-    //         fun_planezt(0);
+        fun_sj1(sjp_wz1);
+        fun_sz1(han_s);
+        if((str_begin.hzfx==dir_up)||(str_begin.hzfx==dir_down))//不在左右位转到左位
+            fun_planezt(0);
 
-    //     while(1){
-    //         if(str_begin.hzfx==dir_left){
-    //             if((loc_data[0][loc_high[0]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[0]<4)){
-    //                 MSG("0 --> 3")
-    //                 fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                 fun_planezt(0);//平面状态0
-    //                 fun_sj2(loc_high[0]+1);//下降到区0最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到123最高位或向上一个格
-    //                     loc_high[0]<fun_min(3,loc_high[1],loc_high[2],loc_high[3])-1?
-    //                     loc_high[0]:fun_min(3,loc_high[1],loc_high[2],loc_high[3])-1);
-    //                 fun_planezt(3);//平面状态3
-    //                 fun_sj2(loc_high[3]);//下降到区3最高位
-    //                 fun_sz1(han_s);//松件
+        while(1){
+            if(str_begin.hzfx==dir_left){
+                if((loc_data[0][loc_high[0]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[0]<4)){
+                    MSG("0 --> 3")
+                    fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                    fun_planezt(0);//平面状态0
+                    fun_sj2(loc_high[0]+1);//下降到区0最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到123最高位或向上一个格
+                        loc_high[0]<fun_min(3,loc_high[1],loc_high[2],loc_high[3])-1?
+                        loc_high[0]:fun_min(3,loc_high[1],loc_high[2],loc_high[3])-1);
+                    fun_planezt(3);//平面状态3
+                    fun_sj2(loc_high[3]);//下降到区3最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[3][loc_high[3]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
-    //                 loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-    //                 loc_high[0]++;//更新区0最高位
-    //                 loc_high[3]--;//更新区3最高位
-    //             }//0 --> 3
-    //             else if((loc_data[0][loc_high[0]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[0]<4)){
-    //                 MSG("0 --> 7")
-    //                 fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                 fun_planezt(0);//平面状态0
-    //                 fun_sj2(loc_high[0]+1);//下降到区0最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到167最高位或向上一个格
-    //                     loc_high[0]<fun_min(3,loc_high[1],loc_high[6],loc_high[7])-1?
-    //                     loc_high[0]:fun_min(3,loc_high[1],loc_high[6],loc_high[7])-1);
-    //                 fun_planezt(7);//平面状态7
-    //                 fun_sj2(loc_high[7]);//下降到区7最高位
-    //                 fun_sz1(han_s);//松件
+                    loc_data[3][loc_high[3]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了3区
+                    loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+                    loc_high[0]++;//更新区0最高位
+                    loc_high[3]--;//更新区3最高位
+                }//0 --> 3
+                else if((loc_data[0][loc_high[0]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[0]<4)){
+                    MSG("0 --> 7")
+                    fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                    fun_planezt(0);//平面状态0
+                    fun_sj2(loc_high[0]+1);//下降到区0最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到167最高位或向上一个格
+                        loc_high[0]<fun_min(3,loc_high[1],loc_high[6],loc_high[7])-1?
+                        loc_high[0]:fun_min(3,loc_high[1],loc_high[6],loc_high[7])-1);
+                    fun_planezt(7);//平面状态7
+                    fun_sj2(loc_high[7]);//下降到区7最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[7][loc_high[7]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了7区
-    //                 loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-    //                 loc_high[0]++;//更新区0最高位
-    //                 loc_high[7]--;//更新区7最高位
-    //             }//0 --> 7
-    //             else if((loc_data[2][loc_high[2]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[2]<4)){
-    //                 MSG("2 --> 3")
-    //                 fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                 fun_planezt(2);//平面状态2
-    //                 fun_sj2(loc_high[2]+1);//下降到区2最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到3最高位或向上一个格
-    //                     loc_high[2]<loc_high[3]-1?
-    //                     loc_high[2]:loc_high[3]-1);
-    //                 fun_planezt(3);//平面状态3
-    //                 fun_sj2(loc_high[3]);//下降到区3最高位
-    //                 fun_sz1(han_s);//松件
+                    loc_data[7][loc_high[7]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了7区
+                    loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+                    loc_high[0]++;//更新区0最高位
+                    loc_high[7]--;//更新区7最高位
+                }//0 --> 7
+                else if((loc_data[2][loc_high[2]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[2]<4)){
+                    MSG("2 --> 3")
+                    fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                    fun_planezt(2);//平面状态2
+                    fun_sj2(loc_high[2]+1);//下降到区2最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到3最高位或向上一个格
+                        loc_high[2]<loc_high[3]-1?
+                        loc_high[2]:loc_high[3]-1);
+                    fun_planezt(3);//平面状态3
+                    fun_sj2(loc_high[3]);//下降到区3最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[3][loc_high[3]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了3区
-    //                 loc_data[2][loc_high[2]+1][0]=0;//2区木有了
-    //                 loc_high[2]++;//更新区2最高位
-    //                 loc_high[3]--;//更新区3最高位
-    //             }//2 --> 3
-    //             else if((loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[1]<4)){
-    //                 MSG("1 --> 3")
-    //                 fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                 fun_planezt(1);//平面状态1
-    //                 fun_sj2(loc_high[1]+1);//下降到区1最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到23最高位或向上一个格
-    //                     loc_high[1]<fun_min(2,loc_high[2],loc_high[3])-1?
-    //                     loc_high[1]:fun_min(2,loc_high[2],loc_high[3])-1);
-    //                 fun_planezt(3);//平面状态3
-    //                 fun_sj2(loc_high[3]);//下降到区3最高位
-    //                 fun_sz1(han_s);//松件
+                    loc_data[3][loc_high[3]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了3区
+                    loc_data[2][loc_high[2]+1][0]=0;//2区木有了
+                    loc_high[2]++;//更新区2最高位
+                    loc_high[3]--;//更新区3最高位
+                }//2 --> 3
+                else if((loc_data[1][loc_high[1]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[1]<4)){
+                    MSG("1 --> 3")
+                    fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                    fun_planezt(1);//平面状态1
+                    fun_sj2(loc_high[1]+1);//下降到区1最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到23最高位或向上一个格
+                        loc_high[1]<fun_min(2,loc_high[2],loc_high[3])-1?
+                        loc_high[1]:fun_min(2,loc_high[2],loc_high[3])-1);
+                    fun_planezt(3);//平面状态3
+                    fun_sj2(loc_high[3]);//下降到区3最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[3][loc_high[3]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了3区
-    //                 loc_data[1][loc_high[1]+1][0]=0;//1区木有了
-    //                 loc_high[1]++;//更新区1最高位
-    //                 loc_high[3]--;//更新区3最高位
-    //             }//1 --> 3
-    //             else{
-    //                 if(loc_high[0]<3){
-    //                     if((loc_data[0][loc_high[0]+1][0]==loc_data[3][1][1])||
-    //                        (loc_data[0][loc_high[0]+1][0]==loc_data[3][2][1])||
-    //                        (loc_data[0][loc_high[0]+1][0]==loc_data[3][3][1])||
-    //                        (loc_data[0][loc_high[0]+1][0]==loc_data[3][4][1])){
-    //                         if(((loc_high[1]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[1][loc_high[1]][0]))&&loc_high[1]>2){
-    //                             MSG("0 --> 1")
-    //                             fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                             fun_planezt(0);//平面状态0
-    //                             fun_sj2(loc_high[0]+1);//下降到区0最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到1最高位或向上一个格
-    //                                 loc_high[0]<loc_high[1]-1?
-    //                                 loc_high[0]:loc_high[1]-1);
-    //                             fun_planezt(1);//平面状态1
-    //                             fun_sj2(loc_high[1]);//下降到区1最高位
-    //                             fun_sz1(han_s);//松件
+                    loc_data[3][loc_high[3]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了3区
+                    loc_data[1][loc_high[1]+1][0]=0;//1区木有了
+                    loc_high[1]++;//更新区1最高位
+                    loc_high[3]--;//更新区3最高位
+                }//1 --> 3
+                else{
+                    if(loc_high[0]<3){
+                        if((loc_data[0][loc_high[0]+1][0]==loc_data[3][1][1])||
+                           (loc_data[0][loc_high[0]+1][0]==loc_data[3][2][1])||
+                           (loc_data[0][loc_high[0]+1][0]==loc_data[3][3][1])||
+                           (loc_data[0][loc_high[0]+1][0]==loc_data[3][4][1])){
+                            if(((loc_high[1]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[1][loc_high[1]][0]))&&loc_high[1]>2){
+                                MSG("0 --> 1")
+                                fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                                fun_planezt(0);//平面状态0
+                                fun_sj2(loc_high[0]+1);//下降到区0最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到1最高位或向上一个格
+                                    loc_high[0]<loc_high[1]-1?
+                                    loc_high[0]:loc_high[1]-1);
+                                fun_planezt(1);//平面状态1
+                                fun_sj2(loc_high[1]);//下降到区1最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[1][loc_high[1]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了1区
-    //                             loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-    //                             loc_high[0]++;//更新区0最高位
-    //                             loc_high[1]--;//更新区1最高位
-    //                         }//0 --> 1
-    //                         else if(((loc_high[2]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[2][loc_high[2]][0]))&&loc_high[2]>2){
-    //                             MSG("0 --> 2")
-    //                             fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                             fun_planezt(0);//平面状态0
-    //                             fun_sj2(loc_high[0]+1);//下降到区0最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到12最高位或向上一个格
-    //                                 loc_high[0]<fun_min(2,loc_high[1],loc_high[2])-1?
-    //                                 loc_high[0]:fun_min(2,loc_high[1],loc_high[2])-1);
-    //                             fun_planezt(2);//平面状态2
-    //                             fun_sj2(loc_high[2]);//下降到区2最高位
-    //                             fun_sz1(han_s);//松件
+                                loc_data[1][loc_high[1]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了1区
+                                loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+                                loc_high[0]++;//更新区0最高位
+                                loc_high[1]--;//更新区1最高位
+                            }//0 --> 1
+                            else if(((loc_high[2]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[2][loc_high[2]][0]))&&loc_high[2]>2){
+                                MSG("0 --> 2")
+                                fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                                fun_planezt(0);//平面状态0
+                                fun_sj2(loc_high[0]+1);//下降到区0最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到12最高位或向上一个格
+                                    loc_high[0]<fun_min(2,loc_high[1],loc_high[2])-1?
+                                    loc_high[0]:fun_min(2,loc_high[1],loc_high[2])-1);
+                                fun_planezt(2);//平面状态2
+                                fun_sj2(loc_high[2]);//下降到区2最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[2][loc_high[2]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了2区
-    //                             loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-    //                             loc_high[0]++;//更新区0最高位
-    //                             loc_high[2]--;//更新区2最高位
-    //                         }//0 --> 2
-    //                     }//目的地在左边
-    //                     else if((loc_data[0][loc_high[0]+1][0]==loc_data[7][1][1])||
-    //                             (loc_data[0][loc_high[0]+1][0]==loc_data[7][2][1])||
-    //                             (loc_data[0][loc_high[0]+1][0]==loc_data[7][3][1])||
-    //                             (loc_data[0][loc_high[0]+1][0]==loc_data[7][4][1])){
-    //                         if(((loc_high[5]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[5][loc_high[5]][0]))&&loc_high[5]>2){
-    //                             MSG("0 --> 5")
-    //                             fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                             fun_planezt(0);//平面状态0
-    //                             fun_sj2(loc_high[0]+1);//下降到区0最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到15最高位或向上一个格
-    //                                 loc_high[0]<fun_min(2,loc_high[1],loc_high[5])-1?
-    //                                 loc_high[0]:fun_min(2,loc_high[1],loc_high[5])-1);
-    //                             fun_planezt(5);//平面状态5
-    //                             fun_sj2(loc_high[5]);//下降到区5最高位
-    //                             fun_sz1(han_s);//松件
+                                loc_data[2][loc_high[2]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了2区
+                                loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+                                loc_high[0]++;//更新区0最高位
+                                loc_high[2]--;//更新区2最高位
+                            }//0 --> 2
+                        }//目的地在左边
+                        else if((loc_data[0][loc_high[0]+1][0]==loc_data[7][1][1])||
+                                (loc_data[0][loc_high[0]+1][0]==loc_data[7][2][1])||
+                                (loc_data[0][loc_high[0]+1][0]==loc_data[7][3][1])||
+                                (loc_data[0][loc_high[0]+1][0]==loc_data[7][4][1])){
+                            if(((loc_high[5]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[5][loc_high[5]][0]))&&loc_high[5]>2){
+                                MSG("0 --> 5")
+                                fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                                fun_planezt(0);//平面状态0
+                                fun_sj2(loc_high[0]+1);//下降到区0最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到15最高位或向上一个格
+                                    loc_high[0]<fun_min(2,loc_high[1],loc_high[5])-1?
+                                    loc_high[0]:fun_min(2,loc_high[1],loc_high[5])-1);
+                                fun_planezt(5);//平面状态5
+                                fun_sj2(loc_high[5]);//下降到区5最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[5][loc_high[5]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了5区
-    //                             loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-    //                             loc_high[0]++;//更新区0最高位
-    //                             loc_high[5]--;//更新区5最高位
-    //                         }//0 --> 5
-    //                         else if(((loc_high[6]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[6][loc_high[6]][0]))&&loc_high[6]>2){
-    //                             MSG("0 --> 6")
-    //                             fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                             fun_planezt(0);//平面状态0
-    //                             fun_sj2(loc_high[0]+1);//下降到区0最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到16最高位或向上一个格
-    //                                 loc_high[0]<fun_min(2,loc_high[1],loc_high[6])-1?
-    //                                 loc_high[0]:fun_min(2,loc_high[1],loc_high[6])-1);
-    //                             fun_planezt(6);//平面状态6
-    //                             fun_sj2(loc_high[6]);//下降到区6最高位
-    //                             fun_sz1(han_s);//松件
+                                loc_data[5][loc_high[5]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了5区
+                                loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+                                loc_high[0]++;//更新区0最高位
+                                loc_high[5]--;//更新区5最高位
+                            }//0 --> 5
+                            else if(((loc_high[6]>=4)||(loc_data[0][loc_high[0]+1][0]>loc_data[6][loc_high[6]][0]))&&loc_high[6]>2){
+                                MSG("0 --> 6")
+                                fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                                fun_planezt(0);//平面状态0
+                                fun_sj2(loc_high[0]+1);//下降到区0最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到16最高位或向上一个格
+                                    loc_high[0]<fun_min(2,loc_high[1],loc_high[6])-1?
+                                    loc_high[0]:fun_min(2,loc_high[1],loc_high[6])-1);
+                                fun_planezt(6);//平面状态6
+                                fun_sj2(loc_high[6]);//下降到区6最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[6][loc_high[6]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了6区
-    //                             loc_data[0][loc_high[0]+1][0]=0;//0区木有了
-    //                             loc_high[0]++;//更新区0最高位
-    //                             loc_high[6]--;//更新区6最高位
-    //                         }//0 --> 6
-    //                     }//目的地在右边
-    //                 }//如果区0还有两个件以上
-    //                 else if(loc_high[2]<3){
-    //                     if(((loc_high[1]>=4)||(loc_data[2][loc_high[2]+1][0]>loc_data[1][loc_high[1]][0]))&&(loc_high[1]>2)){
-    //                         MSG("2 --> 1")
-    //                         fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                         fun_planezt(2);//平面状态2
-    //                         fun_sj2(loc_high[2]+1);//下降到区2最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到1最高位或向上一个格
-    //                             loc_high[2]<loc_high[1]-1?
-    //                             loc_high[2]:loc_high[1]-1);
-    //                         fun_planezt(1);//平面状态1
-    //                         fun_sj2(loc_high[1]);//下降到区1最高位
-    //                         fun_sz1(han_s);//松件
+                                loc_data[6][loc_high[6]][0]=loc_data[0][loc_high[0]+1][0];//件已经从0区拿到了6区
+                                loc_data[0][loc_high[0]+1][0]=0;//0区木有了
+                                loc_high[0]++;//更新区0最高位
+                                loc_high[6]--;//更新区6最高位
+                            }//0 --> 6
+                        }//目的地在右边
+                    }//如果区0还有两个件以上
+                    else if(loc_high[2]<3){
+                        if(((loc_high[1]>=4)||(loc_data[2][loc_high[2]+1][0]>loc_data[1][loc_high[1]][0]))&&(loc_high[1]>2)){
+                            MSG("2 --> 1")
+                            fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                            fun_planezt(2);//平面状态2
+                            fun_sj2(loc_high[2]+1);//下降到区2最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到1最高位或向上一个格
+                                loc_high[2]<loc_high[1]-1?
+                                loc_high[2]:loc_high[1]-1);
+                            fun_planezt(1);//平面状态1
+                            fun_sj2(loc_high[1]);//下降到区1最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[1][loc_high[1]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了1区
-    //                         loc_data[2][loc_high[2]+1][0]=0;//2区木有了
-    //                         loc_high[2]++;//更新区2最高位
-    //                         loc_high[1]--;//更新区1最高位
-    //                     }//2 --> 1
-    //                     else if(loc_high[0]>=4){
-    //                         MSG("2 --> 0")
-    //                         fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                         fun_planezt(2);//平面状态2
-    //                         fun_sj2(loc_high[2]+1);//下降到区2最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到10最高位或向上一个格
-    //                             loc_high[2]<fun_min(2,loc_high[1],loc_high[0])-1?
-    //                             loc_high[2]:fun_min(2,loc_high[1],loc_high[0])-1);
-    //                         fun_planezt(0);//平面状态0
-    //                         fun_sj2(loc_high[0]);//下降到区0最高位
-    //                         fun_sz1(han_s);//松件
+                            loc_data[1][loc_high[1]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了1区
+                            loc_data[2][loc_high[2]+1][0]=0;//2区木有了
+                            loc_high[2]++;//更新区2最高位
+                            loc_high[1]--;//更新区1最高位
+                        }//2 --> 1
+                        else if(loc_high[0]>=4){
+                            MSG("2 --> 0")
+                            fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                            fun_planezt(2);//平面状态2
+                            fun_sj2(loc_high[2]+1);//下降到区2最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到10最高位或向上一个格
+                                loc_high[2]<fun_min(2,loc_high[1],loc_high[0])-1?
+                                loc_high[2]:fun_min(2,loc_high[1],loc_high[0])-1);
+                            fun_planezt(0);//平面状态0
+                            fun_sj2(loc_high[0]);//下降到区0最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[0][loc_high[0]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了0区
-    //                         loc_data[2][loc_high[2]+1][0]=0;//2区木有了
-    //                         loc_high[2]++;//更新区2最高位
-    //                         loc_high[0]--;//更新区0最高位
-    //                     }//2 --> 0
-    //                 }//如果区2有件
-    //                 else if(loc_high[1]<3){
-    //                     if(((loc_high[2]>=4)||(loc_data[1][loc_high[1]+1][0]>loc_data[2][loc_high[2]][0]))&&(loc_high[2]>2)){
-    //                         MSG("1 --> 2")
-    //                         fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                         fun_planezt(1);//平面状态1
-    //                         fun_sj2(loc_high[1]+1);//下降到区1最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到2最高位或向上一个格
-    //                             loc_high[1]<loc_high[2]-1?
-    //                             loc_high[1]:loc_high[2]-1);
-    //                         fun_planezt(2);//平面状态2
-    //                         fun_sj2(loc_high[2]);//下降到区2最高位
-    //                         fun_sz1(han_s);//松件
+                            loc_data[0][loc_high[0]][0]=loc_data[2][loc_high[2]+1][0];//件已经从2区拿到了0区
+                            loc_data[2][loc_high[2]+1][0]=0;//2区木有了
+                            loc_high[2]++;//更新区2最高位
+                            loc_high[0]--;//更新区0最高位
+                        }//2 --> 0
+                    }//如果区2有件
+                    else if(loc_high[1]<3){
+                        if(((loc_high[2]>=4)||(loc_data[1][loc_high[1]+1][0]>loc_data[2][loc_high[2]][0]))&&(loc_high[2]>2)){
+                            MSG("1 --> 2")
+                            fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                            fun_planezt(1);//平面状态1
+                            fun_sj2(loc_high[1]+1);//下降到区1最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到2最高位或向上一个格
+                                loc_high[1]<loc_high[2]-1?
+                                loc_high[1]:loc_high[2]-1);
+                            fun_planezt(2);//平面状态2
+                            fun_sj2(loc_high[2]);//下降到区2最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[2][loc_high[2]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了2区
-    //                         loc_data[1][loc_high[1]+1][0]=0;//1区木有了
-    //                         loc_high[1]++;//更新区1最高位
-    //                         loc_high[2]--;//更新区2最高位
-    //                     }//1 --> 2
-    //                     else if(loc_high[0]>=4){
-    //                         MSG("1 --> 0")
-    //                         fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
-    //                         fun_planezt(1);//平面状态1
-    //                         fun_sj2(loc_high[1]+1);//下降到区1最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到0最高位或向上一个格
-    //                             loc_high[1]<loc_high[0]-1?
-    //                             loc_high[1]:loc_high[0]-1);
-    //                         fun_planezt(0);//平面状态0
-    //                         fun_sj2(loc_high[0]);//下降到区0最高位
-    //                         fun_sz1(han_s);//松件
+                            loc_data[2][loc_high[2]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了2区
+                            loc_data[1][loc_high[1]+1][0]=0;//1区木有了
+                            loc_high[1]++;//更新区1最高位
+                            loc_high[2]--;//更新区2最高位
+                        }//1 --> 2
+                        else if(loc_high[0]>=4){
+                            MSG("1 --> 0")
+                            fun_sj2(fun_min(4,loc_high[0],loc_high[1],loc_high[2],loc_high[3]));//上升到0123最高位
+                            fun_planezt(1);//平面状态1
+                            fun_sj2(loc_high[1]+1);//下降到区1最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到0最高位或向上一个格
+                                loc_high[1]<loc_high[0]-1?
+                                loc_high[1]:loc_high[0]-1);
+                            fun_planezt(0);//平面状态0
+                            fun_sj2(loc_high[0]);//下降到区0最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[0][loc_high[0]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了0区
-    //                         loc_data[1][loc_high[1]+1][0]=0;//1区木有了
-    //                         loc_high[1]++;//更新区1最高位
-    //                         loc_high[0]--;//更新区0最高位
-    //                     }//1 --> 0
-    //                 }//如果区1有件
-    //             }//不能一次拿出来的话
-    //             if(((loc_data[3][4][0]==loc_data[3][4][1])&&
-    //                (loc_data[3][3][0]==loc_data[3][3][1])&&
-    //                (loc_data[3][2][0]==loc_data[3][2][1])&&
-    //                (loc_data[3][1][0]==loc_data[3][1][1])&&
-    //                (loc_data[0][4][0]==0)&&
-    //                (loc_data[0][3][0]==0)&&
-    //                (loc_data[0][2][0]==0)&&
-    //                (loc_data[0][1][0]==0))||(loc_flag++>200)){
-    //                 if((loc_data[7][4][0]==loc_data[7][4][1])&&
-    //                    (loc_data[7][3][0]==loc_data[7][3][1])&&
-    //                    (loc_data[7][2][0]==loc_data[7][2][1])&&
-    //                    (loc_data[7][1][0]==loc_data[7][1][1])&&
-    //                    (loc_data[4][4][0]==0)&&
-    //                    (loc_data[4][3][0]==0)&&
-    //                    (loc_data[4][2][0]==0)&&
-    //                    (loc_data[4][1][0]==0))
-    //                     break;
-    //                 else{
-    //                     loc_flag=0;
-    //                     fun_sj1(fun_min(8,loc_high[0],loc_high[1],loc_high[2],loc_high[3],
-    //                                       loc_high[4],loc_high[5],loc_high[6],loc_high[7]));
-    //                     fun_hz1(dir_right);
-    //                 }
-    //             }//退出条件
-    //         }//回转方向在左方
-    //         else if(str_begin.hzfx==dir_right){
-    //             if((loc_data[4][loc_high[4]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[4]<4)){
-    //                 MSG("4 --> 7")
-    //                 fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                 fun_planezt(4);//平面状态4
-    //                 fun_sj2(loc_high[4]+1);//下降到区4最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到567最高位或向上一个格
-    //                     loc_high[4]<fun_min(3,loc_high[5],loc_high[6],loc_high[7])-1?
-    //                     loc_high[4]:fun_min(3,loc_high[5],loc_high[6],loc_high[7])-1);
-    //                 fun_planezt(7);//平面状态7
-    //                 fun_sj2(loc_high[7]);//下降到区7最高位
-    //                 fun_sz1(han_s);//松件
+                            loc_data[0][loc_high[0]][0]=loc_data[1][loc_high[1]+1][0];//件已经从1区拿到了0区
+                            loc_data[1][loc_high[1]+1][0]=0;//1区木有了
+                            loc_high[1]++;//更新区1最高位
+                            loc_high[0]--;//更新区0最高位
+                        }//1 --> 0
+                    }//如果区1有件
+                }//不能一次拿出来的话
+                if(((loc_data[3][4][0]==loc_data[3][4][1])&&
+                   (loc_data[3][3][0]==loc_data[3][3][1])&&
+                   (loc_data[3][2][0]==loc_data[3][2][1])&&
+                   (loc_data[3][1][0]==loc_data[3][1][1])&&
+                   (loc_data[0][4][0]==0)&&
+                   (loc_data[0][3][0]==0)&&
+                   (loc_data[0][2][0]==0)&&
+                   (loc_data[0][1][0]==0))||(loc_flag++>200)){
+                    if((loc_data[7][4][0]==loc_data[7][4][1])&&
+                       (loc_data[7][3][0]==loc_data[7][3][1])&&
+                       (loc_data[7][2][0]==loc_data[7][2][1])&&
+                       (loc_data[7][1][0]==loc_data[7][1][1])&&
+                       (loc_data[4][4][0]==0)&&
+                       (loc_data[4][3][0]==0)&&
+                       (loc_data[4][2][0]==0)&&
+                       (loc_data[4][1][0]==0))
+                        break;
+                    else{
+                        loc_flag=0;
+                        fun_sj1(fun_min(8,loc_high[0],loc_high[1],loc_high[2],loc_high[3],
+                                          loc_high[4],loc_high[5],loc_high[6],loc_high[7]));
+                        fun_hz1(dir_right);
+                    }
+                }//退出条件
+            }//回转方向在左方
+            else if(str_begin.hzfx==dir_right){
+                if((loc_data[4][loc_high[4]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[4]<4)){
+                    MSG("4 --> 7")
+                    fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                    fun_planezt(4);//平面状态4
+                    fun_sj2(loc_high[4]+1);//下降到区4最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到567最高位或向上一个格
+                        loc_high[4]<fun_min(3,loc_high[5],loc_high[6],loc_high[7])-1?
+                        loc_high[4]:fun_min(3,loc_high[5],loc_high[6],loc_high[7])-1);
+                    fun_planezt(7);//平面状态7
+                    fun_sj2(loc_high[7]);//下降到区7最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[7][loc_high[7]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了7区
-    //                 loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-    //                 loc_high[4]++;//更新区4最高位
-    //                 loc_high[7]--;//更新区7最高位
-    //             }//4 --> 7
-    //             else if((loc_data[4][loc_high[4]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[4]<4)){
-    //                 MSG("4 --> 3")
-    //                 fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                 fun_planezt(4);//平面状态4
-    //                 fun_sj2(loc_high[4]+1);//下降到区4最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到523最高位或向上一个格
-    //                     loc_high[4]<fun_min(3,loc_high[5],loc_high[2],loc_high[3])-1?
-    //                     loc_high[4]:fun_min(3,loc_high[5],loc_high[2],loc_high[3])-1);
-    //                 fun_planezt(3);//平面状态3
-    //                 fun_sj2(loc_high[3]);//下降到区3最高位
-    //                 fun_sz1(han_s);//松件
+                    loc_data[7][loc_high[7]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了7区
+                    loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+                    loc_high[4]++;//更新区4最高位
+                    loc_high[7]--;//更新区7最高位
+                }//4 --> 7
+                else if((loc_data[4][loc_high[4]+1][0]==loc_data[3][loc_high[3]][1])&&(loc_high[4]<4)){
+                    MSG("4 --> 3")
+                    fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                    fun_planezt(4);//平面状态4
+                    fun_sj2(loc_high[4]+1);//下降到区4最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到523最高位或向上一个格
+                        loc_high[4]<fun_min(3,loc_high[5],loc_high[2],loc_high[3])-1?
+                        loc_high[4]:fun_min(3,loc_high[5],loc_high[2],loc_high[3])-1);
+                    fun_planezt(3);//平面状态3
+                    fun_sj2(loc_high[3]);//下降到区3最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[3][loc_high[3]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了3区
-    //                 loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-    //                 loc_high[4]++;//更新区4最高位
-    //                 loc_high[3]--;//更新区3最高位
-    //             }//4 --> 3
-    //             else if((loc_data[6][loc_high[6]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[6]<4)){
-    //                 MSG("6 --> 7")
-    //                 fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                 fun_planezt(6);//平面状态6
-    //                 fun_sj2(loc_high[6]+1);//下降到区6最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到7最高位或向上一个格
-    //                     loc_high[6]<loc_high[7]-1?
-    //                     loc_high[6]:loc_high[7]-1);
-    //                 fun_planezt(7);//平面状态7
-    //                 fun_sj2(loc_high[7]);//下降到区7最高位
-    //                 fun_sz1(han_s);//松件
+                    loc_data[3][loc_high[3]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了3区
+                    loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+                    loc_high[4]++;//更新区4最高位
+                    loc_high[3]--;//更新区3最高位
+                }//4 --> 3
+                else if((loc_data[6][loc_high[6]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[6]<4)){
+                    MSG("6 --> 7")
+                    fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                    fun_planezt(6);//平面状态6
+                    fun_sj2(loc_high[6]+1);//下降到区6最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到7最高位或向上一个格
+                        loc_high[6]<loc_high[7]-1?
+                        loc_high[6]:loc_high[7]-1);
+                    fun_planezt(7);//平面状态7
+                    fun_sj2(loc_high[7]);//下降到区7最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[7][loc_high[7]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了7区
-    //                 loc_data[6][loc_high[6]+1][0]=0;//6区木有了
-    //                 loc_high[6]++;//更新区6最高位
-    //                 loc_high[7]--;//更新区7最高位
-    //             }//6 --> 7
-    //             else if((loc_data[5][loc_high[5]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[5]<4)){
-    //                 MSG("5 --> 7")
-    //                 fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                 fun_planezt(5);//平面状态5
-    //                 fun_sj2(loc_high[5]+1);//下降到区5最高位
-    //                 fun_sz1(han_j);//抓件
-    //                 fun_sj2(//上升到67最高位或向上一个格
-    //                     loc_high[5]<fun_min(2,loc_high[6],loc_high[7])-1?
-    //                     loc_high[5]:fun_min(2,loc_high[6],loc_high[7])-1);
-    //                 fun_planezt(7);//平面状态7
-    //                 fun_sj2(loc_high[7]);//下降到区7最高位
-    //                 fun_sz1(han_s);//松件
+                    loc_data[7][loc_high[7]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了7区
+                    loc_data[6][loc_high[6]+1][0]=0;//6区木有了
+                    loc_high[6]++;//更新区6最高位
+                    loc_high[7]--;//更新区7最高位
+                }//6 --> 7
+                else if((loc_data[5][loc_high[5]+1][0]==loc_data[7][loc_high[7]][1])&&(loc_high[5]<4)){
+                    MSG("5 --> 7")
+                    fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                    fun_planezt(5);//平面状态5
+                    fun_sj2(loc_high[5]+1);//下降到区5最高位
+                    fun_sz1(han_j);//抓件
+                    fun_sj2(//上升到67最高位或向上一个格
+                        loc_high[5]<fun_min(2,loc_high[6],loc_high[7])-1?
+                        loc_high[5]:fun_min(2,loc_high[6],loc_high[7])-1);
+                    fun_planezt(7);//平面状态7
+                    fun_sj2(loc_high[7]);//下降到区7最高位
+                    fun_sz1(han_s);//松件
 
-    //                 loc_data[7][loc_high[7]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了7区
-    //                 loc_data[5][loc_high[5]+1][0]=0;//5区木有了
-    //                 loc_high[5]++;//更新区5最高位
-    //                 loc_high[7]--;//更新区7最高位
-    //             }//5 --> 7
-    //             else{
-    //                 if(loc_high[4]<3){
-    //                     if((loc_data[4][loc_high[4]+1][0]==loc_data[7][1][1])||
-    //                        (loc_data[4][loc_high[4]+1][0]==loc_data[7][2][1])||
-    //                        (loc_data[4][loc_high[4]+1][0]==loc_data[7][3][1])||
-    //                        (loc_data[4][loc_high[4]+1][0]==loc_data[7][4][1])){
-    //                         if(((loc_high[5]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[5][loc_high[5]][0]))&&loc_high[5]>2){
-    //                             MSG("4 --> 5")
-    //                             fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                             fun_planezt(4);//平面状态4
-    //                             fun_sj2(loc_high[4]+1);//下降到区4最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到5最高位或向上一个格
-    //                                 loc_high[4]<loc_high[5]-1?
-    //                                 loc_high[4]:loc_high[5]-1);
-    //                             fun_planezt(5);//平面状态5
-    //                             fun_sj2(loc_high[5]);//下降到区5最高位
-    //                             fun_sz1(han_s);//松件
+                    loc_data[7][loc_high[7]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了7区
+                    loc_data[5][loc_high[5]+1][0]=0;//5区木有了
+                    loc_high[5]++;//更新区5最高位
+                    loc_high[7]--;//更新区7最高位
+                }//5 --> 7
+                else{
+                    if(loc_high[4]<3){
+                        if((loc_data[4][loc_high[4]+1][0]==loc_data[7][1][1])||
+                           (loc_data[4][loc_high[4]+1][0]==loc_data[7][2][1])||
+                           (loc_data[4][loc_high[4]+1][0]==loc_data[7][3][1])||
+                           (loc_data[4][loc_high[4]+1][0]==loc_data[7][4][1])){
+                            if(((loc_high[5]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[5][loc_high[5]][0]))&&loc_high[5]>2){
+                                MSG("4 --> 5")
+                                fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                                fun_planezt(4);//平面状态4
+                                fun_sj2(loc_high[4]+1);//下降到区4最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到5最高位或向上一个格
+                                    loc_high[4]<loc_high[5]-1?
+                                    loc_high[4]:loc_high[5]-1);
+                                fun_planezt(5);//平面状态5
+                                fun_sj2(loc_high[5]);//下降到区5最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[5][loc_high[5]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了5区
-    //                             loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-    //                             loc_high[4]++;//更新区4最高位
-    //                             loc_high[5]--;//更新区5最高位
-    //                         }//4 --> 5
-    //                         else if(((loc_high[6]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[6][loc_high[6]][0]))&&loc_high[6]>2){
-    //                             MSG("4 --> 6")
-    //                             fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                             fun_planezt(4);//平面状态4
-    //                             fun_sj2(loc_high[4]+1);//下降到区4最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到56最高位或向上一个格
-    //                                 loc_high[4]<fun_min(2,loc_high[5],loc_high[6])-1?
-    //                                 loc_high[4]:fun_min(2,loc_high[5],loc_high[6])-1);
-    //                             fun_planezt(6);//平面状态6
-    //                             fun_sj2(loc_high[6]);//下降到区6最高位
-    //                             fun_sz1(han_s);//松件
+                                loc_data[5][loc_high[5]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了5区
+                                loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+                                loc_high[4]++;//更新区4最高位
+                                loc_high[5]--;//更新区5最高位
+                            }//4 --> 5
+                            else if(((loc_high[6]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[6][loc_high[6]][0]))&&loc_high[6]>2){
+                                MSG("4 --> 6")
+                                fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                                fun_planezt(4);//平面状态4
+                                fun_sj2(loc_high[4]+1);//下降到区4最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到56最高位或向上一个格
+                                    loc_high[4]<fun_min(2,loc_high[5],loc_high[6])-1?
+                                    loc_high[4]:fun_min(2,loc_high[5],loc_high[6])-1);
+                                fun_planezt(6);//平面状态6
+                                fun_sj2(loc_high[6]);//下降到区6最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[6][loc_high[6]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了6区
-    //                             loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-    //                             loc_high[4]++;//更新区4最高位
-    //                             loc_high[6]--;//更新区6最高位
-    //                         }//4 --> 6
-    //                     }//目的地在右边
-    //                     else if((loc_data[4][loc_high[4]+1][0]==loc_data[3][1][1])||
-    //                             (loc_data[4][loc_high[4]+1][0]==loc_data[3][2][1])||
-    //                             (loc_data[4][loc_high[4]+1][0]==loc_data[3][3][1])||
-    //                             (loc_data[4][loc_high[4]+1][0]==loc_data[3][4][1])){
-    //                         if(((loc_high[1]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[1][loc_high[1]][0]))&&loc_high[1]>2){
-    //                             MSG("4 --> 1")
-    //                             fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                             fun_planezt(4);//平面状态4
-    //                             fun_sj2(loc_high[4]+1);//下降到区4最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到51最高位或向上一个格
-    //                                 loc_high[4]<fun_min(2,loc_high[5],loc_high[1])-1?
-    //                                 loc_high[4]:fun_min(2,loc_high[5],loc_high[1])-1);
-    //                             fun_planezt(1);//平面状态1
-    //                             fun_sj2(loc_high[1]);//下降到区1最高位
-    //                             fun_sz1(han_s);//松件
+                                loc_data[6][loc_high[6]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了6区
+                                loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+                                loc_high[4]++;//更新区4最高位
+                                loc_high[6]--;//更新区6最高位
+                            }//4 --> 6
+                        }//目的地在右边
+                        else if((loc_data[4][loc_high[4]+1][0]==loc_data[3][1][1])||
+                                (loc_data[4][loc_high[4]+1][0]==loc_data[3][2][1])||
+                                (loc_data[4][loc_high[4]+1][0]==loc_data[3][3][1])||
+                                (loc_data[4][loc_high[4]+1][0]==loc_data[3][4][1])){
+                            if(((loc_high[1]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[1][loc_high[1]][0]))&&loc_high[1]>2){
+                                MSG("4 --> 1")
+                                fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                                fun_planezt(4);//平面状态4
+                                fun_sj2(loc_high[4]+1);//下降到区4最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到51最高位或向上一个格
+                                    loc_high[4]<fun_min(2,loc_high[5],loc_high[1])-1?
+                                    loc_high[4]:fun_min(2,loc_high[5],loc_high[1])-1);
+                                fun_planezt(1);//平面状态1
+                                fun_sj2(loc_high[1]);//下降到区1最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[1][loc_high[1]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了1区
-    //                             loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-    //                             loc_high[4]++;//更新区4最高位
-    //                             loc_high[1]--;//更新区1最高位
-    //                         }//4 --> 1
-    //                         else if(((loc_high[2]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[2][loc_high[2]][0]))&&loc_high[2]>2){
-    //                             MSG("4 --> 2")
-    //                             fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                             fun_planezt(4);//平面状态4
-    //                             fun_sj2(loc_high[4]+1);//下降到区4最高位
-    //                             fun_sz1(han_j);//抓件
-    //                             fun_sj2(//上升到523最高位或向上一个格
-    //                                 loc_high[4]<fun_min(2,loc_high[5],loc_high[2])-1?
-    //                                 loc_high[4]:fun_min(2,loc_high[5],loc_high[2])-1);
-    //                             fun_planezt(2);//平面状态2
-    //                             fun_sj2(loc_high[2]);//下降到区2最高位
-    //                             fun_sz1(han_s);//松件
+                                loc_data[1][loc_high[1]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了1区
+                                loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+                                loc_high[4]++;//更新区4最高位
+                                loc_high[1]--;//更新区1最高位
+                            }//4 --> 1
+                            else if(((loc_high[2]>=4)||(loc_data[4][loc_high[4]+1][0]>loc_data[2][loc_high[2]][0]))&&loc_high[2]>2){
+                                MSG("4 --> 2")
+                                fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                                fun_planezt(4);//平面状态4
+                                fun_sj2(loc_high[4]+1);//下降到区4最高位
+                                fun_sz1(han_j);//抓件
+                                fun_sj2(//上升到523最高位或向上一个格
+                                    loc_high[4]<fun_min(2,loc_high[5],loc_high[2])-1?
+                                    loc_high[4]:fun_min(2,loc_high[5],loc_high[2])-1);
+                                fun_planezt(2);//平面状态2
+                                fun_sj2(loc_high[2]);//下降到区2最高位
+                                fun_sz1(han_s);//松件
 
-    //                             loc_data[2][loc_high[2]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了2区
-    //                             loc_data[4][loc_high[4]+1][0]=0;//4区木有了
-    //                             loc_high[4]++;//更新区4最高位
-    //                             loc_high[2]--;//更新区2最高位
-    //                         }//4 --> 2
-    //                     }//目的地在左边
-    //                 }//如果区4还有两个件以上
-    //                 else if(loc_high[6]<3){
-    //                     if(((loc_high[5]>=4)||(loc_data[6][loc_high[6]+1][0]>loc_data[5][loc_high[5]][0]))&&(loc_high[5]>2)){
-    //                         MSG("6 --> 5")
-    //                         fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                         fun_planezt(6);//平面状态6
-    //                         fun_sj2(loc_high[6]+1);//下降到区6最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到5最高位或向上一个格
-    //                             loc_high[6]<loc_high[5]-1?
-    //                             loc_high[6]:loc_high[5]-1);
-    //                         fun_planezt(5);//平面状态5
-    //                         fun_sj2(loc_high[5]);//下降到区5最高位
-    //                         fun_sz1(han_s);//松件
+                                loc_data[2][loc_high[2]][0]=loc_data[4][loc_high[4]+1][0];//件已经从4区拿到了2区
+                                loc_data[4][loc_high[4]+1][0]=0;//4区木有了
+                                loc_high[4]++;//更新区4最高位
+                                loc_high[2]--;//更新区2最高位
+                            }//4 --> 2
+                        }//目的地在左边
+                    }//如果区4还有两个件以上
+                    else if(loc_high[6]<3){
+                        if(((loc_high[5]>=4)||(loc_data[6][loc_high[6]+1][0]>loc_data[5][loc_high[5]][0]))&&(loc_high[5]>2)){
+                            MSG("6 --> 5")
+                            fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                            fun_planezt(6);//平面状态6
+                            fun_sj2(loc_high[6]+1);//下降到区6最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到5最高位或向上一个格
+                                loc_high[6]<loc_high[5]-1?
+                                loc_high[6]:loc_high[5]-1);
+                            fun_planezt(5);//平面状态5
+                            fun_sj2(loc_high[5]);//下降到区5最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[5][loc_high[5]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了5区
-    //                         loc_data[6][loc_high[6]+1][0]=0;//6区木有了
-    //                         loc_high[6]++;//更新区6最高位
-    //                         loc_high[5]--;//更新区5最高位
-    //                     }//6 --> 5
-    //                     else if(loc_high[4]>=4){
-    //                         MSG("6 --> 4")
-    //                         fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                         fun_planezt(6);//平面状态6
-    //                         fun_sj2(loc_high[6]+1);//下降到区6最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到56最高位或向上一个格
-    //                             loc_high[6]<fun_min(2,loc_high[5],loc_high[4])-1?
-    //                             loc_high[6]:fun_min(2,loc_high[5],loc_high[4])-1);
-    //                         fun_planezt(4);//平面状态4
-    //                         fun_sj2(loc_high[4]);//下降到区4最高位
-    //                         fun_sz1(han_s);//松件
+                            loc_data[5][loc_high[5]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了5区
+                            loc_data[6][loc_high[6]+1][0]=0;//6区木有了
+                            loc_high[6]++;//更新区6最高位
+                            loc_high[5]--;//更新区5最高位
+                        }//6 --> 5
+                        else if(loc_high[4]>=4){
+                            MSG("6 --> 4")
+                            fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                            fun_planezt(6);//平面状态6
+                            fun_sj2(loc_high[6]+1);//下降到区6最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到56最高位或向上一个格
+                                loc_high[6]<fun_min(2,loc_high[5],loc_high[4])-1?
+                                loc_high[6]:fun_min(2,loc_high[5],loc_high[4])-1);
+                            fun_planezt(4);//平面状态4
+                            fun_sj2(loc_high[4]);//下降到区4最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[4][loc_high[4]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了4区
-    //                         loc_data[6][loc_high[6]+1][0]=0;//6区木有了
-    //                         loc_high[6]++;//更新区6最高位
-    //                         loc_high[4]--;//更新区4最高位
-    //                     }//6 --> 4
-    //                 }//如果区6有件
-    //                 else if(loc_high[5]<3){
-    //                     if(((loc_high[6]>=4)||(loc_data[5][loc_high[5]+1][0]>loc_data[6][loc_high[6]][0]))&&(loc_high[6]>2)){
-    //                         MSG("5 --> 6")
-    //                         fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                         fun_planezt(5);//平面状态5
-    //                         fun_sj2(loc_high[5]+1);//下降到区5最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到6最高位或向上一个格
-    //                             loc_high[5]<loc_high[6]-1?
-    //                             loc_high[5]:loc_high[6]-1);
-    //                         fun_planezt(6);//平面状态6
-    //                         fun_sj2(loc_high[6]);//下降到区6最高位
-    //                         fun_sz1(han_s);//松件
+                            loc_data[4][loc_high[4]][0]=loc_data[6][loc_high[6]+1][0];//件已经从6区拿到了4区
+                            loc_data[6][loc_high[6]+1][0]=0;//6区木有了
+                            loc_high[6]++;//更新区6最高位
+                            loc_high[4]--;//更新区4最高位
+                        }//6 --> 4
+                    }//如果区6有件
+                    else if(loc_high[5]<3){
+                        if(((loc_high[6]>=4)||(loc_data[5][loc_high[5]+1][0]>loc_data[6][loc_high[6]][0]))&&(loc_high[6]>2)){
+                            MSG("5 --> 6")
+                            fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                            fun_planezt(5);//平面状态5
+                            fun_sj2(loc_high[5]+1);//下降到区5最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到6最高位或向上一个格
+                                loc_high[5]<loc_high[6]-1?
+                                loc_high[5]:loc_high[6]-1);
+                            fun_planezt(6);//平面状态6
+                            fun_sj2(loc_high[6]);//下降到区6最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[6][loc_high[6]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了6区
-    //                         loc_data[5][loc_high[5]+1][0]=0;//5区木有了
-    //                         loc_high[5]++;//更新区5最高位
-    //                         loc_high[6]--;//更新区6最高位
-    //                     }//5 --> 6
-    //                     else if(loc_high[4]>=4){
-    //                         MSG("5 --> 4")
-    //                         fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
-    //                         fun_planezt(5);//平面状态5
-    //                         fun_sj2(loc_high[5]+1);//下降到区5最高位
-    //                         fun_sz1(han_j);//抓件
-    //                         fun_sj2(//上升到4最高位或向上一个格
-    //                             loc_high[5]<loc_high[4]-1?
-    //                             loc_high[5]:loc_high[4]-1);
-    //                         fun_planezt(4);//平面状态4
-    //                         fun_sj2(loc_high[4]);//下降到区4最高位
-    //                         fun_sz1(han_s);//松件
+                            loc_data[6][loc_high[6]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了6区
+                            loc_data[5][loc_high[5]+1][0]=0;//5区木有了
+                            loc_high[5]++;//更新区5最高位
+                            loc_high[6]--;//更新区6最高位
+                        }//5 --> 6
+                        else if(loc_high[4]>=4){
+                            MSG("5 --> 4")
+                            fun_sj2(fun_min(4,loc_high[4],loc_high[5],loc_high[6],loc_high[7]));//上升到4567最高位
+                            fun_planezt(5);//平面状态5
+                            fun_sj2(loc_high[5]+1);//下降到区5最高位
+                            fun_sz1(han_j);//抓件
+                            fun_sj2(//上升到4最高位或向上一个格
+                                loc_high[5]<loc_high[4]-1?
+                                loc_high[5]:loc_high[4]-1);
+                            fun_planezt(4);//平面状态4
+                            fun_sj2(loc_high[4]);//下降到区4最高位
+                            fun_sz1(han_s);//松件
 
-    //                         loc_data[4][loc_high[4]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了4区
-    //                         loc_data[5][loc_high[5]+1][0]=0;//5区木有了
-    //                         loc_high[5]++;//更新区5最高位
-    //                         loc_high[4]--;//更新区4最高位
-    //                     }//5 --> 4
-    //                 }//如果区5有件
-    //             }//不能一次拿出来的话
-    //             if(((loc_data[7][4][0]==loc_data[7][4][1])&&
-    //                (loc_data[7][3][0]==loc_data[7][3][1])&&
-    //                (loc_data[7][2][0]==loc_data[7][2][1])&&
-    //                (loc_data[7][1][0]==loc_data[7][1][1])&&
-    //                (loc_data[4][4][0]==0)&&
-    //                (loc_data[4][3][0]==0)&&
-    //                (loc_data[4][2][0]==0)&&
-    //                (loc_data[4][1][0]==0))||(loc_flag++>200)){
-    //                 if((loc_data[3][4][0]==loc_data[3][4][1])&&
-    //                    (loc_data[3][3][0]==loc_data[3][3][1])&&
-    //                    (loc_data[3][2][0]==loc_data[3][2][1])&&
-    //                    (loc_data[3][1][0]==loc_data[3][1][1])&&
-    //                    (loc_data[0][4][0]==0)&&
-    //                    (loc_data[0][3][0]==0)&&
-    //                    (loc_data[0][2][0]==0)&&
-    //                    (loc_data[0][1][0]==0))
-    //                     break;
-    //                 else{
-    //                     loc_flag=0;
-    //                     fun_sj1(fun_min(8,loc_high[0],loc_high[1],loc_high[2],loc_high[3],
-    //                                       loc_high[4],loc_high[5],loc_high[6],loc_high[7]));
-    //                     fun_hz1(dir_left);
-    //                 }
-    //             }//退出条件
-    //         }//回转方向在右方
-    //     }//循环执行抓件
-    //     if(str_begin.hzfx==dir_left){
-    //         fun_sj1(sjp_wz1);
-    //         fun_planezt(7);
-    //         fun_sj1(sjp_wz12);
-    //     }
-    //     fun_sz1(han_j);
-    // }//自动抓件
+                            loc_data[4][loc_high[4]][0]=loc_data[5][loc_high[5]+1][0];//件已经从5区拿到了4区
+                            loc_data[5][loc_high[5]+1][0]=0;//5区木有了
+                            loc_high[5]++;//更新区5最高位
+                            loc_high[4]--;//更新区4最高位
+                        }//5 --> 4
+                    }//如果区5有件
+                }//不能一次拿出来的话
+                if(((loc_data[7][4][0]==loc_data[7][4][1])&&
+                   (loc_data[7][3][0]==loc_data[7][3][1])&&
+                   (loc_data[7][2][0]==loc_data[7][2][1])&&
+                   (loc_data[7][1][0]==loc_data[7][1][1])&&
+                   (loc_data[4][4][0]==0)&&
+                   (loc_data[4][3][0]==0)&&
+                   (loc_data[4][2][0]==0)&&
+                   (loc_data[4][1][0]==0))||(loc_flag++>200)){
+                    if((loc_data[3][4][0]==loc_data[3][4][1])&&
+                       (loc_data[3][3][0]==loc_data[3][3][1])&&
+                       (loc_data[3][2][0]==loc_data[3][2][1])&&
+                       (loc_data[3][1][0]==loc_data[3][1][1])&&
+                       (loc_data[0][4][0]==0)&&
+                       (loc_data[0][3][0]==0)&&
+                       (loc_data[0][2][0]==0)&&
+                       (loc_data[0][1][0]==0))
+                        break;
+                    else{
+                        loc_flag=0;
+                        fun_sj1(fun_min(8,loc_high[0],loc_high[1],loc_high[2],loc_high[3],
+                                          loc_high[4],loc_high[5],loc_high[6],loc_high[7]));
+                        fun_hz1(dir_left);
+                    }
+                }//退出条件
+            }//回转方向在右方
+        }//循环执行抓件
+        if(str_begin.hzfx==dir_left){
+            fun_sj1(sjp_wz1);
+            fun_planezt(7);
+            fun_sj1(sjp_wz12);
+        }
+        fun_sz1(han_j);
+    }//自动抓件
 void fun_test(){
     fun_sz1(han_j);
     fun_delay(1,del_s);
