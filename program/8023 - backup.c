@@ -1077,7 +1077,6 @@ void fun_port(){
                 loc_data[0][loc_xh1][1]=loc_data[7][3][1];
             else if((loc_data[0][loc_xh1][0]==loc_data[7][4][0])&&(loc_data[0][loc_xh1][0]!=0))
                 loc_data[0][loc_xh1][1]=loc_data[7][4][1];
-
             if((loc_data[4][loc_xh1][0]==loc_data[3][1][0])&&(loc_data[4][loc_xh1][0]!=0))
                 loc_data[4][loc_xh1][1]=loc_data[3][1][1];
             else if((loc_data[4][loc_xh1][0]==loc_data[3][2][0])&&(loc_data[4][loc_xh1][0]!=0))

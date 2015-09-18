@@ -26,41 +26,45 @@ xdata struct str_parameter str_cod={
 xdata struct str_timerfolline str_tfl;
 ul var_timer=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
-    ui loc_con=par_value;
-    switch(par_model){
-        case del_us://微秒级延时
-            while(loc_con-->0){
-                _nop_();
-                _nop_();
-            }
-            return;
-        case del_ms://毫秒级延时
-            while(loc_con-->0){
-                uc loc_i, loc_j;
-                _nop_();
-                _nop_();
-                loc_i=12;
-                loc_j=168;
-                do{
-                    while(--loc_j);
-                }while(--loc_i);
-            }
-            return;
-        case del_s://秒级延时
-            while(loc_con-->0){
-                uc loc_i, loc_j, loc_k;
-                loc_i=46;
-                loc_j=153;
-                loc_k=245;
-                do{
+    #ifdef Debug
+        ;
+    #else
+        ui loc_con=par_value;
+        switch(par_model){
+            case del_us://微秒级延时
+                while(loc_con-->0){
+                    _nop_();
+                    _nop_();
+                }
+                return;
+            case del_ms://毫秒级延时
+                while(loc_con-->0){
+                    uc loc_i, loc_j;
+                    _nop_();
+                    _nop_();
+                    loc_i=12;
+                    loc_j=168;
                     do{
-                        while(--loc_k);
-                    }while(--loc_j);
-                }while(--loc_i);
-            }
-            return;
-        default:return;
-    }
+                        while(--loc_j);
+                    }while(--loc_i);
+                }
+                return;
+            case del_s://秒级延时
+                while(loc_con-->0){
+                    uc loc_i, loc_j, loc_k;
+                    loc_i=46;
+                    loc_j=153;
+                    loc_k=245;
+                    do{
+                        do{
+                            while(--loc_k);
+                        }while(--loc_j);
+                    }while(--loc_i);
+                }
+                return;
+            default:return;
+        }
+    #endif
 }//延时
 void fun_timer0init(){
     AUXR|=0x80;   //定时器时钟1T模式
@@ -1207,121 +1211,84 @@ void fun_coordinate(){
     
 }//自动巡线之坐标
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
-    xdata uc loc_data[8][5][2];//8个抓件区(0~7),5个高度(0~4),0为现在件序/1为最终件序
-    xdata uc loc_high[8];//8个高度,每个为0-4(位置1~位置5),5表示没有件
-    memset(loc_data,0,sizeof(loc_data));//清空数组
+    xdata struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
+    xdata uc loc_high[8];         //每摞工件的高度
+    xdata uc loc_xh1;             //第一个循环
+
+    memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在件序
+    memset(str_end.jx,0,sizeof(str_end.jx));//清空想要的件序
+    memset(loc_high,0,sizeof(loc_high));//清空高度数组
+
+    //起始区件号
+    str_pass.jx[0][1]=(par_04/10000000)%10;  //传入现在件序:区0的第1号件件号(最高位)
+    str_pass.jx[0][2]=(par_04/1000000)%10;   //传入现在件序:区0的第2号件件号
+    str_pass.jx[0][3]=(par_04/100000)%10;    //传入现在件序:区0的第3号件件号
+    str_pass.jx[0][4]=(par_04/10000)%10;     //传入现在件序:区0的第4号件件号(最低位)
+    str_pass.jx[4][1]=(par_04/1000)%10;      //传入现在件序:区4的第1号件件号(最高位)
+    str_pass.jx[4][2]=(par_04/100)%10;       //传入现在件序:区4的第2号件件号
+    str_pass.jx[4][3]=(par_04/10)%10;        //传入现在件序:区4的第3号件件号
+    str_pass.jx[4][4]=par_04%10;             //传入现在件序:区4的第4号件件号(最低位)
+    //目的区件号
+    str_pass.jx[3][1]=(par_37/10000000)%10;  //传入现在件序:区0的第1号件件号(最高位)
+    str_pass.jx[3][2]=(par_37/1000000)%10;   //传入现在件序:区0的第2号件件号
+    str_pass.jx[3][3]=(par_37/100000)%10;    //传入现在件序:区0的第3号件件号
+    str_pass.jx[3][4]=(par_37/10000)%10;     //传入现在件序:区0的第4号件件号(最低位)
+    str_pass.jx[7][1]=(par_37/1000)%10;      //传入现在件序:区4的第1号件件号(最高位)
+    str_pass.jx[7][2]=(par_37/100)%10;       //传入现在件序:区4的第2号件件号
+    str_pass.jx[7][3]=(par_37/10)%10;        //传入现在件序:区4的第3号件件号
+    str_pass.jx[7][4]=par_37%10;             //传入现在件序:区4的第4号件件号(最低位)
+    //目的次序
+    str_end.jx[3][1]=1;                      //标准目标次序:区3的第1号目的次序号(最高位)
+    str_end.jx[3][2]=2;                      //标准目标次序:区3的第2号目的次序号
+    str_end.jx[3][3]=3;                      //标准目标次序:区3的第3号目的次序号
+    str_end.jx[3][4]=4;                      //标准目标次序:区3的第4号目的次序号(最低位)
+    str_end.jx[7][1]=5;                      //标准目标次序:区7的第1号目的次序号(最高位)
+    str_end.jx[7][2]=6;                      //标准目标次序:区7的第2号目的次序号
+    str_end.jx[7][3]=7;                      //标准目标次序:区7的第3号目的次序号
+    str_end.jx[7][4]=8;                      //标准目标次序:区7的第4号目的次序号(最低位)
+
+    for(loc_xh1=1;loc_xh1<=4;loc_xh1++){
+        if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][1])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[3][1];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][2])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[3][2];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][3])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[3][3];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][4])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[3][4];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][1])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[7][1];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][2])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[7][2];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][3])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[7][3];
+        else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][4])&&(str_pass.jx[0][loc_xh1]!=0))
+            str_end.jx[0][loc_xh1]=str_end.jx[7][4];
+
+        if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][1])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[3][1];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][2])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[3][2];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][3])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[3][3];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][4])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[3][4];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][1])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[7][1];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][2])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[7][2];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][3])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[7][3];
+        else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][4])&&(str_pass.jx[4][loc_xh1]!=0))
+            str_end.jx[4][loc_xh1]=str_end.jx[7][4];
+    }//通过实际件序获得编号
+
+    memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在实际件序
+
+
+
+
     
-    //将现有件序参数切片传递给数组的各个元素
-    loc_data[0][2][0]=(par_04/10000000)%10;
-    loc_data[0][3][0]=(par_04/1000000)%10;
-    loc_data[0][4][0]=(par_04/100000)%10;
-    loc_data[0][5][0]=(par_04/10000)%10;
-    loc_data[4][2][0]=(par_04/1000)%10;
-    loc_data[4][3][0]=(par_04/100)%10;
-    loc_data[4][4][0]=(par_04/10)%10;
-    loc_data[4][5][0]=par_04%10;
-    //将最终件序参数切片传递给数组的各个元素
-    loc_data[3][2][0]=(par_37/10000000)%10;
-    loc_data[3][3][0]=(par_37/1000000)%10;
-    loc_data[3][4][0]=(par_37/100000)%10;
-    loc_data[3][5][0]=(par_37/10000)%10;
-    loc_data[7][2][0]=(par_37/1000)%10;
-    loc_data[7][3][0]=(par_37/100)%10;
-    loc_data[7][4][0]=(par_37/10)%10;
-    loc_data[7][5][0]=par_37%10;
-
-    //将次序传入数组
-    loc_data[3][2][1]=1;
-    loc_data[3][3][1]=2;
-    loc_data[3][4][1]=3;
-    loc_data[3][5][1]=4;
-    loc_data[7][2][1]=5;
-    loc_data[7][3][1]=6;
-    loc_data[7][4][1]=7;
-    loc_data[7][5][1]=8;
-
-    if(str_begin.hzfx==dir_up||str_begin.hzfx==dir_down)//如果回转方向在上下
-        fun_hz1(dir_right);//那么就移到右边
-    while(0){
-        if(str_begin.hzfx==dir_right){
-            if(loc_high[0]<5){
-                if((loc_data[0][loc_high[0]][0]==loc_data[3][1][1])||
-                (loc_data[0][loc_high[0]][0]==loc_data[3][2][1])||
-                (loc_data[0][loc_high[0]][0]==loc_data[3][3][1])||
-                (loc_data[0][loc_high[0]][0]==loc_data[3][4][1])){
-                    if(loc_data[0][loc_high[0]][0]==loc_data[3][loc_high[3]][1]){
-                        MSG("0 --> 3")
-                    }//0 --> 3
-                    else{
-                        if(/*0 --> 1*/){
-                            /* code */
-                        }//0 --> 1
-                        else if(/*0 --> 2*/){
-                            /* code */
-                        }//0 --> 2
-                    }//不能一次到位的话
-                }//如果0区最上面的件应该放在3区
-                else if((loc_data[0][loc_high[0]][0]==loc_data[7][1][1])||
-                (loc_data[0][loc_high[0]][0]==loc_data[7][2][1])||
-                (loc_data[0][loc_high[0]][0]==loc_data[7][3][1])||
-                (loc_data[0][loc_high[0]][0]==loc_data[7][4][1])){
-                    if(loc_data[0][loc_high[0]][0]==loc_data[7][loc_high[7]][1]){
-                        MSG("0 --> 7")
-                    }//0 --> 7
-                    else{
-                        if(/*0 --> 5*/){
-                            /* code */
-                        }//0 --> 5
-                        else if(/*0 --> 6*/){
-                            /* code */
-                        }//0 --> 6
-                    }//不能一次到位的话
-                }//如果0区最上面的件应该放在7区
-            }//如果0区有件
-            if(loc_high[1]<5){
-                if(loc_data[1][loc_high[1]][0]==loc_data[3][loc_high[3]][1]){
-                    MSG("1 --> 3")
-                }//1 --> 3
-                else if(loc_data[1][loc_high[1]][0]==loc_data[7][loc_high[7]][1]){
-                    MSG("1 --> 7")
-                }//1 --> 7
-            }//如果1区有件
-            if(loc_high[2]<5){
-                if(loc_data[2][loc_high[2]][0]==loc_data[3][loc_high[3]][1]){
-                    MSG("2 --> 3")
-                }//2 --> 3
-                else if(loc_data[2][loc_high[2]][0]==loc_data[7][loc_high[7]][1]){
-                    MSG("2 --> 7")
-                }//2 --> 7
-            }//如果2区有件
-        }//如果在右边
-        else{
-            if(loc_high[4]<5){
-                if(loc_data[4][loc_high[4]][0]==loc_data[7][loc_high[7]][1]){
-                    MSG("4 --> 7")
-                }//4 --> 7
-                else if(loc_data[4][loc_high[4]][0]==loc_data[3][loc_high[3]][1]){
-                    MSG("4 --> 3")
-                }//4 --> 3
-            }//如果区4有件
-            if(loc_high[5]<5){
-                if(loc_data[5][loc_high[5]][0]==loc_data[7][loc_high[7]][1]){
-                    MSG("5 --> 7")
-                }//5 --> 7
-                else if(loc_data[5][loc_high[5]][0]==loc_data[3][loc_high[3]][1]){
-                    MSG("5 --> 3")
-                }//5 --> 3
-            }//如果区5有件
-            if(loc_high[6]<5){
-                if(loc_data[6][loc_high[6]][0]==loc_data[7][loc_high[7]][1]){
-                    MSG("6 --> 7")
-                }//6 --> 7
-                else if(loc_data[6][loc_high[6]][0]==loc_data[3][loc_high[3]][1]){
-                    MSG("6 --> 3")
-                }//6 --> 3
-            }//如果区6有件
-        }//如果在左边
-    }
 }//自动抓件
 void fun_zjzt(uc par_model){
     switch(par_model){

@@ -1,5 +1,6 @@
 #ifndef __8023_H__
 #define __8023_H__
+    //#define Debug ok            //调试用条件编译
 /*-------------------------------------------------------------头文件引入-----*/
     #include "STC12c5a60s2.h"   //单片机头文件
     #include "intrins.h"        //_nop_与循环位移
@@ -227,6 +228,9 @@
         char online;        //在线标志位
         ul delay;           //延时变量
     };//定时器移动
+    struct str_zdzj{
+        uc jx[8][5];        //件序:8个抓件区(从左上到左下0-3,从右上到右下4-7);5个高度(0-5),最上空位为0,从上到下1-4,底座为5
+    };//自动抓件
     extern xdata struct str_state str_begin,str_now,str_next;   //分别为:起始状态/当前状态/目标状态
     extern xdata struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
     extern xdata struct str_timerfolline str_tfl;               //定时器巡线
