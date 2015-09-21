@@ -26,18 +26,22 @@ xdata struct str_parameter str_cod={
 xdata struct str_timerfolline str_tfl;
 ul var_timer=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
-    #ifdef Debug
-        ;
-    #else
-        ui loc_con=par_value;
-        switch(par_model){
-            case del_us://微秒级延时
+    ui loc_con=par_value;
+    switch(par_model){
+        case del_us://微秒级延时
+            #ifdef Debug
+                printf("fun_delay(%d,del_us);\n",par_value);
+            #else
                 while(loc_con-->0){
                     _nop_();
                     _nop_();
                 }
-                return;
-            case del_ms://毫秒级延时
+            #endif
+            return;
+        case del_ms://毫秒级延时
+            #ifdef Debug
+                printf("fun_delay(%d,del_ms);\n",par_value);
+            #else
                 while(loc_con-->0){
                     uc loc_i, loc_j;
                     _nop_();
@@ -48,8 +52,12 @@ void fun_delay(ui par_value,enum varENU_del par_model){
                         while(--loc_j);
                     }while(--loc_i);
                 }
-                return;
-            case del_s://秒级延时
+            #endif
+            return;
+        case del_s://秒级延时
+            #ifdef Debug
+                printf("fun_delay(%d,del_s);\n",par_value);
+            #else
                 while(loc_con-->0){
                     uc loc_i, loc_j, loc_k;
                     loc_i=46;
@@ -61,12 +69,15 @@ void fun_delay(ui par_value,enum varENU_del par_model){
                         }while(--loc_j);
                     }while(--loc_i);
                 }
-                return;
-            default:return;
-        }
-    #endif
+            #endif
+            return;
+        default:return;
+    }
 }//延时
 void fun_timer0init(){
+    #ifdef Debug
+        printf("fun_timer0init();\n");
+    #endif
     AUXR|=0x80;   //定时器时钟1T模式
     TMOD&=0xF0;   //定时器模式:16位
     TMOD|=0x01;   //定时器模式:16位
@@ -77,6 +88,9 @@ void fun_timer0init(){
     EA=1;         //开启总中断
 }//1毫秒定时器0初始化
 void fun_timer1init(){
+    #ifdef Debug
+        printf("fun_timer1init();\n");
+    #endif
     AUXR&=0xBF;     //定时器时钟12T模式
     TMOD&=0x0F;     //定时器模式:16位
     TMOD|=0x10;     //定时器模式:16位
@@ -98,12 +112,19 @@ void fun_timer1(){
     TH1=0xB1;
 }//20毫秒定时器1处理函数
 void fun_wait(){
-    while(in_start==1);
-    fun_delay(20,del_ms);
-    while(in_start==0);
-    fun_delay(256,del_ms);
+    #ifdef Debug
+        printf("fun_wait();\n");
+    #else
+        while(in_start==1);
+        fun_delay(20,del_ms);
+        while(in_start==0);
+        fun_delay(256,del_ms);
+    #endif
 }//等待按键
 void fun_pwminit(){
+    #ifdef Debug
+        printf("fun_pwminit();\n");
+    #endif
     CCON=0x00;//PAC寄存控制器
     CH=0;//重置PAC计时器
     CL=0;
@@ -1104,23 +1125,14 @@ void fun_calibration(){
     str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
 }//自动校准平移参数
 void fun_port(){
-    /*
-    PCON|=0x80;     //使能波特率倍速位SMOD
-    SCON=0x50;      //8位数据,可变波特率
-    AUXR|=0x04;     //独立波特率发生器时钟为Fosc,即1T
-    BRT=0xD9;       //设定独立波特率发生器重装值
-    AUXR|=0x01;     //串口1选择独立波特率发生器为波特率发生器
-    AUXR|=0x10;     //启动独立波特率发生器
-    TI=1;           //打开串口传输功能
-    */
-    //38400bps@30.000MHz
+    //19200bps@12.000MHz
     PCON |= 0x80;       //使能波特率倍速位SMOD
     SCON = 0x50;        //8位数据,可变波特率
     AUXR |= 0x04;       //独立波特率发生器时钟为Fosc,即1T
-    BRT = 0xCF;     //设定独立波特率发生器重装值
+    BRT = 0xD9;         //设定独立波特率发生器重装值
     AUXR |= 0x01;       //串口1选择独立波特率发生器为波特率发生器
     AUXR |= 0x10;       //启动独立波特率发生器
-    TI=1;           //打开串口传输功能
+    TI=1;               //打开串口传输功能
 }//串口初始化
 void fun_test(){
     fun_sz1(han_j);
@@ -1216,8 +1228,8 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
     xdata uc loc_xh1;             //第一个循环
 
     memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在件序
-    memset(str_end.jx,0,sizeof(str_end.jx));//清空想要的件序
-    memset(loc_high,0,sizeof(loc_high));//清空高度数组
+    memset(str_end.jx,0,sizeof(str_end.jx)); //清空想要的件序
+    memset(loc_high,5,sizeof(loc_high));     //每组高度置5(没有件)
 
     //起始区件号
     str_pass.jx[0][1]=(par_04/10000000)%10;  //传入现在件序:区0的第1号件件号(最高位)
@@ -1284,6 +1296,161 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
     }//通过实际件序获得编号
 
     memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在实际件序
+    for(loc_xh1=1;loc_xh1<=4;loc_xh1++){
+        str_pass.jx[0][loc_xh1]=str_end.jx[0][loc_xh1];
+        str_pass.jx[4][loc_xh1]=str_end.jx[4][loc_xh1];
+    }//将现在的件序从str_end.jx中拿到str_pass.jx
+    for(loc_xh1=1;loc_xh1<=4;loc_xh1++){
+        str_end.jx[0][loc_xh1]=0;
+        str_end.jx[4][loc_xh1]=0;
+    }//删除str_end.jx中现在的件序
+    loc_high[0]=loc_high[4]=1;//只有0号和4号放满了件
+
+    /*
+        到目前为止准备工作结束,现在的数组中没有实际件序,
+        现在的编号在str_pass.jx中,
+        想要得到的结果件序编号在str_end.jx中
+    */
+    while(1){
+        if(str_begin.hzfx==dir_left){
+            //可以一次拿走,不需要中间位的
+            if(loc_high[1]<5){
+                if(str_pass.jx[1][loc_high[1]]==str_end.jx[3][loc_high[3]]){
+                    #ifdef Debug
+                        printf("1-->3\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//1-->3
+            }//如果区1有件
+            if(loc_high[2]<5){
+                if(str_pass.jx[2][loc_high[2]]==str_end.jx[3][loc_high[3]]){
+                    #ifdef Debug
+                        printf("2-->3\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//2-->3
+            }//如果区2有件
+            if(loc_high[0]<5){
+                if(str_pass.jx[0][loc_high[0]]==str_end.jx[3][loc_high[3]]){
+                    #ifdef Debug
+                        printf("0-->3\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//0-->3
+                if(str_pass.jx[0][loc_high[0]]==str_end.jx[7][loc_high[7]]){
+                    #ifdef Debug
+                        printf("0-->7\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//0-->7
+            }//如果区0有件
+
+            //不可以一次拿走,需要中间位的
+            if(loc_high[0]<5){
+                if((str_pass.jx[0][loc_high[0]]==str_end.jx[3][1])||
+                (str_pass.jx[0][loc_high[0]]==str_end.jx[3][2])||
+                (str_pass.jx[0][loc_high[0]]==str_end.jx[3][3])||
+                (str_pass.jx[0][loc_high[0]]==str_end.jx[3][4])){
+                    if(((loc_high[1]==5)||//如果1区没放东西或者
+                    (str_pass.jx[0][loc_high[0]]>str_pass.jx[1][loc_high[1]]))&&//0区的件编号大于1区的编号并且
+                    (loc_high[1]>2)){//1区不能放超过2个件
+                        #ifdef Debug
+                            printf("0-->1\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }
+                    if(((loc_high[2]==5)||//如果2区没放东西或者
+                        (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大于1区的编号并且
+                        (loc_high[2]>2)){//2区不能放超过2个件
+                        #ifdef Debug
+                            printf("0-->2\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }//如果2区现在没放件或拿过来的件比2区当前的件编号大
+                }//如果要放在3上,但目前不能放
+                if((str_pass.jx[0][loc_high[0]]==str_end.jx[7][1])||
+                (str_pass.jx[0][loc_high[0]]==str_end.jx[7][2])||
+                (str_pass.jx[0][loc_high[0]]==str_end.jx[7][3])||
+                (str_pass.jx[0][loc_high[0]]==str_end.jx[7][4])){
+                    if(((loc_high[5]==5)||//如果5区没东西放或者
+                    (str_pass.jx[0][loc_high[0]]>str_pass.jx[5][loc_high[5]]))&&//0区的件编号大于5区的编号并且
+                    (loc_high[5]>2)){//5区不能放超过2个件
+                        #ifdef Debug
+                            printf("0-->5\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }//如果1区现在没放件或拿过来的件比1区当前的件编号大
+                    if(((loc_high[6]==5)||//如果6区没东西放或者
+                    (str_pass.jx[0][loc_high[0]]>str_pass.jx[6][loc_high[6]]))&&//0区的件编号大于6区的编号并且
+                    (loc_high[6]>2)){//6区不能放超过2个件
+                        #ifdef Debug
+                            printf("0-->6\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }//如果2区现在没放件或拿过来的件比2区当前的件编号大
+                }//如果要放在7上,但目前不能放
+            }//如果区0有件
+
+            //中间两个位置也不能一次搞定的
+            if((loc_high[1]<5)&&(loc_high[2]<5)){
+                if((str_pass.jx[1][loc_high[1]]>str_pass.jx[2][loc_high[2]])&&(loc_high[2]>1)){
+                    #ifdef Debug
+                        printf("1-->2\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//1的件比2的件大且区2放了不到3个件
+                if((str_pass.jx[2][loc_high[2]]>str_pass.jx[1][loc_high[1]])&&(loc_high[1]>1)){
+                    #ifdef Debug
+                        printf("2-->1\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//2的件比1的件大且区1放了不到3个件
+            }//如果区1和区2都有件
+
+            //中间两个位置怎么也搞不定的
+            if((loc_high[1]<5)&&(loc_high[2]<5)){
+                if((loc_high[0]>1)&&(str_pass.jx[1][loc_high[1]]>str_pass.jx[0][loc_high[0]])){
+                    #ifdef Debug
+                        printf("1-->0\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//1区的件比0区的大且0区放了不到3个件
+                if((loc_high[0]>1)&&(str_pass.jx[2][loc_high[2]]>str_pass.jx[0][loc_high[0]])){
+                    #ifdef Debug
+                        printf("2-->0\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//2区的件比0区的大且0区放了不到3个件
+            }
+        }
+        if(str_begin.hzfx==dir_right){
+            
+        }
+    }
 
 
 

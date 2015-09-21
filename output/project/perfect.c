@@ -5,6 +5,10 @@
 void main(){
 	/*串口调试/仿真区*/
 	fun_port();
+	while(1){
+		fun_delay(1000,del_ms);
+	}
+	
 
 	fun_zdzj(12345678,87654321);
 	
