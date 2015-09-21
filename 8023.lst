@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 1   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
                                       while(--loc_j);
                                   }while(--loc_i);
                               }
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 2   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 2   
 
                           #endif
   56   2                  return;
@@ -126,7 +126,7 @@ line level    source
  114          void fun_wait(){
  115   1          #ifdef Debug
  116   1              printf("fun_wait();\n");
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 3   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 3   
 
  117   1          #else
                       while(in_start==1);
@@ -190,7 +190,7 @@ line level    source
  176   3                      CR=1;fun_pwmr(cabs(par_speed));out_pwmr=1;
  177   3                  }
  178   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 4   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 4   
 
  179   2              case mot_rl://左右轮同步
  180   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
@@ -254,7 +254,7 @@ line level    source
  238   2                  else if(par_speed>0){
  239   3                      out_motorselect=0;out_dir1=0;out_en1=0;
  240   3                  }
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 5   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 5   
 
  241   2                  else if(par_speed<0){
  242   3                      out_motorselect=0;out_dir1=1;out_en1=0;
@@ -318,7 +318,7 @@ line level    source
  300   2              case mot_rl://左右轮同步
  301   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
  302   2                      return;
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 6   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 6   
 
  303   2                  else
  304   2                      str_begin.leftsd=str_begin.rightsd=par_speed;
@@ -382,7 +382,7 @@ line level    source
  362   3                          break;
  363   3                      case tra_h:
  364   3                          fun_motors(mot_py,100);
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 7   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 7   
 
  365   3                          fun_delay(str_cod.py1kqh,del_ms);
  366   3                          break;
@@ -446,7 +446,7 @@ line level    source
  424   2              case sjp_1://升降位置1(最上位)
  425   2                  fun_motors(mot_sj,100);
  426   2                  def_select(sel_58);
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 8   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 8   
 
  427   2                  while(in_wz1==1);
  428   2                  fun_delay(str_cod.sj1bzw,del_ms);
@@ -510,7 +510,7 @@ line level    source
  486   3                      fun_motors(mot_sj,-100);
  487   3                      fun_delay(str_cod.sj1zjw,del_ms);
  488   3                  }
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 9   
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 9   
 
  489   2                  else{//要去的地方在上面，向上走
  490   3                      fun_motors(mot_sj,100);
@@ -574,7 +574,7 @@ line level    source
  548   3                          fun_motors(mot_hz,-100);
  549   3                          fun_delay(1,del_s);
  550   3                          while(in_hz==1);
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 10  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 10  
 
  551   3                          fun_delay(str_cod.hz1bz,del_ms);
  552   3                          break;
@@ -638,7 +638,7 @@ line level    source
  610   3                          while(in_hz==0);
  611   3                          while(in_hz==1);
  612   3                          fun_delay(str_cod.hz1bz,del_ms);
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 11  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 11  
 
  613   3                          break;
  614   3                      default:
@@ -702,7 +702,7 @@ line level    source
  672   2                  switch(str_begin.hzfx){
  673   3                      case dir_left://现在在左边
  674   3                      
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 12  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 12  
 
  675   3                          break;
  676   3                      case dir_right://现在在右边
@@ -766,7 +766,7 @@ line level    source
  734   3                          break;
  735   3                      default:
  736   3                          break;
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 13  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 13  
 
  737   3                  }//获取现在回转所在的位置
  738   2                  break;
@@ -830,7 +830,7 @@ line level    source
  796   4                  }
  797   3                  else{
  798   4                      if(in_ls6&&!in_ls3){
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 14  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 14  
 
  799   5                          fun_motors(mot_l,-8);
  800   5                          fun_motors(mot_r,8);
@@ -894,7 +894,7 @@ line level    source
  857   4                          fun_motorsrl(mot_l,loc_sdl);
  858   4                      }
  859   3                  }
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 15  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 15  
 
  860   2                  else{//如果线走完了
  861   3                      str_tfl.run+=2;//指针指向下一组过程
@@ -958,7 +958,7 @@ line level    source
  918   4                          }
  919   3                          else{
  920   4                              loc_sdl=loc_sdr=str_tfl.cachespeed;//前冲速度为str_tfl.cachespeed
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 16  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 16  
 
  921   4                              if(in_ls1&&!in_ls8){//1亮8不亮
  922   5                                  loc_sdl*=0.5;//左减速
@@ -1022,7 +1022,7 @@ line level    source
  979   4                      loc_sdl*=1.5;//左加速
  980   4                      loc_sdr*=0.5;//右减速
  981   4                  }//向右转
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 17  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 17  
 
  982   3                  if(in_ls2&&!in_ls7){//2亮7不亮
  983   4                      loc_sdl*=0.7;//左减速
@@ -1086,7 +1086,7 @@ line level    source
 1041   3                  loc_sdl*=1.5;//左加速
 1042   3                  loc_sdr*=0.5;//右减速
 1043   3              }//向右转
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 18  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 18  
 
 1044   2              if(in_ls2&&!in_ls7){//2亮7不亮
 1045   3                  loc_sdl*=0.7;//左减速
@@ -1150,7 +1150,7 @@ line level    source
 1103   1          IAP_TRIG = 0xa5;                //再次触发
 1104   1          fun_delay(10,del_us);           //稍等一会儿
 1105   1          fun_stope2prom();               //关闭EEPROM功能
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 19  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 19  
 
 1106   1      }//清除EEPROM数据
 1107          void fun_calibration(){
@@ -1214,7 +1214,7 @@ line level    source
 1165   1          fun_sj1(sjp_5);
 1166   1          fun_delay(1,del_s);
 1167   1          fun_sj1(sjp_4);
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 20  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 20  
 
 1168   1          fun_delay(1,del_s);
 1169   1          fun_sj1(sjp_3);
@@ -1277,8 +1277,8 @@ line level    source
 1225          void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
 1226   1          xdata struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束�
              -�得到的结果
-1227   1          xdata uc loc_high[8];         //每摞工件的高度
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 21  
+1227   1          xdata char loc_high[8];         //每摞工件的高度
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 21  
 
 1228   1          xdata uc loc_xh1;             //第一个循环
 1229   1      
@@ -1342,7 +1342,7 @@ line level    source
 1287   2                  str_end.jx[4][loc_xh1]=str_end.jx[3][4];
 1288   2              else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][1])&&(str_pass.jx[4][loc_xh1]!=0))
 1289   2                  str_end.jx[4][loc_xh1]=str_end.jx[7][1];
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 22  
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 22  
 
 1290   2              else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][2])&&(str_pass.jx[4][loc_xh1]!=0))
 1291   2                  str_end.jx[4][loc_xh1]=str_end.jx[7][2];
@@ -1370,231 +1370,416 @@ line level    source
 1313   1          */
 1314   1          while(1){
 1315   2              if(str_begin.hzfx==dir_left){
-1316   3                  //可以一次拿走,不需要中间位的
-1317   3                  if(loc_high[1]<5){
-1318   4                      if(str_pass.jx[1][loc_high[1]]==str_end.jx[3][loc_high[3]]){
-1319   5                          #ifdef Debug
-1320   5                              printf("1-->3\n");
-1321   5                          #else
+1316   3                  //转向条件
+1317   3                  //if(str_pass.jx[0][])
+1318   3      
+1319   3                  //可以一次拿走,不需要中间位的
+1320   3                  if(loc_high[1]<5){
+1321   4                      if(str_pass.jx[1][loc_high[1]]==str_end.jx[3][loc_high[3]]){
+1322   5                          #ifdef Debug
+1323   5                              printf("1-->3\n");
+1324   5                          #else
                                       ;
                                   #endif
-1324   5                              continue;
-1325   5                      }//1-->3
-1326   4                  }//如果区1有件
-1327   3                  if(loc_high[2]<5){
-1328   4                      if(str_pass.jx[2][loc_high[2]]==str_end.jx[3][loc_high[3]]){
-1329   5                          #ifdef Debug
-1330   5                              printf("2-->3\n");
-1331   5                          #else
+1327   5                              continue;
+1328   5                      }//1-->3
+1329   4                  }//如果区1有件
+1330   3                  if(loc_high[2]<5){
+1331   4                      if(str_pass.jx[2][loc_high[2]]==str_end.jx[3][loc_high[3]]){
+1332   5                          #ifdef Debug
+1333   5                              printf("2-->3\n");
+1334   5                          #else
                                       ;
                                   #endif
-1334   5                              continue;
-1335   5                      }//2-->3
-1336   4                  }//如果区2有件
-1337   3                  if(loc_high[0]<5){
-1338   4                      if(str_pass.jx[0][loc_high[0]]==str_end.jx[3][loc_high[3]]){
-1339   5                          #ifdef Debug
-1340   5                              printf("0-->3\n");
-1341   5                          #else
+1337   5                              continue;
+1338   5                      }//2-->3
+1339   4                  }//如果区2有件
+1340   3                  if(loc_high[0]<5){
+1341   4                      if(str_pass.jx[0][loc_high[0]]==str_end.jx[3][loc_high[3]]){
+1342   5                          #ifdef Debug
+1343   5                              printf("0-->3\n");
+1344   5                          #else
                                       ;
                                   #endif
-1344   5                              continue;
-1345   5                      }//0-->3
-1346   4                      if(str_pass.jx[0][loc_high[0]]==str_end.jx[7][loc_high[7]]){
-1347   5                          #ifdef Debug
-1348   5                              printf("0-->7\n");
-1349   5                          #else
-                                      ;
-                                  #endif
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 23  
+1347   5                              continue;
+1348   5                      }//0-->3
+1349   4                      if(str_pass.jx[0][loc_high[0]]==str_end.jx[7][loc_high[7]]){
+1350   5                          #ifdef Debug
+1351   5                              printf("0-->7\n");
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 23  
 
-1352   5                              continue;
-1353   5                      }//0-->7
-1354   4                  }//如果区0有件
-1355   3      
-1356   3                  //不可以一次拿走,需要中间位的
-1357   3                  if(loc_high[0]<5){
-1358   4                      if((str_pass.jx[0][loc_high[0]]==str_end.jx[3][1])||
-1359   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[3][2])||
-1360   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[3][3])||
-1361   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[3][4])){
-1362   5                          if(((loc_high[1]==5)||//如果1区没放东西或者
-1363   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[1][loc_high[1]]))&&//0区的件编号大于1�
+1352   5                          #else
+                                      ;
+                                  #endif
+1355   5                              continue;
+1356   5                      }//0-->7
+1357   4                  }//如果区0有件
+1358   3      
+1359   3                  //不可以一次拿走,需要中间位的
+1360   3                  if(loc_high[0]<5){
+1361   4                      if((str_pass.jx[0][loc_high[0]]==str_end.jx[3][1])||
+1362   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[3][2])||
+1363   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[3][3])||
+1364   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[3][4])){
+1365   5                          if(((loc_high[1]==5)||//如果1区没放东西或者
+1366   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[1][loc_high[1]]))&&//0区的件编号大于1�
              -��的编号并且
-1364   5                          (loc_high[1]>2)){//1区不能放超过2个件
-1365   6                              #ifdef Debug
-1366   6                                  printf("0-->1\n");
-1367   6                              #else
+1367   5                          (loc_high[1]>2)){//1区不能放超过2个件
+1368   6                              #ifdef Debug
+1369   6                                  printf("0-->1\n");
+1370   6                              #else
                                           ;
                                       #endif
-1370   6                                  continue;
-1371   6                          }
-1372   5                          if(((loc_high[2]==5)||//如果2区没放东西或者
-1373   5                              (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大�
-             -��1区的编号并且
-1374   5                              (loc_high[2]>2)){//2区不能放超过2个件
-1375   6                              #ifdef Debug
-1376   6                                  printf("0-->2\n");
-1377   6                              #else
+1373   6                                  continue;
+1374   6                          }
+1375   5                          if(((loc_high[2]==5)||//如果2区没放东西或者
+1376   5                              (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大�
+             -��2区的编号并且
+1377   5                              (loc_high[2]>2)){//2区不能放超过2个件
+1378   6                              #ifdef Debug
+1379   6                                  printf("0-->2\n");
+1380   6                              #else
                                           ;
                                       #endif
-1380   6                                  continue;
-1381   6                          }//如果2区现在没放件或拿过来的件比2区当前的件编号大
-1382   5                      }//如果要放在3上,但目前不能放
-1383   4                      if((str_pass.jx[0][loc_high[0]]==str_end.jx[7][1])||
-1384   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[7][2])||
-1385   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[7][3])||
-1386   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[7][4])){
-1387   5                          if(((loc_high[5]==5)||//如果5区没东西放或者
-1388   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[5][loc_high[5]]))&&//0区的件编号大于5�
+1383   6                                  continue;
+1384   6                          }
+1385   5                      }//如果要放在3上,但目前不能放
+1386   4                      if((str_pass.jx[0][loc_high[0]]==str_end.jx[7][1])||
+1387   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[7][2])||
+1388   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[7][3])||
+1389   4                      (str_pass.jx[0][loc_high[0]]==str_end.jx[7][4])){
+1390   5                          if(((loc_high[5]==5)||//如果5区没东西放或者
+1391   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[5][loc_high[5]]))&&//0区的件编号大于5�
              -��的编号并且
-1389   5                          (loc_high[5]>2)){//5区不能放超过2个件
-1390   6                              #ifdef Debug
-1391   6                                  printf("0-->5\n");
-1392   6                              #else
+1392   5                          (loc_high[5]>2)){//5区不能放超过2个件
+1393   6                              #ifdef Debug
+1394   6                                  printf("0-->5\n");
+1395   6                              #else
                                           ;
                                       #endif
-1395   6                                  continue;
-1396   6                          }//如果1区现在没放件或拿过来的件比1区当前的件编号大
-1397   5                          if(((loc_high[6]==5)||//如果6区没东西放或者
-1398   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[6][loc_high[6]]))&&//0区的件编号大于6�
+1398   6                                  continue;
+1399   6                          }
+1400   5                          if(((loc_high[6]==5)||//如果6区没东西放或者
+1401   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[6][loc_high[6]]))&&//0区的件编号大于6�
              -��的编号并且
-1399   5                          (loc_high[6]>2)){//6区不能放超过2个件
-1400   6                              #ifdef Debug
-1401   6                                  printf("0-->6\n");
-1402   6                              #else
+1402   5                          (loc_high[6]>2)){//6区不能放超过2个件
+1403   6                              #ifdef Debug
+1404   6                                  printf("0-->6\n");
+1405   6                              #else
                                           ;
                                       #endif
-1405   6                                  continue;
-1406   6                          }//如果2区现在没放件或拿过来的件比2区当前的件编号大
-1407   5                      }//如果要放在7上,但目前不能放
-1408   4                  }//如果区0有件
-1409   3      
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 24  
+1408   6                                  continue;
+1409   6                          }
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 24  
 
-1410   3                  //中间两个位置也不能一次搞定的
-1411   3                  if((loc_high[1]<5)&&(loc_high[2]<5)){
-1412   4                      if((str_pass.jx[1][loc_high[1]]>str_pass.jx[2][loc_high[2]])&&(loc_high[2]>1)){
-1413   5                          #ifdef Debug
-1414   5                              printf("1-->2\n");
-1415   5                          #else
+1410   5                      }//如果要放在7上,但目前不能放
+1411   4                  }//如果区0有件
+1412   3      
+1413   3                  //中间两个位置也不能一次搞定的
+1414   3                  if((loc_high[1]<5)&&(loc_high[2]<5)){
+1415   4                      if((str_pass.jx[1][loc_high[1]]>str_pass.jx[2][loc_high[2]])&&(loc_high[2]>1)){
+1416   5                          #ifdef Debug
+1417   5                              printf("1-->2\n");
+1418   5                          #else
                                       ;
                                   #endif
-1418   5                              continue;
-1419   5                      }//1的件比2的件大且区2放了不到3个件
-1420   4                      if((str_pass.jx[2][loc_high[2]]>str_pass.jx[1][loc_high[1]])&&(loc_high[1]>1)){
-1421   5                          #ifdef Debug
-1422   5                              printf("2-->1\n");
-1423   5                          #else
+1421   5                              continue;
+1422   5                      }//1的件比2的件大且区2放了不到3个件
+1423   4                      if((str_pass.jx[2][loc_high[2]]>str_pass.jx[1][loc_high[1]])&&(loc_high[1]>1)){
+1424   5                          #ifdef Debug
+1425   5                              printf("2-->1\n");
+1426   5                          #else
                                       ;
                                   #endif
-1426   5                              continue;
-1427   5                      }//2的件比1的件大且区1放了不到3个件
-1428   4                  }//如果区1和区2都有件
-1429   3      
-1430   3                  //中间两个位置怎么也搞不定的
-1431   3                  if((loc_high[1]<5)&&(loc_high[2]<5)){
-1432   4                      if((loc_high[0]>1)&&(str_pass.jx[1][loc_high[1]]>str_pass.jx[0][loc_high[0]])){
-1433   5                          #ifdef Debug
-1434   5                              printf("1-->0\n");
-1435   5                          #else
+1429   5                              continue;
+1430   5                      }//2的件比1的件大且区1放了不到3个件
+1431   4                  }//如果区1和区2都有件
+1432   3      
+1433   3                  //中间两个位置怎么也搞不定的
+1434   3                  if((loc_high[1]<5)&&(loc_high[2]<5)){
+1435   4                      if((loc_high[0]>1)&&(str_pass.jx[1][loc_high[1]]>str_pass.jx[0][loc_high[0]])){
+1436   5                          #ifdef Debug
+1437   5                              printf("1-->0\n");
+1438   5                          #else
                                       ;
                                   #endif
-1438   5                              continue;
-1439   5                      }//1区的件比0区的大且0区放了不到3个件
-1440   4                      if((loc_high[0]>1)&&(str_pass.jx[2][loc_high[2]]>str_pass.jx[0][loc_high[0]])){
-1441   5                          #ifdef Debug
-1442   5                              printf("2-->0\n");
-1443   5                          #else
+1441   5                              continue;
+1442   5                      }//1区的件比0区的大且0区放了不到3个件
+1443   4                      if((loc_high[0]>1)&&(str_pass.jx[2][loc_high[2]]>str_pass.jx[0][loc_high[0]])){
+1444   5                          #ifdef Debug
+1445   5                              printf("2-->0\n");
+1446   5                          #else
                                       ;
                                   #endif
-1446   5                              continue;
-1447   5                      }//2区的件比0区的大且0区放了不到3个件
-1448   4                  }
-1449   3              }
-1450   2              if(str_begin.hzfx==dir_right){
-1451   3                  
-1452   3              }
-1453   2          }
-1454   1      
-1455   1      
-1456   1      
-1457   1      
-1458   1          
-1459   1      }//自动抓件
-1460          void fun_zjzt(uc par_model){
-1461   1          switch(par_model){
-1462   2              case 0:
-1463   2                  fun_py1(tra_z);
-1464   2                  fun_hz1(dir_left);
-1465   2                  fun_py1(tra_h);
-1466   2                  break;
-1467   2              case 1:
-1468   2                  fun_py1(tra_z);
-1469   2                  fun_hz1(dir_left);
-1470   2                  fun_py1(tra_kh);
-1471   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/21/2015 11:38:23 PAGE 25  
+1449   5                              continue;
+1450   5                      }//2区的件比0区的大且0区放了不到3个件
+1451   4                  }
+1452   3              }//如果回转在左边 
+1453   2              if(str_begin.hzfx==dir_right){
+1454   3                  //可以一次拿走,不需要中间位的
+1455   3                  if(loc_high[5]<5){
+1456   4                      if(str_pass.jx[5][loc_high[5]]==str_end.jx[7][loc_high[7]]){
+1457   5                          #ifdef Debug
+1458   5                              printf("5-->7\n");
+1459   5                          #else
+                                      ;
+                                  #endif
+1462   5                              continue;
+1463   5                      }//5-->7
+1464   4                  }//如果区5有件
+1465   3                  if(loc_high[6]<5){
+1466   4                      if(str_pass.jx[6][loc_high[6]]==str_end.jx[7][loc_high[7]]){
+1467   5                          #ifdef Debug
+1468   5                              printf("6-->7\n");
+1469   5                          #else
+                                      ;
+                                  #endif
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 25  
 
-1472   2              case 2:
-1473   2                  fun_py1(tra_z);
-1474   2                  fun_hz1(dir_left);
-1475   2                  fun_py1(tra_kq);
-1476   2                  break;
-1477   2              case 3:
-1478   2                  fun_py1(tra_z);
-1479   2                  fun_hz1(dir_left);
-1480   2                  fun_py1(tra_q);
-1481   2                  break;
-1482   2              case 4:
-1483   2                  fun_py1(tra_z);
-1484   2                  fun_hz1(dir_right);
-1485   2                  fun_py1(tra_q);
-1486   2                  break;
-1487   2              case 5:
-1488   2                  fun_py1(tra_z);
-1489   2                  fun_hz1(dir_right);
-1490   2                  fun_py1(tra_kq);
-1491   2                  break;
-1492   2              case 6:
-1493   2                  fun_py1(tra_z);
-1494   2                  fun_hz1(dir_right);
-1495   2                  fun_py1(tra_kh);
-1496   2                  break;
-1497   2              case 7:
-1498   2                  fun_py1(tra_z);
-1499   2                  fun_hz1(dir_right);
-1500   2                  fun_py1(tra_h);
-1501   2                  break;
-1502   2          }
-1503   1      }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
-1504          void fun_zhuajian(){
-1505   1          fun_folline(2,70);
-1506   1          fun_turn(tur_l90,40);
-1507   1          fun_folline(1,40);
-1508   1      }//从起始区走到抓件区
-1509          void fun_back(){
-1510   1          fun_motors(mot_rl,-20);
-1511   1          fun_delay(1,del_s);
-1512   1      
-1513   1          fun_motors(mot_rl,-50);
-1514   1          fun_delay(1,del_s);
-1515   1      
-1516   1          fun_motors(mot_r,-50);
-1517   1          fun_motors(mot_l,-20);
-1518   1          fun_delay(1,del_s);
-1519   1      }//从抓件区回到起始区
+1472   5                              continue;
+1473   5                      }//6-->7
+1474   4                  }//如果区6有件
+1475   3                  if(loc_high[4]<5){
+1476   4                      if(str_pass.jx[4][loc_high[4]]==str_end.jx[7][loc_high[7]]){
+1477   5                          #ifdef Debug
+1478   5                              printf("4-->7\n");
+1479   5                          #else
+                                      ;
+                                  #endif
+1482   5                              continue;
+1483   5                      }//4-->7
+1484   4                      if(str_pass.jx[4][loc_high[4]]==str_end.jx[3][loc_high[3]]){
+1485   5                          #ifdef Debug
+1486   5                              printf("4-->3\n");
+1487   5                          #else
+                                      ;
+                                  #endif
+1490   5                              continue;
+1491   5                      }//4-->3
+1492   4                  }//如果区4有件
+1493   3      
+1494   3                  //不可以一次拿走,需要中间位的
+1495   3                  if(loc_high[4]<5){
+1496   4                      if((str_pass.jx[4][loc_high[4]]==str_end.jx[7][1])||
+1497   4                      (str_pass.jx[4][loc_high[4]]==str_end.jx[7][2])||
+1498   4                      (str_pass.jx[4][loc_high[4]]==str_end.jx[7][3])||
+1499   4                      (str_pass.jx[4][loc_high[4]]==str_end.jx[7][4])){
+1500   5                          if(((loc_high[5]==5)||//如果5区没东西放或者
+1501   5                          (str_pass.jx[4][loc_high[4]]>str_pass.jx[5][loc_high[5]]))&&//4区的件编号大于5�
+             -��的编号并且
+1502   5                          (loc_high[5]>2)){//5区不能放超过2个件
+1503   6                              #ifdef Debug
+1504   6                                  printf("4-->5\n");
+1505   6                              #else
+                                          ;
+                                      #endif
+1508   6                                  continue;
+1509   6                          }
+1510   5                          if(((loc_high[6]==5)||//如果6区没东西放或者
+1511   5                          (str_pass.jx[4][loc_high[4]]>str_pass.jx[6][loc_high[6]]))&&//4区的件编号大于6�
+             -��的编号并且
+1512   5                          (loc_high[6]>2)){//6区不能放超过2个件
+1513   6                              #ifdef Debug
+1514   6                                  printf("4-->6\n");
+1515   6                              #else
+                                          ;
+                                      #endif
+1518   6                                  continue;
+1519   6                          }
+1520   5                      }//如果要放在7上,但目前不能放
+1521   4                      if((str_pass.jx[4][loc_high[4]]==str_end.jx[3][1])||
+1522   4                      (str_pass.jx[4][loc_high[4]]==str_end.jx[3][2])||
+1523   4                      (str_pass.jx[4][loc_high[4]]==str_end.jx[3][3])||
+1524   4                      (str_pass.jx[4][loc_high[4]]==str_end.jx[3][4])){
+1525   5                          if(((loc_high[1]==5)||//如果1区没放东西或者
+1526   5                          (str_pass.jx[4][loc_high[4]]>str_pass.jx[1][loc_high[1]]))&&//4区的件编号大于1�
+             -��的编号并且
+1527   5                          (loc_high[1]>2)){//1区不能放超过2个件
+1528   6                              #ifdef Debug
+1529   6                                  printf("4-->1\n");
+1530   6                              #else
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 26  
 
+                                          ;
+                                      #endif
+1533   6                                  continue;
+1534   6                          }
+1535   5                          if(((loc_high[2]==5)||//如果2区没放东西或者
+1536   5                              (str_pass.jx[4][loc_high[4]]>str_pass.jx[2][loc_high[2]]))&&//4区的件编号大�
+             -��2区的编号并且
+1537   5                              (loc_high[2]>2)){//2区不能放超过2个件
+1538   6                              #ifdef Debug
+1539   6                                  printf("4-->2\n");
+1540   6                              #else
+                                          ;
+                                      #endif
+1543   6                                  continue;
+1544   6                          }
+1545   5                      }//如果要放在3上,但目前不能放
+1546   4                  }//如果区4有件
+1547   3      
+1548   3                  //中间两个位置也不能一次搞定的
+1549   3                  if((loc_high[5]<5)&&(loc_high[6]<5)){
+1550   4                      if((str_pass.jx[5][loc_high[5]]>str_pass.jx[6][loc_high[6]])&&(loc_high[6]>1)){
+1551   5                          #ifdef Debug
+1552   5                              printf("5-->6\n");
+1553   5                          #else
+                                      ;
+                                  #endif
+1556   5                              continue;
+1557   5                      }//5的件比6的件大且区6放了不到3个件
+1558   4                      if((str_pass.jx[6][loc_high[6]]>str_pass.jx[5][loc_high[5]])&&(loc_high[5]>1)){
+1559   5                          #ifdef Debug
+1560   5                              printf("6-->5\n");
+1561   5                          #else
+                                      ;
+                                  #endif
+1564   5                              continue;
+1565   5                      }//6的件比5的件大且区5放了不到3个件
+1566   4                  }//如果区5和区6都有件
+1567   3      
+1568   3                  //中间两个位置怎么也搞不定的
+1569   3                  if((loc_high[5]<5)&&(loc_high[6]<5)){
+1570   4                      if((loc_high[4]>1)&&(str_pass.jx[5][loc_high[5]]>str_pass.jx[4][loc_high[4]])){
+1571   5                          #ifdef Debug
+1572   5                              printf("5-->4\n");
+1573   5                          #else
+                                      ;
+                                  #endif
+1576   5                              continue;
+1577   5                      }//5区的件比4区的大且4区放了不到3个件
+1578   4                      if((loc_high[4]>1)&&(str_pass.jx[6][loc_high[6]]>str_pass.jx[4][loc_high[4]])){
+1579   5                          #ifdef Debug
+1580   5                              printf("6-->4\n");
+1581   5                          #else
+                                      ;
+                                  #endif
+1584   5                              continue;
+1585   5                      }//6区的件比4区的大且4区放了不到3个件
+1586   4                  }
+1587   3              }//如果回转在右边
+1588   2              //退出条件
+1589   2          }    
+1590   1      }//自动抓件
+1591          void fun_zjzt(uc par_motor,uc par_model){
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 27  
 
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   7606    ----
-   CONSTANT SIZE    =    219    ----
-   XDATA SIZE       =    148      89
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =      5      52
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
+1592   1          if(par_motor==mot_pyhz){
+1593   2              switch(par_model){
+1594   3                  case 0:
+1595   3                      fun_py1(tra_z);
+1596   3                      fun_hz1(dir_left);
+1597   3                      fun_py1(tra_h);
+1598   3                      break;
+1599   3                  case 1:
+1600   3                      fun_py1(tra_z);
+1601   3                      fun_hz1(dir_left);
+1602   3                      fun_py1(tra_kh);
+1603   3                      break;
+1604   3                  case 2:
+1605   3                      fun_py1(tra_z);
+1606   3                      fun_hz1(dir_left);
+1607   3                      fun_py1(tra_kq);
+1608   3                      break;
+1609   3                  case 3:
+1610   3                      fun_py1(tra_z);
+1611   3                      fun_hz1(dir_left);
+1612   3                      fun_py1(tra_q);
+1613   3                      break;
+1614   3                  case 4:
+1615   3                      fun_py1(tra_z);
+1616   3                      fun_hz1(dir_right);
+1617   3                      fun_py1(tra_q);
+1618   3                      break;
+1619   3                  case 5:
+1620   3                      fun_py1(tra_z);
+1621   3                      fun_hz1(dir_right);
+1622   3                      fun_py1(tra_kq);
+1623   3                      break;
+1624   3                  case 6:
+1625   3                      fun_py1(tra_z);
+1626   3                      fun_hz1(dir_right);
+1627   3                      fun_py1(tra_kh);
+1628   3                      break;
+1629   3                  case 7:
+1630   3                      fun_py1(tra_z);
+1631   3                      fun_hz1(dir_right);
+1632   3                      fun_py1(tra_h);
+1633   3                      break;
+1634   3              }
+1635   2          }
+1636   1          else if(par_motor==mot_sj){
+1637   2              switch(par_model){
+1638   3                  case 0:
+1639   3                      fun_sj1(sjp_1);
+1640   3                      break;
+1641   3                  case 1:
+1642   3                      fun_sj1(sjp_2);
+1643   3                      break;
+1644   3                  case 2:
+1645   3                      fun_sj1(sjp_3);
+1646   3                      break;
+1647   3                  case 3:
+1648   3                      fun_sj1(sjp_4);
+1649   3                      break;
+1650   3                  case 4:
+1651   3                      fun_sj1(sjp_5);
+1652   3                      break;
+1653   3                  default:
+C51 COMPILER V9.54   8023                                                                  09/21/2015 17:07:54 PAGE 28  
 
+1654   3                      break;
+1655   3              }
+1656   2          }
+1657   1      }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
+1658          void fun_najian(uc par_now,uc par_next,pc par_high,puc par_data){
+1659   1          if(par_now==0||par_now==1||par_now==2||par_now==3)
+1660   1              if(str_begin.hzfx==dir_left)
+1661   1                  fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end));
+1662   1              else if(str_begin.hzfx==dir_right)
+1663   1                  fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5
+             -],par_high[6],par_high[7],def_end));
+1664   1          else if(par_now==4||par_now==5||par_now==6||par_now==7)
+1665   1              if(str_begin.hzfx==dir_right)
+1666   1                  fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end));
+1667   1              else if(str_begin.hzfx==dir_left)
+1668   1                  fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5
+             -],par_high[6],par_high[7],def_end));
+1669   1          //升起
+1670   1          fun_zjzt(mot_pyhz,par_now);
+1671   1          fun_zjzt(mot_sj,par_high[par_now]);
+1672   1          fun_sz1(han_j);
+1673   1          // if(){
+1674   1      
+1675   1          // }
+1676   1          fun_sj1();
+*** WARNING C209 IN LINE 1676 OF program\8023.c: '_fun_sj1': too few actual parameters
+1677   1          fun_zjzt(mot_pyhz,par_next);
+1678   1          fun_sj1();
+*** WARNING C209 IN LINE 1678 OF program\8023.c: '_fun_sj1': too few actual parameters
+1679   1          fun_sz1(han_s);
+1680   1      
+1681   1          par_data[par_next]=par_data[par_now];
+1682   1          par_data[par_now][par_high[1]]=0;
+*** ERROR C216 IN LINE 1682 OF program\8023.c: subscript on non-array or too many dimensions
+1683   1          (*par_high[par_now])--;
+1684   1          (*par_high[par_next])++;
+1685   1      }
+1686          void fun_zhuajian(){
+1687   1          fun_folline(2,70);
+1688   1          fun_turn(tur_l90,40);
+1689   1          fun_folline(1,40);
+1690   1      }//从起始区走到抓件区
+1691          void fun_back(){
+1692   1          fun_motors(mot_rl,-20);
+1693   1          fun_delay(1,del_s);
+1694   1      
+1695   1          fun_motors(mot_rl,-50);
+1696   1          fun_delay(1,del_s);
+1697   1      
+1698   1          fun_motors(mot_r,-50);
+1699   1          fun_motors(mot_l,-20);
+1700   1          fun_delay(1,del_s);
+1701   1      }//从抓件区回到起始区
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  2 WARNING(S),  1 ERROR(S)

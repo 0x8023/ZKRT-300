@@ -1224,7 +1224,7 @@ void fun_coordinate(){
 }//自动巡线之坐标
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
     xdata struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
-    xdata uc loc_high[8];         //每摞工件的高度
+    xdata char loc_high[8];         //每摞工件的高度
     xdata uc loc_xh1;             //第一个循环
 
     memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在件序
@@ -1313,6 +1313,9 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
     */
     while(1){
         if(str_begin.hzfx==dir_left){
+            //转向条件
+            //if(str_pass.jx[0][])
+
             //可以一次拿走,不需要中间位的
             if(loc_high[1]<5){
                 if(str_pass.jx[1][loc_high[1]]==str_end.jx[3][loc_high[3]]){
@@ -1370,7 +1373,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                             continue;
                     }
                     if(((loc_high[2]==5)||//如果2区没放东西或者
-                        (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大于1区的编号并且
+                        (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大于2区的编号并且
                         (loc_high[2]>2)){//2区不能放超过2个件
                         #ifdef Debug
                             printf("0-->2\n");
@@ -1378,7 +1381,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                             ;
                         #endif
                             continue;
-                    }//如果2区现在没放件或拿过来的件比2区当前的件编号大
+                    }
                 }//如果要放在3上,但目前不能放
                 if((str_pass.jx[0][loc_high[0]]==str_end.jx[7][1])||
                 (str_pass.jx[0][loc_high[0]]==str_end.jx[7][2])||
@@ -1393,7 +1396,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                             ;
                         #endif
                             continue;
-                    }//如果1区现在没放件或拿过来的件比1区当前的件编号大
+                    }
                     if(((loc_high[6]==5)||//如果6区没东西放或者
                     (str_pass.jx[0][loc_high[0]]>str_pass.jx[6][loc_high[6]]))&&//0区的件编号大于6区的编号并且
                     (loc_high[6]>2)){//6区不能放超过2个件
@@ -1403,7 +1406,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                             ;
                         #endif
                             continue;
-                    }//如果2区现在没放件或拿过来的件比2区当前的件编号大
+                    }
                 }//如果要放在7上,但目前不能放
             }//如果区0有件
 
@@ -1446,61 +1449,240 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                         continue;
                 }//2区的件比0区的大且0区放了不到3个件
             }
-        }
+        }//如果回转在左边 
         if(str_begin.hzfx==dir_right){
-            
+            //可以一次拿走,不需要中间位的
+            if(loc_high[5]<5){
+                if(str_pass.jx[5][loc_high[5]]==str_end.jx[7][loc_high[7]]){
+                    #ifdef Debug
+                        printf("5-->7\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//5-->7
+            }//如果区5有件
+            if(loc_high[6]<5){
+                if(str_pass.jx[6][loc_high[6]]==str_end.jx[7][loc_high[7]]){
+                    #ifdef Debug
+                        printf("6-->7\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//6-->7
+            }//如果区6有件
+            if(loc_high[4]<5){
+                if(str_pass.jx[4][loc_high[4]]==str_end.jx[7][loc_high[7]]){
+                    #ifdef Debug
+                        printf("4-->7\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//4-->7
+                if(str_pass.jx[4][loc_high[4]]==str_end.jx[3][loc_high[3]]){
+                    #ifdef Debug
+                        printf("4-->3\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//4-->3
+            }//如果区4有件
+
+            //不可以一次拿走,需要中间位的
+            if(loc_high[4]<5){
+                if((str_pass.jx[4][loc_high[4]]==str_end.jx[7][1])||
+                (str_pass.jx[4][loc_high[4]]==str_end.jx[7][2])||
+                (str_pass.jx[4][loc_high[4]]==str_end.jx[7][3])||
+                (str_pass.jx[4][loc_high[4]]==str_end.jx[7][4])){
+                    if(((loc_high[5]==5)||//如果5区没东西放或者
+                    (str_pass.jx[4][loc_high[4]]>str_pass.jx[5][loc_high[5]]))&&//4区的件编号大于5区的编号并且
+                    (loc_high[5]>2)){//5区不能放超过2个件
+                        #ifdef Debug
+                            printf("4-->5\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }
+                    if(((loc_high[6]==5)||//如果6区没东西放或者
+                    (str_pass.jx[4][loc_high[4]]>str_pass.jx[6][loc_high[6]]))&&//4区的件编号大于6区的编号并且
+                    (loc_high[6]>2)){//6区不能放超过2个件
+                        #ifdef Debug
+                            printf("4-->6\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }
+                }//如果要放在7上,但目前不能放
+                if((str_pass.jx[4][loc_high[4]]==str_end.jx[3][1])||
+                (str_pass.jx[4][loc_high[4]]==str_end.jx[3][2])||
+                (str_pass.jx[4][loc_high[4]]==str_end.jx[3][3])||
+                (str_pass.jx[4][loc_high[4]]==str_end.jx[3][4])){
+                    if(((loc_high[1]==5)||//如果1区没放东西或者
+                    (str_pass.jx[4][loc_high[4]]>str_pass.jx[1][loc_high[1]]))&&//4区的件编号大于1区的编号并且
+                    (loc_high[1]>2)){//1区不能放超过2个件
+                        #ifdef Debug
+                            printf("4-->1\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }
+                    if(((loc_high[2]==5)||//如果2区没放东西或者
+                        (str_pass.jx[4][loc_high[4]]>str_pass.jx[2][loc_high[2]]))&&//4区的件编号大于2区的编号并且
+                        (loc_high[2]>2)){//2区不能放超过2个件
+                        #ifdef Debug
+                            printf("4-->2\n");
+                        #else
+                            ;
+                        #endif
+                            continue;
+                    }
+                }//如果要放在3上,但目前不能放
+            }//如果区4有件
+
+            //中间两个位置也不能一次搞定的
+            if((loc_high[5]<5)&&(loc_high[6]<5)){
+                if((str_pass.jx[5][loc_high[5]]>str_pass.jx[6][loc_high[6]])&&(loc_high[6]>1)){
+                    #ifdef Debug
+                        printf("5-->6\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//5的件比6的件大且区6放了不到3个件
+                if((str_pass.jx[6][loc_high[6]]>str_pass.jx[5][loc_high[5]])&&(loc_high[5]>1)){
+                    #ifdef Debug
+                        printf("6-->5\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//6的件比5的件大且区5放了不到3个件
+            }//如果区5和区6都有件
+
+            //中间两个位置怎么也搞不定的
+            if((loc_high[5]<5)&&(loc_high[6]<5)){
+                if((loc_high[4]>1)&&(str_pass.jx[5][loc_high[5]]>str_pass.jx[4][loc_high[4]])){
+                    #ifdef Debug
+                        printf("5-->4\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//5区的件比4区的大且4区放了不到3个件
+                if((loc_high[4]>1)&&(str_pass.jx[6][loc_high[6]]>str_pass.jx[4][loc_high[4]])){
+                    #ifdef Debug
+                        printf("6-->4\n");
+                    #else
+                        ;
+                    #endif
+                        continue;
+                }//6区的件比4区的大且4区放了不到3个件
+            }
+        }//如果回转在右边
+        //退出条件
+    }    
+}//自动抓件
+void fun_zjzt(uc par_motor,uc par_model){
+    if(par_motor==mot_pyhz){
+        switch(par_model){
+            case 0:
+                fun_py1(tra_z);
+                fun_hz1(dir_left);
+                fun_py1(tra_h);
+                break;
+            case 1:
+                fun_py1(tra_z);
+                fun_hz1(dir_left);
+                fun_py1(tra_kh);
+                break;
+            case 2:
+                fun_py1(tra_z);
+                fun_hz1(dir_left);
+                fun_py1(tra_kq);
+                break;
+            case 3:
+                fun_py1(tra_z);
+                fun_hz1(dir_left);
+                fun_py1(tra_q);
+                break;
+            case 4:
+                fun_py1(tra_z);
+                fun_hz1(dir_right);
+                fun_py1(tra_q);
+                break;
+            case 5:
+                fun_py1(tra_z);
+                fun_hz1(dir_right);
+                fun_py1(tra_kq);
+                break;
+            case 6:
+                fun_py1(tra_z);
+                fun_hz1(dir_right);
+                fun_py1(tra_kh);
+                break;
+            case 7:
+                fun_py1(tra_z);
+                fun_hz1(dir_right);
+                fun_py1(tra_h);
+                break;
         }
     }
-
-
-
-
-    
-}//自动抓件
-void fun_zjzt(uc par_model){
-    switch(par_model){
-        case 0:
-            fun_py1(tra_z);
-            fun_hz1(dir_left);
-            fun_py1(tra_h);
-            break;
-        case 1:
-            fun_py1(tra_z);
-            fun_hz1(dir_left);
-            fun_py1(tra_kh);
-            break;
-        case 2:
-            fun_py1(tra_z);
-            fun_hz1(dir_left);
-            fun_py1(tra_kq);
-            break;
-        case 3:
-            fun_py1(tra_z);
-            fun_hz1(dir_left);
-            fun_py1(tra_q);
-            break;
-        case 4:
-            fun_py1(tra_z);
-            fun_hz1(dir_right);
-            fun_py1(tra_q);
-            break;
-        case 5:
-            fun_py1(tra_z);
-            fun_hz1(dir_right);
-            fun_py1(tra_kq);
-            break;
-        case 6:
-            fun_py1(tra_z);
-            fun_hz1(dir_right);
-            fun_py1(tra_kh);
-            break;
-        case 7:
-            fun_py1(tra_z);
-            fun_hz1(dir_right);
-            fun_py1(tra_h);
-            break;
+    else if(par_motor==mot_sj){
+        switch(par_model){
+            case 0:
+                fun_sj1(sjp_1);
+                break;
+            case 1:
+                fun_sj1(sjp_2);
+                break;
+            case 2:
+                fun_sj1(sjp_3);
+                break;
+            case 3:
+                fun_sj1(sjp_4);
+                break;
+            case 4:
+                fun_sj1(sjp_5);
+                break;
+            default:
+                break;
+        }
     }
 }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
+void fun_najian(uc par_now,uc par_next,pc par_high,puc par_data){
+    if(par_now==0||par_now==1||par_now==2||par_now==3)
+        if(str_begin.hzfx==dir_left)
+            fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end));
+        else if(str_begin.hzfx==dir_right)
+            fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end));
+    else if(par_now==4||par_now==5||par_now==6||par_now==7)
+        if(str_begin.hzfx==dir_right)
+            fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end));
+        else if(str_begin.hzfx==dir_left)
+            fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end));
+    //升起
+    fun_zjzt(mot_pyhz,par_now);
+    fun_zjzt(mot_sj,par_high[par_now]);
+    fun_sz1(han_j);
+    // if(){
+
+    // }
+    fun_sj1();
+    fun_zjzt(mot_pyhz,par_next);
+    fun_sj1();
+    fun_sz1(han_s);
+
+    par_data[par_next]=par_data[par_now];
+    par_data[par_now][par_high[1]]=0;
+    (*par_high[par_now])--;
+    (*par_high[par_next])++;
+}
 void fun_zhuajian(){
     fun_folline(2,70);
     fun_turn(tur_l90,40);

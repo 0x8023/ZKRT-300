@@ -117,68 +117,69 @@
     sbit out_lamp=P3^7;         //红外输出(LAMP)(低电平打开)
 /*---------------------------------------------------------------变量声明-----*/
     enum varENU_tf{
-        tf_null=0,
-        tf_ture=1,
-        tf_false=2
+        tf_null=10,
+        tf_ture=11,
+        tf_false=12
     };//判断用的,空,对和错
     enum varENU_del{
-        del_us=10,
-        del_ms=11,
-        del_s=12
+        del_us=20,
+        del_ms=21,
+        del_s=22
     };//延时模式选择
     enum varENU_sel{
-        sel_58=20,
-        sel_912=21
+        sel_58=30,
+        sel_912=31
     };//传感器片选
     enum varENU_mot{
-        mot_l=30,
-        mot_r=31,
-        mot_rl=32,
-        mot_sz=33,   //电机1
-        mot_py=34,   //电机2
-        mot_sj=35,   //电机3
-        mot_hz=36    //电机4
+        mot_l=40,
+        mot_r=41,
+        mot_rl=42,
+        mot_sz=43,   //电机1
+        mot_py=44,   //电机2
+        mot_sj=45,   //电机3
+        mot_hz=46,   //电机4
+        mot_pyhz=47  //平移回转同步运动
     };//电机选择
     enum varENU_dir{
-        dir_up=40,
-        dir_down=41,
-        dir_left=42,
-        dir_right=43
+        dir_up=50,
+        dir_down=51,
+        dir_left=52,
+        dir_right=53
     };//方向
     enum varENU_tra{
-        tra_q=50,//没有电机的一方
-        tra_kq=51,
-        tra_z=52,
-        tra_kh=53,
-        tra_h=54//有电机的一方
+        tra_q=60,//没有电机的一方
+        tra_kq=61,
+        tra_z=62,
+        tra_kh=63,
+        tra_h=64//有电机的一方
     };//平移位置
     enum varENU_sjp{
-        sjp_1=60,
-        sjp_12=61,
-        sjp_2=62,
-        sjp_23=63,
-        sjp_3=64,
-        sjp_34=65,
-        sjp_4=66,
-        sjp_45=67,
-        sjp_5=68
+        sjp_1=70,
+        sjp_12=71,
+        sjp_2=72,
+        sjp_23=73,
+        sjp_3=74,
+        sjp_34=75,
+        sjp_4=76,
+        sjp_45=77,
+        sjp_5=78
     };//升降位置
     enum varENU_han{
-        han_j=70,
-        han_s=71
+        han_j=80,
+        han_s=81
     };//手抓状态
     enum varENU_tur{
-        tur_l90=80,
-        tur_r90=81,
-        tur_l180=82,
-        tur_r180=83
+        tur_l90=90,
+        tur_r90=91,
+        tur_l180=92,
+        tur_r180=93
     };//转弯模式
     enum varENU_tfl{
-        tfl_line=90,    //巡线
-        tfl_cache=91,   //前冲
-        tfl_turn=92,    //转弯
-        tfl_start=93,   //带加速的前冲
-        tfl_end=94      //带减速的前冲
+        tfl_line=100,    //巡线
+        tfl_cache=101,   //前冲
+        tfl_turn=102,    //转弯
+        tfl_start=103,   //带加速的前冲
+        tfl_end=104      //带减速的前冲
     };//定时器巡线执行动作
 
     struct str_state{
@@ -268,7 +269,8 @@
     extern uc   fun_min(uc par_num,...);//求最小值
     extern void fun_coordinate();//自动巡线之坐标
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
-    extern void fun_zjzt(uc par_model);//抓件状态
+    extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
+    extern void fun_najian();//拿件(配合自动抓件使用)
     extern void fun_zhuajian();//从起始区走到抓件区
     extern void fun_back();//从抓件区回到起始区
 /*---------------------------------------------------------------更新日志-----*/
