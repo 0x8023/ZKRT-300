@@ -1,7 +1,7 @@
 #ifndef __8023_H__
 #define __8023_H__
 /*-----------------------------------------------------------开启模式选择-----*/
-    #define Debug ok
+//    #define Debug ok
 /*-------------------------------------------------------------头文件引入-----*/
     #include "STC12c5a60s2.h"   //单片机头文件
     #include "intrins.h"        //_nop_与循环位移
@@ -270,7 +270,7 @@
     extern void fun_coordinate();//自动巡线之坐标
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
-    extern void fun_najian();//拿件(配合自动抓件使用)
+    extern void fun_najian(uc par_now,uc par_next,pc par_high,unsigned char** par_data);//拿件(配合自动抓件使用)
     extern void fun_zhuajian();//从起始区走到抓件区
     extern void fun_back();//从抓件区回到起始区
 /*---------------------------------------------------------------更新日志-----*/

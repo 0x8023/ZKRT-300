@@ -4,14 +4,7 @@
 #define D4 D(4000);
 void main(){
 	/*串口调试/仿真区*/
-	fun_port();
-	while(1){
-		fun_delay(1000,del_ms);
-	}
-	
 
-	fun_zdzj(12345678,87654321);
-	
 	/*串口调试/仿真区结束*/
     def_start(//在此输入小车目前的状态
         0,//X坐标
@@ -23,11 +16,13 @@ void main(){
         dir_up)//回转方向
     /*请从下一行开始写你的程序*/
 	//fun_test();
+	fun_test();
+	
 
 
 	//fun_zhuajian();
-	
 	/*
+	
 	  str_tfl.step[0]=tfl_line;
 	  str_tfl.step[1]=2;
 	  str_tfl.step[2]=tfl_cache;
@@ -98,12 +93,12 @@ void main(){
       str_tfl.run=str_tfl.step;
 	  str_tfl.gospeed=40;
 	  str_tfl.turnspeed=40;
+      str_tfl.cachespeed=40;
 	  str_tfl.doing=tf_ture;
 
-      D(5000)
-      fun_sj1(sjp_2);
-	  
-*/
+      while(1);
+	  */
+
 	  
 	 // fun_hz1(dir_up);
 	 // fun_motorsrl(mot_r,60);

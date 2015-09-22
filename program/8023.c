@@ -1324,6 +1324,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                     #else
                         ;
                     #endif
+                        fun_najian(1,3,loc_high,str_pass.jx);
                         continue;
                 }//1-->3
             }//如果区1有件
@@ -1655,33 +1656,261 @@ void fun_zjzt(uc par_motor,uc par_model){
         }
     }
 }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
-void fun_najian(uc par_now,uc par_next,pc par_high,puc par_data){
-    if(par_now==0||par_now==1||par_now==2||par_now==3)
-        if(str_begin.hzfx==dir_left)
-            fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end));
-        else if(str_begin.hzfx==dir_right)
-            fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end));
-    else if(par_now==4||par_now==5||par_now==6||par_now==7)
-        if(str_begin.hzfx==dir_right)
-            fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end));
-        else if(str_begin.hzfx==dir_left)
-            fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end));
-    //升起
-    fun_zjzt(mot_pyhz,par_now);
-    fun_zjzt(mot_sj,par_high[par_now]);
-    fun_sz1(han_j);
-    // if(){
+void fun_najian(uc par_now,uc par_next,pc par_high,unsigned char** par_data){
+    #ifdef Debug
+        printf("%d --> %d\n",(ui)par_now,(ui)par_next);
+    #else
+        //升起
+        if(par_now==0||par_now==1||par_now==2||par_now==3)
+            if(str_begin.hzfx==dir_left)
+                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end)-1);
+            else if(str_begin.hzfx==dir_right)
+                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
+        else if(par_now==4||par_now==5||par_now==6||par_now==7)
+            if(str_begin.hzfx==dir_right)
+                fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
+            else if(str_begin.hzfx==dir_left)
+                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
+        //平移回转到需要的地方
+        fun_zjzt(mot_pyhz,par_now);
+        //下降到工件的位置
+        fun_zjzt(mot_sj,par_high[par_now]);
+        //抓紧工件
+        fun_sz1(han_j);
+        //上升到正确的最高位
+        switch(par_now){
+            case 0:
+                switch(par_next){
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[5],par_high[4],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[5],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[6],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[6],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 1:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[0],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[2],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[5],par_high[4],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[5],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[6],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[6],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 2:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[0],def_end)-1);
+                        break;
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[1],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[5],par_high[4],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[5],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[6],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[6],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[1],par_high[0],def_end)-1);
+                        break;
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[1],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[5],par_high[4],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[5],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[6],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[6],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 4:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[1],par_high[0],def_end)-1);
+                        break;
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[1],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[6],par_high[2],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[6],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[6],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 5:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[1],par_high[0],def_end)-1);
+                        break;
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[1],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[2],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[4],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[6],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 6:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[1],par_high[0],def_end)-1);
+                        break;
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[1],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[2],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[4],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[5],def_end)-1);
+                        break;
+                    case 7:
+                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[7],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 7:
+                switch(par_next){
+                    case 0:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],par_high[1],par_high[0],def_end)-1);
+                        break;
+                    case 1:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],par_high[1],def_end)-1);
+                        break;
+                    case 2:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[6],par_high[2],def_end)-1);
+                        break;
+                    case 3:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[6],par_high[2],par_high[3],def_end)-1);
+                        break;
+                    case 4:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],par_high[4],def_end)-1);
+                        break;
+                    case 5:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],def_end)-1);
+                        break;
+                    case 6:
+                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[6],def_end)-1);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        //平移回转至放件处
+        fun_zjzt(mot_pyhz,par_next);
+        //下降到要放下的位置
+        fun_zjzt(mot_sj,par_high[par_next]-1);
+        //松开手抓
+        fun_sz1(han_s);
+    #endif
 
-    // }
-    fun_sj1();
-    fun_zjzt(mot_pyhz,par_next);
-    fun_sj1();
-    fun_sz1(han_s);
-
-    par_data[par_next]=par_data[par_now];
-    par_data[par_now][par_high[1]]=0;
-    (*par_high[par_now])--;
-    (*par_high[par_next])++;
+    //更新参数
+    par_data[par_next][par_high[par_next]]=par_data[par_now][par_high[par_now]];
+    par_data[par_now][par_high[par_now]]=0;
+    par_high[par_now]--;
+    par_high[par_next]++;
 }
 void fun_zhuajian(){
     fun_folline(2,70);
