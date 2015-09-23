@@ -326,15 +326,25 @@ void fun_sz1(enum varENU_han par_model){
     if(str_begin.szzt==par_model)
         return;
     if(par_model==han_s){//手抓松
-        fun_motors(mot_sz,-100);
-        while(in_s==1);
+        #ifdef Debug
+            fun_motors(mot_sz,-100);
+            while(in_s==1);
+        #else
+            printf("fun_sz1(han_s);\n");
+        #endif
     }
     else{//手抓紧
-        fun_motors(mot_sz,100);
-        while(in_j==1);
+        #ifdef Debug
+            fun_motors(mot_sz,100);
+            while(in_j==1);
+        #else
+            printf("fun_sz1(han_j);\n");
+        #endif
     }
-    fun_delay(20,del_ms);
-    fun_motors(mot_sz,0);
+    #ifndef Debug
+        fun_delay(20,del_ms);
+        fun_motors(mot_sz,0);
+    #endif
     str_begin.szzt=par_model;//存储运行结果
 }//手抓单步运动
 void fun_py1(enum varENU_tra par_model){
@@ -342,75 +352,95 @@ void fun_py1(enum varENU_tra par_model){
         return;
     switch(par_model){
         case tra_q://前平移(没有电机的呢个方向)
-            fun_motors(mot_py,100);
-            while(in_qpy==1);
-            fun_delay(str_cod.py1bz,del_ms);
-            break;
+            #ifdef Debug
+                printf("fun_py1(tra_q);\n");
+            #else
+                fun_motors(mot_py,100);
+                while(in_qpy==1);
+                fun_delay(str_cod.py1bz,del_ms);
+            #endif
+                break;
         case tra_kq:
-            switch(str_begin.pywz){
-                case tra_q:
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1qkq,del_ms);
-                    break;
-                case tra_z:
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1kqz,del_ms);
-                    break;
-                case tra_kh:
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1kqkh,del_ms);
-                    break;
-                case tra_h:
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1kqh,del_ms);
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_py1(tra_kq);\n");
+            #else
+                switch(str_begin.pywz){
+                    case tra_q:
+                        fun_motors(mot_py,-100);
+                        fun_delay(str_cod.py1qkq,del_ms);
+                        break;
+                    case tra_z:
+                        fun_motors(mot_py,100);
+                        fun_delay(str_cod.py1kqz,del_ms);
+                        break;
+                    case tra_kh:
+                        fun_motors(mot_py,100);
+                        fun_delay(str_cod.py1kqkh,del_ms);
+                        break;
+                    case tra_h:
+                        fun_motors(mot_py,100);
+                        fun_delay(str_cod.py1kqh,del_ms);
+                        break;
+                }
+            #endif
+                break;
         case tra_z:
-            switch(str_begin.pywz){
-                case tra_q:
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1qz,del_ms);
-                    break;
-                case tra_kq:
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1kqz,del_ms);
-                    break;
-                case tra_kh:
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1zkh,del_ms);
-                    break;
-                case tra_h:
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1zh,del_ms);
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_py1(tra_z);\n");
+            #else
+                switch(str_begin.pywz){
+                    case tra_q:
+                        fun_motors(mot_py,-100);
+                        fun_delay(str_cod.py1qz,del_ms);
+                        break;
+                    case tra_kq:
+                        fun_motors(mot_py,-100);
+                        fun_delay(str_cod.py1kqz,del_ms);
+                        break;
+                    case tra_kh:
+                        fun_motors(mot_py,100);
+                        fun_delay(str_cod.py1zkh,del_ms);
+                        break;
+                    case tra_h:
+                        fun_motors(mot_py,100);
+                        fun_delay(str_cod.py1zh,del_ms);
+                        break;
+                }
+            #endif
+                break;
         case tra_kh:
-            switch(str_begin.pywz){
-                case tra_q:
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1qkh,del_ms);
-                    break;
-                case tra_kq:
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1kqkh,del_ms);
-                    break;
-                case tra_z:
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1zkh,del_ms);
-                    break;
-                case tra_h:
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1khh,del_ms);
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_py1(tra_kh);\n");
+            #else
+                switch(str_begin.pywz){
+                    case tra_q:
+                        fun_motors(mot_py,-100);
+                        fun_delay(str_cod.py1qkh,del_ms);
+                        break;
+                    case tra_kq:
+                        fun_motors(mot_py,-100);
+                        fun_delay(str_cod.py1kqkh,del_ms);
+                        break;
+                    case tra_z:
+                        fun_motors(mot_py,-100);
+                        fun_delay(str_cod.py1zkh,del_ms);
+                        break;
+                    case tra_h:
+                        fun_motors(mot_py,100);
+                        fun_delay(str_cod.py1khh,del_ms);
+                        break;
+                }
+            #endif
+                break;
         case tra_h://后平移(有电机的呢个方向)
-            fun_motors(mot_py,-100);
-            while(in_hpy==1);
-            fun_delay(str_cod.py1bz,del_ms);
-            break;
+            #ifdef Debug
+                printf("fun_py1(tra_h);\n");
+            #else
+                fun_motors(mot_py,-100);
+                while(in_hpy==1);
+                fun_delay(str_cod.py1bz,del_ms);
+            #endif
+                break;
         default:
             break;
     }
@@ -422,81 +452,117 @@ void fun_sj1(enum varENU_sjp par_model){
        return;
     switch(par_model){
         case sjp_1://升降位置1(最上位)
-            fun_motors(mot_sj,100);
-            def_select(sel_58);
-            while(in_wz1==1);
-            fun_delay(str_cod.sj1bzw,del_ms);
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_1);\n");
+            #else
+                fun_motors(mot_sj,100);
+                def_select(sel_58);
+                while(in_wz1==1);
+                fun_delay(str_cod.sj1bzw,del_ms);
+            #endif
+                break;
         case sjp_12:
-            if(par_model>str_begin.sjwz){
-                fun_motors(mot_sj,-100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            else{//要去的地方在上面，向上走
-                fun_sj1(sjp_2);
-                fun_motors(mot_sj,100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_12);\n");
+            #else
+                if(par_model>str_begin.sjwz){
+                    fun_motors(mot_sj,-100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+                else{//要去的地方在上面，向上走
+                    fun_sj1(sjp_2);
+                    fun_motors(mot_sj,100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+            #endif
+                break;
         case sjp_2://升降位置2
-            fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
-            def_select(sel_58);
-            while(in_wz2==1);
-            fun_delay(str_cod.sj1bzw,del_ms);
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_2);\n");
+            #else
+                fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+                def_select(sel_58);
+                while(in_wz2==1);
+                fun_delay(str_cod.sj1bzw,del_ms);
+            #endif
+                break;
         case sjp_23:
-            if(par_model>str_begin.sjwz){
-                fun_sj1(sjp_2);
-                fun_motors(mot_sj,-100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            else{//要去的地方在上面，向上走
-                fun_sj1(sjp_3);
-                fun_motors(mot_sj,100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_23);\n");
+            #else
+                if(par_model>str_begin.sjwz){
+                    fun_sj1(sjp_2);
+                    fun_motors(mot_sj,-100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+                else{//要去的地方在上面，向上走
+                    fun_sj1(sjp_3);
+                    fun_motors(mot_sj,100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+            #endif
+                break;
         case sjp_3://升降位置3
-            fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
-            def_select(sel_58);
-            while(in_wz3==1);
-            fun_delay(str_cod.sj1bzw,del_ms);
+            #ifdef Debug
+                printf("fun_sj1(sjp_3);\n");
+            #else
+                fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+                def_select(sel_58);
+                while(in_wz3==1);
+                fun_delay(str_cod.sj1bzw,del_ms);
+            #endif
             break;
         case sjp_34:
-            if(par_model>str_begin.sjwz){
-                fun_sj1(sjp_3);
-                fun_motors(mot_sj,-100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            else{//要去的地方在上面，向上走
-                fun_sj1(sjp_4);
-                fun_motors(mot_sj,100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_34);\n");
+            #else
+                if(par_model>str_begin.sjwz){
+                    fun_sj1(sjp_3);
+                    fun_motors(mot_sj,-100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+                else{//要去的地方在上面，向上走
+                    fun_sj1(sjp_4);
+                    fun_motors(mot_sj,100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+            #endif
+                break;
         case sjp_4://升降位置4
-            fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
-            def_select(sel_58);
-            while(in_wz4==1);
-            fun_delay(str_cod.sj1bzw,del_ms);
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_4);\n");
+            #else
+                fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+                def_select(sel_58);
+                while(in_wz4==1);
+                fun_delay(str_cod.sj1bzw,del_ms);
+            #endif
+                break;
         case sjp_45:
-            if(par_model>str_begin.sjwz){
-                fun_sj1(sjp_4);
-                fun_motors(mot_sj,-100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            else{//要去的地方在上面，向上走
-                fun_motors(mot_sj,100);
-                fun_delay(str_cod.sj1zjw,del_ms);
-            }
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_45);\n");
+            #else
+                if(par_model>str_begin.sjwz){
+                    fun_sj1(sjp_4);
+                    fun_motors(mot_sj,-100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+                else{//要去的地方在上面，向上走
+                    fun_motors(mot_sj,100);
+                    fun_delay(str_cod.sj1zjw,del_ms);
+                }
+            #endif
+                break;
         case sjp_5://升降位置5
-            fun_motors(mot_sj,-100);
-            def_select(sel_912);
-            while(in_wz5==1);
-            fun_delay(str_cod.sj1bzw,del_ms);
-            break;
+            #ifdef Debug
+                printf("fun_sj1(sjp_5);\n");
+            #else
+                fun_motors(mot_sj,-100);
+                def_select(sel_912);
+                while(in_wz5==1);
+                fun_delay(str_cod.sj1bzw,del_ms);
+            #endif
+                break;
         default:
             break;
     }
@@ -509,112 +575,128 @@ void fun_hz1(enum varENU_dir par_model){
     def_select(sel_912);
     switch(par_model){
         case dir_up://回转至前方
-            switch(str_begin.hzfx){
-                case dir_down://现在在下方
-                    fun_motors(mot_hz,-100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    while(in_hz==0);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                case dir_left://现在在左边
-                    fun_motors(mot_hz,100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                case dir_right://现在在右边
-                    fun_motors(mot_hz,-100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                default:
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_hz1(dir_up);\n");
+            #else
+                switch(str_begin.hzfx){
+                    case dir_down://现在在下方
+                        fun_motors(mot_hz,-100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        while(in_hz==0);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    case dir_left://现在在左边
+                        fun_motors(mot_hz,100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    case dir_right://现在在右边
+                        fun_motors(mot_hz,-100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    default:
+                        break;
+                }
+            #endif
+                break;
         case dir_down://要去下面
-            switch(str_begin.hzfx){
-                case dir_up://现在在上面
-                    fun_motors(mot_hz,100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    while(in_hz==0);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                case dir_left://现在在左面
-                    fun_motors(mot_hz,-100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                    break;
-                case dir_right://现在在右面
-                    fun_motors(mot_hz,100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                default:
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_hz1(dir_down);\n");
+            #else
+                switch(str_begin.hzfx){
+                    case dir_up://现在在上面
+                        fun_motors(mot_hz,100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        while(in_hz==0);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    case dir_left://现在在左面
+                        fun_motors(mot_hz,-100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                        break;
+                    case dir_right://现在在右面
+                        fun_motors(mot_hz,100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    default:
+                        break;
+                }
+            #endif
+                break;
         case dir_left://要去左边
-            switch(str_begin.hzfx){
-                case dir_up://现在在上面
-                    fun_motors(mot_hz,-100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                    break;
-                case dir_down://现在在下面
-                    fun_motors(mot_hz,100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                    break;
-                case dir_right://现在在右面
-                    fun_motors(mot_hz,-100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    while(in_hz==0);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                default:
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_hz1(dir_left);\n");
+            #else
+                switch(str_begin.hzfx){
+                    case dir_up://现在在上面
+                        fun_motors(mot_hz,-100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                        break;
+                    case dir_down://现在在下面
+                        fun_motors(mot_hz,100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                        break;
+                    case dir_right://现在在右面
+                        fun_motors(mot_hz,-100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        while(in_hz==0);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    default:
+                        break;
+                }
+            #endif
+                break;
         case dir_right://要去右面
-            switch(str_begin.hzfx){
-                case dir_up://现在在前面
-                    fun_motors(mot_hz,100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                case dir_down://现在在下面
-                    fun_motors(mot_hz,-100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                case dir_left://现在在左面
-                    fun_motors(mot_hz,100);
-                    fun_delay(1,del_s);
-                    while(in_hz==1);
-                    while(in_hz==0);
-                    while(in_hz==1);
-                    fun_delay(str_cod.hz1bz,del_ms);
-                    break;
-                default:
-                    break;
-            }
-            break;
+            #ifdef Debug
+                printf("fun_hz1(dir_right);\n");
+            #else
+                switch(str_begin.hzfx){
+                    case dir_up://现在在前面
+                        fun_motors(mot_hz,100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    case dir_down://现在在下面
+                        fun_motors(mot_hz,-100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    case dir_left://现在在左面
+                        fun_motors(mot_hz,100);
+                        fun_delay(1,del_s);
+                        while(in_hz==1);
+                        while(in_hz==0);
+                        while(in_hz==1);
+                        fun_delay(str_cod.hz1bz,del_ms);
+                        break;
+                    default:
+                        break;
+                }
+            #endif
+                break;
         default:
             break;
     }
@@ -1132,7 +1214,6 @@ void fun_port(){
     BRT = 0xD9;         //设定独立波特率发生器重装值
     AUXR |= 0x01;       //串口1选择独立波特率发生器为波特率发生器
     AUXR |= 0x10;       //启动独立波特率发生器
-    TI=1;               //打开串口传输功能
 }//串口初始化
 void fun_test(){
     fun_sz1(han_j);
@@ -1305,56 +1386,67 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
         str_end.jx[4][loc_xh1]=0;
     }//删除str_end.jx中现在的件序
     loc_high[0]=loc_high[4]=1;//只有0号和4号放满了件
+    loc_xh1=0;//循环标志位归零
 
+    fun_sz1(han_s);                 //手抓松
+    fun_sj1(sjp_1);                 //上升到最高位
+    fun_py1(tra_q);                 //平移到前端
+    if(str_begin.hzfx!=dir_right)   //如果不在右边
+        fun_hz1(dir_right);         //就平移到右边
     /*
         到目前为止准备工作结束,现在的数组中没有实际件序,
         现在的编号在str_pass.jx中,
         想要得到的结果件序编号在str_end.jx中
     */
     while(1){
+        //退出条件
+        if((str_pass.jx[3][1]==str_end.jx[3][1])&&
+        (str_pass.jx[3][2]==str_end.jx[3][2])&&
+        (str_pass.jx[3][3]==str_end.jx[3][3])&&
+        (str_pass.jx[3][4]==str_end.jx[3][4])&&
+        (str_pass.jx[7][1]==str_end.jx[7][1])&&
+        (str_pass.jx[7][2]==str_end.jx[7][2])&&
+        (str_pass.jx[7][3]==str_end.jx[7][3])&&
+        (str_pass.jx[7][4]==str_end.jx[7][4])){
+            if(str_begin.hzfx==dir_left){
+                fun_sz1(han_s);                 //手抓松
+                fun_sj1(sjp_1);                 //升降到最高位
+                fun_zjzt(mot_pyhz,7);           //平面位置7
+                fun_zjzt(mot_sj,loc_high[7]);   //升降到7的最高位
+                fun_sz1(han_j);                 //手抓紧
+            }//如果停在左边
+            return;
+        }//如果小车一方的实际件序和想要达到的件序相等
         if(str_begin.hzfx==dir_left){
             //转向条件
-            //if(str_pass.jx[0][])
-
+            loc_xh1++;//标志位+1
+            if(loc_xh1>=100){
+                loc_xh1=0;
+                fun_zjzt(mot_sj,fun_min(loc_high[0],loc_high[1],loc_high[2],loc_high[3],loc_high[4],loc_high[5],loc_high[6],loc_high[7],def_end)-1);
+                fun_hz1(dir_right);
+            }
             //可以一次拿走,不需要中间位的
             if(loc_high[1]<5){
-                if(str_pass.jx[1][loc_high[1]]==str_end.jx[3][loc_high[3]]){
-                    #ifdef Debug
-                        printf("1-->3\n");
-                    #else
-                        ;
-                    #endif
-                        fun_najian(1,3,loc_high,str_pass.jx);
-                        continue;
-                }//1-->3
+                if(str_pass.jx[1][loc_high[1]]==str_end.jx[3][loc_high[3]-1]){
+                    fun_najian(1,3,loc_high,str_pass.jx);//1-->3
+                    continue;
+                }
             }//如果区1有件
             if(loc_high[2]<5){
-                if(str_pass.jx[2][loc_high[2]]==str_end.jx[3][loc_high[3]]){
-                    #ifdef Debug
-                        printf("2-->3\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
-                }//2-->3
+                if(str_pass.jx[2][loc_high[2]]==str_end.jx[3][loc_high[3]-1]){
+                    fun_najian(2,3,loc_high,str_pass.jx);//2-->3
+                    continue;
+                }
             }//如果区2有件
             if(loc_high[0]<5){
-                if(str_pass.jx[0][loc_high[0]]==str_end.jx[3][loc_high[3]]){
-                    #ifdef Debug
-                        printf("0-->3\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
-                }//0-->3
-                if(str_pass.jx[0][loc_high[0]]==str_end.jx[7][loc_high[7]]){
-                    #ifdef Debug
-                        printf("0-->7\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
-                }//0-->7
+                if(str_pass.jx[0][loc_high[0]]==str_end.jx[3][loc_high[3]-1]){
+                    fun_najian(0,3,loc_high,str_pass.jx);//0-->3
+                    continue;
+                }
+                if(str_pass.jx[0][loc_high[0]]==str_end.jx[7][loc_high[7]-1]){
+                    fun_najian(0,7,loc_high,str_pass.jx);//0-->7
+                    continue;
+                }
             }//如果区0有件
 
             //不可以一次拿走,需要中间位的
@@ -1366,22 +1458,14 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                     if(((loc_high[1]==5)||//如果1区没放东西或者
                     (str_pass.jx[0][loc_high[0]]>str_pass.jx[1][loc_high[1]]))&&//0区的件编号大于1区的编号并且
                     (loc_high[1]>2)){//1区不能放超过2个件
-                        #ifdef Debug
-                            printf("0-->1\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(0,1,loc_high,str_pass.jx);//0-->1
+                        continue;
                     }
                     if(((loc_high[2]==5)||//如果2区没放东西或者
-                        (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大于2区的编号并且
-                        (loc_high[2]>2)){//2区不能放超过2个件
-                        #ifdef Debug
-                            printf("0-->2\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                    (str_pass.jx[0][loc_high[0]]>str_pass.jx[2][loc_high[2]]))&&//0区的件编号大于2区的编号并且
+                    (loc_high[2]>2)){//2区不能放超过2个件
+                        fun_najian(0,2,loc_high,str_pass.jx);//0-->2
+                        continue;
                     }
                 }//如果要放在3上,但目前不能放
                 if((str_pass.jx[0][loc_high[0]]==str_end.jx[7][1])||
@@ -1391,22 +1475,14 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                     if(((loc_high[5]==5)||//如果5区没东西放或者
                     (str_pass.jx[0][loc_high[0]]>str_pass.jx[5][loc_high[5]]))&&//0区的件编号大于5区的编号并且
                     (loc_high[5]>2)){//5区不能放超过2个件
-                        #ifdef Debug
-                            printf("0-->5\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(0,5,loc_high,str_pass.jx);//0-->5
+                        continue;
                     }
                     if(((loc_high[6]==5)||//如果6区没东西放或者
                     (str_pass.jx[0][loc_high[0]]>str_pass.jx[6][loc_high[6]]))&&//0区的件编号大于6区的编号并且
                     (loc_high[6]>2)){//6区不能放超过2个件
-                        #ifdef Debug
-                            printf("0-->6\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(0,6,loc_high,str_pass.jx);//0-->6
+                        continue;
                     }
                 }//如果要放在7上,但目前不能放
             }//如果区0有件
@@ -1414,81 +1490,56 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
             //中间两个位置也不能一次搞定的
             if((loc_high[1]<5)&&(loc_high[2]<5)){
                 if((str_pass.jx[1][loc_high[1]]>str_pass.jx[2][loc_high[2]])&&(loc_high[2]>1)){
-                    #ifdef Debug
-                        printf("1-->2\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(1,2,loc_high,str_pass.jx);//1-->2
+                    continue;
                 }//1的件比2的件大且区2放了不到3个件
                 if((str_pass.jx[2][loc_high[2]]>str_pass.jx[1][loc_high[1]])&&(loc_high[1]>1)){
-                    #ifdef Debug
-                        printf("2-->1\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(2,1,loc_high,str_pass.jx);//2-->1
+                    continue;
                 }//2的件比1的件大且区1放了不到3个件
             }//如果区1和区2都有件
 
             //中间两个位置怎么也搞不定的
             if((loc_high[1]<5)&&(loc_high[2]<5)){
                 if((loc_high[0]>1)&&(str_pass.jx[1][loc_high[1]]>str_pass.jx[0][loc_high[0]])){
-                    #ifdef Debug
-                        printf("1-->0\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(1,0,loc_high,str_pass.jx);//1-->0
+                    continue;
                 }//1区的件比0区的大且0区放了不到3个件
                 if((loc_high[0]>1)&&(str_pass.jx[2][loc_high[2]]>str_pass.jx[0][loc_high[0]])){
-                    #ifdef Debug
-                        printf("2-->0\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(2,0,loc_high,str_pass.jx);//2-->0
+                    continue;
                 }//2区的件比0区的大且0区放了不到3个件
             }
         }//如果回转在左边 
         if(str_begin.hzfx==dir_right){
+            //转向条件
+            loc_xh1++;//标志位+1
+            if(loc_xh1>=100){
+                loc_xh1=0;
+                fun_zjzt(mot_sj,fun_min(loc_high[0],loc_high[1],loc_high[2],loc_high[3],loc_high[4],loc_high[5],loc_high[6],loc_high[7],def_end)-1);
+                fun_hz1(dir_left);
+            }
             //可以一次拿走,不需要中间位的
             if(loc_high[5]<5){
-                if(str_pass.jx[5][loc_high[5]]==str_end.jx[7][loc_high[7]]){
-                    #ifdef Debug
-                        printf("5-->7\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                if(str_pass.jx[5][loc_high[5]]==str_end.jx[7][loc_high[7]-1]){
+                    fun_najian(5,7,loc_high,str_pass.jx);//5-->7
+                    continue;
                 }//5-->7
             }//如果区5有件
             if(loc_high[6]<5){
-                if(str_pass.jx[6][loc_high[6]]==str_end.jx[7][loc_high[7]]){
-                    #ifdef Debug
-                        printf("6-->7\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                if(str_pass.jx[6][loc_high[6]]==str_end.jx[7][loc_high[7]-1]){
+                    fun_najian(6,7,loc_high,str_pass.jx);//6-->7
+                    continue;
                 }//6-->7
             }//如果区6有件
             if(loc_high[4]<5){
-                if(str_pass.jx[4][loc_high[4]]==str_end.jx[7][loc_high[7]]){
-                    #ifdef Debug
-                        printf("4-->7\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                if(str_pass.jx[4][loc_high[4]]==str_end.jx[7][loc_high[7]-1]){
+                    fun_najian(4,7,loc_high,str_pass.jx);//4-->7
+                    continue;
                 }//4-->7
-                if(str_pass.jx[4][loc_high[4]]==str_end.jx[3][loc_high[3]]){
-                    #ifdef Debug
-                        printf("4-->3\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                if(str_pass.jx[4][loc_high[4]]==str_end.jx[3][loc_high[3]-1]){
+                    fun_najian(4,3,loc_high,str_pass.jx);//4-->3
+                    continue;
                 }//4-->3
             }//如果区4有件
 
@@ -1501,22 +1552,14 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                     if(((loc_high[5]==5)||//如果5区没东西放或者
                     (str_pass.jx[4][loc_high[4]]>str_pass.jx[5][loc_high[5]]))&&//4区的件编号大于5区的编号并且
                     (loc_high[5]>2)){//5区不能放超过2个件
-                        #ifdef Debug
-                            printf("4-->5\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(4,5,loc_high,str_pass.jx);//4-->5
+                        continue;
                     }
                     if(((loc_high[6]==5)||//如果6区没东西放或者
                     (str_pass.jx[4][loc_high[4]]>str_pass.jx[6][loc_high[6]]))&&//4区的件编号大于6区的编号并且
                     (loc_high[6]>2)){//6区不能放超过2个件
-                        #ifdef Debug
-                            printf("4-->6\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(4,6,loc_high,str_pass.jx);//4-->6
+                        continue;
                     }
                 }//如果要放在7上,但目前不能放
                 if((str_pass.jx[4][loc_high[4]]==str_end.jx[3][1])||
@@ -1526,22 +1569,14 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                     if(((loc_high[1]==5)||//如果1区没放东西或者
                     (str_pass.jx[4][loc_high[4]]>str_pass.jx[1][loc_high[1]]))&&//4区的件编号大于1区的编号并且
                     (loc_high[1]>2)){//1区不能放超过2个件
-                        #ifdef Debug
-                            printf("4-->1\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(4,1,loc_high,str_pass.jx);//4-->1
+                        continue;
                     }
                     if(((loc_high[2]==5)||//如果2区没放东西或者
                         (str_pass.jx[4][loc_high[4]]>str_pass.jx[2][loc_high[2]]))&&//4区的件编号大于2区的编号并且
                         (loc_high[2]>2)){//2区不能放超过2个件
-                        #ifdef Debug
-                            printf("4-->2\n");
-                        #else
-                            ;
-                        #endif
-                            continue;
+                        fun_najian(4,2,loc_high,str_pass.jx);//4-->2
+                        continue;
                     }
                 }//如果要放在3上,但目前不能放
             }//如果区4有件
@@ -1549,40 +1584,24 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
             //中间两个位置也不能一次搞定的
             if((loc_high[5]<5)&&(loc_high[6]<5)){
                 if((str_pass.jx[5][loc_high[5]]>str_pass.jx[6][loc_high[6]])&&(loc_high[6]>1)){
-                    #ifdef Debug
-                        printf("5-->6\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(5,6,loc_high,str_pass.jx);//5-->6
+                    continue;
                 }//5的件比6的件大且区6放了不到3个件
                 if((str_pass.jx[6][loc_high[6]]>str_pass.jx[5][loc_high[5]])&&(loc_high[5]>1)){
-                    #ifdef Debug
-                        printf("6-->5\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(6,5,loc_high,str_pass.jx);//6-->5
+                    continue;
                 }//6的件比5的件大且区5放了不到3个件
             }//如果区5和区6都有件
 
             //中间两个位置怎么也搞不定的
             if((loc_high[5]<5)&&(loc_high[6]<5)){
                 if((loc_high[4]>1)&&(str_pass.jx[5][loc_high[5]]>str_pass.jx[4][loc_high[4]])){
-                    #ifdef Debug
-                        printf("5-->4\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(5,4,loc_high,str_pass.jx);//5-->4
+                    continue;
                 }//5区的件比4区的大且4区放了不到3个件
                 if((loc_high[4]>1)&&(str_pass.jx[6][loc_high[6]]>str_pass.jx[4][loc_high[4]])){
-                    #ifdef Debug
-                        printf("6-->4\n");
-                    #else
-                        ;
-                    #endif
-                        continue;
+                    fun_najian(6,4,loc_high,str_pass.jx);//6-->4
+                    continue;
                 }//6区的件比4区的大且4区放了不到3个件
             }
         }//如果回转在右边
@@ -1656,10 +1675,12 @@ void fun_zjzt(uc par_motor,uc par_model){
         }
     }
 }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
-void fun_najian(uc par_now,uc par_next,pc par_high,unsigned char** par_data){
+void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
     #ifdef Debug
         printf("%d --> %d\n",(ui)par_now,(ui)par_next);
     #else
+        //松开手抓
+        fun_sz1(han_s);        
         //升起
         if(par_now==0||par_now==1||par_now==2||par_now==3)
             if(str_begin.hzfx==dir_left)
@@ -1902,8 +1923,6 @@ void fun_najian(uc par_now,uc par_next,pc par_high,unsigned char** par_data){
         fun_zjzt(mot_pyhz,par_next);
         //下降到要放下的位置
         fun_zjzt(mot_sj,par_high[par_next]-1);
-        //松开手抓
-        fun_sz1(han_s);
     #endif
 
     //更新参数
@@ -1911,7 +1930,7 @@ void fun_najian(uc par_now,uc par_next,pc par_high,unsigned char** par_data){
     par_data[par_now][par_high[par_now]]=0;
     par_high[par_now]--;
     par_high[par_next]++;
-}
+}//拿件(配合自动抓件使用)
 void fun_zhuajian(){
     fun_folline(2,70);
     fun_turn(tur_l90,40);
@@ -1928,3 +1947,61 @@ void fun_back(){
     fun_motors(mot_l,-20);
     fun_delay(1,del_s);
 }//从抓件区回到起始区
+void fun_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx){
+    CLK_DIV=0x00;             //不分频
+    P0M1=0xff;                //P0用于输入
+    P0M0=0x00;                //P0不能输出
+    P1M1=0x00;                //P1口0-1双向
+    P1M0=0xfc;                //P1口2-7输出
+    P2M1=0xf0;                //P2口4-7输入
+    P2M0=0x0f;                //P2口0-3输出
+
+    out_en1=1;                //电机1/3使能
+    out_en2=1;                //电机2/4使能
+    CR=0;                     //PAC计数器归零
+    out_motorselect=0;        //电机片选为0
+
+    #ifdef Debug              //如果是调试模式
+        fun_port();           //初始化串口
+        TI=1;                 //打开串口传输功能        
+    #endif
+    fun_pwminit();            //PWM的初始化
+    fun_timer0init();         //初始化定时器0
+    fun_timer1init();         //初始化定时器1
+
+    str_begin.x=par_x;        //X坐标
+    str_begin.y=par_y;        //Y坐标
+    str_begin.ctfx=par_ctfx;  //车头方向
+    str_begin.szzt=par_szzt;  //手抓状态
+    str_begin.sjwz=par_sjwz;  //升降位置
+    str_begin.pywz=par_pywz;  //平移位置
+    str_begin.hzfx=par_hzfx;  //回转方向
+
+    str_tfl.gospeed=0;        //速度归零
+    fun_motors(mot_sz,0);     //手抓速度归零
+    fun_motors(mot_py,0);     //平移速度归零
+    fun_motors(mot_sj,0);     //手抓速度归零
+    fun_motors(mot_hz,0);     //手抓速度归零
+    fun_motors(mot_rl,0);     //左右速度归零
+
+    TR0=1;                    //打开定时器0
+    TR1=1;                    //打开定时器1
+    in_start=1;               //按键置1
+    #ifdef Debug              //如果开启调试模式
+        fun_delay(5,del_s);
+        MSG("Ready!")         //输出Ready!
+    #else
+        fun_wait();           //等待按键
+    #endif
+}//初始化函数
+void fun_stop(){
+    EA=0;                   //关总中断
+    str_tfl.gospeed=0;      //速度归零
+    fun_motors(mot_sz,0);   //手抓速度归零
+    fun_motors(mot_py,0);   //平移速度归零
+    fun_motors(mot_sj,0);   //手抓速度归零
+    fun_motors(mot_hz,0);   //手抓速度归零
+    fun_motors(mot_rl,0);   //左右速度归零
+    MSG("End!")             //输出End!
+    while(1);               //死循环
+}//结束函数

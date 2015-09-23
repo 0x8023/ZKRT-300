@@ -1,24 +1,21 @@
 #include "../8023.h"
-#define D2 D(2000);
-#define D3 D(3000);
-#define D4 D(4000);
-void main(){
-	/*串口调试/仿真区*/
 
-	/*串口调试/仿真区结束*/
-    def_start(//在此输入小车目前的状态
+void main(){
+    fun_start(//在此输入小车目前的状态
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
         han_s,//手抓状态
         sjp_3,//升降位置
         tra_h,//平移位置
-        dir_up)//回转方向
+        dir_up);//回转方向
     /*请从下一行开始写你的程序*/
 	//fun_test();
-	fun_test();
 	
-
+		
+	fun_zdzj(12345678,43218765);
+	
+	
 
 	//fun_zhuajian();
 	/*
@@ -241,7 +238,7 @@ void main(){
 	fun_py1(tra_h);
 	*/
     /*你的程序到此为止,请不要再继续改动*/
-    def_stop
+    fun_stop();
 }
 void Int0Interrupt() interrupt 0{
     ;

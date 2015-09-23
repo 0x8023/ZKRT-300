@@ -16,53 +16,6 @@
     #define def_timer1stop TR1=0;   //定时器1关闭
     #define def_end 0xFF            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1;//传感器片选
-    #define def_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx) \
-    /*不分频*/        CLK_DIV=0x00;\
-    /*P0用于输入*/    P0M1=0xff;\
-    /*P0不能输出*/    P0M0=0x00;\
-    /*P1口0-1双向*/   P1M1=0x00;\
-    /*P1口2-7输出*/   P1M0=0xfc;\
-    /*P2口4-7输入*/   P2M1=0xf0;\
-    /*P2口0-3输出*/   P2M0=0x0f;\
-    /*-------------*/ \
-    /*电机1/3使能*/   out_en1=1;\
-    /*电机2/4使能*/   out_en2=1;\
-    /*PAC计数器归零*/ CR=0;\
-    /*电机片选为0*/   out_motorselect=0;\
-                      \
-    /*PWM的初始化*/   fun_pwminit();\
-    /*初始化定时器0*/ fun_timer0init();\
-    /*初始化定时器1*/ fun_timer1init();\
-    /*初始化串口*/    fun_port();\
-    /*-------------*/ \
-    /*X坐标*/         str_begin.x=par_x;\
-    /*Y坐标*/         str_begin.y=par_y;\
-    /*车头方向*/      str_begin.ctfx=par_ctfx;\
-    /*手抓状态*/      str_begin.szzt=par_szzt;\
-    /*升降位置*/      str_begin.sjwz=par_sjwz;\
-    /*平移位置*/      str_begin.pywz=par_pywz;\
-    /*回转方向*/      str_begin.hzfx=par_hzfx;\
-    /*-------------*/ \
-    /*速度归零*/      str_tfl.gospeed=0;\
-    /*手抓速度归零*/  fun_motors(mot_sz,0);\
-    /*平移速度归零*/  fun_motors(mot_py,0);\
-    /*手抓速度归零*/  fun_motors(mot_sj,0);\
-    /*手抓速度归零*/  fun_motors(mot_hz,0);\
-    /*左右速度归零*/  fun_motors(mot_rl,0);\
-    /*-------------*/ \
-    /*打开定时器0*/   TR0=1;\
-    /*打开定时器1*/   TR1=1;\
-    /*按键置1*/       in_start=1;\
-    /*输出Ready!*/    MSG("Ready!")\
-    /*等待按键*/      fun_wait();
-    #define def_stop EA=0;\
-    /*速度归零*/     str_tfl.gospeed=0;\
-    /*手抓速度归零*/ fun_motors(mot_sz,0);\
-    /*平移速度归零*/ fun_motors(mot_py,0);\
-    /*手抓速度归零*/ fun_motors(mot_sj,0);\
-    /*手抓速度归零*/ fun_motors(mot_hz,0);\
-    /*左右速度归零*/ fun_motors(mot_rl,0);\
-    /*死循环*/       while(1);
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
     #define J fun_sz1(han_j);
@@ -270,8 +223,10 @@
     extern void fun_coordinate();//自动巡线之坐标
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
-    extern void fun_najian(uc par_now,uc par_next,pc par_high,unsigned char** par_data);//拿件(配合自动抓件使用)
+    extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
     extern void fun_zhuajian();//从起始区走到抓件区
     extern void fun_back();//从抓件区回到起始区
+    extern void fun_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx);//初始化函数
+    extern void fun_stop();//结束函数
 /*---------------------------------------------------------------更新日志-----*/
 #endif
