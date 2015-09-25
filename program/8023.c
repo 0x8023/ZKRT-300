@@ -327,18 +327,18 @@ void fun_sz1(enum varENU_han par_model){
         return;
     if(par_model==han_s){//手抓松
         #ifdef Debug
+            printf("fun_sz1(han_s);\n");
+        #else
             fun_motors(mot_sz,-100);
             while(in_s==1);
-        #else
-            printf("fun_sz1(han_s);\n");
         #endif
     }
     else{//手抓紧
         #ifdef Debug
+            printf("fun_sz1(han_j);\n");
+        #else
             fun_motors(mot_sz,100);
             while(in_j==1);
-        #else
-            printf("fun_sz1(han_j);\n");
         #endif
     }
     #ifndef Debug
@@ -1388,11 +1388,6 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
     loc_high[0]=loc_high[4]=1;//只有0号和4号放满了件
     loc_xh1=0;//循环标志位归零
 
-    fun_sz1(han_s);                 //手抓松
-    fun_sj1(sjp_1);                 //上升到最高位
-    fun_py1(tra_q);                 //平移到前端
-    if(str_begin.hzfx!=dir_right)   //如果不在右边
-        fun_hz1(dir_right);         //就平移到右边
     /*
         到目前为止准备工作结束,现在的数组中没有实际件序,
         现在的编号在str_pass.jx中,
@@ -1605,51 +1600,68 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
                 }//6区的件比4区的大且4区放了不到3个件
             }
         }//如果回转在右边
-        //退出条件
     }    
 }//自动抓件
-void fun_zjzt(uc par_motor,uc par_model){
+void fun_zjzt(uc par_motor,char par_model){
     if(par_motor==mot_pyhz){
         switch(par_model){
             case 0:
+                if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_left))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_left);
                 fun_py1(tra_h);
                 break;
             case 1:
+                if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_left))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_left);
                 fun_py1(tra_kh);
                 break;
             case 2:
+                if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_left))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_left);
                 fun_py1(tra_kq);
                 break;
             case 3:
+                if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_left))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_left);
                 fun_py1(tra_q);
                 break;
             case 4:
+                if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_right))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_right);
                 fun_py1(tra_q);
                 break;
             case 5:
+                if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_right))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_right);
                 fun_py1(tra_kq);
                 break;
             case 6:
+                if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_right))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_right);
                 fun_py1(tra_kh);
                 break;
             case 7:
+                if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_right))
+                    break;
                 fun_py1(tra_z);
                 fun_hz1(dir_right);
                 fun_py1(tra_h);
+                break;
+            default:
                 break;
         }
     }
@@ -1671,6 +1683,10 @@ void fun_zjzt(uc par_motor,uc par_model){
                 fun_sj1(sjp_5);
                 break;
             default:
+                if(par_model<0)
+                    fun_sj1(sjp_1);
+                else if(par_model>5)
+                    fun_sj1(sjp_5);
                 break;
         }
     }
@@ -1679,19 +1695,19 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
     #ifdef Debug
         printf("%d --> %d\n",(ui)par_now,(ui)par_next);
     #else
-        //松开手抓
-        fun_sz1(han_s);        
         //升起
-        if(par_now==0||par_now==1||par_now==2||par_now==3)
+        if(par_now==0||par_now==1||par_now==2||par_now==3){
             if(str_begin.hzfx==dir_left)
                 fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end)-1);
             else if(str_begin.hzfx==dir_right)
-                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
-        else if(par_now==4||par_now==5||par_now==6||par_now==7)
+                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);            
+        }
+        else if(par_now==4||par_now==5||par_now==6||par_now==7){
             if(str_begin.hzfx==dir_right)
                 fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
             else if(str_begin.hzfx==dir_left)
-                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
+                fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);            
+        }
         //平移回转到需要的地方
         fun_zjzt(mot_pyhz,par_now);
         //下降到工件的位置
@@ -1703,25 +1719,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 0:
                 switch(par_next){
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[5],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[6],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1730,25 +1746,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 1:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[2],par_high[3],def_end)-1);
+                       fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[5],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[1],par_high[6],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1757,25 +1773,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 2:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[3],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[5],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[2],par_high[6],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1784,25 +1800,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 3:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[1],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[5],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[3],par_high[2],par_high[6],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1811,25 +1827,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 4:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[1],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[6],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[2],par_high[3],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[4],par_high[6],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1838,25 +1854,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 5:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[1],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[2],par_high[3],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[5],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1865,25 +1881,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 6:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[1],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[2],par_high[3],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(par_high[6],par_high[7],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1892,25 +1908,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 7:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],par_high[1],par_high[0],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[1],par_high[par_next]-1,def_end)-1);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],par_high[1],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[6],par_high[2],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[6],par_high[2],par_high[3],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[2],par_high[par_next]-1,def_end)-1);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],par_high[4],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[5],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(par_high[7],par_high[6],def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
                         break;
                     default:
                         break;
@@ -1923,31 +1939,39 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
         fun_zjzt(mot_pyhz,par_next);
         //下降到要放下的位置
         fun_zjzt(mot_sj,par_high[par_next]-1);
+        //松开手抓
+        fun_sz1(han_s);
     #endif
 
     //更新参数
-    par_data[par_next][par_high[par_next]]=par_data[par_now][par_high[par_now]];
+    par_data[par_next][par_high[par_next]-1]=par_data[par_now][par_high[par_now]];
     par_data[par_now][par_high[par_now]]=0;
-    par_high[par_now]--;
-    par_high[par_next]++;
+    par_high[par_now]++;
+    par_high[par_next]--;
 }//拿件(配合自动抓件使用)
 void fun_zhuajian(){
-    fun_folline(2,70);
+    fun_sz1(han_s);                 //手抓松
+    fun_sj1(sjp_1);                 //上升到最高位
+    fun_py1(tra_q);                 //平移到前端
+    if(str_begin.hzfx!=dir_right)   //如果不在右边
+        fun_hz1(dir_right);         //就平移到右边
+
+    fun_folline(2,60);
     fun_turn(tur_l90,40);
-    fun_folline(1,40);
+    fun_folline(1,60);
 }//从起始区走到抓件区
 void fun_back(){
-    fun_motors(mot_rl,-20);
-    fun_delay(1,del_s);
-
-    fun_motors(mot_rl,-50);
+    fun_motors(mot_rl,-30);
     fun_delay(1,del_s);
 
     fun_motors(mot_r,-50);
     fun_motors(mot_l,-20);
+    fun_delay(3,del_s);    
+
+    fun_motors(mot_rl,-35);
     fun_delay(1,del_s);
 }//从抓件区回到起始区
-void fun_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx){
+void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
     CLK_DIV=0x00;             //不分频
     P0M1=0xff;                //P0用于输入
     P0M0=0x00;                //P0不能输出

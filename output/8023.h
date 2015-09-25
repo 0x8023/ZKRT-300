@@ -226,7 +226,7 @@
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
     extern void fun_zhuajian();//从起始区走到抓件区
     extern void fun_back();//从抓件区回到起始区
-    extern void fun_start(par_x,par_y,par_ctfx,par_szzt,par_sjwz,par_pywz,par_hzfx);//初始化函数
+    extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);//初始化函数
     extern void fun_stop();//结束函数
 /*---------------------------------------------------------------更新日志-----*/
 #endif
