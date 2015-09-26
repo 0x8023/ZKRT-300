@@ -12,13 +12,12 @@ void main(){
     /*请从下一行开始写你的程序*/
 	//fun_test();
 
-		
+		fun_port();
 	fun_zdzj(73468521,32148567);
 	
 	
 
-	//fun_zhuajian();
-	/*
+/*
 	
 	  str_tfl.step[0]=tfl_line;
 	  str_tfl.step[1]=2;
@@ -93,56 +92,50 @@ void main(){
       str_tfl.cachespeed=40;
 	  str_tfl.doing=tf_ture;
 
-      while(1);
-	  */
 
 	  
-	 // fun_hz1(dir_up);
-	 // fun_motorsrl(mot_r,60);
+	  fun_hz1(dir_up);
+	  fun_motors(mot_r,60);
 	
 
-	  
-	 /*
    	  fun_hz1(dir_up);
 	  fun_sj1(sjp_3);
       fun_hz1(dir_right);  //回转180
-      D3
+
       fun_hz1(dir_left);   //回转180
 
       fun_py1(tra_q);  //前移
-      D3
+
       fun_py1(tra_h);  //后移
 
       fun_sz1(han_j);  //手抓紧
-      D3
+
       fun_sz1(han_s);   //手抓松
 
       fun_sj1(sjp_5);  //下降5
       fun_sj1(sjp_2);  //上升2
-      D3
+
       fun_sj1(sjp_1);  //上升1
-      D3
+
       fun_sj1(sjp_2);//下降2
-      D3
+
       fun_sj1(sjp_5);//下降5
-      D3
+
 
 
       
 	  fun_motors(mot_rl,-58);//后退5秒
-      D2
+
       
 	  fun_motors(mot_rl,45);//前进4秒
-      D2
+
 	  
 	  
       fun_motors(mot_l,-15);  //左转90
 	  
 	  fun_motors(mot_r,18);
-      D3
- */
-      
-	/*	
+
+
 	def_timer0start
 	def_timer1start
 
@@ -155,10 +148,8 @@ void main(){
 	str_tfl.online=tf_false;
 	str_tfl.doing=tf_ture;
 	
-	while(1);
-	
-*/
-	/*
+
+
     fun_sj1(sjp_3);
 	fun_sj1(sjp_5);
 	//D(2000);
@@ -201,12 +192,7 @@ void main(){
 
 	fun_py1(tra_h);
 
-	def_stop
-	*/
-	
-	
 
-	/*
 	fun_sj1(sjp_1);
 	fun_calibration();
 	fun_sj1(sjp_4);
@@ -236,7 +222,7 @@ void main(){
 	fun_py1(tra_kh);
 	D(2000)
 	fun_py1(tra_h);
-	*/
+*/
     /*你的程序到此为止,请不要再继续改动*/
     fun_stop();
 }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 1   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE 8023
@@ -62,7 +62,7 @@ line level    source
   52   4                              while(--loc_j);
   53   4                          }while(--loc_i);
   54   3                      }
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 2   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 2   
 
   55   2                  #endif
   56   2                  return;
@@ -126,7 +126,7 @@ line level    source
  114          void fun_wait(){
  115   1          #ifdef Debug
                       printf("fun_wait();\n");
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 3   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 3   
 
                   #else
  118   1              while(in_start==1);
@@ -190,7 +190,7 @@ line level    source
  176   3                      CR=1;fun_pwmr(cabs(par_speed));out_pwmr=1;
  177   3                  }
  178   2                  break;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 4   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 4   
 
  179   2              case mot_rl://左右轮同步
  180   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
@@ -254,7 +254,7 @@ line level    source
  238   2                  else if(par_speed>0){
  239   3                      out_motorselect=0;out_dir1=0;out_en1=0;
  240   3                  }
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 5   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 5   
 
  241   2                  else if(par_speed<0){
  242   3                      out_motorselect=0;out_dir1=1;out_en1=0;
@@ -318,7 +318,7 @@ line level    source
  300   2              case mot_rl://左右轮同步
  301   2                  if((str_begin.leftsd==par_speed)&&(str_begin.rightsd==par_speed))
  302   2                      return;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 6   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 6   
 
  303   2                  else
  304   2                      str_begin.leftsd=str_begin.rightsd=par_speed;
@@ -382,7 +382,7 @@ line level    source
  362   2                      break;
  363   2              case tra_kq:
  364   2                  #ifdef Debug
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 7   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 7   
 
                               printf("fun_py1(tra_kq);\n");
                           #else
@@ -446,7 +446,7 @@ line level    source
  424   3                          case tra_z:
  425   3                              fun_motors(mot_py,-100);
  426   3                              fun_delay(str_cod.py1zkh,del_ms);
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 8   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 8   
 
  427   3                              break;
  428   3                          case tra_h:
@@ -510,7 +510,7 @@ line level    source
  486   2                      fun_delay(str_cod.sj1bzw,del_ms);
  487   2                  #endif
  488   2                      break;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 9   
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 9   
 
  489   2              case sjp_23:
  490   2                  #ifdef Debug
@@ -574,7 +574,7 @@ line level    source
  548   3                          fun_delay(str_cod.sj1zjw,del_ms);
  549   3                      }
  550   2                      else{//要去的地方在上面，向上走
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 10  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 10  
 
  551   3                          fun_motors(mot_sj,100);
  552   3                          fun_delay(str_cod.sj1zjw,del_ms);
@@ -638,7 +638,7 @@ line level    source
                           #else
  611   2                      switch(str_begin.hzfx){
  612   3                          case dir_up://现在在上面
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 11  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 11  
 
  613   3                              fun_motors(mot_hz,100);
  614   3                              fun_delay(1,del_s);
@@ -702,7 +702,7 @@ line level    source
                               printf("fun_hz1(dir_right);\n");
                           #else
  674   2                      switch(str_begin.hzfx){
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 12  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 12  
 
  675   3                          case dir_up://现在在前面
  676   3                              fun_motors(mot_hz,100);
@@ -766,7 +766,7 @@ line level    source
  734   3                      default:
  735   3                          break;
  736   3                  }//获取现在回转所在的位置
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 13  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 13  
 
  737   2                  break;
  738   2              case dir_up://要去上面
@@ -830,7 +830,7 @@ line level    source
  796   3                      case dir_up://现在在上面
  797   3                      
  798   3                          break;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 14  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 14  
 
  799   3                      case dir_down://现在在下面
  800   3                      
@@ -894,7 +894,7 @@ line level    source
  858   3                  fun_delay(10,del_ms);
  859   3                  fun_motors(mot_rl,0);
  860   3                  return;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 15  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 15  
 
  861   3              }
  862   2              if(in_ls2||in_ls1){
@@ -958,7 +958,7 @@ line level    source
  919   5                              loc_sdl*=1.5;//左加速
  920   5                              loc_sdr*=0.5;//右减速
  921   5                          }//向右转
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 16  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 16  
 
  922   4                          if(in_ls2&&!in_ls7){//2亮7不亮
  923   5                              loc_sdl*=0.7;//左减速
@@ -1022,7 +1022,7 @@ line level    source
  981   4                              str_tfl.run+=2;//指针指向下一组过程
  982   4                              str_tfl.delay=0;//延时计数器归零
  983   4                              loc_con=0;//分步运行标志位归零
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 17  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 17  
 
  984   4                          }
  985   3                          break;
@@ -1086,7 +1086,7 @@ line level    source
 1042   1          uc loc_con=par_con;//巡线条数标志位
 1043   1          uc loc_sdr,loc_sdl;//左右轮速度
 1044   1          uc loc_online;//在线标志位
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 18  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 18  
 
 1045   1          while(loc_con){
 1046   2              if((in_ls1||in_ls8)&&(in_ls2&&in_ls3&&in_ls4&&in_ls5&in_ls6&&in_ls7)){//如果中间6个灯全亮,
@@ -1150,7 +1150,7 @@ line level    source
 1103   2                  break;
 1104   2              case tur_l180://左转180
 1105   2                  fun_motors(mot_l,-par_speed);//左轮向后
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 19  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 19  
 
 1106   2                  fun_motors(mot_r,par_speed);//左轮向前
 1107   2                  fun_delay(str_cod.turn180,del_ms);//计时
@@ -1214,7 +1214,7 @@ line level    source
 1165   1          fun_stope2prom();               //关闭EEPROM功能
 1166   1          return loc_dat;                 //返回读取结果
 1167   1      }//读取EEPROM数据
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 20  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 20  
 
 1168          void fun_writee2prom(ui par_add,uc par_dat){
 1169   1          IAP_CONTR = 0x83;               //打开EEPROM功能,设置等待时间
@@ -1278,7 +1278,7 @@ line level    source
 1227   1      
 1228   1          str_begin.pywz=tra_h;
 1229   1          fun_py1(tra_q);
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 21  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 21  
 
 1230   1          fun_delay(1,del_s);
 1231   1          fun_py1(tra_h);
@@ -1342,7 +1342,7 @@ line level    source
 1289          uc fun_min(uc par_num,...){
 1290   1          va_list loc_argp;//保存参数结构
 1291   1          uc loc_min=par_num;//现在的最小值就是第一个
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 22  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 22  
 
 1292   1          uc loc_shu;//当前参数
 1293   1          va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确�
@@ -1406,7 +1406,7 @@ line level    source
 1349   2                  str_end.jx[0][loc_xh1]=str_end.jx[3][3];
 1350   2              else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][4])&&(str_pass.jx[0][loc_xh1]!=0))
 1351   2                  str_end.jx[0][loc_xh1]=str_end.jx[3][4];
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 23  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 23  
 
 1352   2              else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][1])&&(str_pass.jx[0][loc_xh1]!=0))
 1353   2                  str_end.jx[0][loc_xh1]=str_end.jx[7][1];
@@ -1470,7 +1470,7 @@ line level    source
 1411   4                      fun_sz1(han_j);                 //手抓紧
 1412   4                  }//如果停在左边
 1413   3                  return;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 24  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 24  
 
 1414   3              }//如果小车一方的实际件序和想要达到的件序相等
 1415   2              if(str_begin.hzfx==dir_left){
@@ -1534,7 +1534,7 @@ line level    source
 1470   5                          if(((loc_high[5]==5)||//如果5区没东西放或者
 1471   5                          (str_pass.jx[0][loc_high[0]]>str_pass.jx[5][loc_high[5]]))&&//0区的件编号大于5�
              -��的编号并且
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 25  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 25  
 
 1472   5                          (loc_high[5]>2)){//5区不能放超过2个件
 1473   6                              fun_najian(0,5,loc_high,str_pass.jx);//0-->5
@@ -1598,7 +1598,7 @@ line level    source
 1529   4                  }//如果区6有件
 1530   3                  if(loc_high[4]<5){
 1531   4                      if(str_pass.jx[4][loc_high[4]]==str_end.jx[7][loc_high[7]-1]){
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 26  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 26  
 
 1532   5                          fun_najian(4,7,loc_high,str_pass.jx);//4-->7
 1533   5                          continue;
@@ -1662,7 +1662,7 @@ line level    source
 1587   5                          continue;
 1588   5                      }//6的件比5的件大且区5放了不到3个件
 1589   4                  }//如果区5和区6都有件
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 27  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 27  
 
 1590   3      
 1591   3                  //中间两个位置怎么也搞不定的
@@ -1685,486 +1685,527 @@ line level    source
 1608   3                  case 0:
 1609   3                      if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_left))
 1610   3                          break;
-1611   3                      fun_py1(tra_z);
-1612   3                      fun_hz1(dir_left);
-1613   3                      fun_py1(tra_h);
-1614   3                      break;
-1615   3                  case 1:
-1616   3                      if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_left))
-1617   3                          break;
-1618   3                      fun_py1(tra_z);
-1619   3                      fun_hz1(dir_left);
-1620   3                      fun_py1(tra_kh);
-1621   3                      break;
-1622   3                  case 2:
-1623   3                      if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_left))
-1624   3                          break;
-1625   3                      fun_py1(tra_z);
-1626   3                      fun_hz1(dir_left);
-1627   3                      fun_py1(tra_kq);
-1628   3                      break;
-1629   3                  case 3:
-1630   3                      if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_left))
-1631   3                          break;
-1632   3                      fun_py1(tra_z);
-1633   3                      fun_hz1(dir_left);
-1634   3                      fun_py1(tra_q);
-1635   3                      break;
-1636   3                  case 4:
-1637   3                      if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_right))
-1638   3                          break;
-1639   3                      fun_py1(tra_z);
-1640   3                      fun_hz1(dir_right);
-1641   3                      fun_py1(tra_q);
-1642   3                      break;
-1643   3                  case 5:
-1644   3                      if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_right))
-1645   3                          break;
-1646   3                      fun_py1(tra_z);
-1647   3                      fun_hz1(dir_right);
-1648   3                      fun_py1(tra_kq);
-1649   3                      break;
-1650   3                  case 6:
-1651   3                      if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_right))
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 28  
+1611   3                      if(str_begin.hzfx==dir_right){
+1612   4                          fun_py1(tra_z);
+1613   4                          fun_hz1(dir_left);
+1614   4                      }
+1615   3                      fun_py1(tra_h);
+1616   3                      break;
+1617   3                  case 1:
+1618   3                      if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_left))
+1619   3                          break;
+1620   3                      if(str_begin.hzfx==dir_right){
+1621   4                          fun_py1(tra_z);
+1622   4                          fun_hz1(dir_left);
+1623   4                      }
+1624   3                      fun_py1(tra_kh);
+1625   3                      break;
+1626   3                  case 2:
+1627   3                      if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_left))
+1628   3                          break;
+1629   3                      if(str_begin.hzfx==dir_right){
+1630   4                          fun_py1(tra_z);
+1631   4                          fun_hz1(dir_left);
+1632   4                      }
+1633   3                      fun_py1(tra_kq);
+1634   3                      break;
+1635   3                  case 3:
+1636   3                      if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_left))
+1637   3                          break;
+1638   3                      if(str_begin.hzfx==dir_right){
+1639   4                          fun_py1(tra_z);
+1640   4                          fun_hz1(dir_left);
+1641   4                      }
+1642   3                      fun_py1(tra_q);
+1643   3                      break;
+1644   3                  case 4:
+1645   3                      if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_right))
+1646   3                          break;
+1647   3                      if(str_begin.hzfx==dir_left){
+1648   4                          fun_py1(tra_z);
+1649   4                          fun_hz1(dir_right);
+1650   4                      }
+1651   3                      fun_py1(tra_q);
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 28  
 
-1652   3                          break;
-1653   3                      fun_py1(tra_z);
-1654   3                      fun_hz1(dir_right);
-1655   3                      fun_py1(tra_kh);
-1656   3                      break;
-1657   3                  case 7:
-1658   3                      if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_right))
-1659   3                          break;
-1660   3                      fun_py1(tra_z);
-1661   3                      fun_hz1(dir_right);
-1662   3                      fun_py1(tra_h);
-1663   3                      break;
-1664   3                  default:
-1665   3                      break;
-1666   3              }
-1667   2          }
-1668   1          else if(par_motor==mot_sj){
-1669   2              switch(par_model){
-1670   3                  case 0:
-1671   3                      fun_sj1(sjp_1);
-1672   3                      break;
-1673   3                  case 1:
-1674   3                      fun_sj1(sjp_2);
-1675   3                      break;
-1676   3                  case 2:
-1677   3                      fun_sj1(sjp_3);
-1678   3                      break;
-1679   3                  case 3:
-1680   3                      fun_sj1(sjp_4);
+1652   3                      break;
+1653   3                  case 5:
+1654   3                      if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_right))
+1655   3                          break;
+1656   3                      if(str_begin.hzfx==dir_left){
+1657   4                          fun_py1(tra_z);
+1658   4                          fun_hz1(dir_right);
+1659   4                      }
+1660   3                      fun_py1(tra_kq);
+1661   3                      break;
+1662   3                  case 6:
+1663   3                      if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_right))
+1664   3                          break;
+1665   3                      if(str_begin.hzfx==dir_left){
+1666   4                          fun_py1(tra_z);
+1667   4                          fun_hz1(dir_right);
+1668   4                      }
+1669   3                      fun_py1(tra_kh);
+1670   3                      break;
+1671   3                  case 7:
+1672   3                      if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_right))
+1673   3                          break;
+1674   3                      if(str_begin.hzfx==dir_left){
+1675   4                          fun_py1(tra_z);
+1676   4                          fun_hz1(dir_right);
+1677   4                      }
+1678   3                      fun_py1(tra_h);
+1679   3                      break;
+1680   3                  default:
 1681   3                      break;
-1682   3                  case 4:
-1683   3                      fun_sj1(sjp_5);
-1684   3                      break;
-1685   3                  default:
-1686   3                      if(par_model<0)
-1687   3                          fun_sj1(sjp_1);
-1688   3                      else if(par_model>5)
-1689   3                          fun_sj1(sjp_5);
-1690   3                      break;
-1691   3              }
-1692   2          }
-1693   1      }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
-1694          void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
-1695   1          #ifdef Debug
+1682   3              }
+1683   2          }
+1684   1          else if(par_motor==mot_sj){
+1685   2              switch(par_model){
+1686   3                  case 0:
+1687   3                      fun_sj1(sjp_1);
+1688   3                      break;
+1689   3                  case 1:
+1690   3                      fun_sj1(sjp_2);
+1691   3                      break;
+1692   3                  case 2:
+1693   3                      fun_sj1(sjp_3);
+1694   3                      break;
+1695   3                  case 3:
+1696   3                      fun_sj1(sjp_4);
+1697   3                      break;
+1698   3                  case 4:
+1699   3                      fun_sj1(sjp_5);
+1700   3                      break;
+1701   3                  default:
+1702   3                      if(par_model<0)
+1703   3                          fun_sj1(sjp_1);
+1704   3                      else if(par_model>5)
+1705   3                          fun_sj1(sjp_5);
+1706   3                      break;
+1707   3              }
+1708   2          }
+1709   1      }//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
+1710          void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
+1711   1          #ifdef Debug
                       printf("%d --> %d\n",(ui)par_now,(ui)par_next);
                   #else
-1698   1              //升起
-1699   1              if(par_now==0||par_now==1||par_now==2||par_now==3){
-1700   2                  if(str_begin.hzfx==dir_left)
-1701   2                      fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end)-1);
-1702   2                  else if(str_begin.hzfx==dir_right)
-1703   2                      fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_hi
-             -gh[5],par_high[6],par_high[7],def_end)-1);            
-1704   2              }
-1705   1              else if(par_now==4||par_now==5||par_now==6||par_now==7){
-1706   2                  if(str_begin.hzfx==dir_right)
-1707   2                      fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
-1708   2                  else if(str_begin.hzfx==dir_left)
-1709   2                      fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_hi
-             -gh[5],par_high[6],par_high[7],def_end)-1);            
-1710   2              }
-1711   1              //平移回转到需要的地方
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 29  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 29  
 
-1712   1              fun_zjzt(mot_pyhz,par_now);
-1713   1              //下降到工件的位置
-1714   1              fun_zjzt(mot_sj,par_high[par_now]);
-1715   1              //抓紧工件
-1716   1              fun_sz1(han_j);
-1717   1              //上升到正确的最高位
-1718   1              switch(par_now){
-1719   2                  case 0:
-1720   2                      switch(par_next){
-1721   3                          case 1:
-1722   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1723   3                              break;
-1724   3                          case 2:
-1725   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end
-             -)-1);
-1726   3                              break;
-1727   3                          case 3:
-1728   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[2],par_high[par_nex
-             -t]-1,def_end)-1);
-1729   3                              break;
-1730   3                          case 4:
-1731   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[5],par_high[par_nex
-             -t]-1,def_end)-1);
-1732   3                              break;
-1733   3                          case 5:
-1734   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end
-             -)-1);
-1735   3                              break;
-1736   3                          case 6:
-1737   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end
-             -)-1);
-1738   3                              break;
-1739   3                          case 7:
-1740   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[6],par_high[par_nex
-             -t]-1,def_end)-1);
-1741   3                              break;
-1742   3                          default:
-1743   3                              break;
-1744   3                      }
-1745   2                      break;
-1746   2                  case 1:
-1747   2                      switch(par_next){
-1748   3                          case 0:
-1749   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1750   3                              break;
-1751   3                          case 2:
-1752   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1753   3                              break;
-1754   3                          case 3:
-1755   3                             fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end)
+1714   1              //取各位置的最高位
+1715   1              xdata uc loc_high=fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],
+             -par_high[6],par_high[7]);
+1716   1              //升起
+1717   1              if(par_now==0||par_now==1||par_now==2||par_now==3){
+1718   2                  if(str_begin.hzfx==dir_left)
+1719   2                      fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],def_end)-1);
+1720   2                  else if(str_begin.hzfx==dir_right)
+1721   2                      fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_hi
+             -gh[5],par_high[6],par_high[7],def_end)-1);            
+1722   2              }
+1723   1              else if(par_now==4||par_now==5||par_now==6||par_now==7){
+1724   2                  if(str_begin.hzfx==dir_right)
+1725   2                      fun_zjzt(mot_sj,fun_min(par_high[4],par_high[5],par_high[6],par_high[7],def_end)-1);
+1726   2                  else if(str_begin.hzfx==dir_left)
+1727   2                      fun_zjzt(mot_sj,fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_hi
+             -gh[5],par_high[6],par_high[7],def_end)-1);            
+1728   2              }
+1729   1              //平移回转到需要的地方
+1730   1              fun_zjzt(mot_pyhz,par_now);
+1731   1              //下降到工件的位置
+1732   1              fun_zjzt(mot_sj,par_high[par_now]);
+1733   1              //抓紧工件
+1734   1              fun_sz1(han_j);
+1735   1              //上升到正确的最高位
+1736   1              switch(par_now){
+1737   2                  case 0:
+1738   2                      switch(par_next){
+1739   3                          case 1:
+1740   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
              --1);
+1741   3                              break;
+1742   3                          case 2:
+1743   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next
+             -]-1,def_end)-1);
+1744   3                              break;
+1745   3                          case 3:
+1746   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[2],par_h
+             -igh[par_next]-1,def_end)-1);
+1747   3                              break;
+1748   3                          case 4:
+1749   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[5],par_h
+             -igh[par_next]-1,def_end)-1);
+1750   3                              break;
+1751   3                          case 5:
+1752   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next
+             -]-1,def_end)-1);
+1753   3                              break;
+1754   3                          case 6:
+1755   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next
+             -]-1,def_end)-1);
 1756   3                              break;
-1757   3                          case 4:
-1758   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end
-             -)-1);
+1757   3                          case 7:
+1758   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[6],par_h
+             -igh[par_next]-1,def_end)-1);
 1759   3                              break;
-1760   3                          case 5:
-1761   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1762   3                              break;
-1763   3                          case 6:
-1764   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1765   3                              break;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 30  
+1760   3                          default:
+1761   3                              break;
+1762   3                      }
+1763   2                      break;
+1764   2                  case 1:
+1765   2                      switch(par_next){
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 30  
 
-1766   3                          case 7:
-1767   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end
-             -)-1);
+1766   3                          case 0:
+1767   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1768   3                              break;
-1769   3                          default:
-1770   3                              break;
-1771   3                      }
-1772   2                      break;
-1773   2                  case 2:
-1774   2                      switch(par_next){
-1775   3                          case 0:
-1776   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end
-             -)-1);
+1769   3                          case 2:
+1770   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1771   3                              break;
+1772   3                          case 3:
+1773   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next
+             -]-1,def_end)-1);
+1774   3                              break;
+1775   3                          case 4:
+1776   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next
+             -]-1,def_end)-1);
 1777   3                              break;
-1778   3                          case 1:
-1779   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1778   3                          case 5:
+1779   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1780   3                              break;
-1781   3                          case 3:
-1782   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1781   3                          case 6:
+1782   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1783   3                              break;
-1784   3                          case 4:
-1785   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end
-             -)-1);
+1784   3                          case 7:
+1785   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next
+             -]-1,def_end)-1);
 1786   3                              break;
-1787   3                          case 5:
-1788   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1789   3                              break;
-1790   3                          case 6:
-1791   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1792   3                              break;
-1793   3                          case 7:
-1794   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end
-             -)-1);
+1787   3                          default:
+1788   3                              break;
+1789   3                      }
+1790   2                      break;
+1791   2                  case 2:
+1792   2                      switch(par_next){
+1793   3                          case 0:
+1794   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next
+             -]-1,def_end)-1);
 1795   3                              break;
-1796   3                          default:
-1797   3                              break;
-1798   3                      }
-1799   2                      break;
-1800   2                  case 3:
-1801   2                      switch(par_next){
-1802   3                          case 0:
-1803   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[1],par_high[par_nex
-             -t]-1,def_end)-1);
+1796   3                          case 1:
+1797   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1798   3                              break;
+1799   3                          case 3:
+1800   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1801   3                              break;
+1802   3                          case 4:
+1803   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next
+             -]-1,def_end)-1);
 1804   3                              break;
-1805   3                          case 1:
-1806   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end
-             -)-1);
+1805   3                          case 5:
+1806   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1807   3                              break;
-1808   3                          case 2:
-1809   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1808   3                          case 6:
+1809   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1810   3                              break;
-1811   3                          case 4:
-1812   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[5],par_high[par_nex
-             -t]-1,def_end)-1);
+1811   3                          case 7:
+1812   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next
+             -]-1,def_end)-1);
 1813   3                              break;
-1814   3                          case 5:
-1815   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end
-             -)-1);
-1816   3                              break;
-1817   3                          case 6:
-1818   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end
-             -)-1);
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 31  
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 31  
 
-1819   3                              break;
-1820   3                          case 7:
-1821   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[6],par_high[par_nex
-             -t]-1,def_end)-1);
+1814   3                          default:
+1815   3                              break;
+1816   3                      }
+1817   2                      break;
+1818   2                  case 3:
+1819   2                      switch(par_next){
+1820   3                          case 0:
+1821   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[1],par_h
+             -igh[par_next]-1,def_end)-1);
 1822   3                              break;
-1823   3                          default:
-1824   3                              break;
-1825   3                      }
-1826   2                      break;
-1827   2                  case 4:
-1828   2                      switch(par_next){
-1829   3                          case 0:
-1830   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[1],par_high[par_nex
-             -t]-1,def_end)-1);
+1823   3                          case 1:
+1824   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next
+             -]-1,def_end)-1);
+1825   3                              break;
+1826   3                          case 2:
+1827   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1828   3                              break;
+1829   3                          case 4:
+1830   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[5],par_h
+             -igh[par_next]-1,def_end)-1);
 1831   3                              break;
-1832   3                          case 1:
-1833   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end
-             -)-1);
+1832   3                          case 5:
+1833   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next
+             -]-1,def_end)-1);
 1834   3                              break;
-1835   3                          case 2:
-1836   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end
-             -)-1);
+1835   3                          case 6:
+1836   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next
+             -]-1,def_end)-1);
 1837   3                              break;
-1838   3                          case 3:
-1839   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[2],par_high[par_nex
-             -t]-1,def_end)-1);
+1838   3                          case 7:
+1839   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[6],par_h
+             -igh[par_next]-1,def_end)-1);
 1840   3                              break;
-1841   3                          case 5:
-1842   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1843   3                              break;
-1844   3                          case 6:
-1845   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end
-             -)-1);
-1846   3                              break;
-1847   3                          case 7:
-1848   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[6],par_high[par_nex
-             -t]-1,def_end)-1);
+1841   3                          default:
+1842   3                              break;
+1843   3                      }
+1844   2                      break;
+1845   2                  case 4:
+1846   2                      switch(par_next){
+1847   3                          case 0:
+1848   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[1],par_h
+             -igh[par_next]-1,def_end)-1);
 1849   3                              break;
-1850   3                          default:
-1851   3                              break;
-1852   3                      }
-1853   2                      break;
-1854   2                  case 5:
-1855   2                      switch(par_next){
-1856   3                          case 0:
-1857   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end
-             -)-1);
+1850   3                          case 1:
+1851   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next
+             -]-1,def_end)-1);
+1852   3                              break;
+1853   3                          case 2:
+1854   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next
+             -]-1,def_end)-1);
+1855   3                              break;
+1856   3                          case 3:
+1857   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[2],par_h
+             -igh[par_next]-1,def_end)-1);
 1858   3                              break;
-1859   3                          case 1:
-1860   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1859   3                          case 5:
+1860   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1861   3                              break;
-1862   3                          case 2:
-1863   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1862   3                          case 6:
+1863   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 32  
+
+             -]-1,def_end)-1);
 1864   3                              break;
-1865   3                          case 3:
-1866   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end
-             -)-1);
+1865   3                          case 7:
+1866   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[6],par_h
+             -igh[par_next]-1,def_end)-1);
 1867   3                              break;
-1868   3                          case 4:
-1869   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1870   3                              break;
-1871   3                          case 6:
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 32  
-
-1872   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1873   3                              break;
-1874   3                          case 7:
-1875   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end
-             -)-1);
+1868   3                          default:
+1869   3                              break;
+1870   3                      }
+1871   2                      break;
+1872   2                  case 5:
+1873   2                      switch(par_next){
+1874   3                          case 0:
+1875   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next
+             -]-1,def_end)-1);
 1876   3                              break;
-1877   3                          default:
-1878   3                              break;
-1879   3                      }
-1880   2                      break;
-1881   2                  case 6:
-1882   2                      switch(par_next){
-1883   3                          case 0:
-1884   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[1],par_high[par_next]-1,def_end
-             -)-1);
+1877   3                          case 1:
+1878   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1879   3                              break;
+1880   3                          case 2:
+1881   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1882   3                              break;
+1883   3                          case 3:
+1884   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next
+             -]-1,def_end)-1);
 1885   3                              break;
-1886   3                          case 1:
-1887   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1886   3                          case 4:
+1887   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1888   3                              break;
-1889   3                          case 2:
-1890   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1889   3                          case 6:
+1890   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1891   3                              break;
-1892   3                          case 3:
-1893   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[2],par_high[par_next]-1,def_end
-             -)-1);
+1892   3                          case 7:
+1893   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next
+             -]-1,def_end)-1);
 1894   3                              break;
-1895   3                          case 4:
-1896   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[par_next]-1,def_end
-             -)-1);
-1897   3                              break;
-1898   3                          case 5:
-1899   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
-1900   3                              break;
-1901   3                          case 7:
-1902   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1895   3                          default:
+1896   3                              break;
+1897   3                      }
+1898   2                      break;
+1899   2                  case 6:
+1900   2                      switch(par_next){
+1901   3                          case 0:
+1902   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next
+             -]-1,def_end)-1);
 1903   3                              break;
-1904   3                          default:
-1905   3                              break;
-1906   3                      }
-1907   2                      break;
-1908   2                  case 7:
-1909   2                      switch(par_next){
-1910   3                          case 0:
-1911   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[1],par_high[par_nex
-             -t]-1,def_end)-1);
+1904   3                          case 1:
+1905   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1906   3                              break;
+1907   3                          case 2:
+1908   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1909   3                              break;
+1910   3                          case 3:
+1911   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next
+             -]-1,def_end)-1);
 1912   3                              break;
-1913   3                          case 1:
-1914   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end
-             -)-1);
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 33  
+
+1913   3                          case 4:
+1914   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next
+             -]-1,def_end)-1);
 1915   3                              break;
-1916   3                          case 2:
-1917   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end
-             -)-1);
+1916   3                          case 5:
+1917   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1918   3                              break;
-1919   3                          case 3:
-1920   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[2],par_high[par_nex
-             -t]-1,def_end)-1);
+1919   3                          case 7:
+1920   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
 1921   3                              break;
-1922   3                          case 4:
-1923   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[5],par_high[6],par_high[par_nex
-             -t]-1,def_end)-1);
-1924   3                              break;
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 33  
-
-1925   3                          case 5:
-1926   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[6],par_high[par_next]-1,def_end
-             -)-1);
-1927   3                              break;
-1928   3                          case 6:
-1929   3                              fun_zjzt(mot_sj,fun_min(par_high[par_now],par_high[par_next]-1,def_end)-1);
+1922   3                          default:
+1923   3                              break;
+1924   3                      }
+1925   2                      break;
+1926   2                  case 7:
+1927   2                      switch(par_next){
+1928   3                          case 0:
+1929   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[1],par_h
+             -igh[par_next]-1,def_end)-1);
 1930   3                              break;
-1931   3                          default:
-1932   3                              break;
-1933   3                      }
-1934   2                      break;
-1935   2                  default:
-1936   2                      break;
-1937   2              }
-1938   1              //平移回转至放件处
-1939   1              fun_zjzt(mot_pyhz,par_next);
-1940   1              //下降到要放下的位置
-1941   1              fun_zjzt(mot_sj,par_high[par_next]-1);
-1942   1              //松开手抓
-1943   1              fun_sz1(han_s);
-1944   1          #endif
-1945   1      
-1946   1          //更新参数
-1947   1          par_data[par_next][par_high[par_next]-1]=par_data[par_now][par_high[par_now]];
-1948   1          par_data[par_now][par_high[par_now]]=0;
-1949   1          par_high[par_now]++;
-1950   1          par_high[par_next]--;
-1951   1      }//拿件(配合自动抓件使用)
-1952          void fun_zhuajian(){
-1953   1          fun_sz1(han_s);                 //手抓松
-1954   1          fun_sj1(sjp_1);                 //上升到最高位
-1955   1          fun_py1(tra_q);                 //平移到前端
-1956   1          if(str_begin.hzfx!=dir_right)   //如果不在右边
-1957   1              fun_hz1(dir_right);         //就平移到右边
-1958   1      
-1959   1          fun_folline(2,60);
-1960   1          fun_turn(tur_l90,40);
-1961   1          fun_folline(1,60);
-1962   1      }//从起始区走到抓件区
-1963          void fun_back(){
-1964   1          fun_motors(mot_rl,-30);
-1965   1          fun_delay(1,del_s);
-1966   1      
-1967   1          fun_motors(mot_r,-50);
-1968   1          fun_motors(mot_l,-20);
-1969   1          fun_delay(3,del_s);    
-1970   1      
-1971   1          fun_motors(mot_rl,-35);
-1972   1          fun_delay(1,del_s);
-1973   1      }//从抓件区回到起始区
-1974          void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han par_szzt,enum varENU_sjp par
-             -_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
-1975   1          CLK_DIV=0x00;             //不分频
-1976   1          P0M1=0xff;                //P0用于输入
-1977   1          P0M0=0x00;                //P0不能输出
-1978   1          P1M1=0x00;                //P1口0-1双向
-1979   1          P1M0=0xfc;                //P1口2-7输出
-1980   1          P2M1=0xf0;                //P2口4-7输入
-1981   1          P2M0=0x0f;                //P2口0-3输出
-1982   1      
-1983   1          out_en1=1;                //电机1/3使能
-1984   1          out_en2=1;                //电机2/4使能
-C51 COMPILER V9.54   8023                                                                  09/25/2015 15:49:24 PAGE 34  
+1931   3                          case 1:
+1932   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next
+             -]-1,def_end)-1);
+1933   3                              break;
+1934   3                          case 2:
+1935   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next
+             -]-1,def_end)-1);
+1936   3                              break;
+1937   3                          case 3:
+1938   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[2],par_h
+             -igh[par_next]-1,def_end)-1);
+1939   3                              break;
+1940   3                          case 4:
+1941   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[6],par_h
+             -igh[par_next]-1,def_end)-1);
+1942   3                              break;
+1943   3                          case 5:
+1944   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next
+             -]-1,def_end)-1);
+1945   3                              break;
+1946   3                          case 6:
+1947   3                              fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)
+             --1);
+1948   3                              break;
+1949   3                          default:
+1950   3                              break;
+1951   3                      }
+1952   2                      break;
+1953   2                  default:
+1954   2                      break;
+1955   2              }
+1956   1              //平移回转至放件处
+1957   1              fun_zjzt(mot_pyhz,par_next);
+1958   1              //下降到要放下的位置
+1959   1              fun_zjzt(mot_sj,par_high[par_next]-1);
+1960   1              //松开手抓
+1961   1              fun_sz1(han_s);
+1962   1          #endif
+1963   1      
+1964   1          //更新参数
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 34  
 
-1985   1          CR=0;                     //PAC计数器归零
-1986   1          out_motorselect=0;        //电机片选为0
-1987   1      
-1988   1          #ifdef Debug              //如果是调试模式
+1965   1          par_data[par_next][par_high[par_next]-1]=par_data[par_now][par_high[par_now]];
+1966   1          par_data[par_now][par_high[par_now]]=0;
+1967   1          par_high[par_now]++;
+1968   1          par_high[par_next]--;
+1969   1      }//拿件(配合自动抓件使用)
+1970          void fun_zhuajian(){
+1971   1          fun_sz1(han_s);                 //手抓松
+1972   1          fun_sj1(sjp_1);                 //上升到最高位
+1973   1          fun_py1(tra_q);                 //平移到前端
+1974   1          if(str_begin.hzfx!=dir_right)   //如果不在右边
+1975   1              fun_hz1(dir_right);         //就平移到右边
+1976   1      
+1977   1          fun_folline(2,60);
+1978   1          fun_turn(tur_l90,40);
+1979   1          fun_folline(1,60);
+1980   1      }//从起始区走到抓件区
+1981          void fun_back(){
+1982   1          fun_motors(mot_rl,-30);
+1983   1          fun_delay(1,del_s);
+1984   1      
+1985   1          fun_motors(mot_r,-50);
+1986   1          fun_motors(mot_l,-20);
+1987   1          fun_delay(3,del_s);    
+1988   1      
+1989   1          fun_motors(mot_rl,-35);
+1990   1          fun_delay(1,del_s);
+1991   1      }//从抓件区回到起始区
+1992          void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han par_szzt,enum varENU_sjp par
+             -_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
+1993   1          CLK_DIV=0x00;             //不分频
+1994   1          P0M1=0xff;                //P0用于输入
+1995   1          P0M0=0x00;                //P0不能输出
+1996   1          P1M1=0x00;                //P1口0-1双向
+1997   1          P1M0=0xfc;                //P1口2-7输出
+1998   1          P2M1=0xf0;                //P2口4-7输入
+1999   1          P2M0=0x0f;                //P2口0-3输出
+2000   1      
+2001   1          out_en1=1;                //电机1/3使能
+2002   1          out_en2=1;                //电机2/4使能
+2003   1          CR=0;                     //PAC计数器归零
+2004   1          out_motorselect=0;        //电机片选为0
+2005   1      
+2006   1          #ifdef Debug              //如果是调试模式
                       fun_port();           //初始化串口
                       TI=1;                 //打开串口传输功能        
                   #endif
-1992   1          fun_pwminit();            //PWM的初始化
-1993   1          fun_timer0init();         //初始化定时器0
-1994   1          fun_timer1init();         //初始化定时器1
-1995   1      
-1996   1          str_begin.x=par_x;        //X坐标
-1997   1          str_begin.y=par_y;        //Y坐标
-1998   1          str_begin.ctfx=par_ctfx;  //车头方向
-1999   1          str_begin.szzt=par_szzt;  //手抓状态
-2000   1          str_begin.sjwz=par_sjwz;  //升降位置
-2001   1          str_begin.pywz=par_pywz;  //平移位置
-2002   1          str_begin.hzfx=par_hzfx;  //回转方向
-2003   1      
-2004   1          str_tfl.gospeed=0;        //速度归零
-2005   1          fun_motors(mot_sz,0);     //手抓速度归零
-2006   1          fun_motors(mot_py,0);     //平移速度归零
-2007   1          fun_motors(mot_sj,0);     //手抓速度归零
-2008   1          fun_motors(mot_hz,0);     //手抓速度归零
-2009   1          fun_motors(mot_rl,0);     //左右速度归零
-2010   1      
-2011   1          TR0=1;                    //打开定时器0
-2012   1          TR1=1;                    //打开定时器1
-2013   1          in_start=1;               //按键置1
-2014   1          #ifdef Debug              //如果开启调试模式
+2010   1          fun_pwminit();            //PWM的初始化
+2011   1          fun_timer0init();         //初始化定时器0
+2012   1          fun_timer1init();         //初始化定时器1
+2013   1      
+2014   1          str_begin.x=par_x;        //X坐标
+2015   1          str_begin.y=par_y;        //Y坐标
+2016   1          str_begin.ctfx=par_ctfx;  //车头方向
+2017   1          str_begin.szzt=par_szzt;  //手抓状态
+2018   1          str_begin.sjwz=par_sjwz;  //升降位置
+2019   1          str_begin.pywz=par_pywz;  //平移位置
+2020   1          str_begin.hzfx=par_hzfx;  //回转方向
+2021   1      
+2022   1          str_tfl.gospeed=0;        //速度归零
+2023   1          fun_motors(mot_sz,0);     //手抓速度归零
+2024   1          fun_motors(mot_py,0);     //平移速度归零
+2025   1          fun_motors(mot_sj,0);     //手抓速度归零
+C51 COMPILER V9.54   8023                                                                  09/26/2015 11:12:29 PAGE 35  
+
+2026   1          fun_motors(mot_hz,0);     //手抓速度归零
+2027   1          fun_motors(mot_rl,0);     //左右速度归零
+2028   1      
+2029   1          TR0=1;                    //打开定时器0
+2030   1          TR1=1;                    //打开定时器1
+2031   1          in_start=1;               //按键置1
+2032   1          #ifdef Debug              //如果开启调试模式
                       fun_delay(5,del_s);
                       MSG("Ready!")         //输出Ready!
                   #else
-2018   1              fun_wait();           //等待按键
-2019   1          #endif
-2020   1      }//初始化函数
-2021          void fun_stop(){
-2022   1          EA=0;                   //关总中断
-2023   1          str_tfl.gospeed=0;      //速度归零
-2024   1          fun_motors(mot_sz,0);   //手抓速度归零
-2025   1          fun_motors(mot_py,0);   //平移速度归零
-2026   1          fun_motors(mot_sj,0);   //手抓速度归零
-2027   1          fun_motors(mot_hz,0);   //手抓速度归零
-2028   1          fun_motors(mot_rl,0);   //左右速度归零
-2029   1          MSG("End!")             //输出End!
-2030   1          while(1);               //死循环
-2031   1      }//结束函数
+2036   1              fun_wait();           //等待按键
+2037   1          #endif
+2038   1      }//初始化函数
+2039          void fun_stop(){
+2040   1          EA=0;                   //关总中断
+2041   1          str_tfl.gospeed=0;      //速度归零
+2042   1          fun_motors(mot_sz,0);   //手抓速度归零
+2043   1          fun_motors(mot_py,0);   //平移速度归零
+2044   1          fun_motors(mot_sj,0);   //手抓速度归零
+2045   1          fun_motors(mot_hz,0);   //手抓速度归零
+2046   1          fun_motors(mot_rl,0);   //左右速度归零
+2047   1          MSG("End!")             //输出End!
+2048   1          while(1);               //死循环
+2049   1      }//结束函数
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =  11339    ----
+   CODE SIZE        =  11613    ----
    CONSTANT SIZE    =      9    ----
-   XDATA SIZE       =    148      89
+   XDATA SIZE       =    148      90
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      5      69
    IDATA SIZE       =   ----    ----
