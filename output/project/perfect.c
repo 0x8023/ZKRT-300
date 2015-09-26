@@ -1,20 +1,73 @@
 #include "../8023.h"
 
+#define D1 D(1000);
+#define D2 D(2000);
+#define D3 D(3000);
+#define D4 D(4000);
+#define D5 D(5000);
+#define Q fun_py1(tra_q);
+#define KQ fun_py1(tra_kq);
+#define Z fun_py1(tra_z);
+#define KH fun_py1(tra_kh);
+#define H fun_py1(tra_h);
+#define SJ1 fun_sj1(sjp_1);
+#define SJ2 fun_sj1(sjp_2);
+#define SJ3 fun_sj1(sjp_3);
+#define SJ4 fun_sj1(sjp_4);
+#define SJ5 fun_sj1(sjp_5);
+#define HJ fun_sz1(han_j);
+#define HS fun_sz1(han_s);
+#define HZR fun_hz1(dir_right);
+#define HZL fun_hz1(dir_left);
+#define HZU fun_hz1(dir_up);
+#define HZD fun_hz1(dir_down);
+
+int a=0;
 void main(){
     fun_start(//在此输入小车目前的状态
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
         han_j,//手抓状态
-        sjp_2,//升降位置
-        tra_q,//平移位置
-        dir_right);//回转方向
+        sjp_3,//升降位置
+        tra_kq,//平移位置
+        dir_left);//回转方向
     /*请从下一行开始写你的程序*/
 	//fun_test();
-
-		fun_port();
-	fun_zdzj(73468521,32148567);
 	
+	for(a=0;a++<100;){
+	    H
+		KH
+		D5
+		H
+		
+		Z
+		D5
+		H
+		
+		KQ
+		D5
+		KH
+		D5
+		Z
+		D5
+		Q
+		KQ
+		D5
+		Q
+		
+		Z
+		D5
+		Q
+		
+		KH
+		D5
+		KQ
+		Z
+
+	}
+
+  
 	
 
 /*

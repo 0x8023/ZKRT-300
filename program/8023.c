@@ -7,16 +7,16 @@ xdata struct str_parameter str_cod={
     /*ui str_cod.sj1bzw*/58,     //升降标准位延时
     /*ui str_cod.sj1zjw*/800,    //升降中间位延时
 
-    /*ui str_cod.py1bz*/20,      //fun_py1标准位延时
-    /*ui str_cod.py1qkq*/666,    //fun_py1前到靠前延时参数
+    /*ui str_cod.py1bz*/60,      //fun_py1标准位延时
+    /*ui str_cod.py1qkq*/770,    //fun_py1前到靠前延时参数
     /*ui str_cod.py1kqz*/684,    //fun_py1靠前到中间延时
-    /*ui str_cod.py1zkh*/684,    //fun_py1中间到靠后延时
+    /*ui str_cod.py1zkh*/650,    //fun_py1中间到靠后延时
     /*ui str_cod.py1khh*/666,    //fun_py1靠后到后延时
-    /*ui str_cod.py1qz*/500,     //fun_py1前到中间延时
-    /*ui str_cod.py1zh*/500,     //fun_py1中间到后延时
-    /*ui str_cod.py1kqkh*/1480,  //fun_py1靠前到靠后延时
-    /*ui str_cod.py1qkh*/2122,   //fun_py1前到靠后延时
-    /*ui str_cod.py1kqh*/2122,   //fun_py1靠前到后延时
+    /*ui str_cod.py1qz*/1470,    //fun_py1前到中间延时
+    /*ui str_cod.py1zh*/1400,    //fun_py1中间到后延时
+    /*ui str_cod.py1kqkh*/1400,  //fun_py1靠前到靠后延时
+    /*ui str_cod.py1qkh*/2170,   //fun_py1前到靠后延时
+    /*ui str_cod.py1kqh*/2050,   //fun_py1靠前到后延时
 
     /*ui str_cod.hz1bz*/20,      //fun_hz1标准位延时
 
@@ -708,13 +708,13 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
         case dir_left://要去左边
             switch(str_begin.hzfx){
                 case dir_right://现在在右边
-                
+                    fun_motors(mot_hz,-100);
                     break;
                 case dir_up://现在在上面
-                
+                    fun_motors(mot_hz,-100);
                     break;
                 case dir_down://现在在下面
-                
+                    fun_motors(mot_hz,100);
                     break;
                 default:
                     break;
@@ -723,13 +723,13 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
         case dir_right://要去右边
             switch(str_begin.hzfx){
                 case dir_left://现在在左边
-                
+                    fun_motors(mot_hz,100);
                     break;
                 case dir_up://现在在上面
-                
+                    fun_motors(mot_hz,100);
                     break;
                 case dir_down://现在在下面
-                
+                    fun_motors(mot_hz,-100);
                     break;
                 default:
                     break;
@@ -738,13 +738,13 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
         case dir_up://要去上面
             switch(str_begin.hzfx){
                 case dir_left://现在在左边
-                
+                    fun_motors(mot_hz,100);
                     break;
                 case dir_right://现在在右边
-                
+                    fun_motors(mot_hz,-100);
                     break;
                 case dir_down://现在在下面
-                
+                    fun_motors(mot_hz,-100);
                     break;
                 default:
                     break;
@@ -753,13 +753,13 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
         case dir_down://要去下面
             switch(str_begin.hzfx){
                 case dir_left://现在在左边
-                
+                    fun_motors(mot_hz,-100);
                     break;
                 case dir_right://现在在右边
-                
+                    fun_motors(mot_hz,100);
                     break;
-                case dir_up://现在在下面
-                
+                case dir_up://现在在上面
+                    fun_motors(mot_hz,100);
                     break;
                 default:
                     break;
