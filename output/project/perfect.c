@@ -35,6 +35,18 @@ void main(){
     /*请从下一行开始写你的程序*/
 	//fun_test();
 	
+	str_tfl.step[0]=tfl_line;
+	str_tfl.step[1]=28;
+
+	str_tfl.online=tf_false;
+	str_tfl.run=str_tfl.step;
+	str_tfl.gospeed=70;
+	str_tfl.turnspeed=70;
+	str_tfl.cachespeed=70;
+	str_tfl.doing=tf_ture;
+	
+	while(1);
+	/*
 	for(a=0;a++<100;){
 	    H
 		KH
@@ -68,7 +80,7 @@ void main(){
 	}
 
   
-	
+	*/
 
 /*
 	

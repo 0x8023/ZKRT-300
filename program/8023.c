@@ -8,15 +8,16 @@ xdata struct str_parameter str_cod={
     /*ui str_cod.sj1zjw*/800,    //升降中间位延时
 
     /*ui str_cod.py1bz*/60,      //fun_py1标准位延时
-    /*ui str_cod.py1qkq*/770,    //fun_py1前到靠前延时参数
-    /*ui str_cod.py1kqz*/684,    //fun_py1靠前到中间延时
-    /*ui str_cod.py1zkh*/650,    //fun_py1中间到靠后延时
-    /*ui str_cod.py1khh*/666,    //fun_py1靠后到后延时
-    /*ui str_cod.py1qz*/1470,    //fun_py1前到中间延时
-    /*ui str_cod.py1zh*/1400,    //fun_py1中间到后延时
-    /*ui str_cod.py1kqkh*/1400,  //fun_py1靠前到靠后延时
-    /*ui str_cod.py1qkh*/2170,   //fun_py1前到靠后延时
-    /*ui str_cod.py1kqh*/2050,   //fun_py1靠前到后延时
+    /*ui str_cod.py1qkq*/700,    //fun_py1前到靠前延时参数
+    /*ui str_cod.py1kqz*/1000,    //fun_py1靠前到中间延时
+    /*ui str_cod.py1zkh*/635,    //fun_py1中间到靠后延时
+    /*ui str_cod.py1khh*/620,    //fun_py1靠后到后延时
+    /*ui str_cod.py1qz*/1325,    //fun_py1前到中间延时
+    /*ui str_cod.py1zh*/1250,    //fun_py1中间到后延时
+    /*ui str_cod.py1kqkh*/1250,  //fun_py1靠前到靠后延时
+    /*ui str_cod.py1khkq*/1250,  //fun_py1靠后到靠前延时
+    /*ui str_cod.py1qkh*/1890,   //fun_py1前到靠后延时
+    /*ui str_cod.py1kqh*/1835,   //fun_py1靠前到后延时
 
     /*ui str_cod.hz1bz*/20,      //fun_hz1标准位延时
 
@@ -341,10 +342,8 @@ void fun_sz1(enum varENU_han par_model){
             while(in_j==1);
         #endif
     }
-    #ifndef Debug
         fun_delay(20,del_ms);
         fun_motors(mot_sz,0);
-    #endif
     str_begin.szzt=par_model;//存储运行结果
 }//手抓单步运动
 void fun_py1(enum varENU_tra par_model){
@@ -360,72 +359,72 @@ void fun_py1(enum varENU_tra par_model){
                 fun_delay(str_cod.py1bz,del_ms);
             #endif
                 break;
-        case tra_kq:
+        case tra_kq://靠前平移
             #ifdef Debug
                 printf("fun_py1(tra_kq);\n");
             #else
                 switch(str_begin.pywz){
-                    case tra_q:
+                    case tra_q://现在在前面
                         fun_motors(mot_py,-100);
                         fun_delay(str_cod.py1qkq,del_ms);
                         break;
-                    case tra_z:
+                    case tra_z://现在在中间
                         fun_motors(mot_py,100);
                         fun_delay(str_cod.py1kqz,del_ms);
                         break;
-                    case tra_kh:
+                    case tra_kh://现在在靠后
                         fun_motors(mot_py,100);
-                        fun_delay(str_cod.py1kqkh,del_ms);
+                        fun_delay(str_cod.py1khkq,del_ms);
                         break;
-                    case tra_h:
+                    case tra_h://现在在后
                         fun_motors(mot_py,100);
                         fun_delay(str_cod.py1kqh,del_ms);
                         break;
                 }
             #endif
                 break;
-        case tra_z:
+        case tra_z://平移到中间
             #ifdef Debug
                 printf("fun_py1(tra_z);\n");
             #else
                 switch(str_begin.pywz){
-                    case tra_q:
+                    case tra_q://现在在前面
                         fun_motors(mot_py,-100);
                         fun_delay(str_cod.py1qz,del_ms);
                         break;
-                    case tra_kq:
+                    case tra_kq://现在在靠前
                         fun_motors(mot_py,-100);
                         fun_delay(str_cod.py1kqz,del_ms);
                         break;
-                    case tra_kh:
+                    case tra_kh://现在在靠后
                         fun_motors(mot_py,100);
                         fun_delay(str_cod.py1zkh,del_ms);
                         break;
-                    case tra_h:
+                    case tra_h://现在在后面
                         fun_motors(mot_py,100);
                         fun_delay(str_cod.py1zh,del_ms);
                         break;
                 }
             #endif
                 break;
-        case tra_kh:
+        case tra_kh://平移到靠后
             #ifdef Debug
                 printf("fun_py1(tra_kh);\n");
             #else
                 switch(str_begin.pywz){
-                    case tra_q:
+                    case tra_q://现在在前面
                         fun_motors(mot_py,-100);
                         fun_delay(str_cod.py1qkh,del_ms);
                         break;
-                    case tra_kq:
+                    case tra_kq://现在在靠前
                         fun_motors(mot_py,-100);
                         fun_delay(str_cod.py1kqkh,del_ms);
                         break;
-                    case tra_z:
+                    case tra_z://现在在中间
                         fun_motors(mot_py,-100);
                         fun_delay(str_cod.py1zkh,del_ms);
                         break;
-                    case tra_h:
+                    case tra_h://现在在后面
                         fun_motors(mot_py,100);
                         fun_delay(str_cod.py1khh,del_ms);
                         break;
@@ -704,7 +703,7 @@ void fun_hz1(enum varENU_dir par_model){
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
 void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
-    switch(par_hzmodel){
+    switch(par_hzmodel){//获取想要到达的回转位置
         case dir_left://要去左边
             switch(str_begin.hzfx){
                 case dir_right://现在在右边
@@ -769,88 +768,170 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
             break;
     }//获取现在要去的回转位置
     switch(par_pymodel){
-        case tra_q://要去前面
-        
+        case tra_q://前平移(没有电机的呢个方向)
+            fun_motors(mot_py,100);
+            while(in_qpy==1);
+            fun_delay(str_cod.py1bz,del_ms);
             break;
-        case tra_kq://要去靠前
-        
+        case tra_kq://靠前
+            switch(str_begin.pywz){
+                case tra_q://现在在前面
+                    fun_motors(mot_py,-100);
+                    fun_delay(str_cod.py1qkq,del_ms);
+                    break;
+                case tra_z://现在在中间
+                    fun_motors(mot_py,100);
+                    fun_delay(str_cod.py1kqz,del_ms);
+                    break;
+                case tra_kh://现在在靠后
+                    fun_motors(mot_py,100);
+                    fun_delay(str_cod.py1khkq,del_ms);
+                    break;
+                case tra_h://现在在后面
+                    fun_motors(mot_py,100);
+                    fun_delay(str_cod.py1kqh,del_ms);
+                    break;
+            }
             break;
-        case tra_z://要去中间
-        
+        case tra_z://中
+            switch(str_begin.pywz){
+                case tra_q://现在在前面
+                    fun_motors(mot_py,-100);
+                    fun_delay(str_cod.py1qz,del_ms);
+                    break;
+                case tra_kq://现在在靠前
+                    fun_motors(mot_py,-100);
+                    fun_delay(str_cod.py1kqz,del_ms);
+                    break;
+                case tra_kh://现在在靠后
+                    fun_motors(mot_py,100);
+                    fun_delay(str_cod.py1zkh,del_ms);
+                    break;
+                case tra_h://现在在后面
+                    fun_motors(mot_py,100);
+                    fun_delay(str_cod.py1zh,del_ms);
+                    break;
+            }
             break;
-        case tra_kh://要去靠后
-        
+        case tra_kh://靠后
+            switch(str_begin.pywz){
+                case tra_q://现在在前面
+                    fun_motors(mot_py,-100);
+                    fun_delay(str_cod.py1qkh,del_ms);
+                    break;
+                case tra_kq://现在在靠前
+                    fun_motors(mot_py,-100);
+                    fun_delay(str_cod.py1kqkh,del_ms);
+                    break;
+                case tra_z://现在在中间
+                    fun_motors(mot_py,-100);
+                    fun_delay(str_cod.py1zkh,del_ms);
+                    break;
+                case tra_h://现在在后面
+                    fun_motors(mot_py,100);
+                    fun_delay(str_cod.py1khh,del_ms);
+                    break;
+            }
             break;
-        case tra_h://要去后面
-        
+        case tra_h://后平移(有电机的呢个方向)
+            fun_motors(mot_py,-100);
+            while(in_hpy==1);
+            fun_delay(str_cod.py1bz,del_ms);
             break;
         default:
             break;
     }//获取现在平移所在的位置
-    switch(par_hzmodel){
-        case dir_left://要去左边
+    fun_motors(mot_py,0);//停止平移动作
+    str_begin.pywz=par_pymodel;//存储运行结果
+    switch(par_hzmodel){//获取想要到达的回转位置
+        case dir_up://回转至前方
             switch(str_begin.hzfx){
-                case dir_right://现在在右边
-                
+                case dir_down://现在在下方
+                    while(in_hz==1);
+                    while(in_hz==0);
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
                     break;
-                case dir_up://现在在上面
-                
-                    break;
-                case dir_down://现在在下面
-                
-                    break;
-                default:
-                    break;
-            }//获取现在回转所在的位置
-            break;
-        case dir_right://要去右边
-            switch(str_begin.hzfx){
                 case dir_left://现在在左边
-                
-                    break;
-                case dir_up://现在在上面
-                
-                    break;
-                case dir_down://现在在下面
-                
-                    break;
-                default:
-                    break;
-            }//获取现在回转所在的位置
-            break;
-        case dir_up://要去上面
-            switch(str_begin.hzfx){
-                case dir_left://现在在左边
-                
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 case dir_right://现在在右边
-                
-                    break;
-                case dir_down://现在在下面
-                
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 default:
                     break;
-            }//获取现在回转所在的位置
+            }
             break;
         case dir_down://要去下面
             switch(str_begin.hzfx){
-                case dir_left://现在在左边
-                
+                case dir_up://现在在上面
+                    while(in_hz==1);
+                    while(in_hz==0);
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
                     break;
-                case dir_right://现在在右边
-                
+                case dir_left://现在在左面
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
                     break;
-                case dir_up://现在在下面
-                
+                    break;
+                case dir_right://现在在右面
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
                     break;
                 default:
                     break;
-            }//获取现在回转所在的位置
+            }
+            break;
+        case dir_left://要去左边
+            switch(str_begin.hzfx){
+                case dir_up://现在在上面
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
+                    break;
+                    break;
+                case dir_down://现在在下面
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
+                    break;
+                    break;
+                case dir_right://现在在右面
+                    while(in_hz==1);
+                    while(in_hz==0);
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case dir_right://要去右面
+            switch(str_begin.hzfx){
+                case dir_up://现在在前面
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
+                    break;
+                case dir_down://现在在下面
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
+                    break;
+                case dir_left://现在在左面
+                    while(in_hz==1);
+                    while(in_hz==0);
+                    while(in_hz==1);
+                    fun_delay(str_cod.hz1bz,del_ms);
+                    break;
+                default:
+                    break;
+            }
             break;
         default:
             break;
     }//获取现在要去的回转位置
+    fun_motors(mot_hz,0);//停止回转动作
+    str_begin.hzfx=par_hzmodel;//存储运行结果
 }//平移回转同步运动
 void fun_jtjp(){
     while(1){
@@ -891,7 +972,7 @@ void fun_jtjp(){
 }//静态纠偏
 void fun_timermove(){
     static uc loc_con=0;//需要分步做的动作需要用到此静态私有分步标志位
-    uc loc_sdl,loc_sdr;//左轮速度和右轮速度的局部变量
+    int loc_sdl,loc_sdr;//左轮速度和右轮速度的局部变量
     switch(*str_tfl.run){//选择运行方式
         case def_end://运行结束
             fun_motorsrl(mot_rl,0);//再次停止电机运动
@@ -912,20 +993,20 @@ void fun_timermove(){
                 else{
                     loc_sdl=loc_sdr=str_tfl.gospeed;//巡线速度为str_tfl.gospeed
                     if(in_ls1&&!in_ls8){//1亮8不亮
-                        loc_sdl*=0.5;//左减速
-                        loc_sdr*=1.5;//右加速
-                    }//向左转
-                    if(in_ls8&&!in_ls1){//8亮1不亮
-                        loc_sdl*=1.5;//左加速
-                        loc_sdr*=0.5;//右减速
-                    }//向右转
-                    if(in_ls2&&!in_ls7){//2亮7不亮
                         loc_sdl*=0.7;//左减速
                         loc_sdr*=1.3;//右加速
                     }//向左转
-                    if(in_ls7&&!in_ls2){//7亮2不亮
+                    if(in_ls8&&!in_ls1){//8亮1不亮
                         loc_sdl*=1.3;//左加速
                         loc_sdr*=0.7;//右减速
+                    }//向右转
+                    if(in_ls2&&!in_ls7){//2亮7不亮
+                        loc_sdl*=0.8;//左减速
+                        loc_sdr*=1.2;//右加速
+                    }//向左转
+                    if(in_ls7&&!in_ls2){//7亮2不亮
+                        loc_sdl*=1.2;//左加速
+                        loc_sdr*=0.8;//右减速
                     }//向右转
                     if(in_ls3&&!in_ls6){//3亮6不亮
                         loc_sdl*=0.9;//左减速
@@ -1116,20 +1197,20 @@ void fun_qc(uc par_time,uc par_speed){
     while(str_tfl.delay>var_timer){
         loc_sdr=loc_sdl=par_speed;
         if(in_ls1&&!in_ls8){//1亮8不亮
-            loc_sdl*=0.5;//左减速
-            loc_sdr*=1.5;//右加速
-        }//向左转
-        if(in_ls8&&!in_ls1){//8亮1不亮
-            loc_sdl*=1.5;//左加速
-            loc_sdr*=0.5;//右减速
-        }//向右转
-        if(in_ls2&&!in_ls7){//2亮7不亮
             loc_sdl*=0.7;//左减速
             loc_sdr*=1.3;//右加速
         }//向左转
-        if(in_ls7&&!in_ls2){//7亮2不亮
+        if(in_ls8&&!in_ls1){//8亮1不亮
             loc_sdl*=1.3;//左加速
             loc_sdr*=0.7;//右减速
+        }//向右转
+        if(in_ls2&&!in_ls7){//2亮7不亮
+            loc_sdl*=0.8;//左减速
+            loc_sdr*=1.2;//右加速
+        }//向左转
+        if(in_ls7&&!in_ls2){//7亮2不亮
+            loc_sdl*=1.2;//左加速
+            loc_sdr*=0.8;//右减速
         }//向右转
         if(in_ls3&&!in_ls6){//3亮6不亮
             loc_sdl*=0.9;//左减速
@@ -1203,8 +1284,9 @@ void fun_calibration(){
     str_cod.py1qkq=loc_time*0.34;//从前到靠前
     str_cod.py1khh=loc_time*0.2701;//从后到靠后
     str_cod.py1kqz=loc_time*0.189;//从靠前到中间
-    str_cod.py1zkh=loc_time*0.20;//从靠后到中间.
+    str_cod.py1zkh=loc_time*0.20;//从靠后到中间
     str_cod.py1kqkh=loc_time*0.5;//从靠前到靠后
+    str_cod.py1khkq=loc_time*0.5;//从靠后到靠前
 }//自动校准平移参数
 void fun_port(){
     //19200bps@12.000MHz
@@ -1977,6 +2059,31 @@ void fun_zhuajian(){
     fun_folline(2,60);
     fun_turn(tur_l90,40);
     fun_folline(1,60);
+    fun_qc(100,40);
+    while(!in_ls1&&!in_ls2&&!in_ls3&&in_ls4&&in_ls5&&!in_ls6&&!in_ls7&&!in_ls8){
+        if(in_ls3||!in_ls5){
+            fun_motors(mot_r,-30);
+            fun_motors(mot_l,-29);
+            fun_delay(500,del_ms);
+            fun_motors(mot_r,-29);
+            fun_motors(mot_l,-30);
+            fun_delay(500,del_ms);
+            fun_motors(mot_rl,-30);
+            fun_delay(500,del_ms);
+        }//3亮或5不亮
+        else if(in_ls6||!in_ls4){
+            fun_motors(mot_r,-30);
+            fun_motors(mot_l,-29);
+            fun_delay(500,del_ms);
+            fun_motors(mot_r,-29);
+            fun_motors(mot_l,-30);
+            fun_delay(500,del_ms);
+            fun_motors(mot_rl,-30);
+            fun_delay(500,del_ms);
+        }//6亮或4不亮
+        fun_qc(200,40);//重新进行前冲
+    }
+    fun_motors(mot_rl,0);
 }//从起始区走到抓件区
 void fun_back(){
     fun_motors(mot_rl,-30);

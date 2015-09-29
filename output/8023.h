@@ -165,6 +165,7 @@
         ui py1qz;    //fun_py1前到中间延时
         ui py1zh;    //fun_py1中间到后延时
         ui py1kqkh;  //fun_py1靠前到靠后延时
+        ui py1khkq;  //fun_py1靠后到靠前延时
         ui py1qkh;   //fun_py1前到靠后延时
         ui py1kqh;   //fun_py1靠前到后延时
 

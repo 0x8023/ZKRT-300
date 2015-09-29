@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               09/26/2015 19:22:00 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               09/29/2015 11:19:44 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -44,271 +44,286 @@ line level    source
   35   1          /*请从下一行开始写你的程序*/
   36   1              //fun_test();
   37   1              
-  38   1              for(a=0;a++<100;){
-  39   2                  H
-  40   2                      KH
-  41   2                      D5
-  42   2                      H
-  43   2                      
-  44   2                      Z
-  45   2                      D5
-  46   2                      H
-  47   2                      
-  48   2                      KQ
-  49   2                      D5
-  50   2                      KH
-  51   2                      D5
-  52   2                      Z
-  53   2                      D5
-  54   2                      Q
-  55   2                      KQ
-C51 COMPILER V9.54   PERFECT                                                               09/26/2015 19:22:00 PAGE 2   
+  38   1              str_tfl.step[0]=tfl_line;
+  39   1              str_tfl.step[1]=28;
+  40   1      
+  41   1              str_tfl.online=tf_false;
+  42   1              str_tfl.run=str_tfl.step;
+  43   1              str_tfl.gospeed=70;
+  44   1              str_tfl.turnspeed=70;
+  45   1              str_tfl.cachespeed=70;
+  46   1              str_tfl.doing=tf_ture;
+  47   1              
+  48   1              while(1);
+  49   1              /*
+  50   1              for(a=0;a++<100;){
+  51   1                  H
+  52   1                      KH
+  53   1                      D5
+  54   1                      H
+  55   1                      
+C51 COMPILER V9.54   PERFECT                                                               09/29/2015 11:19:44 PAGE 2   
 
-  56   2                      D5
-  57   2                      Q
-  58   2                      
-  59   2                      Z
-  60   2                      D5
-  61   2                      Q
-  62   2                      
-  63   2                      KH
-  64   2                      D5
-  65   2                      KQ
-  66   2                      Z
-  67   2      
-  68   2              }
-  69   1      
-  70   1        
-  71   1              
-  72   1      
-  73   1      /*
-  74   1              
-  75   1                str_tfl.step[0]=tfl_line;
-  76   1                str_tfl.step[1]=2;
-  77   1                str_tfl.step[2]=tfl_cache;
-  78   1            str_tfl.step[3]=75;
+  56   1                      Z
+  57   1                      D5
+  58   1                      H
+  59   1                      
+  60   1                      KQ
+  61   1                      D5
+  62   1                      KH
+  63   1                      D5
+  64   1                      Z
+  65   1                      D5
+  66   1                      Q
+  67   1                      KQ
+  68   1                      D5
+  69   1                      Q
+  70   1                      
+  71   1                      Z
+  72   1                      D5
+  73   1                      Q
+  74   1                      
+  75   1                      KH
+  76   1                      D5
+  77   1                      KQ
+  78   1                      Z
   79   1      
-  80   1                str_tfl.step[4]=tfl_turn;
-  81   1                str_tfl.step[5]=tur_l90;
-  82   1      
-  83   1      
-  84   1                str_tfl.step[6]=tfl_line;
-  85   1                str_tfl.step[7]=3;
-  86   1            str_tfl.step[8]=tfl_cache;
-  87   1            str_tfl.step[9]=75;
-  88   1                str_tfl.step[10]=tfl_turn;
-  89   1                str_tfl.step[11]=tur_l90;
-  90   1      
-  91   1                str_tfl.step[12]=tfl_line;
-  92   1                str_tfl.step[13]=2;
-  93   1            str_tfl.step[14]=tfl_cache;
-  94   1            str_tfl.step[15]=75;
+  80   1              }
+  81   1      
+  82   1        
+  83   1              */
+  84   1      
+  85   1      /*
+  86   1              
+  87   1                str_tfl.step[0]=tfl_line;
+  88   1                str_tfl.step[1]=2;
+  89   1                str_tfl.step[2]=tfl_cache;
+  90   1            str_tfl.step[3]=75;
+  91   1      
+  92   1                str_tfl.step[4]=tfl_turn;
+  93   1                str_tfl.step[5]=tur_l90;
+  94   1      
   95   1      
-  96   1                str_tfl.step[16]=tfl_turn;
-  97   1                str_tfl.step[17]=tur_r90;
-  98   1      
-  99   1                str_tfl.step[18]=tfl_line;
- 100   1                str_tfl.step[19]=3;
- 101   1            str_tfl.step[20]=tfl_cache;
- 102   1            str_tfl.step[21]=75;
- 103   1      
- 104   1                str_tfl.step[22]=tfl_turn;
- 105   1                str_tfl.step[23]=tur_r90;
- 106   1      
- 107   1                str_tfl.step[24]=tfl_line;
- 108   1                str_tfl.step[25]=2;
- 109   1            str_tfl.step[26]=tfl_cache;
- 110   1            str_tfl.step[27]=75;
- 111   1      
- 112   1                str_tfl.step[28]=tfl_turn;
- 113   1                str_tfl.step[29]=tur_r90;
- 114   1      
- 115   1                str_tfl.step[30]=tfl_line;
- 116   1                str_tfl.step[31]=3;
- 117   1            str_tfl.step[32]=tfl_cache;
-C51 COMPILER V9.54   PERFECT                                                               09/26/2015 19:22:00 PAGE 3   
+  96   1                str_tfl.step[6]=tfl_line;
+  97   1                str_tfl.step[7]=3;
+  98   1            str_tfl.step[8]=tfl_cache;
+  99   1            str_tfl.step[9]=75;
+ 100   1                str_tfl.step[10]=tfl_turn;
+ 101   1                str_tfl.step[11]=tur_l90;
+ 102   1      
+ 103   1                str_tfl.step[12]=tfl_line;
+ 104   1                str_tfl.step[13]=2;
+ 105   1            str_tfl.step[14]=tfl_cache;
+ 106   1            str_tfl.step[15]=75;
+ 107   1      
+ 108   1                str_tfl.step[16]=tfl_turn;
+ 109   1                str_tfl.step[17]=tur_r90;
+ 110   1      
+ 111   1                str_tfl.step[18]=tfl_line;
+ 112   1                str_tfl.step[19]=3;
+ 113   1            str_tfl.step[20]=tfl_cache;
+ 114   1            str_tfl.step[21]=75;
+ 115   1      
+ 116   1                str_tfl.step[22]=tfl_turn;
+ 117   1                str_tfl.step[23]=tur_r90;
+C51 COMPILER V9.54   PERFECT                                                               09/29/2015 11:19:44 PAGE 3   
 
- 118   1            str_tfl.step[33]=75;
- 119   1      
- 120   1                str_tfl.step[34]=tfl_turn;
- 121   1                str_tfl.step[35]=tur_r90;
- 122   1      
- 123   1                str_tfl.step[36]=tfl_line;
- 124   1                str_tfl.step[37]=2;
- 125   1            str_tfl.step[38]=tfl_cache;
- 126   1            str_tfl.step[39]=75;
- 127   1      
- 128   1                str_tfl.step[40]=tfl_turn;
- 129   1                str_tfl.step[41]=tur_l90;
- 130   1      
- 131   1                str_tfl.step[42]=tfl_line;
- 132   1                str_tfl.step[43]=3;
- 133   1            str_tfl.step[44]=tfl_cache;
- 134   1            str_tfl.step[45]=75;
- 135   1      
- 136   1                str_tfl.step[46]=tfl_turn;
- 137   1                str_tfl.step[47]=tur_l90;
- 138   1                
- 139   1                str_tfl.step[48]=def_end;
- 140   1               
- 141   1                str_tfl.online=tf_false;
- 142   1            str_tfl.run=str_tfl.step;
- 143   1                str_tfl.gospeed=40;
- 144   1                str_tfl.turnspeed=40;
- 145   1            str_tfl.cachespeed=40;
- 146   1                str_tfl.doing=tf_ture;
+ 118   1      
+ 119   1                str_tfl.step[24]=tfl_line;
+ 120   1                str_tfl.step[25]=2;
+ 121   1            str_tfl.step[26]=tfl_cache;
+ 122   1            str_tfl.step[27]=75;
+ 123   1      
+ 124   1                str_tfl.step[28]=tfl_turn;
+ 125   1                str_tfl.step[29]=tur_r90;
+ 126   1      
+ 127   1                str_tfl.step[30]=tfl_line;
+ 128   1                str_tfl.step[31]=3;
+ 129   1            str_tfl.step[32]=tfl_cache;
+ 130   1            str_tfl.step[33]=75;
+ 131   1      
+ 132   1                str_tfl.step[34]=tfl_turn;
+ 133   1                str_tfl.step[35]=tur_r90;
+ 134   1      
+ 135   1                str_tfl.step[36]=tfl_line;
+ 136   1                str_tfl.step[37]=2;
+ 137   1            str_tfl.step[38]=tfl_cache;
+ 138   1            str_tfl.step[39]=75;
+ 139   1      
+ 140   1                str_tfl.step[40]=tfl_turn;
+ 141   1                str_tfl.step[41]=tur_l90;
+ 142   1      
+ 143   1                str_tfl.step[42]=tfl_line;
+ 144   1                str_tfl.step[43]=3;
+ 145   1            str_tfl.step[44]=tfl_cache;
+ 146   1            str_tfl.step[45]=75;
  147   1      
- 148   1      
- 149   1                
- 150   1                fun_hz1(dir_up);
- 151   1                fun_motors(mot_r,60);
- 152   1              
- 153   1      
- 154   1                fun_hz1(dir_up);
- 155   1                fun_sj1(sjp_3);
- 156   1            fun_hz1(dir_right);  //回转180
- 157   1      
- 158   1            fun_hz1(dir_left);   //回转180
+ 148   1                str_tfl.step[46]=tfl_turn;
+ 149   1                str_tfl.step[47]=tur_l90;
+ 150   1                
+ 151   1                str_tfl.step[48]=def_end;
+ 152   1               
+ 153   1                str_tfl.online=tf_false;
+ 154   1            str_tfl.run=str_tfl.step;
+ 155   1                str_tfl.gospeed=40;
+ 156   1                str_tfl.turnspeed=40;
+ 157   1            str_tfl.cachespeed=40;
+ 158   1                str_tfl.doing=tf_ture;
  159   1      
- 160   1            fun_py1(tra_q);  //前移
- 161   1      
- 162   1            fun_py1(tra_h);  //后移
- 163   1      
- 164   1            fun_sz1(han_j);  //手抓紧
+ 160   1      
+ 161   1                
+ 162   1                fun_hz1(dir_up);
+ 163   1                fun_motors(mot_r,60);
+ 164   1              
  165   1      
- 166   1            fun_sz1(han_s);   //手抓松
- 167   1      
- 168   1            fun_sj1(sjp_5);  //下降5
- 169   1            fun_sj1(sjp_2);  //上升2
- 170   1      
- 171   1            fun_sj1(sjp_1);  //上升1
- 172   1      
- 173   1            fun_sj1(sjp_2);//下降2
- 174   1      
- 175   1            fun_sj1(sjp_5);//下降5
- 176   1      
+ 166   1                fun_hz1(dir_up);
+ 167   1                fun_sj1(sjp_3);
+ 168   1            fun_hz1(dir_right);  //回转180
+ 169   1      
+ 170   1            fun_hz1(dir_left);   //回转180
+ 171   1      
+ 172   1            fun_py1(tra_q);  //前移
+ 173   1      
+ 174   1            fun_py1(tra_h);  //后移
+ 175   1      
+ 176   1            fun_sz1(han_j);  //手抓紧
  177   1      
- 178   1      
- 179   1            
-C51 COMPILER V9.54   PERFECT                                                               09/26/2015 19:22:00 PAGE 4   
+ 178   1            fun_sz1(han_s);   //手抓松
+ 179   1      
+C51 COMPILER V9.54   PERFECT                                                               09/29/2015 11:19:44 PAGE 4   
 
- 180   1                fun_motors(mot_rl,-58);//后退5秒
- 181   1      
- 182   1            
- 183   1                fun_motors(mot_rl,45);//前进4秒
+ 180   1            fun_sj1(sjp_5);  //下降5
+ 181   1            fun_sj1(sjp_2);  //上升2
+ 182   1      
+ 183   1            fun_sj1(sjp_1);  //上升1
  184   1      
- 185   1                
- 186   1                
- 187   1            fun_motors(mot_l,-15);  //左转90
- 188   1                
- 189   1                fun_motors(mot_r,18);
+ 185   1            fun_sj1(sjp_2);//下降2
+ 186   1      
+ 187   1            fun_sj1(sjp_5);//下降5
+ 188   1      
+ 189   1      
  190   1      
- 191   1      
- 192   1              def_timer0start
- 193   1              def_timer1start
- 194   1      
- 195   1              str_tfl.step[0]=tfl_line;
- 196   1              str_tfl.step[1]=5;
- 197   1              str_tfl.step[2]=def_end;
- 198   1              
- 199   1              str_tfl.run=&str_tfl.step[0];
- 200   1              str_tfl.gospeed=50;
- 201   1              str_tfl.online=tf_false;
- 202   1              str_tfl.doing=tf_ture;
- 203   1              
- 204   1      
- 205   1      
- 206   1          fun_sj1(sjp_3);
- 207   1              fun_sj1(sjp_5);
- 208   1              //D(2000);
- 209   1              fun_py1(tra_q);
- 210   1              //D(2000);
- 211   1              fun_py1(tra_h);
- 212   1              //D(2000);
- 213   1              
- 214   1              fun_py1(tra_kh);
- 215   1              //D(2000);
- 216   1              fun_sj1(sjp_5);
- 217   1              fun_sz1(han_j);
- 218   1              //D(2000);
- 219   1              fun_sj1(sjp_3);
+ 191   1            
+ 192   1                fun_motors(mot_rl,-58);//后退5秒
+ 193   1      
+ 194   1            
+ 195   1                fun_motors(mot_rl,45);//前进4秒
+ 196   1      
+ 197   1                
+ 198   1                
+ 199   1            fun_motors(mot_l,-15);  //左转90
+ 200   1                
+ 201   1                fun_motors(mot_r,18);
+ 202   1      
+ 203   1      
+ 204   1              def_timer0start
+ 205   1              def_timer1start
+ 206   1      
+ 207   1              str_tfl.step[0]=tfl_line;
+ 208   1              str_tfl.step[1]=5;
+ 209   1              str_tfl.step[2]=def_end;
+ 210   1              
+ 211   1              str_tfl.run=&str_tfl.step[0];
+ 212   1              str_tfl.gospeed=50;
+ 213   1              str_tfl.online=tf_false;
+ 214   1              str_tfl.doing=tf_ture;
+ 215   1              
+ 216   1      
+ 217   1      
+ 218   1          fun_sj1(sjp_3);
+ 219   1              fun_sj1(sjp_5);
  220   1              //D(2000);
  221   1              fun_py1(tra_q);
  222   1              //D(2000);
- 223   1              fun_sj1(sjp_5);
+ 223   1              fun_py1(tra_h);
  224   1              //D(2000);
- 225   1              fun_sz1(han_s);
- 226   1              //D(2000);
- 227   1              
- 228   1          fun_sj1(sjp_3);
- 229   1              //D(2000);
- 230   1              fun_py1(tra_kq);
- 231   1              //D(2000);
- 232   1              fun_sj1(sjp_5);
- 233   1              //D(2000);
- 234   1              fun_sz1(han_j);
- 235   1              //D(2000);
- 236   1              fun_sj1(sjp_3);
- 237   1              //D(2000);
- 238   1              fun_py1(tra_h);
- 239   1              //D(2000);
- 240   1              fun_sj1(sjp_5);
+ 225   1              
+ 226   1              fun_py1(tra_kh);
+ 227   1              //D(2000);
+ 228   1              fun_sj1(sjp_5);
+ 229   1              fun_sz1(han_j);
+ 230   1              //D(2000);
+ 231   1              fun_sj1(sjp_3);
+ 232   1              //D(2000);
+ 233   1              fun_py1(tra_q);
+ 234   1              //D(2000);
+ 235   1              fun_sj1(sjp_5);
+ 236   1              //D(2000);
+ 237   1              fun_sz1(han_s);
+ 238   1              //D(2000);
+ 239   1              
+ 240   1          fun_sj1(sjp_3);
  241   1              //D(2000);
-C51 COMPILER V9.54   PERFECT                                                               09/26/2015 19:22:00 PAGE 5   
+C51 COMPILER V9.54   PERFECT                                                               09/29/2015 11:19:44 PAGE 5   
 
- 242   1              fun_sz1(han_s);
+ 242   1              fun_py1(tra_kq);
  243   1              //D(2000);
- 244   1              
- 245   1      
- 246   1              fun_py1(tra_h);
- 247   1      
- 248   1      
- 249   1              fun_sj1(sjp_1);
- 250   1              fun_calibration();
- 251   1              fun_sj1(sjp_4);
- 252   1              
- 253   1              fun_py1(tra_q);
- 254   1              fun_sj1(sjp_5);
- 255   1              
- 256   1              fun_py1(tra_q);
- 257   1              
+ 244   1              fun_sj1(sjp_5);
+ 245   1              //D(2000);
+ 246   1              fun_sz1(han_j);
+ 247   1              //D(2000);
+ 248   1              fun_sj1(sjp_3);
+ 249   1              //D(2000);
+ 250   1              fun_py1(tra_h);
+ 251   1              //D(2000);
+ 252   1              fun_sj1(sjp_5);
+ 253   1              //D(2000);
+ 254   1              fun_sz1(han_s);
+ 255   1              //D(2000);
+ 256   1              
+ 257   1      
  258   1              fun_py1(tra_h);
- 259   1              D(2000)
- 260   1              fun_py1(tra_kh);
- 261   1              D(2000)
- 262   1              fun_py1(tra_z);
- 263   1              D(2000)
- 264   1              fun_py1(tra_kq);
- 265   1              D(2000)
- 266   1              fun_py1(tra_q);
- 267   1      
- 268   1              D(2000)
- 269   1              fun_py1(tra_q);
- 270   1              D(2000)
- 271   1              fun_py1(tra_kq);
- 272   1              D(2000)
- 273   1              fun_py1(tra_z);
- 274   1              D(2000)
- 275   1              fun_py1(tra_kh);
- 276   1              D(2000)
- 277   1              fun_py1(tra_h);
- 278   1      */
- 279   1          /*你的程序到此为止,请不要再继续改动*/
- 280   1          fun_stop();
- 281   1      }
- 282          void Int0Interrupt() interrupt 0{
- 283   1          ;
- 284   1      }
- 285          void Timer0Interrupt() interrupt 1 using 1{
- 286   1          fun_timer0();
- 287   1      }
- 288          void Timer1Interrupt() interrupt 3 using 1{
- 289   1          fun_timer1();
- 290   1      }
+ 259   1      
+ 260   1      
+ 261   1              fun_sj1(sjp_1);
+ 262   1              fun_calibration();
+ 263   1              fun_sj1(sjp_4);
+ 264   1              
+ 265   1              fun_py1(tra_q);
+ 266   1              fun_sj1(sjp_5);
+ 267   1              
+ 268   1              fun_py1(tra_q);
+ 269   1              
+ 270   1              fun_py1(tra_h);
+ 271   1              D(2000)
+ 272   1              fun_py1(tra_kh);
+ 273   1              D(2000)
+ 274   1              fun_py1(tra_z);
+ 275   1              D(2000)
+ 276   1              fun_py1(tra_kq);
+ 277   1              D(2000)
+ 278   1              fun_py1(tra_q);
+ 279   1      
+ 280   1              D(2000)
+ 281   1              fun_py1(tra_q);
+ 282   1              D(2000)
+ 283   1              fun_py1(tra_kq);
+ 284   1              D(2000)
+ 285   1              fun_py1(tra_z);
+ 286   1              D(2000)
+ 287   1              fun_py1(tra_kh);
+ 288   1              D(2000)
+ 289   1              fun_py1(tra_h);
+ 290   1      */
+ 291   1          /*你的程序到此为止,请不要再继续改动*/
+ 292   1          fun_stop();
+ 293   1      }
+ 294          void Int0Interrupt() interrupt 0{
+ 295   1          ;
+ 296   1      }
+ 297          void Timer0Interrupt() interrupt 1 using 1{
+ 298   1          fun_timer0();
+ 299   1      }
+ 300          void Timer1Interrupt() interrupt 3 using 1{
+ 301   1          fun_timer1();
+ 302   1      }
+*** WARNING C294 IN LINE 292 OF perfect.c: unreachable code
+C51 COMPILER V9.54   PERFECT                                                               09/29/2015 11:19:44 PAGE 6   
+
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    262    ----
+   CODE SIZE        =    119    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -318,4 +333,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
