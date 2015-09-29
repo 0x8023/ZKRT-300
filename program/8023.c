@@ -7,17 +7,17 @@ xdata struct str_parameter str_cod={
     /*ui str_cod.sj1bzw*/58,     //升降标准位延时
     /*ui str_cod.sj1zjw*/800,    //升降中间位延时
 
-    /*ui str_cod.py1bz*/60,      //fun_py1标准位延时
-    /*ui str_cod.py1qkq*/700,    //fun_py1前到靠前延时参数
-    /*ui str_cod.py1kqz*/1000,    //fun_py1靠前到中间延时
-    /*ui str_cod.py1zkh*/635,    //fun_py1中间到靠后延时
-    /*ui str_cod.py1khh*/620,    //fun_py1靠后到后延时
-    /*ui str_cod.py1qz*/1325,    //fun_py1前到中间延时
-    /*ui str_cod.py1zh*/1250,    //fun_py1中间到后延时
-    /*ui str_cod.py1kqkh*/1250,  //fun_py1靠前到靠后延时
-    /*ui str_cod.py1khkq*/1250,  //fun_py1靠后到靠前延时
-    /*ui str_cod.py1qkh*/1890,   //fun_py1前到靠后延时
-    /*ui str_cod.py1kqh*/1835,   //fun_py1靠前到后延时
+    /*ui str_cod.py1bz*/45,      //fun_py1标准位延时
+    /*ui str_cod.py1qkq*/600,    //fun_py1前到靠前延时参数
+    /*ui str_cod.py1kqz*/525,    //fun_py1靠前到中间延时
+    /*ui str_cod.py1zkh*/525,    //fun_py1中间到靠后延时
+    /*ui str_cod.py1khh*/540,    //fun_py1靠后到后延时
+    /*ui str_cod.py1qz*/1155,    //fun_py1前到中间延时
+    /*ui str_cod.py1zh*/1090,    //fun_py1中间到后延时
+    /*ui str_cod.py1kqkh*/1105,  //fun_py1靠前到靠后延时
+    /*ui str_cod.py1khkq*/1050,  //fun_py1靠后到靠前延时
+    /*ui str_cod.py1qkh*/1735,   //fun_py1前到靠后延时
+    /*ui str_cod.py1kqh*/1635,   //fun_py1靠前到后延时
 
     /*ui str_cod.hz1bz*/20,      //fun_hz1标准位延时
 
@@ -1690,73 +1690,57 @@ void fun_zjzt(uc par_motor,char par_model){
             case 0:
                 if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_left))
                     break;
-                if(str_begin.hzfx==dir_right){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_left);
-                }
+                if(str_begin.hzfx==dir_right)
+                    fun_pyhz2(tra_z,dir_left);
                 fun_py1(tra_h);
                 break;
             case 1:
                 if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_left))
                     break;
-                if(str_begin.hzfx==dir_right){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_left);
-                }
+                if(str_begin.hzfx==dir_right)
+                    fun_pyhz2(tra_z,dir_left);
                 fun_py1(tra_kh);
                 break;
             case 2:
                 if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_left))
                     break;
-                if(str_begin.hzfx==dir_right){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_left);
-                }
+                if(str_begin.hzfx==dir_right)
+                    fun_pyhz2(tra_z,dir_left);
                 fun_py1(tra_kq);
                 break;
             case 3:
                 if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_left))
                     break;
-                if(str_begin.hzfx==dir_right){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_left);
-                }
+                if(str_begin.hzfx==dir_right)
+                    fun_pyhz2(tra_z,dir_left);
                 fun_py1(tra_q);
                 break;
             case 4:
                 if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_right))
                     break;
-                if(str_begin.hzfx==dir_left){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_right);
-                }
+                if(str_begin.hzfx==dir_left)
+                    fun_pyhz2(tra_z,dir_right);
                 fun_py1(tra_q);
                 break;
             case 5:
                 if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_right))
                     break;
-                if(str_begin.hzfx==dir_left){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_right);
-                }
+                if(str_begin.hzfx==dir_left)
+                    fun_pyhz2(tra_z,dir_right);
                 fun_py1(tra_kq);
                 break;
             case 6:
                 if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_right))
                     break;
-                if(str_begin.hzfx==dir_left){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_right);
-                }
+                if(str_begin.hzfx==dir_left)
+                    fun_pyhz2(tra_z,dir_right);
                 fun_py1(tra_kh);
                 break;
             case 7:
                 if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_right))
                     break;
-                if(str_begin.hzfx==dir_left){
-                    fun_py1(tra_z);
-                    fun_hz1(dir_right);
-                }
+                if(str_begin.hzfx==dir_left)
+                    fun_pyhz2(tra_z,dir_right);
                 fun_py1(tra_h);
                 break;
             default:
@@ -1794,7 +1778,7 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
         printf("%d --> %d\n",(ui)par_now,(ui)par_next);
     #else
         //取各位置的最高位
-        xdata uc loc_high=fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7]);
+        xdata uc loc_high=fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end);
         //升起
         if(par_now==0||par_now==1||par_now==2||par_now==3){
             if(str_begin.hzfx==dir_left)

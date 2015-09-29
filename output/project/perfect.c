@@ -22,18 +22,24 @@
 #define HZU fun_hz1(dir_up);
 #define HZD fun_hz1(dir_down);
 
-int a=0;
+
 void main(){
     fun_start(//在此输入小车目前的状态
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
-        han_j,//手抓状态
-        sjp_3,//升降位置
-        tra_kq,//平移位置
-        dir_left);//回转方向
+        han_s,//手抓状态
+        sjp_12,//升降位置
+        tra_q,//平移位置
+        dir_up);//回转方向
     /*请从下一行开始写你的程序*/
 	//fun_test();
+    //fun_pyhz2(tra_h,dir_left);
+   
+
+
+
+	
 	
 	str_tfl.step[0]=tfl_line;
 	str_tfl.step[1]=28;
