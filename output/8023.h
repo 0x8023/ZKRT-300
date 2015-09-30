@@ -15,7 +15,7 @@
     #define def_timer1start TR1=1;  //定时器1开启
     #define def_timer1stop TR1=0;   //定时器1关闭
     #define def_end 0xFF            //不确定元素结束标志位
-    #define def_select(par_model) out_switchselect=par_model==sel_58?0:1;//传感器片选
+    #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
     #define J fun_sz1(han_j);
@@ -203,11 +203,12 @@
     extern void fun_pwml(uc par_value);//左路PWM输出
     extern void fun_motors(enum varENU_mot par_model,char par_speed);//主函数操作电机
     extern void fun_motorsrl(enum varENU_mot par_model,char par_speed);//定时器操作左右轮
-    extern void fun_sz1(enum varENU_han par_model);//手抓单步运动
-    extern void fun_sj1(enum varENU_sjp par_model);//升降单步运动
-    extern void fun_py1(enum varENU_tra par_model);//平移单步运动
-    extern void fun_hz1(enum varENU_dir par_model);//回转单步运动
-    extern void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
+    extern void fun_sz(enum varENU_han par_model);//手抓单步运动
+    extern void fun_sj(enum varENU_sjp par_model);//升降单步运动
+    extern void fun_py(enum varENU_tra par_model);//平移单步运动
+    extern void fun_hz(enum varENU_dir par_model);//回转单步运动
+    extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
+    extern void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//升降回转同步运动
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
     extern void fun_folline(uc par_con,uc par_speed);//主函数巡线

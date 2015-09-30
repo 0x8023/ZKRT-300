@@ -1,58 +1,73 @@
 #include "../8023.h"
 
-#define D1 D(1000);
-#define D2 D(2000);
-#define D3 D(3000);
-#define D4 D(4000);
-#define D5 D(5000);
-#define Q fun_py1(tra_q);
-#define KQ fun_py1(tra_kq);
-#define Z fun_py1(tra_z);
-#define KH fun_py1(tra_kh);
-#define H fun_py1(tra_h);
-#define SJ1 fun_sj1(sjp_1);
-#define SJ2 fun_sj1(sjp_2);
-#define SJ3 fun_sj1(sjp_3);
-#define SJ4 fun_sj1(sjp_4);
-#define SJ5 fun_sj1(sjp_5);
-#define HJ fun_sz1(han_j);
-#define HS fun_sz1(han_s);
-#define HZR fun_hz1(dir_right);
-#define HZL fun_hz1(dir_left);
-#define HZU fun_hz1(dir_up);
-#define HZD fun_hz1(dir_down);
-
-
 void main(){
     fun_start(//在此输入小车目前的状态
         0,//X坐标
         0,//Y坐标
         dir_up,//车头方向
         han_s,//手抓状态
-        sjp_12,//升降位置
+        sjp_1,//升降位置
         tra_q,//平移位置
-        dir_up);//回转方向
+        dir_right);//回转方向
     /*请从下一行开始写你的程序*/
 	//fun_test();
     //fun_pyhz2(tra_h,dir_left);
+	
    
+	//fun_zdzj(12345678,87654321);
+    fun_folline(4,50);
+    fun_turn(tur_l90,40);
+    fun_folline(2,50);
+    fun_turn(tur_r90,40);
+    fun_folline(3,50);
+    D(2000)
 
+    fun_folline(2,50);
+    fun_turn(tur_r90,40);
+    fun_folline(2,50);
+    fun_turn(tur_l90,40);
+    fun_folline(2,50);
+    D(2000)
+
+    fun_turn(tur_r180,40);
+    fun_folline(1,50);
+    fun_turn(tur_r90,40);
+    fun_folline(2,50);
+    fun_turn(tur_l90,40);
+    fun_folline(3,50);
+    D(2000)
+
+    fun_folline(2,50);
+    fun_turn(tur_r90,40);
+    fun_folline(2,50);
+    fun_turn(tur_r90,40);
+    fun_folline(4,50);
+    D(2000)
+
+    fun_folline(5,50);
+    D(2000)
+
+    fun_folline(11,50);
+    fun_turn(tur_r90,40);
+    fun_folline(4,50);
+    fun_turn(tur_l90,40);
+    fun_folline(3,50);
 
 
 	
-	
+	/*
 	str_tfl.step[0]=tfl_line;
 	str_tfl.step[1]=28;
 
 	str_tfl.online=tf_false;
 	str_tfl.run=str_tfl.step;
-	str_tfl.gospeed=70;
-	str_tfl.turnspeed=70;
-	str_tfl.cachespeed=70;
+	str_tfl.gospeed=20;
+	str_tfl.turnspeed=20;
+	str_tfl.cachespeed=20;
 	str_tfl.doing=tf_ture;
 	
 	while(1);
-	/*
+	
 	for(a=0;a++<100;){
 	    H
 		KH

@@ -7,19 +7,19 @@ xdata struct str_parameter str_cod={
     /*ui str_cod.sj1bzw*/58,     //升降标准位延时
     /*ui str_cod.sj1zjw*/800,    //升降中间位延时
 
-    /*ui str_cod.py1bz*/45,      //fun_py1标准位延时
-    /*ui str_cod.py1qkq*/600,    //fun_py1前到靠前延时参数
-    /*ui str_cod.py1kqz*/525,    //fun_py1靠前到中间延时
-    /*ui str_cod.py1zkh*/525,    //fun_py1中间到靠后延时
-    /*ui str_cod.py1khh*/540,    //fun_py1靠后到后延时
-    /*ui str_cod.py1qz*/1155,    //fun_py1前到中间延时
-    /*ui str_cod.py1zh*/1090,    //fun_py1中间到后延时
-    /*ui str_cod.py1kqkh*/1105,  //fun_py1靠前到靠后延时
-    /*ui str_cod.py1khkq*/1050,  //fun_py1靠后到靠前延时
-    /*ui str_cod.py1qkh*/1735,   //fun_py1前到靠后延时
-    /*ui str_cod.py1kqh*/1635,   //fun_py1靠前到后延时
+    /*ui str_cod.py1bz*/45,      //fun_py标准位延时
+    /*ui str_cod.py1qkq*/600,    //fun_py前到靠前延时参数
+    /*ui str_cod.py1kqz*/525,    //fun_py靠前到中间延时
+    /*ui str_cod.py1zkh*/525,    //fun_py中间到靠后延时
+    /*ui str_cod.py1khh*/540,    //fun_py靠后到后延时
+    /*ui str_cod.py1qz*/1155,    //fun_py前到中间延时
+    /*ui str_cod.py1zh*/1090,    //fun_py中间到后延时
+    /*ui str_cod.py1kqkh*/1105,  //fun_py靠前到靠后延时
+    /*ui str_cod.py1khkq*/1050,  //fun_py靠后到靠前延时
+    /*ui str_cod.py1qkh*/1735,   //fun_py前到靠后延时
+    /*ui str_cod.py1kqh*/1635,   //fun_py靠前到后延时
 
-    /*ui str_cod.hz1bz*/20,      //fun_hz1标准位延时
+    /*ui str_cod.hz1bz*/20,      //fun_hz标准位延时
 
     /*ui turn90;*/500,           //90度转弯屏蔽延时
     /*ui turn180;*/2000          //180度转弯屏蔽延时
@@ -323,12 +323,12 @@ void fun_motorsrl(enum varENU_mot par_model,char par_speed){
             break;
     }
 }//定时器操作左右轮
-void fun_sz1(enum varENU_han par_model){
+void fun_sz(enum varENU_han par_model){
     if(str_begin.szzt==par_model)
         return;
     if(par_model==han_s){//手抓松
         #ifdef Debug
-            printf("fun_sz1(han_s);\n");
+            printf("fun_sz(han_s);\n");
         #else
             fun_motors(mot_sz,-100);
             while(in_s==1);
@@ -336,7 +336,7 @@ void fun_sz1(enum varENU_han par_model){
     }
     else{//手抓紧
         #ifdef Debug
-            printf("fun_sz1(han_j);\n");
+            printf("fun_sz(han_j);\n");
         #else
             fun_motors(mot_sz,100);
             while(in_j==1);
@@ -346,13 +346,13 @@ void fun_sz1(enum varENU_han par_model){
         fun_motors(mot_sz,0);
     str_begin.szzt=par_model;//存储运行结果
 }//手抓单步运动
-void fun_py1(enum varENU_tra par_model){
+void fun_py(enum varENU_tra par_model){
     if(str_begin.pywz==par_model)
         return;
     switch(par_model){
         case tra_q://前平移(没有电机的呢个方向)
             #ifdef Debug
-                printf("fun_py1(tra_q);\n");
+                printf("fun_py(tra_q);\n");
             #else
                 fun_motors(mot_py,100);
                 while(in_qpy==1);
@@ -361,7 +361,7 @@ void fun_py1(enum varENU_tra par_model){
                 break;
         case tra_kq://靠前平移
             #ifdef Debug
-                printf("fun_py1(tra_kq);\n");
+                printf("fun_py(tra_kq);\n");
             #else
                 switch(str_begin.pywz){
                     case tra_q://现在在前面
@@ -385,7 +385,7 @@ void fun_py1(enum varENU_tra par_model){
                 break;
         case tra_z://平移到中间
             #ifdef Debug
-                printf("fun_py1(tra_z);\n");
+                printf("fun_py(tra_z);\n");
             #else
                 switch(str_begin.pywz){
                     case tra_q://现在在前面
@@ -409,7 +409,7 @@ void fun_py1(enum varENU_tra par_model){
                 break;
         case tra_kh://平移到靠后
             #ifdef Debug
-                printf("fun_py1(tra_kh);\n");
+                printf("fun_py(tra_kh);\n");
             #else
                 switch(str_begin.pywz){
                     case tra_q://现在在前面
@@ -433,7 +433,7 @@ void fun_py1(enum varENU_tra par_model){
                 break;
         case tra_h://后平移(有电机的呢个方向)
             #ifdef Debug
-                printf("fun_py1(tra_h);\n");
+                printf("fun_py(tra_h);\n");
             #else
                 fun_motors(mot_py,-100);
                 while(in_hpy==1);
@@ -446,13 +446,14 @@ void fun_py1(enum varENU_tra par_model){
     fun_motors(mot_py,0);
     str_begin.pywz=par_model;//存储运行结果
 }//平移单步运动
-void fun_sj1(enum varENU_sjp par_model){
+void fun_sj(enum varENU_sjp par_model){
     if(str_begin.sjwz==par_model)
        return;
+    def_select(sel_58)
     switch(par_model){
         case sjp_1://升降位置1(最上位)
             #ifdef Debug
-                printf("fun_sj1(sjp_1);\n");
+                printf("fun_sj(sjp_1);\n");
             #else
                 fun_motors(mot_sj,100);
                 def_select(sel_58);
@@ -462,14 +463,14 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_12:
             #ifdef Debug
-                printf("fun_sj1(sjp_12);\n");
+                printf("fun_sj(sjp_12);\n");
             #else
                 if(par_model>str_begin.sjwz){
                     fun_motors(mot_sj,-100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
                 else{//要去的地方在上面，向上走
-                    fun_sj1(sjp_2);
+                    fun_sj(sjp_2);
                     fun_motors(mot_sj,100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
@@ -477,7 +478,7 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_2://升降位置2
             #ifdef Debug
-                printf("fun_sj1(sjp_2);\n");
+                printf("fun_sj(sjp_2);\n");
             #else
                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
                 def_select(sel_58);
@@ -487,15 +488,15 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_23:
             #ifdef Debug
-                printf("fun_sj1(sjp_23);\n");
+                printf("fun_sj(sjp_23);\n");
             #else
                 if(par_model>str_begin.sjwz){
-                    fun_sj1(sjp_2);
+                    fun_sj(sjp_2);
                     fun_motors(mot_sj,-100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
                 else{//要去的地方在上面，向上走
-                    fun_sj1(sjp_3);
+                    fun_sj(sjp_3);
                     fun_motors(mot_sj,100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
@@ -503,7 +504,7 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_3://升降位置3
             #ifdef Debug
-                printf("fun_sj1(sjp_3);\n");
+                printf("fun_sj(sjp_3);\n");
             #else
                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
                 def_select(sel_58);
@@ -513,15 +514,15 @@ void fun_sj1(enum varENU_sjp par_model){
             break;
         case sjp_34:
             #ifdef Debug
-                printf("fun_sj1(sjp_34);\n");
+                printf("fun_sj(sjp_34);\n");
             #else
                 if(par_model>str_begin.sjwz){
-                    fun_sj1(sjp_3);
+                    fun_sj(sjp_3);
                     fun_motors(mot_sj,-100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
                 else{//要去的地方在上面，向上走
-                    fun_sj1(sjp_4);
+                    fun_sj(sjp_4);
                     fun_motors(mot_sj,100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
@@ -529,7 +530,7 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_4://升降位置4
             #ifdef Debug
-                printf("fun_sj1(sjp_4);\n");
+                printf("fun_sj(sjp_4);\n");
             #else
                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
                 def_select(sel_58);
@@ -539,10 +540,10 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_45:
             #ifdef Debug
-                printf("fun_sj1(sjp_45);\n");
+                printf("fun_sj(sjp_45);\n");
             #else
                 if(par_model>str_begin.sjwz){
-                    fun_sj1(sjp_4);
+                    fun_sj(sjp_4);
                     fun_motors(mot_sj,-100);
                     fun_delay(str_cod.sj1zjw,del_ms);
                 }
@@ -554,7 +555,7 @@ void fun_sj1(enum varENU_sjp par_model){
                 break;
         case sjp_5://升降位置5
             #ifdef Debug
-                printf("fun_sj1(sjp_5);\n");
+                printf("fun_sj(sjp_5);\n");
             #else
                 fun_motors(mot_sj,-100);
                 def_select(sel_912);
@@ -568,14 +569,14 @@ void fun_sj1(enum varENU_sjp par_model){
     fun_motors(mot_sj,0);
     str_begin.sjwz=par_model;//存储运行结果
 }//升降单步运动
-void fun_hz1(enum varENU_dir par_model){
+void fun_hz(enum varENU_dir par_model){
     if(str_begin.hzfx==par_model)
         return;
     def_select(sel_912);
     switch(par_model){
         case dir_up://回转至前方
             #ifdef Debug
-                printf("fun_hz1(dir_up);\n");
+                printf("fun_hz(dir_up);\n");
             #else
                 switch(str_begin.hzfx){
                     case dir_down://现在在下方
@@ -605,7 +606,7 @@ void fun_hz1(enum varENU_dir par_model){
                 break;
         case dir_down://要去下面
             #ifdef Debug
-                printf("fun_hz1(dir_down);\n");
+                printf("fun_hz(dir_down);\n");
             #else
                 switch(str_begin.hzfx){
                     case dir_up://现在在上面
@@ -636,7 +637,7 @@ void fun_hz1(enum varENU_dir par_model){
                 break;
         case dir_left://要去左边
             #ifdef Debug
-                printf("fun_hz1(dir_left);\n");
+                printf("fun_hz(dir_left);\n");
             #else
                 switch(str_begin.hzfx){
                     case dir_up://现在在上面
@@ -668,7 +669,7 @@ void fun_hz1(enum varENU_dir par_model){
                 break;
         case dir_right://要去右面
             #ifdef Debug
-                printf("fun_hz1(dir_right);\n");
+                printf("fun_hz(dir_right);\n");
             #else
                 switch(str_begin.hzfx){
                     case dir_up://现在在前面
@@ -702,7 +703,7 @@ void fun_hz1(enum varENU_dir par_model){
     fun_motors(mot_hz,0);
     str_begin.hzfx=par_model;//存储运行结果
 }//回转单步运动
-void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
+void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
     switch(par_hzmodel){//获取想要到达的回转位置
         case dir_left://要去左边
             switch(str_begin.hzfx){
@@ -842,6 +843,7 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
             break;
     }//获取现在平移所在的位置
     fun_motors(mot_py,0);//停止平移动作
+    def_select(sel_912)//传感器片选
     str_begin.pywz=par_pymodel;//存储运行结果
     switch(par_hzmodel){//获取想要到达的回转位置
         case dir_up://回转至前方
@@ -876,7 +878,6 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
-                    break;
                 case dir_right://现在在右面
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
@@ -891,11 +892,9 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
                     break;
-                    break;
                 case dir_down://现在在下面
                     while(in_hz==1);
                     fun_delay(str_cod.hz1bz,del_ms);
-                    break;
                     break;
                 case dir_right://现在在右面
                     while(in_hz==1);
@@ -933,6 +932,149 @@ void fun_pyhz2(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
     fun_motors(mot_hz,0);//停止回转动作
     str_begin.hzfx=par_hzmodel;//存储运行结果
 }//平移回转同步运动
+// void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
+//     switch(par_hzmodel){//获取想要到达的回转位置
+//         case dir_left://要去左边
+//             switch(str_begin.hzfx){
+//                 case dir_right://现在在右边
+//                     fun_motors(mot_hz,-100);
+//                     break;
+//                 case dir_up://现在在上面
+//                     fun_motors(mot_hz,-100);
+//                     break;
+//                 case dir_down://现在在下面
+//                     fun_motors(mot_hz,100);
+//                     break;
+//                 default:
+//                     break;
+//             }//获取现在回转所在的位置
+//             break;
+//         case dir_right://要去右边
+//             switch(str_begin.hzfx){
+//                 case dir_left://现在在左边
+//                     fun_motors(mot_hz,100);
+//                     break;
+//                 case dir_up://现在在上面
+//                     fun_motors(mot_hz,100);
+//                     break;
+//                 case dir_down://现在在下面
+//                     fun_motors(mot_hz,-100);
+//                     break;
+//                 default:
+//                     break;
+//             }//获取现在回转所在的位置
+//             break;
+//         case dir_up://要去上面
+//             switch(str_begin.hzfx){
+//                 case dir_left://现在在左边
+//                     fun_motors(mot_hz,100);
+//                     break;
+//                 case dir_right://现在在右边
+//                     fun_motors(mot_hz,-100);
+//                     break;
+//                 case dir_down://现在在下面
+//                     fun_motors(mot_hz,-100);
+//                     break;
+//                 default:
+//                     break;
+//             }//获取现在回转所在的位置
+//             break;
+//         case dir_down://要去下面
+//             switch(str_begin.hzfx){
+//                 case dir_left://现在在左边
+//                     fun_motors(mot_hz,-100);
+//                     break;
+//                 case dir_right://现在在右边
+//                     fun_motors(mot_hz,100);
+//                     break;
+//                 case dir_up://现在在上面
+//                     fun_motors(mot_hz,100);
+//                     break;
+//                 default:
+//                     break;
+//             }//获取现在回转所在的位置
+//             break;
+//         default:
+//             break;
+//     }//获取现在要去的回转位置
+//     switch(par_model){
+//         case sjp_1://升降位置1(最上位)
+//                 fun_motors(mot_sj,100);
+//                 def_select(sel_58);
+//                 while(in_wz1==1);
+//                 fun_delay(str_cod.sj1bzw,del_ms);
+//                 break;
+//         case sjp_12:
+//                 if(par_model>str_begin.sjwz){
+//                     fun_motors(mot_sj,-100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 else{//要去的地方在上面，向上走
+//                     fun_sj(sjp_2);
+//                     fun_motors(mot_sj,100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 break;
+//         case sjp_2://升降位置2
+//                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+//                 def_select(sel_58);
+//                 while(in_wz2==1);
+//                 fun_delay(str_cod.sj1bzw,del_ms);
+//                 break;
+//         case sjp_23:
+//                 if(par_model>str_begin.sjwz){
+//                     fun_sj(sjp_2);
+//                     fun_motors(mot_sj,-100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 else{//要去的地方在上面，向上走
+//                     fun_sj(sjp_3);
+//                     fun_motors(mot_sj,100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 break;
+//         case sjp_3://升降位置3
+//                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+//                 def_select(sel_58);
+//                 while(in_wz3==1);
+//                 fun_delay(str_cod.sj1bzw,del_ms);
+//             break;
+//         case sjp_34:
+//                 if(par_model>str_begin.sjwz){
+//                     fun_sj(sjp_3);
+//                     fun_motors(mot_sj,-100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 else{//要去的地方在上面，向上走
+//                     fun_sj(sjp_4);
+//                     fun_motors(mot_sj,100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 break;
+//         case sjp_4://升降位置4
+//                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
+//                 def_select(sel_58);
+//                 while(in_wz4==1);
+//                 fun_delay(str_cod.sj1bzw,del_ms);
+//                 break;
+//         case sjp_45:
+//                 if(par_model>str_begin.sjwz){
+//                     fun_sj(sjp_4);
+//                     fun_motors(mot_sj,-100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 else{//要去的地方在上面，向上走
+//                     fun_motors(mot_sj,100);
+//                     fun_delay(str_cod.sj1zjw,del_ms);
+//                 }
+//                 break;
+//         case sjp_5://升降位置5
+//                 fun_motors(mot_sj,-100);
+//                 break;
+//         default:
+//             break;
+//     }
+// }//升降回转同步运动
 void fun_jtjp(){
     while(1){
         if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
@@ -992,29 +1134,29 @@ void fun_timermove(){
                 }
                 else{
                     loc_sdl=loc_sdr=str_tfl.gospeed;//巡线速度为str_tfl.gospeed
-                    if(in_ls1&&!in_ls8){//1亮8不亮
-                        loc_sdl*=0.7;//左减速
-                        loc_sdr*=1.3;//右加速
-                    }//向左转
-                    if(in_ls8&&!in_ls1){//8亮1不亮
-                        loc_sdl*=1.3;//左加速
-                        loc_sdr*=0.7;//右减速
-                    }//向右转
-                    if(in_ls2&&!in_ls7){//2亮7不亮
-                        loc_sdl*=0.8;//左减速
-                        loc_sdr*=1.2;//右加速
-                    }//向左转
-                    if(in_ls7&&!in_ls2){//7亮2不亮
-                        loc_sdl*=1.2;//左加速
-                        loc_sdr*=0.8;//右减速
-                    }//向右转
                     if(in_ls3&&!in_ls6){//3亮6不亮
-                        loc_sdl*=0.9;//左减速
-                        loc_sdr*=1.1;//右加速
+                        loc_sdl-=loc_sdl/10;
+                        loc_sdr+=(100-loc_sdr)/10;
                     }//向左转
                     if(in_ls6&&!in_ls3){//6亮3不亮
-                        loc_sdl*=1.1;//左加速
-                        loc_sdr*=0.9;//右减速
+                        loc_sdl+=(100-loc_sdl)/10;
+                        loc_sdr-=loc_sdr/10;
+                    }//向右转
+                    if(in_ls2&&!in_ls7){//2亮7不亮
+                        loc_sdl-=loc_sdl/10*3;
+                        loc_sdr+=(100-loc_sdr)/10*3;
+                    }//向左转
+                    if(in_ls7&&!in_ls2){//7亮2不亮
+                        loc_sdl+=(100-loc_sdl)/10*3;
+                        loc_sdr-=loc_sdr/10*3;
+                    }//向右转
+                    if(in_ls1&&!in_ls8){//1亮8不亮
+                        loc_sdl-=loc_sdl/10*5;
+                        loc_sdr+=(100-loc_sdr)/10*5;
+                    }//向左转
+                    if(in_ls8&&!in_ls1){//8亮1不亮
+                        loc_sdl+=(100-loc_sdl)/10*5;
+                        loc_sdr-=loc_sdr/10*5;
                     }//向右转
                     fun_motorsrl(mot_r,loc_sdr);
                     fun_motorsrl(mot_l,loc_sdl);
@@ -1134,29 +1276,29 @@ void fun_folline(uc par_con,uc par_speed){
         }
         else{
             loc_sdr=loc_sdl=par_speed;
-            if(in_ls1&&!in_ls8){//1亮8不亮
-                loc_sdl*=0.5;//左减速
-                loc_sdr*=1.5;//右加速
-            }//向左转
-            if(in_ls8&&!in_ls1){//8亮1不亮
-                loc_sdl*=1.5;//左加速
-                loc_sdr*=0.5;//右减速
-            }//向右转
-            if(in_ls2&&!in_ls7){//2亮7不亮
-                loc_sdl*=0.7;//左减速
-                loc_sdr*=1.3;//右加速
-            }//向左转
-            if(in_ls7&&!in_ls2){//7亮2不亮
-                loc_sdl*=1.3;//左加速
-                loc_sdr*=0.7;//右减速
-            }//向右转
             if(in_ls3&&!in_ls6){//3亮6不亮
-                loc_sdl*=0.9;//左减速
-                loc_sdr*=1.1;//右加速
+                loc_sdl-=loc_sdl/10;
+                loc_sdr+=(100-loc_sdr)/10;
             }//向左转
             if(in_ls6&&!in_ls3){//6亮3不亮
-                loc_sdl*=1.1;//左加速
-                loc_sdr*=0.9;//右减速
+                loc_sdl+=(100-loc_sdl)/10;
+                loc_sdr-=loc_sdr/10;
+            }//向右转
+            if(in_ls2&&!in_ls7){//2亮7不亮
+                loc_sdl-=loc_sdl/10*3;
+                loc_sdr+=(100-loc_sdr)/10*3;
+            }//向左转
+            if(in_ls7&&!in_ls2){//7亮2不亮
+                loc_sdl+=(100-loc_sdl)/10*3;
+                loc_sdr-=loc_sdr/10*3;
+            }//向右转
+            if(in_ls1&&!in_ls8){//1亮8不亮
+                loc_sdl-=loc_sdl/10*5;
+                loc_sdr+=(100-loc_sdr)/10*5;
+            }//向左转
+            if(in_ls8&&!in_ls1){//8亮1不亮
+                loc_sdl+=(100-loc_sdl)/10*5;
+                loc_sdr-=loc_sdr/10*5;
             }//向右转
             fun_motors(mot_r,loc_sdr);
             fun_motors(mot_l,loc_sdl);
@@ -1268,13 +1410,13 @@ void fun_cleane2prom(ui par_add){
     fun_stope2prom();               //关闭EEPROM功能
 }//清除EEPROM数据
 void fun_calibration(){
-    // fun_sj1(sjp_1);//升到最上位
+    // fun_sj(sjp_1);//升到最上位
     ul loc_time;
-    fun_py1(tra_q);//移动到最前端
-    fun_py1(tra_h);//移动到最后端
+    fun_py(tra_q);//移动到最前端
+    fun_py(tra_h);//移动到最后端
     loc_time=var_timer;
-    fun_py1(tra_q);//移动到前端并计时
-    fun_py1(tra_h);//移动到后端
+    fun_py(tra_q);//移动到前端并计时
+    fun_py(tra_h);//移动到后端
     loc_time=var_timer-loc_time;
     loc_time*=0.5;
     str_cod.py1zh=loc_time*0.5;//从后到中间
@@ -1298,52 +1440,52 @@ void fun_port(){
     AUXR |= 0x10;       //启动独立波特率发生器
 }//串口初始化
 void fun_test(){
-    fun_sz1(han_j);
+    fun_sz(han_j);
     fun_delay(1,del_s);
-    fun_sz1(han_s);
+    fun_sz(han_s);
     fun_delay(1,del_s);
-    fun_sz1(han_j);
+    fun_sz(han_j);
     fun_delay(1,del_s);
-    fun_sz1(han_s);
+    fun_sz(han_s);
     fun_delay(1,del_s);
 
     str_begin.pywz=tra_h;
-    fun_py1(tra_q);
+    fun_py(tra_q);
     fun_delay(1,del_s);
-    fun_py1(tra_h);
+    fun_py(tra_h);
     fun_delay(1,del_s);
-    fun_py1(tra_q);
+    fun_py(tra_q);
     fun_delay(1,del_s);
-    fun_py1(tra_h);
+    fun_py(tra_h);
     fun_delay(1,del_s);
 
-    fun_sj1(sjp_1);
+    fun_sj(sjp_1);
     fun_delay(1,del_s);
-    fun_sj1(sjp_2);
+    fun_sj(sjp_2);
     fun_delay(1,del_s);
-    fun_sj1(sjp_3);
+    fun_sj(sjp_3);
     fun_delay(1,del_s);
-    fun_sj1(sjp_4);
+    fun_sj(sjp_4);
     fun_delay(1,del_s);
-    fun_sj1(sjp_5);
+    fun_sj(sjp_5);
     fun_delay(1,del_s);
-    fun_sj1(sjp_4);
+    fun_sj(sjp_4);
     fun_delay(1,del_s);
-    fun_sj1(sjp_3);
+    fun_sj(sjp_3);
     fun_delay(1,del_s);
-    fun_sj1(sjp_2);
+    fun_sj(sjp_2);
     fun_delay(1,del_s);
-    fun_sj1(sjp_1);
+    fun_sj(sjp_1);
 
     str_now.hzfx=str_begin.hzfx;
     str_begin.hzfx=dir_up;
-    fun_hz1(dir_right);
+    fun_hz(dir_right);
     fun_delay(1,del_s);
-    fun_hz1(dir_up);
+    fun_hz(dir_up);
     fun_delay(1,del_s);
-    fun_hz1(dir_right);
+    fun_hz(dir_right);
     fun_delay(1,del_s);
-    fun_hz1(dir_up);
+    fun_hz(dir_up);
     fun_delay(1,del_s);
     str_begin.hzfx=str_now.hzfx;
 
@@ -1486,11 +1628,11 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
         (str_pass.jx[7][3]==str_end.jx[7][3])&&
         (str_pass.jx[7][4]==str_end.jx[7][4])){
             if(str_begin.hzfx==dir_left){
-                fun_sz1(han_s);                 //手抓松
-                fun_sj1(sjp_1);                 //升降到最高位
+                fun_sz(han_s);                 //手抓松
+                fun_sj(sjp_1);                 //升降到最高位
                 fun_zjzt(mot_pyhz,7);           //平面位置7
                 fun_zjzt(mot_sj,loc_high[7]);   //升降到7的最高位
-                fun_sz1(han_j);                 //手抓紧
+                fun_sz(han_j);                 //手抓紧
             }//如果停在左边
             return;
         }//如果小车一方的实际件序和想要达到的件序相等
@@ -1500,7 +1642,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
             if(loc_xh1>=100){
                 loc_xh1=0;
                 fun_zjzt(mot_sj,fun_min(loc_high[0],loc_high[1],loc_high[2],loc_high[3],loc_high[4],loc_high[5],loc_high[6],loc_high[7],def_end)-1);
-                fun_hz1(dir_right);
+                fun_hz(dir_right);
             }
             //可以一次拿走,不需要中间位的
             if(loc_high[1]<5){
@@ -1594,7 +1736,7 @@ void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需
             if(loc_xh1>=100){
                 loc_xh1=0;
                 fun_zjzt(mot_sj,fun_min(loc_high[0],loc_high[1],loc_high[2],loc_high[3],loc_high[4],loc_high[5],loc_high[6],loc_high[7],def_end)-1);
-                fun_hz1(dir_left);
+                fun_hz(dir_left);
             }
             //可以一次拿走,不需要中间位的
             if(loc_high[5]<5){
@@ -1691,57 +1833,57 @@ void fun_zjzt(uc par_motor,char par_model){
                 if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_left))
                     break;
                 if(str_begin.hzfx==dir_right)
-                    fun_pyhz2(tra_z,dir_left);
-                fun_py1(tra_h);
+                    fun_pyhz(tra_z,dir_left);
+                fun_py(tra_h);
                 break;
             case 1:
                 if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_left))
                     break;
                 if(str_begin.hzfx==dir_right)
-                    fun_pyhz2(tra_z,dir_left);
-                fun_py1(tra_kh);
+                    fun_pyhz(tra_z,dir_left);
+                fun_py(tra_kh);
                 break;
             case 2:
                 if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_left))
                     break;
                 if(str_begin.hzfx==dir_right)
-                    fun_pyhz2(tra_z,dir_left);
-                fun_py1(tra_kq);
+                    fun_pyhz(tra_z,dir_left);
+                fun_py(tra_kq);
                 break;
             case 3:
                 if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_left))
                     break;
                 if(str_begin.hzfx==dir_right)
-                    fun_pyhz2(tra_z,dir_left);
-                fun_py1(tra_q);
+                    fun_pyhz(tra_z,dir_left);
+                fun_py(tra_q);
                 break;
             case 4:
                 if((str_begin.pywz==tra_q)&&(str_begin.hzfx==dir_right))
                     break;
                 if(str_begin.hzfx==dir_left)
-                    fun_pyhz2(tra_z,dir_right);
-                fun_py1(tra_q);
+                    fun_pyhz(tra_z,dir_right);
+                fun_py(tra_q);
                 break;
             case 5:
                 if((str_begin.pywz==tra_kq)&&(str_begin.hzfx==dir_right))
                     break;
                 if(str_begin.hzfx==dir_left)
-                    fun_pyhz2(tra_z,dir_right);
-                fun_py1(tra_kq);
+                    fun_pyhz(tra_z,dir_right);
+                fun_py(tra_kq);
                 break;
             case 6:
                 if((str_begin.pywz==tra_kh)&&(str_begin.hzfx==dir_right))
                     break;
                 if(str_begin.hzfx==dir_left)
-                    fun_pyhz2(tra_z,dir_right);
-                fun_py1(tra_kh);
+                    fun_pyhz(tra_z,dir_right);
+                fun_py(tra_kh);
                 break;
             case 7:
                 if((str_begin.pywz==tra_h)&&(str_begin.hzfx==dir_right))
                     break;
                 if(str_begin.hzfx==dir_left)
-                    fun_pyhz2(tra_z,dir_right);
-                fun_py1(tra_h);
+                    fun_pyhz(tra_z,dir_right);
+                fun_py(tra_h);
                 break;
             default:
                 break;
@@ -1750,25 +1892,25 @@ void fun_zjzt(uc par_motor,char par_model){
     else if(par_motor==mot_sj){
         switch(par_model){
             case 0:
-                fun_sj1(sjp_1);
+                fun_sj(sjp_1);
                 break;
             case 1:
-                fun_sj1(sjp_2);
+                fun_sj(sjp_2);
                 break;
             case 2:
-                fun_sj1(sjp_3);
+                fun_sj(sjp_3);
                 break;
             case 3:
-                fun_sj1(sjp_4);
+                fun_sj(sjp_4);
                 break;
             case 4:
-                fun_sj1(sjp_5);
+                fun_sj(sjp_5);
                 break;
             default:
                 if(par_model<0)
-                    fun_sj1(sjp_1);
+                    fun_sj(sjp_1);
                 else if(par_model>5)
-                    fun_sj1(sjp_5);
+                    fun_sj(sjp_5);
                 break;
         }
     }
@@ -1797,31 +1939,31 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
         //下降到工件的位置
         fun_zjzt(mot_sj,par_high[par_now]);
         //抓紧工件
-        fun_sz1(han_j);
+        fun_sz(han_j);
         //上升到正确的最高位
         switch(par_now){
             case 0:
                 switch(par_next){
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[6],par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1830,25 +1972,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 1:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1857,25 +1999,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 2:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1884,25 +2026,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 3:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[6],par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1911,25 +2053,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 4:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[6],par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1938,25 +2080,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 5:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1965,25 +2107,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 6:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     case 7:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -1992,25 +2134,25 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
             case 7:
                 switch(par_next){
                     case 0:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[1],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[1],par_high[par_next],def_end)-2);
                         break;
                     case 1:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[par_next],def_end)-2);
                         break;
                     case 2:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[par_next],def_end)-2);
                         break;
                     case 3:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[2],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[2],par_high[par_next],def_end)-2);
                         break;
                     case 4:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[5],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[5],par_high[6],par_high[par_next],def_end)-2);
                         break;
                     case 5:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[6],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[6],par_high[par_next],def_end)-2);
                         break;
                     case 6:
-                        fun_zjzt(mot_sj,fun_min(loc_high+1,par_high[par_now],par_high[par_next]-1,def_end)-1);
+                        fun_zjzt(mot_sj,fun_min(loc_high+2,par_high[par_now]+1,par_high[par_next],def_end)-2);
                         break;
                     default:
                         break;
@@ -2024,7 +2166,7 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
         //下降到要放下的位置
         fun_zjzt(mot_sj,par_high[par_next]-1);
         //松开手抓
-        fun_sz1(han_s);
+        fun_sz(han_s);
     #endif
 
     //更新参数
@@ -2034,38 +2176,36 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
     par_high[par_next]--;
 }//拿件(配合自动抓件使用)
 void fun_zhuajian(){
-    fun_sz1(han_s);                 //手抓松
-    fun_sj1(sjp_1);                 //上升到最高位
-    fun_py1(tra_q);                 //平移到前端
+    fun_sz(han_s);                 //手抓松
+    fun_sj(sjp_1);                 //上升到最高位
+    fun_py(tra_q);                 //平移到前端
     if(str_begin.hzfx!=dir_right)   //如果不在右边
-        fun_hz1(dir_right);         //就平移到右边
+        fun_hz(dir_right);         //就平移到右边
 
     fun_folline(2,60);
     fun_turn(tur_l90,40);
     fun_folline(1,60);
     fun_qc(100,40);
-    while(!in_ls1&&!in_ls2&&!in_ls3&&in_ls4&&in_ls5&&!in_ls6&&!in_ls7&&!in_ls8){
-        if(in_ls3||!in_ls5){
-            fun_motors(mot_r,-30);
-            fun_motors(mot_l,-29);
-            fun_delay(500,del_ms);
-            fun_motors(mot_r,-29);
-            fun_motors(mot_l,-30);
-            fun_delay(500,del_ms);
+    while((!in_ls4||!in_ls5)||(in_ls1||in_ls2||in_ls3||in_ls6||in_ls7||in_ls8)){
+        if(in_ls1||in_ls2||in_ls3||!in_ls5){
             fun_motors(mot_rl,-30);
-            fun_delay(500,del_ms);
+            fun_delay(300,del_ms);
+            fun_motors(mot_r,-20);
+            fun_motors(mot_l,-30);
+            fun_delay(300,del_ms);
+            fun_motors(mot_rl,-30);
+            fun_delay(300,del_ms);
         }//3亮或5不亮
-        else if(in_ls6||!in_ls4){
+        else if(in_ls6||in_ls7||in_ls8||!in_ls4){
+            fun_motors(mot_rl,-30);
+            fun_delay(300,del_ms);
             fun_motors(mot_r,-30);
             fun_motors(mot_l,-29);
-            fun_delay(500,del_ms);
-            fun_motors(mot_r,-29);
-            fun_motors(mot_l,-30);
-            fun_delay(500,del_ms);
+            fun_delay(300,del_ms);
             fun_motors(mot_rl,-30);
-            fun_delay(500,del_ms);
+            fun_delay(300,del_ms);
         }//6亮或4不亮
-        fun_qc(200,40);//重新进行前冲
+        fun_qc(128,40);//重新进行前冲
     }
     fun_motors(mot_rl,0);
 }//从起始区走到抓件区
