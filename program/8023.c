@@ -623,7 +623,6 @@ void fun_hz(enum varENU_dir par_model){
                         while(in_hz==1);
                         fun_delay(str_cod.hz1bz,del_ms);
                         break;
-                        break;
                     case dir_right://现在在右面
                         fun_motors(mot_hz,100);
                         fun_delay(1,del_s);
@@ -646,13 +645,11 @@ void fun_hz(enum varENU_dir par_model){
                         while(in_hz==1);
                         fun_delay(str_cod.hz1bz,del_ms);
                         break;
-                        break;
                     case dir_down://现在在下面
                         fun_motors(mot_hz,100);
                         fun_delay(1,del_s);
                         while(in_hz==1);
                         fun_delay(str_cod.hz1bz,del_ms);
-                        break;
                         break;
                     case dir_right://现在在右面
                         fun_motors(mot_hz,-100);
@@ -768,83 +765,8 @@ void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
         default:
             break;
     }//获取现在要去的回转位置
-    switch(par_pymodel){
-        case tra_q://前平移(没有电机的呢个方向)
-            fun_motors(mot_py,100);
-            while(in_qpy==1);
-            fun_delay(str_cod.py1bz,del_ms);
-            break;
-        case tra_kq://靠前
-            switch(str_begin.pywz){
-                case tra_q://现在在前面
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1qkq,del_ms);
-                    break;
-                case tra_z://现在在中间
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1kqz,del_ms);
-                    break;
-                case tra_kh://现在在靠后
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1khkq,del_ms);
-                    break;
-                case tra_h://现在在后面
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1kqh,del_ms);
-                    break;
-            }
-            break;
-        case tra_z://中
-            switch(str_begin.pywz){
-                case tra_q://现在在前面
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1qz,del_ms);
-                    break;
-                case tra_kq://现在在靠前
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1kqz,del_ms);
-                    break;
-                case tra_kh://现在在靠后
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1zkh,del_ms);
-                    break;
-                case tra_h://现在在后面
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1zh,del_ms);
-                    break;
-            }
-            break;
-        case tra_kh://靠后
-            switch(str_begin.pywz){
-                case tra_q://现在在前面
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1qkh,del_ms);
-                    break;
-                case tra_kq://现在在靠前
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1kqkh,del_ms);
-                    break;
-                case tra_z://现在在中间
-                    fun_motors(mot_py,-100);
-                    fun_delay(str_cod.py1zkh,del_ms);
-                    break;
-                case tra_h://现在在后面
-                    fun_motors(mot_py,100);
-                    fun_delay(str_cod.py1khh,del_ms);
-                    break;
-            }
-            break;
-        case tra_h://后平移(有电机的呢个方向)
-            fun_motors(mot_py,-100);
-            while(in_hpy==1);
-            fun_delay(str_cod.py1bz,del_ms);
-            break;
-        default:
-            break;
-    }//获取现在平移所在的位置
-    fun_motors(mot_py,0);//停止平移动作
-    def_select(sel_912)//传感器片选
-    str_begin.pywz=par_pymodel;//存储运行结果
+    fun_py(par_pymodel);//做平移
+    def_select(sel_912);//传感器片选
     switch(par_hzmodel){//获取想要到达的回转位置
         case dir_up://回转至前方
             switch(str_begin.hzfx){
@@ -932,149 +854,199 @@ void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
     fun_motors(mot_hz,0);//停止回转动作
     str_begin.hzfx=par_hzmodel;//存储运行结果
 }//平移回转同步运动
-// void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
-//     switch(par_hzmodel){//获取想要到达的回转位置
-//         case dir_left://要去左边
-//             switch(str_begin.hzfx){
-//                 case dir_right://现在在右边
-//                     fun_motors(mot_hz,-100);
-//                     break;
-//                 case dir_up://现在在上面
-//                     fun_motors(mot_hz,-100);
-//                     break;
-//                 case dir_down://现在在下面
-//                     fun_motors(mot_hz,100);
-//                     break;
-//                 default:
-//                     break;
-//             }//获取现在回转所在的位置
-//             break;
-//         case dir_right://要去右边
-//             switch(str_begin.hzfx){
-//                 case dir_left://现在在左边
-//                     fun_motors(mot_hz,100);
-//                     break;
-//                 case dir_up://现在在上面
-//                     fun_motors(mot_hz,100);
-//                     break;
-//                 case dir_down://现在在下面
-//                     fun_motors(mot_hz,-100);
-//                     break;
-//                 default:
-//                     break;
-//             }//获取现在回转所在的位置
-//             break;
-//         case dir_up://要去上面
-//             switch(str_begin.hzfx){
-//                 case dir_left://现在在左边
-//                     fun_motors(mot_hz,100);
-//                     break;
-//                 case dir_right://现在在右边
-//                     fun_motors(mot_hz,-100);
-//                     break;
-//                 case dir_down://现在在下面
-//                     fun_motors(mot_hz,-100);
-//                     break;
-//                 default:
-//                     break;
-//             }//获取现在回转所在的位置
-//             break;
-//         case dir_down://要去下面
-//             switch(str_begin.hzfx){
-//                 case dir_left://现在在左边
-//                     fun_motors(mot_hz,-100);
-//                     break;
-//                 case dir_right://现在在右边
-//                     fun_motors(mot_hz,100);
-//                     break;
-//                 case dir_up://现在在上面
-//                     fun_motors(mot_hz,100);
-//                     break;
-//                 default:
-//                     break;
-//             }//获取现在回转所在的位置
-//             break;
-//         default:
-//             break;
-//     }//获取现在要去的回转位置
-//     switch(par_model){
-//         case sjp_1://升降位置1(最上位)
-//                 fun_motors(mot_sj,100);
-//                 def_select(sel_58);
-//                 while(in_wz1==1);
-//                 fun_delay(str_cod.sj1bzw,del_ms);
-//                 break;
-//         case sjp_12:
-//                 if(par_model>str_begin.sjwz){
-//                     fun_motors(mot_sj,-100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 else{//要去的地方在上面，向上走
-//                     fun_sj(sjp_2);
-//                     fun_motors(mot_sj,100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 break;
-//         case sjp_2://升降位置2
-//                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
-//                 def_select(sel_58);
-//                 while(in_wz2==1);
-//                 fun_delay(str_cod.sj1bzw,del_ms);
-//                 break;
-//         case sjp_23:
-//                 if(par_model>str_begin.sjwz){
-//                     fun_sj(sjp_2);
-//                     fun_motors(mot_sj,-100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 else{//要去的地方在上面，向上走
-//                     fun_sj(sjp_3);
-//                     fun_motors(mot_sj,100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 break;
-//         case sjp_3://升降位置3
-//                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
-//                 def_select(sel_58);
-//                 while(in_wz3==1);
-//                 fun_delay(str_cod.sj1bzw,del_ms);
-//             break;
-//         case sjp_34:
-//                 if(par_model>str_begin.sjwz){
-//                     fun_sj(sjp_3);
-//                     fun_motors(mot_sj,-100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 else{//要去的地方在上面，向上走
-//                     fun_sj(sjp_4);
-//                     fun_motors(mot_sj,100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 break;
-//         case sjp_4://升降位置4
-//                 fun_motors(mot_sj,par_model<str_begin.sjwz?100:-100);
-//                 def_select(sel_58);
-//                 while(in_wz4==1);
-//                 fun_delay(str_cod.sj1bzw,del_ms);
-//                 break;
-//         case sjp_45:
-//                 if(par_model>str_begin.sjwz){
-//                     fun_sj(sjp_4);
-//                     fun_motors(mot_sj,-100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 else{//要去的地方在上面，向上走
-//                     fun_motors(mot_sj,100);
-//                     fun_delay(str_cod.sj1zjw,del_ms);
-//                 }
-//                 break;
-//         case sjp_5://升降位置5
-//                 fun_motors(mot_sj,-100);
-//                 break;
-//         default:
-//             break;
-//     }
-// }//升降回转同步运动
+void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
+    xdata ul loc_sjdelay=0;//升降中间位延时
+    xdata ul loc_hzdelay=0xFFFF;//回转延时
+    xdata uc loc_sjcgq=0;//升降传感器检测标志位(0为不做升降,1为未到传感器,2为已到传感器)
+    xdata uc loc_hzcgq=0;//回转周期标志位(0为不做,1为一圈,2为两圈)
+    xdata uc loc_hzflag=0;//回转传感器标志位
+    if(par_hzmodel!=str_begin.hzfx){
+        switch(par_hzmodel){
+            case dir_up://回转至前方
+                switch(str_begin.hzfx){
+                    case dir_down://现在在下方
+                        fun_motors(mot_hz,-100);//反转
+                        loc_hzcgq=2;//俩周期
+                        break;
+                    case dir_left://现在在左边
+                        fun_motors(mot_hz,100);//正转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    case dir_right://现在在右边
+                        fun_motors(mot_hz,-100);//反转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case dir_down://要去下面
+                switch(str_begin.hzfx){
+                    case dir_up://现在在上面
+                        fun_motors(mot_hz,100);//正转
+                        loc_hzcgq=2;//俩周期
+                        break;
+                    case dir_left://现在在左面
+                        fun_motors(mot_hz,-100);//反转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    case dir_right://现在在右面
+                        fun_motors(mot_hz,100);//正转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case dir_left://要去左边
+                switch(str_begin.hzfx){
+                    case dir_up://现在在上面
+                        fun_motors(mot_hz,-100);//反转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    case dir_down://现在在下面
+                        fun_motors(mot_hz,100);//正转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    case dir_right://现在在右面
+                        fun_motors(mot_hz,-100);//反转
+                        loc_hzcgq=2;//俩周期
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case dir_right://要去右面
+                switch(str_begin.hzfx){
+                    case dir_up://现在在前面
+                        fun_motors(mot_hz,100);//正转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    case dir_down://现在在下面
+                        fun_motors(mot_hz,-100);//反转
+                        loc_hzcgq=1;//一个周期
+                        break;
+                    case dir_left://现在在左面
+                        fun_motors(mot_hz,100);//正转
+                        loc_hzcgq=2;//俩周期
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }//选择需要的运动周期
+        loc_hzdelay=var_timer+1000;//回转传感器隔1秒检测
+    }//启动回转电机
+    if(par_sjmodel!=str_begin.sjwz){//如果不在位
+        fun_motors(mot_sj,par_sjmodel<str_begin.sjwz?100:-100);//通过高度计算并启动正反转
+        loc_sjcgq=1;//标志位记录为等待传感器
+    }//启动升降电机
+    while(str_begin.hzsd!=0||str_begin.sjsd!=0){//非阻塞型Main函数循环检测
+        if(loc_sjcgq==1){//如果还没到传感器
+            switch(par_sjmodel){
+                case sjp_1:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz1==1){//如果第一个传感器有信号
+                        loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_12:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(str_begin.sjwz==sjp_1||in_wz2==1){//如果开始的时候时在位置1或已经到了位置2
+                        loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_2:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz2==1){//如果第二个传感器有信号
+                        loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_23:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz2==1||in_wz3==1){//如果已经到了位置2或已经到了位置3
+                        loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_3:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz3==1){//如果第三个传感器有信号
+                        loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_34:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz3==1||in_wz4==1){//如果已经到了位置3或已经到了位置4
+                        loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_4:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz4==1){//如果第四个传感器有信号
+                        loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_45:
+                    def_select(sel_58);//片选58传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz4==1||str_begin.sjwz==sjp_5){//如果已经到了位置4或开始的时候时在位置5
+                        loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+                case sjp_5:
+                    def_select(sel_912);//片选912传感器
+                    fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                    if(in_wz5==1){//如果第五个传感器有信号
+                        loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
+                        loc_sjcgq=2;//标志位记录已到传感器
+                    }
+                    break;
+            }
+        }
+        else if(loc_sjcgq==2){//如果延时时间到
+            if(loc_sjdelay<=var_timer){
+                fun_motors(mot_sj,0);//停止电机
+                loc_sjcgq=0;//不做升降了
+                str_begin.sjwz=par_sjmodel;//存储运行结果
+            }
+        }//已经到了传感器需要延时
+        if(loc_hzdelay<=var_timer){//如果1秒延时已经过去
+            if(loc_hzcgq!=0){//如果不是转0圈
+                def_select(sel_912);//传感器片选
+                fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
+                if(in_hz==0){//如果传感器没亮
+                    loc_hzflag=1;//标志位变1
+                }
+                else if(loc_hzflag==1){//如果标志位为1且传感器有信号
+                    loc_hzcgq--;//算一个周期完成
+                    loc_hzflag=0;//标志位变0
+                }
+            }
+            else{//如果圈数为0
+                fun_motors(mot_hz,0);//停止电机
+                loc_hzdelay=0xFFFF;//不做回转了
+                str_begin.hzfx=par_hzmodel;//存储运行结果
+            }
+        }
+    }
+}//升降回转同步运动
 void fun_jtjp(){
     while(1){
         if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
@@ -1305,7 +1277,7 @@ void fun_folline(uc par_con,uc par_speed){
             fun_delay(1,del_ms);
         }
     }//如果巡线条数不为0
-    fun_qc(65,40);
+    fun_qc(60,40);//前冲
 }//主函数巡线
 void fun_turn(enum varENU_tur par_model,uc par_speed){
     switch(par_model){//获取参数
@@ -2205,7 +2177,7 @@ void fun_zhuajian(){
             fun_motors(mot_rl,-30);
             fun_delay(300,del_ms);
         }//6亮或4不亮
-        fun_qc(128,40);//重新进行前冲
+        fun_qc(150,40);//重新进行前冲
     }
     fun_motors(mot_rl,0);
 }//从起始区走到抓件区

@@ -15,45 +15,10 @@ void main(){
 	
    
 	//fun_zdzj(12345678,87654321);
-    fun_folline(4,50);
-    fun_turn(tur_l90,40);
-    fun_folline(2,50);
-    fun_turn(tur_r90,40);
-    fun_folline(3,50);
-    D(2000)
-
-    fun_folline(2,50);
-    fun_turn(tur_r90,40);
-    fun_folline(2,50);
-    fun_turn(tur_l90,40);
-    fun_folline(2,50);
-    D(2000)
-
-    fun_turn(tur_r180,40);
-    fun_folline(1,50);
-    fun_turn(tur_r90,40);
-    fun_folline(2,50);
-    fun_turn(tur_l90,40);
-    fun_folline(3,50);
-    D(2000)
-
-    fun_folline(2,50);
-    fun_turn(tur_r90,40);
-    fun_folline(2,50);
-    fun_turn(tur_r90,40);
-    fun_folline(4,50);
-    D(2000)
-
-    fun_folline(5,50);
-    D(2000)
-
-    fun_folline(11,50);
-    fun_turn(tur_r90,40);
-    fun_folline(4,50);
-    fun_turn(tur_l90,40);
-    fun_folline(3,50);
-
-
+	fun_sjhz(sjp_5,dir_up);
+	D(5000)
+	fun_sjhz(sjp_1,dir_left);
+	
 	
 	/*
 	str_tfl.step[0]=tfl_line;
