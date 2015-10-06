@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               10/06/2015 13:19:58 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               10/07/2015 12:30:44 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -15,18 +15,18 @@ line level    source
    6   1              0,//Y坐标
    7   1              dir_up,//车头方向
    8   1              han_s,//手抓状态
-   9   1              sjp_1,//升降位置
-  10   1              tra_q,//平移位置
-  11   1              dir_right);//回转方向
+   9   1              sjp_4,//升降位置
+  10   1              tra_h,//平移位置
+  11   1              dir_left);//回转方向
   12   1          /*请从下一行开始写你的程序*/
   13   1              //fun_test();
   14   1          //fun_pyhz2(tra_h,dir_left);
   15   1              
   16   1         
   17   1              //fun_zdzj(12345678,87654321);
-  18   1              fun_sjhz(sjp_5,dir_up);
-  19   1              D(5000)
-  20   1              fun_sjhz(sjp_1,dir_left);
+  18   1              fun_sjhz(sjp_1,dir_right);
+  19   1      //      D(5000)
+  20   1      //      fun_sjhz(sjp_2,dir_left);
   21   1              
   22   1              
   23   1              /*
@@ -62,7 +62,7 @@ line level    source
   53   1                      KQ
   54   1                      D5
   55   1                      Q
-C51 COMPILER V9.54   PERFECT                                                               10/06/2015 13:19:58 PAGE 2   
+C51 COMPILER V9.54   PERFECT                                                               10/07/2015 12:30:44 PAGE 2   
 
   56   1                      
   57   1                      Z
@@ -126,7 +126,7 @@ line level    source
  115   1            str_tfl.step[32]=tfl_cache;
  116   1            str_tfl.step[33]=75;
  117   1      
-C51 COMPILER V9.54   PERFECT                                                               10/06/2015 13:19:58 PAGE 3   
+C51 COMPILER V9.54   PERFECT                                                               10/07/2015 12:30:44 PAGE 3   
 
  118   1                str_tfl.step[34]=tfl_turn;
  119   1                str_tfl.step[35]=tur_r90;
@@ -190,7 +190,7 @@ line level    source
  177   1            
  178   1                fun_motors(mot_rl,-58);//后退5秒
  179   1      
-C51 COMPILER V9.54   PERFECT                                                               10/06/2015 13:19:58 PAGE 4   
+C51 COMPILER V9.54   PERFECT                                                               10/07/2015 12:30:44 PAGE 4   
 
  180   1            
  181   1                fun_motors(mot_rl,45);//前进4秒
@@ -254,7 +254,7 @@ line level    source
  239   1              //D(2000);
  240   1              fun_sz1(han_s);
  241   1              //D(2000);
-C51 COMPILER V9.54   PERFECT                                                               10/06/2015 13:19:58 PAGE 5   
+C51 COMPILER V9.54   PERFECT                                                               10/07/2015 12:30:44 PAGE 5   
 
  242   1              
  243   1      
@@ -306,7 +306,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    101    ----
+   CODE SIZE        =     85    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

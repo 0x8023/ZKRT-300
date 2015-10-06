@@ -6,18 +6,18 @@ void main(){
         0,//Y坐标
         dir_up,//车头方向
         han_s,//手抓状态
-        sjp_1,//升降位置
-        tra_q,//平移位置
-        dir_right);//回转方向
+        sjp_4,//升降位置
+        tra_h,//平移位置
+        dir_left);//回转方向
     /*请从下一行开始写你的程序*/
 	//fun_test();
     //fun_pyhz2(tra_h,dir_left);
 	
    
 	//fun_zdzj(12345678,87654321);
-	fun_sjhz(sjp_5,dir_up);
-	D(5000)
-	fun_sjhz(sjp_1,dir_left);
+	fun_sjhz(sjp_1,dir_right);
+//	D(5000)
+//	fun_sjhz(sjp_2,dir_left);
 	
 	
 	/*

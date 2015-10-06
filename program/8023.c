@@ -949,7 +949,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_1:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz1==1){//如果第一个传感器有信号
+                    if(in_wz1==0){//如果第一个传感器有信号
                         loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -957,7 +957,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_12:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(str_begin.sjwz==sjp_1||in_wz2==1){//如果开始的时候时在位置1或已经到了位置2
+                    if(str_begin.sjwz==sjp_1||in_wz2==0){//如果开始的时候时在位置1或已经到了位置2
                         loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -965,7 +965,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_2:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz2==1){//如果第二个传感器有信号
+                    if(in_wz2==0){//如果第二个传感器有信号
                         loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -973,7 +973,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_23:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz2==1||in_wz3==1){//如果已经到了位置2或已经到了位置3
+                    if(in_wz2==0||in_wz3==0){//如果已经到了位置2或已经到了位置3
                         loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -981,7 +981,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_3:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz3==1){//如果第三个传感器有信号
+                    if(in_wz3==0){//如果第三个传感器有信号
                         loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -989,7 +989,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_34:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz3==1||in_wz4==1){//如果已经到了位置3或已经到了位置4
+                    if(in_wz3==0||in_wz4==0){//如果已经到了位置3或已经到了位置4
                         loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -997,7 +997,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_4:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz4==1){//如果第四个传感器有信号
+                    if(in_wz4==0){//如果第四个传感器有信号
                         loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -1005,7 +1005,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_45:
                     def_select(sel_58);//片选58传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz4==1||str_begin.sjwz==sjp_5){//如果已经到了位置4或开始的时候时在位置5
+                    if(in_wz4==0||str_begin.sjwz==sjp_5){//如果已经到了位置4或开始的时候时在位置5
                         loc_sjdelay=var_timer+str_cod.sj1zjw;//通过定时器全局时间标志位计算中间位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
@@ -1013,10 +1013,12 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
                 case sjp_5:
                     def_select(sel_912);//片选912传感器
                     fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                    if(in_wz5==1){//如果第五个传感器有信号
+                    if(in_wz5==0){//如果第五个传感器有信号
                         loc_sjdelay=var_timer+str_cod.sj1bzw;//通过定时器全局时间标志位计算标准位延时
                         loc_sjcgq=2;//标志位记录已到传感器
                     }
+                    break;
+                default:
                     break;
             }
         }
@@ -1031,7 +1033,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
             if(loc_hzcgq!=0){//如果不是转0圈
                 def_select(sel_912);//传感器片选
                 fun_delay(20,del_us);//延时20us,给片选芯片一段时间切换
-                if(in_hz==0){//如果传感器没亮
+                if(in_hz==1){//如果传感器没亮
                     loc_hzflag=1;//标志位变1
                 }
                 else if(loc_hzflag==1){//如果标志位为1且传感器有信号
@@ -1047,6 +1049,9 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
         }
     }
 }//升降回转同步运动
+void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
+    
+}
 void fun_jtjp(){
     while(1){
         if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
