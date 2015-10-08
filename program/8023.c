@@ -1,6 +1,6 @@
 #include "./output/8023.h"
-xdata struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
-xdata struct str_parameter str_cod={
+struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
+struct str_parameter str_cod={
     /*ui str_cod.mlinerqd*/25000,//默认主函数巡线软起动路程为25000
     /*ui str_cod.mlineqc*/200,   //默认主函数巡线前冲时间为500毫秒
 
@@ -24,10 +24,10 @@ xdata struct str_parameter str_cod={
     /*ui turn90;*/500,           //90度转弯屏蔽延时
     /*ui turn180;*/2000          //180度转弯屏蔽延时
 };
-xdata struct str_timerfolline str_tfl;
-ul var_timer=0;
+struct str_timerfolline str_tfl;
+data ul var_timer=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
-    ui loc_con=par_value;
+    data ui loc_con=par_value;
     switch(par_model){
         case del_us://微秒级延时
             #ifdef Debug
@@ -44,7 +44,7 @@ void fun_delay(ui par_value,enum varENU_del par_model){
                 printf("fun_delay(%d,del_ms);\n",par_value);
             #else
                 while(loc_con-->0){
-                    uc loc_i, loc_j;
+                    data uc loc_i, loc_j;
                     _nop_();
                     _nop_();
                     loc_i=12;
@@ -60,7 +60,7 @@ void fun_delay(ui par_value,enum varENU_del par_model){
                 printf("fun_delay(%d,del_s);\n",par_value);
             #else
                 while(loc_con-->0){
-                    uc loc_i, loc_j, loc_k;
+                    data uc loc_i, loc_j, loc_k;
                     loc_i=46;
                     loc_j=153;
                     loc_k=245;
@@ -855,11 +855,11 @@ void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel){
     str_begin.hzfx=par_hzmodel;//存储运行结果
 }//平移回转同步运动
 void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
-    xdata ul loc_sjdelay=0;//升降中间位延时
-    xdata ul loc_hzdelay=0xFFFF;//回转延时
-    xdata uc loc_sjcgq=0;//升降传感器检测标志位(0为不做升降,1为未到传感器,2为已到传感器)
-    xdata uc loc_hzcgq=0;//回转周期标志位(0为不做,1为一圈,2为两圈)
-    xdata uc loc_hzflag=0;//回转传感器标志位
+    ul loc_sjdelay=0;//升降中间位延时
+    ul loc_hzdelay=0xFFFF;//回转延时
+    uc loc_sjcgq=0;//升降传感器检测标志位(0为不做升降,1为未到传感器,2为已到传感器)
+    uc loc_hzcgq=0;//回转周期标志位(0为不做,1为一圈,2为两圈)
+    uc loc_hzflag=0;//回转传感器标志位
     if(par_hzmodel!=str_begin.hzfx){
         switch(par_hzmodel){
             case dir_up://回转至前方
@@ -1050,38 +1050,38 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
     }
 }//升降回转同步运动
 void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
-    
+;
 }
 void fun_jtjp(){
-    while(1){
+    while(1){//循环纠偏
         if((!in_ls1&&!in_ls2&&in_ls4&&in_ls5&&!in_ls7&&!in_ls8)&&((in_ls3&&in_ls6)||(!in_ls3&&!in_ls6))){
             fun_delay(10,del_ms);
             fun_motors(mot_rl,0);
             return;
-        }
+        }//1278不亮,45亮,36要么一起亮要么一起灭
         if(in_ls2||in_ls1){
             fun_motors(mot_l,16);
             fun_motors(mot_r,-16);
-        }
+        }//12亮
         else if(in_ls7||in_ls8){
             fun_motors(mot_l,-16);
             fun_motors(mot_r,16);
-        }
+        }//78亮
         else{
             if(!in_ls4){
                 fun_motors(mot_l,-12);
                 fun_motors(mot_r,12);
-            }
+            }//4不亮
             else if(!in_ls5){
                 fun_motors(mot_l,12);
                 fun_motors(mot_r,-12);
-            }
+            }//4亮5不亮
             else{
-                if(in_ls6&&!in_ls3){
+                if(in_ls6&&!in_ls3){//6亮3不亮
                     fun_motors(mot_l,-8);
                     fun_motors(mot_r,8);
                 }
-                if(in_ls3&&!in_ls6){
+                if(in_ls3&&!in_ls6){//3亮6不亮
                     fun_motors(mot_l,8);
                     fun_motors(mot_r,-8);
                 }
@@ -1090,8 +1090,8 @@ void fun_jtjp(){
     }
 }//静态纠偏
 void fun_timermove(){
-    static uc loc_con=0;//需要分步做的动作需要用到此静态私有分步标志位
-    int loc_sdl,loc_sdr;//左轮速度和右轮速度的局部变量
+    static data uc loc_con=0;//需要分步做的动作需要用到此静态私有分步标志位
+    data int loc_sdl,loc_sdr;//左轮速度和右轮速度的局部变量
     switch(*str_tfl.run){//选择运行方式
         case def_end://运行结束
             fun_motorsrl(mot_rl,0);//再次停止电机运动
@@ -1110,7 +1110,7 @@ void fun_timermove(){
                     (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
                 }
                 else{
-                    loc_sdl=loc_sdr=str_tfl.gospeed;//巡线速度为str_tfl.gospeed
+                    loc_sdl=loc_sdr=40;//巡线速度为str_tfl.gospeed
                     if(in_ls3&&!in_ls6){//3亮6不亮
                         loc_sdl-=loc_sdl/10;
                         loc_sdr+=(100-loc_sdr)/10;
@@ -1230,14 +1230,30 @@ void fun_timermove(){
                     break;
             }
             break;
-        case tfl_start://运行带加速的前冲
-
-            break;
-        case tfl_end://运行带减速的前冲
-
+        default:
             break;
     }
 }//定时器移动
+void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...){
+    va_list loc_argp;//保存参数结构
+    uc loc_step=0;//循环step数组用的东西
+    uc loc_cachespeed;//当前参数
+    va_start(loc_argp,par_cachespeed);//loc_argp指向传入的第一个可选参数,par_cachespeed是最后一个确定的参数
+    loc_cachespeed=va_arg(loc_argp,char);//取出第一个参数
+    while(loc_cachespeed!=def_end){
+        str_tfl.step[loc_step++]=loc_cachespeed;//把给step数组,标志位+1
+        loc_cachespeed=va_arg(loc_argp,char);//取出下一个参数
+    }
+    str_tfl.step[loc_step]=def_end;//step数组结束标志位
+    va_end(loc_argp);//结束
+
+    str_tfl.online=tf_false;//不在线
+    str_tfl.run=str_tfl.step;//指针指向第一个数组
+    str_tfl.gospeed=par_gospeed;//默认速度
+    str_tfl.turnspeed=par_turnspeed;//拐弯速度
+    str_tfl.cachespeed=par_cachespeed;//前冲速度
+    str_tfl.doing=tf_ture;//开始做
+}//主函数用定时器巡线调用函数
 void fun_folline(uc par_con,uc par_speed){
     uc loc_con=par_con;//巡线条数标志位
     uc loc_sdr,loc_sdl;//左右轮速度
@@ -1505,9 +1521,9 @@ void fun_coordinate(){
     
 }//自动巡线之坐标
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
-    xdata struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
-    xdata char loc_high[8];         //每摞工件的高度
-    xdata uc loc_xh1;             //第一个循环
+    struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
+    char loc_high[8];         //每摞工件的高度
+    uc loc_xh1;             //第一个循环
 
     memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在件序
     memset(str_end.jx,0,sizeof(str_end.jx)); //清空想要的件序
@@ -1897,7 +1913,7 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
         printf("%d --> %d\n",(ui)par_now,(ui)par_next);
     #else
         //取各位置的最高位
-        xdata uc loc_high=fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end);
+        uc loc_high=fun_min(par_high[0],par_high[1],par_high[2],par_high[3],par_high[4],par_high[5],par_high[6],par_high[7],def_end);
         //升起
         if(par_now==0||par_now==1||par_now==2||par_now==3){
             if(str_begin.hzfx==dir_left)
@@ -2187,10 +2203,10 @@ void fun_zhuajian(){
     fun_motors(mot_rl,0);
 }//从起始区走到抓件区
 void fun_back(){
-    fun_motors(mot_rl,-30);
+    fun_motors(mot_rl,-25);
     fun_delay(1,del_s);
 
-    fun_motors(mot_r,-50);
+    fun_motors(mot_r,-48);
     fun_motors(mot_l,-20);
     fun_delay(3,del_s);    
 
@@ -2219,6 +2235,10 @@ void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han pa
     fun_timer0init();         //初始化定时器0
     fun_timer1init();         //初始化定时器1
 
+    TR0=1;                    //打开定时器0
+    TR1=1;                    //打开定时器1
+    in_start=1;               //按键置1
+
     str_begin.x=par_x;        //X坐标
     str_begin.y=par_y;        //Y坐标
     str_begin.ctfx=par_ctfx;  //车头方向
@@ -2234,9 +2254,6 @@ void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han pa
     fun_motors(mot_hz,0);     //手抓速度归零
     fun_motors(mot_rl,0);     //左右速度归零
 
-    TR0=1;                    //打开定时器0
-    TR1=1;                    //打开定时器1
-    in_start=1;               //按键置1
     #ifdef Debug              //如果开启调试模式
         fun_delay(5,del_s);
         MSG("Ready!")         //输出Ready!

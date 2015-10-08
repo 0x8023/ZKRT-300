@@ -131,8 +131,6 @@
         tfl_line=100,    //巡线
         tfl_cache=101,   //前冲
         tfl_turn=102,    //转弯
-        tfl_start=103,   //带加速的前冲
-        tfl_end=104      //带减速的前冲
     };//定时器巡线执行动作
 
     struct str_state{
@@ -187,10 +185,10 @@
     struct str_zdzj{
         uc jx[8][5];        //件序:8个抓件区(从左上到左下0-3,从右上到右下4-7);5个高度(0-5),最上空位为0,从上到下1-4,底座为5
     };//自动抓件
-    extern xdata struct str_state str_begin,str_now,str_next;   //分别为:起始状态/当前状态/目标状态
-    extern xdata struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
-    extern xdata struct str_timerfolline str_tfl;               //定时器巡线
-    extern ul var_timer0;                                       //timer0毫秒级计时器计数位
+    extern struct str_state str_begin,str_now,str_next;   //分别为:起始状态/当前状态/目标状态
+    extern struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
+    extern struct str_timerfolline str_tfl;               //定时器巡线
+    extern data ul var_timer0;                                       //timer0毫秒级计时器计数位
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model); //延时
     extern void fun_timer0init();//1毫秒定时器0初始化
@@ -209,8 +207,10 @@
     extern void fun_hz(enum varENU_dir par_model);//回转单步运动
     extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
     extern void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//升降回转同步运动
+    extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel);//平移升降回转同步运动
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
+    extern void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...);//主函数用定时器巡线调用函数
     extern void fun_folline(uc par_con,uc par_speed);//主函数巡线
     extern void fun_turn(enum varENU_tur par_model,uc par_speed);//主函数转弯
     extern void fun_qc(uc par_time,uc par_speed);//主函数前冲

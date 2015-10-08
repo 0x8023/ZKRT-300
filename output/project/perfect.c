@@ -1,5 +1,4 @@
 #include "../8023.h"
-
 void main(){
     fun_start(//在此输入小车目前的状态
         0,//X坐标
@@ -12,27 +11,38 @@ void main(){
     /*请从下一行开始写你的程序*/
 	//fun_test();
     //fun_pyhz2(tra_h,dir_left);
-	
-   
+
 	//fun_zdzj(12345678,87654321);
-	fun_sjhz(sjp_1,dir_right);
+//	fun_sjhz(sjp_1,dir_right);
 //	D(5000)
 //	fun_sjhz(sjp_2,dir_left);
-	
-	
-	/*
-	str_tfl.step[0]=tfl_line;
-	str_tfl.step[1]=28;
 
-	str_tfl.online=tf_false;
-	str_tfl.run=str_tfl.step;
-	str_tfl.gospeed=20;
-	str_tfl.turnspeed=20;
-	str_tfl.cachespeed=20;
-	str_tfl.doing=tf_ture;
+	
+//	str_tfl.step[0]=tfl_start;
+//	str_tfl.step[1]=40;
+//	str_tfl.step[2]=tfl_line;
+//	str_tfl.step[3]=1;
+//	str_tfl.step[4]=def_end;
+
+	fun_flsetting(40,40,40,
+	tfl_line,1,
+    tfl_cache,40,
+	tfl_turn,tur_l90,
+	def_end);
+
+//	str_tfl.step[0]=tfl_line;
+//	str_tfl.step[1]=1;
+//	str_tfl.step[2]=def_end;
+
+//	str_tfl.online=tf_false;
+//    str_tfl.run=str_tfl.step;
+//	str_tfl.gospeed=40;
+//	str_tfl.turnspeed=40;
+//    str_tfl.cachespeed=40;
+//	str_tfl.doing=tf_ture;
 	
 	while(1);
-	
+	/*
 	for(a=0;a++<100;){
 	    H
 		KH
