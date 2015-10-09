@@ -5,7 +5,7 @@ void main(){
         0,//Y坐标
         dir_up,//车头方向
         han_s,//手抓状态
-        sjp_4,//升降位置
+        sjp_3,//升降位置
         tra_h,//平移位置
         dir_left);//回转方向
     /*请从下一行开始写你的程序*/
@@ -24,24 +24,59 @@ void main(){
 //	str_tfl.step[3]=1;
 //	str_tfl.step[4]=def_end;
 
-	fun_flsetting(40,40,40,
-	tfl_line,1,
-    tfl_cache,40,
+	fun_flsetting(65,40,40,
+	tfl_line,3,
+    tfl_cache,44,
 	tfl_turn,tur_l90,
+	tfl_line,2,
+    tfl_cache,44,
+	tfl_turn,tur_r90,
+	tfl_line,3,
+    tfl_cache,44,
 	def_end);
 
-//	str_tfl.step[0]=tfl_line;
-//	str_tfl.step[1]=1;
-//	str_tfl.step[2]=def_end;
+    // str_tfl.step[0]=tfl_line;
+    // str_tfl.step[1]=3;
 
-//	str_tfl.online=tf_false;
-//    str_tfl.run=str_tfl.step;
-//	str_tfl.gospeed=40;
-//	str_tfl.turnspeed=40;
-//    str_tfl.cachespeed=40;
-//	str_tfl.doing=tf_ture;
+    // str_tfl.step[2]=tfl_cache;
+    // str_tfl.step[3]=44;
+
+    // str_tfl.step[4]=tfl_turn;
+    // str_tfl.step[5]=tur_l90;
+
+    // str_tfl.step[6]=tfl_line;
+    // str_tfl.step[7]=2;
+
+    // str_tfl.step[8]=tfl_cache;
+    // str_tfl.step[9]=44;
+
+    // str_tfl.step[10]=tfl_turn;
+    // str_tfl.step[11]=tur_r90;
+
+    // str_tfl.step[12]=tfl_line;
+    // str_tfl.step[13]=2;
+
+    // str_tfl.step[14]=tfl_cache;
+    // str_tfl.step[15]=44;
+
+    // str_tfl.step[16]=def_end;
+
+    // str_tfl.online=tf_false;//不在线
+    // str_tfl.run=str_tfl.step;//指针指向第一个数组
+    // str_tfl.gospeed=65;//默认速度
+    // str_tfl.turnspeed=40;//拐弯速度
+    // str_tfl.cachespeed=40;//前冲速度
+    // str_tfl.doing=tf_ture;//开始做
+
+    fun_py(tra_q);
+    fun_py(tra_h);
+    fun_py(tra_q);
+    fun_py(tra_h);
+    fun_py(tra_q);
+    fun_py(tra_h);
 	
-	while(1);
+	while(str_tfl.doing==tf_ture);
+	J S
 	/*
 	for(a=0;a++<100;){
 	    H

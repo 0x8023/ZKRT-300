@@ -14,17 +14,17 @@
     #define def_timer0stop TR0=0;   //定时器0关闭
     #define def_timer1start TR1=1;  //定时器1开启
     #define def_timer1stop TR1=0;   //定时器1关闭
-    #define def_end 0xFF            //不确定元素结束标志位
+    #define def_end 0xFE            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
-    #define J fun_sz1(han_j);
-    #define S fun_sz1(han_s);
-    #define WZ1 fun_sj1(sjp_1);
-    #define WZ2 fun_sj1(sjp_2);
-    #define WZ3 fun_sj1(sjp_3);
-    #define WZ4 fun_sj1(sjp_4);
-    #define WZ5 fun_sj1(sjp_5);
+    #define J fun_sz(han_j);
+    #define S fun_sz(han_s);
+    #define WZ1 fun_sj(sjp_1);
+    #define WZ2 fun_sj(sjp_2);
+    #define WZ3 fun_sj(sjp_3);
+    #define WZ4 fun_sj(sjp_4);
+    #define WZ5 fun_sj(sjp_5);
     #define MSG(par_value) printf("%s\n",par_value);
     #define OUT(par_value) printf("%d\n",par_value);
 /*-----------------------------------------------------------变量类型说明-----*/
@@ -188,7 +188,8 @@
     extern struct str_state str_begin,str_now,str_next;   //分别为:起始状态/当前状态/目标状态
     extern struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
     extern struct str_timerfolline str_tfl;               //定时器巡线
-    extern data ul var_timer0;                                       //timer0毫秒级计时器计数位
+    extern char var_gjt[4][8];                            //工件台坐标
+    extern data ul var_timer0;                            //timer0毫秒级计时器计数位
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model); //延时
     extern void fun_timer0init();//1毫秒定时器0初始化

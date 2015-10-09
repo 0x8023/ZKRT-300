@@ -25,6 +25,7 @@ struct str_parameter str_cod={
     /*ui turn180;*/2000          //180度转弯屏蔽延时
 };
 struct str_timerfolline str_tfl;
+char var_gjt[4][8];
 data ul var_timer=0;
 void fun_delay(ui par_value,enum varENU_del par_model){
     data ui loc_con=par_value;
@@ -1050,7 +1051,7 @@ void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
     }
 }//升降回转同步运动
 void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
-;
+    ;
 }
 void fun_jtjp(){
     while(1){//循环纠偏
@@ -1110,7 +1111,7 @@ void fun_timermove(){
                     (*(str_tfl.run+1))--;//参数值减1,记录已经走了一条线
                 }
                 else{
-                    loc_sdl=loc_sdr=40;//巡线速度为str_tfl.gospeed
+                    loc_sdl=loc_sdr=str_tfl.gospeed;//巡线速度为str_tfl.gospeed
                     if(in_ls3&&!in_ls6){//3亮6不亮
                         loc_sdl-=loc_sdl/10;
                         loc_sdr+=(100-loc_sdr)/10;
@@ -1176,7 +1177,7 @@ void fun_timermove(){
                         loc_con++;//执行下一步
                     break;
                 case 2://第三步
-                    if(in_ls4&&in_ls5){//如果中间两个灯亮
+                    if(in_ls3||in_ls6){//如果中间两个灯亮
                         fun_motorsrl(mot_rl,0);//停止电机
                         str_tfl.run+=2;//指针指向下一组过程
                         str_tfl.delay=0;//延时计数器归零
@@ -1201,20 +1202,20 @@ void fun_timermove(){
                     else{
                         loc_sdl=loc_sdr=str_tfl.cachespeed;//前冲速度为str_tfl.cachespeed
                         if(in_ls1&&!in_ls8){//1亮8不亮
-                            loc_sdl*=0.5;//左减速
-                            loc_sdr*=1.5;//右加速
-                        }//向左转
-                        if(in_ls8&&!in_ls1){//8亮1不亮
-                            loc_sdl*=1.5;//左加速
-                            loc_sdr*=0.5;//右减速
-                        }//向右转
-                        if(in_ls2&&!in_ls7){//2亮7不亮
                             loc_sdl*=0.7;//左减速
                             loc_sdr*=1.3;//右加速
                         }//向左转
-                        if(in_ls7&&!in_ls2){//7亮2不亮
+                        if(in_ls8&&!in_ls1){//8亮1不亮
                             loc_sdl*=1.3;//左加速
                             loc_sdr*=0.7;//右减速
+                        }//向右转
+                        if(in_ls2&&!in_ls7){//2亮7不亮
+                            loc_sdl*=0.8;//左减速
+                            loc_sdr*=1.2;//右加速
+                        }//向左转
+                        if(in_ls7&&!in_ls2){//7亮2不亮
+                            loc_sdl*=1.2;//左加速
+                            loc_sdr*=0.8;//右减速
                         }//向右转
                         if(in_ls3&&!in_ls6){//3亮6不亮
                             loc_sdl*=0.9;//左减速
@@ -2238,6 +2239,8 @@ void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han pa
     TR0=1;                    //打开定时器0
     TR1=1;                    //打开定时器1
     in_start=1;               //按键置1
+
+    memset(var_gjt,0,sizeof(var_gjt));//清空工件台坐标
 
     str_begin.x=par_x;        //X坐标
     str_begin.y=par_y;        //Y坐标
