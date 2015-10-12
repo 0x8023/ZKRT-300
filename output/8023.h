@@ -226,6 +226,7 @@
     extern void fun_test();//测试
     extern uc   fun_min(uc par_num,...);//求最小值
     extern void fun_coordinate();//自动巡线之坐标
+    extern void fun_findtop();//自动获取最顶上那个没坐标的家伙的工位号
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)

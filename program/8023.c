@@ -1512,11 +1512,11 @@ uc fun_min(uc par_num,...){
     uc loc_shu;//当前参数
     va_start(loc_argp,par_num);//loc_argp指向传入的第一个可选参数，par_num是最后一个确定的参数
     loc_shu=va_arg(loc_argp,uc);//取出下一个参数
-    do{
-        if(loc_shu<loc_min)
-            loc_min=loc_shu;
+    while(loc_shu!=def_end){//如果不是最后一个
+        if(loc_shu<loc_min)//如果取出的参数比之前最小的数小
+            loc_min=loc_shu;//将此数保存
         loc_shu=va_arg(loc_argp,uc);//取出下一个参数
-    }while(loc_shu!=def_end);
+    }
     va_end(loc_argp);//结束
     return loc_min;//退出
 }//求最小值
@@ -1529,7 +1529,7 @@ void fun_findtop(){
         for(loc_xh2=0;loc_xh2<8;loc_xh2++)
             loc_con+=cabs(var_gjt[loc_xh1][loc_xh2]);
     var_top=15-loc_con;
-}//
+}//自动获取最顶上那个没坐标的家伙的工位号
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
     struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
     char loc_high[8];         //每摞工件的高度
