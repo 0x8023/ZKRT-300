@@ -14,8 +14,9 @@
     #define def_timer0stop TR0=0;   //定时器0关闭
     #define def_timer1start TR1=1;  //定时器1开启
     #define def_timer1stop TR1=0;   //定时器1关闭
-    #define def_end 0xFE            //不确定元素结束标志位
+    #define def_end 0x82            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
+    #define def_waitfl while(str_tfl.doing==tf_ture)fun_delay(50,del_ms); //等待定时器巡线结束
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);
     #define J fun_sz(han_j);
@@ -189,6 +190,7 @@
     extern struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
     extern struct str_timerfolline str_tfl;               //定时器巡线
     extern char var_gjt[4][8];                            //工件台坐标
+    extern char var_top;                                  //在最上面没有坐标的呢货
     extern data ul var_timer0;                            //timer0毫秒级计时器计数位
 /*---------------------------------------------------------------函数声明-----*/
     extern void fun_delay(ui par_value,enum varENU_del par_model); //延时
@@ -229,7 +231,12 @@
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
     extern void fun_zhuajian();//从起始区走到抓件区
     extern void fun_back();//从抓件区回到起始区
-    extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);//初始化函数
+    extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
+                          enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx,
+                          uc par_1x,uc par_1y,char par_1,
+                          uc par_2x,uc par_2y,char par_2,
+                          uc par_3x,uc par_3y,char par_3,
+                          uc par_4x,uc par_4y,char par_4);
     extern void fun_stop();//结束函数
 /*---------------------------------------------------------------更新日志-----*/
 #endif

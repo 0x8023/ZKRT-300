@@ -7,114 +7,34 @@ void main(){
         han_s,//手抓状态
         sjp_3,//升降位置
         tra_h,//平移位置
-        dir_left);//回转方向
+        dir_left,//回转方向
+        2,3,5,
+        3,4,-3,
+        0,6,1,
+        1,1,-4);
     /*请从下一行开始写你的程序*/
-	//fun_test();
-    //fun_pyhz2(tra_h,dir_left);
-
-	//fun_zdzj(12345678,87654321);
-//	fun_sjhz(sjp_1,dir_right);
-//	D(5000)
-//	fun_sjhz(sjp_2,dir_left);
-
-	
-//	str_tfl.step[0]=tfl_start;
-//	str_tfl.step[1]=40;
-//	str_tfl.step[2]=tfl_line;
-//	str_tfl.step[3]=1;
-//	str_tfl.step[4]=def_end;
 
 	fun_flsetting(65,40,40,
 	tfl_line,3,
     tfl_cache,44,
-	tfl_turn,tur_l90,
-	tfl_line,2,
+    tfl_turn,tur_l90,
+    tfl_line,1,
     tfl_cache,44,
-	tfl_turn,tur_r90,
-	tfl_line,3,
+    tfl_turn,tur_r90,
+    tfl_line,4,
     tfl_cache,44,
+    tfl_turn,tur_r90,
+    tfl_line,1,
 	def_end);
 
-    // str_tfl.step[0]=tfl_line;
-    // str_tfl.step[1]=3;
-
-    // str_tfl.step[2]=tfl_cache;
-    // str_tfl.step[3]=44;
-
-    // str_tfl.step[4]=tfl_turn;
-    // str_tfl.step[5]=tur_l90;
-
-    // str_tfl.step[6]=tfl_line;
-    // str_tfl.step[7]=2;
-
-    // str_tfl.step[8]=tfl_cache;
-    // str_tfl.step[9]=44;
-
-    // str_tfl.step[10]=tfl_turn;
-    // str_tfl.step[11]=tur_r90;
-
-    // str_tfl.step[12]=tfl_line;
-    // str_tfl.step[13]=2;
-
-    // str_tfl.step[14]=tfl_cache;
-    // str_tfl.step[15]=44;
-
-    // str_tfl.step[16]=def_end;
-
-    // str_tfl.online=tf_false;//不在线
-    // str_tfl.run=str_tfl.step;//指针指向第一个数组
-    // str_tfl.gospeed=65;//默认速度
-    // str_tfl.turnspeed=40;//拐弯速度
-    // str_tfl.cachespeed=40;//前冲速度
-    // str_tfl.doing=tf_ture;//开始做
-
-    fun_py(tra_q);
-    fun_py(tra_h);
-    fun_py(tra_q);
-    fun_py(tra_h);
     fun_py(tra_q);
     fun_py(tra_h);
 	
-	while(str_tfl.doing==tf_ture);
+	def_waitfl
+    
 	J S
-	/*
-	for(a=0;a++<100;){
-	    H
-		KH
-		D5
-		H
-		
-		Z
-		D5
-		H
-		
-		KQ
-		D5
-		KH
-		D5
-		Z
-		D5
-		Q
-		KQ
-		D5
-		Q
-		
-		Z
-		D5
-		Q
-		
-		KH
-		D5
-		KQ
-		Z
-
-	}
-
-  
-	*/
 
 /*
-	
 	  str_tfl.step[0]=tfl_line;
 	  str_tfl.step[1]=2;
 	  str_tfl.step[2]=tfl_cache;
@@ -187,137 +107,6 @@ void main(){
 	  str_tfl.turnspeed=40;
       str_tfl.cachespeed=40;
 	  str_tfl.doing=tf_ture;
-
-
-	  
-	  fun_hz1(dir_up);
-	  fun_motors(mot_r,60);
-	
-
-   	  fun_hz1(dir_up);
-	  fun_sj1(sjp_3);
-      fun_hz1(dir_right);  //回转180
-
-      fun_hz1(dir_left);   //回转180
-
-      fun_py1(tra_q);  //前移
-
-      fun_py1(tra_h);  //后移
-
-      fun_sz1(han_j);  //手抓紧
-
-      fun_sz1(han_s);   //手抓松
-
-      fun_sj1(sjp_5);  //下降5
-      fun_sj1(sjp_2);  //上升2
-
-      fun_sj1(sjp_1);  //上升1
-
-      fun_sj1(sjp_2);//下降2
-
-      fun_sj1(sjp_5);//下降5
-
-
-
-      
-	  fun_motors(mot_rl,-58);//后退5秒
-
-      
-	  fun_motors(mot_rl,45);//前进4秒
-
-	  
-	  
-      fun_motors(mot_l,-15);  //左转90
-	  
-	  fun_motors(mot_r,18);
-
-
-	def_timer0start
-	def_timer1start
-
-	str_tfl.step[0]=tfl_line;
-	str_tfl.step[1]=5;
-	str_tfl.step[2]=def_end;
-	
-	str_tfl.run=&str_tfl.step[0];
-	str_tfl.gospeed=50;
-	str_tfl.online=tf_false;
-	str_tfl.doing=tf_ture;
-	
-
-
-    fun_sj1(sjp_3);
-	fun_sj1(sjp_5);
-	//D(2000);
-	fun_py1(tra_q);
-	//D(2000);
-	fun_py1(tra_h);
-	//D(2000);
-	
-	fun_py1(tra_kh);
-	//D(2000);
-	fun_sj1(sjp_5);
-	fun_sz1(han_j);
-	//D(2000);
-	fun_sj1(sjp_3);
-	//D(2000);
-	fun_py1(tra_q);
-	//D(2000);
-	fun_sj1(sjp_5);
-	//D(2000);
-	fun_sz1(han_s);
-	//D(2000);
-	
-    fun_sj1(sjp_3);
-	//D(2000);
- 	fun_py1(tra_kq);
-	//D(2000);
-	fun_sj1(sjp_5);
-	//D(2000);
-	fun_sz1(han_j);
-	//D(2000);
-	fun_sj1(sjp_3);
-	//D(2000);
-	fun_py1(tra_h);
-	//D(2000);
-	fun_sj1(sjp_5);
-	//D(2000);
-	fun_sz1(han_s);
-	//D(2000);
-	
-
-	fun_py1(tra_h);
-
-
-	fun_sj1(sjp_1);
-	fun_calibration();
-	fun_sj1(sjp_4);
-	
-	fun_py1(tra_q);
-	fun_sj1(sjp_5);
-	
-	fun_py1(tra_q);
-	
-	fun_py1(tra_h);
-	D(2000)
-	fun_py1(tra_kh);
-	D(2000)
-	fun_py1(tra_z);
-	D(2000)
-	fun_py1(tra_kq);
-	D(2000)
-	fun_py1(tra_q);
-
-	D(2000)
-	fun_py1(tra_q);
-	D(2000)
-	fun_py1(tra_kq);
-	D(2000)
-	fun_py1(tra_z);
-	D(2000)
-	fun_py1(tra_kh);
-	D(2000)
-	fun_py1(tra_h);
 */
     /*你的程序到此为止,请不要再继续改动*/
     fun_stop();

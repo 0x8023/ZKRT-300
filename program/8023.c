@@ -26,7 +26,8 @@ struct str_parameter str_cod={
 };
 struct str_timerfolline str_tfl;
 char var_gjt[4][8];
-data ul var_timer=0;
+char var_top;
+data ul var_timer;
 void fun_delay(ui par_value,enum varENU_del par_model){
     data ui loc_con=par_value;
     switch(par_model){
@@ -114,6 +115,7 @@ void fun_timer1(){
     TH1=0xB1;
 }//20毫秒定时器1处理函数
 void fun_wait(){
+    in_start=1;               //按键置1
     #ifdef Debug
         printf("fun_wait();\n");
     #else
@@ -1238,12 +1240,12 @@ void fun_timermove(){
 void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...){
     va_list loc_argp;//保存参数结构
     uc loc_step=0;//循环step数组用的东西
-    uc loc_cachespeed;//当前参数
+    uc loc_con;//当前参数
     va_start(loc_argp,par_cachespeed);//loc_argp指向传入的第一个可选参数,par_cachespeed是最后一个确定的参数
-    loc_cachespeed=va_arg(loc_argp,char);//取出第一个参数
-    while(loc_cachespeed!=def_end){
-        str_tfl.step[loc_step++]=loc_cachespeed;//把给step数组,标志位+1
-        loc_cachespeed=va_arg(loc_argp,char);//取出下一个参数
+    loc_con=va_arg(loc_argp,char);//取出第一个参数
+    while(loc_con!=def_end){
+        str_tfl.step[loc_step++]=loc_con;//把给step数组,标志位+1
+        loc_con=va_arg(loc_argp,char);//取出下一个参数
     }
     str_tfl.step[loc_step]=def_end;//step数组结束标志位
     va_end(loc_argp);//结束
@@ -1521,6 +1523,13 @@ uc fun_min(uc par_num,...){
 void fun_coordinate(){
     
 }//自动巡线之坐标
+void fun_findtop(){
+    uc loc_xh1,loc_xh2,loc_con=0;
+    for(loc_xh1=0;loc_xh1<4;loc_xh1++)
+        for(loc_xh2=0;loc_xh2<8;loc_xh2++)
+            loc_con+=cabs(var_gjt[loc_xh1][loc_xh2]);
+    var_top=15-loc_con;
+}//
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
     struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
     char loc_high[8];         //每摞工件的高度
@@ -2214,7 +2223,12 @@ void fun_back(){
     fun_motors(mot_rl,-35);
     fun_delay(1,del_s);
 }//从抓件区回到起始区
-void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
+void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,
+    enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx,
+    uc par_1x,uc par_1y,char par_1,
+    uc par_2x,uc par_2y,char par_2,
+    uc par_3x,uc par_3y,char par_3,
+    uc par_4x,uc par_4y,char par_4){
     CLK_DIV=0x00;             //不分频
     P0M1=0xff;                //P0用于输入
     P0M0=0x00;                //P0不能输出
@@ -2228,20 +2242,26 @@ void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,enum varENU_han pa
     CR=0;                     //PAC计数器归零
     out_motorselect=0;        //电机片选为0
 
-    #ifdef Debug              //如果是调试模式
-        fun_port();           //初始化串口
-        TI=1;                 //打开串口传输功能        
-    #endif
+    fun_port();               //初始化串口
+    TI=1;                     //打开串口传输功能
+
     fun_pwminit();            //PWM的初始化
+
     fun_timer0init();         //初始化定时器0
     fun_timer1init();         //初始化定时器1
-
     TR0=1;                    //打开定时器0
     TR1=1;                    //打开定时器1
-    in_start=1;               //按键置1
+    var_timer=0;
 
+    memset(str_tfl.step,0,sizeof(str_tfl.step));//清零巡线用步骤数组
     memset(var_gjt,0,sizeof(var_gjt));//清空工件台坐标
-
+    var_top=0;
+    var_gjt[par_1x][par_1y]=par_1;
+    var_gjt[par_2x][par_2y]=par_2;
+    var_gjt[par_3x][par_3y]=par_3;
+    var_gjt[par_4x][par_4y]=par_4;
+    fun_findtop();
+    
     str_begin.x=par_x;        //X坐标
     str_begin.y=par_y;        //Y坐标
     str_begin.ctfx=par_ctfx;  //车头方向
