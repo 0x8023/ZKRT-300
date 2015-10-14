@@ -1,34 +1,40 @@
 #ifndef __8023_H__
 #define __8023_H__
-/*-----------------------------------------------------------¿ªÆôÄ£Ê½Ñ¡Ôñ-----*/
+/*-----------------------------------------------------------å¼€å¯æ¨¡å¼é€‰æ‹©-----*/
 //    #define Debug ok
-/*-------------------------------------------------------------Í·ÎÄ¼şÒıÈë-----*/
-    #include "STC12c5a60s2.h"   //µ¥Æ¬»úÍ·ÎÄ¼ş
-    #include "intrins.h"        //_nop_ÓëÑ­»·Î»ÒÆ
-    #include "math.h"           //ÊıÑ§ÔËËã
-    #include "string.h"         //×Ö·û´®
-    #include "stdio.h"          //´®¿Úµ÷Ï·
-    #include "stdarg.h"         //¿É±ä²ÎÊı
-/*----------------------------------------------------------define ºê¶¨Òå-----*/
-    #define def_timer0start TR0=1;  //¶¨Ê±Æ÷0¿ªÆô
-    #define def_timer0stop TR0=0;   //¶¨Ê±Æ÷0¹Ø±Õ
-    #define def_timer1start TR1=1;  //¶¨Ê±Æ÷1¿ªÆô
-    #define def_timer1stop TR1=0;   //¶¨Ê±Æ÷1¹Ø±Õ
-    #define def_end 0x82            //²»È·¶¨ÔªËØ½áÊø±êÖ¾Î»
-    #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //´«¸ĞÆ÷Æ¬Ñ¡
-    #define def_waitfl while(str_tfl.doing==tf_ture)fun_delay(50,del_ms); //µÈ´ı¶¨Ê±Æ÷Ñ²Ïß½áÊø
-/*-------------------------------------------------------------¼ò»¯ºê¶¨Òå-----*/
-    #define D(par_ms) fun_delay(par_ms,del_ms);
-    #define J fun_sz(han_j);
-    #define S fun_sz(han_s);
-    #define WZ1 fun_sj(sjp_1);
-    #define WZ2 fun_sj(sjp_2);
-    #define WZ3 fun_sj(sjp_3);
-    #define WZ4 fun_sj(sjp_4);
-    #define WZ5 fun_sj(sjp_5);
+/*-------------------------------------------------------------å¤´æ–‡ä»¶å¼•å…¥-----*/
+    #include "STC12c5a60s2.h"   //å•ç‰‡æœºå¤´æ–‡ä»¶
+    #include "intrins.h"        //_nop_ä¸å¾ªç¯ä½ç§»
+    #include "math.h"           //æ•°å­¦è¿ç®—
+    #include "string.h"         //å­—ç¬¦ä¸²
+    #include "stdio.h"          //ä¸²å£è°ƒæˆ
+    #include "stdarg.h"         //å¯å˜å‚æ•°
+/*----------------------------------------------------------define å®å®šä¹‰-----*/
+    #define def_timer0start TR0=1;  //å®šæ—¶å™¨0å¼€å¯
+    #define def_timer0stop TR0=0;   //å®šæ—¶å™¨0å…³é—­
+    #define def_timer1start TR1=1;  //å®šæ—¶å™¨1å¼€å¯
+    #define def_timer1stop TR1=0;   //å®šæ—¶å™¨1å…³é—­
+    #define def_end 0x82            //ä¸ç¡®å®šå…ƒç´ ç»“æŸæ ‡å¿—ä½
+    #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //ä¼ æ„Ÿå™¨ç‰‡é€‰
+    #define def_waitfl while(str_tfl.doing==tf_ture)fun_delay(50,del_ms); //ç­‰å¾…å®šæ—¶å™¨å·¡çº¿ç»“æŸ
+/*-------------------------------------------------------------ç®€åŒ–å®å®šä¹‰-----*/
+    #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> å»¶æ—¶(æ¯«ç§’)
+    #define J fun_sz(han_j);                            // J --> æ‰‹æŠ“æŠ“ç´§
+    #define S fun_sz(han_s);                            // S --> æ‰‹æŠ“æ¾
+    #define WZ1 fun_sj(sjp_1);                          // WZ1 --> å‡é™åˆ°ä½ç½®1
+    #define WZ2 fun_sj(sjp_2);                          // WZ2 --> å‡é™åˆ°ä½ç½®2
+    #define WZ3 fun_sj(sjp_3);                          // WZ3 --> å‡é™åˆ°ä½ç½®3
+    #define WZ4 fun_sj(sjp_4);                          // WZ4 --> å‡é™åˆ°ä½ç½®4
+    #define WZ5 fun_sj(sjp_5);                          // WZ5 --> å‡é™åˆ°ä½ç½®5
+    #define L(par_con) tfl_line,par_con                 // L --> å®šæ—¶å™¨å·¡çº¿
+    #define R90 tfl_turn,tur_r90                        // R90 --> å®šæ—¶å™¨å³è½¬90åº¦
+    #define L90 tfl_turn,tur_l90                        // L90 --> å®šæ—¶å™¨å·¦è½¬90åº¦
+    #define R180 tfl_turn,tur_r180                      // R180 --> å®šæ—¶å™¨å³è½¬180åº¦
+    #define L180 tfl_turn,tur_l180                      // L180 --> å®šæ—¶å™¨å·¦è½¬180åº¦
+    #define C(par_value) tfl_cache,par_value            // C --> å®šæ—¶å™¨å‰å†²
     #define MSG(par_value) printf("%s\n",par_value);
     #define OUT(par_value) printf("%d\n",par_value);
-/*-----------------------------------------------------------±äÁ¿ÀàĞÍËµÃ÷-----*/
+/*-----------------------------------------------------------å˜é‡ç±»å‹è¯´æ˜-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
     typedef unsigned int* pui;     //unsigned int --> pui
@@ -37,76 +43,76 @@
     typedef char* pc;                     //char* --> pc
     typedef unsigned long ul;     //unsigned long --> ul
 /*-----------------------------------------------------------------In Put-----*/
-    sbit in_start=P3^2; //Æô¶¯°´¼ü(start_)
-    sbit in_ls1=P0^7;   //1ºÅ´«¸ĞÆ÷(¿¿½ü×ó²à,ÏÂ²à´«¸ĞÆ÷µÆ,ÎŞĞÅºÅµÍµçÆ½)
-    sbit in_ls2=P0^6;   //2ºÅ´«¸ĞÆ÷
-    sbit in_ls3=P0^5;   //3ºÅ´«¸ĞÆ÷
-    sbit in_ls4=P0^4;   //4ºÅ´«¸ĞÆ÷
-    sbit in_ls5=P0^3;   //5ºÅ´«¸ĞÆ÷
-    sbit in_ls6=P0^2;   //6ºÅ´«¸ĞÆ÷
-    sbit in_ls7=P0^1;   //7ºÅ´«¸ĞÆ÷
-    sbit in_ls8=P0^0;   //8ºÅ´«¸ĞÆ÷(¿¿½üÓÒ²à,ÉÏ²à´«¸ĞÆ÷µÆ)
+    sbit in_start=P3^2; //å¯åŠ¨æŒ‰é”®(start_)
+    sbit in_ls1=P0^7;   //1å·ä¼ æ„Ÿå™¨(é è¿‘å·¦ä¾§,ä¸‹ä¾§ä¼ æ„Ÿå™¨ç¯,æ— ä¿¡å·ä½ç”µå¹³)
+    sbit in_ls2=P0^6;   //2å·ä¼ æ„Ÿå™¨
+    sbit in_ls3=P0^5;   //3å·ä¼ æ„Ÿå™¨
+    sbit in_ls4=P0^4;   //4å·ä¼ æ„Ÿå™¨
+    sbit in_ls5=P0^3;   //5å·ä¼ æ„Ÿå™¨
+    sbit in_ls6=P0^2;   //6å·ä¼ æ„Ÿå™¨
+    sbit in_ls7=P0^1;   //7å·ä¼ æ„Ÿå™¨
+    sbit in_ls8=P0^0;   //8å·ä¼ æ„Ÿå™¨(é è¿‘å³ä¾§,ä¸Šä¾§ä¼ æ„Ÿå™¨ç¯)
 
-    sbit in_j=P3^4;     //ÊÖ×¥½ô´«¸ĞÆ÷
-    sbit in_s=P3^3;     //ÊÖ×¥ËÉ´«¸ĞÆ÷
-    sbit in_qpy=P3^5;   //Æ½ÒÆÇ°Æ½ÒÆ´«¸ĞÆ÷
-    sbit in_hpy=P3^6;   //Æ½ÒÆºóÆ½ÒÆ´«¸ĞÆ÷
+    sbit in_j=P3^4;     //æ‰‹æŠ“ç´§ä¼ æ„Ÿå™¨
+    sbit in_s=P3^3;     //æ‰‹æŠ“æ¾ä¼ æ„Ÿå™¨
+    sbit in_qpy=P3^5;   //å¹³ç§»å‰å¹³ç§»ä¼ æ„Ÿå™¨
+    sbit in_hpy=P3^6;   //å¹³ç§»åå¹³ç§»ä¼ æ„Ÿå™¨
 
-    sbit in_wz1=P2^4;   //Éı½µÎ»ÖÃ1´«¸ĞÆ÷(×îÉÏÎ»)
-    sbit in_wz2=P2^5;   //Éı½µÎ»ÖÃ2´«¸ĞÆ÷
-    sbit in_wz3=P2^6;   //Éı½µÎ»ÖÃ3´«¸ĞÆ÷
-    sbit in_wz4=P2^7;   //Éı½µÎ»ÖÃ4´«¸ĞÆ÷
+    sbit in_wz1=P2^4;   //å‡é™ä½ç½®1ä¼ æ„Ÿå™¨(æœ€ä¸Šä½)
+    sbit in_wz2=P2^5;   //å‡é™ä½ç½®2ä¼ æ„Ÿå™¨
+    sbit in_wz3=P2^6;   //å‡é™ä½ç½®3ä¼ æ„Ÿå™¨
+    sbit in_wz4=P2^7;   //å‡é™ä½ç½®4ä¼ æ„Ÿå™¨
 
-    sbit in_wz5=P2^4;   //Éı½µÎ»ÖÃ5´«¸ĞÆ÷(×îÏÂÎ»)
-    sbit in_hz=P2^5;    //»Ø×ª´«¸ĞÆ÷
+    sbit in_wz5=P2^4;   //å‡é™ä½ç½®5ä¼ æ„Ÿå™¨(æœ€ä¸‹ä½)
+    sbit in_hz=P2^5;    //å›è½¬ä¼ æ„Ÿå™¨
 /*----------------------------------------------------------------Out Put-----*/
-    sbit out_pwmr=P1^2;         //PWMRµÄÕı·´×ª¿ØÖÆÎ»,1´ú±íÕı(DIR_R)
-    sbit out_pwml=P1^5;         //PWMLµÄÕı·´×ª¿ØÖÆÎ»,1´ú±íÕı(DIR_L)
-    sbit out_dir1=P2^0;         //µç»ú1/3·½Ïò(MOT_DIR1)
-    sbit out_en1=P2^1;          //µç»ú1/3Ê¹ÄÜ(MOT_EN1)
-    sbit out_dir2=P2^2;         //µç»ú2/4·½Ïò(MOT_DIR2)
-    sbit out_en2=P2^3;          //µç»ú2/4Ê¹ÄÜ(MOT_EN2)
-    sbit out_switchselect=P1^6; //½Ó½ü¿ª¹ØÆ¬Ñ¡(SER_BS)
-    sbit out_motorselect=P1^7;  //µç»úÊä³öÆ¬Ñ¡(MOT_BS)
-    sbit out_lamp=P3^7;         //ºìÍâÊä³ö(LAMP)(µÍµçÆ½´ò¿ª)
-/*---------------------------------------------------------------±äÁ¿ÉùÃ÷-----*/
+    sbit out_pwmr=P1^2;         //PWMRçš„æ­£åè½¬æ§åˆ¶ä½,1ä»£è¡¨æ­£(DIR_R)
+    sbit out_pwml=P1^5;         //PWMLçš„æ­£åè½¬æ§åˆ¶ä½,1ä»£è¡¨æ­£(DIR_L)
+    sbit out_dir1=P2^0;         //ç”µæœº1/3æ–¹å‘(MOT_DIR1)
+    sbit out_en1=P2^1;          //ç”µæœº1/3ä½¿èƒ½(MOT_EN1)
+    sbit out_dir2=P2^2;         //ç”µæœº2/4æ–¹å‘(MOT_DIR2)
+    sbit out_en2=P2^3;          //ç”µæœº2/4ä½¿èƒ½(MOT_EN2)
+    sbit out_switchselect=P1^6; //æ¥è¿‘å¼€å…³ç‰‡é€‰(SER_BS)
+    sbit out_motorselect=P1^7;  //ç”µæœºè¾“å‡ºç‰‡é€‰(MOT_BS)
+    sbit out_lamp=P3^7;         //çº¢å¤–è¾“å‡º(LAMP)(ä½ç”µå¹³æ‰“å¼€)
+/*---------------------------------------------------------------å˜é‡å£°æ˜-----*/
     enum varENU_tf{
         tf_null=10,
         tf_ture=11,
         tf_false=12
-    };//ÅĞ¶ÏÓÃµÄ,¿Õ,¶ÔºÍ´í
+    };//åˆ¤æ–­ç”¨çš„,ç©º,å¯¹å’Œé”™
     enum varENU_del{
         del_us=20,
         del_ms=21,
         del_s=22
-    };//ÑÓÊ±Ä£Ê½Ñ¡Ôñ
+    };//å»¶æ—¶æ¨¡å¼é€‰æ‹©
     enum varENU_sel{
         sel_58=30,
         sel_912=31
-    };//´«¸ĞÆ÷Æ¬Ñ¡
+    };//ä¼ æ„Ÿå™¨ç‰‡é€‰
     enum varENU_mot{
         mot_l=40,
         mot_r=41,
         mot_rl=42,
-        mot_sz=43,   //µç»ú1
-        mot_py=44,   //µç»ú2
-        mot_sj=45,   //µç»ú3
-        mot_hz=46,   //µç»ú4
-        mot_pyhz=47  //Æ½ÒÆ»Ø×ªÍ¬²½ÔË¶¯
-    };//µç»úÑ¡Ôñ
+        mot_sz=43,   //ç”µæœº1
+        mot_py=44,   //ç”µæœº2
+        mot_sj=45,   //ç”µæœº3
+        mot_hz=46,   //ç”µæœº4
+        mot_pyhz=47  //å¹³ç§»å›è½¬åŒæ­¥è¿åŠ¨
+    };//ç”µæœºé€‰æ‹©
     enum varENU_dir{
         dir_up=50,
         dir_down=51,
         dir_left=52,
         dir_right=53
-    };//·½Ïò
+    };//æ–¹å‘
     enum varENU_tra{
-        tra_q=60,//Ã»ÓĞµç»úµÄÒ»·½
+        tra_q=60,//æ²¡æœ‰ç”µæœºçš„ä¸€æ–¹
         tra_kq=61,
         tra_z=62,
         tra_kh=63,
-        tra_h=64//ÓĞµç»úµÄÒ»·½
-    };//Æ½ÒÆÎ»ÖÃ
+        tra_h=64//æœ‰ç”µæœºçš„ä¸€æ–¹
+    };//å¹³ç§»ä½ç½®
     enum varENU_sjp{
         sjp_1=70,
         sjp_12=71,
@@ -117,127 +123,139 @@
         sjp_4=76,
         sjp_45=77,
         sjp_5=78
-    };//Éı½µÎ»ÖÃ
+    };//å‡é™ä½ç½®
     enum varENU_han{
         han_j=80,
         han_s=81
-    };//ÊÖ×¥×´Ì¬
+    };//æ‰‹æŠ“çŠ¶æ€
     enum varENU_tur{
         tur_l90=90,
         tur_r90=91,
         tur_l180=92,
         tur_r180=93
-    };//×ªÍäÄ£Ê½
+    };//è½¬å¼¯æ¨¡å¼
     enum varENU_tfl{
-        tfl_line=100,    //Ñ²Ïß
-        tfl_cache=101,   //Ç°³å
-        tfl_turn=102,    //×ªÍä
-    };//¶¨Ê±Æ÷Ñ²ÏßÖ´ĞĞ¶¯×÷
+        tfl_line=100,    //å·¡çº¿
+        tfl_cache=101,   //å‰å†²
+        tfl_turn=102,    //è½¬å¼¯
+    };//å®šæ—¶å™¨å·¡çº¿æ‰§è¡ŒåŠ¨ä½œ
 
     struct str_state{
-        char x;                 //X×ø±ê
-        char y;                 //Y×ø±ê
-        char szsd;              //ÊÖ×¥ËÙ¶È
-        char pysd;              //Æ½ÒÆËÙ¶È
-        char sjsd;              //Éı½µËÙ¶È
-        char hzsd;              //»Ø×ªËÙ¶È
-        char leftsd;            //×óÂÖµç»úËÙ¶È
-        char rightsd;           //ÓÒÂÖµç»úËÙ¶È
-        enum varENU_dir ctfx;   //³µÍ··½Ïò
-        enum varENU_han szzt;   //ÊÖ×¥×´Ì¬
-        enum varENU_sjp sjwz;   //Éı½µÎ»ÖÃ
-        enum varENU_tra pywz;   //Æ½ÒÆÎ»ÖÃ
-        enum varENU_dir hzfx;   //»Ø×ª·½Ïò
+        char x;                 //Xåæ ‡
+        char y;                 //Yåæ ‡
+        char szsd;              //æ‰‹æŠ“é€Ÿåº¦
+        char pysd;              //å¹³ç§»é€Ÿåº¦
+        char sjsd;              //å‡é™é€Ÿåº¦
+        char hzsd;              //å›è½¬é€Ÿåº¦
+        char leftsd;            //å·¦è½®ç”µæœºé€Ÿåº¦
+        char rightsd;           //å³è½®ç”µæœºé€Ÿåº¦
+        enum varENU_dir ctfx;   //è½¦å¤´æ–¹å‘
+        enum varENU_han szzt;   //æ‰‹æŠ“çŠ¶æ€
+        enum varENU_sjp sjwz;   //å‡é™ä½ç½®
+        enum varENU_tra pywz;   //å¹³ç§»ä½ç½®
+        enum varENU_dir hzfx;   //å›è½¬æ–¹å‘
     };
     struct str_parameter{
-        ui mlinerqd; //Ä¬ÈÏÖ÷º¯ÊıÑ²ÏßÈíÆğ¶¯Ê±¼äÎª500ºÁÃë
-        ui mlineqc;  //Ä¬ÈÏÖ÷º¯ÊıÑ²ÏßÇ°³åÊ±¼äÎª500ºÁÃë
+        ui mlinerqd; //é»˜è®¤ä¸»å‡½æ•°å·¡çº¿è½¯èµ·åŠ¨æ—¶é—´ä¸º500æ¯«ç§’
+        ui mlineqc;  //é»˜è®¤ä¸»å‡½æ•°å·¡çº¿å‰å†²æ—¶é—´ä¸º500æ¯«ç§’
 
-        ui sj1bzw;   //Éı½µ±ê×¼Î»ÑÓÊ±
-        ui sj1zjw;   //Éı½µÖĞ¼äÎ»ÑÓÊ±
+        ui sj1bzw;   //å‡é™æ ‡å‡†ä½å»¶æ—¶
+        ui sj1zjw;   //å‡é™ä¸­é—´ä½å»¶æ—¶
 
-        uc py1bz;    //fun_py1±ê×¼Î»ÑÓÊ±
-        ui py1qkq;   //fun_py1Ç°µ½¿¿Ç°ÑÓÊ±²ÎÊı
-        ui py1kqz;   //fun_py1¿¿Ç°µ½ÖĞ¼äÑÓÊ±
-        ui py1zkh;   //fun_py1ÖĞ¼äµ½¿¿ºóÑÓÊ±
-        ui py1khh;   //fun_py1¿¿ºóµ½ºóÑÓÊ±
-        ui py1qz;    //fun_py1Ç°µ½ÖĞ¼äÑÓÊ±
-        ui py1zh;    //fun_py1ÖĞ¼äµ½ºóÑÓÊ±
-        ui py1kqkh;  //fun_py1¿¿Ç°µ½¿¿ºóÑÓÊ±
-        ui py1khkq;  //fun_py1¿¿ºóµ½¿¿Ç°ÑÓÊ±
-        ui py1qkh;   //fun_py1Ç°µ½¿¿ºóÑÓÊ±
-        ui py1kqh;   //fun_py1¿¿Ç°µ½ºóÑÓÊ±
+        uc py1bz;    //fun_py1æ ‡å‡†ä½å»¶æ—¶
+        ui py1qkq;   //fun_py1å‰åˆ°é å‰å»¶æ—¶å‚æ•°
+        ui py1kqz;   //fun_py1é å‰åˆ°ä¸­é—´å»¶æ—¶
+        ui py1zkh;   //fun_py1ä¸­é—´åˆ°é åå»¶æ—¶
+        ui py1khh;   //fun_py1é ååˆ°åå»¶æ—¶
+        ui py1qz;    //fun_py1å‰åˆ°ä¸­é—´å»¶æ—¶
+        ui py1zh;    //fun_py1ä¸­é—´åˆ°åå»¶æ—¶
+        ui py1kqkh;  //fun_py1é å‰åˆ°é åå»¶æ—¶
+        ui py1khkq;  //fun_py1é ååˆ°é å‰å»¶æ—¶
+        ui py1qkh;   //fun_py1å‰åˆ°é åå»¶æ—¶
+        ui py1kqh;   //fun_py1é å‰åˆ°åå»¶æ—¶
 
-        ui hz1bz;    //fun_hz1±ê×¼Î»ÑÓÊ±
+        ui hz1bz;    //fun_hz1æ ‡å‡†ä½å»¶æ—¶
 
-        ui turn90;   //90¶È×ªÍäÆÁ±ÎÑÓÊ±
-        ui turn180;  //180¶È×ªÍäÆÁ±ÎÑÓÊ±
-    };//²ÎÊı
+        ui turn90;   //90åº¦è½¬å¼¯å±è”½å»¶æ—¶
+        ui turn180;  //180åº¦è½¬å¼¯å±è”½å»¶æ—¶
+    };//å‚æ•°
     struct str_timerfolline{
-        char step[64];      //²½Öè²ÎÊıÊı¾İ
-        pc run;             //ÕıÔÚÔËĞĞµÄ²½Öè(Ö¸Õë)
-        char gospeed;       //ÔËÑ²ÏßĞĞËÙ¶È
-        char turnspeed;     //×ªÍäÔËĞĞËÙ¶È
-        char cachespeed;    //Ç°³åËÙ¶È
-        char doing;         //ÕıÔÚÒÆ¶¯±êÖ¾Î»
-        char online;        //ÔÚÏß±êÖ¾Î»
-        ul delay;           //ÑÓÊ±±äÁ¿
-    };//¶¨Ê±Æ÷ÒÆ¶¯
+        char step[64];      //æ­¥éª¤å‚æ•°æ•°æ®
+        pc run;             //æ­£åœ¨è¿è¡Œçš„æ­¥éª¤(æŒ‡é’ˆ)
+        char gospeed;       //è¿å·¡çº¿è¡Œé€Ÿåº¦
+        char turnspeed;     //è½¬å¼¯è¿è¡Œé€Ÿåº¦
+        char cachespeed;    //å‰å†²é€Ÿåº¦
+        char doing;         //æ­£åœ¨ç§»åŠ¨æ ‡å¿—ä½
+        char online;        //åœ¨çº¿æ ‡å¿—ä½
+        ul delay;           //å»¶æ—¶å˜é‡
+    };//å®šæ—¶å™¨ç§»åŠ¨
+    struct str_xyproperties{
+        uc enup;            //å…è®¸å‘ä¸Šèµ°æ ‡å¿—ä½
+        uc endown;          //å…è®¸å‘ä¸‹èµ°æ ‡å¿—ä½
+        uc enleft;          //å…è®¸å‘å·¦èµ°æ ‡å¿—ä½
+        uc enright;         //å…è®¸å‘å³èµ°æ ‡å¿—ä½
+        uc value;           //å½“å‰åæ ‡æ˜¯å“ªä¸ªå·¥ä½çš„
+        enum varENU_dir fx; //æ¥åˆ°å½“å‰åæ ‡çš„æ—¶å€™éœ€è¦çš„æœå‘
+    };//åæ ‡çš„å±æ€§
+    struct str_coordinates{
+        struct str_xyproperties xy[5][13];  //åæ ‡
+        struct str_xyproperties top;        //æœ€é¡¶ä¸Šå‘¢ä¸ªæ²¡åæ ‡çš„
+    };//åæ ‡å·¡çº¿
     struct str_zdzj{
-        uc jx[8][5];        //¼şĞò:8¸ö×¥¼şÇø(´Ó×óÉÏµ½×óÏÂ0-3,´ÓÓÒÉÏµ½ÓÒÏÂ4-7);5¸ö¸ß¶È(0-5),×îÉÏ¿ÕÎ»Îª0,´ÓÉÏµ½ÏÂ1-4,µ××ùÎª5
-    };//×Ô¶¯×¥¼ş
-    extern struct str_state str_begin,str_now,str_next;   //·Ö±ğÎª:ÆğÊ¼×´Ì¬/µ±Ç°×´Ì¬/Ä¿±ê×´Ì¬
-    extern struct str_parameter str_cod;                  //Ò»Ğ©¹Ì¶¨µÄ²ÎÊı,Ò»°ã±£³ÖÄ¬ÈÏ¼´¿É
-    extern struct str_timerfolline str_tfl;               //¶¨Ê±Æ÷Ñ²Ïß
-    extern char var_gjt[4][8];                            //¹¤¼şÌ¨×ø±ê
-    extern char var_top;                                  //ÔÚ×îÉÏÃæÃ»ÓĞ×ø±êµÄÄØ»õ
-    extern data ul var_timer0;                            //timer0ºÁÃë¼¶¼ÆÊ±Æ÷¼ÆÊıÎ»
-/*---------------------------------------------------------------º¯ÊıÉùÃ÷-----*/
-    extern void fun_delay(ui par_value,enum varENU_del par_model); //ÑÓÊ±
-    extern void fun_timer0init();//1ºÁÃë¶¨Ê±Æ÷0³õÊ¼»¯
-    extern void fun_timer1init();//20ºÁÃë¶¨Ê±Æ÷1³õÊ¼»¯
-    extern void fun_timer0();//1ºÁÃë¶¨Ê±Æ÷0´¦Àíº¯Êı
-    extern void fun_timer1();//20ºÁÃë¶¨Ê±Æ÷1´¦Àíº¯Êı
-    extern void fun_wait();//µÈ´ı°´¼ü
-    extern void fun_pwminit();//PWM³õÊ¼»¯
-    extern void fun_pwmr(uc par_value);//ÓÒÂ·PWMÊä³ö
-    extern void fun_pwml(uc par_value);//×óÂ·PWMÊä³ö
-    extern void fun_motors(enum varENU_mot par_model,char par_speed);//Ö÷º¯Êı²Ù×÷µç»ú
-    extern void fun_motorsrl(enum varENU_mot par_model,char par_speed);//¶¨Ê±Æ÷²Ù×÷×óÓÒÂÖ
-    extern void fun_sz(enum varENU_han par_model);//ÊÖ×¥µ¥²½ÔË¶¯
-    extern void fun_sj(enum varENU_sjp par_model);//Éı½µµ¥²½ÔË¶¯
-    extern void fun_py(enum varENU_tra par_model);//Æ½ÒÆµ¥²½ÔË¶¯
-    extern void fun_hz(enum varENU_dir par_model);//»Ø×ªµ¥²½ÔË¶¯
-    extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//Æ½ÒÆ»Ø×ªÍ¬²½ÔË¶¯
-    extern void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//Éı½µ»Ø×ªÍ¬²½ÔË¶¯
-    extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel);//Æ½ÒÆÉı½µ»Ø×ªÍ¬²½ÔË¶¯
-    extern void fun_jtjp();//¾²Ì¬¾ÀÆ«
-    extern void fun_timermove();//¶¨Ê±Æ÷ÒÆ¶¯
-    extern void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...);//Ö÷º¯ÊıÓÃ¶¨Ê±Æ÷Ñ²Ïßµ÷ÓÃº¯Êı
-    extern void fun_folline(uc par_con,uc par_speed);//Ö÷º¯ÊıÑ²Ïß
-    extern void fun_turn(enum varENU_tur par_model,uc par_speed);//Ö÷º¯Êı×ªÍä
-    extern void fun_qc(uc par_time,uc par_speed);//Ö÷º¯ÊıÇ°³å
-    extern void fun_stope2prom();//Í£Ö¹EEPROM·şÎñ
-    extern uc   fun_reade2prom(ui par_add);//¶ÁÈ¡EEPROMÊı¾İ
-    extern void fun_writee2prom(ui par_add,uc par_dat);//Ğ´ÈëÊı¾İÖÁEEPROM
-    extern void fun_cleane2prom(ui par_add);//Çå³ıEEPROMÊı¾İ
-    extern void fun_calibration();//×Ô¶¯Ğ£×¼²ÎÊı
-    extern void fun_port();//´®¿Ú³õÊ¼»¯
-    extern void fun_test();//²âÊÔ
-    extern uc   fun_min(uc par_num,...);//Çó×îĞ¡Öµ
-    extern void fun_coordinate();//×Ô¶¯Ñ²ÏßÖ®×ø±ê
-    extern void fun_findtop();//×Ô¶¯»ñÈ¡×î¶¥ÉÏÄÇ¸öÃ»×ø±êµÄ¼Ò»ïµÄ¹¤Î»ºÅ
-    extern void fun_zdzj(ul par_che,ul par_tai);//×Ô¶¯×¥¼ş
-    extern void fun_zjzt(uc par_motor,uc par_model);//×¥¼ş×´Ì¬
-    extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//ÄÃ¼ş(ÅäºÏ×Ô¶¯×¥¼şÊ¹ÓÃ)
-    extern void fun_zhuajian();//´ÓÆğÊ¼Çø×ßµ½×¥¼şÇø
-    extern void fun_back();//´Ó×¥¼şÇø»Øµ½ÆğÊ¼Çø
-    extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//³õÊ¼»¯º¯Êı
-                          enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx,
-                          uc par_1x,uc par_1y,char par_1,
-                          uc par_2x,uc par_2y,char par_2,
-                          uc par_3x,uc par_3y,char par_3,
-                          uc par_4x,uc par_4y,char par_4);
-    extern void fun_stop();//½áÊøº¯Êı
-/*---------------------------------------------------------------¸üĞÂÈÕÖ¾-----*/
+        uc jx[8][5];        //ä»¶åº:8ä¸ªæŠ“ä»¶åŒº(ä»å·¦ä¸Šåˆ°å·¦ä¸‹0-3,ä»å³ä¸Šåˆ°å³ä¸‹4-7);5ä¸ªé«˜åº¦(0-5),æœ€ä¸Šç©ºä½ä¸º0,ä»ä¸Šåˆ°ä¸‹1-4,åº•åº§ä¸º5
+    };//è‡ªåŠ¨æŠ“ä»¶
+    extern struct str_state str_begin,str_now,str_next;   //åˆ†åˆ«ä¸º:èµ·å§‹çŠ¶æ€/å½“å‰çŠ¶æ€/ç›®æ ‡çŠ¶æ€
+    extern struct str_parameter str_cod;                  //ä¸€äº›å›ºå®šçš„å‚æ•°,ä¸€èˆ¬ä¿æŒé»˜è®¤å³å¯
+    extern struct str_timerfolline str_tfl;               //å®šæ—¶å™¨å·¡çº¿
+    extern struct str_coordinates str_zbfl;               //åæ ‡å·¡çº¿
+    extern data ul var_timer0;                            //timer0æ¯«ç§’çº§è®¡æ—¶å™¨è®¡æ•°ä½
+/*---------------------------------------------------------------å‡½æ•°å£°æ˜-----*/
+    extern void fun_delay(ui par_value,enum varENU_del par_model); //å»¶æ—¶
+    extern void fun_timer0init();//1æ¯«ç§’å®šæ—¶å™¨0åˆå§‹åŒ–
+    extern void fun_timer1init();//20æ¯«ç§’å®šæ—¶å™¨1åˆå§‹åŒ–
+    extern void fun_timer0();//1æ¯«ç§’å®šæ—¶å™¨0å¤„ç†å‡½æ•°
+    extern void fun_timer1();//20æ¯«ç§’å®šæ—¶å™¨1å¤„ç†å‡½æ•°
+    extern void fun_wait();//ç­‰å¾…æŒ‰é”®
+    extern void fun_pwminit();//PWMåˆå§‹åŒ–
+    extern void fun_pwmr(uc par_value);//å³è·¯PWMè¾“å‡º
+    extern void fun_pwml(uc par_value);//å·¦è·¯PWMè¾“å‡º
+    extern void fun_motors(enum varENU_mot par_model,char par_speed);//ä¸»å‡½æ•°æ“ä½œç”µæœº
+    extern void fun_motorsrl(enum varENU_mot par_model,char par_speed);//å®šæ—¶å™¨æ“ä½œå·¦å³è½®
+    extern void fun_sz(enum varENU_han par_model);//æ‰‹æŠ“å•æ­¥è¿åŠ¨
+    extern void fun_sj(enum varENU_sjp par_model);//å‡é™å•æ­¥è¿åŠ¨
+    extern void fun_py(enum varENU_tra par_model);//å¹³ç§»å•æ­¥è¿åŠ¨
+    extern void fun_hz(enum varENU_dir par_model);//å›è½¬å•æ­¥è¿åŠ¨
+    extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//å¹³ç§»å›è½¬åŒæ­¥è¿åŠ¨
+    extern void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//å‡é™å›è½¬åŒæ­¥è¿åŠ¨
+    extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel);//å¹³ç§»å‡é™å›è½¬åŒæ­¥è¿åŠ¨
+    extern void fun_jtjp();//é™æ€çº å
+    extern void fun_timermove();//å®šæ—¶å™¨ç§»åŠ¨
+    extern void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...);//ä¸»å‡½æ•°ç”¨å®šæ—¶å™¨å·¡çº¿è°ƒç”¨å‡½æ•°
+    extern void fun_folline(uc par_con,uc par_speed);//ä¸»å‡½æ•°å·¡çº¿
+    extern void fun_turn(enum varENU_tur par_model,uc par_speed);//ä¸»å‡½æ•°è½¬å¼¯
+    extern void fun_qc(uc par_time,uc par_speed);//ä¸»å‡½æ•°å‰å†²
+    extern void fun_stope2prom();//åœæ­¢EEPROMæœåŠ¡
+    extern uc   fun_reade2prom(ui par_add);//è¯»å–EEPROMæ•°æ®
+    extern void fun_writee2prom(ui par_add,uc par_dat);//å†™å…¥æ•°æ®è‡³EEPROM
+    extern void fun_cleane2prom(ui par_add);//æ¸…é™¤EEPROMæ•°æ®
+    extern void fun_calibration();//è‡ªåŠ¨æ ¡å‡†å‚æ•°
+    extern void fun_port();//ä¸²å£åˆå§‹åŒ–
+    extern void fun_test();//æµ‹è¯•
+    extern uc   fun_min(uc par_num,...);//æ±‚æœ€å°å€¼
+    extern void fun_coordinate();//è‡ªåŠ¨å·¡çº¿ä¹‹åæ ‡
+    extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,//è®¾ç½®åˆå§‹åæ ‡
+                par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,
+                par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,
+                par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,
+                uc par_5value,uc par_5fx);
+    extern void fun_getxy(char par_value);//é€šè¿‡æƒ³è¦å»çš„å·¥ä½å·è·å¾—XYåæ ‡å¹¶å‚¨å­˜åœ¨str_nextç»“æ„ä½“ä¸­
+    extern void fun_zdzj(ul par_che,ul par_tai);//è‡ªåŠ¨æŠ“ä»¶
+    extern void fun_zjzt(uc par_motor,uc par_model);//æŠ“ä»¶çŠ¶æ€
+    extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//æ‹¿ä»¶(é…åˆè‡ªåŠ¨æŠ“ä»¶ä½¿ç”¨)
+    extern void fun_zhuajian();//ä»èµ·å§‹åŒºèµ°åˆ°æŠ“ä»¶åŒº
+    extern void fun_back();//ä»æŠ“ä»¶åŒºå›åˆ°èµ·å§‹åŒº
+    extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//åˆå§‹åŒ–å‡½æ•°
+                enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
+    extern void fun_stop();//ç»“æŸå‡½æ•°
+/*---------------------------------------------------------------æ›´æ–°æ—¥å¿—-----*/
 #endif

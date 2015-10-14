@@ -21,12 +21,11 @@ struct str_parameter str_cod={
 
     /*ui str_cod.hz1bz*/20,      //fun_hz标准位延时
 
-    /*ui turn90;*/500,           //90度转弯屏蔽延时
+    /*ui turn90;*/800,           //90度转弯屏蔽延时
     /*ui turn180;*/2000          //180度转弯屏蔽延时
 };
 struct str_timerfolline str_tfl;
-char var_gjt[4][8];
-char var_top;
+struct str_coordinates str_zbfl;
 data ul var_timer;
 void fun_delay(ui par_value,enum varENU_del par_model){
     data ui loc_con=par_value;
@@ -1179,7 +1178,7 @@ void fun_timermove(){
                         loc_con++;//执行下一步
                     break;
                 case 2://第三步
-                    if(in_ls3||in_ls6){//如果中间两个灯亮
+                    if(in_ls3||in_ls6){//如果3亮或6亮
                         fun_motorsrl(mot_rl,0);//停止电机
                         str_tfl.run+=2;//指针指向下一组过程
                         str_tfl.delay=0;//延时计数器归零
@@ -1301,7 +1300,7 @@ void fun_folline(uc par_con,uc par_speed){
             fun_delay(1,del_ms);
         }
     }//如果巡线条数不为0
-    fun_qc(60,40);//前冲
+    fun_qc(42,40);//前冲
 }//主函数巡线
 void fun_turn(enum varENU_tur par_model,uc par_speed){
     switch(par_model){//获取参数
@@ -1326,7 +1325,7 @@ void fun_turn(enum varENU_tur par_model,uc par_speed){
             fun_delay(str_cod.turn180,del_ms);//计时
             break;
     }
-    while(!in_ls4||!in_ls5);
+    while(in_ls3||in_ls6);//3亮或者6亮
     fun_motors(mot_rl,0);//停止电机
 }//主函数转弯
 void fun_qc(uc par_time,uc par_speed){
@@ -1521,15 +1520,32 @@ uc fun_min(uc par_num,...){
     return loc_min;//退出
 }//求最小值
 void fun_coordinate(){
-    
+    ;
 }//自动巡线之坐标
-void fun_findtop(){
-    uc loc_xh1,loc_xh2,loc_con=0;
-    for(loc_xh1=0;loc_xh1<4;loc_xh1++)
-        for(loc_xh2=0;loc_xh2<8;loc_xh2++)
-            loc_con+=cabs(var_gjt[loc_xh1][loc_xh2]);
-    var_top=15-loc_con;
-}//自动获取最顶上那个没坐标的家伙的工位号
+void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,
+    par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,
+    par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,
+    par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,
+    uc par_5value,uc par_5fx){
+
+    str_zbfl.xy[par_1x][par_1y].value=par_1value;   str_zbfl.xy[par_1x][par_1y].fx=par_1fx;
+    str_zbfl.xy[par_2x][par_2y].value=par_2value;   str_zbfl.xy[par_2x][par_2y].fx=par_2fx;
+    str_zbfl.xy[par_3x][par_3y].value=par_3value;   str_zbfl.xy[par_3x][par_3y].fx=par_3fx;
+    str_zbfl.xy[par_4x][par_4y].value=par_4value;   str_zbfl.xy[par_4x][par_4y].fx=par_4fx;
+    str_zbfl.top.value=par_5value;                  str_zbfl.top.fx=par_5fx;
+}//设置初始坐标
+void fun_getxy(char par_value){
+    uc loc_xh1,loc_xh2;
+    for(loc_xh1=0;loc_xh1<5;loc_xh1++){
+        for(loc_xh2=0;loc_xh2<13;loc_xh2++){
+            if(str_zbfl.xy[loc_xh1][loc_xh2].value==par_value){
+                str_next.x=loc_xh1;
+                str_next.y=loc_xh2;
+                str_next.ctfx=str_zbfl.xy[loc_xh1][loc_xh2].fx;
+            }
+        }
+    }
+}//通过想要去的工位号获得XY坐标并储存在str_next结构体中
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
     struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
     char loc_high[8];         //每摞工件的高度
@@ -2224,11 +2240,7 @@ void fun_back(){
     fun_delay(1,del_s);
 }//从抓件区回到起始区
 void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,
-    enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx,
-    uc par_1x,uc par_1y,char par_1,
-    uc par_2x,uc par_2y,char par_2,
-    uc par_3x,uc par_3y,char par_3,
-    uc par_4x,uc par_4y,char par_4){
+    enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
     CLK_DIV=0x00;             //不分频
     P0M1=0xff;                //P0用于输入
     P0M0=0x00;                //P0不能输出
@@ -2251,17 +2263,13 @@ void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,
     fun_timer1init();         //初始化定时器1
     TR0=1;                    //打开定时器0
     TR1=1;                    //打开定时器1
-    var_timer=0;
+    var_timer=0;              //定时器定时标志位归零,通电时开始计时
 
     memset(str_tfl.step,0,sizeof(str_tfl.step));//清零巡线用步骤数组
-    memset(var_gjt,0,sizeof(var_gjt));//清空工件台坐标
-    var_top=0;
-    var_gjt[par_1x][par_1y]=par_1;
-    var_gjt[par_2x][par_2y]=par_2;
-    var_gjt[par_3x][par_3y]=par_3;
-    var_gjt[par_4x][par_4y]=par_4;
-    fun_findtop();
-    
+    memset(str_zbfl.xy,0,sizeof(str_zbfl.xy));//清空坐标
+    str_zbfl.top.value=0;//顶上的工位号
+    str_zbfl.top.fx=dir_up;//顶上的方向
+
     str_begin.x=par_x;        //X坐标
     str_begin.y=par_y;        //Y坐标
     str_begin.ctfx=par_ctfx;  //车头方向

@@ -7,25 +7,16 @@ void main(){
         han_s,//手抓状态
         sjp_3,//升降位置
         tra_h,//平移位置
-        dir_left,//回转方向
-        2,3,5,
-        3,4,-3,
-        0,6,1,
-        1,1,-4);
+        dir_left);//回转方向
+    fun_setxy(//设置初始坐标
+        2,2,5,dir_up,
+        3,4,4,dir_up,
+        5,6,2,dir_down,
+        1,9,1,dir_down,
+        3,dir_left);
     /*请从下一行开始写你的程序*/
 
-	fun_flsetting(65,40,40,
-	tfl_line,3,
-    tfl_cache,44,
-    tfl_turn,tur_l90,
-    tfl_line,1,
-    tfl_cache,44,
-    tfl_turn,tur_r90,
-    tfl_line,4,
-    tfl_cache,44,
-    tfl_turn,tur_r90,
-    tfl_line,1,
-	def_end);
+	fun_flsetting(65,40,40,L(3),C(44),L90,L(1),C(44),R90,L(4),C(44),R90,L(1),def_end);
 
     fun_py(tra_q);
     fun_py(tra_h);
