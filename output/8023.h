@@ -176,8 +176,10 @@
 
         ui hz1bz;    //fun_hz1标准位延时
 
-        ui turn90;   //90度转弯屏蔽延时
-        ui turn180;  //180度转弯屏蔽延时
+        ui mainturn90;    //主函数90度转弯屏蔽延时
+        ui timerturn90;   //定时器90度转弯屏蔽延时
+        ui mainturn180;  //主函数180度转弯屏蔽延时
+        ui timerturn180;  //主函数180度转弯屏蔽延时
     };//参数
     struct str_timerfolline{
         char step[64];      //步骤参数数据
@@ -190,10 +192,10 @@
         ul delay;           //延时变量
     };//定时器移动
     struct str_xyproperties{
-        uc enup;            //允许向上走标志位
-        uc endown;          //允许向下走标志位
-        uc enleft;          //允许向左走标志位
-        uc enright;         //允许向右走标志位
+        uc enup;            //允许车头向上标志位
+        uc endown;          //允许车头向下标志位
+        uc enleft;          //允许车头向左标志位
+        uc enright;         //允许车头向右标志位
         uc value;           //当前坐标是哪个工位的
         enum varENU_dir fx; //来到当前坐标的时候需要的朝向
     };//坐标的属性
@@ -220,7 +222,7 @@
     extern void fun_pwmr(uc par_value);//右路PWM输出
     extern void fun_pwml(uc par_value);//左路PWM输出
     extern void fun_motors(enum varENU_mot par_model,char par_speed);//主函数操作电机
-    extern void fun_motorsrl(enum varENU_mot par_model,char par_speed);//定时器操作左右轮
+    extern void fun_motorsrl(enum varENU_mot par_model,int par_speed);//定时器操作左右轮
     extern void fun_sz(enum varENU_han par_model);//手抓单步运动
     extern void fun_sj(enum varENU_sjp par_model);//升降单步运动
     extern void fun_py(enum varENU_tra par_model);//平移单步运动
@@ -243,12 +245,16 @@
     extern void fun_test();//测试
     extern uc   fun_min(uc par_num,...);//求最小值
     extern void fun_coordinate();//自动巡线之坐标
-    extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,//设置初始坐标
-                par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,
-                par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,
-                par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,
-                uc par_5value,uc par_5fx);
+    extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,
+           par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
+           par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
+           par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
+           uc par_5value,uc par_5fx);
+    extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
     extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中
+    extern void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step);
+    extern void fun_record(enum varENU_tfl par_model);
+    extern void fun_go(char par_gw);
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
