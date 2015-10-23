@@ -6,7 +6,7 @@ void main(){
         dir_up,//车头方向
         han_s,//手抓状态
         sjp_1,//升降位置
-        tra_q,//平移位置
+        tra_h,//平移位置
         dir_right);//回转方向
     fun_setxy(//设置初始坐标
         1,5,2,dir_down,dir_down,
@@ -16,16 +16,21 @@ void main(){
         3,dir_right);
     
     /*请从下一行开始写你的程序*/
+	
+    fun_jtjp();
+    fun_stop();
 
     // fun_zhuajian();
     // D(3000);
     // fun_py(tra_h);
     // fun_back();
-
+    // fun_pysjhz(tra_q,sjp_5,dir_down);
+    // D(3000)
+    // fun_pysjhz(tra_h,sjp_1,dir_right);
 
     fun_flsetting(20,55,55,L(10),R90,def_end);
 
-    def_waitfl
+    
 
 /*
 	  str_tfl.step[0]=tfl_line;

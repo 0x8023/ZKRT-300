@@ -16,7 +16,7 @@
     #define def_timer1stop TR1=0;   //定时器1关闭
     #define def_end 0x82            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
-    #define def_waitfl while(str_tfl.doing==tf_ture)fun_delay(50,del_ms); //等待定时器巡线结束
+    #define def_waitfl while(str_tfl.doing==tf_ture)fun_delay(50,del_ms);fun_jtjp(); //等待定时器巡线结束
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> 延时(毫秒)
     #define J fun_sz(han_j);                            // J --> 手抓抓紧
@@ -229,7 +229,7 @@
     extern void fun_hz(enum varENU_dir par_model);//回转单步运动
     extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
     extern void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//升降回转同步运动
-    extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel);//平移升降回转同步运动
+    extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//平移升降回转同步运动(先升降回转,再平移回转)
     extern void fun_jtjp();//静态纠偏
     extern void fun_timermove();//定时器移动
     extern void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...);//主函数用定时器巡线调用函数
@@ -244,7 +244,6 @@
     extern void fun_port();//串口初始化
     extern void fun_test();//测试
     extern uc   fun_min(uc par_num,...);//求最小值
-    extern void fun_coordinate();//自动巡线之坐标
     extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,
            par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
            par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
@@ -252,9 +251,10 @@
            uc par_5value,uc par_5fx);
     extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
     extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中
-    extern void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step);
-    extern void fun_record(enum varENU_tfl par_model);
-    extern void fun_go(char par_gw);
+    extern void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step);//坐标巡线单步累计步骤生成
+    extern void fun_coordinate();//自动巡线之坐标
+    extern void fun_record(enum varENU_tfl par_model);//定时器坐标巡线步骤生成
+    extern void fun_go(char par_gw);//定时器坐标巡线最终调用形式
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
