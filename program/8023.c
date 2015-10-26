@@ -22,7 +22,7 @@ struct str_parameter str_cod={
     /*ui str_cod.hz1bz*/20,      //fun_hz标准位延时
 
     /*ui mainturn90;*/1200,      //主函数90度转弯屏蔽延时
-    /*ui timerturn90;*/1200,     //定时器90度转弯屏蔽延时
+    /*ui timerturn90;*/700,     //定时器90度转弯屏蔽延时
     /*ui mainturn180;*/2000,     //主函数180度转弯屏蔽延时
     /*ui timerturn180;*/2000     //定时器180度转弯屏蔽延时
 };
@@ -1800,22 +1800,37 @@ void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw){
 }//通过工件的朝向和小车的车头方向屏蔽坐标
 void fun_getxy(char par_value){
     uc loc_xhx,loc_xhy;//两个循环变量
-    for(loc_xhx=0;loc_xhx<=4;loc_xhx++){//X轴循环,0-5
-        for(loc_xhy=0;loc_xhy<=12;loc_xhy++){//y轴循环,0-13
-            if(str_zbfl.xy[loc_xhx][loc_xhy].value==par_value){//如果找到了这个件
-                str_next.x=loc_xhx;//x轴坐标赋值给str_next.x
-                str_next.y=loc_xhy;//y轴坐标赋值给str_next.y
-                str_next.ctfx=str_zbfl.xy[loc_xhx][loc_xhy].fx;//车头方向赋值给str_next.ctfx
-                str_now.x=str_begin.x;//当前的x轴坐标等于起始的x轴坐标
-                str_now.y=str_begin.y;//当前的y轴坐标等于起始的y轴坐标
-                str_now.ctfx=str_begin.ctfx;//当前的车头方向等于起始的车头方向
-                return;//退出函数
+    str_now.x=str_begin.x;//当前的x轴坐标等于起始的x轴坐标
+    str_now.y=str_begin.y;//当前的y轴坐标等于起始的y轴坐标
+    str_now.ctfx=str_begin.ctfx;//当前的车头方向等于起始的车头方向
+    if(par_value==str_zbfl.top.value){//如果是去最顶上的工位台
+        if(str_zbfl.top.fx==dir_right){
+            str_next.x=0;//x轴坐标赋值为0
+            str_next.y=12;//y轴坐标赋值为12
+            str_next.ctfx=dir_right;//车头方向赋值为dir_right
+        }else if(str_zbfl.top.fx==dir_left){
+            str_next.x=4;//x轴坐标赋值为4
+            str_next.y=12;//y轴坐标赋值为12
+            str_next.ctfx=dir_left;//车头方向赋值为dir_left
+        }
+    }else{
+        for(loc_xhx=0;loc_xhx<=4;loc_xhx++){//X轴循环,0-5
+            for(loc_xhy=0;loc_xhy<=12;loc_xhy++){//y轴循环,0-12
+                if(str_zbfl.xy[loc_xhx][loc_xhy].value==par_value){//如果找到了这个件
+                    str_next.x=loc_xhx;//x轴坐标赋值给str_next.x
+                    str_next.y=loc_xhy;//y轴坐标赋值给str_next.y
+                    str_next.ctfx=str_zbfl.xy[loc_xhx][loc_xhy].fx;//车头方向赋值给str_next.ctfx
+                    return;//退出函数
+                }
             }
         }
     }
 }//通过想要去的工位号获得XY坐标并储存在str_next结构体中,把现在的工位号存储再str_now结构体中
 void fun_xymove(enum varENU_tfl par_model,char par_value){
     if(*str_tfl.run==0){//如果当前步骤没被编辑过
+        if(par_model==tfl_cache){//如果第一个是前冲
+            return;//不允许是前冲
+        }
         (*str_tfl.run)=par_model;//那就等于现在的模式
     }else if(*str_tfl.run!=par_model){//如果当前步骤和传入的步骤不一样
         str_tfl.run+=2;//指针指向下一组数组
@@ -1929,26 +1944,37 @@ void fun_coordinate(){
     ;
 }//自动巡线之坐标
 void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed){
+    /*
+        优先左右走,其次考虑车头方向,再次考虑工件台的位置
+    */
     str_tfl.run=str_tfl.step;//指针指向第一个步骤
     while((str_now.x!=par_x)||(str_now.y!=par_y)||(str_now.ctfx!=par_ctfx)){//如果xy轴到达了,车头方向一致了
         switch(str_now.ctfx){//判断当前车头方向
             case dir_up://现在车头朝上
-                if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
-                    fun_xymove(tfl_line,1);
-                    str_now.y+=1;
-                }else if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
+                if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_r90);
                     str_now.ctfx=dir_right;
-                }else if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
+                    continue;
+                }
+                if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_l90);
                     str_now.ctfx=dir_left;
-                }else if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
+                    continue;
+                }
+                if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
+                    fun_xymove(tfl_line,1);
+                    str_now.y+=1;
+                    continue;
+                }
+                if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_r180);
                     str_now.ctfx=dir_down;
-                }else{
+                    continue;
+                }
+                if(par_x==str_now.x&&par_y==str_now.y){//需要在原地转个弯
                     fun_xymove(tfl_cache,40);
                     switch(par_ctfx){
                         case dir_left:
@@ -1964,25 +1990,34 @@ void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,
                             break;
                     }
                     str_now.ctfx=par_ctfx;
+                    continue;
                 }
                 break;
             case dir_down://现在车头朝下
-                if(par_y<str_now.y){//如果要去的Y值比现在的小//向下走
-                    fun_xymove(tfl_line,1);
-                    str_now.y-=1;
-                }else if(par_x>str_now.x){//如果要去的x值比现在的大//向右走
+                if(par_x>str_now.x){//如果要去的x值比现在的大//向右走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_l90);
                     str_now.ctfx=dir_right;
-                }else if(par_x<str_now.x){//如果要去的x值比现在的小//向左走
+                    continue;
+                }
+                if(par_x<str_now.x){//如果要去的x值比现在的小//向左走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_r90);
                     str_now.ctfx=dir_left;
-                }else if(par_y>str_now.y){//如果要去的Y值比现在的大//向上走
+                    continue;
+                }
+                if(par_y<str_now.y){//如果要去的Y值比现在的小//向下走
+                    fun_xymove(tfl_line,1);
+                    str_now.y-=1;
+                    continue;
+                }
+                if(par_y>str_now.y){//如果要去的Y值比现在的大//向上走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_r180);
                     str_now.ctfx=dir_up;
-                }else{
+                    continue;
+                }
+                if(par_x==str_now.x&&par_y==str_now.y){//需要在原地转个弯
                     fun_xymove(tfl_cache,40);
                     switch(par_ctfx){
                         case dir_left:
@@ -1998,25 +2033,34 @@ void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,
                             break;
                     }
                     str_now.ctfx=par_ctfx;
+                    continue;
                 }
                 break;
             case dir_right://现在车头朝右
                 if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
                     fun_xymove(tfl_line,1);
                     str_now.x+=1;
-                }else if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
-                    fun_xymove(tfl_cache,40);
-                    fun_xymove(tfl_turn,tur_r90);
-                    str_now.ctfx=dir_down;
-                }else if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
-                    fun_xymove(tfl_cache,40);
-                    fun_xymove(tfl_turn,tur_l90);
-                    str_now.ctfx=dir_up;
-                }else if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
+                    continue;
+                }
+                if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_l180);
                     str_now.ctfx=dir_left;
-                }else{
+                    continue;
+                }
+                if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l90);
+                    str_now.ctfx=dir_up;
+                    continue;
+                }
+                if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r90);
+                    str_now.ctfx=dir_down;
+                    continue;
+                }
+                if(par_x==str_now.x&&par_y==str_now.y){//需要在原地转个弯
                     fun_xymove(tfl_cache,40);
                     switch(par_ctfx){
                         case dir_left:
@@ -2032,25 +2076,34 @@ void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,
                             break;
                     }
                     str_now.ctfx=par_ctfx;
+                    continue;
                 }
                 break;
             case dir_left://现在车头朝左
                 if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
                     fun_xymove(tfl_line,1);
                     str_now.x-=1;
-                }else if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
-                    fun_xymove(tfl_cache,40);
-                    fun_xymove(tfl_turn,tur_l90);
-                    str_now.ctfx=dir_down;
-                }else if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
-                    fun_xymove(tfl_cache,40);
-                    fun_xymove(tfl_turn,tur_r90);
-                    str_now.ctfx=dir_up;
-                }else if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
+                    continue;
+                }
+                if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
                     fun_xymove(tfl_cache,40);
                     fun_xymove(tfl_turn,tur_l180);
                     str_now.ctfx=dir_right;
-                }else{
+                    continue;
+                }
+                if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r90);
+                    str_now.ctfx=dir_up;
+                    continue;
+                }
+                if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l90);
+                    str_now.ctfx=dir_down;
+                    continue;
+                }
+                if(par_x==str_now.x&&par_y==str_now.y){//需要在原地转个弯
                     fun_xymove(tfl_cache,40);
                     switch(par_ctfx){
                         case dir_right:
@@ -2066,15 +2119,18 @@ void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,
                             break;
                     }
                     str_now.ctfx=par_ctfx;
+                    continue;
                 }
                 break;
             default:
                 break;
         }
     }
+    fun_xymove(tfl_line,1);//进入工位台
+    fun_xymove(tfl_cache,40);//前冲
     str_tfl.run+=2;//指针指向下一组数组
     (*str_tfl.run)=def_end;//存入步骤
-    
+
     str_tfl.online=tf_false;//不在线
     str_tfl.run=str_tfl.step;//指针指向第一个数组
     str_tfl.gospeed=par_gospeed;//默认速度
@@ -2084,7 +2140,12 @@ void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,
 }//定时器坐标巡线步骤生成
 void fun_go(char par_gw){
     fun_getxy(par_gw);
-    fun_record(str_next.x,str_next.y,str_next.ctfx,56,45,50);
+    if(str_next.ctfx==dir_up){
+        fun_record(str_next.x,str_next.y-1,str_next.ctfx,56,45,50);
+    }
+    else if(str_next.ctfx==dir_down){
+        fun_record(str_next.x,str_next.y+1,str_next.ctfx,56,45,50);
+    }
     while(str_tfl.doing==tf_ture)
         fun_delay(50,del_ms);
 }//定时器坐标巡线最终调用形式
