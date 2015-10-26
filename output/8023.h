@@ -251,9 +251,9 @@
            uc par_5value,uc par_5fx);
     extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
     extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中
-    extern void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step);//坐标巡线单步累计步骤生成
+    extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成
     extern void fun_coordinate();//自动巡线之坐标
-    extern void fun_record(enum varENU_tfl par_model);//定时器坐标巡线步骤生成
+    extern void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed);//定时器坐标巡线步骤生成
     extern void fun_go(char par_gw);//定时器坐标巡线最终调用形式
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态

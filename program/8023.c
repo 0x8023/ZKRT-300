@@ -24,7 +24,7 @@ struct str_parameter str_cod={
     /*ui mainturn90;*/1200,      //主函数90度转弯屏蔽延时
     /*ui timerturn90;*/1200,     //定时器90度转弯屏蔽延时
     /*ui mainturn180;*/2000,     //主函数180度转弯屏蔽延时
-    /*ui timerturn180;*/2500     //定时器180度转弯屏蔽延时
+    /*ui timerturn180;*/2000     //定时器180度转弯屏蔽延时
 };
 struct str_timerfolline str_tfl;
 struct str_coordinates str_zbfl;
@@ -1799,42 +1799,41 @@ void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw){
     }
 }//通过工件的朝向和小车的车头方向屏蔽坐标
 void fun_getxy(char par_value){
-    uc loc_xhx,loc_xhy;
-    for(loc_xhx=0;loc_xhx<=4;loc_xhx++){
-        for(loc_xhy=0;loc_xhy<=12;loc_xhy++){
-            if(str_zbfl.xy[loc_xhx][loc_xhy].value==par_value){
-                str_now.x=str_next.x=loc_xhx;
-                str_now.y=str_next.y=loc_xhy;
-                str_now.ctfx=str_next.ctfx=str_zbfl.xy[loc_xhx][loc_xhy].fx;
-                return;
+    uc loc_xhx,loc_xhy;//两个循环变量
+    for(loc_xhx=0;loc_xhx<=4;loc_xhx++){//X轴循环,0-5
+        for(loc_xhy=0;loc_xhy<=12;loc_xhy++){//y轴循环,0-13
+            if(str_zbfl.xy[loc_xhx][loc_xhy].value==par_value){//如果找到了这个件
+                str_next.x=loc_xhx;//x轴坐标赋值给str_next.x
+                str_next.y=loc_xhy;//y轴坐标赋值给str_next.y
+                str_next.ctfx=str_zbfl.xy[loc_xhx][loc_xhy].fx;//车头方向赋值给str_next.ctfx
+                str_now.x=str_begin.x;//当前的x轴坐标等于起始的x轴坐标
+                str_now.y=str_begin.y;//当前的y轴坐标等于起始的y轴坐标
+                str_now.ctfx=str_begin.ctfx;//当前的车头方向等于起始的车头方向
+                return;//退出函数
             }
         }
     }
-}//通过想要去的工位号获得XY坐标并储存在str_next结构体中
-void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
-    if(*par_step==0){
-        (*par_step)=par_model;
+}//通过想要去的工位号获得XY坐标并储存在str_next结构体中,把现在的工位号存储再str_now结构体中
+void fun_xymove(enum varENU_tfl par_model,char par_value){
+    if(*str_tfl.run==0){//如果当前步骤没被编辑过
+        (*str_tfl.run)=par_model;//那就等于现在的模式
+    }else if(*str_tfl.run!=par_model){//如果当前步骤和传入的步骤不一样
+        str_tfl.run+=2;//指针指向下一组数组
+        (*str_tfl.run)=par_model;//存入步骤
     }
-    else if(*par_step!=par_model){
-        (*par_step)+=2;
-        (*par_step)=par_model;
-    }
-    switch(*par_step){//选择正在编辑的步骤
-        case 0://如果步骤为空
-            (*par_step)=par_model;//写入当前模式
-            break;
+    switch(*str_tfl.run){//选择正在编辑的步骤
         case tfl_line://如果正在编辑巡线
-            *(par_step+1)+=par_value;//巡线步骤的参数加上需要增加的参数(据说可以减去)
+            *(str_tfl.run+1)+=par_value;//巡线步骤的参数加上需要增加的参数(据说可以减去)
             break;
         case tfl_turn://如果正在编辑转完
-            switch(*(par_step+1)){//选择正在编辑的步骤
+            switch(*(str_tfl.run+1)){//选择正在编辑的步骤
                 case 0://如果还没被写入值
-                    *(par_step+1)=par_value;//直接写进去
+                    *(str_tfl.run+1)=par_value;//直接写进去
                     break;
                 case tur_l90://如果现在在左转
                     switch(par_value){//选择传入的参数
                         case tur_l90://如果需要左转
-                            *(par_step+1)=tur_l180;//左转两个90°=左转180°
+                            *(str_tfl.run+1)=tur_l180;//左转两个90°=左转180°
                             break;
                         case tur_r90://如果需要右转
                             #ifdef Debug
@@ -1842,10 +1841,10 @@ void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
                             #endif
                             break;
                         case tur_l180://如果需要左转180°
-                            *(par_step+1)=tur_r90;//左转90°+左转180°=右转90°
+                            *(str_tfl.run+1)=tur_r90;//左转90°+左转180°=右转90°
                             break;
                         case tur_r180://如果需要右转180°
-                            *(par_step+1)=tur_r90;//左转90°+右转180°=右转90°
+                            *(str_tfl.run+1)=tur_r90;//左转90°+右转180°=右转90°
                             break;
                         default:
                             break;
@@ -1859,13 +1858,13 @@ void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
                             #endif
                             break;
                         case tur_r90:
-                            *(par_step+1)=tur_r180;
+                            *(str_tfl.run+1)=tur_r180;
                             break;
                         case tur_l180:
-                            *(par_step+1)=tur_l90;
+                            *(str_tfl.run+1)=tur_l90;
                             break;
                         case tur_r180:
-                            *(par_step+1)=tur_l90;
+                            *(str_tfl.run+1)=tur_l90;
                             break;
                         default:
                             break;
@@ -1874,10 +1873,10 @@ void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
                 case tur_l180:
                     switch(par_value){
                         case tur_l90:
-                            *(par_step+1)=tur_r90;
+                            *(str_tfl.run+1)=tur_r90;
                             break;
                         case tur_r90:
-                            *(par_step+1)=tur_l90;
+                            *(str_tfl.run+1)=tur_l90;
                             break;
                         case tur_l180:
                             #ifdef Debug
@@ -1896,10 +1895,10 @@ void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
                 case tur_r180:
                     switch(par_value){
                         case tur_l90:
-                            *(par_step+1)=tur_r90;
+                            *(str_tfl.run+1)=tur_r90;
                             break;
                         case tur_r90:
-                            *(par_step+1)=tur_l90;
+                            *(str_tfl.run+1)=tur_l90;
                             break;
                         case tur_l180:
                             #ifdef Debug
@@ -1920,7 +1919,7 @@ void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
             }
             break;
         case tfl_cache://如果正在编辑前冲
-            *(par_step+1)+=par_value;
+            *(str_tfl.run+1)+=par_value;
             break;
         default:
             break;
@@ -1929,63 +1928,163 @@ void fun_xymove(enum varENU_tfl par_model,char par_value,pc par_step){
 void fun_coordinate(){
     ;
 }//自动巡线之坐标
-void fun_record(enum varENU_tfl par_model){
-    uc loc_step=0;//步骤标志位
-    while((str_now.x==str_next.x)&&(str_now.y==str_next.y)&&(str_now.ctfx==str_next.ctfx)){//如果xy轴到达了,车头方向一致了
+void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed){
+    str_tfl.run=str_tfl.step;//指针指向第一个步骤
+    while((str_now.x!=par_x)||(str_now.y!=par_y)||(str_now.ctfx!=par_ctfx)){//如果xy轴到达了,车头方向一致了
         switch(str_now.ctfx){//判断当前车头方向
             case dir_up://现在车头朝上
-                if(str_next.y>str_now.y){//如果要去的Y值比现在的大,向上走
-                    
-                }else if(str_next.x>str_now.x){//如果要去的x值比现在的大,向右走
-                    
-                }else if(str_next.x<str_now.x){//如果要去的x值比现在的小,向左走
-                    
-                }else if(str_next.y<str_now.y){//如果要去的Y值比现在的小,向下走
-                    
+                if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
+                    fun_xymove(tfl_line,1);
+                    str_now.y+=1;
+                }else if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r90);
+                    str_now.ctfx=dir_right;
+                }else if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l90);
+                    str_now.ctfx=dir_left;
+                }else if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r180);
+                    str_now.ctfx=dir_down;
+                }else{
+                    fun_xymove(tfl_cache,40);
+                    switch(par_ctfx){
+                        case dir_left:
+                            fun_xymove(tfl_turn,tur_l90);
+                            break;
+                        case dir_right:
+                            fun_xymove(tfl_turn,tur_r90);
+                            break;
+                        case dir_down:
+                            fun_xymove(tfl_turn,tur_l180);
+                            break;
+                        default:
+                            break;
+                    }
+                    str_now.ctfx=par_ctfx;
                 }
                 break;
             case dir_down://现在车头朝下
-                if(str_next.y<str_now.y){//如果要去的Y值比现在的小//向下走
-                    
-                }else if(str_next.x>str_now.x){//如果要去的x值比现在的大//向右走
-                    
-                }else if(str_next.x<str_now.x){//如果要去的x值比现在的小//向左走
-                    
-                }else if(str_next.y>str_now.y){//如果要去的Y值比现在的大//向上走
-                    
+                if(par_y<str_now.y){//如果要去的Y值比现在的小//向下走
+                    fun_xymove(tfl_line,1);
+                    str_now.y-=1;
+                }else if(par_x>str_now.x){//如果要去的x值比现在的大//向右走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l90);
+                    str_now.ctfx=dir_right;
+                }else if(par_x<str_now.x){//如果要去的x值比现在的小//向左走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r90);
+                    str_now.ctfx=dir_left;
+                }else if(par_y>str_now.y){//如果要去的Y值比现在的大//向上走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r180);
+                    str_now.ctfx=dir_up;
+                }else{
+                    fun_xymove(tfl_cache,40);
+                    switch(par_ctfx){
+                        case dir_left:
+                            fun_xymove(tfl_turn,tur_r90);
+                            break;
+                        case dir_right:
+                            fun_xymove(tfl_turn,tur_l90);
+                            break;
+                        case dir_up:
+                            fun_xymove(tfl_turn,tur_l180);
+                            break;
+                        default:
+                            break;
+                    }
+                    str_now.ctfx=par_ctfx;
                 }
                 break;
             case dir_right://现在车头朝右
-                if(str_next.x>str_now.x){//如果要去的x值比现在的大,向右走
-                    
-                }else if(str_next.y<str_now.y){//如果要去的Y值比现在的小,向下走
-                    
-                }else if(str_next.y>str_now.y){//如果要去的Y值比现在的大,向上走
-                    
-                }else if(str_next.x<str_now.x){//如果要去的x值比现在的小,向左走
-                    
+                if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
+                    fun_xymove(tfl_line,1);
+                    str_now.x+=1;
+                }else if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r90);
+                    str_now.ctfx=dir_down;
+                }else if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l90);
+                    str_now.ctfx=dir_up;
+                }else if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l180);
+                    str_now.ctfx=dir_left;
+                }else{
+                    fun_xymove(tfl_cache,40);
+                    switch(par_ctfx){
+                        case dir_left:
+                            fun_xymove(tfl_turn,tur_l180);
+                            break;
+                        case dir_down:
+                            fun_xymove(tfl_turn,tur_r90);
+                            break;
+                        case dir_up:
+                            fun_xymove(tfl_turn,tur_l90);
+                            break;
+                        default:
+                            break;
+                    }
+                    str_now.ctfx=par_ctfx;
                 }
                 break;
             case dir_left://现在车头朝左
-                if(str_next.x<str_now.x){//如果要去的x值比现在的小,向左走
-                    
-                }else if(str_next.y<str_now.y){//如果要去的Y值比现在的小,向下走
-                    
-                }else if(str_next.y>str_now.y){//如果要去的Y值比现在的大,向上走
-                    
-                }else if(str_next.x>str_now.x){//如果要去的x值比现在的大,向右走
-                    
+                if(par_x<str_now.x){//如果要去的x值比现在的小,向左走
+                    fun_xymove(tfl_line,1);
+                    str_now.x-=1;
+                }else if(par_y<str_now.y){//如果要去的Y值比现在的小,向下走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l90);
+                    str_now.ctfx=dir_down;
+                }else if(par_y>str_now.y){//如果要去的Y值比现在的大,向上走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_r90);
+                    str_now.ctfx=dir_up;
+                }else if(par_x>str_now.x){//如果要去的x值比现在的大,向右走
+                    fun_xymove(tfl_cache,40);
+                    fun_xymove(tfl_turn,tur_l180);
+                    str_now.ctfx=dir_right;
+                }else{
+                    fun_xymove(tfl_cache,40);
+                    switch(par_ctfx){
+                        case dir_right:
+                            fun_xymove(tfl_turn,tur_l180);
+                            break;
+                        case dir_down:
+                            fun_xymove(tfl_turn,tur_l90);
+                            break;
+                        case dir_up:
+                            fun_xymove(tfl_turn,tur_r90);
+                            break;
+                        default:
+                            break;
+                    }
+                    str_now.ctfx=par_ctfx;
                 }
                 break;
             default:
                 break;
         }
     }
-    str_tfl.step[loc_step++]=def_end;
+    str_tfl.run+=2;//指针指向下一组数组
+    (*str_tfl.run)=def_end;//存入步骤
+    
+    str_tfl.online=tf_false;//不在线
+    str_tfl.run=str_tfl.step;//指针指向第一个数组
+    str_tfl.gospeed=par_gospeed;//默认速度
+    str_tfl.turnspeed=par_turnspeed;//拐弯速度
+    str_tfl.cachespeed=par_cachespeed;//前冲速度
+    str_tfl.doing=tf_ture;//开始做
 }//定时器坐标巡线步骤生成
 void fun_go(char par_gw){
     fun_getxy(par_gw);
-
+    fun_record(str_next.x,str_next.y,str_next.ctfx,56,45,50);
     while(str_tfl.doing==tf_ture)
         fun_delay(50,del_ms);
 }//定时器坐标巡线最终调用形式

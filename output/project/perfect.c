@@ -8,30 +8,16 @@ void main(){
         sjp_1,//升降位置
         tra_h,//平移位置
         dir_right);//回转方向
-    fun_setxy(//设置初始坐标
-        1,5,2,dir_down,dir_down,
-        1,7,4,dir_down,dir_down,
-        2,8,5,dir_up,dir_down,
-        2,10,1,dir_up,dir_down,
-        3,dir_right);
+    fun_setxy(//x轴坐标,y轴坐标,工位号,到达此坐标时需要的朝向,工位在小车的哪一侧
+        1,6,2,dir_up,dir_right,
+        1,8,5,dir_up,dir_left,
+        2,7,3,dir_up,dir_right,
+        2,9,1,dir_up,dir_left,
+        4,dir_right);
     
     /*请从下一行开始写你的程序*/
-	
-    fun_jtjp();
-    fun_stop();
-
-    // fun_zhuajian();
-    // D(3000);
-    // fun_py(tra_h);
-    // fun_back();
-    // fun_pysjhz(tra_q,sjp_5,dir_down);
-    // D(3000)
-    // fun_pysjhz(tra_h,sjp_1,dir_right);
-
-    fun_flsetting(20,55,55,L(10),R90,def_end);
-
-    
-
+	D(2000)
+    fun_go(2);
 /*
 	  str_tfl.step[0]=tfl_line;
 	  str_tfl.step[1]=2;
