@@ -2139,16 +2139,39 @@ void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,
     str_tfl.doing=tf_ture;//开始做
 }//定时器坐标巡线步骤生成
 void fun_go(char par_gw){
-    fun_getxy(par_gw);
-    if(str_next.ctfx==dir_up){
-        fun_record(str_next.x,str_next.y-1,str_next.ctfx,56,45,50);
+    fun_getxy(par_gw);//通过工位号获取xy坐标
+    if(str_next.ctfx==dir_up){//如果去的地方要车头向上
+        fun_record(str_next.x,str_next.y-1,str_next.ctfx,56,45,50);//少向上一个
+        str_now.x=str_next.x;
+        str_now.y=str_next.y;
+        str_now.ctfx=str_next.ctfx;
+    }else if(str_next.ctfx==dir_down){//如果去的地方要车头向下
+        fun_record(str_next.x,str_next.y+1,str_next.ctfx,56,45,50);//少向下一个
+        str_now.x=str_next.x;
+        str_now.y=str_next.y;
+        str_now.ctfx=str_next.ctfx;
+    }else{//最顶上工位的情况
+        fun_record(str_next.x,str_next.y,dir_up,56,45,50);//不多上不多下,但设置车头方向为向前
+        if(str_next.x==0){//从左边的来
+            str_now.x=4;
+            str_now.y=13;
+            str_now.ctfx=dir_down;
+        }else if(str_next.x==4){//从右边的来
+            str_now.x=0;
+            str_now.y=13;
+            str_now.ctfx=dir_down;
+        }
     }
-    else if(str_next.ctfx==dir_down){
-        fun_record(str_next.x,str_next.y+1,str_next.ctfx,56,45,50);
-    }
+}//定时器坐标巡线最终调用形式
+void fun_maintfl(){
     while(str_tfl.doing==tf_ture)
         fun_delay(50,del_ms);
-}//定时器坐标巡线最终调用形式
+    fun_jtjp();
+}//主函数设置定时器等待巡线结束函数
+void fun_zbtfl(){
+    fun_maintfl();
+    str_begin=str_now;
+}//坐标巡线设置定时器等待巡线结束函数
 void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
     struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
     char loc_high[8];         //每摞工件的高度

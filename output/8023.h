@@ -16,7 +16,6 @@
     #define def_timer1stop TR1=0;   //定时器1关闭
     #define def_end 0x82            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
-    #define def_waitfl while(str_tfl.doing==tf_ture)fun_delay(50,del_ms);fun_jtjp(); //等待定时器巡线结束
 /*-------------------------------------------------------------简化宏定义-----*/
     #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> 延时(毫秒)
     #define J fun_sz(han_j);                            // J --> 手抓抓紧
@@ -255,6 +254,8 @@
     extern void fun_coordinate();//自动巡线之坐标
     extern void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed);//定时器坐标巡线步骤生成
     extern void fun_go(char par_gw);//定时器坐标巡线最终调用形式
+    extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
+    extern void fun_zbtfl();//坐标巡线设置定时器等待巡线结束函数
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)

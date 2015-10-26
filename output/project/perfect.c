@@ -12,13 +12,14 @@ void main(){
     fun_setxy(//x轴坐标,y轴坐标,工位号,到达此坐标时需要的朝向,工位在小车的哪一侧
         1,6,2,dir_up,dir_right,
         1,8,5,dir_up,dir_left,
-        2,7,3,dir_up,dir_right,
+        //2,7,3,dir_up,dir_right,
+        4,9,3,dir_up,dir_left,
         2,9,1,dir_up,dir_left,
         4,dir_right);
     
     /*请从下一行开始写你的程序*/
 	D(2000)
-    fun_go(4);
+    fun_go(3);
 /*
 	  str_tfl.step[0]=tfl_line;
 	  str_tfl.step[1]=2;
