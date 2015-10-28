@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               10/26/2015 19:16:54 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               10/28/2015 07:58:43 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -7,8 +7,8 @@ COMPILER INVOKED BY: D:\MyProgram\keil\C51\BIN\C51.EXE perfect.c LARGE OPTIMIZE(
 
 line level    source
 
-   1          #include "../8023.h"
-   2          #include "HANS.h"
+   1          //#include "HANS.h"
+   2          #include "../8023.h"
    3          void main(){
    4   1          fun_start(//在此输入小车目前的状态
    5   1              0,//X坐标
@@ -28,7 +28,7 @@ line level    source
   18   1              4,dir_right);
   19   1          
   20   1          /*请从下一行开始写你的程序*/
-  21   1              D(2000)
+  21   1              fun_delay(2,del_s);
   22   1          fun_go(3);
   23   1      /*
   24   1                str_tfl.step[0]=tfl_line;
@@ -62,7 +62,7 @@ line level    source
   52   1      
   53   1                str_tfl.step[22]=tfl_turn;
   54   1                str_tfl.step[23]=tur_r90;
-C51 COMPILER V9.54   PERFECT                                                               10/26/2015 19:16:54 PAGE 2   
+C51 COMPILER V9.54   PERFECT                                                               10/28/2015 07:58:43 PAGE 2   
 
   55   1      
   56   1                str_tfl.step[24]=tfl_line;
@@ -126,7 +126,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-C51 COMPILER V9.54   PERFECT                                                               10/26/2015 19:16:54 PAGE 3   
+C51 COMPILER V9.54   PERFECT                                                               10/28/2015 07:58:43 PAGE 3   
 
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

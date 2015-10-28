@@ -17,22 +17,28 @@
     #define def_end 0x82            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
 /*-------------------------------------------------------------简化宏定义-----*/
-    #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> 延时(毫秒)
-    #define J fun_sz(han_j);                            // J --> 手抓抓紧
-    #define S fun_sz(han_s);                            // S --> 手抓松
-    #define WZ1 fun_sj(sjp_1);                          // WZ1 --> 升降到位置1
-    #define WZ2 fun_sj(sjp_2);                          // WZ2 --> 升降到位置2
-    #define WZ3 fun_sj(sjp_3);                          // WZ3 --> 升降到位置3
-    #define WZ4 fun_sj(sjp_4);                          // WZ4 --> 升降到位置4
-    #define WZ5 fun_sj(sjp_5);                          // WZ5 --> 升降到位置5
-    #define L(par_con) tfl_line,par_con                 // L --> 定时器巡线
-    #define R90 tfl_turn,tur_r90                        // R90 --> 定时器右转90度
-    #define L90 tfl_turn,tur_l90                        // L90 --> 定时器左转90度
-    #define R180 tfl_turn,tur_r180                      // R180 --> 定时器右转180度
-    #define L180 tfl_turn,tur_l180                      // L180 --> 定时器左转180度
-    #define C(par_value) tfl_cache,par_value            // C --> 定时器前冲
-    #define MSG(par_value) printf("%s\n",par_value);
-    #define OUT(par_value) printf("%d\n",par_value);
+    #ifndef __HANS_H__
+        #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> 延时(毫秒)
+        
+        #define J fun_sz(han_j);                            // J --> 手抓抓紧
+        #define S fun_sz(han_s);                            // S --> 手抓松
+        
+        #define WZ1 fun_sj(sjp_1);                          // WZ1 --> 升降到位置1
+        #define WZ2 fun_sj(sjp_2);                          // WZ2 --> 升降到位置2
+        #define WZ3 fun_sj(sjp_3);                          // WZ3 --> 升降到位置3
+        #define WZ4 fun_sj(sjp_4);                          // WZ4 --> 升降到位置4
+        #define WZ5 fun_sj(sjp_5);                          // WZ5 --> 升降到位置5
+        
+        #define L(par_con) tfl_line,par_con                 // L --> 定时器巡线
+        #define R90 tfl_turn,tur_r90                        // R90 --> 定时器右转90度
+        #define L90 tfl_turn,tur_l90                        // L90 --> 定时器左转90度
+        #define R180 tfl_turn,tur_r180                      // R180 --> 定时器右转180度
+        #define L180 tfl_turn,tur_l180                      // L180 --> 定时器左转180度
+        #define C(par_value) tfl_cache,par_value            // C --> 定时器前冲
+        
+        #define MSG(par_value) printf("%s\n",par_value);
+        #define OUT(par_value) printf("%d\n",par_value);
+    #endif
 /*-----------------------------------------------------------变量类型说明-----*/
     typedef unsigned int ui;       //unsigned int --> ui
     typedef unsigned char uc;  //unsigned char uc --> uc
@@ -197,9 +203,9 @@
         uc enright;         //允许车头向右标志位
         uc value;           //当前坐标是哪个工位的
         enum varENU_dir fx; //来到当前坐标的时候需要的朝向
-    };//坐标的属性
+    };//坐标的属性(绝对位置)
     struct str_coordinates{
-        struct str_xyproperties xy[5][13];  //坐标
+        struct str_xyproperties xy[5][14];  //坐标(包括第Y=13的虚拟坐标)
         struct str_xyproperties top;        //最顶上呢个没坐标的
     };//坐标巡线
     struct str_zdzj{

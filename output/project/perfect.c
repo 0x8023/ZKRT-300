@@ -1,5 +1,5 @@
+//#include "HANS.h"
 #include "../8023.h"
-#include "HANS.h"
 void main(){
     fun_start(//在此输入小车目前的状态
         0,//X坐标
@@ -18,7 +18,7 @@ void main(){
         4,dir_right);
     
     /*请从下一行开始写你的程序*/
-	D(2000)
+	fun_delay(2,del_s);
     fun_go(3);
 /*
 	  str_tfl.step[0]=tfl_line;
