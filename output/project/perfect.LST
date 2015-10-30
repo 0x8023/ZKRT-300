@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               10/28/2015 07:58:43 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               10/29/2015 14:06:04 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -22,112 +22,33 @@ line level    source
              -侧
   13   1              1,6,2,dir_up,dir_right,
   14   1              1,8,5,dir_up,dir_left,
-  15   1              //2,7,3,dir_up,dir_right,
-  16   1              4,9,3,dir_up,dir_left,
-  17   1              2,9,1,dir_up,dir_left,
-  18   1              4,dir_right);
-  19   1          
-  20   1          /*请从下一行开始写你的程序*/
-  21   1              fun_delay(2,del_s);
-  22   1          fun_go(3);
-  23   1      /*
-  24   1                str_tfl.step[0]=tfl_line;
-  25   1                str_tfl.step[1]=2;
-  26   1                str_tfl.step[2]=tfl_cache;
-  27   1            str_tfl.step[3]=75;
-  28   1      
-  29   1                str_tfl.step[4]=tfl_turn;
-  30   1                str_tfl.step[5]=tur_l90;
-  31   1      2.84/5.3
-  32   1      
-  33   1                str_tfl.step[6]=tfl_line;
-  34   1                str_tfl.step[7]=3;
-  35   1            str_tfl.step[8]=tfl_cache;
-  36   1            str_tfl.step[9]=75;
-  37   1                str_tfl.step[10]=tfl_turn;
-  38   1                str_tfl.step[11]=tur_l90;
-  39   1      
-  40   1                str_tfl.step[12]=tfl_line;
-  41   1                str_tfl.step[13]=2;
-  42   1            str_tfl.step[14]=tfl_cache;
-  43   1            str_tfl.step[15]=75;
-  44   1      
-  45   1                str_tfl.step[16]=tfl_turn;
-  46   1                str_tfl.step[17]=tur_r90;
-  47   1      
-  48   1                str_tfl.step[18]=tfl_line;
-  49   1                str_tfl.step[19]=3;
-  50   1            str_tfl.step[20]=tfl_cache;
-  51   1            str_tfl.step[21]=75;
-  52   1      
-  53   1                str_tfl.step[22]=tfl_turn;
-  54   1                str_tfl.step[23]=tur_r90;
-C51 COMPILER V9.54   PERFECT                                                               10/28/2015 07:58:43 PAGE 2   
-
-  55   1      
-  56   1                str_tfl.step[24]=tfl_line;
-  57   1                str_tfl.step[25]=2;
-  58   1            str_tfl.step[26]=tfl_cache;
-  59   1            str_tfl.step[27]=75;
-  60   1      
-  61   1                str_tfl.step[28]=tfl_turn;
-  62   1                str_tfl.step[29]=tur_r90;
-  63   1      
-  64   1                str_tfl.step[30]=tfl_line;
-  65   1                str_tfl.step[31]=3;
-  66   1            str_tfl.step[32]=tfl_cache;
-  67   1            str_tfl.step[33]=75;
-  68   1      
-  69   1                str_tfl.step[34]=tfl_turn;
-  70   1                str_tfl.step[35]=tur_r90;
-  71   1      
-  72   1                str_tfl.step[36]=tfl_line;
-  73   1                str_tfl.step[37]=2;
-  74   1            str_tfl.step[38]=tfl_cache;
-  75   1            str_tfl.step[39]=75;
-  76   1      
-  77   1                str_tfl.step[40]=tfl_turn;
-  78   1                str_tfl.step[41]=tur_l90;
-  79   1      
-  80   1                str_tfl.step[42]=tfl_line;
-  81   1                str_tfl.step[43]=3;
-  82   1            str_tfl.step[44]=tfl_cache;
-  83   1            str_tfl.step[45]=75;
-  84   1      
-  85   1                str_tfl.step[46]=tfl_turn;
-  86   1                str_tfl.step[47]=tur_l90;
-  87   1                
-  88   1                str_tfl.step[48]=def_end;
-  89   1               
-  90   1                str_tfl.online=tf_false;
-  91   1            str_tfl.run=str_tfl.step;
-  92   1                str_tfl.gospeed=40;
-  93   1                str_tfl.turnspeed=40;
-  94   1            str_tfl.cachespeed=40;
-  95   1                str_tfl.doing=tf_ture;
-  96   1      */
-  97   1          /*你的程序到此为止,请不要再继续改动*/
-  98   1          fun_stop();
-  99   1      }
- 100          void Int0Interrupt() interrupt 0{
- 101   1          ;
- 102   1      }
- 103          void Timer0Interrupt() interrupt 1 using 1{
- 104   1          fun_timer0();
- 105   1      }
- 106          void Timer1Interrupt() interrupt 3 using 1{
- 107   1          fun_timer1();
- 108   1      }
+  15   1              2,7,3,dir_up,dir_right,
+  16   1              2,9,1,dir_up,dir_left,
+  17   1              4,dir_right);
+  18   1          /*请从下一行开始写你的程序*/
+  19   1              fun_delay(1,del_s);
+  20   1          fun_go(gw_2);
+  21   1          fun_zbtfl();
+  22   1          /*你的程序到此为止,请不要再继续改动*/
+  23   1          fun_stop();
+  24   1      }
+  25          void Int0Interrupt() interrupt 0{
+  26   1          ;
+  27   1      }
+  28          void Timer0Interrupt() interrupt 1 using 1{
+  29   1          fun_timer0();
+  30   1      }
+  31          void Timer1Interrupt() interrupt 3 using 1{
+  32   1          fun_timer1();
+  33   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    193    ----
+   CODE SIZE        =    196    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
-C51 COMPILER V9.54   PERFECT                                                               10/28/2015 07:58:43 PAGE 3   
-
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

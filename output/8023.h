@@ -103,7 +103,7 @@
         mot_py=44,   //电机2
         mot_sj=45,   //电机3
         mot_hz=46,   //电机4
-        mot_pyhz=47  //平移回转同步运动
+        mot_pyhz=47  //平移回转同步运动(仅自动抓件函数用到)
     };//电机选择
     enum varENU_dir{
         dir_up=50,
@@ -142,8 +142,18 @@
     enum varENU_tfl{
         tfl_line=100,    //巡线
         tfl_cache=101,   //前冲
-        tfl_turn=102,    //转弯
+        tfl_turn=102     //转弯
     };//定时器巡线执行动作
+    enum varENU_go{
+        gw_1=110,
+        gw_2=111,
+        gw_3=112,
+        gw_4=113,
+        gw_5=114,
+        get=115,
+        start=116,
+        end=117
+    };
 
     struct str_state{
         char x;                 //X坐标
@@ -183,7 +193,7 @@
 
         ui mainturn90;    //主函数90度转弯屏蔽延时
         ui timerturn90;   //定时器90度转弯屏蔽延时
-        ui mainturn180;  //主函数180度转弯屏蔽延时
+        ui mainturn180;   //主函数180度转弯屏蔽延时
         ui timerturn180;  //主函数180度转弯屏蔽延时
     };//参数
     struct str_timerfolline{
@@ -259,7 +269,7 @@
     extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成
     extern void fun_coordinate();//自动巡线之坐标
     extern void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed);//定时器坐标巡线步骤生成
-    extern void fun_go(char par_gw);//定时器坐标巡线最终调用形式
+    extern void fun_go(enum varENU_go par_model);//定时器坐标巡线最终调用形式
     extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
     extern void fun_zbtfl();//坐标巡线设置定时器等待巡线结束函数
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
@@ -270,5 +280,9 @@
     extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
                 enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
     extern void fun_stop();//结束函数
+/*-----------------------------------------------------------调试函数声明-----*/
+    #ifdef Debug
+        extern void deb_outstep(uc par_model);//输出定时器巡线数组
+    #endif
 /*---------------------------------------------------------------更新日志-----*/
 #endif
