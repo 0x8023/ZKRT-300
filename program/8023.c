@@ -2074,9 +2074,105 @@ void fun_xymove(enum varENU_tfl par_model,char par_value){
             break;
     }
 }//坐标巡线单步累计步骤生成
-void fun_coordinate(){
+void fun_coordinate(char par_xnow,char par_ynow,char par_ctfxnow,char par_xnext,char par_ynext,char par_ctfxnext){
     ;
 }//自动巡线之坐标
+char fun_getpublicy(char par_xnow,char par_ynow,char par_xnext,char par_ynext,enum varENU_dir par_gwfx){
+    uc loc_xhx,loc_xhy,loc_flag=0,loc_con=0;
+    uc loc_data[12];
+    memset(loc_data,0,sizeof(loc_data));//清空数组
+    if(par_xnext>par_xnow){//往右走
+        for(loc_xhy=0;loc_xhy<=12;loc_xhy++){//循环扫描所有可能性的Y
+            for(loc_xhx=par_xnow;loc_xhx<=par_xnext;loc_xhx++){//循环扫描两点之间的X
+                if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果允许右行
+                    loc_flag++;//标志位+1
+                }
+            }
+            if(loc_flag==par_xnext-par_xnow+1){//如果可以走的线就是一共需要走的线
+                loc_data[loc_con++]=loc_xhy;//将Y轴数据记录至数组
+            }
+            loc_flag=0;//标志位清零
+        }
+    }else if(par_xnext<par_xnow){//往左走
+        for(loc_xhy=0;loc_xhy<=12;loc_xhy++){//循环扫描所有可能性的Y
+            for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//循环扫描两点之间的X
+                if(str_zbfl.xy[loc_xhx][loc_xhy].enleft==tf_ture){//如果允许左行
+                    loc_flag++;//标志位+1
+                }
+            }
+            if(loc_flag==par_xnow-par_xnext+1){//如果可以走的线就是一共需要走的线
+                loc_data[loc_con++]=loc_xhy;//将Y轴数据记录至数组
+            }
+            loc_flag=0;//标志位清零
+        }
+    }else{//不往左不往右
+        return (-1);
+    }
+    if(par_ynext>par_ynow){//要往上走
+        if(par_gwfx==dir_up){//工位要求向上停
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]>=par_ynow && loc_data[loc_con]<par_ynext){//如果比现在的大,比要去的小
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]<par_ynow){//如果比现在的小
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]>par_ynext){//如果比要去的大
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+        }else if(par_gwfx==dir_down){//工位要求向下停
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]>par_ynext){//如果比要去的大
+                    return (loc_data[loc_con]);//返回值
+                }
+                if(loc_data[loc_con]<par_ynext){//如果比要去的小
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+        }else{
+            return (-1);
+        }
+    }else if(par_ynext<par_ynow){//往下走
+        if(par_gwfx==dir_up){//工位要求向上停
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]<par_ynext){//如果比要去的小
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]>par_ynext){//如果比要去的大
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+        }else if(par_gwfx==dir_down){//如果工位要求朝下停
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]<=par_ynow && loc_data[loc_con]>par_ynext){//如果比现在的小,比要去的大
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]>par_ynow){//如果比现在的大
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+            for(loc_con=0;loc_data[loc_con]!=0;loc_con++){//循环已经赋值过的数组
+                if(loc_data[loc_con]<par_ynext){//如果比要去的小
+                    return (loc_data[loc_con]);//返回值
+                }
+            }
+        }else{
+            return (-1);
+        }
+    }else{
+        return (-1);
+    }
+    return (-2);
+}//获取共有Y轴
 void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed){
     /*
         优先左右走,其次考虑车头方向,再次考虑工件台的位置
