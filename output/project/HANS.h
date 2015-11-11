@@ -1,12 +1,12 @@
 #ifndef __HANS_H__
 #define __HANS_H__
-    #define A 40,35,45
-    #define K 56,45,50
-    #define Y 76,48,50
+    #define A 40,40,45
+    #define K 43,40,45
+    #define Y 70,40,50
 
     #define GW fun_sj(sjp_1);fun_py(tra_h);fun_hz(dir_right);fun_sz(han_s);
 
-    #define CD fun_flsetting(30,0,35,L(1),E);W
+    #define CD fun_folline(1,30);
 
     #define R90 tfl_turn,tur_r90  
     #define L90 tfl_turn,tur_l90
@@ -64,7 +64,7 @@
     #define LEFT fun_hz(dir_left);
     #define U fun_hz(dir_up);
 
-    #define W def_waitfl
+    #define W fun_maintfl();
     #define E def_end
 
     #define F fun_flsetting
@@ -74,6 +74,9 @@
     #define PH(a,b)  fun_pyhz(a,b);
     #define ST(a,b,c) fun_pysjhz(b,a,c);
 
-    #define T	fun_motors(mot_rl,-15);fun_delay(1250,del_ms);F(A,E);W
-    #define JIN 	fun_motors(mot_rl,15);fun_delay(1250,del_ms);F(A,E);W
+    #define T   fun_motors(mot_rl,-15);fun_delay(1050,del_ms);fun_jtjp();F(A,E);W
+    #define JIN     fun_motors(mot_rl,15);fun_delay(1050,del_ms);fun_jtjp();F(A,E);W
+        
+    #define JP fun_jtjp();
+        
 #endif

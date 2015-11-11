@@ -1,7 +1,7 @@
 #ifndef __8023_H__
 #define __8023_H__
 /*-----------------------------------------------------------开启模式选择-----*/
-//    #define Debug ok
+    #define Debug ok
 /*-------------------------------------------------------------头文件引入-----*/
     #include "STC12c5a60s2.h"   //单片机头文件
     #include "intrins.h"        //_nop_与循环位移
@@ -267,17 +267,17 @@
     extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
     extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中
     extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成
-    extern void fun_coordinate(char par_xnow,char par_ynow,char par_ctfxnow,char par_xnext,char par_ynext,char par_ctfxnext);//自动巡线之坐标
     extern char fun_getpublicy(char par_xnow,char par_ynow,char par_xnext,char par_ynext,enum varENU_dir par_gwfx);//获取共有Y轴
-    extern void fun_record(char par_x,char par_y,enum varENU_dir par_ctfx,char par_gospeed,char par_turnspeed,char par_cachespeed);//定时器坐标巡线步骤生成
+    extern void fun_record(char par_xnow,char par_ynow,enum varENU_dir par_ctfxnow,char par_xnext,char par_ynext,enum varENU_dir par_ctfxnext);//定时器坐标巡线步骤生成
     extern void fun_go(enum varENU_go par_model);//定时器坐标巡线最终调用形式
+    extern void fun_coordinate(char par_gospeed,char par_turnspeed,char par_cachespeed);//自动巡线之坐标
     extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
     extern void fun_zbtfl();//坐标巡线设置定时器等待巡线结束函数
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
     extern void fun_zhuajian();//从起始区走到抓件区
-    extern void fun_back();//从抓件区回到起始区
+    extern void fun_back90();//从抓件区回到起始区
     extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
                 enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
     extern void fun_stop();//结束函数
