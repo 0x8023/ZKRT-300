@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   PERFECT                                                               11/11/2015 19:46:16 PAGE 1   
+C51 COMPILER V9.54   PERFECT                                                               11/12/2015 11:01:59 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE PERFECT
@@ -62,7 +62,7 @@ line level    source
   52   1          // deb_outstep(32);
   53   1          // fun_zbtfl();
   54   1      
-C51 COMPILER V9.54   PERFECT                                                               11/11/2015 19:46:16 PAGE 2   
+C51 COMPILER V9.54   PERFECT                                                               11/12/2015 11:01:59 PAGE 2   
 
   55   1          
   56   1          // // F(K,L(5),C(45),R90,L(3),C(45),L90,L(4),E);

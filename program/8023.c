@@ -2576,7 +2576,11 @@ void fun_back(){
 }
 void fun_coordinate(char par_gospeed,char par_turnspeed,char par_cachespeed){
     char loc_y=fun_getpublicy(str_now.x,str_now.y,str_next.x,str_next.y,str_next.ctfx);//获取公共Y
-    if(loc_y>=0&&loc_y<20){//常规情况
+    str_tfl.run=str_tfl.step;//指针指向第一个步骤
+    if((loc_y>=0&&loc_y<20)||(loc_y>=40&&loc_y<60)){//常规情况和在同一横轴的情况
+        if(loc_y>=40&&loc_y<60){
+            loc_y-=40;
+        }
         //第一步:直行
         if(loc_y!=str_now.y){//当前行不是PublicY
             if(str_next.y>str_now.y){//要往上走
@@ -2662,64 +2666,96 @@ void fun_coordinate(char par_gospeed,char par_turnspeed,char par_cachespeed){
             fun_xymove(tfl_line,str_now.x-str_next.x);
         }
         //第四步:转弯
+        if(str_next.y>str_now.y){//如果要往上走
+            fun_xymove(tfl_cache,40);//前冲
+            if(str_now.ctfx==dir_left){
+                fun_xymove(tfl_turn,tur_r90);//转弯
+            }else if(str_now.ctfx==dir_right){
+                fun_xymove(tfl_turn,tur_l90);//转弯
+            }
+        }else if(str_next.y<str_now.y){//如果要往下走
+            fun_xymove(tfl_cache,40);//前冲
+            if(str_now.ctfx==dir_left){
+                fun_xymove(tfl_turn,tur_l90);//转弯
+            }else if(str_now.ctfx==dir_right){
+                fun_xymove(tfl_turn,tur_r90);//转弯
+            }
+        }
         //第五步:直行
-        
+        if(str_next.y>str_now.y){//如果要往上走
+            fun_xymove(tfl_line,str_next.y-str_now.y);
+            fun_xymove(tfl_cache,40);//前冲
+        }else if(str_next.y<str_now.y){//如果要往下走
+            fun_xymove(tfl_line,str_now.y-str_next.y);
+            fun_xymove(tfl_cache,40);//前冲
+        }
     }else if(loc_y>=20&&loc_y<40){//在同一X轴(同一竖线)
-
-    }else if(loc_y>=40&&loc_y<60){//在同一Y轴(同一横线)
-
+        loc_y-=20;//把数据还原
+        //第一步:直行
+        if(str_next.y>str_now.y){//要往上走
+            if(str_now.ctfx!=dir_up){//如果车头不是向上(是向下)
+                fun_xymove(tfl_cache,40);//前冲
+                switch(str_now.ctfx){//选择现在的车头方向
+                    case dir_down://如果现在车头向下
+                        if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
+                            fun_xymove(tfl_turn,tur_r180);//右转180
+                            fun_xymove(tfl_line,str_next.y-str_now.y);//巡线至PublicY
+                        }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
+                            fun_xymove(tfl_turn,tur_l180);//左转180
+                            fun_xymove(tfl_line,str_next.y-str_now.y);//巡线至PublicY
+                        }else{//左右都有东西
+                            ;//*$*//
+                        }
+                        break;
+                    case dir_left://如果现在车头向左
+                        fun_xymove(tfl_turn,tur_r90);//转弯
+                        fun_xymove(tfl_line,str_next.y-str_now.y);//巡线至PublicY
+                        break;
+                    case dir_right://如果现在车头向右
+                        fun_xymove(tfl_turn,tur_l90);//转弯
+                        fun_xymove(tfl_line,str_next.y-str_now.y);//巡线至PublicY
+                        break;
+                    default:
+                        break;
+                }
+            }else{//如果车头向上
+                fun_xymove(tfl_line,str_next.y-str_now.y);//直接巡线至PublicY
+            }
+        }else if(str_next.y<str_now.y){//如果要去的在现在的下面,往下走
+            if(str_now.ctfx!=dir_down){//如果车头不是向下(是向上)
+                fun_xymove(tfl_cache,40);//前冲
+                switch(str_now.ctfx){//选择现在的车头方向
+                    case dir_up://如果现在车头向上
+                        if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
+                            fun_xymove(tfl_turn,tur_l180);//左转180
+                            fun_xymove(tfl_line,str_now.y-str_next.y);//巡线至PublicY
+                        }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
+                            fun_xymove(tfl_turn,tur_r180);//右转180
+                            fun_xymove(tfl_line,str_now.y-str_next.y);//巡线至PublicY
+                        }else{//左右都有东西
+                            ;//*$*//
+                        }
+                        break;
+                    case dir_left://如果现在车头向左
+                        fun_xymove(tfl_turn,tur_l90);//转弯
+                        fun_xymove(tfl_line,str_now.y-str_next.y);//巡线至PublicY
+                        break;
+                    case dir_right://如果现在车头向右
+                        fun_xymove(tfl_turn,tur_r90);//转弯
+                        fun_xymove(tfl_line,str_now.y-str_next.y);//巡线至PublicY
+                        break;
+                    default:
+                        break;
+                }
+            }else{//如果车头向下
+                fun_xymove(tfl_line,str_now.y-str_next.y);//直接巡线至PublicY
+            }
+        }
+        fun_xymove(tfl_cache,40);//前冲
     }else{
         //错误
     }
 
-    fun_delay(50,del_ms);
-    str_tfl.run=str_tfl.step;//指针指向第一个步骤
-    if(str_next.x==str_now.x){
-        if(str_next.ctfx==dir_up){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,str_next.y-1,str_next.ctfx);
-        }else if(str_next.ctfx==dir_down){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,str_next.y+1,str_next.ctfx);
-        }else{
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,str_next.y,dir_up);
-        }
-    }else if(str_next.y==str_now.y){
-        ;
-    }else{
-        //第一步:沿Y轴走
-        if(str_next.x>str_now.x){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,loc_y,dir_right);
-            str_now.ctfx=dir_right;
-        }else if(str_next.x<str_now.x){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,loc_y,dir_left);
-            str_now.ctfx=dir_left;
-        }else{
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,loc_y,str_next.ctfx);
-        }
-        str_now.y=loc_y;
-        //第二步:沿X轴走
-        if(str_next.y>str_now.y){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_next.x,str_now.y,dir_up);
-            str_now.ctfx=dir_up;
-        }else if(str_next.y<str_now.y){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_next.x,str_now.y,dir_down);
-            str_now.ctfx=dir_down;
-        }else{
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_next.x,str_now.y,str_next.ctfx);
-            str_now.ctfx=str_next.ctfx;
-        }
-        str_now.x=str_next.x;
-        //第三步:沿Y轴走
-        if(str_next.ctfx==dir_up){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,str_next.y-1,str_next.ctfx);
-        }else if(str_next.ctfx==dir_down){
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,str_next.y+1,str_next.ctfx);
-        }else{
-            fun_record(str_now.x,str_now.y,str_now.ctfx,str_now.x,str_next.y,dir_up);
-        }
-    }
-
-    fun_xymove(tfl_line,1);//进入工位台
-    fun_xymove(tfl_cache,40);//前冲
     str_tfl.run+=2;//指针指向下一组数组
     (*str_tfl.run)=def_end;//存入步骤
     printf("%d\n",(int)loc_y);
