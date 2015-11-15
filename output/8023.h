@@ -1,7 +1,7 @@
 #ifndef __8023_H__
 #define __8023_H__
 /*-----------------------------------------------------------开启模式选择-----*/
-    #define Debug ok
+//    #define Debug ok
 /*-------------------------------------------------------------头文件引入-----*/
     #include "STC12c5a60s2.h"   //单片机头文件
     #include "intrins.h"        //_nop_与循环位移
@@ -221,7 +221,7 @@
     struct str_zdzj{
         uc jx[8][5];        //件序:8个抓件区(从左上到左下0-3,从右上到右下4-7);5个高度(0-5),最上空位为0,从上到下1-4,底座为5
     };//自动抓件
-    extern struct str_state str_begin,str_now,str_next;   //分别为:起始状态/当前状态/目标状态
+    extern struct str_state str_begin,str_now,str_next;   //分别为:上一个状态/起始状态/当前状态/目标状态
     extern struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
     extern struct str_timerfolline str_tfl;               //定时器巡线
     extern struct str_coordinates str_zbfl;               //坐标巡线
@@ -259,11 +259,11 @@
     extern void fun_port();//串口初始化
     extern void fun_test();//测试
     extern uc   fun_min(uc par_num,...);//求最小值
-    extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,
-           par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
-           par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
-           par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
-           uc par_5value,uc par_5fx);
+    extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,//x为x轴坐标,y为y轴坐标,value为工位号,fx为到达此坐标时需要的朝向,gw为工位在小车的哪一侧
+                             par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
+                             par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
+                             par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
+                                              uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw);
     extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
     extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中
     extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成
@@ -284,6 +284,7 @@
 /*-----------------------------------------------------------调试函数声明-----*/
     #ifdef Debug
         extern void deb_outstep(uc par_model);//输出定时器巡线数组
+        extern void deb_outpb();
     #endif
 /*---------------------------------------------------------------更新日志-----*/
 #endif
