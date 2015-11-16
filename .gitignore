@@ -8,19 +8,14 @@
 !*.A51
 
 *.bak
-*.htm
 /output/project/perfect
 *.lnp
 *.uvgui.*
 *.lst
 *.plg
 *.LST
-*.plg
 *.obj
 *.__b
 *.htm
 *.OBJ
-*.plg
-*.bak
-*.LST
 *.M51

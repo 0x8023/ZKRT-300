@@ -1,4 +1,5 @@
 #include "./output/8023.h"
+/*---------------------------------------------------------------定义变量-----*/
 struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
 struct str_parameter str_cod={
     /*ui str_cod.mlinerqd*/25000,//默认主函数巡线软起动路程为25000
@@ -29,6 +30,7 @@ struct str_parameter str_cod={
 struct str_timerfolline str_tfl;
 struct str_coordinates str_zbfl;
 data ul var_timer;
+/*---------------------------------------------------------------方法实现-----*/
 void fun_delay(ui par_value,enum varENU_del par_model){
     data ui loc_con=par_value;
     switch(par_model){
@@ -2548,8 +2550,56 @@ void fun_go(enum varENU_go par_model){
     str_tfl.run=str_tfl.step;//指针指向第一个步骤
     switch(par_model){
         case go_get:
+            fun_sz(han_s);                 //手抓松
+            fun_sj(sjp_1);                 //上升到最高位
+            fun_py(tra_q);                 //平移到前端
+            if(str_begin.hzfx!=dir_right){ //如果不在右边
+                fun_hz(dir_right);         //就平移到右边
+            }
+            fun_folline(2,60);
+            fun_turn(tur_l90,40);
+            fun_folline(1,60);
+            fun_qc(100,40);
+            while((!in_ls4||!in_ls5)||(in_ls1||in_ls2||in_ls3||in_ls6||in_ls7||in_ls8)){
+                if(in_ls1||in_ls2||in_ls3||!in_ls5){
+                    fun_motors(mot_rl,-30);
+                    fun_delay(300,del_ms);
+                    fun_motors(mot_r,-20);
+                    fun_motors(mot_l,-30);
+                    fun_delay(300,del_ms);
+                    fun_motors(mot_rl,-30);
+                    fun_delay(300,del_ms);
+                }//3亮或5不亮
+                else if(in_ls6||in_ls7||in_ls8||!in_ls4){
+                    fun_motors(mot_rl,-30);
+                    fun_delay(300,del_ms);
+                    fun_motors(mot_r,-30);
+                    fun_motors(mot_l,-29);
+                    fun_delay(300,del_ms);
+                    fun_motors(mot_rl,-30);
+                    fun_delay(300,del_ms);
+                }//6亮或4不亮
+                fun_qc(200,40);//重新进行前冲
+            }
+            fun_motors(mot_rl,0);
+            str_begin.x=3;
+            str_begin.y=1;
+            str_begin.ctfx=dir_left;
             break;
         case go_start:
+            fun_motors(mot_rl,-25);
+            fun_delay(1,del_s);
+
+            fun_motors(mot_r,-48);
+            fun_motors(mot_l,-20);
+            fun_delay(3,del_s);    
+
+            fun_motors(mot_rl,-35);
+            fun_delay(1,del_s);
+            fun_motors(mot_rl,0);
+            str_begin.x=4;
+            str_begin.y=0;
+            str_begin.ctfx=dir_up;
             break;
         case go_end:
             str_next.x=0;//x轴坐标赋值为0
@@ -3271,52 +3321,6 @@ void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]){
     par_high[par_now]++;
     par_high[par_next]--;
 }//拿件(配合自动抓件使用)
-void fun_zhuajian(){
-    fun_sz(han_s);                 //手抓松
-    fun_sj(sjp_1);                 //上升到最高位
-    fun_py(tra_q);                 //平移到前端
-    if(str_begin.hzfx!=dir_right)  //如果不在右边
-        fun_hz(dir_right);         //就平移到右边
-
-    fun_folline(2,60);
-    fun_turn(tur_l90,40);
-    fun_folline(1,60);
-    fun_qc(100,40);
-    while((!in_ls4||!in_ls5)||(in_ls1||in_ls2||in_ls3||in_ls6||in_ls7||in_ls8)){
-        if(in_ls1||in_ls2||in_ls3||!in_ls5){
-            fun_motors(mot_rl,-30);
-            fun_delay(300,del_ms);
-            fun_motors(mot_r,-20);
-            fun_motors(mot_l,-30);
-            fun_delay(300,del_ms);
-            fun_motors(mot_rl,-30);
-            fun_delay(300,del_ms);
-        }//3亮或5不亮
-        else if(in_ls6||in_ls7||in_ls8||!in_ls4){
-            fun_motors(mot_rl,-30);
-            fun_delay(300,del_ms);
-            fun_motors(mot_r,-30);
-            fun_motors(mot_l,-29);
-            fun_delay(300,del_ms);
-            fun_motors(mot_rl,-30);
-            fun_delay(300,del_ms);
-        }//6亮或4不亮
-        fun_qc(200,40);//重新进行前冲
-    }
-    fun_motors(mot_rl,0);
-}//从起始区走到抓件区
-void fun_back90(){
-    fun_motors(mot_rl,-25);
-    fun_delay(1,del_s);
-
-    fun_motors(mot_r,-48);
-    fun_motors(mot_l,-20);
-    fun_delay(3,del_s);    
-
-    fun_motors(mot_rl,-35);
-    fun_delay(1,del_s);
-    fun_motors(mot_rl,0);
-}//从抓件区回到起始区
 void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,
     enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
     CLK_DIV=0x00;             //不分频

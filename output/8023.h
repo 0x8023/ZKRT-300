@@ -279,10 +279,8 @@
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
     extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
     extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
-    extern void fun_zhuajian();//从起始区走到抓件区
-    extern void fun_back90();//从抓件区回到起始区
     extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
-                enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
+                          enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
     extern void fun_stop();//结束函数
 /*-----------------------------------------------------------调试函数声明-----*/
     #ifdef Debug
