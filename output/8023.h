@@ -83,7 +83,7 @@
     sbit out_switchselect=P1^6; //接近开关片选(SER_BS)
     sbit out_motorselect=P1^7;  //电机输出片选(MOT_BS)
     sbit out_lamp=P3^7;         //红外输出(LAMP)(低电平打开)
-/*---------------------------------------------------------------变量声明-----*/
+/*-----------------------------------------------------------变量类型定义-----*/
     enum varENU_tf{
         tf_null=10,
         tf_ture=11,
@@ -224,68 +224,80 @@
     struct str_zdzj{
         uc jx[8][5];        //件序:8个抓件区(从左上到左下0-3,从右上到右下4-7);5个高度(0-5),最上空位为0,从上到下1-4,底座为5
     };//自动抓件
+/*---------------------------------------------------------------变量声明-----*/
     extern struct str_state str_begin,str_now,str_next;   //分别为:上一个状态/起始状态/当前状态/目标状态
     extern struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
     extern struct str_timerfolline str_tfl;               //定时器巡线
     extern struct str_coordinates str_zbfl;               //坐标巡线
     extern data ul var_timer0;                            //timer0毫秒级计时器计数位
-/*---------------------------------------------------------------函数声明-----*/
-    extern void fun_delay(ui par_value,enum varENU_del par_model); //延时
-    extern void fun_timer0init();//1毫秒定时器0初始化
-    extern void fun_timer1init();//20毫秒定时器1初始化
-    extern void fun_timer0();//1毫秒定时器0处理函数
-    extern void fun_timer1();//20毫秒定时器1处理函数
-    extern void fun_wait();//等待按键
-    extern void fun_pwminit();//PWM初始化
-    extern void fun_pwmr(uc par_value);//右路PWM输出
-    extern void fun_pwml(uc par_value);//左路PWM输出
-    extern void fun_motors(enum varENU_mot par_model,char par_speed);//主函数操作电机
-    extern void fun_motorsrl(enum varENU_mot par_model,int par_speed);//定时器操作左右轮
-    extern void fun_sz(enum varENU_han par_model);//手抓单步运动
-    extern void fun_sj(enum varENU_sjp par_model);//升降单步运动
-    extern void fun_py(enum varENU_tra par_model);//平移单步运动
-    extern void fun_hz(enum varENU_dir par_model);//回转单步运动
-    extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
-    extern void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//升降回转同步运动
-    extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel);//平移升降回转同步运动(先升降回转,再平移回转)
-    extern void fun_jtjp();//静态纠偏
-    extern void fun_timermove();//定时器移动
-    extern void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...);//主函数用定时器巡线调用函数
-    extern void fun_folline(uc par_con,uc par_speed);//主函数巡线
-    extern void fun_turn(enum varENU_tur par_model,uc par_speed);//主函数转弯
-    extern void fun_qc(uc par_time,uc par_speed);//主函数前冲
-    extern void fun_stope2prom();//停止EEPROM服务
-    extern uc   fun_reade2prom(ui par_add);//读取EEPROM数据
-    extern void fun_writee2prom(ui par_add,uc par_dat);//写入数据至EEPROM
-    extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
-    extern void fun_calibration();//自动校准参数
-    extern void fun_port();//串口初始化
-    extern void fun_test();//测试
-    extern uc   fun_min(uc par_num,...);//求最小值
-    extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,//x为x轴坐标,y为y轴坐标,value为工位号,fx为到达此坐标时需要的朝向,gw为工位在小车的哪一侧
-                             par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
-                             par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
-                             par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
-                                              uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw);
-    extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
-    extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中
-    extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成
-    extern char fun_getpublicy(char par_xnow,char par_ynow,char par_xnext,char par_ynext,enum varENU_dir par_gwfx);//获取共有Y轴
-    extern void fun_record(char par_xnow,char par_ynow,enum varENU_dir par_ctfxnow,char par_xnext,char par_ynext,enum varENU_dir par_ctfxnext);//定时器坐标巡线步骤生成
-    extern void fun_go(enum varENU_go par_model);//定时器坐标巡线最终调用形式
-    extern void fun_coordinate();//自动巡线之坐标
-    extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
-    extern void fun_zbtfl();//坐标巡线设置定时器等待巡线结束函数
-    extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
-    extern void fun_zjzt(uc par_motor,uc par_model);//抓件状态
-    extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
-    extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
-                          enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
-    extern void fun_stop();//结束函数
-/*-----------------------------------------------------------调试函数声明-----*/
-    #ifdef Debug
-        extern void deb_outstep(uc par_model);//输出定时器巡线数组
-        extern void deb_outpb();
-    #endif
+/*---------------------------------------------------------------函数声明-----*/    
+    /*-------------------------------------------------------------------延时-----*/
+        extern void fun_delay(ui par_value,enum varENU_del par_model);//延时
+    /*-------------------------------------------------------------------串口-----*/
+        extern void fun_port();//串口初始化
+    /*--------------------------------------------------------------------PWM-----*/
+        extern void fun_pwminit();//PWM初始化
+        extern void fun_pwmr(uc par_value);//右路PWM输出
+        extern void fun_pwml(uc par_value);//左路PWM输出
+    /*-----------------------------------------------------------------定时器-----*/
+        extern void fun_timer0init();//1毫秒定时器0初始化
+        extern void fun_timer1init();//20毫秒定时器1初始化
+        extern void fun_timer0();//1毫秒定时器0处理函数
+        extern void fun_timer1();//20毫秒定时器1处理函数
+    /*-----------------------------------------------------------------E2PROM-----*/
+        extern void fun_stope2prom();//关闭EEPROM功能(IapIdle)
+        extern uc fun_reade2prom(ui par_add);//读取EEPROM数据
+        extern void fun_writee2prom(ui par_add,uc par_dat);//写EEPROM数据
+        extern void fun_cleane2prom(ui par_add);//清除EEPROM数据
+    /*-------------------------------------------------------------启动和停止-----*/
+        extern void fun_wait();//等待按键
+        extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
+                       enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
+        extern void fun_stop();//结束函数
+    /*--------------------------------------------------------电机1~4单步运动-----*/
+        extern void fun_sz(enum varENU_han par_model);//手抓单步运动
+        extern void fun_py(enum varENU_tra par_model);//平移单步运动
+        extern void fun_sj(enum varENU_sjp par_model);//升降单步运动
+        extern void fun_hz(enum varENU_dir par_model);//回转单步运动
+    /*--------------------------------------------------------电机2~4同步运动-----*/
+        extern void fun_pyhz(enum varENU_tra par_pymodel,enum varENU_dir par_hzmodel);//平移回转同步运动
+        extern void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel);//升降回转同步运动
+        extern void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel);//平移升降回转同步运动(先升降回转,再平移回转)
+    /*---------------------------------------------------------------自动抓件-----*/
+        extern uc fun_min(uc par_num,...);//求最小值
+        extern void fun_zjzt(uc par_motor,char par_model);//抓件状态,0为左上位,3为左下位,4为右上位,7为右下位
+        extern void fun_najian(uc par_now,uc par_next,char par_high[8],uc par_data[8][5]);//拿件(配合自动抓件使用)
+        extern void fun_calibration();//自动校准平移参数
+        extern void fun_zdzj(ul par_04,ul par_37);//自动抓件
+    /*-------------------------------------------------------------主函数巡线-----*/
+        extern void fun_motors(enum varENU_mot par_model,char par_speed);//主函数操作电机
+        extern void fun_folline(uc par_con,uc par_speed);//主函数巡线
+        extern void fun_turn(enum varENU_tur par_model,uc par_speed);//主函数转弯
+        extern void fun_qc(uc par_time,uc par_speed);//主函数前冲
+        extern void fun_jtjp();//静态纠偏
+    /*-------------------------------------------------------------定时器巡线-----*/
+        extern void fun_motorsrl(enum varENU_mot par_model,int par_speed);//定时器操作左右轮
+        extern void fun_timermove();//定时器移动
+        extern void fun_flsetting(char par_gospeed,char par_turnspeed,char par_cachespeed,...);//主函数用定时器巡线调用函数
+        extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
+    /*---------------------------------------------------------------坐标巡线-----*/
+        extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,//设置初始坐标
+                                 par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
+                                 par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
+                                 par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
+                                                  uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw);
+        extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
+        extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中,把现在的工位号存储再str_now结构体中
+        extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成
+        extern char fun_getpublicy(char par_xnow,char par_ynow,char par_xnext,char par_ynext,enum varENU_dir par_gwfx);//获取共有Y轴
+        extern void fun_coordinate();//自动巡线之坐标
+        extern void fun_go(enum varENU_go par_model);//定时器坐标巡线最终调用形式
+        extern void fun_zbtfl();//坐标巡线设置定时器等待巡线结束函数
+    /*---------------------------------------------------------------调试测试-----*/
+        extern void fun_test();//测试程序
+        #ifdef Debug
+            extern void deb_outstep(uc par_model);//输出定时器巡线数组
+            extern void deb_outpb();//输出屏蔽坐标
+        #endif
 /*---------------------------------------------------------------更新日志-----*/
 #endif
