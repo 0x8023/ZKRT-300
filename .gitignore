@@ -1,0 +1,13 @@
+!program/
+
+*.LST
+*.bak
+*.uvgui.*
+*.plg
+*.lst
+*.__b
+*.htm
+*.obj
+*.OBJ
+*.lnp
+*.M51

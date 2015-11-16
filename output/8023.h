@@ -16,6 +16,9 @@
     #define def_timer1stop TR1=0;   //定时器1关闭
     #define def_end 0x82            //不确定元素结束标志位
     #define def_select(par_model) out_switchselect=par_model==sel_58?0:1; //传感器片选
+    #define def_setspeed(par_gospeed,par_turnspeed,par_cachespeed) str_tfl.gospeed=par_gospeed;\
+                                                                   str_tfl.turnspeed=par_turnspeed;\
+                                                                   str_tfl.cachespeed=par_cachespeed;
 /*-------------------------------------------------------------简化宏定义-----*/
     #ifndef __HANS_H__
         #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> 延时(毫秒)
@@ -35,7 +38,7 @@
         #define R180 tfl_turn,tur_r180                      // R180 --> 定时器右转180度
         #define L180 tfl_turn,tur_l180                      // L180 --> 定时器左转180度
         #define C(par_value) tfl_cache,par_value            // C --> 定时器前冲
-        
+
         #define MSG(par_value) printf("%s\n",par_value);
         #define OUT(par_value) printf("%d\n",par_value);
     #endif
@@ -145,14 +148,14 @@
         tfl_turn=102     //转弯
     };//定时器巡线执行动作
     enum varENU_go{
-        gw_1=110,
-        gw_2=111,
-        gw_3=112,
-        gw_4=113,
-        gw_5=114,
-        get=115,
-        start=116,
-        end=117
+        go_1=110,
+        go_2=111,
+        go_3=112,
+        go_4=113,
+        go_5=114,
+        go_get=115,
+        go_start=116,
+        go_end=117
     };
 
     struct str_state{
@@ -270,7 +273,7 @@
     extern char fun_getpublicy(char par_xnow,char par_ynow,char par_xnext,char par_ynext,enum varENU_dir par_gwfx);//获取共有Y轴
     extern void fun_record(char par_xnow,char par_ynow,enum varENU_dir par_ctfxnow,char par_xnext,char par_ynext,enum varENU_dir par_ctfxnext);//定时器坐标巡线步骤生成
     extern void fun_go(enum varENU_go par_model);//定时器坐标巡线最终调用形式
-    extern void fun_coordinate(char par_gospeed,char par_turnspeed,char par_cachespeed);//自动巡线之坐标
+    extern void fun_coordinate();//自动巡线之坐标
     extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
     extern void fun_zbtfl();//坐标巡线设置定时器等待巡线结束函数
     extern void fun_zdzj(ul par_che,ul par_tai);//自动抓件
