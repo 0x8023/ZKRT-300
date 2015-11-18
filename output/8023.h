@@ -224,11 +224,20 @@
     struct str_zdzj{
         uc jx[8][5];        //件序:8个抓件区(从左上到左下0-3,从右上到右下4-7);5个高度(0-5),最上空位为0,从上到下1-4,底座为5
     };//自动抓件
+    struct str_gongweiproperty{
+        enum varENU_dir fx;//方向
+        char wei[2][5];//工位存放的东西
+    };//工位的属性
+    struct str_setgongjian{
+        char che[2][5];//小车上的件
+        struct str_gongweiproperty gw[6];//5个工位
+    };//自动放件结构体
 /*---------------------------------------------------------------变量声明-----*/
     extern struct str_state str_begin,str_now,str_next;   //分别为:上一个状态/起始状态/当前状态/目标状态
     extern struct str_parameter str_cod;                  //一些固定的参数,一般保持默认即可
     extern struct str_timerfolline str_tfl;               //定时器巡线
     extern struct str_coordinates str_zbfl;               //坐标巡线
+    extern struct str_setgongjian str_jian;               //自动放件
     extern data ul var_timer0;                            //timer0毫秒级计时器计数位
 /*---------------------------------------------------------------函数声明-----*/
     /*-------------------------------------------------------------------延时-----*/

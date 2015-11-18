@@ -27,9 +27,10 @@
         /*ui mainturn180;*/2000,     //主函数180度转弯屏蔽延时
         /*ui timerturn180;*/2000     //定时器180度转弯屏蔽延时
     };
-    struct str_timerfolline str_tfl;
-    struct str_coordinates str_zbfl;
-    data ul var_timer;
+    struct str_timerfolline str_tfl;               //定时器巡线
+    struct str_coordinates str_zbfl;               //坐标巡线
+    struct str_setgongjian str_jian;               //自动放件
+    data ul var_timer;                             //全局延时标志位
 /*-------------------------------------------------------------------延时-----*/
     void fun_delay(ui par_value,enum varENU_del par_model){
         data ui loc_con=par_value;
@@ -2385,7 +2386,7 @@
             while(str_tfl.doing==tf_ture){
                 fun_delay(50,del_ms);
             }
-            memset(str_tfl.step,0,sizeof(str_tfl.step));//清零巡线用步骤数组
+            memset(str_tfl.step,def_end,sizeof(str_tfl.step));//清零巡线用步骤数组
             fun_jtjp();
         #endif
     }//主函数设置定时器等待巡线结束函数
@@ -2396,6 +2397,7 @@
         par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
                          uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw){
         //x为x轴坐标,y为y轴坐标,value为工位号,fx为到达此坐标时需要的朝向,gw为工位在小车的哪一侧
+        uc loc_xh;
 
         //设置坐标的value
         str_zbfl.xy[par_1x][par_1y].value=par_1value;
@@ -2410,6 +2412,29 @@
         str_zbfl.xy[par_3x][par_3y].fx=par_3fx;
         str_zbfl.xy[par_4x][par_4y].fx=par_4fx;
         str_zbfl.top.fx=par_5fx;
+
+        for(loc_xh=1;loc_xh<=5;loc_xh++){//循环5次
+            if(par_1value==loc_xh){//如果第一个输入的数是1-5
+                str_jian.gw[loc_xh].fx=par_1gw;//存储工位为1-5的方向
+                continue;
+            }
+            if(par_2value==loc_xh){
+                str_jian.gw[loc_xh].fx=par_2gw;
+                continue;
+            }
+            if(par_3value==loc_xh){
+                str_jian.gw[loc_xh].fx=par_3gw;
+                continue;
+            }
+            if(par_4value==loc_xh){
+                str_jian.gw[loc_xh].fx=par_4gw;
+                continue;
+            }
+            if(par_5value==loc_xh){
+                str_jian.gw[loc_xh].fx=par_5gw;
+                continue;
+            }
+        }
 
         //Y=13
         str_zbfl.xy[1][13].enup=tf_false;
@@ -2426,12 +2451,22 @@
         str_zbfl.xy[3][13].endown=tf_false;
 
         //用来屏蔽5号工位的
-        if(par_5gw==dir_up){
-            str_zbfl.xy[0][13].enleft=tf_false;
-            str_zbfl.xy[4][13].enright=tf_false;
-        }else if(par_5gw==dir_down){
-            str_zbfl.xy[0][13].enright=tf_false;
-            str_zbfl.xy[4][13].enleft=tf_false;
+        if(par_5gw==dir_left){//如果5号位在小车左边
+            if(par_5fx==dir_right){//如果小车车头方向朝右
+                str_zbfl.xy[0][13].enleft=tf_false;
+                str_zbfl.xy[4][13].enright=tf_false;
+            }else if(par_5fx==dir_left){//如果小车车头方向朝左
+                str_zbfl.xy[0][13].enright=tf_false;
+                str_zbfl.xy[4][13].enleft=tf_false;
+            }
+        }else if(par_5gw==dir_right){//如果5号位在小车右边
+            if(par_5fx==dir_right){//如果小车车头方向朝右
+                str_zbfl.xy[0][13].enright=tf_false;
+                str_zbfl.xy[4][13].enleft=tf_false;
+            }else if(par_5fx==dir_left){//如果小车车头方向朝左
+                str_zbfl.xy[0][13].enleft=tf_false;
+                str_zbfl.xy[4][13].enright=tf_false;
+            }
         }
 
         //Y=12
@@ -2780,7 +2815,7 @@
                 }
             }else{//如果同在Y轴(一条横线上)
                 if(par_gwfx==dir_up){
-                    for(loc_xhy=par_ynow;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
+                    for(loc_xhy=par_ynext;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
                         for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//从现在的x轴循环到要去的x轴
                             if(str_zbfl.xy[loc_xhx][loc_xhy].enleft==tf_ture){//如果该位置允许左转
                                 loc_flag++;
@@ -2814,7 +2849,7 @@
                         }
                         loc_flag=0;
                     }
-                    for(loc_xhy=par_ynow;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
+                    for(loc_xhy=par_ynext;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
                         for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//从现在的x轴循环到要去的x轴
                             if(str_zbfl.xy[loc_xhx][loc_xhy].enleft==tf_ture){//如果该位置允许左转
                                 loc_flag++;
@@ -2969,48 +3004,48 @@
                     }
                 }
             }else{//如果同在Y轴(一条横线上)
-                if(par_gwfx==dir_up){
-                    for(loc_xhy=par_ynow;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
-                        for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//从现在的x轴循环到要去的x轴
-                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许左转
+                if(par_gwfx==dir_up){//要求向上停
+                    for(loc_xhy=par_ynext;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
+                        for(loc_xhx=par_xnow;loc_xhx<=par_xnext;loc_xhx++){//从现在的x轴循环到要去的x轴
+                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许右转
                                 loc_flag++;
                             }
                         }
-                        if(par_xnow-par_xnext==loc_flag-1){//如果每一条线都可以走
+                        if(par_xnext-par_xnow==loc_flag-1){//如果每一条线都可以走
                             return (loc_xhy+40);//返回可以走的Y值
                         }
                         loc_flag=0;
                     }
                     for(loc_xhy=par_ynext;loc_xhy<=12;loc_xhy++){//从要去的Y轴循环到12
-                        for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//从现在的x轴循环到要去的x轴
-                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许左转
+                        for(loc_xhx=par_xnow;loc_xhx<=par_xnext;loc_xhx++){//从现在的x轴循环到要去的x轴
+                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许右转
                                 loc_flag++;
                             }
                         }
-                        if(par_xnow-par_xnext==loc_flag-1){//如果每一条线都可以走
+                        if(par_xnext-par_xnow==loc_flag-1){//如果每一条线都可以走
                             return (loc_xhy+40);//返回可以走的Y值
                         }
                         loc_flag=0;
                     }
-                }else if(par_gwfx==dir_down){
+                }else if(par_gwfx==dir_down){//要求向下停
                     for(loc_xhy=par_ynext;loc_xhy<=12;loc_xhy++){//从要去的Y轴循环到12
-                        for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//从现在的x轴循环到要去的x轴
-                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许左转
+                        for(loc_xhx=par_xnow;loc_xhx<=par_xnext;loc_xhx++){//从现在的x轴循环到要去的x轴
+                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许右转
                                 loc_flag++;
                             }
                         }
-                        if(par_xnow-par_xnext==loc_flag-1){//如果每一条线都可以走
+                        if(par_xnext-par_xnow==loc_flag-1){//如果每一条线都可以走
                             return (loc_xhy+40);//返回可以走的Y值
                         }
                         loc_flag=0;
                     }
-                    for(loc_xhy=par_ynow;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
-                        for(loc_xhx=par_xnow;loc_xhx>=par_xnext;loc_xhx--){//从现在的x轴循环到要去的x轴
-                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许左转
+                    for(loc_xhy=par_ynext;loc_xhy>=0;loc_xhy--){//从现在的Y轴循环到0
+                        for(loc_xhx=par_xnow;loc_xhx<=par_xnext;loc_xhx++){//从现在的x轴循环到要去的x轴
+                            if(str_zbfl.xy[loc_xhx][loc_xhy].enright==tf_ture){//如果该位置允许右转
                                 loc_flag++;
                             }
                         }
-                        if(par_xnow-par_xnext==loc_flag-1){//如果每一条线都可以走
+                        if(par_xnext-par_xnow==loc_flag-1){//如果每一条线都可以走
                             return (loc_xhy+40);//返回可以走的Y值
                         }
                         loc_flag=0;
@@ -3025,7 +3060,8 @@
     void fun_coordinate(){
         char loc_y=fun_getpublicy(str_now.x,str_now.y,str_next.x,str_next.y,str_next.ctfx);//获取公共Y
         #ifdef Debug
-            printf("now.x=%d,\tnow.y=%d,\tnext.x=%d,\tnext.y=%d,\tPublicY=%d\n",(int)str_now.x,(int)str_now.y,(int)str_next.x,(int)str_next.y,(int)loc_y);
+            static uc deb_loc=0;
+            printf("%d \tnow.x=%d \tnow.y=%d \tnext.x=%d \tnext.y=%d \tPublicY=%d \n",(int)++deb_loc,(int)str_now.x,(int)str_now.y,(int)str_next.x,(int)str_next.y,(int)loc_y);
         #endif
         if((loc_y>=0&&loc_y<20)||(loc_y>=40&&loc_y<60)){//常规情况和在同一横轴的情况
             if(loc_y>=40&&loc_y<60){
@@ -3035,7 +3071,7 @@
             if(loc_y!=str_now.y){//当前行不是PublicY
                 if(loc_y>str_now.y){//要往上走
                     if(str_now.ctfx!=dir_up){//如果车头不是向上(是向下)
-                        fun_xymove(tfl_cache,40);//前冲
+                        fun_xymove(tfl_cache,50);//前冲
                         switch(str_now.ctfx){//选择现在的车头方向
                             case dir_down://如果现在车头向下
                                 if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
@@ -3064,7 +3100,7 @@
                     }
                 }else if(loc_y<str_now.y){//如果要去的在现在的下面,往下走
                     if(str_now.ctfx!=dir_down){//如果车头不是向下(是向上)
-                        fun_xymove(tfl_cache,40);//前冲
+                        fun_xymove(tfl_cache,50);//前冲
                         switch(str_now.ctfx){//选择现在的车头方向
                             case dir_up://如果现在车头向上
                                 if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
@@ -3095,14 +3131,14 @@
             }
             //第二步:拐弯
             if(str_next.x>str_now.x){//向右转
-                fun_xymove(tfl_cache,40);//前冲
+                fun_xymove(tfl_cache,50);//前冲
                 if(str_now.ctfx==dir_up){
                     fun_xymove(tfl_turn,tur_r90);//转弯
                 }else if(str_now.ctfx==dir_down){
                     fun_xymove(tfl_turn,tur_l90);//转弯
                 }
             }else if(str_next.x<str_now.x){//向左转
-                fun_xymove(tfl_cache,40);//前冲
+                fun_xymove(tfl_cache,50);//前冲
                 if(str_now.ctfx==dir_up){
                     fun_xymove(tfl_turn,tur_l90);//转弯
                 }else if(str_now.ctfx==dir_down){
@@ -3117,14 +3153,14 @@
             }
             //第四步:转弯
             if(str_next.y>str_now.y){//如果要往上走
-                fun_xymove(tfl_cache,40);//前冲
+                fun_xymove(tfl_cache,50);//前冲
                 if(str_now.ctfx==dir_left){
                     fun_xymove(tfl_turn,tur_r90);//转弯
                 }else if(str_now.ctfx==dir_right){
                     fun_xymove(tfl_turn,tur_l90);//转弯
                 }
             }else if(str_next.y<str_now.y){//如果要往下走
-                fun_xymove(tfl_cache,40);//前冲
+                fun_xymove(tfl_cache,50);//前冲
                 if(str_now.ctfx==dir_left){
                     fun_xymove(tfl_turn,tur_l90);//转弯
                 }else if(str_now.ctfx==dir_right){
@@ -3138,16 +3174,56 @@
                 fun_xymove(tfl_line,str_now.y-str_next.y);
             }
             //第六步:转弯
-            if(str_now.ctfx!=str_next.ctfx){
-                ;
+            if(str_now.ctfx!=str_next.ctfx){//如果到了指定坐标但车头方向不对
+                if(str_next.ctfx==dir_up&&str_now.ctfx==dir_down){//如果要向上停并且现在车头向下
+                    fun_xymove(tfl_line,1);//寻一条线
+                    fun_xymove(tfl_cache,50);//前冲
+                    if(str_now.x==0){
+                        fun_xymove(tfl_turn,tur_r180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else if(str_now.x==4){
+                        fun_xymove(tfl_turn,tur_l180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else{
+                        if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果允许左转
+                            fun_xymove(tfl_turn,tur_r180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果允许右转
+                            fun_xymove(tfl_turn,tur_l180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else{//不允许左转和右转
+                            ;
+                        }
+                    }
+                }else if(str_next.ctfx==dir_down&&str_now.ctfx==dir_up){//如果要向下停并且现在车头向上
+                    fun_xymove(tfl_line,1);//寻一条线
+                    fun_xymove(tfl_cache,50);//前冲
+                    if(str_now.x==0){
+                        fun_xymove(tfl_turn,tur_l180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else if(str_now.x==4){
+                        fun_xymove(tfl_turn,tur_r180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else{
+                        if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果允许左转
+                            fun_xymove(tfl_turn,tur_l180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果允许右转
+                            fun_xymove(tfl_turn,tur_r180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else{//不允许左转和右转
+                            ;
+                        }
+                    }
+                }
             }
-            fun_xymove(tfl_cache,40);//前冲
+            fun_xymove(tfl_cache,50);//前冲
         }else if(loc_y>=20&&loc_y<40){//在同一X轴(同一竖线)
             loc_y-=20;//把数据还原
             //第一步:直行
             if(str_next.y>str_now.y){//要往上走
                 if(str_now.ctfx!=dir_up){//如果车头不是向上(是向下)
-                    fun_xymove(tfl_cache,40);//前冲
+                    fun_xymove(tfl_cache,50);//前冲
                     switch(str_now.ctfx){//选择现在的车头方向
                         case dir_down://如果现在车头向下
                             if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
@@ -3176,7 +3252,7 @@
                 }
             }else if(str_next.y<str_now.y){//如果要去的在现在的下面,往下走
                 if(str_now.ctfx!=dir_down){//如果车头不是向下(是向上)
-                    fun_xymove(tfl_cache,40);//前冲
+                    fun_xymove(tfl_cache,50);//前冲
                     switch(str_now.ctfx){//选择现在的车头方向
                         case dir_up://如果现在车头向上
                             if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
@@ -3204,13 +3280,60 @@
                     fun_xymove(tfl_line,str_now.y-str_next.y);//直接巡线至PublicY
                 }
             }
-            fun_xymove(tfl_cache,40);//前冲
+            //第二步:转弯
+            if(str_now.ctfx!=str_next.ctfx){//如果到了指定坐标但车头方向不对
+                if(str_next.ctfx==dir_up&&str_now.ctfx==dir_down){//如果要向上停并且现在车头向下
+                    fun_xymove(tfl_line,1);//寻一条线
+                    fun_xymove(tfl_cache,50);//前冲
+                    if(str_now.x==0){
+                        fun_xymove(tfl_turn,tur_r180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else if(str_now.x==4){
+                        fun_xymove(tfl_turn,tur_l180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else{
+                        if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果允许左转
+                            fun_xymove(tfl_turn,tur_r180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果允许右转
+                            fun_xymove(tfl_turn,tur_l180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else{//不允许左转和右转
+                            ;
+                        }
+                    }
+                }else if(str_next.ctfx==dir_down&&str_now.ctfx==dir_up){//如果要向下停并且现在车头向上
+                    fun_xymove(tfl_line,1);//寻一条线
+                    fun_xymove(tfl_cache,50);//前冲
+                    if(str_now.x==0){
+                        fun_xymove(tfl_turn,tur_l180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else if(str_now.x==4){
+                        fun_xymove(tfl_turn,tur_r180);
+                        fun_xymove(tfl_line,1);//寻一条线
+                    }else{
+                        if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果允许左转
+                            fun_xymove(tfl_turn,tur_l180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果允许右转
+                            fun_xymove(tfl_turn,tur_r180);//掉头
+                            fun_xymove(tfl_line,1);//寻一条线
+                        }else{//不允许左转和右转
+                            ;
+                        }
+                    }
+                }
+            }
+            fun_xymove(tfl_cache,50);//前冲
         }else{
             //错误
         }
         str_tfl.online=tf_false;//不在线
     }//自动巡线之坐标
     void fun_go(enum varENU_go par_model){
+        if(str_tfl.step[1]!=def_end){//如果巡线用数组没有被清空
+            fun_zbtfl();//等待巡线,并清空数组
+        }
         str_tfl.run=str_tfl.step;//指针指向第一个步骤
         switch(par_model){
             case go_get:
@@ -3323,8 +3446,14 @@
     }//定时器坐标巡线最终调用形式
     void fun_zbtfl(){
         fun_maintfl();
-        str_begin=str_now;
+        str_begin.x=str_now.x;
+        str_begin.y=str_now.y;
+        str_begin.ctfx=str_now.ctfx;
     }//坐标巡线设置定时器等待巡线结束函数
+/*---------------------------------------------------------------自动放件-----*/
+    // void fun_set(char par_num,...){
+
+    // }
 /*---------------------------------------------------------------调试测试-----*/
     void fun_test(){
         fun_sz(han_j);

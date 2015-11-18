@@ -1,4 +1,4 @@
-//#include "HANS.h"
+#include "HANS.h"
 #include "../8023.h"
 void main(){
     fun_start(//在此输入小车目前的状态
@@ -9,102 +9,65 @@ void main(){
         sjp_1,//升降位置
         tra_h,//平移位置
         dir_right);//回转方向
+    // fun_setxy(//x轴坐标,y轴坐标,工位号,到达此坐标时需要的朝向,工位在小车的哪一侧
+    //     0,4,4,dir_up,dir_right,
+    //     0,9,2,dir_up,dir_right,
+    //     2,7,3,dir_up,dir_left,
+    //     3,9,1,dir_up,dir_right,
+    //     5,dir_right,dir_down);
+    // /*请从下一行开始写你的程序*/
+    
     fun_setxy(//x轴坐标,y轴坐标,工位号,到达此坐标时需要的朝向,工位在小车的哪一侧
-        1,5,4,dir_down,dir_left,
-        1,10,1,dir_up,dir_right,
-        3,7,2,dir_up,dir_left,
-        4,10,3,dir_up,dir_left,
-        5,dir_right,dir_down);
-    /*请从下一行开始写你的程序*/
-    //fun_delay(1,del_s);
-    //fun_go(go_5);
-    //
+        1,9,1,DU,DL,
+        1,5,2,DU,DR,
+        2,8,4,DU,DR,
+        4,7,5,DU,DL,
+        3,DR,DL);
+    /*START*/
 
-    //while(1);
+    L1
 
-    //fun_sj(sjp_1);fun_py(tra_h);fun_hz(dir_right);fun_sz(han_s);
-
-   // fun_folline(1,30);
+    W
+    L2
+ W
     
-    // // F(A,L(6),C(45),L90,L(3),C(45),R90,L(2),C(45),E);
-    // 
-    def_setspeed(45,40,40)
-    fun_go(go_1);
-    fun_zbtfl();
-    D(2500)
+    L3
+  
+    W
+    O4
+  W
+    O5
+W
+    L1
+W
+    O4
+    W
+    L2
 
-    fun_go(go_2);
-    fun_zbtfl();
-    D(2500)
+    W
+    O5
 
-    fun_go(go_3);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_4);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_5);
-    fun_zbtfl();
-    D(2500)
-
-      fun_go(go_1);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_2);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_3);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_4);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_5);
-    fun_zbtfl();
-    D(2500)
-
-    fun_go(go_end);
-    fun_zbtfl();
-    D(2500)
-
-
-
+    W
+    L3
+ W
+    L1
+ 
+    W
+    O5
+ W
+    L3
+ W
+    O4
+ W
+    L2
+W
     
-    // // F(A,L(4),C(45),R90,L(1),C(45),R90,L(1),C(45),E);
-    // fun_go(go_2);
-    // deb_outstep(32);
-    // fun_zbtfl();
-
+    O5
+  W
+    OE
+    W
     
-    // // F(A,L(5),C(45),R90,L(3),C(45),R90,L(1),C(45),E);
-    // fun_go(go_3);
-    // deb_outstep(32);
-    // fun_zbtfl();
 
-    
-    // // F(K,L(6),C(45),E);
-    // fun_go(go_4);
-    // deb_outstep(32);
-    // fun_zbtfl();
-
-    
-    // // F(K,L(2),C(45),R90,L(1),C(45),L90,L(4),C(45),E);
-    // fun_go(go_5);
-    // deb_outstep(32);
-    // fun_zbtfl();
-
-    
-    // // F(K,L(5),C(45),R90,L(3),C(45),L90,L(4),E);
-
-    // // fun_zbtfl();
-
-    // fun_zbtfl();
     /*你的程序到此为止,请不要再继续改动*/
     fun_stop();
 }

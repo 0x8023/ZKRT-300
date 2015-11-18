@@ -3,6 +3,20 @@
     #define A 40,40,45
     #define K 43,40,45
     #define Y 70,40,50
+        
+    #define L1 def_setspeed(40,40,45);fun_go(go_1);
+    #define L2 def_setspeed(40,40,45);fun_go(go_2);
+    #define L3 def_setspeed(40,40,45);fun_go(go_3);
+    #define L4 def_setspeed(40,40,45);fun_go(go_4);
+    #define L5 def_setspeed(40,40,45);fun_go(go_5);
+    #define LE def_setspeed(40,40,45);fun_go(go_end);
+    
+    #define O1 def_setspeed(45,40,45);fun_go(go_1);
+    #define O2 def_setspeed(45,40,45);fun_go(go_2);
+    #define O3 def_setspeed(45,40,45);fun_go(go_3);
+    #define O4 def_setspeed(45,40,45);fun_go(go_4);
+    #define O5 def_setspeed(45,40,45);fun_go(go_5);
+    #define OE def_setspeed(45,40,45);fun_go(go_end);
 
     #define GW fun_sj(sjp_1);fun_py(tra_h);fun_hz(dir_right);fun_sz(han_s);
 
@@ -64,7 +78,7 @@
     #define LEFT fun_hz(dir_left);
     #define U fun_hz(dir_up);
 
-    #define W fun_maintfl();
+    #define W fun_zbtfl();
     #define E def_end
 
     #define F fun_flsetting
@@ -78,5 +92,8 @@
     #define JIN     fun_motors(mot_rl,15);fun_delay(1050,del_ms);fun_jtjp();F(A,E);W
         
     #define JP fun_jtjp();
-        
+    
+    #define GG fun_go(go_get);
+    #define GS fun_go(go_start);
+    
 #endif
