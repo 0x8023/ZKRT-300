@@ -1589,7 +1589,7 @@
     void fun_zdzj(ul par_04,ul par_37){//ul型数据,一次输入所有结果,无需等待
         struct str_zdzj str_pass,str_end;//str_zdzj(自动抓件)的结构体:现在的数据和结束时得到的结果
         char loc_high[8];         //每摞工件的高度
-        uc loc_xh1;             //第一个循环
+        uc loc_xh;                //第一个循环
 
         memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在件序
         memset(str_end.jx,0,sizeof(str_end.jx)); //清空想要的件序
@@ -1613,6 +1613,15 @@
         str_pass.jx[7][2]=(par_37/100)%10;       //传入现在件序:区4的第2号件件号
         str_pass.jx[7][3]=(par_37/10)%10;        //传入现在件序:区4的第3号件件号
         str_pass.jx[7][4]=par_37%10;             //传入现在件序:区4的第4号件件号(最低位)
+        //保存件号(自动放件使用)
+        str_jian.che[0][1]=(par_37/10000000)%10; //传入现在件序:区0的第1号件件号(最高位)
+        str_jian.che[0][2]=(par_37/1000000)%10;  //传入现在件序:区0的第2号件件号
+        str_jian.che[0][3]=(par_37/100000)%10;   //传入现在件序:区0的第3号件件号
+        str_jian.che[0][4]=(par_37/10000)%10;    //传入现在件序:区0的第4号件件号(最低位)
+        str_jian.che[1][1]=(par_37/1000)%10;     //传入现在件序:区4的第1号件件号(最高位)
+        str_jian.che[1][2]=(par_37/100)%10;      //传入现在件序:区4的第2号件件号
+        str_jian.che[1][3]=(par_37/10)%10;       //传入现在件序:区4的第3号件件号
+        str_jian.che[1][4]=par_37%10;            //传入现在件序:区4的第4号件件号(最低位)
         //目的次序
         str_end.jx[3][1]=1;                      //标准目标次序:区3的第1号目的次序号(最高位)
         str_end.jx[3][2]=2;                      //标准目标次序:区3的第2号目的次序号
@@ -1623,53 +1632,53 @@
         str_end.jx[7][3]=7;                      //标准目标次序:区7的第3号目的次序号
         str_end.jx[7][4]=8;                      //标准目标次序:区7的第4号目的次序号(最低位)
 
-        for(loc_xh1=1;loc_xh1<=4;loc_xh1++){
-            if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][1])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[3][1];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][2])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[3][2];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][3])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[3][3];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[3][4])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[3][4];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][1])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[7][1];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][2])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[7][2];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][3])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[7][3];
-            else if((str_pass.jx[0][loc_xh1]==str_pass.jx[7][4])&&(str_pass.jx[0][loc_xh1]!=0))
-                str_end.jx[0][loc_xh1]=str_end.jx[7][4];
+        for(loc_xh=1;loc_xh<=4;loc_xh++){
+            if((str_pass.jx[0][loc_xh]==str_pass.jx[3][1])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[3][1];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[3][2])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[3][2];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[3][3])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[3][3];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[3][4])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[3][4];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[7][1])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[7][1];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[7][2])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[7][2];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[7][3])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[7][3];
+            else if((str_pass.jx[0][loc_xh]==str_pass.jx[7][4])&&(str_pass.jx[0][loc_xh]!=0))
+                str_end.jx[0][loc_xh]=str_end.jx[7][4];
 
-            if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][1])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[3][1];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][2])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[3][2];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][3])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[3][3];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[3][4])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[3][4];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][1])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[7][1];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][2])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[7][2];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][3])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[7][3];
-            else if((str_pass.jx[4][loc_xh1]==str_pass.jx[7][4])&&(str_pass.jx[4][loc_xh1]!=0))
-                str_end.jx[4][loc_xh1]=str_end.jx[7][4];
+            if((str_pass.jx[4][loc_xh]==str_pass.jx[3][1])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[3][1];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[3][2])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[3][2];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[3][3])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[3][3];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[3][4])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[3][4];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[7][1])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[7][1];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[7][2])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[7][2];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[7][3])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[7][3];
+            else if((str_pass.jx[4][loc_xh]==str_pass.jx[7][4])&&(str_pass.jx[4][loc_xh]!=0))
+                str_end.jx[4][loc_xh]=str_end.jx[7][4];
         }//通过实际件序获得编号
 
         memset(str_pass.jx,0,sizeof(str_pass.jx));//清空现在实际件序
-        for(loc_xh1=1;loc_xh1<=4;loc_xh1++){
-            str_pass.jx[0][loc_xh1]=str_end.jx[0][loc_xh1];
-            str_pass.jx[4][loc_xh1]=str_end.jx[4][loc_xh1];
+        for(loc_xh=1;loc_xh<=4;loc_xh++){
+            str_pass.jx[0][loc_xh]=str_end.jx[0][loc_xh];
+            str_pass.jx[4][loc_xh]=str_end.jx[4][loc_xh];
         }//将现在的件序从str_end.jx中拿到str_pass.jx
-        for(loc_xh1=1;loc_xh1<=4;loc_xh1++){
-            str_end.jx[0][loc_xh1]=0;
-            str_end.jx[4][loc_xh1]=0;
+        for(loc_xh=1;loc_xh<=4;loc_xh++){
+            str_end.jx[0][loc_xh]=0;
+            str_end.jx[4][loc_xh]=0;
         }//删除str_end.jx中现在的件序
         loc_high[0]=loc_high[4]=1;//只有0号和4号放满了件
-        loc_xh1=0;//循环标志位归零
+        loc_xh=0;//循环标志位归零
 
         /*
             到目前为止准备工作结束,现在的数组中没有实际件序,
@@ -1693,13 +1702,15 @@
                     fun_zjzt(mot_sj,loc_high[7]);   //升降到7的最高位
                     fun_sz(han_j);                 //手抓紧
                 }//如果停在左边
+                str_jian.high[0]=1;//左边标记已经放满了(自动放件用)
+                str_jian.high[1]=1;//右边标记已经放满了(自动放件用)
                 return;
             }//如果小车一方的实际件序和想要达到的件序相等
             if(str_begin.hzfx==dir_left){
                 //转向条件
-                loc_xh1++;//标志位+1
-                if(loc_xh1>=100){
-                    loc_xh1=0;
+                loc_xh++;//标志位+1
+                if(loc_xh>=100){
+                    loc_xh=0;
                     fun_zjzt(mot_sj,fun_min(loc_high[0],loc_high[1],loc_high[2],loc_high[3],loc_high[4],loc_high[5],loc_high[6],loc_high[7],def_end)-1);
                     fun_hz(dir_right);
                 }
@@ -1791,9 +1802,9 @@
             }//如果回转在左边 
             if(str_begin.hzfx==dir_right){
                 //转向条件
-                loc_xh1++;//标志位+1
-                if(loc_xh1>=100){
-                    loc_xh1=0;
+                loc_xh++;//标志位+1
+                if(loc_xh>=100){
+                    loc_xh=0;
                     fun_zjzt(mot_sj,fun_min(loc_high[0],loc_high[1],loc_high[2],loc_high[3],loc_high[4],loc_high[5],loc_high[6],loc_high[7],def_end)-1);
                     fun_hz(dir_left);
                 }
@@ -2413,6 +2424,7 @@
         str_zbfl.xy[par_4x][par_4y].fx=par_4fx;
         str_zbfl.top.fx=par_5fx;
 
+        //保存工件在小车的相对方向(自动放件使用)
         for(loc_xh=1;loc_xh<=5;loc_xh++){//循环5次
             if(par_1value==loc_xh){//如果第一个输入的数是1-5
                 str_jian.gw[loc_xh].fx=par_1gw;//存储工位为1-5的方向
@@ -3071,24 +3083,31 @@
             if(loc_y!=str_now.y){//当前行不是PublicY
                 if(loc_y>str_now.y){//要往上走
                     if(str_now.ctfx!=dir_up){//如果车头不是向上(是向下)
-                        fun_xymove(tfl_cache,50);//前冲
                         switch(str_now.ctfx){//选择现在的车头方向
                             case dir_down://如果现在车头向下
-                                if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
-                                    fun_xymove(tfl_turn,tur_r180);//右转180
-                                    fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
-                                }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
-                                    fun_xymove(tfl_turn,tur_l180);//左转180
-                                    fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
-                                }else{//左右都有东西
-                                    ;//*$*//
+                                while(1){
+                                    if((str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture)||(str_now.x==2&&str_now.y==12)){//如果左边没东西或到了2,12
+                                        fun_xymove(tfl_cache,50);//前冲
+                                        fun_xymove(tfl_turn,tur_r180);//右转180
+                                        fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
+                                        break;
+                                    }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
+                                        fun_xymove(tfl_cache,50);//前冲
+                                        fun_xymove(tfl_turn,tur_l180);//左转180
+                                        fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
+                                        break;
+                                    }else{//左右都有东西
+                                        fun_xymove(tfl_line,1);//寻一条线
+                                    }
                                 }
                                 break;
                             case dir_left://如果现在车头向左
+                                fun_xymove(tfl_cache,50);//前冲
                                 fun_xymove(tfl_turn,tur_r90);//转弯
                                 fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
                                 break;
                             case dir_right://如果现在车头向右
+                                fun_xymove(tfl_cache,50);//前冲
                                 fun_xymove(tfl_turn,tur_l90);//转弯
                                 fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
                                 break;
@@ -3100,24 +3119,31 @@
                     }
                 }else if(loc_y<str_now.y){//如果要去的在现在的下面,往下走
                     if(str_now.ctfx!=dir_down){//如果车头不是向下(是向上)
-                        fun_xymove(tfl_cache,50);//前冲
                         switch(str_now.ctfx){//选择现在的车头方向
                             case dir_up://如果现在车头向上
-                                if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
-                                    fun_xymove(tfl_turn,tur_l180);//左转180
-                                    fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
-                                }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
-                                    fun_xymove(tfl_turn,tur_r180);//右转180
-                                    fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
-                                }else{//左右都有东西
-                                    ;//*$*//
+                                while(1){
+                                    if((str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture)||(str_now.x==2&&str_now.y==12)){//如果左边没东西或到了2,12
+                                        fun_xymove(tfl_cache,50);//前冲
+                                        fun_xymove(tfl_turn,tur_l180);//左转180
+                                        fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
+                                        break;
+                                    }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
+                                        fun_xymove(tfl_cache,50);//前冲
+                                        fun_xymove(tfl_turn,tur_r180);//右转180
+                                        fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
+                                        break;
+                                    }else{//左右都有东西
+                                        fun_xymove(tfl_line,1);//寻一条线
+                                    }
                                 }
                                 break;
                             case dir_left://如果现在车头向左
+                                fun_xymove(tfl_cache,50);//前冲
                                 fun_xymove(tfl_turn,tur_l90);//转弯
                                 fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
                                 break;
                             case dir_right://如果现在车头向右
+                                fun_xymove(tfl_cache,50);//前冲
                                 fun_xymove(tfl_turn,tur_r90);//转弯
                                 fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
                                 break;
@@ -3226,14 +3252,20 @@
                     fun_xymove(tfl_cache,50);//前冲
                     switch(str_now.ctfx){//选择现在的车头方向
                         case dir_down://如果现在车头向下
-                            if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
-                                fun_xymove(tfl_turn,tur_r180);//右转180
-                                fun_xymove(tfl_line,str_next.y-str_now.y);//巡线至PublicY
-                            }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
-                                fun_xymove(tfl_turn,tur_l180);//左转180
-                                fun_xymove(tfl_line,str_next.y-str_now.y);//巡线至PublicY
-                            }else{//左右都有东西
-                                ;//*$*//
+                            while(1){
+                                if((str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture)||(str_now.x==2&&str_now.y==12)){//如果左边没东西或到了2,12
+                                    fun_xymove(tfl_cache,50);//前冲
+                                    fun_xymove(tfl_turn,tur_r180);//右转180
+                                    fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
+                                    break;
+                                }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
+                                    fun_xymove(tfl_cache,50);//前冲
+                                    fun_xymove(tfl_turn,tur_l180);//左转180
+                                    fun_xymove(tfl_line,loc_y-str_now.y);//巡线至PublicY
+                                    break;
+                                }else{//左右都有东西
+                                    fun_xymove(tfl_line,1);//寻一条线
+                                }
                             }
                             break;
                         case dir_left://如果现在车头向左
@@ -3255,14 +3287,20 @@
                     fun_xymove(tfl_cache,50);//前冲
                     switch(str_now.ctfx){//选择现在的车头方向
                         case dir_up://如果现在车头向上
-                            if(str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture){//如果左边没东西
-                                fun_xymove(tfl_turn,tur_l180);//左转180
-                                fun_xymove(tfl_line,str_now.y-str_next.y);//巡线至PublicY
-                            }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
-                                fun_xymove(tfl_turn,tur_r180);//右转180
-                                fun_xymove(tfl_line,str_now.y-str_next.y);//巡线至PublicY
-                            }else{//左右都有东西
-                                ;//*$*//
+                            while(1){
+                                if((str_zbfl.xy[str_now.x][str_now.y].enleft==tf_ture)||(str_now.x==2&&str_now.y==12)){//如果左边没东西或到了2,12
+                                    fun_xymove(tfl_cache,50);//前冲
+                                    fun_xymove(tfl_turn,tur_l180);//左转180
+                                    fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
+                                    break;
+                                }else if(str_zbfl.xy[str_now.x][str_now.y].enright==tf_ture){//如果右边没东西
+                                    fun_xymove(tfl_cache,50);//前冲
+                                    fun_xymove(tfl_turn,tur_r180);//右转180
+                                    fun_xymove(tfl_line,str_now.y-loc_y);//巡线至PublicY
+                                    break;
+                                }else{//左右都有东西
+                                    fun_xymove(tfl_line,1);//寻一条线
+                                }
                             }
                             break;
                         case dir_left://如果现在车头向左
@@ -3449,11 +3487,43 @@
         str_begin.x=str_now.x;
         str_begin.y=str_now.y;
         str_begin.ctfx=str_now.ctfx;
-    }//坐标巡线设置定时器等待巡线结束函数
+    }//坐标巡线设置定时器等待巡线结束
 /*---------------------------------------------------------------自动放件-----*/
-    // void fun_set(char par_num,...){
+    void fun_fjzt(char par_value,...){
+        va_list loc_argp;//保存参数结构
+        uc loc_xh=0;//一个循环用的变量
+        uc loc_con;//当前参数
+        char loc_step[8];//用来存放动作和参数的列表
+        va_start(loc_argp,par_value);//loc_argp指向传入的第一个可选参数,par_value是最后一个确定的参数
+        loc_con=va_arg(loc_argp,char);//取出第一个参数
+        while(loc_con!=def_end){
+            loc_step[loc_xh++]=loc_con;//把取出的值赋给数组
+            loc_con=va_arg(loc_argp,char);//取出下一个参数
+        }
+        loc_step[loc_xh]=def_end;//
+        va_end(loc_argp);//结束
+    }
+    void fun_getset(enum varENU_dir par_chefx,char par_chenum,enum varENU_dir par_gwfx,char par_gwnum){
+        //参数分别为:车上的方向(左右)   ,车上的第几个件(1-4) , 工位的方向(上下)       ,工位的第几个件(1-2)
+        fun_sj(str_jian.publichigh);//升降到最高位
+        fun_hz(par_chefx);//回转到要抓取的方向
+        if(par_chefx==dir_left){
+            fun_py(tra_q);
+        }else if(par_chefx==dir_right){
+            fun_py(tra_h);
+        }//平移到指定方向,现在手抓在车的方向的两摞件上方
 
-    // }
+
+    }//从小车上拿起件然后放到台子上
+    void fun_set(char par_tai,ui par_jian){
+        char loc_jian[4];//用来存放此工件台需要放置什么件
+        //切片
+        loc_jian[0]=par_jian/1000;
+        loc_jian[1]=par_jian/100%10;
+        loc_jian[2]=par_jian/10%10;
+        loc_jian[3]=par_jian%10;
+
+    }
 /*---------------------------------------------------------------调试测试-----*/
     void fun_test(){
         fun_sz(han_j);

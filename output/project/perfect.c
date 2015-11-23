@@ -18,55 +18,64 @@ void main(){
     // /*请从下一行开始写你的程序*/
     
     fun_setxy(//x轴坐标,y轴坐标,工位号,到达此坐标时需要的朝向,工位在小车的哪一侧
-        1,9,1,DU,DL,
-        1,5,2,DU,DR,
-        2,8,4,DU,DR,
-        4,7,5,DU,DL,
-        3,DR,DL);
+        1,7,1,DU,DL,
+        2,10,3,DU,DL,
+        2,6,4,DU,DL,
+        3,9,2,DU,DR,
+        5,DR,DD);
     /*START*/
 
-    L1
-
-    W
-    L2
- W
     
-    L3
-  
-    W
-    O4
-  W
-    O5
-W
     L1
 W
-    O4
-    W
-    L2
-
-    W
-    O5
-
-    W
-    L3
- W
-    L1
- 
-    W
-    O5
- W
-    L3
- W
-    O4
- W
+    
     L2
 W
     
+    L3
+W
+    
+    O4
+W
+    
     O5
-  W
+W
+    
+    
+    L1
+W
+    O4
+W
+    
+    L3
+W
+    
+    O5
+W
+    
+    O4
+W
+    
+    L1
+W
+    
+    L2
+W
+    
+    O4
+W
+    
+    L1
+W
+    O5
+W
+    
+    O4
+W
+    
     OE
     W
-    
+
 
     /*你的程序到此为止,请不要再继续改动*/
     fun_stop();
