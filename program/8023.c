@@ -2397,7 +2397,7 @@
             while(str_tfl.doing==tf_ture){
                 fun_delay(50,del_ms);
             }
-            memset(str_tfl.step,def_end,sizeof(str_tfl.step));//清零巡线用步骤数组
+            memset(str_tfl.step,0,sizeof(str_tfl.step));//清零巡线用步骤数组
             fun_jtjp();
         #endif
     }//主函数设置定时器等待巡线结束函数
@@ -3369,7 +3369,7 @@
         str_tfl.online=tf_false;//不在线
     }//自动巡线之坐标
     void fun_go(enum varENU_go par_model){
-        if(str_tfl.step[1]!=def_end){//如果巡线用数组没有被清空
+        if(str_tfl.step[0]!=0){//如果巡线用数组没有被清空
             fun_zbtfl();//等待巡线,并清空数组
         }
         str_tfl.run=str_tfl.step;//指针指向第一个步骤
@@ -3489,41 +3489,42 @@
         str_begin.ctfx=str_now.ctfx;
     }//坐标巡线设置定时器等待巡线结束
 /*---------------------------------------------------------------自动放件-----*/
-    void fun_fjzt(char par_value,...){
-        va_list loc_argp;//保存参数结构
-        uc loc_xh=0;//一个循环用的变量
-        uc loc_con;//当前参数
-        char loc_step[8];//用来存放动作和参数的列表
-        va_start(loc_argp,par_value);//loc_argp指向传入的第一个可选参数,par_value是最后一个确定的参数
-        loc_con=va_arg(loc_argp,char);//取出第一个参数
-        while(loc_con!=def_end){
-            loc_step[loc_xh++]=loc_con;//把取出的值赋给数组
-            loc_con=va_arg(loc_argp,char);//取出下一个参数
-        }
-        loc_step[loc_xh]=def_end;//
-        va_end(loc_argp);//结束
-    }
-    void fun_getset(enum varENU_dir par_chefx,char par_chenum,enum varENU_dir par_gwfx,char par_gwnum){
-        //参数分别为:车上的方向(左右)   ,车上的第几个件(1-4) , 工位的方向(上下)       ,工位的第几个件(1-2)
-        fun_sj(str_jian.publichigh);//升降到最高位
-        fun_hz(par_chefx);//回转到要抓取的方向
-        if(par_chefx==dir_left){
-            fun_py(tra_q);
-        }else if(par_chefx==dir_right){
-            fun_py(tra_h);
-        }//平移到指定方向,现在手抓在车的方向的两摞件上方
+    // void fun_07zt(char par_1,char par_2){
+    //     ;
+    // }
+    // void fun_fjzt(char par_value,...){
+    //     va_list loc_argp;//保存参数结构
+    //     uc loc_xh=0;//一个循环用的变量
+    //     uc loc_con;//当前参数
+    //     char loc_step[8];//用来存放动作和参数的列表
+    //     va_start(loc_argp,par_value);//loc_argp指向传入的第一个可选参数,par_value是最后一个确定的参数
+    //     loc_con=va_arg(loc_argp,char);//取出第一个参数
+    //     while(loc_con!=def_end){
+    //         loc_step[loc_xh++]=loc_con;//把取出的值赋给数组
+    //         loc_con=va_arg(loc_argp,char);//取出下一个参数
+    //     }
+    //     loc_step[loc_xh]=def_end;//
+    //     va_end(loc_argp);//结束
+    // }
+    // void fun_getset(enum varENU_dir par_chefx,char par_chenum,enum varENU_dir par_gwfx,char par_gwnum){
+    //     //参数分别为:车上的方向(左右)   ,车上的第几个件(1-4) , 工位的方向(上下)       ,工位的第几个件(1-2)
+    //     fun_sj(str_jian.publichigh);//升降到最高位
+    //     fun_hz(par_chefx);//回转到要抓取的方向
+    //     if(par_chefx==dir_left){
+    //         fun_py(tra_q);
+    //     }else if(par_chefx==dir_right){
+    //         fun_py(tra_h);
+    //     }//平移到指定方向,现在手抓在车的方向的两摞件上方
+    // }//从小车上拿起件然后放到台子上
+    // void fun_set(char par_tai,ui par_jian){
+    //     char loc_jian[4];//用来存放此工件台需要放置什么件
+    //     //切片
+    //     loc_jian[0]=par_jian/1000;
+    //     loc_jian[1]=par_jian/100%10;
+    //     loc_jian[2]=par_jian/10%10;
+    //     loc_jian[3]=par_jian%10;
 
-
-    }//从小车上拿起件然后放到台子上
-    void fun_set(char par_tai,ui par_jian){
-        char loc_jian[4];//用来存放此工件台需要放置什么件
-        //切片
-        loc_jian[0]=par_jian/1000;
-        loc_jian[1]=par_jian/100%10;
-        loc_jian[2]=par_jian/10%10;
-        loc_jian[3]=par_jian%10;
-
-    }
+    // }
 /*---------------------------------------------------------------调试测试-----*/
     void fun_test(){
         fun_sz(han_j);
