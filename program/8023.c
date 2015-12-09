@@ -3481,6 +3481,9 @@
         }
         str_tfl.run=str_tfl.step;//指针指向第一个数组
         str_tfl.doing=tf_ture;//开始做
+        #ifdef Debug
+            deb_outstep(32);
+        #endif
     }//定时器坐标巡线最终调用形式
     void fun_zbtfl(){
         fun_maintfl();
@@ -3601,7 +3604,7 @@
         void deb_outstep(uc par_model){
             uc loc_con;
             for(loc_con=0;loc_con<=par_model-1;loc_con+=8){
-                printf("%d:%d , %d:%d , %d:%d , %d:%d\n",
+                printf("%d:%d \t%d:%d \t%d:%d \t%d:%d\n",
                 (int)str_tfl.step[loc_con+0],
                 (int)str_tfl.step[loc_con+1],
                 (int)str_tfl.step[loc_con+2],

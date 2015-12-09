@@ -18,65 +18,243 @@ void main(){
     // /*请从下一行开始写你的程序*/
     
     fun_setxy(//x轴坐标,y轴坐标,工位号,到达此坐标时需要的朝向,工位在小车的哪一侧
-        1,7,4,DU,DR,
-        2,10,2,DU,DL,
-        3,9,3,DU,DL,
-        3,10,1,DU,DR,
+        2,7,1,DU,DL,
+        2,5,3,DU,DL,
+        3,4,2,DU,DR,
+        3,9,4,DU,DR,
         5,DR,DR);
-    /*START*/
 
-/*    
+    
     L1
-W
+
+while(1);
+
+    SJ2
+    J
+    SJ1
+    PH(DZ,DD)
+    SJ2
+    Q
+    W
+    SJ3
+    S
+    SJ1
+    PH(DH,DR)
+    SJ3
+    J
+    SJ1
+    PH(DZ,DD)
+    Q
+    SJ2
+    S
+    SJ1
     
     L2
-W
+    PH(DQ,DL)
+    SJ2
+    J
+    SJ1
+    PH(DQ,DD)
+    SJ2
+    W
+    SJ3
+    S
+    SJ1
     
     L3
-W
+    PH(DH,DR)
+    SJ4
+    J
+    SJ1
+    PH(DH,DD)
+    W
+    SJ3
+    S
+    SJ2
+    PH(DH,DR)
+    SJ5
+    J
+    SJ1
+    PH(DH,DD)
+    SJ2
+    S
+    SJ1
     
     O4
-W
+    PH(DQ,DL)
+    SJ3
+    J
+    SJ1
+    PH(DH,DD)
+    SJ2
+    W
+    SJ3
+    S
+    SJ2
+    PH(DQ,DL)
+    SJ4
+    J
+    SJ1
+    PH(DH,DD)
+    SJ2
+    S
+    SJ1
     
     O5
-W
+    PH(DQ,DL)
+    SJ5
+    J
+    SJ2
+    PH(DQ,DD)
+    W
+    SJ3
+    S
+    SJ1
     
+    //
     
-    L1
-W
     O4
-W
+    H
+    W
+    SJ2
+    J
+    SJ1
+    JIN
+    SJ3
+    S
+    SJ2
+    T
+    SJ3
+    J
+    SJ1
+    Z
+    
+    O5
+    W
+    Q
+    SJ2
+    S
+    SJ1
     
     L3
-W
-    
-    O5
-W
-    
-    O4
-W
-    
-    L1
-W
+    H
+    W
+    SJ2
+    J
+    SJ1
+    Z
     
     L2
-W
-    
-    O4
-W
+    W
+    Q
+    JIN
+    SJ3
+    S
+    SJ2
+    T
+    SJ3
+    J
+    SJ1
+    JIN
+    SJ2
+    S
+    SJ1
+    T
     
     L1
-W
-    O5
-W
+    Q
+    W
+    SJ2
+    J
+    SJ1
+    JIN
+    SJ3
+    S
+    SJ2
+    T
+    SJ3
+    J
+    SJ1
+    Z
     
     O4
-W
+    W
+    H
+    JIN
+    SJ2
+    S
+    SJ1
+    T
+    
+    O5
+    Q
+    W
+    SJ2
+    J
+    SJ1
+    JIN
+    SJ3
+    S
+    SJ2
+    T
+    SJ3
+    J
+    SJ1
+    Z
+    
+    L1
+    W
+    Q
+    JIN
+    SJ2
+    S
+    SJ1
+    
+    //
+    O4
+    H
+    W
+    JIN
+    SJ2
+    J
+    SJ1
+    PH(DQ,DL)
+    SJ5
+    S
+    SJ2
+    PH(DH,DD)
+    SJ3
+    J
+    SJ2
+    T
+    PH(DQ,DL)
+    SJ4
+    S
+    SJ1
+    
+    L1
+    PH(DQ,DD)
+    W
+    JIN
+    SJ2
+    J
+    SJ1
+    PH(DH,DR)
+    SJ5
+    S
+    SJ2
+    PH(DQ,DD)
+    SJ3
+    J
+    SJ2
+    PH(DH,DR)
+    SJ4
+    S
+    SJ1
     
     OE
     W
-*/
-
+    
 
     /*你的程序到此为止,请不要再继续改动*/
     fun_stop();
