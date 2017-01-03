@@ -31,3 +31,11 @@
 # Debug files
 *.dSYM/
 *.su
+*.lst
+8023/bin/8023.__b
+*.htm
+*.bak
+*.8023
+eg/bin/perfect.lnp
+eg/perfect.m51
+eg/bin/perfect
