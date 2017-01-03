@@ -20,24 +20,24 @@
                                                                    str_tfl.turnspeed=par_turnspeed;\
                                                                    str_tfl.cachespeed=par_cachespeed;
 /*-------------------------------------------------------------简化宏定义-----*/
-    #ifndef __HANS_H__
-        #define D(par_ms) fun_delay(par_ms,del_ms);         // D --> 延时(毫秒)
+    #ifndef __EASY_H__
+        #define D(par_ms) fun_delay(par_ms,del_ms); // D --> 延时(毫秒)
         
-        #define J fun_sz(han_j);                            // J --> 手抓抓紧
-        #define S fun_sz(han_s);                            // S --> 手抓松
+        #define J fun_sz(han_j);                    // J --> 手抓抓紧
+        #define S fun_sz(han_s);                    // S --> 手抓松
         
-        #define WZ1 fun_sj(sjp_1);                          // WZ1 --> 升降到位置1
-        #define WZ2 fun_sj(sjp_2);                          // WZ2 --> 升降到位置2
-        #define WZ3 fun_sj(sjp_3);                          // WZ3 --> 升降到位置3
-        #define WZ4 fun_sj(sjp_4);                          // WZ4 --> 升降到位置4
-        #define WZ5 fun_sj(sjp_5);                          // WZ5 --> 升降到位置5
+        #define WZ1 fun_sj(sjp_1);                  // WZ1 --> 升降到位置1
+        #define WZ2 fun_sj(sjp_2);                  // WZ2 --> 升降到位置2
+        #define WZ3 fun_sj(sjp_3);                  // WZ3 --> 升降到位置3
+        #define WZ4 fun_sj(sjp_4);                  // WZ4 --> 升降到位置4
+        #define WZ5 fun_sj(sjp_5);                  // WZ5 --> 升降到位置5
         
-        #define L(par_con) tfl_line,par_con                 // L --> 定时器巡线
-        #define R90 tfl_turn,tur_r90                        // R90 --> 定时器右转90度
-        #define L90 tfl_turn,tur_l90                        // L90 --> 定时器左转90度
-        #define R180 tfl_turn,tur_r180                      // R180 --> 定时器右转180度
-        #define L180 tfl_turn,tur_l180                      // L180 --> 定时器左转180度
-        #define C(par_value) tfl_cache,par_value            // C --> 定时器前冲
+        #define L(par_con) tfl_line,par_con         // L --> 定时器巡线
+        #define R90 tfl_turn,tur_r90                // R90 --> 定时器右转90度
+        #define L90 tfl_turn,tur_l90                // L90 --> 定时器左转90度
+        #define R180 tfl_turn,tur_r180              // R180 --> 定时器右转180度
+        #define L180 tfl_turn,tur_l180              // L180 --> 定时器左转180度
+        #define C(par_value) tfl_cache,par_value    // C --> 定时器前冲
 
         #define MSG(par_value) printf("%s\n",par_value);
         #define OUT(par_value) printf("%d\n",par_value);
@@ -85,62 +85,62 @@
     sbit out_lamp=P3^7;         //红外输出(LAMP)(低电平打开)
 /*-----------------------------------------------------------变量类型定义-----*/
     enum varENU_tf{
-        tf_null=10,
-        tf_ture=11,
-        tf_false=12
-    };//判断用的,空,对和错
+        tf_null=10, //空
+        tf_ture=11, //对
+        tf_false=12 //错
+    };//判断用的
     enum varENU_del{
-        del_us=20,
-        del_ms=21,
-        del_s=22
+        del_us=20,  //微秒
+        del_ms=21,  //毫秒
+        del_s=22    //秒
     };//延时模式选择
     enum varENU_sel{
-        sel_58=30,
-        sel_912=31
+        sel_58=30,  //ps5-8
+        sel_912=31  //ps9-12
     };//传感器片选
     enum varENU_mot{
-        mot_l=40,
-        mot_r=41,
-        mot_rl=42,
-        mot_sz=43,   //电机1
-        mot_py=44,   //电机2
-        mot_sj=45,   //电机3
-        mot_hz=46,   //电机4
-        mot_pyhz=47  //平移回转同步运动(仅自动抓件函数用到)
+        mot_l=40,   //左轮电机
+        mot_r=41,   //右轮电机
+        mot_rl=42,  //左右轮电机
+        mot_sz=43,  //电机1(手抓)
+        mot_py=44,  //电机2(平移)
+        mot_sj=45,  //电机3(升降)
+        mot_hz=46,  //电机4(回转)
+        mot_pyhz=47 //平移回转同步运动(仅自动抓件函数用到)
     };//电机选择
     enum varENU_dir{
-        dir_up=50,
-        dir_down=51,
-        dir_left=52,
-        dir_right=53
+        dir_up=50,      //上
+        dir_down=51,    //下
+        dir_left=52,    //左
+        dir_right=53    //右
     };//方向
     enum varENU_tra{
-        tra_q=60,//没有电机的一方
+        tra_q=60,   //没有电机的一方
         tra_kq=61,
-        tra_z=62,
+        tra_z=62,   //丝杠的位置
         tra_kh=63,
-        tra_h=64//有电机的一方
+        tra_h=64    //有电机的一方
     };//平移位置
     enum varENU_sjp{
-        sjp_1=70,
-        sjp_12=71,
-        sjp_2=72,
-        sjp_23=73,
-        sjp_3=74,
-        sjp_34=75,
-        sjp_4=76,
-        sjp_45=77,
-        sjp_5=78
+        sjp_1=70,   //最上方传感器
+        sjp_12=71,  //一二号传感器之间
+        sjp_2=72,   //第二个传感器
+        sjp_23=73,  //二三号传感器之间
+        sjp_3=74,   //第三个传感器
+        sjp_34=75,  //三四号传感器之间
+        sjp_4=76,   //第四个传感器
+        sjp_45=77,  //四五号传感器之间
+        sjp_5=78    //最下方传感器
     };//升降位置
     enum varENU_han{
-        han_j=80,
-        han_s=81
+        han_j=80,   //紧
+        han_s=81    //松
     };//手抓状态
     enum varENU_tur{
-        tur_l90=90,
-        tur_r90=91,
-        tur_l180=92,
-        tur_r180=93
+        tur_l90=90, //左转90度
+        tur_r90=91, //右转90度
+        tur_l180=92,//左转180度
+        tur_r180=93 //右转180度
     };//转弯模式
     enum varENU_tfl{
         tfl_line=100,    //巡线
@@ -148,14 +148,14 @@
         tfl_turn=102     //转弯
     };//定时器巡线执行动作
     enum varENU_go{
-        go_1=110,
-        go_2=111,
-        go_3=112,
-        go_4=113,
-        go_5=114,
-        go_get=115,
-        go_start=116,
-        go_end=117
+        go_1=110,       //一号工件台
+        go_2=111,       //二号工件台
+        go_3=112,       //三号工件台
+        go_4=113,       //四号工件台
+        go_5=114,       //五号工件台
+        go_get=115,     //取物台
+        go_start=116,   //起始区
+        go_end=117      //结束区
     };
 
     struct str_state{
@@ -263,7 +263,7 @@
     /*-------------------------------------------------------------启动和停止-----*/
         extern void fun_wait();//等待按键
         extern void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,//初始化函数
-                       enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
+                              enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx);
         extern void fun_stop();//结束函数
     /*--------------------------------------------------------电机1~4单步运动-----*/
         extern void fun_sz(enum varENU_han par_model);//手抓单步运动
@@ -293,10 +293,10 @@
         extern void fun_maintfl();//主函数设置定时器等待巡线结束函数
     /*---------------------------------------------------------------坐标巡线-----*/
         extern void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,//设置初始坐标
-                                 par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
-                                 par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
-                                 par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
-                                                  uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw);
+                              uc par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
+                              uc par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
+                              uc par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
+                                                  uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw);//5号工位一定在顶上
         extern void fun_pbxy(uc par_x,uc par_y,enum varENU_dir par_fx,enum varENU_dir par_gw);//通过工件的朝向和小车的车头方向屏蔽坐标
         extern void fun_getxy(char par_value);//通过想要去的工位号获得XY坐标并储存在str_next结构体中,把现在的工位号存储再str_now结构体中
         extern void fun_xymove(enum varENU_tfl par_model,char par_value);//坐标巡线单步累计步骤生成

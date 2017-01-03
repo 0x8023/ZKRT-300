@@ -1,4 +1,4 @@
-#include "./output/8023.h"
+#include "8023.h"
 /*---------------------------------------------------------------定义变量-----*/
     struct str_state str_begin,str_now,str_next;//分别为:起始状态/当前状态/目标状态
     struct str_parameter str_cod={
@@ -184,8 +184,9 @@
         #endif
     }//等待按键
     void fun_start(char par_x,char par_y,enum varENU_dir par_ctfx,
-        enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
+                   enum varENU_han par_szzt,enum varENU_sjp par_sjwz,enum varENU_tra par_pywz,enum varENU_dir par_hzfx){
         CLK_DIV=0x00;             //不分频
+
         P0M1=0xff;                //P0用于输入
         P0M0=0x00;                //P0不能输出
         P1M1=0x00;                //P1口0-1双向
@@ -267,8 +268,8 @@
                 while(in_j==1);
             #endif
         }
-            fun_delay(20,del_ms);
-            fun_motors(mot_sz,0);
+        fun_delay(20,del_ms);
+        fun_motors(mot_sz,0);
         str_begin.szzt=par_model;//存储运行结果
     }//手抓单步运动
     void fun_py(enum varENU_tra par_model){
@@ -781,7 +782,7 @@
         fun_motors(mot_hz,0);//停止回转动作
         str_begin.hzfx=par_hzmodel;//存储运行结果
     }//平移回转同步运动
-    void fun_sjhz(enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
+    void fun_sjhz(enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel){
         ul loc_sjdelay=0;//升降中间位延时
         ul loc_hzdelay=0xFFFF;//回转延时
         uc loc_sjcgq=0;//升降传感器检测标志位(0为不做升降,1为未到传感器,2为已到传感器)
@@ -976,7 +977,7 @@
             }
         }
     }//升降回转同步运动
-    void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_tra par_sjmodel,enum varENU_dir par_hzmodel){
+    void fun_pysjhz(enum varENU_tra par_pymodel,enum varENU_sjp par_sjmodel,enum varENU_dir par_hzmodel){
         ul loc_sjdelay=0;//升降中间位延时
         ul loc_hzdelay=0xFFFF;//回转延时
         uc loc_sjcgq=0;//升降传感器检测标志位(0为不做升降,1为未到传感器,2为已到传感器)
@@ -2403,10 +2404,10 @@
     }//主函数设置定时器等待巡线结束函数
 /*---------------------------------------------------------------坐标巡线-----*/
     void fun_setxy(uc par_1x,uc par_1y,uc par_1value,enum varENU_dir par_1fx,enum varENU_dir par_1gw,
-        par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
-        par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
-        par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
-                         uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw){
+                   uc par_2x,uc par_2y,uc par_2value,enum varENU_dir par_2fx,enum varENU_dir par_2gw,
+                   uc par_3x,uc par_3y,uc par_3value,enum varENU_dir par_3fx,enum varENU_dir par_3gw,
+                   uc par_4x,uc par_4y,uc par_4value,enum varENU_dir par_4fx,enum varENU_dir par_4gw,
+                                       uc par_5value,enum varENU_dir par_5fx,enum varENU_dir par_5gw){
         //x为x轴坐标,y为y轴坐标,value为工位号,fx为到达此坐标时需要的朝向,gw为工位在小车的哪一侧
         uc loc_xh;
 
