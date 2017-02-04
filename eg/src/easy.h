@@ -2,7 +2,7 @@
 #define __EASY_H__
 
 //等待按键
-    #define WT {fun_wait();}
+    #define KEY {fun_wait();}
 
 //手抓单步运动
     #define SJ {fun_sz(han_j);}
@@ -337,6 +337,9 @@
     #define OG3 {fun_go(go_3);fun_zbtfl();}
     #define OG4 {fun_go(go_4);fun_zbtfl();}
     #define OG5 {fun_go(go_5);fun_zbtfl();}
+    #define GS {fun_go(go_start);}
+    #define GG {fun_go(go_get);}
+    #define GE {fun_go(go_end);}
 
 //同步定时器坐标巡线
     #define TG1 {fun_go(go_1);}
@@ -344,8 +347,9 @@
     #define TG3 {fun_go(go_3);}
     #define TG4 {fun_go(go_4);}
     #define TG5 {fun_go(go_5);}
+    #define WT {fun_zbtfl();}
 
-//同步定时器坐标巡线结束
-    #define GE {fun_zbtfl();}
+//自动抓件
+    #define ZJ(x,y) {fun_zdzj(x,y);}
 
 #endif
